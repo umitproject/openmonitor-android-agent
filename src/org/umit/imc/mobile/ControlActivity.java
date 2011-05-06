@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton;
+	private String scanStatus = "On";
 	private RadioButton rb1;
 	private RadioButton rb2;
 	private Button b1;
@@ -90,16 +91,42 @@ public class ControlActivity extends Activity {
         
         intervalButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
-	       	                
+	       		if(et3.getText().toString().equals("")){
+	       			Context context = getApplicationContext();
+	        		CharSequence text = "Empty!";
+	        		int duration = Toast.LENGTH_SHORT;
+
+	        		Toast toast = Toast.makeText(context, text, duration);
+	        		toast.show();
+	       				
+	       		}
+	       		else{
+	       			int newInterval = Integer.parseInt(et3.getText().toString());
+	       			Context context = getApplicationContext();
+	        		CharSequence text = "New scan interval: " + et3.getText().toString() + " s";
+	        		int duration = Toast.LENGTH_SHORT;
+
+	        		Toast toast = Toast.makeText(context, text, duration);
+	        		toast.show();
+	       		}
 	       		
 	       	}
 
 	   	}  );
         
         scanButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  
-	       	                
+	       	public void onClick(View v) {
+	       		if(scanStatus.compareTo("On") == 0)
+	       			scanStatus = "Off";
+	       		else
+	       			scanStatus = "On";
 	       		
+	       		Context context = getApplicationContext();
+        		CharSequence text = "Scan status changed to: " + scanStatus;
+        		int duration = Toast.LENGTH_SHORT;
+
+        		Toast toast = Toast.makeText(context, text, duration);
+        		toast.show();
 	       	}
 
 	   	}  );

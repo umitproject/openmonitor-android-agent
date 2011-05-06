@@ -8,5 +8,11 @@
 	    android:text="IMC Mobile Agent"
 	    android:id="@+id/IMCTextView"
 	    />
+	    
+	<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:text="Go to ISP" 
+			android:layout_below="@id/IMCTextView"
+			android:id="@+id/ISPButton"/>
     
 </RelativeLayout>
