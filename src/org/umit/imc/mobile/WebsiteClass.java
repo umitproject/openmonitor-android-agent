@@ -21,25 +21,58 @@
 
 package org.umit.imc.mobile;
 
-import android.view.View;
+import java.net.URL;
 
-
-public class AbstractTest {
+public class WebsiteClass {
 		
+	private URL websiteURL;
+	private String websiteMetaData;
+	private boolean websiteStatus;
 		
-	public AbstractTest() {
+	public WebsiteClass() {
 		super();
 		
 	}
 	
 			
-	public boolean clean(){
-		return true;
+	public URL getWebsiteURL() {
+		return websiteURL;
 	}
 
-	public void scan(View view) {
-		// TODO Auto-generated method stub
-		
+
+	public void setWebsiteURL(URL websiteURL) {
+		this.websiteURL = websiteURL;
 	}
+
+
+	public String getWebsiteMetaData() {
+		return websiteMetaData;
+	}
+
+
+	public void setWebsiteMetaData(String websiteMetaData) {
+		this.websiteMetaData = websiteMetaData;
+	}
+
+
+	public boolean isWebsiteStatus() {
+		return websiteStatus;
+	}
+
+
+	public void setWebsiteStatus(boolean websiteStatus) {
+		this.websiteStatus = websiteStatus;
+	}
+
+
+	public WebsiteClass(URL websiteURL, String websiteMetaData,
+			boolean websiteStatus) {
+		super();
+		this.websiteURL = websiteURL;
+		this.websiteMetaData = websiteMetaData;
+		this.websiteStatus = websiteStatus;
+	}
+
+	
 	
 }
