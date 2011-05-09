@@ -21,10 +21,12 @@
  * USA
  */
 -->
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost 
+	xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"

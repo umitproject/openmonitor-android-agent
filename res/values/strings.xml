@@ -2,4 +2,18 @@
 <resources>
     <string name="hello">Hello World, Main!</string>
     <string name="app_name">Umit IMC Mobile Agent</string>
+    <string name="radio_button_website">Website</string>
+    <string name="radio_button_service">Service</string>
+    <string name="back_button">Back</string>
+    <string name="isp_button">Go to ISP</string>
+    <string name="check_box_filter">Filter Critical Events</string>
+    <string name="text_ip">IP: </string>
+    <string name="edit_text_suggestion">Enter Suggestion</string>
+    <string name="edit_text_email">Enter Email</string>
+    <string name="text_selected">Selected is : </string>
+    <string name="send_button">Send</string>
+    <string name="text_scanning">Override Default Scanning Interval</string>
+    <string name="edit_text_interval">Enter Value</string>
+    <string name="interval_button">Set Interval</string>
+    <string name="scan_button">Start/Stop Scan</string>
 </resources>

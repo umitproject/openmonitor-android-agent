@@ -21,25 +21,30 @@
  * USA
  */
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/maptablayout" android:orientation="vertical"
-    android:layout_width="fill_parent" android:layout_height="fill_parent">
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/maptablayout" 
+    android:orientation="vertical"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent">
     <TextView  
 	    android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content" 
-	    android:text="IMC Mobile Agent"
+	    android:text="@string/app_name"
 	    android:id="@+id/IMCTextView"
 	    />
 	    
-	<ListView android:id="@+id/ListView01"
+	<ListView 
+		android:id="@+id/ListView01"
 		android:layout_width="wrap_content"
 		android:layout_below="@id/IMCTextView" 
 		android:layout_height="wrap_content" />
 		
-	<Button android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="Back" 
-			android:layout_below="@id/ListView01"
-			android:id="@+id/backButton"/>
+	<Button 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/back_button"
+		android:layout_below="@id/ListView01"
+		android:id="@+id/backButton"/>
     
 </RelativeLayout>
