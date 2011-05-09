@@ -26,9 +26,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import org.umit.imc.mobile.R;
+import android.content.Context;
+
+
 public class WebsiteOpen {
 
-	static public StringBuffer getContent(String str){
+	static public StringBuffer getContent(String str, Context context){
 	InputStreamReader isr = null;
 
     BufferedReader in = null;
@@ -48,7 +52,7 @@ public class WebsiteOpen {
 	            result.append(inputLine);
 	        }
 	    }catch(Exception ex){
-	        result = new StringBuffer("TIMEOUT");
+	        result = new StringBuffer(context.getString(R.string.exception_timeout));
 	        
 	    }
 	        try {

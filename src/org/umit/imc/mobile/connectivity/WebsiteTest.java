@@ -33,7 +33,7 @@ public class WebsiteTest extends AbstractTest{
 
 	
 	@Override
-	public void scan(View view) {
+	public void scan(final View view) {
 		
 		scanHandler = new Handler();
 		Runnable runnable = new Runnable() {
@@ -42,7 +42,7 @@ public class WebsiteTest extends AbstractTest{
 				
 					final String metaData = "Hello";
 					String websiteURL = "http://www.google.com/";
-					final String websiteReturn = WebsiteOpen.getContent(websiteURL).toString();
+					final String websiteReturn = WebsiteOpen.getContent(websiteURL, view.getContext()).toString();
 					final int status = 0;
 										
 					scanHandler.post(new Runnable() {

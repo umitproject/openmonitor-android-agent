@@ -38,7 +38,7 @@ import android.widget.Toast;
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton;
-	private String scanStatus = "On";
+	private String scanStatus;
 	private RadioButton rb1;
 	private RadioButton rb2;
 	private Button b1;
@@ -66,12 +66,13 @@ public class ControlActivity extends Activity {
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
+        scanStatus = getString(R.string.scan_on);
         
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
 	       		if((et1.getText().toString().equals("")) && (et2.getText().toString().equals(""))){
 	        		Context context = getApplicationContext();
-	        		CharSequence text = "Enter Suggestion!";
+	        		CharSequence text = getString(R.string.edit_text_suggestion);
 	        		int duration = Toast.LENGTH_SHORT;
 
 	        		Toast toast = Toast.makeText(context, text, duration);
@@ -80,7 +81,7 @@ public class ControlActivity extends Activity {
 	        	} 
 	        	else if(!checkEmail(et2.getText().toString())){
 	        		Context context = getApplicationContext();
-	        		CharSequence text = "Invalid Email Address!";
+	        		CharSequence text = getString(R.string.toast_email);
 	        		int duration = Toast.LENGTH_SHORT;
 
 	        		Toast toast = Toast.makeText(context, text, duration);
@@ -89,15 +90,15 @@ public class ControlActivity extends Activity {
 	        	else{
 	    	    	if(v == b1){
 	    	    		if(rb1.isChecked() == true)
-	    	    			t1.setText("Selected is : "+rb1.getText()+ "&" + et1.getText().toString()
-	    	    			+ "&" + et2.getText().toString());
+	    	    			t1.setText(getString(R.string.text_selected) + rb1.getText() 
+	    	    			+ "&" + et1.getText().toString() + "&" + et2.getText().toString());
 	    	    		
 	    	    		if(rb2.isChecked() == true)
-	    	    			t1.setText("Selected is : "+rb2.getText()+ "&" + et1.getText().toString()
-	    	    			+ "&" + et2.getText().toString());
+	    	    			t1.setText(getString(R.string.text_selected) + rb2.getText()
+	    	    			+ "&" + et1.getText().toString() + "&" + et2.getText().toString());
 	    	    		else{
 	    	    			Context context = getApplicationContext();
-	    	        		CharSequence text = "No Selection!";
+	    	        		CharSequence text = getString(R.string.toast_selection);
 	    	        		int duration = Toast.LENGTH_SHORT;
 
 	    	        		Toast toast = Toast.makeText(context, text, duration);
@@ -114,7 +115,7 @@ public class ControlActivity extends Activity {
 	       	public void onClick(View v) {  
 	       		if(et3.getText().toString().equals("")){
 	       			Context context = getApplicationContext();
-	        		CharSequence text = "Empty!";
+	        		CharSequence text = getString(R.string.toast_empty);
 	        		int duration = Toast.LENGTH_SHORT;
 
 	        		Toast toast = Toast.makeText(context, text, duration);
@@ -124,7 +125,8 @@ public class ControlActivity extends Activity {
 	       		else{
 	       			int newInterval = Integer.parseInt(et3.getText().toString());
 	       			Context context = getApplicationContext();
-	        		CharSequence text = "New scan interval: " + et3.getText().toString() + " s";
+	        		CharSequence text = getString(R.string.toast_new_scan_interval) 
+	        		+ et3.getText().toString() + getString(R.string.toast_seconds);
 	        		int duration = Toast.LENGTH_SHORT;
 
 	        		Toast toast = Toast.makeText(context, text, duration);
@@ -137,13 +139,13 @@ public class ControlActivity extends Activity {
         
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		if(scanStatus.compareTo("On") == 0)
-	       			scanStatus = "Off";
+	       		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0)
+	       			scanStatus = getString(R.string.scan_off);
 	       		else
-	       			scanStatus = "On";
+	       			scanStatus = getString(R.string.scan_on);
 	       		
 	       		Context context = getApplicationContext();
-        		CharSequence text = "Scan status changed to: " + scanStatus;
+        		CharSequence text = getString(R.string.toast_scan_change) + scanStatus;
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
@@ -160,7 +162,3 @@ public class ControlActivity extends Activity {
     }
 	
 }
-
-
-
-

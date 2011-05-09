@@ -38,7 +38,7 @@ public class InformationActivity extends Activity{
     /** Called when the activity is first created. */
 	private CheckBox c1, c2;
 	private ListView lv1;
-	private String lv_arr[]={"Websites","Services"};
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,9 @@ public class InformationActivity extends Activity{
         c1 = (CheckBox) findViewById(R.id.check1);
         c2 = (CheckBox) findViewById(R.id.check2);
         c2.setVisibility(8);
-        lv1=(ListView)findViewById(R.id.ListView01);
-     // By using setAdpater method in listview we an add string array in list.
+        lv1 = (ListView)findViewById(R.id.ListView01);
+        String lv_arr[] = {getString(R.string.list_websites),getString(R.string.list_services)};
+    
         lv1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1 , lv_arr));
      
      

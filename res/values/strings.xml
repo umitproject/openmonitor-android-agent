@@ -16,4 +16,18 @@
     <string name="edit_text_interval">Enter Value</string>
     <string name="interval_button">Set Interval</string>
     <string name="scan_button">Start/Stop Scan</string>
+    <string name="scan_on">On</string>
+    <string name="toast_email">Invalid Email Address!</string>
+    <string name="toast_selection">No Selection!</string>
+    <string name="toast_empty">Empty!</string>
+    <string name="toast_new_scan_interval">New scan interval: </string>
+    <string name="toast_seconds"> secs</string>
+    <string name="scan_off">Off</string>
+    <string name="toast_scan_change">Scan status changed to: </string>
+    <string name="list_websites">Websites</string>
+    <string name="list_services">Services</string>
+    <string name="tab_information">Information</string>
+    <string name="tab_control">Control</string>
+    <string name="tab_map">Map</string>
+    <string name="exception_timeout">Time Out!</string>
 </resources>
