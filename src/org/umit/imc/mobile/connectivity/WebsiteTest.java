@@ -21,10 +21,7 @@
 
 package org.umit.imc.mobile.connectivity;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
+import org.umit.imc.mobile.connectivity.WebsiteOpen;
 
 import android.os.Handler;
 import android.view.View;
@@ -44,18 +41,14 @@ public class WebsiteTest extends AbstractTest{
 			public void run() {
 				
 					final String metaData = "Hello";
-					URL websiteURL;
-					try {
-						websiteURL = new URL("http://www.google.com");
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					final boolean status = true;
+					String websiteURL = "http://www.google.com/";
+					final String websiteReturn = WebsiteOpen.getContent(websiteURL).toString();
+					final int status = 0;
 										
 					scanHandler.post(new Runnable() {
 						@Override
 						public void run() {
+							websiteResult.setWebsiteContent(websiteReturn);
 							websiteResult.setWebsiteMetaData(metaData);
 							websiteResult.setWebsiteStatus(status);
 						}

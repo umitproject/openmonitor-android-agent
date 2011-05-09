@@ -24,17 +24,38 @@ package org.umit.imc.mobile.connectivity;
 import java.net.URL;
 
 public class WebsiteClass {
-		
+	
 	private URL websiteURL;
 	private String websiteMetaData;
-	private boolean websiteStatus;
+	private int websiteStatus;
+	private String websiteContent;
 		
 	public WebsiteClass() {
 		super();
 		
 	}
-	
-			
+		
+	public int getWebsiteStatus() {
+		return websiteStatus;
+	}
+
+
+	public void setWebsiteStatus(int websiteStatus) {
+		this.websiteStatus = websiteStatus;
+	}
+
+
+	public String getWebsiteContent() {
+		return websiteContent;
+	}
+
+
+	public void setWebsiteContent(String websiteContent) {
+		this.websiteContent = websiteContent;
+	}
+
+
+				
 	public URL getWebsiteURL() {
 		return websiteURL;
 	}
@@ -54,25 +75,14 @@ public class WebsiteClass {
 		this.websiteMetaData = websiteMetaData;
 	}
 
-
-	public boolean isWebsiteStatus() {
-		return websiteStatus;
-	}
-
-
-	public void setWebsiteStatus(boolean websiteStatus) {
-		this.websiteStatus = websiteStatus;
-	}
-
-
 	public WebsiteClass(URL websiteURL, String websiteMetaData,
-			boolean websiteStatus) {
+			int websiteStatus, String websiteContent) {
 		super();
 		this.websiteURL = websiteURL;
 		this.websiteMetaData = websiteMetaData;
 		this.websiteStatus = websiteStatus;
+		this.websiteContent = websiteContent;
 	}
 
-	
 	
 }
