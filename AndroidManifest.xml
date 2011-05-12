@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="org.umit.imc.mobile"
+      package="org.umit.icm.mobile"
       android:versionCode="1"
       android:versionName="1.0">
 
@@ -17,7 +17,9 @@
         <activity android:name="ControlActivity"></activity>
         <activity android:name="InformationActivity"></activity>
         <activity android:name="MapActivityTab"></activity>
-        <activity android:name="ISPActivity"></activity>
+        <activity android:name="ISPActivity"
+        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
+        
         
 
     </application>

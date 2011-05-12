@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, Main!</string>
-    <string name="app_name">Umit IMC Mobile Agent</string>
+    <string name="app_name">Umit ICM Mobile Agent</string>
     <string name="radio_button_website">Website</string>
     <string name="radio_button_service">Service</string>
     <string name="back_button">Back</string>
