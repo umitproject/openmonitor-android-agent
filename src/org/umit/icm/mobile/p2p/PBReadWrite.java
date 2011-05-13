@@ -18,35 +18,3 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
-
-option java_outer_classname = "MessageProtos";
-
-message WebsiteReportNormal{
-		required int32 testID = 1;
-		required int64 timeUTC = 2;
-		required int32 statusCode = 3;
-		required string responseContent = 4;
-		required bool matchPattern = 5;
-		optional double bandwidth = 6;
-}
-
-message WebsiteReportError{
-		required int32 testID = 1;
-		required int64 timeUTC = 2;
-		required int32 statusCode = 3;
-		required string redirectLink = 4;
-		required string listNodes = 5;
-}
-
-message ServiceReportAllowed{
-		required int32 testID = 1;
-		required int64 timeUTC = 2;
-		required bool statusCode = 3;
-		optional double bandwidth = 4;
-}
-
-message ServiceReportDenied{
-		required int32 testID = 1;
-		required int64 timeUTC = 2;
-		required string listNodes = 3;
-}
