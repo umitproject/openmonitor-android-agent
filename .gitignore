@@ -14,5 +14,8 @@ gen/
 target/
 .settings/
 
+# Maven preferences
+*.prefs
+
 # Local configuration file (sdk path, etc)
 local.properties
