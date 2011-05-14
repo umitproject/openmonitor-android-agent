@@ -19,6 +19,7 @@
  * USA
  */
 
+package org.umit.icm.mobile.proto.generated;
 option java_outer_classname = "MessageProtos";
 
 message WebsiteReportNormal{

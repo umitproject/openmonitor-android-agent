@@ -75,7 +75,7 @@
 						<configuration>
 							<tasks>
 								<exec executable="protoc">
-									<arg value="--java_out=src/org/umit/icm/mobile/proto" />
+									<arg value="--java_out=src" />
 									<arg value="src/org/umit/icm/mobile/proto/Messages.proto" />
 								</exec>
 							</tasks>
