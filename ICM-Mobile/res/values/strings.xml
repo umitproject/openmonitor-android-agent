@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Main!</string>
+    <string name="app_name">Umit ICM Mobile Agent</string>
+    <string name="radio_button_website">Website</string>
+    <string name="radio_button_service">Service</string>
+    <string name="back_button">Back</string>
+    <string name="isp_button">Go to ISP</string>
+    <string name="check_box_filter">Filter Critical Events</string>
+    <string name="text_ip">IP: </string>
+    <string name="edit_text_suggestion">Enter Suggestion</string>
+    <string name="edit_text_email">Enter Email</string>
+    <string name="text_selected">Selected is : </string>
+    <string name="send_button">Send</string>
+    <string name="text_scanning">Override Default Scanning Interval</string>
+    <string name="edit_text_interval">Enter Value</string>
+    <string name="interval_button">Set Interval</string>
+    <string name="scan_button">Start/Stop Scan</string>
+    <string name="scan_on">On</string>
+    <string name="toast_email">Invalid Email Address!</string>
+    <string name="toast_selection">No Selection!</string>
+    <string name="toast_empty">Empty!</string>
+    <string name="toast_new_scan_interval">New scan interval: </string>
+    <string name="toast_seconds"> secs</string>
+    <string name="scan_off">Off</string>
+    <string name="toast_scan_change">Scan status changed to: </string>
+    <string name="list_websites">Websites</string>
+    <string name="list_services">Services</string>
+    <string name="tab_information">Information</string>
+    <string name="tab_control">Control</string>
+    <string name="tab_map">Map</string>
+    <string name="exception_timeout">Time Out!</string>
+</resources>
