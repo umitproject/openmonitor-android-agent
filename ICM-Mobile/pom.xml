@@ -43,6 +43,12 @@
 		    <version>2.2.0</version>
 		    <scope>compile</scope>
 	    </dependency>
+	    <dependency>
+  			<groupId>com.google.android.maps</groupId>
+  			<artifactId>maps</artifactId>
+  			<version>4_r1</version>
+  			<scope>provided</scope>
+		</dependency>    
     </dependencies>
 
     <build>
