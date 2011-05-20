@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.maps;
 
+import android.view.View;
+
 /**
  * This is the abstract map class.
  */
@@ -42,7 +44,8 @@ public class AbstractMap {
 		return true;
 	}
 	
-	public boolean setEvents(){
-		return true;
+	public View getView(){
+		View newView = null;
+		return newView;
 	}
 }

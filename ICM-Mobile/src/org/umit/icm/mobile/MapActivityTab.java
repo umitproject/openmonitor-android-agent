@@ -25,7 +25,6 @@ import org.umit.icm.mobile.R;
 
 import com.google.android.maps.MapActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,7 +40,7 @@ public class MapActivityTab extends MapActivity{
         super.onCreate(icicle);
         setContentView(R.layout.mapactivity);
         ISPButton = (Button) findViewById(R.id.ISPButton);
-        
+               
         ISPButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
 	       		Bundle bundle = new Bundle();	
