@@ -46,6 +46,8 @@ public class OSMMaps extends AbstractMap {
 		return osmMapView;
 	}
 	
+	
+	
 	public GeoPoint getGeoPoint(double lat, double lon)	{
         
         GeoPoint geoPoint = new GeoPoint(

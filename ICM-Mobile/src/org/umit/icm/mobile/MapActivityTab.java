@@ -53,11 +53,7 @@ public class MapActivityTab extends MapActivity{
         GoogleMaps googleMap = new GoogleMaps();
         mapView = googleMap.getView(this, mapView);
         
-                      
-        mapView.invalidate();
-        
-       
-        
+                  
         //OSMMaps osmMap = new OSMMaps();
         //setContentView(osmMap.getView(this));
         

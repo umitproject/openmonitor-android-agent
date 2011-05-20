@@ -79,7 +79,8 @@ public class GoogleMaps extends AbstractMap {
         MapActivtyTabOverlay mapOverlay = new MapActivtyTabOverlay();
         List<Overlay> listOfOverlays = googleMapView.getOverlays();
         listOfOverlays.clear();
-        listOfOverlays.add(mapOverlay);        
+        listOfOverlays.add(mapOverlay);
+        googleMapView.invalidate();
  
 		return googleMapView;
 	}
