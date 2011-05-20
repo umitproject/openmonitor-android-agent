@@ -54,7 +54,7 @@ public class GoogleMaps extends AbstractMap {
 		MapController mapController;
 		final GeoPoint geoPoint = GoogleMaps.getGeoPoint(52.212077, 0.091496); 
 		
-		class MapActivtyTabOverlay extends Overlay 
+		class MapActivityTabOverlay extends Overlay 
 	    {
 			
 	        public boolean draw(Canvas canvas, MapView mapView, 
@@ -76,7 +76,7 @@ public class GoogleMaps extends AbstractMap {
         
         mapController.animateTo(geoPoint);
         mapController.setZoom(17); 
-        MapActivtyTabOverlay mapOverlay = new MapActivtyTabOverlay();
+        MapActivityTabOverlay mapOverlay = new MapActivityTabOverlay();
         List<Overlay> listOfOverlays = googleMapView.getOverlays();
         listOfOverlays.clear();
         listOfOverlays.add(mapOverlay);
@@ -85,7 +85,9 @@ public class GoogleMaps extends AbstractMap {
 		return googleMapView;
 	}
 	
+	public void refreshOverlap(){
 		
+	}
 	public static GeoPoint getGeoPoint(double lat, double lon)	{
 		                 
         GeoPoint geoPoint = new GeoPoint(
