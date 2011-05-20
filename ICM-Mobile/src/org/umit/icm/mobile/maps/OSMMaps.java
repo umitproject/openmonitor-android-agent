@@ -24,29 +24,34 @@ package org.umit.icm.mobile.maps;
 import android.content.Context;
 import android.view.View;
 
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
 /**
- * This is the abstract map class.
+ * Implementation of OSM. This class extends AbstractMap.
  */
 
-public class AbstractMap {
+public class OSMMaps extends AbstractMap {
 		
 	
 	
-	public AbstractMap() {
+	public OSMMaps() {
 		super();
 		
 	}
 	
-	public boolean getEvents(){
-		return true;
-	}
-	
-	public boolean collateEvents(){
-		return true;
-	}
-	
+	@Override	
 	public View getView(Context context){
-		View newView = null;
-		return newView;
+		final  MapView osmMapView = new MapView(context, 256);
+		return osmMapView;
+	}
+	
+	public GeoPoint getGeoPoint(double lat, double lon)	{
+        
+        GeoPoint geoPoint = new GeoPoint(
+            (int) (lat * 1E6), 
+            (int) (lon * 1E6));
+        
+        return geoPoint;
 	}
 }

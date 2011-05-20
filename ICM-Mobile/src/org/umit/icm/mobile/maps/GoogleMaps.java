@@ -24,29 +24,35 @@ package org.umit.icm.mobile.maps;
 import android.content.Context;
 import android.view.View;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
+
 /**
- * This is the abstract map class.
+ * Implementation of GoogleMaps. This class extends AbstractMap.
  */
 
-public class AbstractMap {
+public class GoogleMaps extends AbstractMap {
 		
 	
 	
-	public AbstractMap() {
+	public GoogleMaps() {
 		super();
 		
 	}
 	
-	public boolean getEvents(){
-		return true;
-	}
-	
-	public boolean collateEvents(){
-		return true;
-	}
-	
+	@Override	
 	public View getView(Context context){
-		View newView = null;
-		return newView;
+		final  MapView googleMapView = null;
+		return googleMapView;
 	}
+	
+	public GeoPoint getGeoPoint(double lat, double lon)	{
+		                 
+        GeoPoint geoPoint = new GeoPoint(
+            (int) (lat * 1E6), 
+            (int) (lon * 1E6));
+        
+        return geoPoint;
+	}
+	
 }
