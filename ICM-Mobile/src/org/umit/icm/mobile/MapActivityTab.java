@@ -23,6 +23,8 @@ package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
 
+import com.google.android.maps.MapActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MapActivityTab extends Activity{
+public class MapActivityTab extends MapActivity{
     /** Called when the activity is first created. */
 	private Button ISPButton;
 	String param1;
@@ -51,5 +53,10 @@ public class MapActivityTab extends Activity{
 
 	   	}  );
     }
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

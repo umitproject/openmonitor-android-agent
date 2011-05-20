@@ -39,5 +39,10 @@
 		android:text="@string/isp_button" 
 		android:layout_below="@id/IMCTextView"
 		android:id="@+id/ISPButton"/>
+		
+	<com.google.android.maps.MapView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:apiKey="0ypQ-LmtOI2bSFZESidxGq7QFVTIbNzqzTGSxOA" />
     
 </RelativeLayout>
