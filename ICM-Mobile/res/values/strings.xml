@@ -30,4 +30,6 @@
     <string name="tab_control">Control</string>
     <string name="tab_map">Map</string>
     <string name="exception_timeout">Time Out!</string>
+    <string name="ticker_up">Inc</string>
+    <string name="ticker_down">Dec</string>
 </resources>
