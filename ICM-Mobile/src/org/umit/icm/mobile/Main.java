@@ -46,17 +46,18 @@ public class Main extends TabActivity {
         spec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
                           res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(spec);
-
-        intent = new Intent().setClass(this, ControlActivity.class);
-        spec = tabHost.newTabSpec(getString(R.string.tab_control)).setIndicator(getString(R.string.tab_control),
-                          res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
-        tabHost.addTab(spec);
-
+        
         intent = new Intent().setClass(this, MapActivityTab.class);
         spec = tabHost.newTabSpec(getString(R.string.tab_map)).setIndicator(getString(R.string.tab_map),
                           res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(2);
+        intent = new Intent().setClass(this, ControlActivity.class);
+        spec = tabHost.newTabSpec(getString(R.string.tab_control)).setIndicator(getString(R.string.tab_control),
+                          res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+        tabHost.addTab(spec);
+    
+
+        tabHost.setCurrentTab(0);
     }
 }
