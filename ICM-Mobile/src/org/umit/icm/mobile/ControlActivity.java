@@ -39,13 +39,12 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton;
+	private Button sendButton, intervalButton, scanButton, b1, incButton, decButton;
 	private String scanStatus;
-	private RadioButton rb1;
-	private RadioButton rb2;
-	private Button b1;
+	private RadioButton rb1, rb2;
 	private TextView t1;
-	private EditText et1, et2, et3;
+	private EditText et1, et2, etInterval;
+	private int newInterval;
 	private final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
              "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
              "\\@" +
@@ -64,11 +63,14 @@ public class ControlActivity extends Activity {
         t1 = (TextView)findViewById(R.id.TextView01);
         et1 = (EditText) this.findViewById(R.id.text1);
         et2 = (EditText) this.findViewById(R.id.text2);
-        et3 = (EditText) this.findViewById(R.id.text3);
+        etInterval = (EditText) this.findViewById(R.id.text3);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
+        incButton = (Button) this.findViewById(R.id.tickerButtonUp);
+        decButton = (Button) this.findViewById(R.id.tickerButtonDown);
         scanStatus = getString(R.string.scan_on);
+        newInterval = 10;
         
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
@@ -115,7 +117,7 @@ public class ControlActivity extends Activity {
         
         intervalButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
-	       		if(et3.getText().toString().equals("")){
+	       		if(etInterval.getText().toString().equals("")){
 	       			Context context = getApplicationContext();
 	        		CharSequence text = getString(R.string.toast_empty);
 	        		int duration = Toast.LENGTH_SHORT;
@@ -125,10 +127,10 @@ public class ControlActivity extends Activity {
 	       				
 	       		}
 	       		else{
-	       			int newInterval = Integer.parseInt(et3.getText().toString());
+	       			newInterval = Integer.parseInt(etInterval.getText().toString());
 	       			Context context = getApplicationContext();
 	        		CharSequence text = getString(R.string.toast_new_scan_interval) 
-	        		+ et3.getText().toString() + getString(R.string.toast_seconds);
+	        		+ etInterval.getText().toString() + getString(R.string.toast_seconds);
 	        		int duration = Toast.LENGTH_SHORT;
 
 	        		Toast toast = Toast.makeText(context, text, duration);
@@ -152,6 +154,26 @@ public class ControlActivity extends Activity {
 
         		Toast toast = Toast.makeText(context, text, duration);
         		toast.show();
+	       	}
+
+	   	}  );
+        
+        incButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {
+	       		
+	       		newInterval++;
+	       		etInterval.setText(Integer.toString(newInterval));
+        		
+	       	}
+
+	   	}  );
+        
+        decButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {
+	       		
+	       		newInterval--;
+	       		etInterval.setText(Integer.toString(newInterval));
+        		
 	       	}
 
 	   	}  );
