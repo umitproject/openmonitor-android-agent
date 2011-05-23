@@ -33,7 +33,7 @@
   <artifactId>icm-mobiletest</artifactId>
   <packaging>apk</packaging>
   <version>1.0.0-test-maven</version>
-  <name>UMITICMMobileTest</name>
+  <name>ICMMobileTest</name>
   <dependencies>
     <dependency>
       <groupId>com.google.android</groupId>

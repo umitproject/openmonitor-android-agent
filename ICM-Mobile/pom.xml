@@ -28,7 +28,7 @@
     <artifactId>icm-mobile</artifactId>
     <version>1.0.0-test-maven</version>
     <packaging>apk</packaging>
-    <name>UMITICMMobile</name>
+    <name>ICMMobile</name>
     
     <repositories>
 	    <repository>  
