@@ -36,7 +36,7 @@
 	<RadioGroup 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:id="@+id/QueGroup1"
 		android:layout_below="@id/IMCTextView">
 	
