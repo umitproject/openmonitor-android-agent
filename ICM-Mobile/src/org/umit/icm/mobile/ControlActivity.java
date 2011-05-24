@@ -24,9 +24,11 @@ package org.umit.icm.mobile;
 import java.util.regex.Pattern;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.notifications.NotificationService;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -160,7 +162,7 @@ public class ControlActivity extends Activity {
         
         incButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		
+	       		//startService(new Intent(ControlActivity.this,NotificationService.class));      	
 	       		newInterval++;
 	       		etInterval.setText(Integer.toString(newInterval));
         		
@@ -170,7 +172,7 @@ public class ControlActivity extends Activity {
         
         decButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		
+	       		stopService(new Intent(ControlActivity.this,NotificationService.class));
 	       		newInterval--;
 	       		etInterval.setText(Integer.toString(newInterval));
         		

@@ -32,4 +32,6 @@
     <string name="exception_timeout">Time Out!</string>
     <string name="ticker_up">Inc</string>
     <string name="ticker_down">Dec</string>
+    <string name="start_service">Service Started</string>
+    <string name="service_name">Notification Service</string>
 </resources>
