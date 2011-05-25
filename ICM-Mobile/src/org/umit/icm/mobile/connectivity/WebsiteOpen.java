@@ -23,52 +23,56 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-
-import org.umit.icm.mobile.R;
-import android.content.Context;
+import java.net.URLConnection;
 
 
 public class WebsiteOpen {
 
-	static public StringBuffer getContent(String str, Context context){
-	InputStreamReader isr = null;
+	static public String getContent(String str){
 
-    BufferedReader in = null;
-	
-	 StringBuffer result = new StringBuffer();
-	    try{
-	        URL websiteUrl = new URL(str); 
-	        	
 
-	        isr  = new InputStreamReader(websiteUrl.openStream());
 
-	        in = new BufferedReader(isr);
 
-	        String inputLine;
+	    try {
+	    	URL url = new URL(str);
+            URLConnection conn = url.openConnection();
+            // Get the response
+            InputStream is = conn.getInputStream();
+            
+	            String result= convertStreamToString(is);
 
-	        while ((inputLine = in.readLine()) != null){
-	            result.append(inputLine);
-	        }
-	    }catch(Exception ex){
-	        result = new StringBuffer(context.getString(R.string.exception_timeout));
 	        
-	    }
-	        try {
-				in.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        try {
-				isr.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return result;
-	}	
-}
-    
+	            return result;
+	        
+	        
 
+	    } catch (Exception e) {}
+		return null;
+	}
+	
+	private static String convertStreamToString(InputStream is) {
+	   
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	    StringBuilder sb = new StringBuilder();
+
+	    String line = null;
+	    try {
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line + "\n");
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            is.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return sb.toString();
+	}
+    
+}

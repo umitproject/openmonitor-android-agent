@@ -22,10 +22,12 @@
 package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -37,6 +39,8 @@ public class InformationActivity extends Activity{
     /** Called when the activity is first created. */
 	private CheckBox c1, c2;
 	private ListView lv1;
+	private TextView ipTextView;
+	ArrayAdapter<String> lvAdapter;
 	
 	
     @Override
@@ -46,22 +50,38 @@ public class InformationActivity extends Activity{
         WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         int ipAddress = wifiInfo.getIpAddress();
-        TextView ipTextView = (TextView) findViewById(R.id.ipTextView);
+        ipTextView = (TextView) findViewById(R.id.ipTextView);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));
         
         c1 = (CheckBox) findViewById(R.id.check1);
         c2 = (CheckBox) findViewById(R.id.check2);
         c2.setVisibility(8);
         lv1 = (ListView)findViewById(R.id.ListView01);
-        String lv_arr[] = {getString(R.string.list_websites),getString(R.string.list_services)};
-    
-        lv1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1 , lv_arr));
-     
+        
+        
+       
+        new DownloadWebsite().execute("http://www.google.com");
      
         
                         
     }
-    
-    
+    private class DownloadWebsite extends AsyncTask<String,String,String> {
+    	  
+
+    	protected void onPostExecute(String result) {
+    		 String lv_arr[] = {getString(R.string.list_websites),getString(R.string.list_services), result};
+    	        lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
+    	        lv1.setAdapter(lvAdapter);
+    		 
+    	   }
+         
+		protected String doInBackground(String... urls) {
+			// TODO Auto-generated method stub
+			return WebsiteOpen.getContent(urls[0]);
+		}
+
+			
+    }
+      
 	
 }
