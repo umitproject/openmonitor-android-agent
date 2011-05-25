@@ -22,17 +22,17 @@
 package org.umit.icm.mobile.test;
 
 
+import org.umit.icm.mobile.utils.AESCrypto;
+
 import junit.framework.Assert;
 import android.test.AndroidTestCase;
 
 
 public class CryptoTests extends AndroidTestCase {
 
-    public void testEncryption() throws Throwable {
-       Assert.assertTrue(1 + 1 == 2);
+    public void aesEncryptDecrypt() throws Throwable {
+    	String cipherText = AESCrypto.encrypt("secretICMMobilePassword", "This is a test string");
+       Assert.assertEquals("This is a test string", AESCrypto.decrypt("secretICMMobilePassword", cipherText));
     }
 
-    public void testDecryption() throws Throwable {
-       Assert.assertTrue(1 + 1 == 3);
-    }
 }
