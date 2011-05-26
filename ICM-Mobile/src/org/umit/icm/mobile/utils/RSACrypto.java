@@ -127,9 +127,10 @@ public class RSACrypto {
     	
     	ObjectOutputStream objOutStream = null;
     	File sdCard = Environment.getExternalStorageDirectory();
-    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
-    	keyDir.mkdirs();
-    	File file = new File(keyDir, fileName);
+    	//File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	//keyDir.mkdirs();
+    	//File file = new File(keyDir, fileName);
+    	File file = new File(sdCard, fileName);
     	try {
     			objOutStream = new ObjectOutputStream(
     				    new BufferedOutputStream(new FileOutputStream(file)));
@@ -144,8 +145,9 @@ public class RSACrypto {
     public static PublicKey readPublicKey(String fileName) throws IOException{
     	
     	File sdCard = Environment.getExternalStorageDirectory();
-    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
-    	File file = new File(keyDir, fileName);
+    	//File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	//File file = new File(keyDir, fileName);
+    	File file = new File(sdCard, fileName);
     	InputStream inputStream = ServerConnection.class.getResourceAsStream(file.toString());
     	  ObjectInputStream objInputStream =
     	    new ObjectInputStream(new BufferedInputStream(inputStream));

@@ -30,7 +30,7 @@ import android.test.AndroidTestCase;
 
 public class CryptoTests extends AndroidTestCase {
 
-    public void aesEncryptDecrypt() throws Throwable {
+    public void testEncryptDecrypt() throws Throwable {
     	String cipherText = AESCrypto.encrypt("secretICMMobilePassword", "This is a test string");
         Assert.assertEquals("This is a test string", AESCrypto.decrypt("secretICMMobilePassword", cipherText));
     }

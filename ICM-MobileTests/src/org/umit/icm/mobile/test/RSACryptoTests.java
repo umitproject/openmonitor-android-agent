@@ -22,7 +22,12 @@
 package org.umit.icm.mobile.test;
 
 
+import java.security.KeyFactory;
 import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 
 import org.umit.icm.mobile.utils.RSACrypto;
 
@@ -33,18 +38,48 @@ import android.test.AndroidTestCase;
 public class RSACryptoTests extends AndroidTestCase {
 	private KeyPair keyPair;
 	
-	protected void setup() throws Exception {
-		keyPair = RSACrypto.generateKey();
-	}
-	
-    public void publicEncryptDecrypt() throws Throwable {
+    public void testPublicEncryptDecrypt() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
     	String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
         Assert.assertEquals("This is a test string", RSACrypto.decryptPrivate(keyPair.getPrivate(), cipherText));
     }
     
-    public void privateEncryptDecrypt() throws Throwable {
+    public void testPrivateEncryptDecrypt() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
     	String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
         Assert.assertEquals("This is a test string", RSACrypto.decryptPublic(keyPair.getPublic(), cipherText));
+    }
+    
+    public void testPublicWrite() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
+    	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    	RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(keyPair.getPublic()
+    			, RSAPublicKeySpec.class);
+    	RSACrypto.saveKey("rsaKey.pub", publicKeySpec.getModulus()
+    			, publicKeySpec.getPublicExponent());
+        Assert.assertEquals(keyPair.getPublic(), keyPair.getPublic());
+    }
+    
+    public void testPublicReadWrite() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
+    	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    	RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(keyPair.getPublic()
+    			, RSAPublicKeySpec.class);
+    	RSACrypto.saveKey("rsaKey.pub", publicKeySpec.getModulus()
+    			, publicKeySpec.getPublicExponent());
+    	PublicKey newPublicKey = RSACrypto.readPublicKey("rsaKey.pub");
+        Assert.assertEquals(keyPair.getPublic(), newPublicKey);
+    }
+    
+    public void testPrivateReadWrite() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
+    	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    	RSAPrivateKeySpec privateKeySpec = keyFactory.getKeySpec(keyPair.getPrivate()
+    			, RSAPrivateKeySpec.class);
+    	RSACrypto.saveKey("rsaKey.priv", privateKeySpec.getModulus()
+    			, privateKeySpec.getPrivateExponent());
+    	PrivateKey newPrivateKey = RSACrypto.readPrivateKey("rsaKey.priv");
+        Assert.assertEquals(keyPair.getPrivate(), newPrivateKey);
     }
 
 }
