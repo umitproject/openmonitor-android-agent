@@ -21,12 +21,28 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.math.BigInteger;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 
 import javax.crypto.Cipher;
+
+import org.restlet.engine.http.connector.ServerConnection;
+
+import android.os.Environment;
 
 public class RSACrypto {
 	
@@ -105,5 +121,69 @@ public class RSACrypto {
 
         return bts;
     }
+    
+    public static void saveKey(String fileName, BigInteger modulus, BigInteger exponential) 
+    throws IOException{
+    	
+    	ObjectOutputStream objOutStream = null;
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	keyDir.mkdirs();
+    	File file = new File(keyDir, fileName);
+    	try {
+    			objOutStream = new ObjectOutputStream(
+    				    new BufferedOutputStream(new FileOutputStream(file)));
+    			objOutStream.writeObject(modulus);
+    			objOutStream.writeObject(exponential);    		
+    	} finally {
+    		objOutStream.close();
+    	}
+    	
+    }
+    
+    public static PublicKey readPublicKey(String fileName) throws IOException{
+    	
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	File file = new File(keyDir, fileName);
+    	InputStream inputStream = ServerConnection.class.getResourceAsStream(file.toString());
+    	  ObjectInputStream objInputStream =
+    	    new ObjectInputStream(new BufferedInputStream(inputStream));
+    	  try {
+	    	    BigInteger modulus = (BigInteger) objInputStream.readObject();
+	    	    BigInteger exponential = (BigInteger) objInputStream.readObject();
+	    	    RSAPublicKeySpec rsaKeySpec = new RSAPublicKeySpec(modulus, exponential);
+	    	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	    	    return keyFactory.generatePublic(rsaKeySpec);
+    	  } catch (Exception e) {
+    		    throw new RuntimeException("readPublicKey exception", e);
+    	  } finally {
+    		  objInputStream.close();
+    	  }
+    	    	
+    }
+    
+    public static PrivateKey readPrivateKey(String fileName) throws IOException{
+    	
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	File file = new File(keyDir, fileName);
+    	InputStream inputStream = ServerConnection.class.getResourceAsStream(file.toString());
+    	  ObjectInputStream objInputStream =
+    	    new ObjectInputStream(new BufferedInputStream(inputStream));
+    	  try {
+	    	    BigInteger modulus = (BigInteger) objInputStream.readObject();
+	    	    BigInteger exponential = (BigInteger) objInputStream.readObject();
+	    	    RSAPrivateKeySpec rsaKeySpec = new RSAPrivateKeySpec(modulus, exponential);
+	    	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	    	    return keyFactory.generatePrivate(rsaKeySpec);
+    	  } catch (Exception e) {
+    		    throw new RuntimeException("readPrivateKey exception", e);
+    	  } finally {
+    		  objInputStream.close();
+    	  }
+    	    	
+    }
+
 
 }
