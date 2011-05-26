@@ -40,9 +40,7 @@ public class AESCrypto {
 	
 	public static String decrypt(String key, String cipherText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
-		byte[] cipherTextBytes = toByte(cipherText);
-		byte[] plainText = decrypt(generatedKey, cipherTextBytes);
-		return new String(plainText);
+		return new String(decrypt(generatedKey, toByte(cipherText)));
 	}
 
 	private static byte[] generateKey(byte[] key) throws Exception {
@@ -51,24 +49,21 @@ public class AESCrypto {
 		randomGen.setSeed(key);
 	    keyGen.init(keySize, randomGen); 
 	    SecretKey secretKey = keyGen.generateKey();
-	    byte[] finalKey = secretKey.getEncoded();
-	    return finalKey;
+	    return secretKey.getEncoded();
 	}
 
 	private static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
-	    byte[] cipherBytes = cipher.doFinal(plainBytes);
-		return cipherBytes;
+	    return cipher.doFinal(plainBytes);		
 	}
 
 	private static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
-	    byte[] plainBytes = cipher.doFinal(cipherBytes);
-		return plainBytes;
+	    return cipher.doFinal(cipherBytes);
 	}
 	
 	private static String toHex (byte buf[]) {
