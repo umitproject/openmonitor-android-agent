@@ -49,17 +49,7 @@ public class RSACryptoTests extends AndroidTestCase {
     	String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
         Assert.assertEquals("This is a test string", RSACrypto.decryptPublic(keyPair.getPublic(), cipherText));
     }
-    
-    public void testPublicWrite() throws Throwable {
-    	keyPair = RSACrypto.generateKey();
-    	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-    	RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(keyPair.getPublic()
-    			, RSAPublicKeySpec.class);
-    	RSACrypto.saveKey("rsaKey.pub", publicKeySpec.getModulus()
-    			, publicKeySpec.getPublicExponent());
-        Assert.assertEquals(keyPair.getPublic(), keyPair.getPublic());
-    }
-    
+     
     public void testPublicReadWrite() throws Throwable {
     	keyPair = RSACrypto.generateKey();
     	KeyFactory keyFactory = KeyFactory.getInstance("RSA");

@@ -24,6 +24,7 @@ package org.umit.icm.mobile.utils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,8 +40,6 @@ import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
 import javax.crypto.Cipher;
-
-import org.restlet.engine.http.connector.ServerConnection;
 
 import android.os.Environment;
 
@@ -127,10 +126,9 @@ public class RSACrypto {
     	
     	ObjectOutputStream objOutStream = null;
     	File sdCard = Environment.getExternalStorageDirectory();
-    	//File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
-    	//keyDir.mkdirs();
-    	//File file = new File(keyDir, fileName);
-    	File file = new File(sdCard, fileName);
+    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	keyDir.mkdirs();
+    	File file = new File(keyDir, fileName);
     	try {
     			objOutStream = new ObjectOutputStream(
     				    new BufferedOutputStream(new FileOutputStream(file)));
@@ -145,10 +143,10 @@ public class RSACrypto {
     public static PublicKey readPublicKey(String fileName) throws IOException{
     	
     	File sdCard = Environment.getExternalStorageDirectory();
-    	//File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
-    	//File file = new File(keyDir, fileName);
-    	File file = new File(sdCard, fileName);
-    	InputStream inputStream = ServerConnection.class.getResourceAsStream(file.toString());
+    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+    	File file = new File(keyDir, fileName);
+    	//File file = new File(sdCard, fileName);
+    	InputStream inputStream = new FileInputStream(file.toString());
     	  ObjectInputStream objInputStream =
     	    new ObjectInputStream(new BufferedInputStream(inputStream));
     	  try {
@@ -170,7 +168,7 @@ public class RSACrypto {
     	File sdCard = Environment.getExternalStorageDirectory();
     	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
     	File file = new File(keyDir, fileName);
-    	InputStream inputStream = ServerConnection.class.getResourceAsStream(file.toString());
+    	InputStream inputStream = new FileInputStream(file.toString());
     	  ObjectInputStream objInputStream =
     	    new ObjectInputStream(new BufferedInputStream(inputStream));
     	  try {
