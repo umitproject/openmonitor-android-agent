@@ -52,7 +52,7 @@ public class RSACrypto {
 		return new String(decryptPublic(publicKey, cipherTextBytes));
 	}
 
-	private static KeyPair generateKey() throws Exception {
+	public static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
 		keyPairGen.initialize(keySize);

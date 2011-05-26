@@ -22,17 +22,29 @@
 package org.umit.icm.mobile.test;
 
 
-import org.umit.icm.mobile.utils.AESCrypto;
+import java.security.KeyPair;
+
+import org.umit.icm.mobile.utils.RSACrypto;
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;
 
 
-public class CryptoTests extends AndroidTestCase {
-
-    public void aesEncryptDecrypt() throws Throwable {
-    	String cipherText = AESCrypto.encrypt("secretICMMobilePassword", "This is a test string");
-        Assert.assertEquals("This is a test string", AESCrypto.decrypt("secretICMMobilePassword", cipherText));
+public class RSACryptoTests extends AndroidTestCase {
+	private KeyPair keyPair;
+	
+	protected void setup() throws Exception {
+		keyPair = RSACrypto.generateKey();
+	}
+	
+    public void publicEncryptDecrypt() throws Throwable {
+    	String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
+        Assert.assertEquals("This is a test string", RSACrypto.decryptPrivate(keyPair.getPrivate(), cipherText));
+    }
+    
+    public void privateEncryptDecrypt() throws Throwable {
+    	String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
+        Assert.assertEquals("This is a test string", RSACrypto.decryptPublic(keyPair.getPublic(), cipherText));
     }
 
 }
