@@ -25,12 +25,8 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 public class RSACrypto {
 	
@@ -43,8 +39,7 @@ public class RSACrypto {
 	
 	public static String decryptPrivate(PrivateKey privateKey, String cipherText) throws Exception {
 		byte[] cipherTextBytes = toByte(cipherText);
-		byte[] plainText = decryptPrivate(privateKey, cipherTextBytes);
-		return new String(plainText);
+		return new String(decryptPrivate(privateKey, cipherTextBytes));
 	}
 	
 	public static String encryptPrivate(PrivateKey privateKey, String plainText) throws Exception {
@@ -54,44 +49,38 @@ public class RSACrypto {
 	
 	public static String decryptPublic(PublicKey publicKey, String cipherText) throws Exception {
 		byte[] cipherTextBytes = toByte(cipherText);
-		byte[] plainText = decryptPublic(publicKey, cipherTextBytes);
-		return new String(plainText);
+		return new String(decryptPublic(publicKey, cipherTextBytes));
 	}
 
 	private static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
 		keyPairGen.initialize(keySize);
-		KeyPair keyPair = keyPairGen.generateKeyPair();
-		return keyPair;   
+		return keyPairGen.generateKeyPair();   
 	}
 
 	private static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-	    byte[] cipherBytes = cipher.doFinal(plainBytes);
-		return cipherBytes;
+	    return cipher.doFinal(plainBytes);
 	}
 
 	private static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, privateKey);
-	    byte[] plainBytes = cipher.doFinal(cipherBytes);
-		return plainBytes;
+	    return cipher.doFinal(cipherBytes);
 	}
 	
 	private static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-	    byte[] cipherBytes = cipher.doFinal(plainBytes);
-		return cipherBytes;
+	    return cipher.doFinal(plainBytes);
 	}
 	
 	private static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, publicKey);
-	    byte[] plainBytes = cipher.doFinal(cipherBytes);
-		return plainBytes;
+	    return cipher.doFinal(cipherBytes);
 	}
 	
 	private static String toHex (byte buf[]) {
