@@ -48,6 +48,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+	  <groupId>com.google.protobuf</groupId>
+	  <artifactId>protobuf-java</artifactId>
+	  <version>2.2.0</version>
+	  <scope>compile</scope>
+	</dependency>
+    <dependency>
       <groupId>org.umit.icm.mobile</groupId>
       <artifactId>icm-mobile</artifactId>
       <type>apk</type>
