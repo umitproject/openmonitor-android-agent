@@ -57,8 +57,8 @@ public class RSACryptoTests extends AndroidTestCase {
     			, RSAPublicKeySpec.class);
     	RSACrypto.saveKey("rsaKey.pub", publicKeySpec.getModulus()
     			, publicKeySpec.getPublicExponent());
-    	PublicKey newPublicKey = RSACrypto.readPublicKey("rsaKey.pub");
-        Assert.assertEquals(keyPair.getPublic(), newPublicKey);
+        Assert.assertEquals(RSACrypto.readPublicKey("rsaKey.pub") 
+        		,keyPair.getPublic());
     }
     
     public void testPrivateReadWrite() throws Throwable {
@@ -68,8 +68,8 @@ public class RSACryptoTests extends AndroidTestCase {
     			, RSAPrivateKeySpec.class);
     	RSACrypto.saveKey("rsaKey.priv", privateKeySpec.getModulus()
     			, privateKeySpec.getPrivateExponent());
-    	PrivateKey newPrivateKey = RSACrypto.readPrivateKey("rsaKey.priv");
-        Assert.assertEquals(keyPair.getPrivate(), newPrivateKey);
+        Assert.assertEquals(RSACrypto.readPrivateKey("rsaKey.priv")
+        		, keyPair.getPrivate());
     }
 
 }
