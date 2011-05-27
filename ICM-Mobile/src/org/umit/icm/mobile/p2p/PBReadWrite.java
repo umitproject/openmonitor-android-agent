@@ -30,7 +30,7 @@ import org.umit.icm.mobile.proto.generated.MessageProtos.*;
 
 public class PBReadWrite {
 	
-	private WebsiteReportNormal websiteNormal = WebsiteReportNormal.newBuilder()
+	private static WebsiteReportNormal websiteNormal = WebsiteReportNormal.newBuilder()
 	.setBandwidth(128.9)
 	.setMatchPattern(true)
 	.setResponseContent("Content")
@@ -80,6 +80,10 @@ public class PBReadWrite {
 		}
 		return null;
 		
+	}
+	
+	public static WebsiteReportNormal testReturn() {
+		return websiteNormal;
 	}
 }
 

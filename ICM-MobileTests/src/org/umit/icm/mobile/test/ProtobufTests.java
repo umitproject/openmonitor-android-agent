@@ -32,19 +32,10 @@ import android.test.AndroidTestCase;
 public class ProtobufTests extends AndroidTestCase {
 
     public void websiteReportNormalReadWrite() throws Throwable {
-    	/*WebsiteReportNormal websiteNormal = WebsiteReportNormal.newBuilder()
-    	.setBandwidth(128.9)
-    	.setMatchPattern(true)
-    	.setResponseContent("Content")
-    	.setStatusCode(1)
-    	.setTestID(10)
-    	.setTimeUTC(123456)
-    	.build();
     	PBReadWrite pbReadWrite = new PBReadWrite();
     	pbReadWrite.testWrite();
     	WebsiteReportNormal websiteNormalRead = pbReadWrite.testRead(); 
-       Assert.assertEquals(websiteNormal, websiteNormalRead);*/
-    	Assert.assertTrue(true);
+       	Assert.assertEquals(PBReadWrite.testReturn(), websiteNormalRead);
     }
 
 }
