@@ -145,7 +145,6 @@ public class RSACrypto {
     	File sdCard = Environment.getExternalStorageDirectory();
     	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
     	File file = new File(keyDir, fileName);
-    	//File file = new File(sdCard, fileName);
     	InputStream inputStream = new FileInputStream(file.toString());
     	  ObjectInputStream objInputStream =
     	    new ObjectInputStream(new BufferedInputStream(inputStream));
@@ -184,6 +183,5 @@ public class RSACrypto {
     	  }
     	    	
     }
-
 
 }
