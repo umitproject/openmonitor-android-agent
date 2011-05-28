@@ -21,6 +21,28 @@
 
 package org.umit.icm.mobile.p2p;
 
+import org.umit.icm.mobile.proto.MessageProtos.*;
+import org.umit.icm.mobile.p2p.P2PCommunication;
+
 public class MessageSender {
-	
+		public static byte [] sendICMReport(AgentData agentData, ICMReport icmReport) throws Exception {
+			return P2PCommunication.sendMessage(agentData, icmReport.toByteArray());
+		}
+		
+		public static byte [] receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
+			return P2PCommunication.sendMessage(agentData, getEvents.toByteArray());
+		}
+		
+		public static byte [] receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
+			return P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
+		}
+		
+		public static byte [] receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
+			return P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
+		}
+		
+		public static byte [] sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
+			return P2PCommunication.sendMessage(agentData, sendPrivateKey.toByteArray());
+		}
+		
 }

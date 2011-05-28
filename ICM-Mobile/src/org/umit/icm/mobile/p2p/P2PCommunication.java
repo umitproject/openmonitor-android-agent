@@ -21,9 +21,13 @@
 
 package org.umit.icm.mobile.p2p;
 
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.utils.AESCrypto;
+
 public class P2PCommunication {
-	public static byte[] sendMessage(String peerInfo, byte[] message) throws Exception {
-		byte [] response = null;
-		return response;
+	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
+		byte [] symmetricKey = null;
+		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
+		return AESCrypto.decrypt(symmetricKey, cipherBytes);
 	}
 }
