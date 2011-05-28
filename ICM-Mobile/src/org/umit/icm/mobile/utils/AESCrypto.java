@@ -35,12 +35,12 @@ public class AESCrypto {
 	public static String encrypt(String key, String plainText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
 		byte[] cipherText = encrypt(generatedKey, plainText.getBytes());
-		return toHex(cipherText);
+		return CryptoHelper.toHex(cipherText);
 	}
 	
 	public static String decrypt(String key, String cipherText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
-		return new String(decrypt(generatedKey, toByte(cipherText)));
+		return new String(decrypt(generatedKey, CryptoHelper.toByte(cipherText)));
 	}
 
 	public static byte[] generateKey(byte[] key) throws Exception {
@@ -65,28 +65,5 @@ public class AESCrypto {
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}
-	
-	private static String toHex (byte buf[]) {
-        StringBuffer strbuf = new StringBuffer(buf.length * 2);
-        int i;
-
-        for (i = 0; i < buf.length; i++) {
-            if (((int) buf[i] & 0xff) < 0x10)
-            strbuf.append("0");
-
-            strbuf.append(Long.toString((int) buf[i] & 0xff, 16));
-        }
-
-        return strbuf.toString();
-     }
-
-    private static byte[] toByte (String hex) {
-        byte[] bts = new byte[hex.length() / 2];
-        for (int i = 0; i < bts.length; i++) {
-            bts[i] = (byte) Integer.parseInt(hex.substring(2*i, 2*i+2), 16);
-        }
-
-        return bts;
-    }
 
 }

@@ -49,21 +49,21 @@ public class RSACrypto {
 
 	public static String encryptPublic(PublicKey publicKey, String plainText) throws Exception {
 		byte[] cipherText = encryptPublic(publicKey, plainText.getBytes());
-		return toHex(cipherText);
+		return CryptoHelper.toHex(cipherText);
 	}
 	
 	public static String decryptPrivate(PrivateKey privateKey, String cipherText) throws Exception {
-		byte[] cipherTextBytes = toByte(cipherText);
+		byte[] cipherTextBytes = CryptoHelper.toByte(cipherText);
 		return new String(decryptPrivate(privateKey, cipherTextBytes));
 	}
 	
 	public static String encryptPrivate(PrivateKey privateKey, String plainText) throws Exception {
 		byte[] cipherText = encryptPrivate(privateKey, plainText.getBytes());
-		return toHex(cipherText);
+		return CryptoHelper.toHex(cipherText);
 	}
 	
 	public static String decryptPublic(PublicKey publicKey, String cipherText) throws Exception {
-		byte[] cipherTextBytes = toByte(cipherText);
+		byte[] cipherTextBytes = CryptoHelper.toByte(cipherText);
 		return new String(decryptPublic(publicKey, cipherTextBytes));
 	}
 
@@ -98,29 +98,6 @@ public class RSACrypto {
 	    return cipher.doFinal(cipherBytes);
 	}
 	
-	private static String toHex (byte buf[]) {
-        StringBuffer strbuf = new StringBuffer(buf.length * 2);
-        int i;
-
-        for (i = 0; i < buf.length; i++) {
-            if (((int) buf[i] & 0xff) < 0x10)
-            strbuf.append("0");
-
-            strbuf.append(Long.toString((int) buf[i] & 0xff, 16));
-        }
-
-        return strbuf.toString();
-     }
-
-    private static byte[] toByte (String hex) {
-        byte[] bts = new byte[hex.length() / 2];
-        for (int i = 0; i < bts.length; i++) {
-            bts[i] = (byte) Integer.parseInt(hex.substring(2*i, 2*i+2), 16);
-        }
-
-        return bts;
-    }
-    
     public static void saveKey(String fileName, BigInteger modulus, BigInteger exponential) 
     throws IOException{
     	
