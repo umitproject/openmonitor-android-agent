@@ -26,7 +26,7 @@ import org.umit.icm.mobile.utils.AESCrypto;
 
 public class P2PCommunication {
 	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
-		byte [] symmetricKey = null;
+		byte [] symmetricKey = AESCrypto.readKey("myPrivateKey.priv");
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		return AESCrypto.decrypt(symmetricKey, cipherBytes);
 	}

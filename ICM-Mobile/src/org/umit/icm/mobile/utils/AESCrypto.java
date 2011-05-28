@@ -21,12 +21,23 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+
+import android.os.Environment;
 
 public class AESCrypto {
 	
@@ -65,5 +76,40 @@ public class AESCrypto {
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}
-
+	
+	 public static void saveKey(String fileName, byte[] secretKey) 
+	    throws IOException{
+	    	
+	    	ObjectOutputStream objOutStream = null;
+	    	File sdCard = Environment.getExternalStorageDirectory();
+	    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+	    	keyDir.mkdirs();
+	    	File file = new File(keyDir, fileName);
+	    	try {
+	    			objOutStream = new ObjectOutputStream(
+	    				    new BufferedOutputStream(new FileOutputStream(file)));
+	    			objOutStream.writeObject(secretKey);    		
+	    	} finally {
+	    		objOutStream.close();
+	    	}
+	    	
+	    }
+	 
+	 public static byte[] readKey(String fileName) throws IOException{
+	    	
+	    	File sdCard = Environment.getExternalStorageDirectory();
+	    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+	    	File file = new File(keyDir, fileName);
+	    	InputStream inputStream = new FileInputStream(file.toString());
+	    	  ObjectInputStream objInputStream =
+	    	    new ObjectInputStream(new BufferedInputStream(inputStream));
+	    	  try {
+		    	    return (byte[]) objInputStream.readObject();
+	    	  } catch (Exception e) {
+	    		    throw new RuntimeException("readPublicKey exception", e);
+	    	  } finally {
+	    		  objInputStream.close();
+	    	  }
+	    	    	
+	    }
 }
