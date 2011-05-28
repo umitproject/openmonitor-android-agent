@@ -43,7 +43,7 @@ public class AESCrypto {
 		return new String(decrypt(generatedKey, toByte(cipherText)));
 	}
 
-	private static byte[] generateKey(byte[] key) throws Exception {
+	public static byte[] generateKey(byte[] key) throws Exception {
 		KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 		SecureRandom randomGen = SecureRandom.getInstance("SHA1PRNG");
 		randomGen.setSeed(key);
@@ -52,14 +52,14 @@ public class AESCrypto {
 	    return secretKey.getEncoded();
 	}
 
-	private static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
+	public static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(plainBytes);		
 	}
 
-	private static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
+	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
