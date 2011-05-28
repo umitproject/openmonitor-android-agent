@@ -26,16 +26,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.umit.icm.mobile.proto.MessageProtos.Trace;
+
 
 public class PBReadWrite {
 	
-	/*private static WebsiteReportNormal websiteNormal = WebsiteReportNormal.newBuilder()
-	.setBandwidth(128.9)
-	.setMatchPattern(true)
-	.setResponseContent("Content")
-	.setStatusCode(1)
-	.setTestID(10)
-	.setTimeUTC(123456)
+	private static Trace trace = Trace.newBuilder()
+	.setHop(1)
+	.setIp("10.1.1.1")
+	.addPacketsTiming(1)
 	.build();
 	
 
@@ -48,7 +47,7 @@ public class PBReadWrite {
 			e.printStackTrace();
 		}
 		try {
-			websiteNormal.writeTo(outputStream);
+			trace.writeTo(outputStream);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -61,7 +60,7 @@ public class PBReadWrite {
 		}
 	}
 	
-	public WebsiteReportNormal testRead(){
+	public Trace testRead(){
 		FileInputStream inputStream = null;
 		try {
 			inputStream = new FileInputStream("/tmp/temp.txt");
@@ -69,10 +68,10 @@ public class PBReadWrite {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebsiteReportNormal.newBuilder().build();
+		Trace.newBuilder().build();
 		try {
-			WebsiteReportNormal newWebsiteNormal = WebsiteReportNormal.parseFrom(inputStream);
-			return newWebsiteNormal;
+			Trace trace = Trace.parseFrom(inputStream);
+			return trace;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,8 +80,9 @@ public class PBReadWrite {
 		
 	}
 	
-	public static WebsiteReportNormal testReturn() {
-		return websiteNormal;
-	}*/
+	public static Trace testReturn() {
+		return trace;
+	}
+	
 }
 
