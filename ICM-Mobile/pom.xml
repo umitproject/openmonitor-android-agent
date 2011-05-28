@@ -106,7 +106,7 @@
 							<tasks>
 								<exec executable="protoc">
 									<arg value="--java_out=src" />
-									<arg value="src/org/umit/icm/mobile/proto/Messages.proto" />
+									<arg value="src/org/umit/icm/mobile/common/proto/messages.proto" />
 								</exec>
 							</tasks>
 							<sourceRoot>src</sourceRoot>
