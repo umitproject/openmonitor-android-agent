@@ -34,5 +34,12 @@ public class CryptoTests extends AndroidTestCase {
     	String cipherText = AESCrypto.encrypt("secretICMMobilePassword", "This is a test string");
         Assert.assertEquals("This is a test string", AESCrypto.decrypt("secretICMMobilePassword", cipherText));
     }
+    
+    public void testReadWrite() throws Throwable {
+    	byte[] key = AESCrypto.generateKey("secretICMMobilePassword".getBytes());
+    	AESCrypto.saveKey("mySecretKey.priv", key);
+        Assert.assertEquals(AESCrypto.readKey("mySecretKey.priv") 
+        		,key);
+    }
 
 }
