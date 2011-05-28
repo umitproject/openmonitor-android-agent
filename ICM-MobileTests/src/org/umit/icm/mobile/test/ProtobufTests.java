@@ -23,7 +23,8 @@ package org.umit.icm.mobile.test;
 
 
 import org.umit.icm.mobile.p2p.PBReadWrite;
-import org.umit.icm.mobile.proto.generated.MessageProtos.WebsiteReportNormal;
+import org.umit.icm.mobile.proto.MessageProtos.Trace;
+
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;
@@ -31,11 +32,11 @@ import android.test.AndroidTestCase;
 
 public class ProtobufTests extends AndroidTestCase {
 
-    public void websiteReportNormalReadWrite() throws Throwable {
+    public void traceReadWrite() throws Throwable {
     	PBReadWrite pbReadWrite = new PBReadWrite();
     	pbReadWrite.testWrite();
-    	WebsiteReportNormal websiteNormalRead = pbReadWrite.testRead(); 
-       	Assert.assertEquals(PBReadWrite.testReturn(), websiteNormalRead);
+    	Trace trace = pbReadWrite.testRead(); 
+       	Assert.assertEquals(PBReadWrite.testReturn(), trace);
     }
 
 }
