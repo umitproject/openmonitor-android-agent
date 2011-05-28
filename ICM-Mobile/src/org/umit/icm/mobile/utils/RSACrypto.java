@@ -74,25 +74,25 @@ public class RSACrypto {
 		return keyPairGen.generateKeyPair();   
 	}
 
-	private static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
+	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
 
-	private static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
+	public static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, privateKey);
 	    return cipher.doFinal(cipherBytes);
 	}
 	
-	private static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
+	public static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 	    return cipher.doFinal(plainBytes);
 	}
 	
-	private static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
+	public static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, publicKey);
 	    return cipher.doFinal(cipherBytes);
