@@ -4011,12 +4011,20 @@ public final class MessageProtos {
     public boolean hasAgentID() { return hasAgentID; }
     public long getAgentID() { return agentID_; }
     
+    // required string cipheredPublicKey = 6;
+    public static final int CIPHEREDPUBLICKEY_FIELD_NUMBER = 6;
+    private boolean hasCipheredPublicKey;
+    private java.lang.String cipheredPublicKey_ = "";
+    public boolean hasCipheredPublicKey() { return hasCipheredPublicKey; }
+    public java.lang.String getCipheredPublicKey() { return cipheredPublicKey_; }
+    
     public final boolean isInitialized() {
       if (!hasHeader) return false;
       if (!hasToken) return false;
       if (!hasPrivateKey) return false;
       if (!hasPublicKey) return false;
       if (!hasAgentID) return false;
+      if (!hasCipheredPublicKey) return false;
       if (!getHeader().isInitialized()) return false;
       return true;
     }
@@ -4037,6 +4045,9 @@ public final class MessageProtos {
       }
       if (hasAgentID()) {
         output.writeInt64(5, getAgentID());
+      }
+      if (hasCipheredPublicKey()) {
+        output.writeString(6, getCipheredPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4066,6 +4077,10 @@ public final class MessageProtos {
       if (hasAgentID()) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, getAgentID());
+      }
+      if (hasCipheredPublicKey()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(6, getCipheredPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4231,6 +4246,9 @@ public final class MessageProtos {
         if (other.hasAgentID()) {
           setAgentID(other.getAgentID());
         }
+        if (other.hasCipheredPublicKey()) {
+          setCipheredPublicKey(other.getCipheredPublicKey());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -4279,6 +4297,10 @@ public final class MessageProtos {
             }
             case 40: {
               setAgentID(input.readInt64());
+              break;
+            }
+            case 50: {
+              setCipheredPublicKey(input.readString());
               break;
             }
           }
@@ -4401,6 +4423,27 @@ public final class MessageProtos {
       public Builder clearAgentID() {
         result.hasAgentID = false;
         result.agentID_ = 0L;
+        return this;
+      }
+      
+      // required string cipheredPublicKey = 6;
+      public boolean hasCipheredPublicKey() {
+        return result.hasCipheredPublicKey();
+      }
+      public java.lang.String getCipheredPublicKey() {
+        return result.getCipheredPublicKey();
+      }
+      public Builder setCipheredPublicKey(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCipheredPublicKey = true;
+        result.cipheredPublicKey_ = value;
+        return this;
+      }
+      public Builder clearCipheredPublicKey() {
+        result.hasCipheredPublicKey = false;
+        result.cipheredPublicKey_ = getDefaultInstance().getCipheredPublicKey();
         return this;
       }
     }
@@ -4752,10 +4795,26 @@ public final class MessageProtos {
     public boolean hasPeerStatus() { return hasPeerStatus; }
     public java.lang.String getPeerStatus() { return peerStatus_; }
     
+    // required string agentIP = 4;
+    public static final int AGENTIP_FIELD_NUMBER = 4;
+    private boolean hasAgentIP;
+    private java.lang.String agentIP_ = "";
+    public boolean hasAgentIP() { return hasAgentIP; }
+    public java.lang.String getAgentIP() { return agentIP_; }
+    
+    // required int32 agentPort = 5;
+    public static final int AGENTPORT_FIELD_NUMBER = 5;
+    private boolean hasAgentPort;
+    private int agentPort_ = 0;
+    public boolean hasAgentPort() { return hasAgentPort; }
+    public int getAgentPort() { return agentPort_; }
+    
     public final boolean isInitialized() {
       if (!hasToken) return false;
       if (!hasPublicKey) return false;
       if (!hasPeerStatus) return false;
+      if (!hasAgentIP) return false;
+      if (!hasAgentPort) return false;
       return true;
     }
     
@@ -4769,6 +4828,12 @@ public final class MessageProtos {
       }
       if (hasPeerStatus()) {
         output.writeString(3, getPeerStatus());
+      }
+      if (hasAgentIP()) {
+        output.writeString(4, getAgentIP());
+      }
+      if (hasAgentPort()) {
+        output.writeInt32(5, getAgentPort());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4790,6 +4855,14 @@ public final class MessageProtos {
       if (hasPeerStatus()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(3, getPeerStatus());
+      }
+      if (hasAgentIP()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getAgentIP());
+      }
+      if (hasAgentPort()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, getAgentPort());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4949,6 +5022,12 @@ public final class MessageProtos {
         if (other.hasPeerStatus()) {
           setPeerStatus(other.getPeerStatus());
         }
+        if (other.hasAgentIP()) {
+          setAgentIP(other.getAgentIP());
+        }
+        if (other.hasAgentPort()) {
+          setAgentPort(other.getAgentPort());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -4984,6 +5063,14 @@ public final class MessageProtos {
             }
             case 26: {
               setPeerStatus(input.readString());
+              break;
+            }
+            case 34: {
+              setAgentIP(input.readString());
+              break;
+            }
+            case 40: {
+              setAgentPort(input.readInt32());
               break;
             }
           }
@@ -5051,6 +5138,45 @@ public final class MessageProtos {
       public Builder clearPeerStatus() {
         result.hasPeerStatus = false;
         result.peerStatus_ = getDefaultInstance().getPeerStatus();
+        return this;
+      }
+      
+      // required string agentIP = 4;
+      public boolean hasAgentIP() {
+        return result.hasAgentIP();
+      }
+      public java.lang.String getAgentIP() {
+        return result.getAgentIP();
+      }
+      public Builder setAgentIP(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasAgentIP = true;
+        result.agentIP_ = value;
+        return this;
+      }
+      public Builder clearAgentIP() {
+        result.hasAgentIP = false;
+        result.agentIP_ = getDefaultInstance().getAgentIP();
+        return this;
+      }
+      
+      // required int32 agentPort = 5;
+      public boolean hasAgentPort() {
+        return result.hasAgentPort();
+      }
+      public int getAgentPort() {
+        return result.getAgentPort();
+      }
+      public Builder setAgentPort(int value) {
+        result.hasAgentPort = true;
+        result.agentPort_ = value;
+        return this;
+      }
+      public Builder clearAgentPort() {
+        result.hasAgentPort = false;
+        result.agentPort_ = 0;
         return this;
       }
     }
@@ -12762,76 +12888,78 @@ public final class MessageProtos {
       "\030\001 \002(\t\022\017\n\007agentID\030\002 \002(\003\"H\n\016ResponseHeade" +
       "r\022\030\n\020currentVersionNo\030\001 \002(\005\022\034\n\024currentTe" +
       "stVersionNo\030\002 \002(\005\".\n\rRegisterAgent\022\n\n\002ip" +
-      "\030\001 \002(\t\022\021\n\tversionNo\030\002 \002(\005\"\231\001\n\025RegisterAg" +
+      "\030\001 \002(\t\022\021\n\tversionNo\030\002 \002(\005\"\264\001\n\025RegisterAg" +
       "entResponse\0229\n\006header\030\001 \002(\0132).org.umit.i",
       "cm.mobile.proto.ResponseHeader\022\r\n\005token\030" +
       "\002 \002(\t\022\022\n\nprivateKey\030\003 \002(\t\022\021\n\tpublicKey\030\004" +
-      " \002(\t\022\017\n\007agentID\030\005 \002(\003\"G\n\013GetPeerList\0228\n\006" +
-      "header\030\001 \002(\0132(.org.umit.icm.mobile.proto" +
-      ".RequestHeader\"A\n\tAgentData\022\r\n\005token\030\001 \002" +
-      "(\t\022\021\n\tpublicKey\030\002 \002(\t\022\022\n\npeerStatus\030\003 \002(" +
-      "\t\"\212\001\n\023GetPeerListResponse\0229\n\006header\030\001 \002(" +
-      "\0132).org.umit.icm.mobile.proto.ResponseHe" +
-      "ader\0228\n\nknownPeers\030\002 \003(\0132$.org.umit.icm." +
-      "mobile.proto.AgentData\"L\n\020GetSuperPeerLi",
-      "st\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobile" +
-      ".proto.RequestHeader\"\224\001\n\030GetSuperPeerLis" +
-      "tResponse\0229\n\006header\030\001 \002(\0132).org.umit.icm" +
-      ".mobile.proto.ResponseHeader\022=\n\017knownSup" +
-      "erPeers\030\002 \003(\0132$.org.umit.icm.mobile.prot" +
-      "o.AgentData\"x\n\tGetEvents\0228\n\006header\030\001 \002(\013" +
-      "2(.org.umit.icm.mobile.proto.RequestHead" +
-      "er\022\021\n\tlocations\030\002 \003(\t\022\016\n\006geoLat\030\003 \001(\003\022\016\n" +
-      "\006geoLon\030\004 \001(\003\"\206\002\n\005Event\022\020\n\010testType\030\001 \002(" +
-      "\t\022\021\n\teventType\030\002 \002(\t\022\020\n\010timeZone\030\003 \002(\005\022\017",
-      "\n\007timeUTC\030\004 \002(\003\022\024\n\014sinceTimeUTC\030\005 \002(\003\022\021\n" +
-      "\tlocations\030\006 \003(\t\022E\n\rwebsiteReport\030\007 \001(\0132" +
-      "..org.umit.icm.mobile.proto.WebsiteRepor" +
-      "tDetail\022E\n\rserviceReport\030\010 \001(\0132..org.umi" +
-      "t.icm.mobile.proto.ServiceReportDetail\"\200" +
-      "\001\n\021GetEventsResponse\0229\n\006header\030\001 \002(\0132).o" +
-      "rg.umit.icm.mobile.proto.ResponseHeader\022" +
-      "0\n\006events\030\002 \003(\0132 .org.umit.icm.mobile.pr" +
-      "oto.Event\"\207\001\n\021SendWebsiteReport\0228\n\006heade" +
-      "r\030\001 \002(\0132(.org.umit.icm.mobile.proto.Requ",
-      "estHeader\0228\n\006report\030\002 \002(\0132(.org.umit.icm" +
-      ".mobile.proto.WebsiteReport\"\207\001\n\021SendServ" +
-      "iceReport\0228\n\006header\030\001 \002(\0132(.org.umit.icm" +
-      ".mobile.proto.RequestHeader\0228\n\006report\030\002 " +
-      "\002(\0132(.org.umit.icm.mobile.proto.ServiceR" +
-      "eport\"O\n\022SendReportResponse\0229\n\006header\030\001 " +
-      "\002(\0132).org.umit.icm.mobile.proto.Response" +
-      "Header\"q\n\nNewVersion\0228\n\006header\030\001 \002(\0132(.o" +
-      "rg.umit.icm.mobile.proto.RequestHeader\022\026" +
-      "\n\016agentVersionNo\030\002 \002(\005\022\021\n\tagentType\030\003 \002(",
-      "\t\"\207\001\n\022NewVersionResponse\0229\n\006header\030\001 \002(\013" +
-      "2).org.umit.icm.mobile.proto.ResponseHea" +
-      "der\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update\030\003 \001(\014" +
-      "\022\021\n\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n\006heade" +
-      "r\030\001 \002(\0132(.org.umit.icm.mobile.proto.Requ" +
-      "estHeader\022\034\n\024currentTestVersionNo\030\002 \002(\005\"" +
-      "Y\n\004Test\022\016\n\006testID\030\001 \002(\003\022\022\n\nwebsiteURL\030\002 " +
-      "\001(\t\022\023\n\013servideCode\030\003 \001(\005\022\030\n\020executeAtTim" +
-      "eUTC\030\004 \001(\003\"\224\001\n\020NewTestsResponse\0229\n\006heade" +
-      "r\030\001 \002(\0132).org.umit.icm.mobile.proto.Resp",
-      "onseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umit.icm" +
-      ".mobile.proto.Test\022\025\n\rtestVersionNo\030\003 \002(" +
-      "\005\"F\n\nAssignTask\0228\n\006header\030\001 \002(\0132(.org.um" +
-      "it.icm.mobile.proto.RequestHeader\"\177\n\022Ass" +
-      "ignTaskResponse\0229\n\006header\030\001 \002(\0132).org.um" +
-      "it.icm.mobile.proto.ResponseHeader\022.\n\005te" +
-      "sts\030\002 \003(\0132\037.org.umit.icm.mobile.proto.Te" +
-      "st\"J\n\016UpgradeToSuper\0228\n\006header\030\001 \002(\0132(.o" +
-      "rg.umit.icm.mobile.proto.RequestHeader\"\222" +
-      "\001\n\026UpgradeToSuperResponse\0229\n\006header\030\001 \002(",
-      "\0132).org.umit.icm.mobile.proto.ResponseHe" +
-      "ader\022\020\n\010newToken\030\002 \002(\t\022\025\n\rnewPrivateKey\030" +
-      "\003 \002(\t\022\024\n\014newPublicKey\030\004 \002(\t\"g\n\016SendPriva" +
-      "teKey\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mob" +
-      "ile.proto.RequestHeader\022\033\n\023symmetricPriv" +
-      "ateKey\030\002 \002(\t\"S\n\026SendPrivateKeyResponse\0229" +
+      " \002(\t\022\017\n\007agentID\030\005 \002(\003\022\031\n\021cipheredPublicK" +
+      "ey\030\006 \002(\t\"G\n\013GetPeerList\0228\n\006header\030\001 \002(\0132" +
+      "(.org.umit.icm.mobile.proto.RequestHeade" +
+      "r\"e\n\tAgentData\022\r\n\005token\030\001 \002(\t\022\021\n\tpublicK" +
+      "ey\030\002 \002(\t\022\022\n\npeerStatus\030\003 \002(\t\022\017\n\007agentIP\030" +
+      "\004 \002(\t\022\021\n\tagentPort\030\005 \002(\005\"\212\001\n\023GetPeerList" +
+      "Response\0229\n\006header\030\001 \002(\0132).org.umit.icm." +
+      "mobile.proto.ResponseHeader\0228\n\nknownPeer",
+      "s\030\002 \003(\0132$.org.umit.icm.mobile.proto.Agen" +
+      "tData\"L\n\020GetSuperPeerList\0228\n\006header\030\001 \002(" +
+      "\0132(.org.umit.icm.mobile.proto.RequestHea" +
+      "der\"\224\001\n\030GetSuperPeerListResponse\0229\n\006head" +
+      "er\030\001 \002(\0132).org.umit.icm.mobile.proto.Res" +
+      "ponseHeader\022=\n\017knownSuperPeers\030\002 \003(\0132$.o" +
+      "rg.umit.icm.mobile.proto.AgentData\"x\n\tGe" +
+      "tEvents\0228\n\006header\030\001 \002(\0132(.org.umit.icm.m" +
+      "obile.proto.RequestHeader\022\021\n\tlocations\030\002" +
+      " \003(\t\022\016\n\006geoLat\030\003 \001(\003\022\016\n\006geoLon\030\004 \001(\003\"\206\002\n",
+      "\005Event\022\020\n\010testType\030\001 \002(\t\022\021\n\teventType\030\002 " +
+      "\002(\t\022\020\n\010timeZone\030\003 \002(\005\022\017\n\007timeUTC\030\004 \002(\003\022\024" +
+      "\n\014sinceTimeUTC\030\005 \002(\003\022\021\n\tlocations\030\006 \003(\t\022" +
+      "E\n\rwebsiteReport\030\007 \001(\0132..org.umit.icm.mo" +
+      "bile.proto.WebsiteReportDetail\022E\n\rservic" +
+      "eReport\030\010 \001(\0132..org.umit.icm.mobile.prot" +
+      "o.ServiceReportDetail\"\200\001\n\021GetEventsRespo" +
+      "nse\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobil" +
+      "e.proto.ResponseHeader\0220\n\006events\030\002 \003(\0132 " +
+      ".org.umit.icm.mobile.proto.Event\"\207\001\n\021Sen",
+      "dWebsiteReport\0228\n\006header\030\001 \002(\0132(.org.umi" +
+      "t.icm.mobile.proto.RequestHeader\0228\n\006repo" +
+      "rt\030\002 \002(\0132(.org.umit.icm.mobile.proto.Web" +
+      "siteReport\"\207\001\n\021SendServiceReport\0228\n\006head" +
+      "er\030\001 \002(\0132(.org.umit.icm.mobile.proto.Req" +
+      "uestHeader\0228\n\006report\030\002 \002(\0132(.org.umit.ic" +
+      "m.mobile.proto.ServiceReport\"O\n\022SendRepo" +
+      "rtResponse\0229\n\006header\030\001 \002(\0132).org.umit.ic" +
+      "m.mobile.proto.ResponseHeader\"q\n\nNewVers" +
+      "ion\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobil",
+      "e.proto.RequestHeader\022\026\n\016agentVersionNo\030" +
+      "\002 \002(\005\022\021\n\tagentType\030\003 \002(\t\"\207\001\n\022NewVersionR" +
+      "esponse\0229\n\006header\030\001 \002(\0132).org.umit.icm.m" +
+      "obile.proto.ResponseHeader\022\023\n\013downloadUR" +
+      "L\030\002 \001(\t\022\016\n\006update\030\003 \001(\014\022\021\n\tversionNo\030\004 \002" +
+      "(\005\"b\n\010NewTests\0228\n\006header\030\001 \002(\0132(.org.umi" +
+      "t.icm.mobile.proto.RequestHeader\022\034\n\024curr" +
+      "entTestVersionNo\030\002 \002(\005\"Y\n\004Test\022\016\n\006testID" +
+      "\030\001 \002(\003\022\022\n\nwebsiteURL\030\002 \001(\t\022\023\n\013servideCod" +
+      "e\030\003 \001(\005\022\030\n\020executeAtTimeUTC\030\004 \001(\003\"\224\001\n\020Ne",
+      "wTestsResponse\0229\n\006header\030\001 \002(\0132).org.umi" +
+      "t.icm.mobile.proto.ResponseHeader\022.\n\005tes" +
+      "ts\030\002 \003(\0132\037.org.umit.icm.mobile.proto.Tes" +
+      "t\022\025\n\rtestVersionNo\030\003 \002(\005\"F\n\nAssignTask\0228" +
+      "\n\006header\030\001 \002(\0132(.org.umit.icm.mobile.pro" +
+      "to.RequestHeader\"\177\n\022AssignTaskResponse\0229" +
       "\n\006header\030\001 \002(\0132).org.umit.icm.mobile.pro" +
-      "to.ResponseHeaderB\017B\rMessageProtos"
+      "to.ResponseHeader\022.\n\005tests\030\002 \003(\0132\037.org.u" +
+      "mit.icm.mobile.proto.Test\"J\n\016UpgradeToSu" +
+      "per\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobil",
+      "e.proto.RequestHeader\"\222\001\n\026UpgradeToSuper" +
+      "Response\0229\n\006header\030\001 \002(\0132).org.umit.icm." +
+      "mobile.proto.ResponseHeader\022\020\n\010newToken\030" +
+      "\002 \002(\t\022\025\n\rnewPrivateKey\030\003 \002(\t\022\024\n\014newPubli" +
+      "cKey\030\004 \002(\t\"g\n\016SendPrivateKey\0228\n\006header\030\001" +
+      " \002(\0132(.org.umit.icm.mobile.proto.Request" +
+      "Header\022\033\n\023symmetricPrivateKey\030\002 \002(\t\"S\n\026S" +
+      "endPrivateKeyResponse\0229\n\006header\030\001 \002(\0132)." +
+      "org.umit.icm.mobile.proto.ResponseHeader" +
+      "B\017B\rMessageProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12923,7 +13051,7 @@ public final class MessageProtos {
           internal_static_org_umit_icm_mobile_proto_RegisterAgentResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_RegisterAgentResponse_descriptor,
-              new java.lang.String[] { "Header", "Token", "PrivateKey", "PublicKey", "AgentID", },
+              new java.lang.String[] { "Header", "Token", "PrivateKey", "PublicKey", "AgentID", "CipheredPublicKey", },
               org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetPeerList_descriptor =
@@ -12939,7 +13067,7 @@ public final class MessageProtos {
           internal_static_org_umit_icm_mobile_proto_AgentData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentData_descriptor,
-              new java.lang.String[] { "Token", "PublicKey", "PeerStatus", },
+              new java.lang.String[] { "Token", "PublicKey", "PeerStatus", "AgentIP", "AgentPort", },
               org.umit.icm.mobile.proto.MessageProtos.AgentData.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentData.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetPeerListResponse_descriptor =
