@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2011 Adriano Monteiro Marques
+ *
+ * Author:  Zubair Nabi <zn.zubairnabi@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    
+    <RadioGroup 
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal"
+		android:id="@+id/controlrg">
+		
+	
+		<RadioButton 
+			android:checked="false"
+			android:id="@+id/websiterb" 
+			android:text="@string/radio_button_website"/>
+	
+		<RadioButton 
+			android:checked="false"
+			android:id="@+id/servicerb" 
+			android:text="@string/radio_button_service"/>
+	</RadioGroup>
+
+    <EditText 
+    	android:id="@+id/EditText01" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="wrap_content"
+    	android:layout_below="@id/controlrg" 
+    	android:hint="@string/edit_text_suggestion">
+    </EditText>
+    
+    <EditText 
+    	android:id="@+id/EditTextEmail" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="wrap_content"  
+    	android:hint="@string/edit_text_email"
+    	android:layout_below="@id/EditText01">
+    </EditText>
+
+    <Button 
+    	android:id="@+id/Button01" 
+    	android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/send_button" 
+        android:layout_below="@id/EditTextEmail">
+     </Button>
+
+</RelativeLayout>

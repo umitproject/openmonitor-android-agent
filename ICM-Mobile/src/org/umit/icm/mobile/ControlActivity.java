@@ -21,8 +21,6 @@
 
 package org.umit.icm.mobile;
 
-import java.util.regex.Pattern;
-
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.notifications.NotificationService;
 
@@ -34,8 +32,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -43,28 +39,13 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton, b1, incButton, decButton;
 	private String scanStatus;
-	private RadioButton rb1, rb2;
-	private TextView t1;
-	private EditText et1, et2, etInterval;
+	private EditText etInterval;
 	private int newInterval;
-	private final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
-             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-             "\\@" +
-             "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-             "(" +
-             "\\." +
-             "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-             ")+"
-         );
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.controlactivity);
-        rb1 = (RadioButton)findViewById(R.id.option1);
-        rb2 = (RadioButton)findViewById(R.id.option2);
-        t1 = (TextView)findViewById(R.id.TextView01);
-        et1 = (EditText) this.findViewById(R.id.text1);
-        et2 = (EditText) this.findViewById(R.id.text2);
         etInterval = (EditText) this.findViewById(R.id.text3);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
@@ -73,46 +54,13 @@ public class ControlActivity extends Activity {
         decButton = (Button) this.findViewById(R.id.tickerButtonDown);
         scanStatus = getString(R.string.scan_on);
         newInterval = 10;
+        b1 = scanButton;
         
         sendButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  
-	       		if((et1.getText().toString().equals("")) && (et2.getText().toString().equals(""))){
-	        		Context context = getApplicationContext();
-	        		CharSequence text = getString(R.string.edit_text_suggestion);
-	        		int duration = Toast.LENGTH_SHORT;
-
-	        		Toast toast = Toast.makeText(context, text, duration);
-	        		toast.show();
-	        		
-	        	} 
-	        	else if(!checkEmail(et2.getText().toString())){
-	        		Context context = getApplicationContext();
-	        		CharSequence text = getString(R.string.toast_email);
-	        		int duration = Toast.LENGTH_SHORT;
-
-	        		Toast toast = Toast.makeText(context, text, duration);
-	        		toast.show();
-	        	}
-	        	else{
-	    	    	if(v == b1){
-	    	    		if(rb1.isChecked() == true)
-	    	    			t1.setText(getString(R.string.text_selected) + rb1.getText() 
-	    	    			+ "&" + et1.getText().toString() + "&" + et2.getText().toString());
-	    	    		
-	    	    		if(rb2.isChecked() == true)
-	    	    			t1.setText(getString(R.string.text_selected) + rb2.getText()
-	    	    			+ "&" + et1.getText().toString() + "&" + et2.getText().toString());
-	    	    		else{
-	    	    			Context context = getApplicationContext();
-	    	        		CharSequence text = getString(R.string.toast_selection);
-	    	        		int duration = Toast.LENGTH_SHORT;
-
-	    	        		Toast toast = Toast.makeText(context, text, duration);
-	    	        		toast.show();
-	    	    		}
-	    	    	}
-	        	}                
-	       		
+	       	public void onClick(View v) {  	       		
+	       		SuggestionDialog suggestionDialog = 
+	       			new SuggestionDialog(ControlActivity.this, "", new OnReadyListener());
+	            suggestionDialog.show();	        		
 	       	}
 
 	    }  );
@@ -164,8 +112,7 @@ public class ControlActivity extends Activity {
 	       	public void onClick(View v) {
 	       		//startService(new Intent(ControlActivity.this,NotificationService.class));      	
 	       		newInterval++;
-	       		etInterval.setText(Integer.toString(newInterval));
-        		
+	       		etInterval.setText(Integer.toString(newInterval));   		
 	       	}
 
 	   	}  );
@@ -181,10 +128,12 @@ public class ControlActivity extends Activity {
 	   	}  );
                 
     }
-   
     
-    private boolean checkEmail(String email) {
-        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
+    private class OnReadyListener implements SuggestionDialog.ReadyListener {
+        @Override
+        public void ready(String selection) {
+            Toast.makeText(ControlActivity.this, selection, Toast.LENGTH_LONG).show();
+        }
     }
-	
+   
 }

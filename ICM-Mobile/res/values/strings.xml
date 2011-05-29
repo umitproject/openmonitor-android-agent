@@ -34,4 +34,5 @@
     <string name="ticker_down">Dec</string>
     <string name="start_service">Service Started</string>
     <string name="service_name">Notification Service</string>
+    <string name="register_suggestion">Register Suggestion</string>
 </resources>

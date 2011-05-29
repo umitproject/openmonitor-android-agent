@@ -32,62 +32,19 @@
     	android:layout_height="wrap_content" 
     	android:text="@string/app_name"
     	android:id="@+id/IMCTextView"/>
-			
-	<RadioGroup 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:id="@+id/QueGroup1"
-		android:layout_below="@id/IMCTextView">
-	
-		<RadioButton 
-			android:checked="false"
-			android:id="@+id/option1" 
-			android:text="@string/radio_button_website"/>
-	
-		<RadioButton 
-			android:checked="false"
-			android:id="@+id/option2" 
-			android:text="@string/radio_button_service"/>
-	</RadioGroup>
 		
-	<LinearLayout 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:orientation="vertical"
-		android:layout_below="@id/QueGroup1"
-		android:id="@+id/LL1">
-		
-		<EditText 
-			android:id="@+id/text1"
+	<Button 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
-			android:hint="@string/edit_text_suggestion"/>
-			
-		<EditText 
-			android:id="@+id/text2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:hint="@string/edit_text_email"/>
-			
-		<TextView 
-			android:id="@+id/TextView01" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:text="@string/text_selected"/>
-			
-		<Button 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="@string/send_button" 
+			android:text="@string/register_suggestion" 
+			android:layout_below="@id/IMCTextView"
 			android:id="@+id/selected"/>
-	</LinearLayout>
 		
 	<RelativeLayout 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:orientation="vertical"
-		android:layout_below="@id/LL1"
+		android:layout_below="@id/selected"
 		android:id="@+id/RL1">
 		
 		<TextView  
