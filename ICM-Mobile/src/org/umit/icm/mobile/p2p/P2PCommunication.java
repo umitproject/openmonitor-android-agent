@@ -27,11 +27,12 @@ import java.security.PublicKey;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.utils.AESCrypto;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 public class P2PCommunication {
 	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
-		byte [] symmetricKey = AESCrypto.readKey("mySecretKey.priv");
+		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		// TODO HTTP send
 		// TODO HTTP respond
@@ -40,11 +41,11 @@ public class P2PCommunication {
 	}
 	
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
-		PrivateKey privateKey = RSACrypto.readPrivateKey("myPrivateKey.priv");
+		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		// TODO HTTP send
 		// TODO HTTP respond
-		PublicKey peerPublicKey = RSACrypto.readPublicKey(agentInfo.getAgentIP()+"PublicKey.pub");
+		PublicKey peerPublicKey = CryptoKeyReader.getPeerPublicKey(agentInfo.getAgentIP());
 		byte [] response = null;
 		return RSACrypto.decryptPublic(peerPublicKey, response);
 	}
