@@ -35,6 +35,8 @@ public class P2PCommunication {
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		// TODO HTTP send
 		// TODO HTTP respond
+		ResponseHeader header = null;
+		checkResponse(header);
 		return AESCrypto.decrypt(symmetricKey, cipherBytes);
 	}
 	

@@ -42,7 +42,7 @@ public class MessageSender {
 		}
 		
 		public static byte [] sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
-			return P2PCommunication.sendMessage(agentData, sendPrivateKey.toByteArray());
+			return P2PCommunication.sendMessagePublic(agentData, sendPrivateKey.toByteArray());
 		}
 		
 }
