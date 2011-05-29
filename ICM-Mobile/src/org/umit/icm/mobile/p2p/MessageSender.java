@@ -63,6 +63,13 @@ public class MessageSender {
 			return getSuperPeerListResponse;
 		}
 		
+		public static AssignTaskResponse receiveTaskList(AgentData agentData, AssignTask assignTask) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, assignTask.toByteArray());
+			AssignTaskResponse assignTaskResponse = AssignTaskResponse.parseFrom(response);
+			P2PCommunication.checkResponse(assignTaskResponse.getHeader());
+			return assignTaskResponse;
+		}
+		
 		public static void sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
 			byte[] response = P2PCommunication.sendMessagePublic(agentData, sendPrivateKey.toByteArray());
 			SendPrivateKeyResponse sendPrivateKeyResponse = SendPrivateKeyResponse.parseFrom(response);
