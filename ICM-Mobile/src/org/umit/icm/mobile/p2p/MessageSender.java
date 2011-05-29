@@ -25,24 +25,48 @@ import org.umit.icm.mobile.proto.MessageProtos.*;
 import org.umit.icm.mobile.p2p.P2PCommunication;
 
 public class MessageSender {
-		public static byte [] sendICMReport(AgentData agentData, ICMReport icmReport) throws Exception {
-			return P2PCommunication.sendMessage(agentData, icmReport.toByteArray());
+		public static void sendICMReport(AgentData agentData, ICMReport icmReport) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, icmReport.toByteArray());
+			 // TODO check Response
 		}
 		
-		public static byte [] receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
-			return P2PCommunication.sendMessage(agentData, getEvents.toByteArray());
+		public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());
+			SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);	  
+			P2PCommunication.checkResponse(sendReportResponse.getHeader());
 		}
 		
-		public static byte [] receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
-			return P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
+		public static void sendServiceReport(AgentData agentData, SendServiceReport serviceReport) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, serviceReport.toByteArray());
+			SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);	  
+			P2PCommunication.checkResponse(sendReportResponse.getHeader());
 		}
 		
-		public static byte [] receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
-			return P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
+		public static GetEventsResponse receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, getEvents.toByteArray());
+			GetEventsResponse getEventsResponse = GetEventsResponse.parseFrom(response);
+			P2PCommunication.checkResponse(getEventsResponse.getHeader());
+			return getEventsResponse;
 		}
 		
-		public static byte [] sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
-			return P2PCommunication.sendMessagePublic(agentData, sendPrivateKey.toByteArray());
+		public static GetPeerListResponse receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
+			GetPeerListResponse getPeerListResponse = GetPeerListResponse.parseFrom(response);
+			P2PCommunication.checkResponse(getPeerListResponse.getHeader());
+			return getPeerListResponse;
+		}
+		
+		public static GetSuperPeerListResponse receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
+			GetSuperPeerListResponse getSuperPeerListResponse = GetSuperPeerListResponse.parseFrom(response);
+			P2PCommunication.checkResponse(getSuperPeerListResponse.getHeader());
+			return getSuperPeerListResponse;
+		}
+		
+		public static void sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
+			byte[] response = P2PCommunication.sendMessagePublic(agentData, sendPrivateKey.toByteArray());
+			SendPrivateKeyResponse sendPrivateKeyResponse = SendPrivateKeyResponse.parseFrom(response);
+			P2PCommunication.checkResponse(sendPrivateKeyResponse.getHeader());
 		}
 		
 }

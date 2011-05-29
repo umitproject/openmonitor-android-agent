@@ -35,9 +35,8 @@ public class P2PCommunication {
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		// TODO HTTP send
 		// TODO HTTP respond
-		ResponseHeader header = null;
-		checkResponse(header);
-		return AESCrypto.decrypt(symmetricKey, cipherBytes);
+		byte [] response = null;
+		return AESCrypto.decrypt(symmetricKey, response);
 	}
 	
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
@@ -45,19 +44,18 @@ public class P2PCommunication {
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		// TODO HTTP send
 		// TODO HTTP respond
-		ResponseHeader header = null;
-		checkResponse(header);
 		PublicKey peerPublicKey = RSACrypto.readPublicKey(agentInfo.getAgentIP()+"PublicKey.pub");
-		return RSACrypto.decryptPublic(peerPublicKey, cipherBytes);
+		byte [] response = null;
+		return RSACrypto.decryptPublic(peerPublicKey, response);
 	}
 	
 	public static void checkResponse(ResponseHeader header) throws Exception {
 		int myCurrentTestVersionNo = 0, myCurrentVersionNo = 0;
 		if (header.getCurrentTestVersionNo() > myCurrentTestVersionNo)
 			;
-			// contact aggregator to update testversion
+			// TODO contact aggregator to update testversion
 		if (header.getCurrentVersionNo() > myCurrentVersionNo)
 			;
-			// contact aggregator to update agentversion
+			// TODO contact aggregator to update agentversion
 	}
 }
