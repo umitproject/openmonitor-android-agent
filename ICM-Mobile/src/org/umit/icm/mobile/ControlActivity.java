@@ -26,7 +26,6 @@ import org.umit.icm.mobile.notifications.NotificationService;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,6 +52,8 @@ public class ControlActivity extends Activity {
         incButton = (Button) this.findViewById(R.id.tickerButtonUp);
         decButton = (Button) this.findViewById(R.id.tickerButtonDown);
         scanStatus = getString(R.string.scan_on);
+        scanButton.setText(getString(R.string.scan_text)
+        		+ " " + getString(R.string.scan_off));
         newInterval = 10;
         b1 = scanButton;
         
@@ -93,13 +94,23 @@ public class ControlActivity extends Activity {
         
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0)
+	       		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0){
+	       			scanButton.setText(getString(R.string.scan_text)
+		       				+" "+ getString(R.string.scan_on));
 	       			scanStatus = getString(R.string.scan_off);
-	       		else
+	       		}
+	       			
+	       		else{
+	       			scanButton.setText(getString(R.string.scan_text)
+		       				+" "+ getString(R.string.scan_off));
 	       			scanStatus = getString(R.string.scan_on);
+	       		}
+	       			
+	       	
 	       		
 	       		Context context = getApplicationContext();
-        		CharSequence text = getString(R.string.toast_scan_change) + scanStatus;
+        		CharSequence text = getString(R.string.toast_scan_change) 
+        		+ " " + scanStatus;
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
@@ -119,7 +130,7 @@ public class ControlActivity extends Activity {
         
         decButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		stopService(new Intent(ControlActivity.this,NotificationService.class));
+	       		//stopService(new Intent(ControlActivity.this,NotificationService.class));
 	       		newInterval--;
 	       		etInterval.setText(Integer.toString(newInterval));
         		
