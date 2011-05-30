@@ -81,7 +81,8 @@ public class AESCrypto {
 	    	
 	    	ObjectOutputStream objOutStream = null;
 	    	File sdCard = Environment.getExternalStorageDirectory();
-	    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+	    	File keyDir = new File (sdCard.getAbsolutePath() 
+	    			+ Constants.KEYS_DIR);
 	    	keyDir.mkdirs();
 	    	File file = new File(keyDir, fileName);
 	    	try {
@@ -97,7 +98,8 @@ public class AESCrypto {
 	 public static byte[] readKey(String fileName) throws IOException{
 	    	
 	    	File sdCard = Environment.getExternalStorageDirectory();
-	    	File keyDir = new File (sdCard.getAbsolutePath() + "/keys");
+	    	File keyDir = new File (sdCard.getAbsolutePath() 
+	    			+ Constants.KEYS_DIR);
 	    	File file = new File(keyDir, fileName);
 	    	InputStream inputStream = new FileInputStream(file.toString());
 	    	  ObjectInputStream objInputStream =
