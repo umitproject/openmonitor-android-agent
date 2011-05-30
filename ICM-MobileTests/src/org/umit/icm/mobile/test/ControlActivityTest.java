@@ -24,13 +24,14 @@ package org.umit.icm.mobile.test;
 import org.umit.icm.mobile.ControlActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ControlActivityTest extends
 		ActivityInstrumentationTestCase2<ControlActivity> {
 	
 	private ControlActivity mActivity;
-	private TextView mView;
+	private Button intervalButton;
 	
 	public ControlActivityTest() {
 	      super("org.umit.icm.mobile", ControlActivity.class);
@@ -40,14 +41,14 @@ public class ControlActivityTest extends
     protected void setUp() throws Exception {
         super.setUp();
         mActivity = this.getActivity();
-        mView = (TextView) mActivity.findViewById(org.umit.icm.mobile.R.id.TextView01);    
+        intervalButton = (Button) mActivity.findViewById(org.umit.icm.mobile.R.id.intervalButton);    
     }
 	
 	public void testPreconditions() {
-	      assertNotNull(mView);
+	      assertNotNull(intervalButton);
 	    }
 	
 	public void testText() {
-	      assertEquals("Selected is :",(String)mView.getText());
+	      assertEquals("Set Interval",(String)intervalButton.getText());
 	    }
 }
