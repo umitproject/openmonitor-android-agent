@@ -34,64 +34,25 @@
     	android:id="@+id/IMCTextView"/>
 		
 	<Button 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="@string/register_suggestion" 
-			android:layout_below="@id/IMCTextView"
-			android:id="@+id/selected"/>
-		
-	<RelativeLayout 
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
-		android:orientation="vertical"
+		android:text="@string/register_suggestion" 
+		android:layout_below="@id/IMCTextView"
+		android:layout_centerHorizontal="true"
+		android:id="@+id/selected"/>
+
+	<Button 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/interval_button" 
 		android:layout_below="@id/selected"
-		android:id="@+id/RL1">
-		
-		<TextView  
-    		android:layout_width="fill_parent" 
-    		android:layout_height="wrap_content" 
-    		android:text="@string/text_scanning"
-    		android:id="@+id/IntervalTextView"/>
-    	
-    	<EditText 
-    		android:id="@+id/text3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:hint="@string/edit_text_interval"
-			android:numeric="decimal"
-			android:layout_below="@id/IntervalTextView"/>
-			
-				
-		<Button 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="@string/ticker_up" 
-			android:layout_toRightOf="@id/text3"
-			android:layout_below="@id/IntervalTextView"
-			android:id="@+id/tickerButtonUp"/>
-			
-		<Button 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="@string/ticker_down" 
-			android:layout_toRightOf="@id/tickerButtonUp"
-			android:layout_below="@id/IntervalTextView"
-			android:id="@+id/tickerButtonDown"/>
-			
-		<Button 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="@string/interval_button" 
-			android:layout_toRightOf="@id/tickerButtonDown"
-			android:layout_below="@id/IntervalTextView"
-			android:id="@+id/intervalButton"/>
-		
-	</RelativeLayout>
-	
+		android:layout_centerHorizontal="true"
+		android:id="@+id/intervalButton"/>
 	<Button 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:text="@string/scan_button" 
-		android:layout_below="@id/RL1"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/intervalButton"
 		android:id="@+id/scanButton"/>
 </RelativeLayout>
