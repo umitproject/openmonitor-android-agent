@@ -23,27 +23,55 @@ package org.umit.icm.mobile.utils;
 
 public class RuntimeParameters {
 	private int scanInterval;
-	private int scanStatus;
+	private String scanStatus;
 	
-	public RuntimeParameters(int scanInterval, int scanStatus) {
+	public RuntimeParameters(int scanInterval, String scanStatus) {
 		super();
 		this.scanInterval = scanInterval;
 		this.scanStatus = scanStatus;
 	}
+	
+	public RuntimeParameters() {
+		super();
+	}
 
-	public int getScanInterval() {
+	public int getScanInterval() throws Exception {
+		scanInterval = readScanInterval();
 		return scanInterval;
 	}
 
-	public void setScanInterval(int scanInterval) {
+	public void setScanInterval(int scanInterval) throws Exception {
 		this.scanInterval = scanInterval;
+		writeScanInterval(scanInterval);
 	}
 
-	public int getScanStatus() {
+	public String getScanStatus() throws Exception {
+		scanStatus = readScanStatus();
 		return scanStatus;
 	}
 
-	public void setScanStatus(int scanStatus) {
+	public void setScanStatus(String scanStatus) throws Exception {
 		this.scanStatus = scanStatus;
+		writeScanStatus(scanStatus);
+	}
+	
+	private String readScanStatus() throws Exception {
+		return SDCardReadWrite.readString(Constants.SCAN_FILE
+				, Constants.PARAMETERS_DIR);
+	}
+
+	private void writeScanStatus(String scanStatus) throws Exception {
+		SDCardReadWrite.writeString(Constants.SCAN_FILE
+				, Constants.PARAMETERS_DIR, scanStatus);
+	}
+	
+	private int readScanInterval() throws Exception {
+		return Integer.parseInt(SDCardReadWrite.readString(Constants.INTERVAL_FILE
+				, Constants.PARAMETERS_DIR));
+	}
+
+	private void writeScanInterval(int scanStatus) throws Exception {
+		SDCardReadWrite.writeString(Constants.INTERVAL_FILE
+				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
 	}
 }
