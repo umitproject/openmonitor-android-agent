@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton, b1;
+	private Button sendButton, intervalButton, scanButton;
 	private String scanStatus;
 	private RuntimeParameters runtimeParameters;
 	
@@ -57,7 +57,6 @@ public class ControlActivity extends Activity {
 		}
         scanButton.setText(getString(R.string.scan_text)
         		+ " " + scanStatus);
-        b1 = scanButton;
         
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
