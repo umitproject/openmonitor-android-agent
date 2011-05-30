@@ -23,6 +23,7 @@ package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.notifications.NotificationService;
+import org.umit.icm.mobile.utils.RuntimeParameters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,18 +38,25 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton, b1;
 	private String scanStatus;
+	private RuntimeParameters runtimeParameters;
 	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        runtimeParameters = new RuntimeParameters();
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
-        scanStatus = getString(R.string.scan_on);
+        try {
+			scanStatus = runtimeParameters.getScanStatus();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         scanButton.setText(getString(R.string.scan_text)
-        		+ " " + getString(R.string.scan_off));
+        		+ " " + scanStatus);
         b1 = scanButton;
         
         sendButton.setOnClickListener(new OnClickListener() { 
@@ -88,7 +96,12 @@ public class ControlActivity extends Activity {
 	       			scanStatus = getString(R.string.scan_on);
 	       		}
 	       			
-	       	
+	       		try {
+					runtimeParameters.setScanStatus(scanStatus);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	       		
 	       		Context context = getApplicationContext();
         		CharSequence text = getString(R.string.toast_scan_change) 
