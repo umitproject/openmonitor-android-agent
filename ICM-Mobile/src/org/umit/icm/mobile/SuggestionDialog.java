@@ -65,7 +65,6 @@ public class SuggestionDialog extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suggestiondialog);
-        setTitle("Suggestion Dialog");
         Button buttonOK = (Button) findViewById(R.id.Button01);
         buttonOK.setOnClickListener(new sendListener());
         etSuggest = (EditText) findViewById(R.id.EditText01);
