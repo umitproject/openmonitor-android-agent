@@ -42,7 +42,8 @@ public class SDCardReadWrite {
     	File file = new File(keyDir, fileName);
     	if(!file.exists()){
     		file.createNewFile();
-    		FileWriter fileWriter = new FileWriter(file);
+    	}
+    		FileWriter fileWriter = new FileWriter(file, false);
     		try {
     			fileWriter.write(data);
 			
@@ -51,8 +52,7 @@ public class SDCardReadWrite {
     		} finally {
 			fileWriter.close();
     		}
-    	}
-	}
+		}
 	
 	public static String readString(String fileName
 			, String dir) throws Exception{

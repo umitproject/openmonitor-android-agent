@@ -22,6 +22,7 @@
 package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.utils.RuntimeParameters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -33,19 +34,16 @@ import android.widget.EditText;
 
 public class IntervalDialog extends Dialog {
 	
-	private String interval;
-	private Context contextControl;
     private ReadyIntervalListener readyListener;
     EditText etInterval;
     private int newInterval; 
+    private RuntimeParameters runtimeParameters;
    
     
     public IntervalDialog(Context context, String interval, 
             ReadyIntervalListener readyListener) {
         super(context);
-        this.interval = interval;
         this.readyListener = readyListener;
-        this.contextControl = context;
     }
     
     @Override
@@ -59,7 +57,13 @@ public class IntervalDialog extends Dialog {
         Button buttonDec = (Button) findViewById(R.id.tickerButtonDown);
         buttonDec.setOnClickListener(new DecButton());
         etInterval = (EditText) findViewById(R.id.etInterval);
-        newInterval = 10;
+        runtimeParameters = new RuntimeParameters();
+        try {
+			newInterval = runtimeParameters.getScanInterval();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // TODO Read from SD
         
     }
@@ -76,6 +80,12 @@ public class IntervalDialog extends Dialog {
 			if (!etInterval.getText().toString().equals(""))
 				newInterval = Integer.parseInt(etInterval.getText().toString());
 			readyListener.ready(Integer.toString(newInterval));
+			try {
+				runtimeParameters.setScanInterval(newInterval);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			IntervalDialog.this.dismiss();
 					        	                 		
 			}
