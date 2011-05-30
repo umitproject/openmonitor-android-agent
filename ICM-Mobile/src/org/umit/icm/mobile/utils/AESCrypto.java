@@ -89,7 +89,9 @@ public class AESCrypto {
 	    			objOutStream = new ObjectOutputStream(
 	    				    new BufferedOutputStream(new FileOutputStream(file)));
 	    			objOutStream.writeObject(secretKey);    		
-	    	} finally {
+	    	} catch (Exception e) {
+    		    throw new RuntimeException("AES writeKey exception", e);
+    	    } finally {
 	    		objOutStream.close();
 	    	}
 	    	
@@ -107,7 +109,7 @@ public class AESCrypto {
 	    	  try {
 		    	    return (byte[]) objInputStream.readObject();
 	    	  } catch (Exception e) {
-	    		    throw new RuntimeException("readPublicKey exception", e);
+	    		    throw new RuntimeException("AES readKey exception", e);
 	    	  } finally {
 	    		  objInputStream.close();
 	    	  }

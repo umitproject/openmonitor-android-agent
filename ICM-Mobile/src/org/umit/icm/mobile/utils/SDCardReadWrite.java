@@ -33,25 +33,37 @@ import android.os.Environment;
 public class SDCardReadWrite {
 	private static File sdCard;
 	
-	public static void writeString(String fileName, String data) throws Exception{
-		sdCard = Environment.getExternalStorageDirectory();	
-		FileWriter fileWriter = new FileWriter(new File(sdCard, fileName));
+	public static void writeString(String fileName
+			, String dir, String data) throws Exception{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, fileName);
+		FileWriter fileWriter = new FileWriter(file);
 		try {
 			fileWriter.write(data);
 			
-		} finally {
+		} catch (Exception e) {
+		    throw new RuntimeException("SDCardWrite exception", e);
+  	    } finally {
 			fileWriter.close();
 		}
 	}
 	
-	public static String readString(String fileName) throws Exception{
-		sdCard = Environment.getExternalStorageDirectory();	
-		FileReader fileReader = new FileReader(new File(sdCard, fileName));
+	public static String readString(String fileName
+			, String dir) throws Exception{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, fileName);
+		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader); 
 		try {
 			return bufferedReader.readLine();
 			
-		} finally {
+		} catch (Exception e) {
+		    throw new RuntimeException("SDCardRead exception", e);
+  	    } finally {
 			fileReader.close();
 		}
 	}
