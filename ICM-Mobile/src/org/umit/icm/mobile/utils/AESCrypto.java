@@ -40,8 +40,7 @@ import javax.crypto.spec.SecretKeySpec;
 import android.os.Environment;
 
 public class AESCrypto {
-	
-	private static int keySize = 128;
+
 
 	public static String encrypt(String key, String plainText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
@@ -58,7 +57,7 @@ public class AESCrypto {
 		KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 		SecureRandom randomGen = SecureRandom.getInstance("SHA1PRNG");
 		randomGen.setSeed(key);
-	    keyGen.init(keySize, randomGen); 
+	    keyGen.init(Constants.AES_KEY_SIZE, randomGen); 
 	    SecretKey secretKey = keyGen.generateKey();
 	    return secretKey.getEncoded();
 	}

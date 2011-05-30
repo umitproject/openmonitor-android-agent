@@ -45,7 +45,6 @@ import android.os.Environment;
 
 public class RSACrypto {
 	
-	private static int keySize = 1024;
 
 	public static String encryptPublic(PublicKey publicKey, String plainText) throws Exception {
 		byte[] cipherText = encryptPublic(publicKey, plainText.getBytes());
@@ -70,7 +69,7 @@ public class RSACrypto {
 	public static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-		keyPairGen.initialize(keySize);
+		keyPairGen.initialize(Constants.RSA_KEY_SIZE);
 		return keyPairGen.generateKeyPair();   
 	}
 

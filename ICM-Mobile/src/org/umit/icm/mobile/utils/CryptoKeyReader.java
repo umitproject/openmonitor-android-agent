@@ -25,24 +25,20 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class CryptoKeyReader {
-	private static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
-	private static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
-	private static String MY_SECRET_KEY_FILE = "mySecretKey.sec";
-	private static String PEER_PUBLIC_KEY_FILE = "PublicKey.pub";
 	
 	public static PublicKey getMyPublicKey() throws Exception {
-		return RSACrypto.readPublicKey(MY_PUBLIC_KEY_FILE);
+		return RSACrypto.readPublicKey(Constants.MY_PUBLIC_KEY_FILE);
 	}
 	
 	public static PrivateKey getMyPrivateKey() throws Exception {
-		return RSACrypto.readPrivateKey(MY_PRIVATE_KEY_FILE);
+		return RSACrypto.readPrivateKey(Constants.MY_PRIVATE_KEY_FILE);
 	}
 	
 	public static byte[] getMySecretKey() throws Exception {
-		return AESCrypto.readKey(MY_SECRET_KEY_FILE);
+		return AESCrypto.readKey(Constants.MY_SECRET_KEY_FILE);
 	}
 	
 	public static PublicKey getPeerPublicKey(String peerIP) throws Exception {
-		return RSACrypto.readPublicKey(peerIP+PEER_PUBLIC_KEY_FILE);
+		return RSACrypto.readPublicKey(peerIP+Constants.PEER_PUBLIC_KEY_FILE);
 	}
 }
