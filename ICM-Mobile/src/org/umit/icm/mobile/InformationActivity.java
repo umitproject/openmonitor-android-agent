@@ -37,7 +37,7 @@ import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
     /** Called when the activity is first created. */
-	private CheckBox c1, c2;
+	private CheckBox cbFilter, c2;
 	private ListView lv1;
 	private TextView ipTextView;
 	ArrayAdapter<String> lvAdapter;
@@ -53,17 +53,12 @@ public class InformationActivity extends Activity{
         ipTextView = (TextView) findViewById(R.id.ipTextView);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));
         
-        c1 = (CheckBox) findViewById(R.id.check1);
+        cbFilter = (CheckBox) findViewById(R.id.check1);
         c2 = (CheckBox) findViewById(R.id.check2);
         c2.setVisibility(8);
         lv1 = (ListView)findViewById(R.id.ListView01);
-        
-        
-       
-        new DownloadWebsite().execute("http://www.google.com");
-     
-        
-                        
+                      
+        new DownloadWebsite().execute("http://www.google.com");                                   
     }
     private class DownloadWebsite extends AsyncTask<String,String,String> {
     	  
