@@ -50,12 +50,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
 			android:text="@string/check_box_filter" />
-		
-		<CheckBox 
-			android:id="@+id/check2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-			android:text="Blank" />
 				
 	</LinearLayout>
 	

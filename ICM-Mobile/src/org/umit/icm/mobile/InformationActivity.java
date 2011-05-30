@@ -37,7 +37,7 @@ import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
     /** Called when the activity is first created. */
-	private CheckBox cbFilter, c2;
+	private CheckBox cbFilter;
 	private ListView lv1;
 	private TextView ipTextView;
 	ArrayAdapter<String> lvAdapter;
@@ -54,8 +54,6 @@ public class InformationActivity extends Activity{
         ipTextView.append(Formatter.formatIpAddress(ipAddress));
         
         cbFilter = (CheckBox) findViewById(R.id.check1);
-        c2 = (CheckBox) findViewById(R.id.check2);
-        c2.setVisibility(8);
         lv1 = (ListView)findViewById(R.id.ListView01);
                       
         new DownloadWebsite().execute("http://www.google.com");                                   
