@@ -31,8 +31,8 @@ import android.test.AndroidTestCase;
 public class SDCardReadWriteTests extends AndroidTestCase {
 
     public void testReadWrite() throws Throwable {
-    	SDCardReadWrite.writeString("sdtest.txt", "This is a test string");
-        String readString = SDCardReadWrite.readString("sdtest.txt");
+    	SDCardReadWrite.writeString("sdtest.txt", "/test" , "This is a test string");
+        String readString = SDCardReadWrite.readString("sdtest.txt", "/test");
         Assert.assertEquals("This is a test string", readString);
     }
 

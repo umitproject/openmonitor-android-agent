@@ -25,7 +25,6 @@ import org.umit.icm.mobile.ControlActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class ControlActivityTest extends
 		ActivityInstrumentationTestCase2<ControlActivity> {
