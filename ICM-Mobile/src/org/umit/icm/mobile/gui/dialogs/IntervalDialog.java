@@ -22,8 +22,6 @@
 package org.umit.icm.mobile.gui.dialogs;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
 import org.umit.icm.mobile.utils.RuntimeParameters;
 
 import android.app.Dialog;

@@ -24,9 +24,6 @@ package org.umit.icm.mobile.gui.dialogs;
 import java.util.regex.Pattern;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
-import org.umit.icm.mobile.R.string;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -41,8 +38,8 @@ import android.widget.RadioButton;
 
 public class SuggestionDialog extends Dialog {
 	
-	private String selection;
-	private Context contextControl;
+	String selection;
+	Context contextControl;
     private ReadyListener readyListener;
     EditText etSuggest, etEmail;
     private RadioButton sRB, wRB;
