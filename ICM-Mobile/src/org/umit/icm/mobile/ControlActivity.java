@@ -22,6 +22,8 @@
 package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
+import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.utils.RuntimeParameters;
 
