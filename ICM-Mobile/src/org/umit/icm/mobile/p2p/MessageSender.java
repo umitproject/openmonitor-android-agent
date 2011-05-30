@@ -76,4 +76,16 @@ public class MessageSender {
 			P2PCommunication.checkResponse(sendPrivateKeyResponse.getHeader());
 		}
 		
+		public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());
+			TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
+			P2PCommunication.checkResponse(testSuggestionResponse.getHeader());
+		}
+		
+		public static void sendServiceSuggestion(AgentData agentData, ServiceSuggestion serviceSuggestion) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray());
+			TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
+			P2PCommunication.checkResponse(testSuggestionResponse.getHeader());
+		}
+		
 }
