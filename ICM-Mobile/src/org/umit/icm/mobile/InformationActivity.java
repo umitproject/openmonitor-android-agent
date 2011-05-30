@@ -69,15 +69,32 @@ public class InformationActivity extends Activity{
     	  
 
     	protected void onPostExecute(String result) {
-    		 String lv_arr[] = {getString(R.string.list_websites),getString(R.string.list_services), result};
-    	        lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
-    	        lv1.setAdapter(lvAdapter);
-    		 
+    		 if (result.equals(null)){
+    			 String lv_arr[] = {getString(R.string.list_websites)
+    					 , getString(R.string.list_services)
+    					 , "No Internet Connection"};
+    			 lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
+        	     lv1.setAdapter(lvAdapter);
+    		 } else {
+    			 String lv_arr[] = {getString(R.string.list_websites)
+    					 , getString(R.string.list_services)
+    					 , result};
+    			 lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
+        	     lv1.setAdapter(lvAdapter);
+    		 }
+    		     		        		 
     	   }
          
 		protected String doInBackground(String... urls) {
 			// TODO Auto-generated method stub
-			return WebsiteOpen.getContent(urls[0]);
+			try {
+				return WebsiteOpen.getContent(urls[0]);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			
 		}
 
 			

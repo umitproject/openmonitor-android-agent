@@ -30,6 +30,7 @@ public class WebsiteTest extends AbstractTest{
 	
 	private Handler scanHandler;
 	private WebsiteClass websiteResult;
+	String websiteReturn;
 
 	
 	@Override
@@ -42,7 +43,14 @@ public class WebsiteTest extends AbstractTest{
 				
 					final String metaData = "Hello";
 					String websiteURL = "http://www.google.com/";
-					final String websiteReturn = WebsiteOpen.getContent(websiteURL).toString();
+					websiteReturn = null;
+					
+					try {
+						websiteReturn = WebsiteOpen.getContent(websiteURL).toString();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					final int status = 0;
 										
 					scanHandler.post(new Runnable() {

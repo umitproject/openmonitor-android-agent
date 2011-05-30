@@ -31,48 +31,39 @@ import java.net.URLConnection;
 
 public class WebsiteOpen {
 
-	static public String getContent(String str){
+	static public String getContent(String str) throws Exception {
 
-
-
-
-	    try {
-	    	URL url = new URL(str);
-            URLConnection conn = url.openConnection();
-            // Get the response
-            InputStream is = conn.getInputStream();
-            
-	            String result= convertStreamToString(is);
-
-	        
-	            return result;
-	        
-	        
-
-	    } catch (Exception e) {}
-		return null;
+		URL url = new URL(str);
+        URLConnection urlConnection = url.openConnection();
+        InputStream inputStream = urlConnection.getInputStream();
+        try{
+        	return convertStreamToString(inputStream);
+        }
+        catch (Exception e) {
+        	e.printStackTrace();
+        	return null;
+        }
+        finally {
+        	inputStream.close();
+        }
+	        	       
 	}
 	
-	private static String convertStreamToString(InputStream is) {
+	private static String convertStreamToString(InputStream inputStream) throws IOException {
 	   
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	    StringBuilder sb = new StringBuilder();
+		if (inputStream.equals(null))
+			return null;
+	    BufferedReader bufferedReader 
+	    = new BufferedReader(new InputStreamReader(inputStream));
+	    StringBuilder stringBuilder = new StringBuilder();
 
 	    String line = null;
-	    try {
-	        while ((line = reader.readLine()) != null) {
-	            sb.append(line + "\n");
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            is.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    return sb.toString();
+	    
+	        while ((line = bufferedReader.readLine()) != null) {
+	            stringBuilder.append(line + "\n");
+	        }	   
+	    inputStream.close();	    	    
+	    return stringBuilder.toString();
 	}
     
 }
