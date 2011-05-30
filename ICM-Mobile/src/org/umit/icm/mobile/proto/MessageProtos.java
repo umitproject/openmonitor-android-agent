@@ -13109,9 +13109,25 @@ public final class MessageProtos {
     public boolean hasEmailAddress() { return hasEmailAddress; }
     public java.lang.String getEmailAddress() { return emailAddress_; }
     
+    // required string hostName = 4;
+    public static final int HOSTNAME_FIELD_NUMBER = 4;
+    private boolean hasHostName;
+    private java.lang.String hostName_ = "";
+    public boolean hasHostName() { return hasHostName; }
+    public java.lang.String getHostName() { return hostName_; }
+    
+    // required string ip = 5;
+    public static final int IP_FIELD_NUMBER = 5;
+    private boolean hasIp;
+    private java.lang.String ip_ = "";
+    public boolean hasIp() { return hasIp; }
+    public java.lang.String getIp() { return ip_; }
+    
     public final boolean isInitialized() {
       if (!hasHeader) return false;
       if (!hasServiceName) return false;
+      if (!hasHostName) return false;
+      if (!hasIp) return false;
       if (!getHeader().isInitialized()) return false;
       return true;
     }
@@ -13126,6 +13142,12 @@ public final class MessageProtos {
       }
       if (hasEmailAddress()) {
         output.writeString(3, getEmailAddress());
+      }
+      if (hasHostName()) {
+        output.writeString(4, getHostName());
+      }
+      if (hasIp()) {
+        output.writeString(5, getIp());
       }
       getUnknownFields().writeTo(output);
     }
@@ -13147,6 +13169,14 @@ public final class MessageProtos {
       if (hasEmailAddress()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(3, getEmailAddress());
+      }
+      if (hasHostName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getHostName());
+      }
+      if (hasIp()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(5, getIp());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13306,6 +13336,12 @@ public final class MessageProtos {
         if (other.hasEmailAddress()) {
           setEmailAddress(other.getEmailAddress());
         }
+        if (other.hasHostName()) {
+          setHostName(other.getHostName());
+        }
+        if (other.hasIp()) {
+          setIp(other.getIp());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -13346,6 +13382,14 @@ public final class MessageProtos {
             }
             case 26: {
               setEmailAddress(input.readString());
+              break;
+            }
+            case 34: {
+              setHostName(input.readString());
+              break;
+            }
+            case 42: {
+              setIp(input.readString());
               break;
             }
           }
@@ -13429,6 +13473,48 @@ public final class MessageProtos {
       public Builder clearEmailAddress() {
         result.hasEmailAddress = false;
         result.emailAddress_ = getDefaultInstance().getEmailAddress();
+        return this;
+      }
+      
+      // required string hostName = 4;
+      public boolean hasHostName() {
+        return result.hasHostName();
+      }
+      public java.lang.String getHostName() {
+        return result.getHostName();
+      }
+      public Builder setHostName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasHostName = true;
+        result.hostName_ = value;
+        return this;
+      }
+      public Builder clearHostName() {
+        result.hasHostName = false;
+        result.hostName_ = getDefaultInstance().getHostName();
+        return this;
+      }
+      
+      // required string ip = 5;
+      public boolean hasIp() {
+        return result.hasIp();
+      }
+      public java.lang.String getIp() {
+        return result.getIp();
+      }
+      public Builder setIp(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasIp = true;
+        result.ip_ = value;
+        return this;
+      }
+      public Builder clearIp() {
+        result.hasIp = false;
+        result.ip_ = getDefaultInstance().getIp();
         return this;
       }
     }
@@ -14026,12 +14112,13 @@ public final class MessageProtos {
       "\"w\n\021WebsiteSuggestion\0228\n\006header\030\001 \002(\0132(.",
       "org.umit.icm.mobile.proto.RequestHeader\022" +
       "\022\n\nwebsiteURL\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(" +
-      "\t\"x\n\021ServiceSuggestion\0228\n\006header\030\001 \002(\0132(" +
-      ".org.umit.icm.mobile.proto.RequestHeader" +
-      "\022\023\n\013serviceName\030\002 \002(\t\022\024\n\014emailAddress\030\003 " +
-      "\001(\t\"S\n\026TestSuggestionResponse\0229\n\006header\030" +
-      "\001 \002(\0132).org.umit.icm.mobile.proto.Respon" +
-      "seHeaderB\017B\rMessageProtos"
+      "\t\"\226\001\n\021ServiceSuggestion\0228\n\006header\030\001 \002(\0132" +
+      "(.org.umit.icm.mobile.proto.RequestHeade" +
+      "r\022\023\n\013serviceName\030\002 \002(\t\022\024\n\014emailAddress\030\003" +
+      " \001(\t\022\020\n\010hostName\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026Te" +
+      "stSuggestionResponse\0229\n\006header\030\001 \002(\0132).o" +
+      "rg.umit.icm.mobile.proto.ResponseHeaderB" +
+      "\017B\rMessageProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14315,7 +14402,7 @@ public final class MessageProtos {
           internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_descriptor,
-              new java.lang.String[] { "Header", "ServiceName", "EmailAddress", },
+              new java.lang.String[] { "Header", "ServiceName", "EmailAddress", "HostName", "Ip", },
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.class,
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_descriptor =
