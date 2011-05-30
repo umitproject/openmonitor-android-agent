@@ -29,4 +29,5 @@ public class Constants {
 	public static int RSA_KEY_SIZE = 1024;
 	public static int AES_KEY_SIZE = 128;
 	public static String KEYS_DIR = "/keys";
+	public static String PARAMETERS_DIR = "/params";
 }

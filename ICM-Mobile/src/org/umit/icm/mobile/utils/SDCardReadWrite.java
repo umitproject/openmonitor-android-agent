@@ -38,16 +38,20 @@ public class SDCardReadWrite {
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
+		keyDir.mkdirs();
     	File file = new File(keyDir, fileName);
-		FileWriter fileWriter = new FileWriter(file);
-		try {
-			fileWriter.write(data);
+    	if(!file.exists()){
+    		file.createNewFile();
+    		FileWriter fileWriter = new FileWriter(file);
+    		try {
+    			fileWriter.write(data);
 			
-		} catch (Exception e) {
+    		} catch (Exception e) {
 		    throw new RuntimeException("SDCardWrite exception", e);
-  	    } finally {
+    		} finally {
 			fileWriter.close();
-		}
+    		}
+    	}
 	}
 	
 	public static String readString(String fileName
