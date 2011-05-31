@@ -23,6 +23,8 @@ package org.umit.icm.mobile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
@@ -58,23 +60,27 @@ public class InformationActivity extends Activity{
         
         cbFilter = (CheckBox) findViewById(R.id.check1);
         listView = (ListView)findViewById(R.id.ListView01);
-                      
-        new DownloadWebsite().execute("http://www.google.com");                                   
+        
+        String website = "http://www.google.com";
+        new DownloadWebsiteContent().execute(website);
+        new DownloadWebsiteHeader().execute(website);
     }
-    private class DownloadWebsite extends AsyncTask<String,String,String> {
+    private class DownloadWebsiteContent extends AsyncTask<String,String,String> {
     	  
     	protected void onPostExecute(String result) {
-    		     String listContent[] = {getString(R.string.list_websites)
-    					 , getString(R.string.list_services)
-    					 , result};
-    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listContent);
+    		    // String listContent[] = {getString(R.string.list_websites)
+    				//	 , getString(R.string.list_services)
+    					// , result};
+    			
+    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1);
         	     listView.setAdapter(arrayAdapter);	     		        		 
     	   }
          
 		protected String doInBackground(String... urls) {
 			// TODO Auto-generated method stub
+			String result = new String();
 			try {
-				String result = WebsiteOpen.getContent(urls[0]);
+				result = WebsiteOpen.getContent(urls[0]);
 				return result;							
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -84,6 +90,39 @@ public class InformationActivity extends Activity{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
+			} 			
+					
+		}
+			
+    }
+    
+    private class DownloadWebsiteHeader extends AsyncTask<String,List<String>,List<String>> {
+  	  
+    	protected void onPostExecute(List<String> result) {
+    		    // String listContent[] = {getString(R.string.list_websites)
+    				//	 , getString(R.string.list_services)
+    					// , result};
+    			
+    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , result);
+        	     listView.setAdapter(arrayAdapter);	     		        		 
+    	   }
+         
+		protected List<String> doInBackground(String... urls) {
+			// TODO Auto-generated method stub
+			List<String> result = new ArrayList<String>();
+			try {
+				result = WebsiteOpen.getHeaders(urls[0]);
+				return result;							
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
 			} 			
 					
 		}

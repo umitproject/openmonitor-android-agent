@@ -27,6 +27,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class WebsiteOpen {
@@ -38,6 +41,19 @@ public class WebsiteOpen {
 
         InputStream inputStream = urlConnection.getInputStream();
      	return convertStreamToString(inputStream);
+          
+	}
+	
+	static public List<String> getHeaders(String str) throws IOException {
+
+		URL url = new URL(str);
+		List<String> list = new LinkedList<String>();  
+		list = new ArrayList<String>();  
+		URLConnection urlConnection = url.openConnection();
+		for (int i=0 ; urlConnection.getHeaderField(i)!=null ; i++)
+			list.add(urlConnection.getHeaderField(i));
+        
+     	return list;
           
 	}
 	
