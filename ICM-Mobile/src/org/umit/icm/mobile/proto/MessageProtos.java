@@ -1440,19 +1440,19 @@ public final class MessageProtos {
     public boolean hasStatusCode() { return hasStatusCode; }
     public int getStatusCode() { return statusCode_; }
     
-    // optional double responseTime = 3;
+    // optional int64 responseTime = 3;
     public static final int RESPONSETIME_FIELD_NUMBER = 3;
     private boolean hasResponseTime;
-    private double responseTime_ = 0D;
+    private long responseTime_ = 0L;
     public boolean hasResponseTime() { return hasResponseTime; }
-    public double getResponseTime() { return responseTime_; }
+    public long getResponseTime() { return responseTime_; }
     
-    // optional double bandwidth = 4;
+    // optional int32 bandwidth = 4;
     public static final int BANDWIDTH_FIELD_NUMBER = 4;
     private boolean hasBandwidth;
-    private double bandwidth_ = 0D;
+    private int bandwidth_ = 0;
     public boolean hasBandwidth() { return hasBandwidth; }
-    public double getBandwidth() { return bandwidth_; }
+    public int getBandwidth() { return bandwidth_; }
     
     public final boolean isInitialized() {
       if (!hasWebsiteURL) return false;
@@ -1469,10 +1469,10 @@ public final class MessageProtos {
         output.writeInt32(2, getStatusCode());
       }
       if (hasResponseTime()) {
-        output.writeDouble(3, getResponseTime());
+        output.writeInt64(3, getResponseTime());
       }
       if (hasBandwidth()) {
-        output.writeDouble(4, getBandwidth());
+        output.writeInt32(4, getBandwidth());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1493,11 +1493,11 @@ public final class MessageProtos {
       }
       if (hasResponseTime()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, getResponseTime());
+          .computeInt64Size(3, getResponseTime());
       }
       if (hasBandwidth()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, getBandwidth());
+          .computeInt32Size(4, getBandwidth());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1693,12 +1693,12 @@ public final class MessageProtos {
               setStatusCode(input.readInt32());
               break;
             }
-            case 25: {
-              setResponseTime(input.readDouble());
+            case 24: {
+              setResponseTime(input.readInt64());
               break;
             }
-            case 33: {
-              setBandwidth(input.readDouble());
+            case 32: {
+              setBandwidth(input.readInt32());
               break;
             }
           }
@@ -1745,39 +1745,39 @@ public final class MessageProtos {
         return this;
       }
       
-      // optional double responseTime = 3;
+      // optional int64 responseTime = 3;
       public boolean hasResponseTime() {
         return result.hasResponseTime();
       }
-      public double getResponseTime() {
+      public long getResponseTime() {
         return result.getResponseTime();
       }
-      public Builder setResponseTime(double value) {
+      public Builder setResponseTime(long value) {
         result.hasResponseTime = true;
         result.responseTime_ = value;
         return this;
       }
       public Builder clearResponseTime() {
         result.hasResponseTime = false;
-        result.responseTime_ = 0D;
+        result.responseTime_ = 0L;
         return this;
       }
       
-      // optional double bandwidth = 4;
+      // optional int32 bandwidth = 4;
       public boolean hasBandwidth() {
         return result.hasBandwidth();
       }
-      public double getBandwidth() {
+      public int getBandwidth() {
         return result.getBandwidth();
       }
-      public Builder setBandwidth(double value) {
+      public Builder setBandwidth(int value) {
         result.hasBandwidth = true;
         result.bandwidth_ = value;
         return this;
       }
       public Builder clearBandwidth() {
         result.hasBandwidth = false;
-        result.bandwidth_ = 0D;
+        result.bandwidth_ = 0;
         return this;
       }
     }
@@ -14022,8 +14022,8 @@ public final class MessageProtos {
       "dNode\030\006 \003(\014\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
       "it.icm.mobile.proto.TraceRoute\"f\n\023Websit" +
       "eReportDetail\022\022\n\nwebsiteURL\030\001 \002(\t\022\022\n\nsta" +
-      "tusCode\030\002 \002(\005\022\024\n\014responseTime\030\003 \001(\001\022\021\n\tb" +
-      "andwidth\030\004 \001(\001\"\304\001\n\rWebsiteReport\0224\n\006head" +
+      "tusCode\030\002 \002(\005\022\024\n\014responseTime\030\003 \001(\003\022\021\n\tb" +
+      "andwidth\030\004 \001(\005\"\304\001\n\rWebsiteReport\0224\n\006head" +
       "er\030\001 \002(\0132$.org.umit.icm.mobile.proto.ICM" +
       "Report\022>\n\006report\030\002 \002(\0132..org.umit.icm.mo" +
       "bile.proto.WebsiteReportDetail\022\024\n\014redire" +
