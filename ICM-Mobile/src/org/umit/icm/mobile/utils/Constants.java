@@ -34,4 +34,6 @@ public class Constants {
 	public static String SCAN_FILE = "scan.param";
 	public static int DEFAULT_SCAN_INTERVAL = 10;
 	public static String DEFAULT_SCAN_STATUS = "On";
+	public static String WEBSITES_DIR = "/websites";
+	public static String WEBSITE_FILE = "-site.web";
 }

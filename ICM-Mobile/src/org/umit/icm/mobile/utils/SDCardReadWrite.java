@@ -21,10 +21,24 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.math.BigInteger;
+import java.security.KeyFactory;
+import java.security.spec.RSAPublicKeySpec;
+import java.util.List;
+
+import org.umit.icm.mobile.connectivity.Website;
 
 import android.os.Environment;
 
@@ -34,7 +48,7 @@ public class SDCardReadWrite {
 	private static File sdCard;
 	
 	public static void writeString(String fileName
-			, String dir, String data) throws Exception{
+			, String dir, String data) throws IOException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -55,7 +69,7 @@ public class SDCardReadWrite {
 		}
 	
 	public static String readString(String fileName
-			, String dir) throws Exception{
+			, String dir) throws IOException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -73,7 +87,7 @@ public class SDCardReadWrite {
 	}
 	
 	public static boolean fileExists(String fileName
-			, String dir) throws Exception{
+			, String dir) throws IOException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -82,5 +96,52 @@ public class SDCardReadWrite {
     		return false;
     	}
     	return true;
+	}
+	
+	public static void writeWebsite(String dir
+			, Website data) throws IOException{
+		ObjectOutputStream objOutStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir, data.getUrl()
+    			+ Constants.WEBSITE_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));
+			objOutStream.writeObject(data.getUrl());
+			objOutStream.writeObject(data.getHeader());
+			objOutStream.writeObject(data.getContent());
+    	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static Website readWebsite(String dir
+			, String url) throws IOException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, url
+    			+ Constants.WEBSITE_FILE);
+    	Website website = new Website();
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+	    	    website.setUrl((String) objInputStream.readObject());
+	    	    website.setHeader((List<String>) objInputStream.readObject());
+	    	    website.setContent((String) objInputStream.readObject());
+	    	    
+	    	    return website;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read exception", e);
+  	  	} finally {
+  		  objInputStream.close();
+  	  	}
 	}
 }

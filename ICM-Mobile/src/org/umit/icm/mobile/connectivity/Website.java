@@ -21,8 +21,12 @@
 
 package org.umit.icm.mobile.connectivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 public class Website {
 	private String url;
@@ -67,4 +71,12 @@ public class Website {
 		this.header = header;
 	}
 	
+	public void writeWebsite() throws IOException {
+		Website website = new Website(this.url, this.content, this.header);
+		SDCardReadWrite.writeWebsite(Constants.WEBSITES_DIR, website);
+	}
+	
+	public Website readWebsite(String url) throws IOException {
+		return SDCardReadWrite.readWebsite(Constants.WEBSITES_DIR, url);
+	}
 }
