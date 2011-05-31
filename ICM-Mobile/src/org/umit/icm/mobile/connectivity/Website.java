@@ -79,4 +79,12 @@ public class Website {
 	public Website readWebsite(String url) throws IOException {
 		return SDCardReadWrite.readWebsite(Constants.WEBSITES_DIR, url);
 	}
+	
+	public boolean equals(Website website) {
+		if((website.getUrl().equals(this.getUrl()))
+				&& website.getContent().equals(this.getContent())
+				&& website.getHeader().equals(this.getHeader()))
+			return true;
+		return false;
+	}
 }
