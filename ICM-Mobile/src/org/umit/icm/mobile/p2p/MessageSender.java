@@ -25,11 +25,7 @@ import org.umit.icm.mobile.proto.MessageProtos.*;
 import org.umit.icm.mobile.p2p.P2PCommunication;
 
 public class MessageSender {
-		public static void sendICMReport(AgentData agentData, ICMReport icmReport) throws Exception {
-			byte[] response = P2PCommunication.sendMessage(agentData, icmReport.toByteArray());
-			 // TODO check Response
-		}
-		
+				
 		public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());
 			SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);	  
