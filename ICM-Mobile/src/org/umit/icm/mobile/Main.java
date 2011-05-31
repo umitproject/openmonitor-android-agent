@@ -23,6 +23,9 @@ package org.umit.icm.mobile;
 
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.RuntimeParameters;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -40,6 +43,21 @@ public class Main extends TabActivity {
         TabHost tabHost = getTabHost(); 
         TabHost.TabSpec spec;
         Intent intent;  
+        
+        try {
+			if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
+					, Constants.PARAMETERS_DIR) == false )
+					&& (SDCardReadWrite.fileExists(Constants.SCAN_FILE
+			        		, Constants.PARAMETERS_DIR) == false )) {
+				RuntimeParameters runtimeParameters = new RuntimeParameters();
+				runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
+				runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         
         intent = new Intent().setClass(this, InformationActivity.class);
 

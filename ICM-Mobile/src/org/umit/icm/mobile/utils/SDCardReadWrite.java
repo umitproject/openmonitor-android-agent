@@ -71,4 +71,16 @@ public class SDCardReadWrite {
 			fileReader.close();
 		}
 	}
+	
+	public static boolean fileExists(String fileName
+			, String dir) throws Exception{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, fileName);
+    	if(!file.exists()){
+    		return false;
+    	}
+    	return true;
+	}
 }

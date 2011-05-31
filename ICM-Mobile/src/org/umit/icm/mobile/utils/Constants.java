@@ -32,4 +32,6 @@ public class Constants {
 	public static String PARAMETERS_DIR = "/params";
 	public static String INTERVAL_FILE = "interval.param";
 	public static String SCAN_FILE = "scan.param";
+	public static int DEFAULT_SCAN_INTERVAL = 10;
+	public static String DEFAULT_SCAN_STATUS = "On";
 }
