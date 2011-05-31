@@ -57,8 +57,18 @@ public class ControlActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        scanButton.setText(getString(R.string.scan_text)
-        		+ " " + scanStatus);
+		
+		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0){
+   			scanButton.setText(getString(R.string.scan_text)
+       				+" "+ getString(R.string.scan_on));
+   			scanStatus = getString(R.string.scan_off);
+   		}
+   			
+   		else{
+   			scanButton.setText(getString(R.string.scan_text)
+       				+" "+ getString(R.string.scan_off));
+   			scanStatus = getString(R.string.scan_on);
+   		}
         
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
