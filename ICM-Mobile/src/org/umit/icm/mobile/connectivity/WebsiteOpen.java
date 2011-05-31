@@ -31,28 +31,18 @@ import java.net.URLConnection;
 
 public class WebsiteOpen {
 
-	static public String getContent(String str) throws Exception {
+	static public String getContent(String str) throws IOException {
 
 		URL url = new URL(str);
-        URLConnection urlConnection = url.openConnection();
+		URLConnection urlConnection = url.openConnection();
+
         InputStream inputStream = urlConnection.getInputStream();
-        try{
-        	return convertStreamToString(inputStream);
-        }
-        catch (Exception e) {
-        	e.printStackTrace();
-        	return null;
-        }
-        finally {
-        	inputStream.close();
-        }
-	        	       
+     	return convertStreamToString(inputStream);
+          
 	}
 	
 	private static String convertStreamToString(InputStream inputStream) throws IOException {
 	   
-		if (inputStream.equals(null))
-			return null;
 	    BufferedReader bufferedReader 
 	    = new BufferedReader(new InputStreamReader(inputStream));
 	    StringBuilder stringBuilder = new StringBuilder();

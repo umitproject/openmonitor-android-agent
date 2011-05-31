@@ -21,6 +21,9 @@
 
 package org.umit.icm.mobile;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
@@ -38,9 +41,9 @@ import android.text.format.Formatter;
 public class InformationActivity extends Activity{
     /** Called when the activity is first created. */
 	private CheckBox cbFilter;
-	private ListView lv1;
+	private ListView listView;
 	private TextView ipTextView;
-	ArrayAdapter<String> lvAdapter;
+	ArrayAdapter<String> arrayAdapter;
 	
 	
     @Override
@@ -54,44 +57,37 @@ public class InformationActivity extends Activity{
         ipTextView.append(Formatter.formatIpAddress(ipAddress));
         
         cbFilter = (CheckBox) findViewById(R.id.check1);
-        lv1 = (ListView)findViewById(R.id.ListView01);
+        listView = (ListView)findViewById(R.id.ListView01);
                       
         new DownloadWebsite().execute("http://www.google.com");                                   
     }
     private class DownloadWebsite extends AsyncTask<String,String,String> {
     	  
-
     	protected void onPostExecute(String result) {
-    		 if (result.equals(null)){
-    			 String lv_arr[] = {getString(R.string.list_websites)
-    					 , getString(R.string.list_services)
-    					 , "No Internet Connection"};
-    			 lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
-        	     lv1.setAdapter(lvAdapter);
-    		 } else {
-    			 String lv_arr[] = {getString(R.string.list_websites)
+    		     String listContent[] = {getString(R.string.list_websites)
     					 , getString(R.string.list_services)
     					 , result};
-    			 lvAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , lv_arr);
-        	     lv1.setAdapter(lvAdapter);
-    		 }
-    		     		        		 
+    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listContent);
+        	     listView.setAdapter(arrayAdapter);	     		        		 
     	   }
          
 		protected String doInBackground(String... urls) {
 			// TODO Auto-generated method stub
 			try {
-				return WebsiteOpen.getContent(urls[0]);
-			} catch (Exception e) {
+				String result = WebsiteOpen.getContent(urls[0]);
+				return result;							
+			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return null;
-			}
-			
+				return e.getMessage();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return e.getMessage();
+			} 			
+					
 		}
-
 			
     }
-      
-	
+      	
 }
