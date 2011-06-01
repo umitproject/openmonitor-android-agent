@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.connectivity;
 
+import java.io.IOException;
+
 import android.view.View;
 
 
@@ -33,11 +35,11 @@ public class AbstractTest {
 	}
 	
 			
-	public boolean clean(){
+	public Object clean() throws IOException {
 		return true;
 	}
 
-	public void scan(View view) {
+	public void scan() throws IOException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -22,7 +22,10 @@
 package org.umit.icm.mobile;
 
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.RuntimeParameters;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -41,6 +44,13 @@ public class Main extends TabActivity {
         setContentView(R.layout.main);
         Resources res = getResources(); 
         TabHost tabHost = getTabHost(); 
+        WebsiteTest websiteTest = new WebsiteTest();
+        try {
+			websiteTest.scan();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         TabHost.TabSpec spec;
         Intent intent;  
         

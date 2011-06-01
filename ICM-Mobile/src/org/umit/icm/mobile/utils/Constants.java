@@ -21,6 +21,9 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Constants {
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
 	public static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
@@ -36,4 +39,24 @@ public class Constants {
 	public static String DEFAULT_SCAN_STATUS = "On";
 	public static String WEBSITES_DIR = "/websites";
 	public static String WEBSITE_FILE = "-site.web";
+	public static List<String> WEBSITE_LIST = new ArrayList<String>()
+	{/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{
+		add("http://www.google.com");
+		add("http://www.facebook.com");
+		add("http://www.youtube.com");
+		add("http://www.twitter.com");
+		add("http://www.yahoo.com");
+		add("http://www.cnn.com");
+		add("http://www.bbc.com");
+		add("http://www.gmail.com");
+		add("http://www.hotmail.com");
+		add("http://www.linkedin.com");
+	}};
+	
+
 }

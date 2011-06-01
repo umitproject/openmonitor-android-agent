@@ -889,15 +889,15 @@ public final class MessageProtos {
     public boolean hasTimeUTC() { return hasTimeUTC; }
     public long getTimeUTC() { return timeUTC_; }
     
-    // repeated bytes passedNode = 6;
+    // repeated string passedNode = 6;
     public static final int PASSEDNODE_FIELD_NUMBER = 6;
-    private java.util.List<com.google.protobuf.ByteString> passedNode_ =
+    private java.util.List<java.lang.String> passedNode_ =
       java.util.Collections.emptyList();
-    public java.util.List<com.google.protobuf.ByteString> getPassedNodeList() {
+    public java.util.List<java.lang.String> getPassedNodeList() {
       return passedNode_;
     }
     public int getPassedNodeCount() { return passedNode_.size(); }
-    public com.google.protobuf.ByteString getPassedNode(int index) {
+    public java.lang.String getPassedNode(int index) {
       return passedNode_.get(index);
     }
     
@@ -937,8 +937,8 @@ public final class MessageProtos {
       if (hasTimeUTC()) {
         output.writeInt64(5, getTimeUTC());
       }
-      for (com.google.protobuf.ByteString element : getPassedNodeList()) {
-        output.writeBytes(6, element);
+      for (java.lang.String element : getPassedNodeList()) {
+        output.writeString(6, element);
       }
       if (hasTraceroute()) {
         output.writeMessage(7, getTraceroute());
@@ -974,9 +974,9 @@ public final class MessageProtos {
       }
       {
         int dataSize = 0;
-        for (com.google.protobuf.ByteString element : getPassedNodeList()) {
+        for (java.lang.String element : getPassedNodeList()) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(element);
+            .computeStringSizeNoTag(element);
         }
         size += dataSize;
         size += 1 * getPassedNodeList().size();
@@ -1155,7 +1155,7 @@ public final class MessageProtos {
         }
         if (!other.passedNode_.isEmpty()) {
           if (result.passedNode_.isEmpty()) {
-            result.passedNode_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+            result.passedNode_ = new java.util.ArrayList<java.lang.String>();
           }
           result.passedNode_.addAll(other.passedNode_);
         }
@@ -1208,7 +1208,7 @@ public final class MessageProtos {
               break;
             }
             case 50: {
-              addPassedNode(input.readBytes());
+              addPassedNode(input.readString());
               break;
             }
             case 58: {
@@ -1315,37 +1315,37 @@ public final class MessageProtos {
         return this;
       }
       
-      // repeated bytes passedNode = 6;
-      public java.util.List<com.google.protobuf.ByteString> getPassedNodeList() {
+      // repeated string passedNode = 6;
+      public java.util.List<java.lang.String> getPassedNodeList() {
         return java.util.Collections.unmodifiableList(result.passedNode_);
       }
       public int getPassedNodeCount() {
         return result.getPassedNodeCount();
       }
-      public com.google.protobuf.ByteString getPassedNode(int index) {
+      public java.lang.String getPassedNode(int index) {
         return result.getPassedNode(index);
       }
-      public Builder setPassedNode(int index, com.google.protobuf.ByteString value) {
+      public Builder setPassedNode(int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   result.passedNode_.set(index, value);
         return this;
       }
-      public Builder addPassedNode(com.google.protobuf.ByteString value) {
+      public Builder addPassedNode(java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   if (result.passedNode_.isEmpty()) {
-          result.passedNode_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+          result.passedNode_ = new java.util.ArrayList<java.lang.String>();
         }
         result.passedNode_.add(value);
         return this;
       }
       public Builder addAllPassedNode(
-          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+          java.lang.Iterable<? extends java.lang.String> values) {
         if (result.passedNode_.isEmpty()) {
-          result.passedNode_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+          result.passedNode_ = new java.util.ArrayList<java.lang.String>();
         }
         super.addAll(values, result.passedNode_);
         return this;
@@ -14019,7 +14019,7 @@ public final class MessageProtos {
       "proto.Trace\"\260\001\n\tICMReport\022\020\n\010reportID\030\001 " +
       "\002(\003\022\017\n\007agentID\030\002 \002(\003\022\016\n\006testID\030\003 \002(\005\022\020\n\010" +
       "timeZone\030\004 \002(\005\022\017\n\007timeUTC\030\005 \002(\003\022\022\n\npasse" +
-      "dNode\030\006 \003(\014\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
+      "dNode\030\006 \003(\t\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
       "it.icm.mobile.proto.TraceRoute\"f\n\023Websit" +
       "eReportDetail\022\022\n\nwebsiteURL\030\001 \002(\t\022\022\n\nsta" +
       "tusCode\030\002 \002(\005\022\024\n\014responseTime\030\003 \001(\003\022\021\n\tb" +
