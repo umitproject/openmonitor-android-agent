@@ -39,6 +39,8 @@ import com.google.protobuf.ByteString;
 
 import android.util.Log;
 
+// TODO Add sanity checks to all message fields. They may raise exceptions.
+// TODO Catch Runtime exceptions.
 public class WebsiteTest extends AbstractTest{
 	
 	
@@ -50,7 +52,7 @@ public class WebsiteTest extends AbstractTest{
 	}
 	
 	@Override()
-	public void scan() throws IOException{
+	public void scan() throws IOException, RuntimeException{
 
 		Runnable runnable = new Runnable() {
 			@Override
@@ -100,7 +102,7 @@ public class WebsiteTest extends AbstractTest{
 		new Thread(runnable).start();
 	}
 	
-	public WebsiteReport clean(String websiteURL, String websiteContent, List<String> websiteHeader) throws IOException {
+	public WebsiteReport clean(String websiteURL, String websiteContent, List<String> websiteHeader) throws IOException, RuntimeException {
 		List<String> listNodes = new ArrayList<String>();
 		listNodes.add("node1");
 		listNodes.add("node2");
