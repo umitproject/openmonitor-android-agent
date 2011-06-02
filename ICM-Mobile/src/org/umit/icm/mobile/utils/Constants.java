@@ -59,5 +59,5 @@ public class Constants {
 		add("http://www.hotmail.com/");
 	}};
 	
-
+	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
 }
