@@ -94,6 +94,7 @@ public class WebsiteTest extends AbstractTest{
 						if (websiteReport.getHtmlResponse().length()!=0)
 							Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
 						Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
+						Log.w("############", websiteReport.getReport().getWebsiteURL());
 						
 					}
 																				

@@ -1440,12 +1440,12 @@ public final class MessageProtos {
     public boolean hasStatusCode() { return hasStatusCode; }
     public int getStatusCode() { return statusCode_; }
     
-    // optional int64 responseTime = 3;
+    // optional int32 responseTime = 3;
     public static final int RESPONSETIME_FIELD_NUMBER = 3;
     private boolean hasResponseTime;
-    private long responseTime_ = 0L;
+    private int responseTime_ = 0;
     public boolean hasResponseTime() { return hasResponseTime; }
-    public long getResponseTime() { return responseTime_; }
+    public int getResponseTime() { return responseTime_; }
     
     // optional int32 bandwidth = 4;
     public static final int BANDWIDTH_FIELD_NUMBER = 4;
@@ -1469,7 +1469,7 @@ public final class MessageProtos {
         output.writeInt32(2, getStatusCode());
       }
       if (hasResponseTime()) {
-        output.writeInt64(3, getResponseTime());
+        output.writeInt32(3, getResponseTime());
       }
       if (hasBandwidth()) {
         output.writeInt32(4, getBandwidth());
@@ -1493,7 +1493,7 @@ public final class MessageProtos {
       }
       if (hasResponseTime()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, getResponseTime());
+          .computeInt32Size(3, getResponseTime());
       }
       if (hasBandwidth()) {
         size += com.google.protobuf.CodedOutputStream
@@ -1694,7 +1694,7 @@ public final class MessageProtos {
               break;
             }
             case 24: {
-              setResponseTime(input.readInt64());
+              setResponseTime(input.readInt32());
               break;
             }
             case 32: {
@@ -1745,21 +1745,21 @@ public final class MessageProtos {
         return this;
       }
       
-      // optional int64 responseTime = 3;
+      // optional int32 responseTime = 3;
       public boolean hasResponseTime() {
         return result.hasResponseTime();
       }
-      public long getResponseTime() {
+      public int getResponseTime() {
         return result.getResponseTime();
       }
-      public Builder setResponseTime(long value) {
+      public Builder setResponseTime(int value) {
         result.hasResponseTime = true;
         result.responseTime_ = value;
         return this;
       }
       public Builder clearResponseTime() {
         result.hasResponseTime = false;
-        result.responseTime_ = 0L;
+        result.responseTime_ = 0;
         return this;
       }
       
@@ -6734,29 +6734,22 @@ public final class MessageProtos {
     public boolean hasEventType() { return hasEventType; }
     public java.lang.String getEventType() { return eventType_; }
     
-    // required int32 timeZone = 3;
-    public static final int TIMEZONE_FIELD_NUMBER = 3;
-    private boolean hasTimeZone;
-    private int timeZone_ = 0;
-    public boolean hasTimeZone() { return hasTimeZone; }
-    public int getTimeZone() { return timeZone_; }
-    
-    // required int64 timeUTC = 4;
-    public static final int TIMEUTC_FIELD_NUMBER = 4;
+    // required int64 timeUTC = 3;
+    public static final int TIMEUTC_FIELD_NUMBER = 3;
     private boolean hasTimeUTC;
     private long timeUTC_ = 0L;
     public boolean hasTimeUTC() { return hasTimeUTC; }
     public long getTimeUTC() { return timeUTC_; }
     
-    // required int64 sinceTimeUTC = 5;
-    public static final int SINCETIMEUTC_FIELD_NUMBER = 5;
+    // required int64 sinceTimeUTC = 4;
+    public static final int SINCETIMEUTC_FIELD_NUMBER = 4;
     private boolean hasSinceTimeUTC;
     private long sinceTimeUTC_ = 0L;
     public boolean hasSinceTimeUTC() { return hasSinceTimeUTC; }
     public long getSinceTimeUTC() { return sinceTimeUTC_; }
     
-    // repeated string locations = 6;
-    public static final int LOCATIONS_FIELD_NUMBER = 6;
+    // repeated string locations = 5;
+    public static final int LOCATIONS_FIELD_NUMBER = 5;
     private java.util.List<java.lang.String> locations_ =
       java.util.Collections.emptyList();
     public java.util.List<java.lang.String> getLocationsList() {
@@ -6767,15 +6760,15 @@ public final class MessageProtos {
       return locations_.get(index);
     }
     
-    // optional .org.umit.icm.mobile.proto.WebsiteReportDetail websiteReport = 7;
-    public static final int WEBSITEREPORT_FIELD_NUMBER = 7;
+    // optional .org.umit.icm.mobile.proto.WebsiteReportDetail websiteReport = 6;
+    public static final int WEBSITEREPORT_FIELD_NUMBER = 6;
     private boolean hasWebsiteReport;
     private org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail websiteReport_ = org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail.getDefaultInstance();
     public boolean hasWebsiteReport() { return hasWebsiteReport; }
     public org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail getWebsiteReport() { return websiteReport_; }
     
-    // optional .org.umit.icm.mobile.proto.ServiceReportDetail serviceReport = 8;
-    public static final int SERVICEREPORT_FIELD_NUMBER = 8;
+    // optional .org.umit.icm.mobile.proto.ServiceReportDetail serviceReport = 7;
+    public static final int SERVICEREPORT_FIELD_NUMBER = 7;
     private boolean hasServiceReport;
     private org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail serviceReport_ = org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail.getDefaultInstance();
     public boolean hasServiceReport() { return hasServiceReport; }
@@ -6784,7 +6777,6 @@ public final class MessageProtos {
     public final boolean isInitialized() {
       if (!hasTestType) return false;
       if (!hasEventType) return false;
-      if (!hasTimeZone) return false;
       if (!hasTimeUTC) return false;
       if (!hasSinceTimeUTC) return false;
       if (hasWebsiteReport()) {
@@ -6804,23 +6796,20 @@ public final class MessageProtos {
       if (hasEventType()) {
         output.writeString(2, getEventType());
       }
-      if (hasTimeZone()) {
-        output.writeInt32(3, getTimeZone());
-      }
       if (hasTimeUTC()) {
-        output.writeInt64(4, getTimeUTC());
+        output.writeInt64(3, getTimeUTC());
       }
       if (hasSinceTimeUTC()) {
-        output.writeInt64(5, getSinceTimeUTC());
+        output.writeInt64(4, getSinceTimeUTC());
       }
       for (java.lang.String element : getLocationsList()) {
-        output.writeString(6, element);
+        output.writeString(5, element);
       }
       if (hasWebsiteReport()) {
-        output.writeMessage(7, getWebsiteReport());
+        output.writeMessage(6, getWebsiteReport());
       }
       if (hasServiceReport()) {
-        output.writeMessage(8, getServiceReport());
+        output.writeMessage(7, getServiceReport());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6839,17 +6828,13 @@ public final class MessageProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(2, getEventType());
       }
-      if (hasTimeZone()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, getTimeZone());
-      }
       if (hasTimeUTC()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, getTimeUTC());
+          .computeInt64Size(3, getTimeUTC());
       }
       if (hasSinceTimeUTC()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, getSinceTimeUTC());
+          .computeInt64Size(4, getSinceTimeUTC());
       }
       {
         int dataSize = 0;
@@ -6862,11 +6847,11 @@ public final class MessageProtos {
       }
       if (hasWebsiteReport()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getWebsiteReport());
+          .computeMessageSize(6, getWebsiteReport());
       }
       if (hasServiceReport()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getServiceReport());
+          .computeMessageSize(7, getServiceReport());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7027,9 +7012,6 @@ public final class MessageProtos {
         if (other.hasEventType()) {
           setEventType(other.getEventType());
         }
-        if (other.hasTimeZone()) {
-          setTimeZone(other.getTimeZone());
-        }
         if (other.hasTimeUTC()) {
           setTimeUTC(other.getTimeUTC());
         }
@@ -7082,22 +7064,18 @@ public final class MessageProtos {
               break;
             }
             case 24: {
-              setTimeZone(input.readInt32());
-              break;
-            }
-            case 32: {
               setTimeUTC(input.readInt64());
               break;
             }
-            case 40: {
+            case 32: {
               setSinceTimeUTC(input.readInt64());
               break;
             }
-            case 50: {
+            case 42: {
               addLocations(input.readString());
               break;
             }
-            case 58: {
+            case 50: {
               org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail.newBuilder();
               if (hasWebsiteReport()) {
                 subBuilder.mergeFrom(getWebsiteReport());
@@ -7106,7 +7084,7 @@ public final class MessageProtos {
               setWebsiteReport(subBuilder.buildPartial());
               break;
             }
-            case 66: {
+            case 58: {
               org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail.newBuilder();
               if (hasServiceReport()) {
                 subBuilder.mergeFrom(getServiceReport());
@@ -7162,25 +7140,7 @@ public final class MessageProtos {
         return this;
       }
       
-      // required int32 timeZone = 3;
-      public boolean hasTimeZone() {
-        return result.hasTimeZone();
-      }
-      public int getTimeZone() {
-        return result.getTimeZone();
-      }
-      public Builder setTimeZone(int value) {
-        result.hasTimeZone = true;
-        result.timeZone_ = value;
-        return this;
-      }
-      public Builder clearTimeZone() {
-        result.hasTimeZone = false;
-        result.timeZone_ = 0;
-        return this;
-      }
-      
-      // required int64 timeUTC = 4;
+      // required int64 timeUTC = 3;
       public boolean hasTimeUTC() {
         return result.hasTimeUTC();
       }
@@ -7198,7 +7158,7 @@ public final class MessageProtos {
         return this;
       }
       
-      // required int64 sinceTimeUTC = 5;
+      // required int64 sinceTimeUTC = 4;
       public boolean hasSinceTimeUTC() {
         return result.hasSinceTimeUTC();
       }
@@ -7216,7 +7176,7 @@ public final class MessageProtos {
         return this;
       }
       
-      // repeated string locations = 6;
+      // repeated string locations = 5;
       public java.util.List<java.lang.String> getLocationsList() {
         return java.util.Collections.unmodifiableList(result.locations_);
       }
@@ -7256,7 +7216,7 @@ public final class MessageProtos {
         return this;
       }
       
-      // optional .org.umit.icm.mobile.proto.WebsiteReportDetail websiteReport = 7;
+      // optional .org.umit.icm.mobile.proto.WebsiteReportDetail websiteReport = 6;
       public boolean hasWebsiteReport() {
         return result.hasWebsiteReport();
       }
@@ -7293,7 +7253,7 @@ public final class MessageProtos {
         return this;
       }
       
-      // optional .org.umit.icm.mobile.proto.ServiceReportDetail serviceReport = 8;
+      // optional .org.umit.icm.mobile.proto.ServiceReportDetail serviceReport = 7;
       public boolean hasServiceReport() {
         return result.hasServiceReport();
       }
@@ -14022,7 +13982,7 @@ public final class MessageProtos {
       "dNode\030\006 \003(\t\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
       "it.icm.mobile.proto.TraceRoute\"f\n\023Websit" +
       "eReportDetail\022\022\n\nwebsiteURL\030\001 \002(\t\022\022\n\nsta" +
-      "tusCode\030\002 \002(\005\022\024\n\014responseTime\030\003 \001(\003\022\021\n\tb" +
+      "tusCode\030\002 \002(\005\022\024\n\014responseTime\030\003 \001(\005\022\021\n\tb" +
       "andwidth\030\004 \001(\005\"\304\001\n\rWebsiteReport\0224\n\006head" +
       "er\030\001 \002(\0132$.org.umit.icm.mobile.proto.ICM" +
       "Report\022>\n\006report\030\002 \002(\0132..org.umit.icm.mo" +
@@ -14059,66 +14019,65 @@ public final class MessageProtos {
       "rg.umit.icm.mobile.proto.AgentData\"x\n\tGe" +
       "tEvents\0228\n\006header\030\001 \002(\0132(.org.umit.icm.m" +
       "obile.proto.RequestHeader\022\021\n\tlocations\030\002" +
-      " \003(\t\022\016\n\006geoLat\030\003 \001(\003\022\016\n\006geoLon\030\004 \001(\003\"\206\002\n",
+      " \003(\t\022\016\n\006geoLat\030\003 \001(\003\022\016\n\006geoLon\030\004 \001(\003\"\364\001\n",
       "\005Event\022\020\n\010testType\030\001 \002(\t\022\021\n\teventType\030\002 " +
-      "\002(\t\022\020\n\010timeZone\030\003 \002(\005\022\017\n\007timeUTC\030\004 \002(\003\022\024" +
-      "\n\014sinceTimeUTC\030\005 \002(\003\022\021\n\tlocations\030\006 \003(\t\022" +
-      "E\n\rwebsiteReport\030\007 \001(\0132..org.umit.icm.mo" +
-      "bile.proto.WebsiteReportDetail\022E\n\rservic" +
-      "eReport\030\010 \001(\0132..org.umit.icm.mobile.prot" +
-      "o.ServiceReportDetail\"\200\001\n\021GetEventsRespo" +
-      "nse\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobil" +
-      "e.proto.ResponseHeader\0220\n\006events\030\002 \003(\0132 " +
-      ".org.umit.icm.mobile.proto.Event\"\207\001\n\021Sen",
-      "dWebsiteReport\0228\n\006header\030\001 \002(\0132(.org.umi" +
+      "\002(\t\022\017\n\007timeUTC\030\003 \002(\003\022\024\n\014sinceTimeUTC\030\004 \002" +
+      "(\003\022\021\n\tlocations\030\005 \003(\t\022E\n\rwebsiteReport\030\006" +
+      " \001(\0132..org.umit.icm.mobile.proto.Website" +
+      "ReportDetail\022E\n\rserviceReport\030\007 \001(\0132..or" +
+      "g.umit.icm.mobile.proto.ServiceReportDet" +
+      "ail\"\200\001\n\021GetEventsResponse\0229\n\006header\030\001 \002(" +
+      "\0132).org.umit.icm.mobile.proto.ResponseHe" +
+      "ader\0220\n\006events\030\002 \003(\0132 .org.umit.icm.mobi" +
+      "le.proto.Event\"\207\001\n\021SendWebsiteReport\0228\n\006",
+      "header\030\001 \002(\0132(.org.umit.icm.mobile.proto" +
+      ".RequestHeader\0228\n\006report\030\002 \002(\0132(.org.umi" +
+      "t.icm.mobile.proto.WebsiteReport\"\207\001\n\021Sen" +
+      "dServiceReport\0228\n\006header\030\001 \002(\0132(.org.umi" +
       "t.icm.mobile.proto.RequestHeader\0228\n\006repo" +
-      "rt\030\002 \002(\0132(.org.umit.icm.mobile.proto.Web" +
-      "siteReport\"\207\001\n\021SendServiceReport\0228\n\006head" +
-      "er\030\001 \002(\0132(.org.umit.icm.mobile.proto.Req" +
-      "uestHeader\0228\n\006report\030\002 \002(\0132(.org.umit.ic" +
-      "m.mobile.proto.ServiceReport\"O\n\022SendRepo" +
-      "rtResponse\0229\n\006header\030\001 \002(\0132).org.umit.ic" +
-      "m.mobile.proto.ResponseHeader\"q\n\nNewVers" +
+      "rt\030\002 \002(\0132(.org.umit.icm.mobile.proto.Ser" +
+      "viceReport\"O\n\022SendReportResponse\0229\n\006head" +
+      "er\030\001 \002(\0132).org.umit.icm.mobile.proto.Res" +
+      "ponseHeader\"q\n\nNewVersion\0228\n\006header\030\001 \002(" +
+      "\0132(.org.umit.icm.mobile.proto.RequestHea",
+      "der\022\026\n\016agentVersionNo\030\002 \002(\005\022\021\n\tagentType" +
+      "\030\003 \002(\t\"\207\001\n\022NewVersionResponse\0229\n\006header\030" +
+      "\001 \002(\0132).org.umit.icm.mobile.proto.Respon" +
+      "seHeader\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update\030" +
+      "\003 \001(\014\022\021\n\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n\006" +
+      "header\030\001 \002(\0132(.org.umit.icm.mobile.proto" +
+      ".RequestHeader\022\034\n\024currentTestVersionNo\030\002" +
+      " \002(\005\"Y\n\004Test\022\016\n\006testID\030\001 \002(\003\022\022\n\nwebsiteU" +
+      "RL\030\002 \001(\t\022\023\n\013servideCode\030\003 \001(\005\022\030\n\020execute" +
+      "AtTimeUTC\030\004 \001(\003\"\224\001\n\020NewTestsResponse\0229\n\006",
+      "header\030\001 \002(\0132).org.umit.icm.mobile.proto" +
+      ".ResponseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umi" +
+      "t.icm.mobile.proto.Test\022\025\n\rtestVersionNo" +
+      "\030\003 \002(\005\"F\n\nAssignTask\0228\n\006header\030\001 \002(\0132(.o" +
+      "rg.umit.icm.mobile.proto.RequestHeader\"\177" +
+      "\n\022AssignTaskResponse\0229\n\006header\030\001 \002(\0132).o" +
+      "rg.umit.icm.mobile.proto.ResponseHeader\022" +
+      ".\n\005tests\030\002 \003(\0132\037.org.umit.icm.mobile.pro" +
+      "to.Test\"J\n\016UpgradeToSuper\0228\n\006header\030\001 \002(" +
+      "\0132(.org.umit.icm.mobile.proto.RequestHea",
+      "der\"\222\001\n\026UpgradeToSuperResponse\0229\n\006header" +
+      "\030\001 \002(\0132).org.umit.icm.mobile.proto.Respo" +
+      "nseHeader\022\020\n\010newToken\030\002 \002(\t\022\025\n\rnewPrivat" +
+      "eKey\030\003 \002(\t\022\024\n\014newPublicKey\030\004 \002(\t\"g\n\016Send" +
+      "PrivateKey\0228\n\006header\030\001 \002(\0132(.org.umit.ic" +
+      "m.mobile.proto.RequestHeader\022\033\n\023symmetri" +
+      "cPrivateKey\030\002 \002(\t\"S\n\026SendPrivateKeyRespo" +
+      "nse\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobil" +
+      "e.proto.ResponseHeader\"w\n\021WebsiteSuggest" +
       "ion\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobil",
-      "e.proto.RequestHeader\022\026\n\016agentVersionNo\030" +
-      "\002 \002(\005\022\021\n\tagentType\030\003 \002(\t\"\207\001\n\022NewVersionR" +
-      "esponse\0229\n\006header\030\001 \002(\0132).org.umit.icm.m" +
-      "obile.proto.ResponseHeader\022\023\n\013downloadUR" +
-      "L\030\002 \001(\t\022\016\n\006update\030\003 \001(\014\022\021\n\tversionNo\030\004 \002" +
-      "(\005\"b\n\010NewTests\0228\n\006header\030\001 \002(\0132(.org.umi" +
-      "t.icm.mobile.proto.RequestHeader\022\034\n\024curr" +
-      "entTestVersionNo\030\002 \002(\005\"Y\n\004Test\022\016\n\006testID" +
-      "\030\001 \002(\003\022\022\n\nwebsiteURL\030\002 \001(\t\022\023\n\013servideCod" +
-      "e\030\003 \001(\005\022\030\n\020executeAtTimeUTC\030\004 \001(\003\"\224\001\n\020Ne",
-      "wTestsResponse\0229\n\006header\030\001 \002(\0132).org.umi" +
-      "t.icm.mobile.proto.ResponseHeader\022.\n\005tes" +
-      "ts\030\002 \003(\0132\037.org.umit.icm.mobile.proto.Tes" +
-      "t\022\025\n\rtestVersionNo\030\003 \002(\005\"F\n\nAssignTask\0228" +
-      "\n\006header\030\001 \002(\0132(.org.umit.icm.mobile.pro" +
-      "to.RequestHeader\"\177\n\022AssignTaskResponse\0229" +
-      "\n\006header\030\001 \002(\0132).org.umit.icm.mobile.pro" +
-      "to.ResponseHeader\022.\n\005tests\030\002 \003(\0132\037.org.u" +
-      "mit.icm.mobile.proto.Test\"J\n\016UpgradeToSu" +
-      "per\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobil",
-      "e.proto.RequestHeader\"\222\001\n\026UpgradeToSuper" +
-      "Response\0229\n\006header\030\001 \002(\0132).org.umit.icm." +
-      "mobile.proto.ResponseHeader\022\020\n\010newToken\030" +
-      "\002 \002(\t\022\025\n\rnewPrivateKey\030\003 \002(\t\022\024\n\014newPubli" +
-      "cKey\030\004 \002(\t\"g\n\016SendPrivateKey\0228\n\006header\030\001" +
-      " \002(\0132(.org.umit.icm.mobile.proto.Request" +
-      "Header\022\033\n\023symmetricPrivateKey\030\002 \002(\t\"S\n\026S" +
-      "endPrivateKeyResponse\0229\n\006header\030\001 \002(\0132)." +
-      "org.umit.icm.mobile.proto.ResponseHeader" +
-      "\"w\n\021WebsiteSuggestion\0228\n\006header\030\001 \002(\0132(.",
-      "org.umit.icm.mobile.proto.RequestHeader\022" +
-      "\022\n\nwebsiteURL\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(" +
-      "\t\"\226\001\n\021ServiceSuggestion\0228\n\006header\030\001 \002(\0132" +
-      "(.org.umit.icm.mobile.proto.RequestHeade" +
-      "r\022\023\n\013serviceName\030\002 \002(\t\022\024\n\014emailAddress\030\003" +
-      " \001(\t\022\020\n\010hostName\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026Te" +
-      "stSuggestionResponse\0229\n\006header\030\001 \002(\0132).o" +
-      "rg.umit.icm.mobile.proto.ResponseHeaderB" +
-      "\017B\rMessageProtos"
+      "e.proto.RequestHeader\022\022\n\nwebsiteURL\030\002 \002(" +
+      "\t\022\024\n\014emailAddress\030\003 \001(\t\"\226\001\n\021ServiceSugge" +
+      "stion\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mob" +
+      "ile.proto.RequestHeader\022\023\n\013serviceName\030\002" +
+      " \002(\t\022\024\n\014emailAddress\030\003 \001(\t\022\020\n\010hostName\030\004" +
+      " \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026TestSuggestionRespon" +
+      "se\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobile" +
+      ".proto.ResponseHeaderB\017B\rMessageProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14266,7 +14225,7 @@ public final class MessageProtos {
           internal_static_org_umit_icm_mobile_proto_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Event_descriptor,
-              new java.lang.String[] { "TestType", "EventType", "TimeZone", "TimeUTC", "SinceTimeUTC", "Locations", "WebsiteReport", "ServiceReport", },
+              new java.lang.String[] { "TestType", "EventType", "TimeUTC", "SinceTimeUTC", "Locations", "WebsiteReport", "ServiceReport", },
               org.umit.icm.mobile.proto.MessageProtos.Event.class,
               org.umit.icm.mobile.proto.MessageProtos.Event.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetEventsResponse_descriptor =
