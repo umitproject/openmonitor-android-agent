@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -35,23 +36,34 @@ import org.apache.http.HttpException;
 
 
 public class WebsiteOpen {
-
-	static public String getContent(String str) throws IOException, HttpException {
-
+	
+	static public URLConnection openURLConnection(String str) throws IOException, HttpException {
 		URL url = new URL(str);
-		URLConnection urlConnection = url.openConnection();
+		return url.openConnection();
+	}
+	
+	static public int getResponseCode(URLConnection urlConnection) throws IOException, HttpException {
+
+		if (urlConnection instanceof HttpURLConnection) {
+			HttpURLConnection httpURLConnection 
+			= (HttpURLConnection) urlConnection;
+			return httpURLConnection.getResponseCode();
+		}
+		return 0;
+          
+	}
+
+	static public String getContent(URLConnection urlConnection) throws IOException, HttpException {
 
         InputStream inputStream = urlConnection.getInputStream();
      	return convertStreamToString(inputStream);
           
 	}
 	
-	static public List<String> getHeaders(String str) throws IOException, HttpException {
+	static public List<String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
 
-		URL url = new URL(str);
 		List<String> list = new LinkedList<String>();  
 		list = new ArrayList<String>();  
-		URLConnection urlConnection = url.openConnection();
 		for (int i=0 ; urlConnection.getHeaderField(i)!=null ; i++)
 			list.add(urlConnection.getHeaderField(i));
         

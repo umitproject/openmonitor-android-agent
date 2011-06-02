@@ -56,6 +56,7 @@ public class Constants {
 		add("http://www.gmail.com");
 		add("http://www.umitproject.org/");
 		add("http://www.flickr.com/");
+		add("http://www.hotmail.com/");
 	}};
 	
 

@@ -23,6 +23,7 @@ package org.umit.icm.mobile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,8 +81,25 @@ public class InformationActivity extends Activity{
 		protected String doInBackground(String... urls) {
 			// TODO Auto-generated method stub
 			String result = new String();
+			URLConnection urlConnection = null;
 			try {
-				result = WebsiteOpen.getContent(urls[0]);
+				urlConnection = WebsiteOpen.openURLConnection(urls[0]);							
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return e.getMessage();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return e.getMessage();
+			} catch (HttpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return e.getMessage();
+			}  	
+			
+			try {
+				result = WebsiteOpen.getContent(urlConnection);
 				return result;							
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -116,8 +134,29 @@ public class InformationActivity extends Activity{
 		protected List<String> doInBackground(String... urls) {
 			// TODO Auto-generated method stub
 			List<String> result = new ArrayList<String>();
+			URLConnection urlConnection = null;
 			try {
-				result = WebsiteOpen.getHeaders(urls[0]);
+				urlConnection = WebsiteOpen.openURLConnection(urls[0]);					
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
+			} catch (HttpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
+			}
+			
+			
+			try {
+				result = WebsiteOpen.getHeaders(urlConnection);
 				return result;							
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

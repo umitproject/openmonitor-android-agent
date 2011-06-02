@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -64,12 +65,15 @@ public class WebsiteTest extends AbstractTest{
 					List<String> websiteHeader = new ArrayList<String>();
 					String currentURL = new String();
 					WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
+					URLConnection urlConnection = null;
 					
 					while(iterator.hasNext()){
                                
                                currentURL = iterator.next(); 
+    						
+    						
 						try {
-								websiteContent = WebsiteOpen.getContent(currentURL);
+								urlConnection = WebsiteOpen.openURLConnection(currentURL);
 						} catch (IOException e) {
 								// TODO Auto-generated catch block
 								websiteContent = e.getMessage(); 
@@ -87,7 +91,35 @@ public class WebsiteTest extends AbstractTest{
 						}
 						
 						try {
-							websiteHeader = WebsiteOpen.getHeaders(currentURL);
+							Log.w("#####responsecode",  Integer.toString(WebsiteOpen.getResponseCode(urlConnection)));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (HttpException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						try {
+							websiteContent = WebsiteOpen.getContent(urlConnection);
+					} catch (IOException e) {
+							// TODO Auto-generated catch block
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+					}
+					
+					catch (HttpException e) {
+						// TODO Auto-generated catch block
+						websiteContent = e.getMessage(); 
+						e.printStackTrace();
+					} catch (RuntimeException e) {
+						// TODO Auto-generated catch block
+						websiteContent = e.getMessage(); 
+						e.printStackTrace();
+					}
+						
+						try {
+							websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 						} catch (IOException e) {
 								// TODO Auto-generated catch block
 								websiteHeader.add(e.getMessage()); 
@@ -121,6 +153,7 @@ public class WebsiteTest extends AbstractTest{
 							
 						Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
 						Log.w("############", websiteReport.getReport().getWebsiteURL());
+					
 						
 					}
 																				
