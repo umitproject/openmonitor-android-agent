@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
@@ -90,7 +91,12 @@ public class InformationActivity extends Activity{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
-			} 			
+			} catch (HttpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return e.getMessage();
+			}  	
+			
 					
 		}
 			
@@ -119,6 +125,11 @@ public class InformationActivity extends Activity{
 				result.add(e.getMessage());
 				return result;
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				result.add(e.getMessage());
+				return result;
+			} catch (HttpException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.add(e.getMessage());

@@ -31,10 +31,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.http.HttpException;
+
 
 public class WebsiteOpen {
 
-	static public String getContent(String str) throws IOException {
+	static public String getContent(String str) throws IOException, HttpException {
 
 		URL url = new URL(str);
 		URLConnection urlConnection = url.openConnection();
@@ -44,7 +46,7 @@ public class WebsiteOpen {
           
 	}
 	
-	static public List<String> getHeaders(String str) throws IOException {
+	static public List<String> getHeaders(String str) throws IOException, HttpException {
 
 		URL url = new URL(str);
 		List<String> list = new LinkedList<String>();  

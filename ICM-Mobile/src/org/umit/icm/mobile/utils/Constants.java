@@ -54,8 +54,8 @@ public class Constants {
 		add("http://www.cnn.com");
 		add("http://www.bbc.com");
 		add("http://www.gmail.com");
-		add("http://www.hotmail.com");
-		add("http://www.linkedin.com");
+		add("http://www.umitproject.org/");
+		add("http://www.flickr.com/");
 	}};
 	
 

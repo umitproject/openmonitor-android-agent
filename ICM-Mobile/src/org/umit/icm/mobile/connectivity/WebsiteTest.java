@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
@@ -52,13 +53,12 @@ public class WebsiteTest extends AbstractTest{
 	}
 	
 	@Override()
-	public void scan() throws IOException, RuntimeException{
+	public void scan() {
 
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				
-					
+									
 					Iterator<String> iterator = listWebsites.iterator();
 					String websiteContent = new String();
 					List<String> websiteHeader = new ArrayList<String>();
@@ -76,12 +76,30 @@ public class WebsiteTest extends AbstractTest{
 								e.printStackTrace();
 						}
 						
+						catch (HttpException e) {
+							// TODO Auto-generated catch block
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+						} catch (RuntimeException e) {
+							// TODO Auto-generated catch block
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+						}
+						
 						try {
 							websiteHeader = WebsiteOpen.getHeaders(currentURL);
 						} catch (IOException e) {
 								// TODO Auto-generated catch block
 								websiteHeader.add(e.getMessage()); 
 								e.printStackTrace();
+						} catch (HttpException e) {
+							// TODO Auto-generated catch block
+							websiteHeader.add(e.getMessage()); 
+							e.printStackTrace();
+						} catch (RuntimeException e) {
+							// TODO Auto-generated catch block
+							websiteHeader.add(e.getMessage()); 
+							e.printStackTrace();
 						}
 						
 						try {
@@ -90,9 +108,17 @@ public class WebsiteTest extends AbstractTest{
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+						} catch (RuntimeException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						if (websiteReport.getHtmlResponse().length()!=0)
-							Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
+						if (websiteReport.getHtmlResponse().length()!=0) {
+							if(websiteReport.getHtmlResponse().length()>100)
+								Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
+							else
+								Log.w("############", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
+						}
+							
 						Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
 						Log.w("############", websiteReport.getReport().getWebsiteURL());
 						
@@ -116,7 +142,7 @@ public class WebsiteTest extends AbstractTest{
 		.addAllPassedNode(listNodes)
 		.build();
 		
-		int statusCode = 0;
+		int statusCode = websiteHeader.size();
 		if(websiteHeader.size()!=0) {
 			Pattern httpCodePattern = 
 				Pattern.compile("10[0-1]|20[0-6]|30[0-7]|40[0-9]|41[0-7]|50[0-5]");

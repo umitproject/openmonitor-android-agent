@@ -45,12 +45,8 @@ public class Main extends TabActivity {
         Resources res = getResources(); 
         TabHost tabHost = getTabHost(); 
         WebsiteTest websiteTest = new WebsiteTest();
-        try {
-			websiteTest.scan();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+        websiteTest.scan();
+		
         TabHost.TabSpec spec;
         Intent intent;  
         
