@@ -32,6 +32,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.HttpException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 
 public class WebsiteOpen {
@@ -41,14 +44,11 @@ public class WebsiteOpen {
 		return url.openConnection();
 	}
 	
-	static public int getResponseCode(URLConnection urlConnection) throws IOException, HttpException {
+	static public int getResponseCode(String str) throws IOException, HttpException {
 
-		if (urlConnection instanceof HttpURLConnection) {
-			HttpURLConnection httpURLConnection 
-			= (HttpURLConnection) urlConnection;
-			return httpURLConnection.getResponseCode();
-		}
-		return 0;
+		HttpGet httpGet = new HttpGet(str);
+		HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
+		return httpResponse.getStatusLine().getStatusCode();
           
 	}
 

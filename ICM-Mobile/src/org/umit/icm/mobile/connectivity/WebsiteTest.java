@@ -93,7 +93,7 @@ public class WebsiteTest extends AbstractTest{
 						}
 						
 						try {
-							Log.w("#####responsecode",  Integer.toString(WebsiteOpen.getResponseCode(urlConnection)));
+							Log.w("#####responsecode",  Integer.toString(WebsiteOpen.getResponseCode(currentURL)));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
