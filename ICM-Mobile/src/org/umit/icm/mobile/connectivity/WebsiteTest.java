@@ -24,8 +24,10 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,7 +64,7 @@ public class WebsiteTest extends AbstractTest{
 									
 					Iterator<String> iterator = listWebsites.iterator();
 					String websiteContent = new String();
-					List<String> websiteHeader = new ArrayList<String>();
+					Map<String, String> websiteHeader = new HashMap <String, String>();
 					String currentURL = new String();
 					WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 					URLConnection urlConnection = null;
@@ -122,15 +124,15 @@ public class WebsiteTest extends AbstractTest{
 							websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 						} catch (IOException e) {
 								// TODO Auto-generated catch block
-								websiteHeader.add(e.getMessage()); 
+								websiteHeader.put("exception", e.getMessage()); 
 								e.printStackTrace();
 						} catch (HttpException e) {
 							// TODO Auto-generated catch block
-							websiteHeader.add(e.getMessage()); 
+							websiteHeader.put("exception", e.getMessage());
 							e.printStackTrace();
 						} catch (RuntimeException e) {
 							// TODO Auto-generated catch block
-							websiteHeader.add(e.getMessage()); 
+							websiteHeader.put("exception", e.getMessage()); 
 							e.printStackTrace();
 						}
 						
@@ -162,7 +164,9 @@ public class WebsiteTest extends AbstractTest{
 		new Thread(runnable).start();
 	}
 	
-	public WebsiteReport clean(String websiteURL, String websiteContent, List<String> websiteHeader) throws IOException, RuntimeException {
+	public WebsiteReport clean(String websiteURL, String websiteContent
+			, Map<String, String> websiteHeader) 
+	throws IOException, RuntimeException {
 		List<String> listNodes = new ArrayList<String>();
 		listNodes.add("node1");
 		listNodes.add("node2");
@@ -180,7 +184,7 @@ public class WebsiteTest extends AbstractTest{
 			Pattern httpCodePattern = 
 				Pattern.compile("10[0-1]|20[0-6]|30[0-7]|40[0-9]|41[0-7]|50[0-5]");
 			Matcher httpCodeMatcher = 
-				httpCodePattern.matcher(websiteHeader.get(0));
+				httpCodePattern.matcher(websiteHeader.get("status"));
 			while (httpCodeMatcher.find()) {
 			    statusCode = Integer.parseInt(httpCodeMatcher.group());
 			}

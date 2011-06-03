@@ -25,7 +25,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
@@ -120,37 +122,34 @@ public class InformationActivity extends Activity{
 			
     }
     
-    private class DownloadWebsiteHeader extends AsyncTask<String,List<String>,List<String>> {
+    private class DownloadWebsiteHeader extends AsyncTask<String,Map<String, String>,Map<String, String>> {
   	  
-    	protected void onPostExecute(List<String> result) {
-    		    // String listContent[] = {getString(R.string.list_websites)
-    				//	 , getString(R.string.list_services)
-    					// , result};
-    			
-    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , result);
+    	protected void onPostExecute(Map<String, String> result) {
+    			 List<String> listResult = new ArrayList<String>(result.values());
+    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listResult);
         	     listView.setAdapter(arrayAdapter);	     		        		 
     	   }
          
-		protected List<String> doInBackground(String... urls) {
+		protected Map<String, String> doInBackground(String... urls) {
 			// TODO Auto-generated method stub
-			List<String> result = new ArrayList<String>();
+			Map<String, String> result = new HashMap<String, String>();
 			URLConnection urlConnection = null;
 			try {
 				urlConnection = WebsiteOpen.openURLConnection(urls[0]);					
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			} catch (HttpException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			}
 			
@@ -161,17 +160,17 @@ public class InformationActivity extends Activity{
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			} catch (HttpException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result.add(e.getMessage());
+				result.put("exception", e.getMessage());
 				return result;
 			} 			
 					

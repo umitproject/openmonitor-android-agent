@@ -28,9 +28,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.HttpException;
 
@@ -60,14 +59,26 @@ public class WebsiteOpen {
           
 	}
 	
-	static public List<String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
+	static public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
 
-		List<String> list = new LinkedList<String>();  
-		list = new ArrayList<String>();  
-		for (int i=0 ; urlConnection.getHeaderField(i)!=null ; i++)
-			list.add(urlConnection.getHeaderField(i));
+		Map<String, String> headerMap = new HashMap <String, String>();
+		String key = new String();
+		String value = new String();
+		
+		for (int i=0 ;	; i++) {
+			key = urlConnection.getHeaderFieldKey(i);
+			value = urlConnection.getHeaderField(i);
+			if (key == null && value == null)
+				break;
+			if (key == null) 
+				key = "status";
+			headerMap.put(key
+					, value);
+			key = "";
+			value = "";
+		}
         
-     	return list;
+     	return headerMap;
           
 	}
 	
