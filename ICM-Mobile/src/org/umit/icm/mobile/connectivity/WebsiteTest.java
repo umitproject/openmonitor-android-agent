@@ -62,102 +62,82 @@ public class WebsiteTest extends AbstractTest{
 			@Override
 			public void run() {
 									
-					Iterator<String> iterator = listWebsites.iterator();
-					String websiteContent = new String();
-					Map<String, String> websiteHeader = new HashMap <String, String>();
-					String currentURL = new String();
-					WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
-					URLConnection urlConnection = null;
+				Iterator<String> iterator = listWebsites.iterator();
+				String websiteContent = new String();
+				Map<String, String> websiteHeader = new HashMap <String, String>();
+				String currentURL = new String();
+				WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
+				URLConnection urlConnection = null;
 					
-					while(iterator.hasNext()){
+				while(iterator.hasNext()){
                                
-                               currentURL = iterator.next(); 
-    						
-    						
-						try {
-								urlConnection = WebsiteOpen.openURLConnection(currentURL);
-						} catch (IOException e) {
-								// TODO Auto-generated catch block
-								websiteContent = e.getMessage(); 
-								e.printStackTrace();
-						}
-						
-						catch (HttpException e) {
-							// TODO Auto-generated catch block
+					currentURL = iterator.next(); 
+    				try {
+    						urlConnection = WebsiteOpen.openURLConnection(currentURL);
+					} catch (IOException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
-						} catch (RuntimeException e) {
-							// TODO Auto-generated catch block
+					} catch (HttpException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
-						}
+					} catch (RuntimeException e) {							
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+					}
 						
-						try {
+					try {
 							Log.w("#####responsecode",  Integer.toString(WebsiteOpen.getResponseCode(currentURL)));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
+					} catch (IOException e) {
 							e.printStackTrace();
-						} catch (HttpException e) {
-							// TODO Auto-generated catch block
+					} catch (HttpException e) {
 							e.printStackTrace();
-						}
+					}
 						
-						try {
+					try {
 							websiteContent = WebsiteOpen.getContent(urlConnection);
 					} catch (IOException e) {
-							// TODO Auto-generated catch block
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+					} catch (HttpException e) {
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+					} catch (RuntimeException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
 					}
-					
-					catch (HttpException e) {
-						// TODO Auto-generated catch block
-						websiteContent = e.getMessage(); 
-						e.printStackTrace();
-					} catch (RuntimeException e) {
-						// TODO Auto-generated catch block
-						websiteContent = e.getMessage(); 
-						e.printStackTrace();
-					}
 						
-						try {
+					try {
 							websiteHeader = WebsiteOpen.getHeaders(urlConnection);
-						} catch (IOException e) {
-								// TODO Auto-generated catch block
-								websiteHeader.put("exception", e.getMessage()); 
-								e.printStackTrace();
-						} catch (HttpException e) {
-							// TODO Auto-generated catch block
-							websiteHeader.put("exception", e.getMessage());
-							e.printStackTrace();
-						} catch (RuntimeException e) {
-							// TODO Auto-generated catch block
+					} catch (IOException e) {
 							websiteHeader.put("exception", e.getMessage()); 
 							e.printStackTrace();
-						}
+					} catch (HttpException e) {
+							websiteHeader.put("exception", e.getMessage());
+							e.printStackTrace();
+					} catch (RuntimeException e) {
+							websiteHeader.put("exception", e.getMessage()); 
+							e.printStackTrace();
+					}
 						
-						try {
+					try {
 							websiteReport = (WebsiteReport) clean(currentURL
 									, websiteContent, websiteHeader);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
+					} catch (IOException e) {
 							e.printStackTrace();
-						} catch (RuntimeException e) {
-							// TODO Auto-generated catch block
+					} catch (RuntimeException e) {
 							e.printStackTrace();
-						}
-						if (websiteReport.getHtmlResponse().length()!=0) {
-							if(websiteReport.getHtmlResponse().length()>100)
-								Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
-							else
-								Log.w("############", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
-						}
-							
-						Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
-						Log.w("############", websiteReport.getReport().getWebsiteURL());
-					
-						
 					}
+					if (websiteReport.getHtmlResponse().length()!=0) {
+						if(websiteReport.getHtmlResponse().length()>100)
+							Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
+						else
+							Log.w("############", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
+					}
+							
+					Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
+					Log.w("############", websiteReport.getReport().getWebsiteURL());
+											
+				}
 																				
 			};
 		};		
@@ -207,4 +187,3 @@ public class WebsiteTest extends AbstractTest{
 	}
 		
 }
-
