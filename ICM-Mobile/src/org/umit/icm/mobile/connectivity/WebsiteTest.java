@@ -37,6 +37,7 @@ import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
 import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.RuntimeParameters;
 
 import com.google.protobuf.ByteString;
 
@@ -57,6 +58,13 @@ public class WebsiteTest extends AbstractTest{
 	
 	@Override()
 	public void scan() {
+		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
+		 RuntimeParameters runtimeParameters = new RuntimeParameters();
+		 try {
+				interval = runtimeParameters.getScanInterval();
+		 } catch (Exception e) {
+				e.printStackTrace();
+		 }
 
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
@@ -132,7 +140,7 @@ public class WebsiteTest extends AbstractTest{
 				}
 																				
 			};
-		}, 0, 2000); 
+		}, 0, interval); 
 
 	}
 	
