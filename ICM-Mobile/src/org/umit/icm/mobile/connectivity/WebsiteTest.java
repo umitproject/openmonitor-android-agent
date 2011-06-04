@@ -24,6 +24,7 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +43,6 @@ import org.umit.icm.mobile.utils.RuntimeParameters;
 import com.google.protobuf.ByteString;
 
 
-import android.text.format.Time;
 import android.util.Log;
 
 // TODO Add sanity checks to all message fields. They may raise exceptions.
@@ -107,17 +107,47 @@ public class WebsiteTest extends AbstractTest{
 						e.printStackTrace();
 					}
 					
-					try {
+					if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
+					
+						try {
+								websiteContent = WebsiteOpen.getContent(urlConnection);
+						} catch (IOException e) {
+								websiteContent = e.getMessage(); 
+								e.printStackTrace();
+						} catch (HttpException e) {
+								websiteContent = e.getMessage(); 
+								e.printStackTrace();
+						} catch (RuntimeException e) {
+								websiteContent = e.getMessage(); 
+								e.printStackTrace();
+						}
+					} else {
+						String newURL = websiteHeader.get("location");
+						try {
+    						urlConnection = WebsiteOpen.openURLConnection(newURL);
+						} catch (IOException e) {
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+						} catch (HttpException e) {
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+						} catch (RuntimeException e) {							
+							websiteContent = e.getMessage(); 
+							e.printStackTrace();
+						}
+						
+						try {
 							websiteContent = WebsiteOpen.getContent(urlConnection);
-					} catch (IOException e) {
+						} catch (IOException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
-					} catch (HttpException e) {
+						} catch (HttpException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
-					} catch (RuntimeException e) {
+						} catch (RuntimeException e) {
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
+						}
 					}
 						
 					try {
@@ -149,16 +179,15 @@ public class WebsiteTest extends AbstractTest{
 			, Map<String, String> websiteHeader) 
 	throws IOException, RuntimeException {
 		List<String> listNodes = new ArrayList<String>();
-		Time currentTime = new Time();
-		currentTime.setToNow();
+		Calendar calendar = Calendar.getInstance();
 		listNodes.add("node1");
 		listNodes.add("node2");
 		ICMReport icmReport = ICMReport.newBuilder()
 		.setReportID(10)
 		.setAgentID(10)
 		.setTestID(10)
-		.setTimeZone(Integer.parseInt(Time.getCurrentTimezone()))
-		.setTimeUTC(Integer.parseInt(currentTime.toString()))
+		.setTimeZone(Calendar.ZONE_OFFSET)
+		.setTimeUTC(calendar.getTimeInMillis())
 		.addAllPassedNode(listNodes)
 		.build();
 		
