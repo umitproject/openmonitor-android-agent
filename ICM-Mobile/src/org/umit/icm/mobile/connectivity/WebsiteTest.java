@@ -69,8 +69,7 @@ public class WebsiteTest extends AbstractTest{
 				WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 				URLConnection urlConnection = null;
 					
-				while(iterator.hasNext()){
-                               
+				while(iterator.hasNext()){               
 					currentURL = iterator.next(); 
     				try {
     						urlConnection = WebsiteOpen.openURLConnection(currentURL);
@@ -84,15 +83,20 @@ public class WebsiteTest extends AbstractTest{
 							websiteContent = e.getMessage(); 
 							e.printStackTrace();
 					}
-						
+					
 					try {
-							Log.w("#####responsecode",  Integer.toString(WebsiteOpen.getResponseCode(currentURL)));
+						websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 					} catch (IOException e) {
-							e.printStackTrace();
+						websiteHeader.put("exception", e.getMessage()); 
+						e.printStackTrace();
 					} catch (HttpException e) {
-							e.printStackTrace();
+						websiteHeader.put("exception", e.getMessage());
+						e.printStackTrace();
+					} catch (RuntimeException e) {
+						websiteHeader.put("exception", e.getMessage()); 
+						e.printStackTrace();
 					}
-						
+					
 					try {
 							websiteContent = WebsiteOpen.getContent(urlConnection);
 					} catch (IOException e) {
@@ -107,19 +111,6 @@ public class WebsiteTest extends AbstractTest{
 					}
 						
 					try {
-							websiteHeader = WebsiteOpen.getHeaders(urlConnection);
-					} catch (IOException e) {
-							websiteHeader.put("exception", e.getMessage()); 
-							e.printStackTrace();
-					} catch (HttpException e) {
-							websiteHeader.put("exception", e.getMessage());
-							e.printStackTrace();
-					} catch (RuntimeException e) {
-							websiteHeader.put("exception", e.getMessage()); 
-							e.printStackTrace();
-					}
-						
-					try {
 							websiteReport = (WebsiteReport) clean(currentURL
 									, websiteContent, websiteHeader);
 					} catch (IOException e) {
@@ -129,13 +120,13 @@ public class WebsiteTest extends AbstractTest{
 					}
 					if (websiteReport.getHtmlResponse().length()!=0) {
 						if(websiteReport.getHtmlResponse().length()>100)
-							Log.w("############", websiteReport.getHtmlResponse().substring(1, 100));
+							Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, 100));
 						else
-							Log.w("############", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
+							Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
 					}
 							
-					Log.w("############", Integer.toString(websiteReport.getReport().getStatusCode()));
-					Log.w("############", websiteReport.getReport().getWebsiteURL());
+					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
+					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
 											
 				}
 																				

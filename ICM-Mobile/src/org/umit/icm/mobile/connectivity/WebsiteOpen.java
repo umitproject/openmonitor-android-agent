@@ -31,9 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 
 public class WebsiteOpen {
@@ -42,13 +39,6 @@ public class WebsiteOpen {
 		URL url = new URL(str);
 		return url.openConnection();
 	}
-	
-	static public int getResponseCode(String str) throws IOException, HttpException {
-
-		HttpGet httpGet = new HttpGet(str);
-		HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
-		return httpResponse.getStatusLine().getStatusCode();
-    }
 
 	static public String getContent(URLConnection urlConnection) throws IOException, HttpException {
 
