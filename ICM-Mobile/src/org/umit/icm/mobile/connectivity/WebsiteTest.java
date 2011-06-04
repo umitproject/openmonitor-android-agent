@@ -42,6 +42,7 @@ import org.umit.icm.mobile.utils.RuntimeParameters;
 import com.google.protobuf.ByteString;
 
 
+import android.text.format.Time;
 import android.util.Log;
 
 // TODO Add sanity checks to all message fields. They may raise exceptions.
@@ -148,14 +149,16 @@ public class WebsiteTest extends AbstractTest{
 			, Map<String, String> websiteHeader) 
 	throws IOException, RuntimeException {
 		List<String> listNodes = new ArrayList<String>();
+		Time currentTime = new Time();
+		currentTime.setToNow();
 		listNodes.add("node1");
 		listNodes.add("node2");
 		ICMReport icmReport = ICMReport.newBuilder()
 		.setReportID(10)
 		.setAgentID(10)
 		.setTestID(10)
-		.setTimeZone(10)
-		.setTimeUTC(10)
+		.setTimeZone(Integer.parseInt(Time.getCurrentTimezone()))
+		.setTimeUTC(Integer.parseInt(currentTime.toString()))
 		.addAllPassedNode(listNodes)
 		.build();
 		
