@@ -25,7 +25,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -49,15 +48,13 @@ public class WebsiteOpen {
 		HttpGet httpGet = new HttpGet(str);
 		HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
 		return httpResponse.getStatusLine().getStatusCode();
-          
-	}
+    }
 
 	static public String getContent(URLConnection urlConnection) throws IOException, HttpException {
 
         InputStream inputStream = urlConnection.getInputStream();
      	return convertStreamToString(inputStream);
-          
-	}
+    }
 	
 	static public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
 
@@ -72,22 +69,19 @@ public class WebsiteOpen {
 				break;
 			if (key == null) 
 				key = "status";
-			headerMap.put(key
-					, value);
+			headerMap.put(key, value);
 			key = "";
 			value = "";
 		}
-        
+ 
      	return headerMap;
-          
-	}
+   	}
 	
 	private static String convertStreamToString(InputStream inputStream) throws IOException {
 	   
 	    BufferedReader bufferedReader 
 	    = new BufferedReader(new InputStreamReader(inputStream));
 	    StringBuilder stringBuilder = new StringBuilder();
-
 	    String line = null;
 	    
 	        while ((line = bufferedReader.readLine()) != null) {
