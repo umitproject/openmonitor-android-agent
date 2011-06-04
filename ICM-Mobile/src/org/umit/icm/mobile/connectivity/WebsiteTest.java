@@ -171,7 +171,7 @@ public class WebsiteTest extends AbstractTest{
 				}
 																				
 			};
-		}, 0, interval); 
+		}, 0, interval * 1000); 
 
 	}
 	
