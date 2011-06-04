@@ -45,13 +45,12 @@ import android.widget.TextView;
 import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
-    /** Called when the activity is first created. */
+   
 	private CheckBox cbFilter;
 	private ListView listView;
 	private TextView ipTextView;
 	ArrayAdapter<String> arrayAdapter;
-	
-	
+		
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +59,7 @@ public class InformationActivity extends Activity{
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         int ipAddress = wifiInfo.getIpAddress();
         ipTextView = (TextView) findViewById(R.id.ipTextView);
-        ipTextView.append(Formatter.formatIpAddress(ipAddress));
-        
+        ipTextView.append(Formatter.formatIpAddress(ipAddress));    
         cbFilter = (CheckBox) findViewById(R.id.check1);
         listView = (ListView)findViewById(R.id.ListView01);
         
@@ -72,30 +70,24 @@ public class InformationActivity extends Activity{
     private class DownloadWebsiteContent extends AsyncTask<String,String,String> {
     	  
     	protected void onPostExecute(String result) {
-    		    // String listContent[] = {getString(R.string.list_websites)
-    				//	 , getString(R.string.list_services)
-    					// , result};
-    			
-    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1);
-        	     listView.setAdapter(arrayAdapter);	     		        		 
-    	   }
+    				
+    		arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1);
+        	listView.setAdapter(arrayAdapter);	     		        		 
+    	}
          
 		protected String doInBackground(String... urls) {
-			// TODO Auto-generated method stub
+		
 			String result = new String();
 			URLConnection urlConnection = null;
 			try {
 				urlConnection = WebsiteOpen.openURLConnection(urls[0]);							
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			}  	
@@ -104,19 +96,15 @@ public class InformationActivity extends Activity{
 				result = WebsiteOpen.getContent(urlConnection);
 				return result;							
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.getMessage();
 			}  	
-			
 					
 		}
 			
@@ -125,50 +113,42 @@ public class InformationActivity extends Activity{
     private class DownloadWebsiteHeader extends AsyncTask<String,Map<String, String>,Map<String, String>> {
   	  
     	protected void onPostExecute(Map<String, String> result) {
-    			 List<String> listResult = new ArrayList<String>(result.values());
-    			 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listResult);
-        	     listView.setAdapter(arrayAdapter);	     		        		 
-    	   }
+    		 List<String> listResult = new ArrayList<String>(result.values());
+    		 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listResult);
+    		 listView.setAdapter(arrayAdapter);	     		        		 
+    	}
          
 		protected Map<String, String> doInBackground(String... urls) {
-			// TODO Auto-generated method stub
 			Map<String, String> result = new HashMap<String, String>();
 			URLConnection urlConnection = null;
 			try {
 				urlConnection = WebsiteOpen.openURLConnection(urls[0]);					
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
 			}
 			
-			
 			try {
 				result = WebsiteOpen.getHeaders(urlConnection);
 				return result;							
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				result.put("exception", e.getMessage());
 				return result;
