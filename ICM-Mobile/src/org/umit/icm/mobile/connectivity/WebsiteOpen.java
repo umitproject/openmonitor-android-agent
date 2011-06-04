@@ -29,6 +29,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpException;
 
@@ -79,6 +81,20 @@ public class WebsiteOpen {
 	        }	   
 	    inputStream.close();	    	    
 	    return stringBuilder.toString();
+	}
+	
+	public static int getStatusCode(Map <String, String> websiteHeader) {
+		int statusCode = websiteHeader.size();
+		if(websiteHeader.size()!=0) {
+			Pattern httpCodePattern = 
+				Pattern.compile("10[0-1]|20[0-6]|30[0-7]|40[0-9]|41[0-7]|50[0-5]");
+			Matcher httpCodeMatcher = 
+				httpCodePattern.matcher(websiteHeader.get("status"));
+			while (httpCodeMatcher.find()) {
+			    statusCode = Integer.parseInt(httpCodeMatcher.group());
+			}
+		}
+		return statusCode;
 	}
     
 }

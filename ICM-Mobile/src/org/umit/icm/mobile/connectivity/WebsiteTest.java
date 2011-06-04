@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
@@ -58,7 +58,8 @@ public class WebsiteTest extends AbstractTest{
 	@Override()
 	public void scan() {
 
-		Runnable runnable = new Runnable() {
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
 									
@@ -131,8 +132,8 @@ public class WebsiteTest extends AbstractTest{
 				}
 																				
 			};
-		};		
-		new Thread(runnable).start();
+		}, 0, 2000); 
+
 	}
 	
 	public WebsiteReport clean(String websiteURL, String websiteContent
@@ -150,17 +151,8 @@ public class WebsiteTest extends AbstractTest{
 		.addAllPassedNode(listNodes)
 		.build();
 		
-		int statusCode = websiteHeader.size();
-		if(websiteHeader.size()!=0) {
-			Pattern httpCodePattern = 
-				Pattern.compile("10[0-1]|20[0-6]|30[0-7]|40[0-9]|41[0-7]|50[0-5]");
-			Matcher httpCodeMatcher = 
-				httpCodePattern.matcher(websiteHeader.get("status"));
-			while (httpCodeMatcher.find()) {
-			    statusCode = Integer.parseInt(httpCodeMatcher.group());
-			}
-		}
-			
+		int statusCode = WebsiteOpen.getStatusCode(websiteHeader);
+					
 		WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
 		.setBandwidth(0)
 		.setResponseTime(0)
