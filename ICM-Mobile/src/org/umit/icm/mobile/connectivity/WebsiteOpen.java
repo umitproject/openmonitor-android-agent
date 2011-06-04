@@ -96,5 +96,13 @@ public class WebsiteOpen {
 		}
 		return statusCode;
 	}
+	
+	public static String httpOrHttps(Map <String, String> websiteHeader) {
+		String connectionType = "http";
+		int statusCode = getStatusCode(websiteHeader);
+		if (statusCode >= 300 && statusCode <= 307 && statusCode != 306)
+			connectionType = "https";
+		return connectionType;
+	}
     
 }
