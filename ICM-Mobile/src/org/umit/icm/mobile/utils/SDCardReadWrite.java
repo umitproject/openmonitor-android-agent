@@ -33,9 +33,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
 
@@ -149,6 +151,47 @@ public class SDCardReadWrite {
 		if(storageState.equals(mediaMounted))
 			return true;
 		return false;
+	}
+	
+	public static void writeWebsiteReport(String dir
+			, WebsiteReport data) throws IOException{
+		OutputStream outputStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir, data.getReport().getWebsiteURL()
+    			+ Constants.WEBSITE_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			outputStream = new FileOutputStream(file);
+			data.writeTo(outputStream);
+			
+    	} finally {
+    		outputStream.close();
+    	}
+	}
+	
+	public static WebsiteReport readWebsiteReport(String dir
+			, String url) throws IOException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, url
+    			+ Constants.WEBSITE_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	
+  	  	try {
+	      		WebsiteReport websiteReport 
+	      		= WebsiteReport.parseFrom(inputStream);
+	      		return websiteReport;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
 	}
 	
 }
