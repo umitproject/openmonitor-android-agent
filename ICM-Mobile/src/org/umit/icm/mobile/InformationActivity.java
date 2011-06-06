@@ -32,12 +32,16 @@ import java.util.Map;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Activity;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -61,13 +65,41 @@ public class InformationActivity extends Activity{
         ipTextView = (TextView) findViewById(R.id.ipTextView);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));    
         cbFilter = (CheckBox) findViewById(R.id.check1);
-        listView = (ListView)findViewById(R.id.ListView01);
+        listView = (ListView)findViewById(R.id.ListView01);  
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+          @Override
+          public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        	  String item = (String) listView.getItemAtPosition(position);
+        	  Log.w("Clicktest", item);
+          }
+        });
         
-        String website = "http://www.google.com";
+        
+        /*String website = "http://www.google.com";
         new DownloadWebsiteContent().execute(website);
-        new DownloadWebsiteHeader().execute(website);
+        new DownloadWebsiteHeader().execute(website); */
+        new UpdateList().execute("");
     }
-    private class DownloadWebsiteContent extends AsyncTask<String,String,String> {
+    private class UpdateList extends AsyncTask<String,String,List<String>> {
+  	  
+    	protected void onPostExecute(List<String> result) {
+   		 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
+   				 ,android.R.layout.simple_list_item_1 
+   				 , result);
+   		 listView.setAdapter(arrayAdapter);	
+    	}
+         
+		protected List<String> doInBackground(String... urls) {		
+			return Constants.WEBSITE_LIST;
+			 						
+		}
+			
+    }
+    
+    
+    /*private class DownloadWebsiteContent extends AsyncTask<String,String,String> {
     	  
     	protected void onPostExecute(String result) {
     				
@@ -156,6 +188,6 @@ public class InformationActivity extends Activity{
 					
 		}
 			
-    }
+    } */
       	
 }
