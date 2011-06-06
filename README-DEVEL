@@ -1,0 +1,9 @@
+As mentioned in http://dev.umitproject.org/issues/450 the central Maven repository does not have the Google Maps API or the OSMDroid API. Therefore, both need to be manually install in the local Maven repository.
+This is the general template of the command that needs to be executed for each manual Maven artifact installation:
+mvn install:install-file  -Dfile=path-to-your-artifact-jar \
+                          -DgroupId=your.groupId \
+                          -DartifactId=your-artifactId \
+                          -Dversion=version \
+                          -Dpackaging=jar \
+                          -DlocalRepositoryPath=path-to-specific-local-repo
+
