@@ -39,6 +39,7 @@ import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.RuntimeParameters;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import com.google.protobuf.ByteString;
 
@@ -152,6 +153,8 @@ public class WebsiteTest extends AbstractTest{
 					try {
 							websiteReport = (WebsiteReport) clean(currentURL
 									, websiteContent, websiteHeader);
+							SDCardReadWrite.writeWebsiteReport
+							(Constants.WEBSITES_DIR, websiteReport);
 					} catch (IOException e) {
 							e.printStackTrace();
 					} catch (RuntimeException e) {
