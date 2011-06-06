@@ -35,6 +35,7 @@ import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -72,7 +73,11 @@ public class InformationActivity extends Activity{
           @Override
           public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         	  String item = (String) listView.getItemAtPosition(position);
-        	  Log.w("Clicktest", item);
+        	  Bundle bundle = new Bundle();	
+        	  bundle.putString("websiteclicked",item);         		 
+        	  Intent intent = new Intent(InformationActivity.this, WebsiteActivity.class);
+        	  intent.putExtras(bundle);
+        	  startActivity(intent); 
           }
         });
         

@@ -21,6 +21,7 @@
         <activity android:name="ISPActivity"
         		  android:theme="@android:style/Theme.NoTitleBar"></activity>
         <service android:name=".notifications.NotificationService"></service>
+        <activity android:name="WebsiteActivity"></activity>
         
         
 
