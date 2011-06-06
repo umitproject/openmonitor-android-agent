@@ -160,7 +160,8 @@ public class SDCardReadWrite {
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
 		keyDir.mkdirs();
-    	File file = new File(keyDir, data.getReport().getWebsiteURL().substring(10)
+    	File file = new File(keyDir
+    			, data.getReport().getWebsiteURL().substring(11).replaceAll("/", "-")
     			+ Constants.WEBSITE_FILE);
     	if(!file.exists()){
     		file.createNewFile();
@@ -179,7 +180,8 @@ public class SDCardReadWrite {
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
-    	File file = new File(keyDir, url.substring(10)
+    	File file = new File(keyDir
+    			, url.substring(11).replaceAll("/", "-")
     			+ Constants.WEBSITE_FILE);
     	InputStream inputStream = new FileInputStream(file.toString());
   	  	
