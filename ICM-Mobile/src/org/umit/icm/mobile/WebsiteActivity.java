@@ -29,7 +29,10 @@ import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,28 +46,17 @@ public class WebsiteActivity extends Activity{
 	private ListView listView;
 	private ImageView imageView;
 	private Button backButton;
+	private String website;
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Bundle bundle = this.getIntent().getExtras();
-        String website = bundle.getString("websiteclicked");
+        website = bundle.getString("websiteclicked");
         
         setContentView(R.layout.websiteactivity);
         listView = (ListView)findViewById(R.id.ListView01);
         imageView = (ImageView)findViewById(R.id.favicon_image);
-        Bitmap favicon = null;
-        try {
-			 favicon = WebsiteOpen.getFavicon(website);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		imageView.setImageBitmap(favicon);
-        
+                      
         String listViewItems[] = {getString(R.string.website_details), website};
         listView.setAdapter(new ArrayAdapter<String>(this
         		, android.R.layout.simple_list_item_1 
@@ -79,6 +71,37 @@ public class WebsiteActivity extends Activity{
 	       	}
 
 	   	}  );
+        
+        new UpdateFavicon().execute(website);
+    }
+    
+    private class UpdateFavicon extends AsyncTask<String,String,Bitmap> {
+    	  
+    	protected void onPostExecute(Bitmap favicon) {
+    		imageView.setImageBitmap(favicon);
+    	}
+         
+		protected Bitmap doInBackground(String... urls) {
+			Bitmap favicon = null;
+			Resources resources = getResources(); 
+			try {
+				 favicon = WebsiteOpen.getFavicon(website);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				favicon 
+				= BitmapFactory.decodeResource(resources,
+						R.drawable.tabs_icons);
+				e.printStackTrace();
+			} catch (HttpException e) {
+				favicon 
+				= BitmapFactory.decodeResource(resources,
+						R.drawable.tabs_icons);
+				e.printStackTrace();
+			}
+			return favicon;
+			 						
+		}
+			
     }
 }
 
