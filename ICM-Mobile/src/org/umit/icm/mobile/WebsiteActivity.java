@@ -21,21 +21,27 @@
 
 package org.umit.icm.mobile;
 
+import java.io.IOException;
+
+import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class WebsiteActivity extends Activity{
     /** Called when the activity is first created. */
 	private ListView listView;
-	
+	private ImageView imageView;
 	private Button backButton;
     @Override
     public void onCreate(Bundle icicle) {
@@ -45,6 +51,19 @@ public class WebsiteActivity extends Activity{
         
         setContentView(R.layout.websiteactivity);
         listView = (ListView)findViewById(R.id.ListView01);
+        imageView = (ImageView)findViewById(R.id.favicon_image);
+        Bitmap favicon = null;
+        try {
+			 favicon = WebsiteOpen.getFavicon(website);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		imageView.setImageBitmap(favicon);
         
         String listViewItems[] = {getString(R.string.website_details), website};
         listView.setAdapter(new ArrayAdapter<String>(this

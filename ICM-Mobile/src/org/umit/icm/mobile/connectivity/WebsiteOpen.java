@@ -21,8 +21,6 @@
 
 package org.umit.icm.mobile.connectivity;
 
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +33,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpException;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 
 public class WebsiteOpen {
@@ -50,9 +51,14 @@ public class WebsiteOpen {
      	return convertStreamToString(inputStream);
     }
 	
-	static public Image getFavicon(String str) throws IOException, HttpException {
-		URL url = new URL(str+"favicon.ico");
-		return Toolkit.getDefaultToolkit().createImage(url);
+	static public InputStream getContentStream(URLConnection urlConnection) throws IOException, HttpException {
+
+        return urlConnection.getInputStream();
+    }
+	
+	static public Bitmap getFavicon(String str) throws IOException, HttpException {
+		InputStream inputStream = getContentStream(openURLConnection(str + "/favicon.ico"));
+		return BitmapFactory.decodeStream(inputStream);
 	}
 	
 	static public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
