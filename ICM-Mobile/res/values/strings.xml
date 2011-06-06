@@ -36,4 +36,5 @@
     <string name="service_name">Notification Service</string>
     <string name="register_suggestion">Register Suggestion</string>
     <string name="scan_text">Scan</string>
+    <string name="website_details">Website Details</string>
 </resources>

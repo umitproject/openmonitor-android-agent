@@ -46,7 +46,7 @@ public class WebsiteActivity extends Activity{
         setContentView(R.layout.websiteactivity);
         listView = (ListView)findViewById(R.id.ListView01);
         
-        String listViewItems[] = {getString(R.string.list_websites), website};
+        String listViewItems[] = {getString(R.string.website_details), website};
         listView.setAdapter(new ArrayAdapter<String>(this
         		, android.R.layout.simple_list_item_1 
         		, listViewItems));

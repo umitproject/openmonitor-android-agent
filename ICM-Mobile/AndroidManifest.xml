@@ -21,10 +21,9 @@
         <activity android:name="ISPActivity"
         		  android:theme="@android:style/Theme.NoTitleBar"></activity>
         <service android:name=".notifications.NotificationService"></service>
-        <activity android:name="WebsiteActivity"></activity>
-        
-        
-
+        <activity android:name="WebsiteActivity"
+        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
+    
     </application>
     <uses-sdk android:minSdkVersion="4" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
