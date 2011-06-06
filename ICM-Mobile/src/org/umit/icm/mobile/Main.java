@@ -22,8 +22,6 @@
 package org.umit.icm.mobile;
 
 
-import java.io.IOException;
-
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.utils.Constants;
@@ -35,6 +33,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 public class Main extends TabActivity {
     /** Called when the activity is first created. */
@@ -42,46 +41,51 @@ public class Main extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Resources res = getResources(); 
+        Resources resources = getResources(); 
         TabHost tabHost = getTabHost(); 
-        WebsiteTest websiteTest = new WebsiteTest();
-        websiteTest.scan();
-		
-        TabHost.TabSpec spec;
-        Intent intent;  
         
-        try {
-			if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
-					, Constants.PARAMETERS_DIR) == false )
-					&& (SDCardReadWrite.fileExists(Constants.SCAN_FILE
-			        		, Constants.PARAMETERS_DIR) == false )) {
-				RuntimeParameters runtimeParameters = new RuntimeParameters();
-				runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
-				runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        
-        intent = new Intent().setClass(this, InformationActivity.class);
-
-        spec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
-                          res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
-        tabHost.addTab(spec);
+        Intent intent = new Intent().setClass(this, InformationActivity.class);
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
+                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+        tabHost.addTab(tabSpec);
         
         intent = new Intent().setClass(this, MapActivityTab.class);
-        spec = tabHost.newTabSpec(getString(R.string.tab_map)).setIndicator(getString(R.string.tab_map),
-                          res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
-        tabHost.addTab(spec);
+        tabSpec = tabHost.newTabSpec(getString(R.string.tab_map)).setIndicator(getString(R.string.tab_map),
+                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+        tabHost.addTab(tabSpec);
 
         intent = new Intent().setClass(this, ControlActivity.class);
-        spec = tabHost.newTabSpec(getString(R.string.tab_control)).setIndicator(getString(R.string.tab_control),
-                          res.getDrawable(R.drawable.tabs_icons)).setContent(intent);
-        tabHost.addTab(spec);
+        tabSpec = tabHost.newTabSpec(getString(R.string.tab_control)).setIndicator(getString(R.string.tab_control),
+                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+        tabHost.addTab(tabSpec);
     
-
         tabHost.setCurrentTab(0);
+        
+        if(!SDCardReadWrite.checkSDCard()) {
+        	String text = "Error! No SD Card detected.";
+        	int duration = Toast.LENGTH_LONG;
+    		Toast toast = Toast.makeText(this, text, duration);
+    		toast.show();
+    		moveTaskToBack(true);
+    		
+        	
+        } else {        	            	       
+	        WebsiteTest websiteTest = new WebsiteTest();
+	        websiteTest.scan();
+			                         
+	        try {
+				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
+						, Constants.PARAMETERS_DIR) == false )
+						&& (SDCardReadWrite.fileExists(Constants.SCAN_FILE
+				        		, Constants.PARAMETERS_DIR) == false )) {
+					RuntimeParameters runtimeParameters = new RuntimeParameters();
+					runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
+					runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	            
+        }
     }
 }

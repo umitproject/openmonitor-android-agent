@@ -33,9 +33,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.math.BigInteger;
-import java.security.KeyFactory;
-import java.security.spec.RSAPublicKeySpec;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Website;
@@ -144,4 +141,14 @@ public class SDCardReadWrite {
   		  objInputStream.close();
   	  	}
 	}
+	
+	public static boolean checkSDCard() {
+		
+		String storageState = android.os.Environment.getExternalStorageState();
+		String mediaMounted = android.os.Environment.MEDIA_MOUNTED;
+		if(storageState.equals(mediaMounted))
+			return true;
+		return false;
+	}
+	
 }

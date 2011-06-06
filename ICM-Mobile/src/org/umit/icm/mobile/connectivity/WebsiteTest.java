@@ -49,7 +49,6 @@ import android.util.Log;
 // TODO Catch Runtime exceptions.
 public class WebsiteTest extends AbstractTest{
 	
-	
 	private List<String> listWebsites;
 
 	public WebsiteTest() {
