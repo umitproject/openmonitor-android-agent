@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.connectivity;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +49,11 @@ public class WebsiteOpen {
         InputStream inputStream = urlConnection.getInputStream();
      	return convertStreamToString(inputStream);
     }
+	
+	static public Image getFavicon(String str) throws IOException, HttpException {
+		URL url = new URL(str+"favicon.ico");
+		return Toolkit.getDefaultToolkit().createImage(url);
+	}
 	
 	static public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
 
