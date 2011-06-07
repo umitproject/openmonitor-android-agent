@@ -60,4 +60,16 @@ public class Constants {
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
+	public static String AGGREGATOR_URL = "https://0.0.0.0:8080";
+	public static String AGGR_REGISTER_AGENT = "/api/registeragent/";
+	public static String AGGR_GET_PEER_LIST = "/api/getpeerlist/";
+	public static String AGGR_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
+	public static String AGGR_GET_EVENTS = "/api/getevents/";
+	public static String AGGR_SEND_WEBSITE_REPORT = "/api/sendwebsitereport/";
+	public static String AGGR_SEND_SERVICE_REPORT = "/api/sendservicereport/";
+	public static String AGGR_CHECK_VERSION = "/api/checkversion/";
+	public static String AGGR_CHECK_TESTS = "/api/checktests/";
+	public static String AGGR_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
+	public static String AGGR_SERVICE_SUGGESTION = "/api/servicesuggestion/";
+	public static String AGGR_TESTS = "/api/tests/";
 }

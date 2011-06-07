@@ -26,8 +26,8 @@ import org.restlet.resource.Put;
 
 public interface AggregatorResources {
 
-	 @Get
-	 public void registerPeer();
+	 @Post
+	 public void registerAgent();
 	 
 	 @Get
 	 public void peersList();
