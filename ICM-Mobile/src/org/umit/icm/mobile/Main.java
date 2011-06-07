@@ -24,8 +24,8 @@ package org.umit.icm.mobile;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
+import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.utils.Constants;
-import org.umit.icm.mobile.utils.RuntimeParameters;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;

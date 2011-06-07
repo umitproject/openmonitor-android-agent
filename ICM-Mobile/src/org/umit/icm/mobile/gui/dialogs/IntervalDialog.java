@@ -22,7 +22,7 @@
 package org.umit.icm.mobile.gui.dialogs;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.utils.RuntimeParameters;
+import org.umit.icm.mobile.process.RuntimeParameters;
 
 import android.app.Dialog;
 import android.content.Context;

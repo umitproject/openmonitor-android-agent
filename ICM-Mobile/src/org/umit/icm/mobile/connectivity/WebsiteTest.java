@@ -34,11 +34,11 @@ import java.util.TimerTask;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
 import org.umit.icm.mobile.utils.Constants;
-import org.umit.icm.mobile.utils.RuntimeParameters;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import com.google.protobuf.ByteString;

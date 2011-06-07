@@ -19,7 +19,10 @@
  * USA
  */
 
-package org.umit.icm.mobile.utils;
+package org.umit.icm.mobile.process;
+
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 public class RuntimeParameters {
 	private int scanInterval;
