@@ -21,11 +21,9 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
@@ -47,110 +45,95 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.Constants;
 
-public class AggregatorResources {
-
-	 public static ClientResource getClientResource(String url) {
-		 return new ClientResource(Constants.AGGREGATOR_URL + url);
-	 }
-	 
+public class AggregatorRetrieve {
+	
 	 public static RegisterAgentResponse registerAgent(
-			 RegisterAgent registerAgent,
-			 ClientResource clientResource) 
+			RegisterAgent registerAgent) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(registerAgent); 
-		 return RegisterAgentResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+			 ClientResource clientResource 
+			 = AggregatorResources.getClientResource(Constants.AGGR_REGISTER_AGENT);
+			return AggregatorResources.registerAgent(
+					registerAgent, clientResource); 
 	 }
-	 
+	
 	 public static GetPeerListResponse getPeerList(
-			 GetPeerList getPeerList, 
-			 ClientResource clientResource) 
+			 GetPeerList getPeerList) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getPeerList); 
-		 return GetPeerListResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
+		return AggregatorResources.getPeerList(
+				getPeerList, clientResource); 
 	 }
 	 
 	 public static GetSuperPeerListResponse getSuperPeerList(
-			 GetSuperPeerList getSuperPeerList, 
-			 ClientResource clientResource) 
+			 GetSuperPeerList getSuperPeerList) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getSuperPeerList); 
-		 return GetSuperPeerListResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
+		return AggregatorResources.getSuperPeerList(
+				getSuperPeerList, clientResource); 
 	 }
 	 
 	 public static GetEventsResponse getEvents(
-			 GetEvents getEvents, 
-			 ClientResource clientResource) 
+			 GetEvents getEvents) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getEvents); 
-		 return GetEventsResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
+		return AggregatorResources.getEvents(
+				getEvents, clientResource); 
 	 }
 	 
 	 public static SendReportResponse sendWebsiteReport(
-			 SendWebsiteReport sendWebsiteReport, 
-			 ClientResource clientResource) 
+			 SendWebsiteReport sendWebsiteReport) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(sendWebsiteReport); 
-		 return SendReportResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
+		return AggregatorResources.sendWebsiteReport(
+				sendWebsiteReport, clientResource); 
 	 }
 	 
 	 public static SendReportResponse sendServiceReport(
-			 SendServiceReport sendServiceReport, 
-			 ClientResource clientResource) 
+			 SendServiceReport sendServiceReport) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(sendServiceReport); 
-		 return SendReportResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
+		return AggregatorResources.sendServiceReport(
+				sendServiceReport, clientResource); 
 	 }
 	 
 	 public static NewVersionResponse checkVersion(
-			 NewVersion newVersion, 
-			 ClientResource clientResource) 
+			 NewVersion newVersion) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(newVersion); 
-		 return NewVersionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
+		return AggregatorResources.checkVersion(
+				newVersion, clientResource); 
 	 }
 	 
 	 public static NewTestsResponse checkTests(
-			 NewTests newTests, 
-			 ClientResource clientResource) 
+			 NewTests newTests) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(newTests); 
-		 return NewTestsResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
+		return AggregatorResources.checkTests(
+				newTests, clientResource); 
 	 }
 	 
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
-			 WebsiteSuggestion websiteSuggestion, 
-			 ClientResource clientResource) 
+			 WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(websiteSuggestion); 
-		 return TestSuggestionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
+		return AggregatorResources.sendWebsiteSuggestion(
+				websiteSuggestion, clientResource); 
 	 }
 	 
 	 public static TestSuggestionResponse sendServiceSuggestion(
-			 ServiceSuggestion serviceSuggestion, 
-			 ClientResource clientResource) 
+			 ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(serviceSuggestion); 
-		 return TestSuggestionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 ClientResource clientResource 
+		 = AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
+		return AggregatorResources.sendServiceSuggestion(
+				serviceSuggestion, clientResource); 
 	 }
-
 }
