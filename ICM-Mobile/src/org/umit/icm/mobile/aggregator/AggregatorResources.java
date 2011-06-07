@@ -21,32 +21,13 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import org.restlet.resource.Get;
-import org.restlet.resource.Put;
+import org.restlet.resource.ClientResource;
+import org.umit.icm.mobile.utils.Constants;
 
-public interface AggregatorResources {
+public class AggregatorResources {
 
-	 @Post
-	 public void registerAgent();
-	 
-	 @Get
-	 public void peersList();
-	 
-	 @Get
-	 public void superPeersList();
-	 
-	 @Get
-	 public void events();
-	 
-	 @Put
-	 public void sendReport();
-	 
-	 @Get
-	 public void newVersion();
-	 
-	 @Get
-	 public void newTests();
-	 
-	 @Get
-	 public void assignTasks();
+	 public ClientResource getClientResource(String url) {
+		 return new ClientResource(Constants.AGGREGATOR_URL + url);
+	 }
+
 }
