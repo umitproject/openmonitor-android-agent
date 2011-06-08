@@ -37,7 +37,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Website;
-import org.umit.icm.mobile.proto.MessageProtos.Test;
+import org.umit.icm.mobile.process.TestObject;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
@@ -216,7 +216,7 @@ public class SDCardReadWrite {
 	}
 	
 	public static void writeTests(String dir
-			, List<Test> data) throws IOException, RuntimeException{
+			, List<TestObject> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
@@ -238,9 +238,9 @@ public class SDCardReadWrite {
     	}
 	}
 	
-	public static List<Test> readTests(String dir
+	public static List<TestObject> readTests(String dir
 			, String name) throws IOException, RuntimeException{
-		List<Test> tests = null;
+		List<TestObject> tests = null;
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -250,7 +250,7 @@ public class SDCardReadWrite {
   	  	ObjectInputStream objInputStream =
   	    new ObjectInputStream(new BufferedInputStream(inputStream));
   	  	try {
-	    	    tests = ((List<Test>) objInputStream.readObject());
+	    	    tests = ((List<TestObject>) objInputStream.readObject());
 	      		return tests;
   	  	} catch (Exception e) {
   		    throw new RuntimeException("read website exception", e);

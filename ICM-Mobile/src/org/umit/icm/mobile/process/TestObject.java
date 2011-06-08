@@ -21,7 +21,13 @@
 
 package org.umit.icm.mobile.process;
 
-public class TestObject {
+import java.io.Serializable;
+
+public class TestObject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long testID;
 	private String websiteURL;
 	private int serviceCode;
