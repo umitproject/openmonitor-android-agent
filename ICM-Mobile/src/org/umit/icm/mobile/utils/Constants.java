@@ -33,7 +33,10 @@ public class Constants {
 	public static int AES_KEY_SIZE = 128;
 	public static String KEYS_DIR = "/keys";
 	public static String PARAMETERS_DIR = "/params";
+	public static String VERSIONS_DIR = "/versions";
 	public static String INTERVAL_FILE = "interval.param";
+	public static String TESTS_VERSION_FILE = "tests.ver";
+	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
 	public static int DEFAULT_SCAN_INTERVAL = 10;
 	public static String DEFAULT_SCAN_STATUS = "On";

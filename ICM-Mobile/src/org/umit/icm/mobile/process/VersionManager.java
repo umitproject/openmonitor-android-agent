@@ -21,18 +21,57 @@
 
 package org.umit.icm.mobile.process;
 
+import java.io.IOException;
+
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
+
 public class VersionManager {
-	private int currentVersion;
+	private int agentVersion;
+	private int testsVersion;
 	
-	VersionManager() {
-		currentVersion = 0;
+	public VersionManager() {
+		agentVersion = 0;
+		testsVersion = 0;
 	}
 
-	public int getCurrentVersion() {
-		return currentVersion;
+	public int getAgentVersion() throws IOException {
+		agentVersion = readAgentVersion();
+		return agentVersion;
 	}
 
-	public void setCurrentVersion(int currentVersion) {
-		this.currentVersion = currentVersion;
+	public void setAgentVersion(int agentVersion) throws IOException {
+		this.agentVersion = agentVersion;
+		writeAgentVersion(agentVersion);
 	}
+
+	public int getTestsVersion() throws IOException {
+		testsVersion = readTestsVersion();
+		return testsVersion;
+	}
+
+	public void setTestsVersion(int testsVersion) throws IOException {
+		this.testsVersion = testsVersion;
+		writeTestsVersion(testsVersion);
+	}
+	
+	private int readAgentVersion() throws IOException {
+		return Integer.parseInt(SDCardReadWrite.readString(Constants.AGENT_VERSION_FILE
+				, Constants.VERSIONS_DIR));
+	}
+
+	private void writeAgentVersion(int agentVersion) throws IOException {
+		SDCardReadWrite.writeString(Constants.AGENT_VERSION_FILE
+				, Constants.VERSIONS_DIR, Integer.toString(agentVersion));
+	}
+	
+	private int readTestsVersion() throws IOException {
+		return Integer.parseInt(SDCardReadWrite.readString(Constants.TESTS_VERSION_FILE
+				, Constants.VERSIONS_DIR));
+	}
+
+	private void writeTestsVersion(int testsVersion) throws IOException {
+		SDCardReadWrite.writeString(Constants.TESTS_VERSION_FILE
+				, Constants.VERSIONS_DIR, Integer.toString(testsVersion));
+	} 
 }
