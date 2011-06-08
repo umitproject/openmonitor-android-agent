@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.process;
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -38,42 +40,42 @@ public class RuntimeParameters {
 		super();
 	}
 
-	public int getScanInterval() throws Exception {
+	public int getScanInterval() throws IOException {
 		scanInterval = readScanInterval();
 		return scanInterval;
 	}
 
-	public void setScanInterval(int scanInterval) throws Exception {
+	public void setScanInterval(int scanInterval) throws IOException {
 		this.scanInterval = scanInterval;
 		writeScanInterval(scanInterval);
 	}
 
-	public String getScanStatus() throws Exception {
+	public String getScanStatus() throws IOException {
 		scanStatus = readScanStatus();
 		return scanStatus;
 	}
 
-	public void setScanStatus(String scanStatus) throws Exception {
+	public void setScanStatus(String scanStatus) throws IOException {
 		this.scanStatus = scanStatus;
 		writeScanStatus(scanStatus);
 	}
 	
-	private String readScanStatus() throws Exception {
+	private String readScanStatus() throws IOException {
 		return SDCardReadWrite.readString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR);
 	}
 
-	private void writeScanStatus(String scanStatus) throws Exception {
+	private void writeScanStatus(String scanStatus) throws IOException {
 		SDCardReadWrite.writeString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR, scanStatus);
 	}
 	
-	private int readScanInterval() throws Exception {
+	private int readScanInterval() throws IOException {
 		return Integer.parseInt(SDCardReadWrite.readString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR));
 	}
 
-	private void writeScanInterval(int scanStatus) throws Exception {
+	private void writeScanInterval(int scanStatus) throws IOException {
 		SDCardReadWrite.writeString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
 	}
