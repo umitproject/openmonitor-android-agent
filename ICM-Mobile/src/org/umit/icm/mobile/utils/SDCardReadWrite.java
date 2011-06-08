@@ -223,7 +223,7 @@ public class SDCardReadWrite {
     			+ dir);
 		keyDir.mkdirs();
     	File file = new File(keyDir
-    			, Constants.TESTS_DIR + Constants.TESTS_FILE);
+    			, Constants.TESTS_FILE);
     	if(!file.exists()){
     		file.createNewFile();
     	}
@@ -245,7 +245,7 @@ public class SDCardReadWrite {
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
     	File file = new File(keyDir
-    			, Constants.TESTS_DIR + Constants.TESTS_FILE);
+    			, Constants.TESTS_FILE);
     	InputStream inputStream = new FileInputStream(file.toString());
   	  	ObjectInputStream objInputStream =
   	    new ObjectInputStream(new BufferedInputStream(inputStream));
