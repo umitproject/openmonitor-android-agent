@@ -44,6 +44,11 @@ public class TestManager {
 		writeTests(currentTests);
 	}
 	
+	public void addTest(TestObject test) throws IOException, RuntimeException {
+		this.currentTests.add(test);
+		writeTests(currentTests);
+	}
+	
 	private void writeTests(List<TestObject> tests) throws IOException, RuntimeException {
 		SDCardReadWrite.writeTests(Constants.TESTS_DIR, tests);
 	}
