@@ -37,6 +37,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
@@ -207,6 +208,50 @@ public class SDCardReadWrite {
 	      		WebsiteReport websiteReport 
 	      		= WebsiteReport.parseFrom(inputStream);
 	      		return websiteReport;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read website exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writeTests(String dir
+			, List<Test> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.TESTS_DIR + Constants.TESTS_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));
+			objOutStream.writeObject(data);
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write tests exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<Test> readTests(String dir
+			, String name) throws IOException, RuntimeException{
+		List<Test> tests = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.TESTS_DIR + Constants.TESTS_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+	    	    tests = ((List<Test>) objInputStream.readObject());
+	      		return tests;
   	  	} catch (Exception e) {
   		    throw new RuntimeException("read website exception", e);
   	  	} finally {

@@ -21,18 +21,23 @@
 
 package org.umit.icm.mobile.process;
 
+import java.util.List;
+
+import org.umit.icm.mobile.proto.MessageProtos.Test;
+
 public class TestManager {
-	private int currentTest;
+	private List<Test> currentTests;
 	
 	TestManager() {
-		currentTest = 0;
+		currentTests = null;
 	}
 
-	public int getCurrentTest() {
-		return currentTest;
+	public List<Test> getCurrentTests() {
+		return currentTests;
 	}
 
-	public void setCurrentTest(int currentTest) {
-		this.currentTest = currentTest;
+	public void setCurrentTests(List<Test> currentTests) {
+		this.currentTests = currentTests;
 	}
+
 }
