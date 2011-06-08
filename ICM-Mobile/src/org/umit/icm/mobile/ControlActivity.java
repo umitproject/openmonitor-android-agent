@@ -21,15 +21,18 @@
 
 package org.umit.icm.mobile;
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
-import org.umit.icm.mobile.notifications.NotificationService;
+//import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.RuntimeParameters;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,8 +56,9 @@ public class ControlActivity extends Activity {
         scanButton = (Button) this.findViewById(R.id.scanButton);
         try {
 			scanStatus = runtimeParameters.getScanStatus();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
 		
@@ -109,9 +113,10 @@ public class ControlActivity extends Activity {
 	       			
 	       		try {
 					runtimeParameters.setScanStatus(scanStatus);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (RuntimeException e) {
+						e.printStackTrace();
 				}
 	       		
 	       		Context context = getApplicationContext();

@@ -40,42 +40,42 @@ public class RuntimeParameters {
 		super();
 	}
 
-	public int getScanInterval() throws IOException {
+	public int getScanInterval() throws IOException, RuntimeException {
 		scanInterval = readScanInterval();
 		return scanInterval;
 	}
 
-	public void setScanInterval(int scanInterval) throws IOException {
+	public void setScanInterval(int scanInterval) throws IOException, RuntimeException {
 		this.scanInterval = scanInterval;
 		writeScanInterval(scanInterval);
 	}
 
-	public String getScanStatus() throws IOException {
+	public String getScanStatus() throws IOException, RuntimeException {
 		scanStatus = readScanStatus();
 		return scanStatus;
 	}
 
-	public void setScanStatus(String scanStatus) throws IOException {
+	public void setScanStatus(String scanStatus) throws IOException, RuntimeException {
 		this.scanStatus = scanStatus;
 		writeScanStatus(scanStatus);
 	}
 	
-	private String readScanStatus() throws IOException {
+	private String readScanStatus() throws IOException, RuntimeException {
 		return SDCardReadWrite.readString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR);
 	}
 
-	private void writeScanStatus(String scanStatus) throws IOException {
+	private void writeScanStatus(String scanStatus) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR, scanStatus);
 	}
 	
-	private int readScanInterval() throws IOException {
+	private int readScanInterval() throws IOException, RuntimeException {
 		return Integer.parseInt(SDCardReadWrite.readString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR));
 	}
 
-	private void writeScanInterval(int scanStatus) throws IOException {
+	private void writeScanInterval(int scanStatus) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
 	}

@@ -22,7 +22,7 @@
 package org.umit.icm.mobile.test;
 
 
-import org.umit.icm.mobile.utils.RuntimeParameters;
+import org.umit.icm.mobile.process.RuntimeParameters;
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;

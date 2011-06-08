@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.gui.dialogs;
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.RuntimeParameters;
 
@@ -60,12 +62,12 @@ public class IntervalDialog extends Dialog {
         runtimeParameters = new RuntimeParameters();
         try {
 			newInterval = runtimeParameters.getScanInterval();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
-        // TODO Read from SD
-        
+		
     }
     
     public interface ReadyIntervalListener {
@@ -76,14 +78,14 @@ public class IntervalDialog extends Dialog {
 
 		@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
 			if (!etInterval.getText().toString().equals(""))
 				newInterval = Integer.parseInt(etInterval.getText().toString());
 			readyListener.ready(Integer.toString(newInterval));
 			try {
 				runtimeParameters.setScanInterval(newInterval);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
 			IntervalDialog.this.dismiss();
@@ -96,7 +98,6 @@ public class IntervalDialog extends Dialog {
 
 		@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
 			if (!etInterval.getText().toString().equals(""))
 				newInterval = Integer.parseInt(etInterval.getText().toString());
 			newInterval++;
@@ -110,7 +111,6 @@ public class IntervalDialog extends Dialog {
 
 		@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
 			if (!etInterval.getText().toString().equals(""))
 				newInterval = Integer.parseInt(etInterval.getText().toString());
 			newInterval--;

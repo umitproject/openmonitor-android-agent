@@ -47,7 +47,7 @@ public class SDCardReadWrite {
 	private static File sdCard;
 	
 	public static void writeString(String fileName
-			, String dir, String data) throws IOException{
+			, String dir, String data) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -68,7 +68,7 @@ public class SDCardReadWrite {
 		}
 	
 	public static String readString(String fileName
-			, String dir) throws IOException{
+			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -86,19 +86,33 @@ public class SDCardReadWrite {
 	}
 	
 	public static boolean fileExists(String fileName
-			, String dir) throws IOException{
+			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
     	File file = new File(keyDir, fileName);
-    	if(!file.exists()){
+    	if(file.exists()){
+    		return true;
+    	}
+    	return false;
+	}
+	
+	public static boolean fileNotEmpty(String fileName
+			, String dir) throws IOException, RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, fileName);
+    	FileReader fileReader = new FileReader(file);
+    	BufferedReader bufferedReader = new BufferedReader(fileReader);
+    	if(bufferedReader.readLine() == null){
     		return false;
     	}
     	return true;
 	}
 	
 	public static void writeWebsite(String dir
-			, Website data) throws IOException{
+			, Website data) throws IOException , RuntimeException{
 		ObjectOutputStream objOutStream = null;
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
@@ -115,13 +129,15 @@ public class SDCardReadWrite {
 			objOutStream.writeObject(data.getUrl());
 			objOutStream.writeObject(data.getHeader());
 			objOutStream.writeObject(data.getContent());
-    	} finally {
+    	} catch (Exception e) {
+  		    throw new RuntimeException("writeWebsite exception", e);
+  	  	} finally {
     		objOutStream.close();
     	}
 	}
 	
 	public static Website readWebsite(String dir
-			, String url) throws IOException{
+			, String url) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -138,7 +154,7 @@ public class SDCardReadWrite {
 	    	    
 	    	    return website;
   	  	} catch (Exception e) {
-  		    throw new RuntimeException("read exception", e);
+  		    throw new RuntimeException("readWebsite exception", e);
   	  	} finally {
   		  objInputStream.close();
   	  	}
@@ -154,7 +170,7 @@ public class SDCardReadWrite {
 	}
 	
 	public static void writeWebsiteReport(String dir
-			, WebsiteReport data) throws IOException{
+			, WebsiteReport data) throws IOException, RuntimeException{
 		OutputStream outputStream = null;
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
@@ -170,13 +186,15 @@ public class SDCardReadWrite {
 			outputStream = new FileOutputStream(file);
 			data.writeTo(outputStream);
 			
-    	} finally {
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write website exception", e);
+  	  	} finally {
     		outputStream.close();
     	}
 	}
 	
 	public static WebsiteReport readWebsiteReport(String dir
-			, String url) throws IOException{
+			, String url) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -190,7 +208,7 @@ public class SDCardReadWrite {
 	      		= WebsiteReport.parseFrom(inputStream);
 	      		return websiteReport;
   	  	} catch (Exception e) {
-  		    throw new RuntimeException("read exception", e);
+  		    throw new RuntimeException("read website exception", e);
   	  	} finally {
   		  inputStream.close();
   	  	}

@@ -22,6 +22,8 @@
 package org.umit.icm.mobile;
 
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.process.RuntimeParameters;
@@ -69,20 +71,27 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);
     		
         	
-        } else {        	            	       
-	        WebsiteTest websiteTest = new WebsiteTest();
-	        websiteTest.scan();
-			                         
+        } else {        	            	      			                         
 	        try {
 				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
-						, Constants.PARAMETERS_DIR) == false )
-						&& (SDCardReadWrite.fileExists(Constants.SCAN_FILE
+						, Constants.PARAMETERS_DIR) == false) 
+					|| (SDCardReadWrite.fileNotEmpty(Constants.INTERVAL_FILE
 				        		, Constants.PARAMETERS_DIR) == false )) {
 					RuntimeParameters runtimeParameters = new RuntimeParameters();
 					runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
-					runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);
 				}
-			} catch (Exception e) {
+				else if ((SDCardReadWrite.fileExists(Constants.SCAN_FILE
+				        		, Constants.PARAMETERS_DIR) == false )
+						|| (SDCardReadWrite.fileNotEmpty(Constants.SCAN_FILE
+				        		, Constants.PARAMETERS_DIR) == false )) {
+					RuntimeParameters runtimeParameters = new RuntimeParameters();
+					runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
+				}
+				WebsiteTest websiteTest = new WebsiteTest();
+		        websiteTest.scan();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
 	            
