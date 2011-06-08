@@ -75,4 +75,6 @@ public class Constants {
 	public static String AGGR_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
 	public static String AGGR_SERVICE_SUGGESTION = "/api/servicesuggestion/";
 	public static String AGGR_TESTS = "/api/tests/";
+	public static int DEFAULT_TESTS_VERSION = 1;
+	public static int DEFAULT_AGENT_VERSION = 1;
 }
