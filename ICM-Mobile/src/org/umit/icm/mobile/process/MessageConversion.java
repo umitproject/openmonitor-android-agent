@@ -21,6 +21,9 @@
 
 package org.umit.icm.mobile.process;
 
+import java.io.IOException;
+
+import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 
 public class MessageConversion {
@@ -28,5 +31,21 @@ public class MessageConversion {
 		return new TestObject(
 				test.getTestID(), test.getWebsiteURL(),
 				test.getServideCode(), test.getExecuteAtTimeUTC());
+	}
+	
+	public static void UpdateAgentVersion (ResponseHeader header) throws IOException {
+		VersionManager versionManager = new VersionManager();
+		if (header.getCurrentVersionNo() > versionManager.getAgentVersion()) {
+			versionManager.setAgentVersion(header.getCurrentVersionNo());
+			// TODO patch current binary
+		}
+	}
+	
+	public static void UpdateTestsVersion (ResponseHeader header) throws IOException {
+		VersionManager versionManager = new VersionManager();
+		if (header.getCurrentTestVersionNo() > versionManager.getTestsVersion()) {
+			versionManager.setTestsVersion(header.getCurrentTestVersionNo());
+			// TODO update current tests
+		}
 	}
 }
