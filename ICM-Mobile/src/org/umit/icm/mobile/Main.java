@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.process.RuntimeParameters;
+import org.umit.icm.mobile.process.VersionManager;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -38,7 +39,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 public class Main extends TabActivity {
-    /** Called when the activity is first created. */
+ 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +69,7 @@ public class Main extends TabActivity {
         	int duration = Toast.LENGTH_LONG;
     		Toast toast = Toast.makeText(this, text, duration);
     		toast.show();
-    		moveTaskToBack(true);
-    		
-        	
+    		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try {
 				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
@@ -80,13 +79,28 @@ public class Main extends TabActivity {
 					RuntimeParameters runtimeParameters = new RuntimeParameters();
 					runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
 				}
-				else if ((SDCardReadWrite.fileExists(Constants.SCAN_FILE
+				if ((SDCardReadWrite.fileExists(Constants.SCAN_FILE
 				        		, Constants.PARAMETERS_DIR) == false )
 						|| (SDCardReadWrite.fileNotEmpty(Constants.SCAN_FILE
 				        		, Constants.PARAMETERS_DIR) == false )) {
 					RuntimeParameters runtimeParameters = new RuntimeParameters();
 					runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
 				}
+				if ((SDCardReadWrite.fileExists(Constants.AGENT_VERSION_FILE
+						, Constants.VERSIONS_DIR) == false) 
+					|| (SDCardReadWrite.fileNotEmpty(Constants.AGENT_VERSION_FILE
+				        		, Constants.VERSIONS_DIR) == false )) {
+					VersionManager versionManager = new VersionManager();
+					versionManager.setAgentVersion(Constants.DEFAULT_AGENT_VERSION);
+				}
+				if ((SDCardReadWrite.fileExists(Constants.TESTS_VERSION_FILE
+						, Constants.VERSIONS_DIR) == false) 
+					|| (SDCardReadWrite.fileNotEmpty(Constants.TESTS_VERSION_FILE
+				        		, Constants.VERSIONS_DIR) == false )) {
+					VersionManager versionManager = new VersionManager();
+					versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
+				}
+				
 				WebsiteTest websiteTest = new WebsiteTest();
 		        websiteTest.scan();
 			} catch (IOException e) {
