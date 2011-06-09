@@ -31,15 +31,27 @@ import android.test.AndroidTestCase;
 public class CryptoTests extends AndroidTestCase {
 
     public void testEncryptDecrypt() throws Throwable {
-    	String cipherText = AESCrypto.encrypt("secretICMMobilePassword", "This is a test string");
-        Assert.assertEquals("This is a test string", AESCrypto.decrypt("secretICMMobilePassword", cipherText));
+    	String cipherText = AESCrypto.encrypt("secretICMMobilePassword"
+    			, "This is a test string");
+        Assert.assertEquals("This is a test string"
+        		, AESCrypto.decrypt("secretICMMobilePassword", cipherText));
     }
     
     public void testReadWrite() throws Throwable {
-    	byte[] key = AESCrypto.generateKey("secretICMMobilePassword".getBytes());
+    	byte[] key = AESCrypto.generateKey(
+    			"secretICMMobilePassword".getBytes());
     	AESCrypto.saveKey("mySecretKey.priv", key);
-        Assert.assertEquals(AESCrypto.readKey("mySecretKey.priv") 
-        		,key);
+        Assert.assertTrue(byteArrayEquals(AESCrypto.readKey(
+        		"mySecretKey.priv"),key));
+    }
+    
+    public boolean byteArrayEquals(byte[] array1, byte[] array2) {
+    	if (array1.length != array2.length)
+    		return false;
+    	for(int i = 0; i < array1.length; i++)
+    		if(array1[i] != array2[i])
+    			return false;
+    	return true;
     }
 
 }
