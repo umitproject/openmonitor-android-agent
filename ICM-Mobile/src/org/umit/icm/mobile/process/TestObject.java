@@ -27,7 +27,7 @@ public class TestObject implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3221295685377211053L;
 	private long testID;
 	private String websiteURL;
 	private int serviceCode;

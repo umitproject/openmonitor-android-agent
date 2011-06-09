@@ -62,7 +62,7 @@ public class Main extends TabActivity {
                           resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(tabSpec);
     
-        tabHost.setCurrentTab(0);
+        tabHost.setCurrentTab(0);       
         
         if(!SDCardReadWrite.checkSDCard()) {
         	String text = "Error! No SD Card detected.";
