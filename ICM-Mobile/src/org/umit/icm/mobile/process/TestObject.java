@@ -81,4 +81,13 @@ public class TestObject implements Serializable {
 	public void setExecuteAtTimeUTC(long executeAtTimeUTC) {
 		this.executeAtTimeUTC = executeAtTimeUTC;
 	}
+	
+	public boolean isEqual(TestObject testObject) {
+		if(this.executeAtTimeUTC == testObject.executeAtTimeUTC
+				&& this.serviceCode == testObject.serviceCode
+				&& this.testID == testObject.testID
+				&& this.websiteURL.equals(testObject.websiteURL))
+			return true;
+		return false;
+	}
 }

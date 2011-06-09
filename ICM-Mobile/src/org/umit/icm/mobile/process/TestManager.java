@@ -58,9 +58,19 @@ public class TestManager {
 	}
 	
 	public boolean isEqual (TestManager testManager) {
-		if (this.equals(testManager))
+		try {
+			if(testManager.getCurrentTests().size() != this.getCurrentTests().size())
+					return false;
+			for(int i = 0; i< this.getCurrentTests().size(); i++)
+				if(!this.getCurrentTests().get(i).isEqual(
+						testManager.getCurrentTests().get(i)))
+					return false;			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 			return true;
-		return false;
 	}
 
 }
