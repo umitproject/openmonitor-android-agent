@@ -29,15 +29,40 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 public class RuntimeParameters {
 	private int scanInterval;
 	private String scanStatus;
+	private String token;
+	private long agentID;
 	
-	public RuntimeParameters(int scanInterval, String scanStatus) {
+	public RuntimeParameters(int scanInterval, String scanStatus, String token,
+			long agentID) {
 		super();
 		this.scanInterval = scanInterval;
 		this.scanStatus = scanStatus;
+		this.token = token;
+		this.agentID = agentID;
 	}
 	
 	public RuntimeParameters() {
 		super();
+	}
+
+	public String getToken() throws IOException, RuntimeException {
+		token = readToken();
+		return token;
+	}
+
+	public void setToken(String token) throws IOException, RuntimeException {
+		this.token = token;
+		writeToken(token);
+	}
+
+	public long getAgentID() throws IOException, RuntimeException {
+		agentID = readAgentID();
+		return agentID;
+	}
+
+	public void setAgentID(long agentID) throws IOException, RuntimeException {
+		this.agentID = agentID;
+		writeAgentID(agentID);
 	}
 
 	public int getScanInterval() throws IOException, RuntimeException {
@@ -78,5 +103,25 @@ public class RuntimeParameters {
 	private void writeScanInterval(int scanStatus) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
+	}
+	
+	private long readAgentID() throws IOException, RuntimeException {
+		return Long.parseLong(SDCardReadWrite.readString(Constants.AGENTID_FILE
+				, Constants.PARAMETERS_DIR));
+	}
+
+	private void writeAgentID(long agentID) throws IOException, RuntimeException {
+		SDCardReadWrite.writeString(Constants.AGENTID_FILE
+				, Constants.PARAMETERS_DIR, Long.toString(agentID));
+	}
+	
+	private String readToken() throws IOException, RuntimeException {
+		return SDCardReadWrite.readString(Constants.TOKEN_FILE
+				, Constants.PARAMETERS_DIR);
+	}
+
+	private void writeToken(String token) throws IOException, RuntimeException {
+		SDCardReadWrite.writeString(Constants.TOKEN_FILE
+				, Constants.PARAMETERS_DIR, token);
 	}
 }

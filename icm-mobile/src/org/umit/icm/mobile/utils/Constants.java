@@ -35,6 +35,8 @@ public class Constants {
 	public static String PARAMETERS_DIR = "/params";
 	public static String VERSIONS_DIR = "/versions";
 	public static String INTERVAL_FILE = "interval.param";
+	public static String TOKEN_FILE = "token.param";
+	public static String AGENTID_FILE = "agentid.param";
 	public static String TESTS_VERSION_FILE = "tests.ver";
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
