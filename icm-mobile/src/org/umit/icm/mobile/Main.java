@@ -25,12 +25,10 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
-import org.umit.icm.mobile.process.RuntimeParameters;
-import org.umit.icm.mobile.process.VersionManager;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -48,7 +46,7 @@ public class Main extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Resources resources = getResources(); 
-        TabHost tabHost = getTabHost(); 
+        TabHost tabHost = getTabHost();
         
         Intent intent = new Intent().setClass(this, InformationActivity.class);
         TabHost.TabSpec tabSpec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
@@ -78,34 +76,29 @@ public class Main extends TabActivity {
 				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
 						, Constants.PARAMETERS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.INTERVAL_FILE
-				        		, Constants.PARAMETERS_DIR) == false )) {
-					RuntimeParameters runtimeParameters = new RuntimeParameters();
-					runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
+				        		, Constants.PARAMETERS_DIR) == false )) {					
+					Globals.runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
 				}
 				if ((SDCardReadWrite.fileExists(Constants.SCAN_FILE
 				        		, Constants.PARAMETERS_DIR) == false )
 						|| (SDCardReadWrite.fileNotEmpty(Constants.SCAN_FILE
-				        		, Constants.PARAMETERS_DIR) == false )) {
-					RuntimeParameters runtimeParameters = new RuntimeParameters();
-					runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
+				        		, Constants.PARAMETERS_DIR) == false )) {					
+					Globals.runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
 				}
 				if ((SDCardReadWrite.fileExists(Constants.AGENT_VERSION_FILE
 						, Constants.VERSIONS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.AGENT_VERSION_FILE
-				        		, Constants.VERSIONS_DIR) == false )) {
-					VersionManager versionManager = new VersionManager();
-					versionManager.setAgentVersion(Constants.DEFAULT_AGENT_VERSION);
+				        		, Constants.VERSIONS_DIR) == false )) {					
+					Globals.versionManager.setAgentVersion(Constants.DEFAULT_AGENT_VERSION);
 				}
 				if ((SDCardReadWrite.fileExists(Constants.TESTS_VERSION_FILE
 						, Constants.VERSIONS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.TESTS_VERSION_FILE
-				        		, Constants.VERSIONS_DIR) == false )) {
-					VersionManager versionManager = new VersionManager();
-					versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
+				        		, Constants.VERSIONS_DIR) == false )) {					
+					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}
-				
-				WebsiteTest websiteTest = new WebsiteTest();
-		        websiteTest.scan();
+								
+		        Globals.websiteTest.scan();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {

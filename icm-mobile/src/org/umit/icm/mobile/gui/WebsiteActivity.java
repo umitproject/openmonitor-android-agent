@@ -26,10 +26,6 @@ import java.io.IOException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.drawable;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
-import org.umit.icm.mobile.R.string;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;

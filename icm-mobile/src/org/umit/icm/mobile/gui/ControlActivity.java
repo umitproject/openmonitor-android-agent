@@ -24,13 +24,10 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
-import org.umit.icm.mobile.R.string;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;
-import org.umit.icm.mobile.process.RuntimeParameters;
+import org.umit.icm.mobile.process.Globals;
 
 import android.app.Activity;
 import android.content.Context;
@@ -46,19 +43,17 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton;
 	private String scanStatus;
-	private RuntimeParameters runtimeParameters;
-	
+		
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        runtimeParameters = new RuntimeParameters();
+        super.onCreate(savedInstanceState);    
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
         try {
-			scanStatus = runtimeParameters.getScanStatus();
+			scanStatus = Globals.runtimeParameters.getScanStatus();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RuntimeException e) {
@@ -115,7 +110,7 @@ public class ControlActivity extends Activity {
 	       		}
 	       			
 	       		try {
-					runtimeParameters.setScanStatus(scanStatus);
+					Globals.runtimeParameters.setScanStatus(scanStatus);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (RuntimeException e) {

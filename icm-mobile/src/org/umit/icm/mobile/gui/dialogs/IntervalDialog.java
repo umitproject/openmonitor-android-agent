@@ -24,7 +24,7 @@ package org.umit.icm.mobile.gui.dialogs;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.process.RuntimeParameters;
+import org.umit.icm.mobile.process.Globals;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -39,8 +39,7 @@ public class IntervalDialog extends Dialog {
     private ReadyIntervalListener readyListener;
     EditText etInterval;
     private int newInterval; 
-    private RuntimeParameters runtimeParameters;
-   
+       
     
     public IntervalDialog(Context context, String interval, 
             ReadyIntervalListener readyListener) {
@@ -58,10 +57,9 @@ public class IntervalDialog extends Dialog {
         buttonInc.setOnClickListener(new IncButton());
         Button buttonDec = (Button) findViewById(R.id.tickerButtonDown);
         buttonDec.setOnClickListener(new DecButton());
-        etInterval = (EditText) findViewById(R.id.etInterval);
-        runtimeParameters = new RuntimeParameters();
+        etInterval = (EditText) findViewById(R.id.etInterval);     
         try {
-			newInterval = runtimeParameters.getScanInterval();
+			newInterval = Globals.runtimeParameters.getScanInterval();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RuntimeException e) {
@@ -82,7 +80,7 @@ public class IntervalDialog extends Dialog {
 				newInterval = Integer.parseInt(etInterval.getText().toString());
 			readyListener.ready(Integer.toString(newInterval));
 			try {
-				runtimeParameters.setScanInterval(newInterval);
+				Globals.runtimeParameters.setScanInterval(newInterval);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {

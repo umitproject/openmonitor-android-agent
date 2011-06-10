@@ -21,19 +21,10 @@
 
 package org.umit.icm.mobile.gui;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.http.HttpException;
+import java.util.List;
+
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
-import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Activity;
@@ -42,7 +33,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -83,10 +73,6 @@ public class InformationActivity extends Activity{
           }
         });
         
-        
-        /*String website = "http://www.google.com";
-        new DownloadWebsiteContent().execute(website);
-        new DownloadWebsiteHeader().execute(website); */
         new UpdateList().execute("");
     }
     private class UpdateList extends AsyncTask<String,String,List<String>> {
@@ -103,98 +89,6 @@ public class InformationActivity extends Activity{
 			 						
 		}
 			
-    }
-    
-    
-    /*private class DownloadWebsiteContent extends AsyncTask<String,String,String> {
-    	  
-    	protected void onPostExecute(String result) {
-    				
-    		arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1);
-        	listView.setAdapter(arrayAdapter);	     		        		 
-    	}
-         
-		protected String doInBackground(String... urls) {
-		
-			String result = new String();
-			URLConnection urlConnection = null;
-			try {
-				urlConnection = WebsiteOpen.openURLConnection(urls[0]);							
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			} catch (HttpException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			}  	
-			
-			try {
-				result = WebsiteOpen.getContent(urlConnection);
-				return result;							
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			} catch (HttpException e) {
-				e.printStackTrace();
-				return e.getMessage();
-			}  	
-					
-		}
-			
-    }
-    
-    private class DownloadWebsiteHeader extends AsyncTask<String,Map<String, String>,Map<String, String>> {
-  	  
-    	protected void onPostExecute(Map<String, String> result) {
-    		 List<String> listResult = new ArrayList<String>(result.values());
-    		 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this,android.R.layout.simple_list_item_1 , listResult);
-    		 listView.setAdapter(arrayAdapter);	     		        		 
-    	}
-         
-		protected Map<String, String> doInBackground(String... urls) {
-			Map<String, String> result = new HashMap<String, String>();
-			URLConnection urlConnection = null;
-			try {
-				urlConnection = WebsiteOpen.openURLConnection(urls[0]);					
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			} catch (IOException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			} catch (HttpException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			}
-			
-			try {
-				result = WebsiteOpen.getHeaders(urlConnection);
-				return result;							
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			} catch (IOException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			} catch (HttpException e) {
-				e.printStackTrace();
-				result.put("exception", e.getMessage());
-				return result;
-			} 			
-					
-		}
-			
-    } */
+    }    
       	
 }
