@@ -37,4 +37,6 @@
     <string name="register_suggestion">Register Suggestion</string>
     <string name="scan_text">Scan</string>
     <string name="website_details">Website Details</string>
+    <string name="scan_status_off">Scanning is Off</string>
+    <string name="no_sdcard">Error! No SD Card detected</string>
 </resources>

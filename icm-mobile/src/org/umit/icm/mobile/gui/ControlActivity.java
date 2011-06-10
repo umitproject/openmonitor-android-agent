@@ -101,12 +101,14 @@ public class ControlActivity extends Activity {
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_on));
 	       			scanStatus = getString(R.string.scan_off);
+	       			Globals.websiteTest.stopScan();
 	       		}
 	       			
 	       		else{
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_off));
 	       			scanStatus = getString(R.string.scan_on);
+	       			Globals.websiteTest.scan();
 	       		}
 	       			
 	       		try {

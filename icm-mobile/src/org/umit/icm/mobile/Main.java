@@ -66,7 +66,7 @@ public class Main extends TabActivity {
         tabHost.setCurrentTab(0);       
         
         if(!SDCardReadWrite.checkSDCard()) {
-        	String text = "Error! No SD Card detected.";
+        	String text = getString(R.string.no_sdcard);
         	int duration = Toast.LENGTH_LONG;
     		Toast toast = Toast.makeText(this, text, duration);
     		toast.show();
@@ -97,8 +97,17 @@ public class Main extends TabActivity {
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}
-								
-		        Globals.websiteTest.scan();
+				if(Globals.runtimeParameters.getScanStatus().equals("On"))				
+		        	Globals.websiteTest.scan();
+		        else {
+		        	int duration = Toast.LENGTH_SHORT;
+
+	        		Toast toast = Toast.makeText(this
+	        				, getString(R.string.scan_status_off)
+	        				, duration);
+	        		toast.show();
+		        }
+		        				
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {

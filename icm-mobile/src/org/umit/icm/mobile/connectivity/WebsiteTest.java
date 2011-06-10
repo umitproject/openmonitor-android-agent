@@ -68,7 +68,7 @@ public class WebsiteTest extends AbstractTest{
 		 } catch (Exception e) {
 				e.printStackTrace();
 		 }
-	
+		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
@@ -176,6 +176,10 @@ public class WebsiteTest extends AbstractTest{
 			};
 		}, 0, interval * 1000); 
 
+	}
+	
+	public void stopScan() {
+		this.timer.cancel();
 	}
 	
 	public WebsiteReport clean(String websiteURL, String websiteContent
