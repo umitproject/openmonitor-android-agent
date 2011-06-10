@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import org.umit.icm.mobile.connectivity.WebsiteTest;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 public class Globals {
 	public static RuntimeParameters runtimeParameters 
@@ -30,4 +31,9 @@ public class Globals {
 	= new VersionManager();
 	public static WebsiteTest websiteTest 
 	= new WebsiteTest();
+	public static RequestHeader requestHeader
+	= RequestHeader.newBuilder()
+	.setAgentID(1)
+	.setToken("1")
+	.build();
 }

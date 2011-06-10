@@ -179,21 +179,15 @@ public class ControlActivity extends Activity {
     		}
     	}
          
-		protected String doInBackground(String... args) {		
-			RequestHeader requestHeader
-        	= RequestHeader.newBuilder()
-        	.setAgentID(1)
-        	.setToken("1")
-        	.build();
+		protected String doInBackground(String... args) {					
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
         	.setEmailAddress(args[0])
-        	.setHeader(requestHeader)
+        	.setHeader(Globals.requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
         	//return AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
-        	return "true";
-			 						
+        	return "true";			 						
 		}
 			
     }  
@@ -210,22 +204,16 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {		
-			RequestHeader requestHeader
-        	= RequestHeader.newBuilder()
-        	.setAgentID(1)
-        	.setToken("1")
-        	.build();
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
         	.setEmailAddress(args[0])
         	.setServiceName(args[1])
-        	.setHeader(requestHeader)
+        	.setHeader(Globals.requestHeader)
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();
         	//AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
-        	return "true";
-			 						
+        	return "true";			 						
 		}
 			
     }
