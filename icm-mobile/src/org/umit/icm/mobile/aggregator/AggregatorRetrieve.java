@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.restlet.resource.ClientResource;
+import org.umit.icm.mobile.process.MessageConversion;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -50,90 +51,120 @@ public class AggregatorRetrieve {
 	 public static RegisterAgentResponse registerAgent(
 			RegisterAgent registerAgent) 
 	 throws UnsupportedEncodingException, IOException {
-			 ClientResource clientResource 
-			 = AggregatorResources.getClientResource(Constants.AGGR_REGISTER_AGENT);
-			return AggregatorResources.registerAgent(
-					registerAgent, clientResource); 
+			ClientResource clientResource 
+			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
+			RegisterAgentResponse registerAgentResponse
+			= AggregatorResources.registerAgent(registerAgent, clientResource); 
+			MessageConversion.updateAgentVersion(registerAgentResponse.getHeader());
+			MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
+			return registerAgentResponse;
 	 }
 	
 	 public static GetPeerListResponse getPeerList(
-			 GetPeerList getPeerList) 
+			GetPeerList getPeerList) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
-		return AggregatorResources.getPeerList(
-				getPeerList, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
+		 	GetPeerListResponse getPeerListResponse
+		 	= AggregatorResources.getPeerList(getPeerList, clientResource);
+		 	MessageConversion.updateAgentVersion(getPeerListResponse.getHeader());
+		 	MessageConversion.updateTestsVersion(getPeerListResponse.getHeader());
+		 	return getPeerListResponse;
 	 }
 	 
 	 public static GetSuperPeerListResponse getSuperPeerList(
-			 GetSuperPeerList getSuperPeerList) 
+			GetSuperPeerList getSuperPeerList) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
-		return AggregatorResources.getSuperPeerList(
-				getSuperPeerList, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
+		 	GetSuperPeerListResponse getSuperPeerListResponse
+		 	= AggregatorResources.getSuperPeerList(getSuperPeerList, clientResource);
+		 	MessageConversion.updateAgentVersion(getSuperPeerListResponse.getHeader());
+		 	MessageConversion.updateTestsVersion(getSuperPeerListResponse.getHeader());
+		 	return getSuperPeerListResponse; 
 	 }
 	 
 	 public static GetEventsResponse getEvents(
-			 GetEvents getEvents) 
+			GetEvents getEvents) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
-		return AggregatorResources.getEvents(
-				getEvents, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
+		 	GetEventsResponse getEventsResponse 
+		 	= AggregatorResources.getEvents(getEvents, clientResource);
+		 	MessageConversion.updateAgentVersion(getEventsResponse.getHeader());
+		 	MessageConversion.updateTestsVersion(getEventsResponse.getHeader());
+		 	return getEventsResponse;
 	 }
 	 
 	 public static SendReportResponse sendWebsiteReport(
-			 SendWebsiteReport sendWebsiteReport) 
+			SendWebsiteReport sendWebsiteReport) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
-		return AggregatorResources.sendWebsiteReport(
-				sendWebsiteReport, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
+		 	SendReportResponse sendReportResponse
+		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport, clientResource);
+		 	MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
+			MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
+			return sendReportResponse;
 	 }
 	 
 	 public static SendReportResponse sendServiceReport(
-			 SendServiceReport sendServiceReport) 
+			SendServiceReport sendServiceReport) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
-		return AggregatorResources.sendServiceReport(
-				sendServiceReport, clientResource); 
-	 }
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
+		 	SendReportResponse sendReportResponse 
+		 	= AggregatorResources.sendServiceReport(sendServiceReport, clientResource);
+		 	MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
+			MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
+			return sendReportResponse;
+	 }	
 	 
 	 public static NewVersionResponse checkVersion(
-			 NewVersion newVersion) 
+			NewVersion newVersion) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
-		return AggregatorResources.checkVersion(
-				newVersion, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
+		 	NewVersionResponse newVersionResponse
+		 	= AggregatorResources.checkVersion(newVersion, clientResource);
+		 	MessageConversion.updateAgentVersion(newVersionResponse.getHeader());
+			MessageConversion.updateTestsVersion(newVersionResponse.getHeader());
+			return newVersionResponse;
 	 }
 	 
 	 public static NewTestsResponse checkTests(
-			 NewTests newTests) 
+			NewTests newTests) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
-		return AggregatorResources.checkTests(
-				newTests, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
+		 	NewTestsResponse newTestsResponse 
+		 	= AggregatorResources.checkTests(newTests, clientResource);
+		 	MessageConversion.updateAgentVersion(newTestsResponse.getHeader());
+			MessageConversion.updateTestsVersion(newTestsResponse.getHeader());
+			return newTestsResponse;
 	 }
 	 
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
-			 WebsiteSuggestion websiteSuggestion) 
+			WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
-		return AggregatorResources.sendWebsiteSuggestion(
-				websiteSuggestion, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
+		 	TestSuggestionResponse testSuggestionResponse
+		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);
+		 	MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
+		 	MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
+			return testSuggestionResponse;
 	 }
 	 
 	 public static TestSuggestionResponse sendServiceSuggestion(
-			 ServiceSuggestion serviceSuggestion) 
+			ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 = AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
-		return AggregatorResources.sendServiceSuggestion(
-				serviceSuggestion, clientResource); 
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
+		 	TestSuggestionResponse testSuggestionResponse
+		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
+		 	MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
+		 	MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
+			return testSuggestionResponse;
 	 }
 }
