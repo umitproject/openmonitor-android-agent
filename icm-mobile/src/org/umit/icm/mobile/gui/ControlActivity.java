@@ -33,12 +33,15 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
+import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -147,35 +150,12 @@ public class ControlActivity extends Activity {
             		, getString(R.string.text_selected) 
             		+ " " + option + " " + suggestion + " " + email
             		, Toast.LENGTH_LONG).show();
-            if(option.equals("Website")) {
-            	RequestHeader requestHeader
-            	= RequestHeader.newBuilder()
-            	.setAgentID(1)
-            	.setToken("1")
-            	.build();
-            	WebsiteSuggestion websiteSuggestion
-            	= WebsiteSuggestion.newBuilder()
-            	.setEmailAddress(email)
-            	.setHeader(requestHeader)
-            	.setWebsiteURL(suggestion)
-            	.build();
-            	//AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
+            if(option.equals("Website")) {            	
+            	new SendWebsiteTask().execute(email, suggestion);
             }
             else {
-            	RequestHeader requestHeader
-            	= RequestHeader.newBuilder()
-            	.setAgentID(1)
-            	.setToken("1")
-            	.build();
-            	ServiceSuggestion serviceSuggestion
-            	= ServiceSuggestion.newBuilder()
-            	.setEmailAddress(email)
-            	.setServiceName(suggestion)
-            	.setHeader(requestHeader)
-            	.setHostName(suggestion)
-            	.setIp(suggestion)      
-            	.build();
-            	//AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
+            	new SendServiceTask().execute(email, suggestion
+            			,suggestion, suggestion);
             }
             
         }
@@ -187,5 +167,67 @@ public class ControlActivity extends Activity {
             Toast.makeText(ControlActivity.this, interval, Toast.LENGTH_LONG).show();
         }
     }
-   
+    
+    private class SendWebsiteTask extends AsyncTask<String,String,String> {
+    	  
+    	protected void onPostExecute(String result) {
+    		if (result.equals("true")) {
+    			int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(ControlActivity.this
+        				, "Website Suggestion Sent", duration);
+        		toast.show();	
+    		}
+    	}
+         
+		protected String doInBackground(String... args) {		
+			RequestHeader requestHeader
+        	= RequestHeader.newBuilder()
+        	.setAgentID(1)
+        	.setToken("1")
+        	.build();
+        	WebsiteSuggestion websiteSuggestion
+        	= WebsiteSuggestion.newBuilder()
+        	.setEmailAddress(args[0])
+        	.setHeader(requestHeader)
+        	.setWebsiteURL(args[1])
+        	.build();
+        	//return AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
+        	return "true";
+			 						
+		}
+			
+    }  
+    
+    private class SendServiceTask extends AsyncTask<String,String,String> {
+  	  
+    	protected void onPostExecute(String result) {
+    		if (result.equals("true")) {
+    			int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(ControlActivity.this
+        				, "Service Suggestion Sent", duration);
+        		toast.show();	
+    		}
+    	}
+         
+		protected String doInBackground(String... args) {		
+			RequestHeader requestHeader
+        	= RequestHeader.newBuilder()
+        	.setAgentID(1)
+        	.setToken("1")
+        	.build();
+        	ServiceSuggestion serviceSuggestion
+        	= ServiceSuggestion.newBuilder()
+        	.setEmailAddress(args[0])
+        	.setServiceName(args[1])
+        	.setHeader(requestHeader)
+        	.setHostName(args[2])
+        	.setIp(args[3])      
+        	.build();
+        	//AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
+        	return "true";
+			 						
+		}
+			
+    }
+      	 
 }
