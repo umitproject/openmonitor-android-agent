@@ -15,14 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ControlActivity"></activity>
-        <activity android:name="InformationActivity"></activity>
-        <activity android:name="MapActivityTab"></activity>
-        <activity android:name="ISPActivity"
-        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
         <service android:name=".notifications.NotificationService"></service>
-        <activity android:name="WebsiteActivity"
-        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".gui.ControlActivity"></activity>
+        <activity android:name=".gui.InformationActivity"></activity>
+        <activity android:name=".gui.ISPActivity"></activity>
+        <activity android:name=".gui.MapActivityTab"></activity>
+        <activity android:name=".gui.WebsiteActivity"></activity>
     
     </application>
     <uses-sdk android:minSdkVersion="4" />

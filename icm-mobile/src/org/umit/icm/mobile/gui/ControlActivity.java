@@ -19,11 +19,14 @@
  * USA
  */
 
-package org.umit.icm.mobile;
+package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.R.id;
+import org.umit.icm.mobile.R.layout;
+import org.umit.icm.mobile.R.string;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;

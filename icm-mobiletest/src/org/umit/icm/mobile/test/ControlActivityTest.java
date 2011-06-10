@@ -21,7 +21,7 @@
 
 package org.umit.icm.mobile.test;
 
-import org.umit.icm.mobile.ControlActivity;
+import org.umit.icm.mobile.gui.ControlActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;

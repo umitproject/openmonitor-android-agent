@@ -21,8 +21,8 @@
 
 package org.umit.icm.mobile.notifications;
 
-import org.umit.icm.mobile.InformationActivity;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.gui.InformationActivity;
 
 import android.app.Notification;
 import android.app.NotificationManager;

@@ -19,7 +19,7 @@
  * USA
  */
 
-package org.umit.icm.mobile;
+package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -31,6 +31,8 @@ import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.R.id;
+import org.umit.icm.mobile.R.layout;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.utils.Constants;
 

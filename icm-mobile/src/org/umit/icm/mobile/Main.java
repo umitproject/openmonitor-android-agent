@@ -26,6 +26,9 @@ import java.io.IOException;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
+import org.umit.icm.mobile.gui.ControlActivity;
+import org.umit.icm.mobile.gui.InformationActivity;
+import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.process.VersionManager;
 import org.umit.icm.mobile.utils.Constants;
