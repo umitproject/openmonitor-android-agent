@@ -51,10 +51,12 @@ import android.util.Log;
 public class WebsiteTest extends AbstractTest{
 	
 	private List<String> listWebsites;
+	Timer timer;
 
 	public WebsiteTest() {
 		super();
 		listWebsites = Constants.WEBSITE_LIST;
+		timer = new Timer(); 
 	}
 	
 	@Override()
@@ -66,8 +68,7 @@ public class WebsiteTest extends AbstractTest{
 		 } catch (Exception e) {
 				e.printStackTrace();
 		 }
-
-		Timer timer = new Timer();
+	
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
