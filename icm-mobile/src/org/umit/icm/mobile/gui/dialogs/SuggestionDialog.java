@@ -70,8 +70,7 @@ public class SuggestionDialog extends Dialog {
         etSuggest = (EditText) findViewById(R.id.EditText01);
         etEmail = (EditText) findViewById(R.id.EditTextEmail);
         wRB = (RadioButton)findViewById(R.id.websiterb);
-        sRB = (RadioButton)findViewById(R.id.servicerb);
-        
+        sRB = (RadioButton)findViewById(R.id.servicerb);       
     }
     
     public interface ReadyListener {
@@ -81,8 +80,7 @@ public class SuggestionDialog extends Dialog {
     private class sendListener implements android.view.View.OnClickListener {
 
 		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
+		public void onClick(View arg0) {	
 			Context context = SuggestionDialog.this.getContext();
 			if((etSuggest.getText().toString().equals("")) && (etEmail.getText().toString().equals(""))){
         		
@@ -90,8 +88,7 @@ public class SuggestionDialog extends Dialog {
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
-        		toast.show();
-        		
+        		toast.show();        		
         	} 
         	else if(!checkEmail(etEmail.getText().toString())){
         		
@@ -103,18 +100,17 @@ public class SuggestionDialog extends Dialog {
         	}
         	else{
     	    		if(wRB.isChecked() == true) {
-    	    			readyListener.ready(context.getString(R.string.text_selected) + wRB.getText() 
-    	    	    			+ "&" + etSuggest.getText().toString() + "&" + etEmail.getText().toString());
-    	                SuggestionDialog.this.dismiss();
- 
+    	    			readyListener.ready((wRB.getText() 
+    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
+    	    	    			+ etEmail.getText().toString()));
+    	                SuggestionDialog.this.dismiss(); 
     	    		}
-    	    			
-    	    		
+    	    			    	    		
     	    		else if(sRB.isChecked() == true) {
-    	    			readyListener.ready(context.getString(R.string.text_selected) + sRB.getText()
-    	    	    			+ "&" + etSuggest.getText().toString() + "&" + etEmail.getText().toString());
+    	    			readyListener.ready(sRB.getText()
+    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
+    	    	    			+ etEmail.getText().toString());
     	                SuggestionDialog.this.dismiss();
- 
     	    		}
     	    		else{
     	    			

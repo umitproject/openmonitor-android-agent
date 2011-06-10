@@ -22,17 +22,21 @@
 package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
+import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -44,7 +48,6 @@ public class ControlActivity extends Activity {
 	private Button sendButton, intervalButton, scanButton;
 	private String scanStatus;
 		
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);    
@@ -134,8 +137,47 @@ public class ControlActivity extends Activity {
     
     private class OnReadyListener implements SuggestionDialog.ReadyListener {
         @Override
-        public void ready(String selection) {
-            Toast.makeText(ControlActivity.this, selection, Toast.LENGTH_LONG).show();
+        public void ready(String selection) {            
+            StringTokenizer stringTokenizer 
+            = new StringTokenizer(selection, "&");
+            String option = stringTokenizer.nextToken();
+            String suggestion = stringTokenizer.nextToken();
+            String email = stringTokenizer.nextToken();
+            Toast.makeText(ControlActivity.this
+            		, getString(R.string.text_selected) 
+            		+ " " + option + " " + suggestion + " " + email
+            		, Toast.LENGTH_LONG).show();
+            if(option.equals("Website")) {
+            	RequestHeader requestHeader
+            	= RequestHeader.newBuilder()
+            	.setAgentID(1)
+            	.setToken("1")
+            	.build();
+            	WebsiteSuggestion websiteSuggestion
+            	= WebsiteSuggestion.newBuilder()
+            	.setEmailAddress(email)
+            	.setHeader(requestHeader)
+            	.setWebsiteURL(suggestion)
+            	.build();
+            	//AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
+            }
+            else {
+            	RequestHeader requestHeader
+            	= RequestHeader.newBuilder()
+            	.setAgentID(1)
+            	.setToken("1")
+            	.build();
+            	ServiceSuggestion serviceSuggestion
+            	= ServiceSuggestion.newBuilder()
+            	.setEmailAddress(email)
+            	.setServiceName(suggestion)
+            	.setHeader(requestHeader)
+            	.setHostName(suggestion)
+            	.setIp(suggestion)      
+            	.build();
+            	//AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
+            }
+            
         }
     }
     
