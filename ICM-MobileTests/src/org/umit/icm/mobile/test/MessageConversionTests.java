@@ -31,7 +31,7 @@ import android.test.AndroidTestCase;
 
 public class MessageConversionTests extends AndroidTestCase {
     
-    public void testTestToTestObject() throws Throwable {
+    public void testTestToTestObject() throws Throwable {	
     	Test test = Test.newBuilder()
     	.setExecuteAtTimeUTC(1)
     	.setTestID(1)
