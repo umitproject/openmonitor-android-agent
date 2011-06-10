@@ -36,12 +36,21 @@ public class RuntimeParametersTests extends AndroidTestCase {
     	Assert.assertEquals("On", runtimeParameters.getScanStatus());
     }
     
-
     public void testIntervalSetGet() throws Throwable {
     	RuntimeParameters runtimeParameters = new RuntimeParameters();
     	runtimeParameters.setScanInterval(33);
     	Assert.assertEquals(33, runtimeParameters.getScanInterval());
     }
-
-
+    
+    public void testAgentIDSetGet() throws Throwable {
+    	RuntimeParameters runtimeParameters = new RuntimeParameters();
+    	runtimeParameters.setAgentID(40000);
+    	Assert.assertEquals(40000, runtimeParameters.getAgentID());
+    }
+    
+    public void testTokenSetGet() throws Throwable {
+    	RuntimeParameters runtimeParameters = new RuntimeParameters();
+    	runtimeParameters.setToken("token");
+    	Assert.assertEquals("token", runtimeParameters.getToken());
+    }
 }
