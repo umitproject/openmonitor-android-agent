@@ -24,6 +24,7 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 
@@ -63,5 +64,12 @@ public class MessageConversion {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void initializeRequestHeader() throws IOException, RuntimeException {
+		Globals.requestHeader = RequestHeader.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setToken(Globals.runtimeParameters.getToken())
+		.build();
 	}
 }
