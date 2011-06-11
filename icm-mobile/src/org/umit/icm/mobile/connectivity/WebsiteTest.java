@@ -86,26 +86,26 @@ public class WebsiteTest extends AbstractTest{
     						urlConnection = WebsiteOpen.openURLConnection(currentURL);
 					} catch (IOException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 					} catch (HttpException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 					} catch (RuntimeException e) {							
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 					}
 					
 					try {
 						websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 					} catch (IOException e) {
 						websiteHeader.put("exception", e.getMessage()); 
-						e.printStackTrace();
+						stopScan();
 					} catch (HttpException e) {
 						websiteHeader.put("exception", e.getMessage());
-						e.printStackTrace();
+						stopScan();
 					} catch (RuntimeException e) {
 						websiteHeader.put("exception", e.getMessage()); 
-						e.printStackTrace();
+						stopScan();
 					}
 					
 					if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
@@ -113,14 +113,14 @@ public class WebsiteTest extends AbstractTest{
 						try {
 								websiteContent = WebsiteOpen.getContent(urlConnection);
 						} catch (IOException e) {
-								websiteContent = e.getMessage(); 
-								e.printStackTrace();
+								websiteContent = e.getMessage(); 								
+								stopScan();
 						} catch (HttpException e) {
 								websiteContent = e.getMessage(); 
-								e.printStackTrace();
+								stopScan();
 						} catch (RuntimeException e) {
 								websiteContent = e.getMessage(); 
-								e.printStackTrace();
+								stopScan();
 						}
 					} else {
 						String newURL = websiteHeader.get("location");
@@ -128,26 +128,26 @@ public class WebsiteTest extends AbstractTest{
     						urlConnection = WebsiteOpen.openURLConnection(newURL);
 						} catch (IOException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						} catch (HttpException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						} catch (RuntimeException e) {							
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						}
 						
 						try {
 							websiteContent = WebsiteOpen.getContent(urlConnection);
 						} catch (IOException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						} catch (HttpException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						} catch (RuntimeException e) {
 							websiteContent = e.getMessage(); 
-							e.printStackTrace();
+							stopScan();
 						}
 					}
 						
@@ -157,9 +157,9 @@ public class WebsiteTest extends AbstractTest{
 							SDCardReadWrite.writeWebsiteReport
 							(Constants.WEBSITES_DIR, websiteReport);
 					} catch (IOException e) {
-							e.printStackTrace();
+						stopScan();
 					} catch (RuntimeException e) {
-							e.printStackTrace();
+						stopScan();
 					}
 					if (websiteReport.getHtmlResponse().length()!=0) {
 						if(websiteReport.getHtmlResponse().length()>100)
