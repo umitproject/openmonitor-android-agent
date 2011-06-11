@@ -41,16 +41,14 @@ public class SuggestionDialog extends Dialog {
 	String selection;
 	Context contextControl;
     private ReadyListener readyListener;
-    EditText etSuggest, etEmail;
+    EditText etSuggest, etEmail, etHost, etIP;
     private RadioButton sRB, wRB;
     private final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
             "\\@" +
-            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-            "(" +
+            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +            
             "\\." +
-            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-            ")+"
+            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}"             
         );
     
     public SuggestionDialog(Context context, String selection, 
@@ -69,6 +67,8 @@ public class SuggestionDialog extends Dialog {
         buttonOK.setOnClickListener(new sendListener());
         etSuggest = (EditText) findViewById(R.id.EditText01);
         etEmail = (EditText) findViewById(R.id.EditTextEmail);
+        etHost = (EditText) findViewById(R.id.EditTextHost);
+        etIP = (EditText) findViewById(R.id.EditTextIP);
         wRB = (RadioButton)findViewById(R.id.websiterb);
         sRB = (RadioButton)findViewById(R.id.servicerb);       
     }
@@ -100,17 +100,37 @@ public class SuggestionDialog extends Dialog {
         	}
         	else{
     	    		if(wRB.isChecked() == true) {
-    	    			readyListener.ready((wRB.getText() 
-    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
-    	    	    			+ etEmail.getText().toString()));
-    	                SuggestionDialog.this.dismiss(); 
+    	    			if((etHost.getText().toString().equals("")) 
+    	    					&& (etIP.getText().toString().equals(""))){
+	    	    			readyListener.ready(wRB.getText() 
+	    	    	    			+ "&" + etSuggest.getText().toString() 
+	    	    	    			+ "&" + etEmail.getText().toString()
+	    	    					+ "&" + etHost.getText().toString() 
+	    	    					+ "&" + etIP.getText().toString());
+	    	                SuggestionDialog.this.dismiss(); 
+    	    			} else {
+    	    				CharSequence text = context.getString(R.string.remove_host_ip);
+    	            		int duration = Toast.LENGTH_SHORT;
+
+    	            		Toast toast = Toast.makeText(context, text, duration);
+    	            		toast.show();    	    				
+    	    			}
     	    		}
     	    			    	    		
     	    		else if(sRB.isChecked() == true) {
-    	    			readyListener.ready(sRB.getText()
-    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
-    	    	    			+ etEmail.getText().toString());
-    	                SuggestionDialog.this.dismiss();
+    	    			if((!etHost.getText().toString().equals("")) 
+    	    					&& (!etIP.getText().toString().equals(""))){
+	    	    			readyListener.ready(sRB.getText()
+	    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
+	    	    	    			+ etEmail.getText().toString());
+	    	                SuggestionDialog.this.dismiss();
+    	    			} else {
+    	    				CharSequence text = context.getString(R.string.invalid_host_ip);
+    	            		int duration = Toast.LENGTH_SHORT;
+
+    	            		Toast toast = Toast.makeText(context, text, duration);
+    	            		toast.show();
+    	    			}
     	    		}
     	    		else{
     	    			

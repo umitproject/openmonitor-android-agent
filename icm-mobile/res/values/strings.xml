@@ -41,4 +41,6 @@
     <string name="no_sdcard">Error! No SD Card detected</string>
     <string name="edit_text_host">Enter Host Name (Service Only)</string>
     <string name="edit_text_ip">Enter IP (Service Only)</string>
+    <string name="remove_host_ip">Remove Host Name and/or IP for Website</string>
+    <string name="invalid_host_ip">Missing Host Name and/or IP</string>
 </resources>
