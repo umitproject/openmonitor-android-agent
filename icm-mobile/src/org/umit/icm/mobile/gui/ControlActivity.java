@@ -162,7 +162,7 @@ public class ControlActivity extends Activity {
                   		+ " " + host + " " + ip
                   		, Toast.LENGTH_LONG).show();
             	new SendServiceTask().execute(email, suggestion
-            			,suggestion, suggestion);
+            			,host, ip);
             }
             
         }
