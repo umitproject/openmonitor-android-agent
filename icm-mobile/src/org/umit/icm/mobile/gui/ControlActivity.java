@@ -146,14 +146,21 @@ public class ControlActivity extends Activity {
             String option = stringTokenizer.nextToken();
             String suggestion = stringTokenizer.nextToken();
             String email = stringTokenizer.nextToken();
-            Toast.makeText(ControlActivity.this
-            		, getString(R.string.text_selected) 
-            		+ " " + option + " " + suggestion + " " + email
-            		, Toast.LENGTH_LONG).show();
-            if(option.equals("Website")) {            	
+            String host = stringTokenizer.nextToken();
+            String ip = stringTokenizer.nextToken();          
+            if(option.equals("Website")) {          
+            	  Toast.makeText(ControlActivity.this
+                  		, getString(R.string.text_selected) 
+                  		+ " " + option + " " + suggestion + " " + email
+                  		, Toast.LENGTH_LONG).show();
             	new SendWebsiteTask().execute(email, suggestion);
             }
             else {
+            	  Toast.makeText(ControlActivity.this
+                  		, getString(R.string.text_selected) 
+                  		+ " " + option + " " + suggestion + " " + email 
+                  		+ " " + host + " " + ip
+                  		, Toast.LENGTH_LONG).show();
             	new SendServiceTask().execute(email, suggestion
             			,suggestion, suggestion);
             }

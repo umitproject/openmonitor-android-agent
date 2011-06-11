@@ -51,6 +51,10 @@ public class SuggestionDialog extends Dialog {
             "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}"             
         );
     
+    private final Pattern IP_PATTERN = Pattern.compile(
+    		"(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)" +
+    		"{3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"); 
+    
     public SuggestionDialog(Context context, String selection, 
             ReadyListener readyListener) {
         super(context);
@@ -104,9 +108,7 @@ public class SuggestionDialog extends Dialog {
     	    					&& (etIP.getText().toString().equals(""))){
 	    	    			readyListener.ready(wRB.getText() 
 	    	    	    			+ "&" + etSuggest.getText().toString() 
-	    	    	    			+ "&" + etEmail.getText().toString()
-	    	    					+ "&" + etHost.getText().toString() 
-	    	    					+ "&" + etIP.getText().toString());
+	    	    	    			+ "&" + etEmail.getText().toString());
 	    	                SuggestionDialog.this.dismiss(); 
     	    			} else {
     	    				CharSequence text = context.getString(R.string.remove_host_ip);
@@ -120,10 +122,21 @@ public class SuggestionDialog extends Dialog {
     	    		else if(sRB.isChecked() == true) {
     	    			if((!etHost.getText().toString().equals("")) 
     	    					&& (!etIP.getText().toString().equals(""))){
-	    	    			readyListener.ready(sRB.getText()
-	    	    	    			+ "&" + etSuggest.getText().toString() + "&" 
-	    	    	    			+ etEmail.getText().toString());
-	    	                SuggestionDialog.this.dismiss();
+    	    				if(!checkIP(etIP.getText().toString())){
+    	    	        		
+    	    	        		CharSequence text = context.getString(R.string.toast_ip);
+    	    	        		int duration = Toast.LENGTH_SHORT;
+
+    	    	        		Toast toast = Toast.makeText(context, text, duration);
+    	    	        		toast.show();
+    	    	        	} else {
+		    	    			readyListener.ready(sRB.getText()
+		    	    	    			+ "&" + etSuggest.getText().toString() 
+		    	    	    			+ "&" + etEmail.getText().toString()
+		    	    	    			+ "&" + etHost.getText().toString() 
+		    	    					+ "&" + etIP.getText().toString());
+		    	                SuggestionDialog.this.dismiss();
+    	    	        	}
     	    			} else {
     	    				CharSequence text = context.getString(R.string.invalid_host_ip);
     	            		int duration = Toast.LENGTH_SHORT;
@@ -148,6 +161,10 @@ public class SuggestionDialog extends Dialog {
     
     private boolean checkEmail(String email) {
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
+    }
+    
+    private boolean checkIP(String ip) {
+        return IP_PATTERN.matcher(ip).matches();
     }
     
 }
