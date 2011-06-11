@@ -170,11 +170,16 @@ public class ControlActivity extends Activity {
     		}
     	}
          
-		protected String doInBackground(String... args) {					
+		protected String doInBackground(String... args) {	
+			RequestHeader requestHeader
+			= RequestHeader.newBuilder()
+			.setAgentID(1)
+			.setToken("1")
+			.build();
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
         	.setEmailAddress(args[0])
-        	.setHeader(Globals.requestHeader)
+        	.setHeader(requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
         	//return AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
@@ -194,12 +199,17 @@ public class ControlActivity extends Activity {
     		}
     	}
          
-		protected String doInBackground(String... args) {		
+		protected String doInBackground(String... args) {
+			RequestHeader requestHeader
+			= RequestHeader.newBuilder()
+			.setAgentID(1)
+			.setToken("1")
+			.build();
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
         	.setEmailAddress(args[0])
         	.setServiceName(args[1])
-        	.setHeader(Globals.requestHeader)
+        	.setHeader(requestHeader)
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();

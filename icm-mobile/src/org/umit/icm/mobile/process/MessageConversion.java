@@ -66,10 +66,10 @@ public class MessageConversion {
 		}
 	}
 	
-	public static void initializeRequestHeader() throws IOException, RuntimeException {
+	/*public static void initializeRequestHeader() throws IOException, RuntimeException {
 		Globals.requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setToken(Globals.runtimeParameters.getToken())
 		.build();
-	}
+	}*/
 }

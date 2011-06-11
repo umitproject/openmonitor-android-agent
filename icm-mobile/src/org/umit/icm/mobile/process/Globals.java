@@ -31,9 +31,9 @@ public class Globals {
 	= new VersionManager();
 	public static WebsiteTest websiteTest 
 	= new WebsiteTest();
-	public static RequestHeader requestHeader
+	/*public static RequestHeader requestHeader
 	= RequestHeader.newBuilder()
 	.setAgentID(1)
 	.setToken("1")
-	.build();
+	.build();*/
 }
