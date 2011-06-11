@@ -57,27 +57,11 @@ public class ControlActivity extends Activity {
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
-        scanButton = (Button) this.findViewById(R.id.scanButton);
-        try {
-			scanStatus = Globals.runtimeParameters.getScanStatus();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-		}
-		
-		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0){
-   			scanButton.setText(getString(R.string.scan_text)
-       				+" "+ getString(R.string.scan_on));
-   			scanStatus = getString(R.string.scan_off);
-   		}
-   			
-   		else{
-   			scanButton.setText(getString(R.string.scan_text)
+        scanButton = (Button) this.findViewById(R.id.scanButton);        
+		scanStatus = getString(R.string.scan_on);
+		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
-   			scanStatus = getString(R.string.scan_on);
-   		}
-        
+   	   	   	        
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
 	       		SuggestionDialog suggestionDialog = 

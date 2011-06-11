@@ -97,16 +97,8 @@ public class Main extends TabActivity {
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}
-				if(Globals.runtimeParameters.getScanStatus().equals("On"))				
-		        	Globals.websiteTest.scan();
-		        else {
-		        	int duration = Toast.LENGTH_SHORT;
-
-	        		Toast toast = Toast.makeText(this
-	        				, getString(R.string.scan_status_off)
-	        				, duration);
-	        		toast.show();
-		        }
+					
+		        Globals.websiteTest.scan();		        
 		        				
 			} catch (IOException e) {
 				e.printStackTrace();
