@@ -56,13 +56,33 @@
     </EditText>
     
     <EditText 
+    	android:id="@+id/EditTextHost" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"  
+    	android:hint="@string/edit_text_host"
+    	android:layout_centerHorizontal="true"
+    	android:textSize="20sp"
+    	android:layout_below="@id/EditText01">
+    </EditText>
+        
+    <EditText 
+    	android:id="@+id/EditTextIP" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"  
+    	android:hint="@string/edit_text_ip"
+    	android:layout_centerHorizontal="true"
+    	android:textSize="20sp"
+    	android:layout_below="@id/EditTextHost">
+    </EditText>
+    
+    <EditText 
     	android:id="@+id/EditTextEmail" 
     	android:layout_height="wrap_content"
     	android:layout_width="fill_parent"  
     	android:hint="@string/edit_text_email"
     	android:layout_centerHorizontal="true"
     	android:textSize="20sp"
-    	android:layout_below="@id/EditText01">
+    	android:layout_below="@id/EditTextIP">
     </EditText>
 
     <Button 

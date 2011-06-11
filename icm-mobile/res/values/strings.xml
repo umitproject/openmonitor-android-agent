@@ -8,7 +8,7 @@
     <string name="isp_button">Go to ISP</string>
     <string name="check_box_filter">Filter Critical Events</string>
     <string name="text_ip">IP: </string>
-    <string name="edit_text_suggestion">Enter Suggestion</string>
+    <string name="edit_text_suggestion">Enter Website or Service Name</string>
     <string name="edit_text_email">Enter Email</string>
     <string name="text_selected">Selected is : </string>
     <string name="send_button">Send</string>
@@ -39,4 +39,6 @@
     <string name="website_details">Website Details</string>
     <string name="scan_status_off">Scanning is Off</string>
     <string name="no_sdcard">Error! No SD Card detected</string>
+    <string name="edit_text_host">Enter Host Name (Service Only)</string>
+    <string name="edit_text_ip">Enter IP (Service Only)</string>
 </resources>
