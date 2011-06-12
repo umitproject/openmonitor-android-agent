@@ -48,12 +48,12 @@ import android.util.Log;
 
 // TODO Add sanity checks to all message fields. They may raise exceptions.
 // TODO Catch Runtime exceptions.
-public class WebsiteTest extends AbstractTest{
+public class WebsiteConnectivity extends AbstractConnectivity{
 	
 	private List<String> listWebsites;
 	Timer timer;
 
-	public WebsiteTest() {
+	public WebsiteConnectivity() {
 		super();
 		listWebsites = Constants.WEBSITE_LIST;
 		timer = new Timer(); 

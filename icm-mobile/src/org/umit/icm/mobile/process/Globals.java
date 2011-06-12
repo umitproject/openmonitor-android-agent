@@ -22,7 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.WebsiteTest;
+import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 import android.content.res.Resources;
@@ -33,8 +33,8 @@ public class Globals {
 	= new RuntimeParameters();
 	public static VersionManager versionManager 
 	= new VersionManager();
-	public static WebsiteTest websiteTest 
-	= new WebsiteTest();
+	public static WebsiteConnectivity websiteTest 
+	= new WebsiteConnectivity();
 	/*public static RequestHeader requestHeader
 	= RequestHeader.newBuilder()
 	.setAgentID(1)

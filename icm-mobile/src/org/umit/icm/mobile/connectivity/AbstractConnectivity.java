@@ -23,9 +23,9 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 
-public class AbstractTest {
+public class AbstractConnectivity {
 		
-	public AbstractTest() {
+	public AbstractConnectivity() {
 		super();		
 	}
 	
