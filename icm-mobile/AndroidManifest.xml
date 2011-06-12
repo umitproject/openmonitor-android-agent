@@ -16,11 +16,16 @@
             </intent-filter>
         </activity>
         <service android:name=".notifications.NotificationService"></service>
-        <activity android:name=".gui.ControlActivity"></activity>
+        <activity android:name=".gui.ControlActivity">
+            <intent-filter>
+            	<action android:name="org.umit.icm.mobile.CONTROL_ACTIVITY" />            	
+            </intent-filter>
+        </activity>
         <activity android:name=".gui.InformationActivity"></activity>
         <activity android:name=".gui.ISPActivity"></activity>
         <activity android:name=".gui.MapActivityTab"></activity>
         <activity android:name=".gui.WebsiteActivity"></activity>
+        <service android:name=".connectivity.WebsiteConnectivityService"></service>
     
     </application>
     <uses-sdk android:minSdkVersion="4" />

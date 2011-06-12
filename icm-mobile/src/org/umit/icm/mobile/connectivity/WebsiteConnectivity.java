@@ -29,12 +29,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
-import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
@@ -51,136 +48,58 @@ import android.util.Log;
 public class WebsiteConnectivity extends AbstractConnectivity{
 	
 	private List<String> listWebsites;
-	Timer timer;
 
 	public WebsiteConnectivity() {
 		super();
 		listWebsites = Constants.WEBSITE_LIST;
-		timer = new Timer(); 
 	}
 	
 	@Override()
-	public void scan() {
-		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
-		 RuntimeParameters runtimeParameters = new RuntimeParameters();
-		 try {
-				interval = runtimeParameters.getScanInterval();
-		 } catch (Exception e) {
-				e.printStackTrace();
-		 }
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-									
-				Iterator<String> iterator = listWebsites.iterator();
-				String websiteContent = new String();
-				Map<String, String> websiteHeader = new HashMap <String, String>();
-				String currentURL = new String();
-				WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
-				URLConnection urlConnection = null;
-					
-				while(iterator.hasNext()){               
-					currentURL = iterator.next(); 
-    				try {
-    						urlConnection = WebsiteOpen.openURLConnection(currentURL);
-					} catch (IOException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-					} catch (HttpException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-					} catch (RuntimeException e) {							
-							websiteContent = e.getMessage(); 
-							stopScan();
-					}
-					
-					try {
-						websiteHeader = WebsiteOpen.getHeaders(urlConnection);
-					} catch (IOException e) {
-						websiteHeader.put("exception", e.getMessage()); 
-						stopScan();
-					} catch (HttpException e) {
-						websiteHeader.put("exception", e.getMessage());
-						stopScan();
-					} catch (RuntimeException e) {
-						websiteHeader.put("exception", e.getMessage()); 
-						stopScan();
-					}
-					
-					if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
-					
-						try {
-								websiteContent = WebsiteOpen.getContent(urlConnection);
-						} catch (IOException e) {
-								websiteContent = e.getMessage(); 								
-								stopScan();
-						} catch (HttpException e) {
-								websiteContent = e.getMessage(); 
-								stopScan();
-						} catch (RuntimeException e) {
-								websiteContent = e.getMessage(); 
-								stopScan();
-						}
-					} else {
-						String newURL = websiteHeader.get("location");
-						try {
-    						urlConnection = WebsiteOpen.openURLConnection(newURL);
-						} catch (IOException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-						} catch (HttpException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-						} catch (RuntimeException e) {							
-							websiteContent = e.getMessage(); 
-							stopScan();
-						}
-						
-						try {
-							websiteContent = WebsiteOpen.getContent(urlConnection);
-						} catch (IOException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-						} catch (HttpException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-						} catch (RuntimeException e) {
-							websiteContent = e.getMessage(); 
-							stopScan();
-						}
-					}
-						
-					try {
-							websiteReport = (WebsiteReport) clean(currentURL
-									, websiteContent, websiteHeader);
-							SDCardReadWrite.writeWebsiteReport
-							(Constants.WEBSITES_DIR, websiteReport);
-					} catch (IOException e) {
-						stopScan();
-					} catch (RuntimeException e) {
-						stopScan();
-					}
-					if (websiteReport.getHtmlResponse().length()!=0) {
-						if(websiteReport.getHtmlResponse().length()>100)
-							Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, 100));
-						else
-							Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
-					}
-							
-					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
-					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+	public void scan() throws IOException, HttpException {
 											
+		Iterator<String> iterator = listWebsites.iterator();
+		String websiteContent = new String();
+		Map<String, String> websiteHeader = new HashMap <String, String>();
+		String currentURL = new String();
+		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
+		URLConnection urlConnection = null;
+			
+		while(iterator.hasNext()){               
+			currentURL = iterator.next(); 
+			urlConnection = WebsiteOpen.openURLConnection(currentURL);
+			websiteHeader = WebsiteOpen.getHeaders(urlConnection);
+			
+			if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
+			
+				websiteContent = WebsiteOpen.getContent(urlConnection);
+			} else {
+				String newURL = websiteHeader.get("location");
+				urlConnection = WebsiteOpen.openURLConnection(newURL);
+				
+				websiteContent = WebsiteOpen.getContent(urlConnection);
+			}
+				try {
+				websiteReport = (WebsiteReport) clean(currentURL
+							, websiteContent, websiteHeader);
+					SDCardReadWrite.writeWebsiteReport
+					(Constants.WEBSITES_DIR, websiteReport);
+				if (websiteReport.getHtmlResponse().length()!=0) {
+					if(websiteReport.getHtmlResponse().length()>100)
+						Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, 100));
+					else
+						Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
 				}
-																				
-			};
-		}, 0, interval * 1000); 
-
-	}
-	
-	public void stopScan() {
-		this.timer.cancel();
-	}
+						
+				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
+				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+				} catch (RuntimeException e) {
+					
+			}			
+									
+		}
+																		
+	};
+		 
 	
 	public WebsiteReport clean(String websiteURL, String websiteContent
 			, Map<String, String> websiteHeader) 

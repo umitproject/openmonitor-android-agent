@@ -1,0 +1,111 @@
+/**
+ * Copyright (C) 2011 Adriano Monteiro Marques
+ *
+ * Author:  Zubair Nabi <zn.zubairnabi@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
+
+package org.umit.icm.mobile.connectivity;
+
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.apache.http.HttpException;
+import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.RuntimeParameters;
+import org.umit.icm.mobile.utils.Constants;
+
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.os.IBinder;
+
+public class WebsiteConnectivityService extends Service {
+
+	private Timer timer = new Timer();
+	private ConnectivityManager connectivityManager;
+	
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}		
+	
+	@Override
+	public void onCreate() {
+
+		super.onCreate();
+		connectivityManager
+	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		startScan();
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		stopScan();
+	}
+	
+	private void startScan() {
+		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
+		 RuntimeParameters runtimeParameters = new RuntimeParameters();
+		 try {
+				interval = runtimeParameters.getScanInterval();
+		 } catch (Exception e) {
+				e.printStackTrace();
+		 }
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					Globals.websiteTest.scan();
+				} catch (IOException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();					
+				} catch (HttpException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))
+						stopScanNotify();					
+				} 
+			}	
+		}, 0, interval * 1000); 
+	}
+	
+	void stopScan() {
+		if (timer != null){
+			timer.cancel();		
+		}
+				
+	}
+	
+	void stopScanNotify() {
+		if (timer != null){
+			timer.cancel();
+			Globals.scanStatus = getString(R.string.scan_off);
+			Context context = getApplicationContext();			
+			Intent intent = new Intent("org.umit.icm.mobile.CONTROL_ACTIVITY");			
+			context.sendBroadcast(intent);		
+			stopSelf();
+			
+		}
+				
+	}
+					
+}

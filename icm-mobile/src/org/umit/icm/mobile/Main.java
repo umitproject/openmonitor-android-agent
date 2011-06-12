@@ -25,6 +25,7 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
@@ -98,7 +99,7 @@ public class Main extends TabActivity {
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}
 				Globals.scanStatus = getString(R.string.scan_on);
-		        Globals.websiteTest.scan();		        
+				startService(new Intent(Main.this, WebsiteConnectivityService.class));		        
 		        				
 			} catch (IOException e) {
 				e.printStackTrace();

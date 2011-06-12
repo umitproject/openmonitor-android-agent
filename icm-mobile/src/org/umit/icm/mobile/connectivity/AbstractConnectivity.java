@@ -23,6 +23,8 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 
+import org.apache.http.HttpException;
+
 public class AbstractConnectivity {
 		
 	public AbstractConnectivity() {
@@ -33,7 +35,7 @@ public class AbstractConnectivity {
 		return true;
 	}
 
-	public void scan() throws IOException {
+	public void scan() throws IOException, HttpException, RuntimeException {
 		
 	}
 	

@@ -26,6 +26,7 @@ import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
+import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;
@@ -35,9 +36,13 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -57,6 +62,20 @@ public class ControlActivity extends Activity {
         scanButton = (Button) this.findViewById(R.id.scanButton);        		
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
+		
+		BroadcastReceiver receiver = new BroadcastReceiver() {
+		   
+			@Override
+			public void onReceive(Context context, Intent intent) {				
+				if(intent.getAction().equals("org.umit.icm.mobile.CONTROL_ACTIVITY")) {
+					scanButton.setText(getString(R.string.scan_text)
+		       				+" "+ getString(R.string.scan_on));
+			      }				
+			}
+		  };
+
+		registerReceiver(receiver
+				, new IntentFilter("org.umit.icm.mobile.CONTROL_ACTIVITY"));
    	   	   	        
         sendButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
@@ -83,18 +102,18 @@ public class ControlActivity extends Activity {
         
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		if(Globals.scanStatus.compareTo(getString(R.string.scan_on)) == 0){
+	       		if(Globals.scanStatus.equalsIgnoreCase(getString(R.string.scan_on))){
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_on));
 	       			Globals.scanStatus = getString(R.string.scan_off);
-	       			Globals.websiteTest.stopScan();
+	       			stopService(new Intent(ControlActivity.this, WebsiteConnectivityService.class));
 	       		}
 	       			
 	       		else{
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_off));
 	       			Globals.scanStatus = getString(R.string.scan_on);
-	       			Globals.websiteTest.scan();
+	       			startService(new Intent(ControlActivity.this, WebsiteConnectivityService.class));
 	       		}
 	       			
 	       		try {

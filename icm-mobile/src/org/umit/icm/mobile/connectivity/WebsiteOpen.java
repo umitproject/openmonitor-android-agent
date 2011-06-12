@@ -36,6 +36,8 @@ import org.apache.http.HttpException;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.util.Log;
 
 
 public class WebsiteOpen {
@@ -116,6 +118,18 @@ public class WebsiteOpen {
 		if (statusCode >= 300 && statusCode <= 307 && statusCode != 306)
 			connectionType = "https";
 		return connectionType;
+	}
+	
+	public static boolean checkInternetAccess(
+			ConnectivityManager connectivityManager) {	    
+	    if (connectivityManager.getActiveNetworkInfo() != null
+	            && connectivityManager.getActiveNetworkInfo().isAvailable()
+	            && connectivityManager.getActiveNetworkInfo().isConnected()) {
+	        return true;
+	    } else {
+	        Log.w("####", "No Internet");
+	        return false;
+	    }
 	}
     
 }
