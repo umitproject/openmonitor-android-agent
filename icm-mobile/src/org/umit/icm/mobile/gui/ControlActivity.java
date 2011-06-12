@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
+//import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;
@@ -33,7 +33,6 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
-import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Activity;
 import android.content.Context;
@@ -41,7 +40,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -49,7 +47,6 @@ import android.widget.Toast;
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton;
-	private String scanStatus;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +54,7 @@ public class ControlActivity extends Activity {
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
-        scanButton = (Button) this.findViewById(R.id.scanButton);        
-		scanStatus = getString(R.string.scan_on);
+        scanButton = (Button) this.findViewById(R.id.scanButton);        		
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
    	   	   	        
@@ -87,22 +83,22 @@ public class ControlActivity extends Activity {
         
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
-	       		if(scanStatus.compareTo(getString(R.string.scan_on)) == 0){
+	       		if(Globals.scanStatus.compareTo(getString(R.string.scan_on)) == 0){
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_on));
-	       			scanStatus = getString(R.string.scan_off);
+	       			Globals.scanStatus = getString(R.string.scan_off);
 	       			Globals.websiteTest.stopScan();
 	       		}
 	       			
 	       		else{
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_off));
-	       			scanStatus = getString(R.string.scan_on);
+	       			Globals.scanStatus = getString(R.string.scan_on);
 	       			Globals.websiteTest.scan();
 	       		}
 	       			
 	       		try {
-					Globals.runtimeParameters.setScanStatus(scanStatus);
+					Globals.runtimeParameters.setScanStatus(Globals.scanStatus);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (RuntimeException e) {
@@ -111,7 +107,7 @@ public class ControlActivity extends Activity {
 	       		
 	       		Context context = getApplicationContext();
         		CharSequence text = getString(R.string.toast_scan_change) 
-        		+ " " + scanStatus;
+        		+ " " + Globals.scanStatus;
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);

@@ -97,7 +97,7 @@ public class Main extends TabActivity {
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}
-					
+				Globals.scanStatus = getString(R.string.scan_on);
 		        Globals.websiteTest.scan();		        
 		        				
 			} catch (IOException e) {

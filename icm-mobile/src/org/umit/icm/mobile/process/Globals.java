@@ -21,8 +21,12 @@
 
 package org.umit.icm.mobile.process;
 
+import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteTest;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+
+import android.content.res.Resources;
+
 
 public class Globals {
 	public static RuntimeParameters runtimeParameters 
@@ -36,4 +40,5 @@ public class Globals {
 	.setAgentID(1)
 	.setToken("1")
 	.build();*/
+	public static String scanStatus = " "; 
 }
