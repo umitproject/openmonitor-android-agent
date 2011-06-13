@@ -29,6 +29,7 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -47,9 +48,14 @@ public class WebsiteActivity extends Activity{
 	private ListView listView;
 	private Button backButton;
 	private String website;
+	private ProgressDialog progressDialog;
+	
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        progressDialog = ProgressDialog.show(this, 
+        		getString(R.string.loading)	, getString(R.string.retrieving_website)
+        		, true, false);
         Bundle bundle = this.getIntent().getExtras();
         website = bundle.getString("websiteclicked");
         
@@ -73,6 +79,7 @@ public class WebsiteActivity extends Activity{
     	  
     	protected void onPostExecute(WebsiteTextBitmapAdapter itla) {
     		listView.setAdapter(itla);
+    		progressDialog.dismiss();
     	}
          
 		protected WebsiteTextBitmapAdapter doInBackground(String... urls) {
