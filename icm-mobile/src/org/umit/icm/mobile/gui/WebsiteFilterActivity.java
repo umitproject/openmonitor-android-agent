@@ -22,6 +22,10 @@
 package org.umit.icm.mobile.gui;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.utils.Constants;
 
@@ -30,21 +34,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 public class WebsiteFilterActivity extends Activity{
    	
 	private ListView listView;	
-	ArrayAdapter<String> arrayAdapter;
 	Button backButton;
+	private WebsiteTextCheckboxAdapter websiteTextCheckboxAdapter;
+	private List<String> listWebsites;
+	private List<WebsiteTextCheckbox> listWebsitesCheckbox;
+	private String currentURL;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.websitefilteractivity);
+        listWebsites = Constants.WEBSITE_LIST;
+        listWebsitesCheckbox 
+        = new ArrayList<WebsiteTextCheckbox>();
+        Iterator<String> iterator = listWebsites.iterator();
                         
         backButton = (Button) findViewById(R.id.backButton);        
         backButton.setOnClickListener(new OnClickListener() { 
@@ -54,11 +64,18 @@ public class WebsiteFilterActivity extends Activity{
 
 	   	}  );
                     
-        listView = (ListView)findViewById(R.id.ListView01);  
-        arrayAdapter = new ArrayAdapter<String>(WebsiteFilterActivity.this
-  				 ,android.R.layout.simple_list_item_1 
-  				 , Constants.WEBSITE_LIST);
-  		 listView.setAdapter(arrayAdapter);	                        
+        listView = (ListView)findViewById(R.id.ListView01);
+        websiteTextCheckboxAdapter 
+        = new WebsiteTextCheckboxAdapter(WebsiteFilterActivity.this);
+                
+        while(iterator.hasNext()){               
+			currentURL = iterator.next();
+			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, false));						       			
+        }  
+        
+        websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
+        listView.setAdapter(websiteTextCheckboxAdapter);
+                  		                       
     }
  	          
 }
