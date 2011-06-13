@@ -39,6 +39,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -53,6 +54,7 @@ public class WebsiteActivity extends Activity{
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         progressDialog = ProgressDialog.show(this, 
         		getString(R.string.loading)	, getString(R.string.retrieving_website)
         		, true, false);
