@@ -24,6 +24,7 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
@@ -42,7 +43,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -51,7 +51,7 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton;
+	private Button sendButton, intervalButton, scanButton, filterButton;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,8 @@ public class ControlActivity extends Activity {
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
-        scanButton = (Button) this.findViewById(R.id.scanButton);        		
+        scanButton = (Button) this.findViewById(R.id.scanButton);
+        filterButton = (Button) this.findViewById(R.id.filterButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		
@@ -85,6 +86,15 @@ public class ControlActivity extends Activity {
 	       	}
 
 	    }  );
+        
+        filterButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       				            		 
+	       		Intent intent = new Intent(ControlActivity.this, WebsiteFilterActivity.class);	       		
+	            startActivity(intent); 
+	       	}
+
+	   	}  );
+        
         
         intervalButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  

@@ -24,13 +24,11 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
-import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -68,8 +66,7 @@ public class WebsiteActivity extends Activity{
         
         backButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       				            		 
-	       		Intent intent = new Intent(WebsiteActivity.this, Main.class);	       		
-	            startActivity(intent); 
+	       		WebsiteActivity.this.finish();
 	       	}
 
 	   	}  );
