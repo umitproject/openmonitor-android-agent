@@ -77,19 +77,19 @@ public class WebsiteActivity extends Activity{
     
     private class UpdateFavicon extends AsyncTask<String,String,WebsiteTextBitmapAdapter> {
     	  
-    	protected void onPostExecute(WebsiteTextBitmapAdapter itla) {
-    		listView.setAdapter(itla);
+    	protected void onPostExecute(WebsiteTextBitmapAdapter websiteData) {
+    		listView.setAdapter(websiteData);
     		progressDialog.dismiss();
     	}
          
 		protected WebsiteTextBitmapAdapter doInBackground(String... urls) {
 			Bitmap favicon = null;
-			WebsiteTextBitmapAdapter itla = new WebsiteTextBitmapAdapter(WebsiteActivity.this);
+			WebsiteTextBitmapAdapter websiteTextBitmapAdapter 
+			= new WebsiteTextBitmapAdapter(WebsiteActivity.this);
 			Resources resources = getResources(); 
 			try {
 				 favicon = WebsiteOpen.getFavicon(website);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) { 
 				favicon 
 				= BitmapFactory.decodeResource(resources,
 						R.drawable.tabs_icons);
@@ -100,12 +100,10 @@ public class WebsiteActivity extends Activity{
 						R.drawable.tabs_icons);
 				e.printStackTrace();
 			}
-			Drawable d =new BitmapDrawable(favicon);
-			itla.addItem(new WebsiteTextBitmap(website, d));
-			return itla;
+			Drawable drawable = new BitmapDrawable(favicon);
+			websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(website, drawable));
+			return websiteTextBitmapAdapter;
 			 						
-		}
-			
+		}			
     }
 }
-
