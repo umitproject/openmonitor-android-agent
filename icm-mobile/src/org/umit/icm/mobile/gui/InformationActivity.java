@@ -36,14 +36,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
-   
-	private CheckBox cbFilter;
+   	
 	private ListView listView;
 	private TextView ipTextView;
 	ArrayAdapter<String> arrayAdapter;
@@ -57,7 +55,6 @@ public class InformationActivity extends Activity{
         int ipAddress = wifiInfo.getIpAddress();
         ipTextView = (TextView) findViewById(R.id.ipTextView);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));    
-        cbFilter = (CheckBox) findViewById(R.id.check1);
         listView = (ListView)findViewById(R.id.ListView01);  
         listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
