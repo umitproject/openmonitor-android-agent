@@ -33,19 +33,18 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 public class WebsiteActivity extends Activity{
     /** Called when the activity is first created. */
 	private ListView listView;
-	private ImageView imageView;
 	private Button backButton;
 	private String website;
     @Override
@@ -55,13 +54,7 @@ public class WebsiteActivity extends Activity{
         website = bundle.getString("websiteclicked");
         
         setContentView(R.layout.websiteactivity);
-        listView = (ListView)findViewById(R.id.ListView01);
-        imageView = (ImageView)findViewById(R.id.favicon_image);
-                      
-        String listViewItems[] = {getString(R.string.website_details), website};
-        listView.setAdapter(new ArrayAdapter<String>(this
-        		, android.R.layout.simple_list_item_1 
-        		, listViewItems));
+        listView = (ListView)findViewById(R.id.ListView01);                
         
         backButton = (Button) findViewById(R.id.backButton);
         
@@ -76,14 +69,15 @@ public class WebsiteActivity extends Activity{
         new UpdateFavicon().execute(website);
     }
     
-    private class UpdateFavicon extends AsyncTask<String,String,Bitmap> {
+    private class UpdateFavicon extends AsyncTask<String,String,WebsiteTextBitmapAdapter> {
     	  
-    	protected void onPostExecute(Bitmap favicon) {
-    		imageView.setImageBitmap(favicon);
+    	protected void onPostExecute(WebsiteTextBitmapAdapter itla) {
+    		listView.setAdapter(itla);
     	}
          
-		protected Bitmap doInBackground(String... urls) {
+		protected WebsiteTextBitmapAdapter doInBackground(String... urls) {
 			Bitmap favicon = null;
+			WebsiteTextBitmapAdapter itla = new WebsiteTextBitmapAdapter(WebsiteActivity.this);
 			Resources resources = getResources(); 
 			try {
 				 favicon = WebsiteOpen.getFavicon(website);
@@ -99,7 +93,9 @@ public class WebsiteActivity extends Activity{
 						R.drawable.tabs_icons);
 				e.printStackTrace();
 			}
-			return favicon;
+			Drawable d =new BitmapDrawable(favicon);
+			itla.addItem(new WebsiteTextBitmap(website, d));
+			return itla;
 			 						
 		}
 			
