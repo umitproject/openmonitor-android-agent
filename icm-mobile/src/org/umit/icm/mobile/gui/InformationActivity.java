@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.gui;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +30,8 @@ import java.util.List;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -73,6 +76,24 @@ public class InformationActivity extends Activity{
           }
         });
         
+        try {
+			if ((SDCardReadWrite.fileExists(Constants.WEBSITES_LIST_FILE
+					, Constants.WEBSITES_DIR) == true)){					
+				Globals.websitesList 
+				= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);									
+
+			} else {
+				Globals.intialize();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+        
         new UpdateList().execute("");
     }
     private class UpdateList extends AsyncTask<String,String,List<Website>> {
@@ -80,8 +101,11 @@ public class InformationActivity extends Activity{
     	protected void onPostExecute(List<Website> result) {
     		List<String> list = new ArrayList<String>();
     		Iterator<Website> iterator = result.iterator();
+    		Website website = new Website();
     		 while(iterator.hasNext()){  
-    			 list.add(iterator.next().getUrl());
+    			 website = iterator.next();
+    			 if(website.getCheck().equals("true"))
+    				 list.add(website.getUrl());
     		 }
    		 	arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
    				 ,android.R.layout.simple_list_item_1 

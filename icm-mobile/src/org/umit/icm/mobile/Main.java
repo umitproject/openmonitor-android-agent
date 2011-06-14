@@ -49,7 +49,8 @@ public class Main extends TabActivity {
         Resources resources = getResources(); 
         TabHost tabHost = getTabHost();
         
-        Intent intent = new Intent().setClass(this, InformationActivity.class);
+        Intent intent = new Intent().setClass(this, InformationActivity.class)
+        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         TabHost.TabSpec tabSpec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
                           resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(tabSpec);
@@ -64,8 +65,8 @@ public class Main extends TabActivity {
                           resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(tabSpec);
     
-        tabHost.setCurrentTab(0);       
-        
+        tabHost.setCurrentTab(0);
+       
         if(!SDCardReadWrite.checkSDCard()) {
         	String text = getString(R.string.no_sdcard);
         	int duration = Toast.LENGTH_LONG;
@@ -97,8 +98,7 @@ public class Main extends TabActivity {
 					|| (SDCardReadWrite.fileNotEmpty(Constants.TESTS_VERSION_FILE
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
-				}
-				Globals.intialize();
+				}							
 				Globals.scanStatus = getString(R.string.scan_on);
 				startService(new Intent(Main.this, WebsiteConnectivityService.class));
 				

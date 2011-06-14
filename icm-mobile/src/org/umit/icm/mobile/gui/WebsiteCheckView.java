@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.gui;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class WebsiteCheckView extends LinearLayout {
      private WebsiteTextCheckbox websiteTextCheckbox;
      
      public WebsiteCheckView(Context context, WebsiteTextCheckbox websiteTextCheckbox) {
-          super(context);
+          super(context);          
 
           this.setOrientation(HORIZONTAL);
           this.websiteTextCheckbox = websiteTextCheckbox;
@@ -47,7 +48,30 @@ public class WebsiteCheckView extends LinearLayout {
           addView(checkBox,  new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));                    
           addView(text, new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));          
+          
+          text.setOnClickListener( new OnClickListener()
+          {
+                @Override
+				public void onClick(View v) {
+					if (checkBox.isChecked())
+                   	 setCheckBoxState(false);
+                    else
+                   	 setCheckBoxState(true);
+							
+				}
+  
+          });
+          
+          checkBox.setOnClickListener( new OnClickListener()
+          {
+                @Override
+				public void onClick(View v) {
+                	setCheckBoxState(checkBox.isChecked());
+							
+				}
+  
+          });
      }
 
      public void setText(String website) {
@@ -55,7 +79,7 @@ public class WebsiteCheckView extends LinearLayout {
      }
      public void setCheckBoxState(boolean check)
      {
-    	 checkBox.setChecked(websiteTextCheckbox.isCheck());
-    	 websiteTextCheckbox.setCheck(true);
+    	 checkBox.setChecked(check);
+    	 websiteTextCheckbox.setCheck(check);
      }
 }

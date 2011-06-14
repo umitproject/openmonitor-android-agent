@@ -24,7 +24,6 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;

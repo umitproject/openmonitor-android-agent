@@ -22,12 +22,16 @@
 package org.umit.icm.mobile.gui;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -41,24 +45,51 @@ public class WebsiteFilterActivity extends Activity{
    	
 	private ListView listView;	
 	Button backButton;
-	private WebsiteTextCheckboxAdapter websiteTextCheckboxAdapter;
-	private List<String> listWebsites;
+	private WebsiteTextCheckboxAdapter websiteTextCheckboxAdapter;	
 	private List<WebsiteTextCheckbox> listWebsitesCheckbox;
 	private String currentURL;
+	private Website currentWebsite;
+	private boolean currentCheck;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.websitefilteractivity);
-        listWebsites = Constants.WEBSITE_LIST;
+        setContentView(R.layout.websitefilteractivity);        
         listWebsitesCheckbox 
         = new ArrayList<WebsiteTextCheckbox>();
-        Iterator<String> iterator = listWebsites.iterator();
+        Iterator<Website> iterator = Globals.websitesList.iterator();
                         
         backButton = (Button) findViewById(R.id.backButton);        
         backButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       				            		 
+	       	public void onClick(View v) {  	   
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
+	       		= listWebsitesCheckbox.iterator();	       		
+	       		int i = 0;
+	       		String check = "";
+	       		Website website = new Website();
+	       		WebsiteTextCheckbox websiteTextCheckbox = null;
+	    		while(iteratorCheck.hasNext()){ 
+	    			websiteTextCheckbox = iteratorCheck.next();
+	    			if(websiteTextCheckbox.isCheck() == true) {
+	    				check = "true";	    				
+	    			}    				
+	    			else
+	    				check = "false";
+	    			website = Globals.websitesList.get(i);
+	    			website.setCheck(check);
+	    			Globals.websitesList.set(i, 
+	    					website);						       				    			
+	    			i++;
+	            } 
+	    		try {
+					SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR,
+							Globals.websitesList);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+				}
 	       		WebsiteFilterActivity.this.finish();	       			             
 	       	}
 
@@ -69,8 +100,13 @@ public class WebsiteFilterActivity extends Activity{
         = new WebsiteTextCheckboxAdapter(WebsiteFilterActivity.this);
                 
         while(iterator.hasNext()){               
-			currentURL = iterator.next();
-			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, false));						       			
+			currentWebsite = iterator.next();
+			currentURL = currentWebsite.getUrl();
+			if (currentWebsite.getCheck().equals("true"))
+				currentCheck = true;
+			else 
+				currentCheck = false;			
+			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, currentCheck));						       			
         }  
         
         websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
