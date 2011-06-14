@@ -21,10 +21,10 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -56,101 +56,90 @@ public class AggregatorResources {
 	 public static RegisterAgentResponse registerAgent(
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(registerAgent); 
-		 return RegisterAgentResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+	 throws UnsupportedEncodingException, IOException {		 		 
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(registerAgent.toByteArray()));		 
+		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
 	 }
 	 
 	 public static GetPeerListResponse getPeerList(
 			 GetPeerList getPeerList, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getPeerList); 
-		 return GetPeerListResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(getPeerList.toByteArray())); 
+		 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static GetSuperPeerListResponse getSuperPeerList(
 			 GetSuperPeerList getSuperPeerList, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getSuperPeerList); 
-		 return GetSuperPeerListResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(getSuperPeerList.toByteArray())); 
+		 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static GetEventsResponse getEvents(
 			 GetEvents getEvents, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(getEvents); 
-		 return GetEventsResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64Chunked(getEvents.toByteArray())); 
+		 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static SendReportResponse sendWebsiteReport(
 			 SendWebsiteReport sendWebsiteReport, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(sendWebsiteReport); 
-		 return SendReportResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(sendWebsiteReport.toByteArray())); 
+		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static SendReportResponse sendServiceReport(
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(sendServiceReport); 
-		 return SendReportResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(sendServiceReport.toByteArray())); 
+		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static NewVersionResponse checkVersion(
 			 NewVersion newVersion, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(newVersion); 
-		 return NewVersionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(newVersion.toByteArray())); 
+		 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static NewTestsResponse checkTests(
 			 NewTests newTests, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(newTests); 
-		 return NewTestsResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(newTests.toByteArray())); 
+		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(websiteSuggestion); 
-		 return TestSuggestionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response 
+		 = clientResource.post(Base64.encodeBase64(websiteSuggestion.toByteArray())); 
+		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
 	 public static TestSuggestionResponse sendServiceSuggestion(
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(serviceSuggestion); 
-		 return TestSuggestionResponse.parseFrom(
-				 new ByteArrayInputStream(
-						 response.getText().getBytes("UTF-8")));
+		 Representation response = clientResource.post(Base64.encodeBase64(serviceSuggestion.toByteArray())); 
+		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 
 }
