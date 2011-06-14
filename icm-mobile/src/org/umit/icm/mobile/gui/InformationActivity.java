@@ -22,10 +22,13 @@
 package org.umit.icm.mobile.gui;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.process.Globals;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -72,17 +75,22 @@ public class InformationActivity extends Activity{
         
         new UpdateList().execute("");
     }
-    private class UpdateList extends AsyncTask<String,String,List<String>> {
+    private class UpdateList extends AsyncTask<String,String,List<Website>> {
   	  
-    	protected void onPostExecute(List<String> result) {
-   		 arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
+    	protected void onPostExecute(List<Website> result) {
+    		List<String> list = new ArrayList<String>();
+    		Iterator<Website> iterator = result.iterator();
+    		 while(iterator.hasNext()){  
+    			 list.add(iterator.next().getUrl());
+    		 }
+   		 	arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
    				 ,android.R.layout.simple_list_item_1 
-   				 , result);
-   		 listView.setAdapter(arrayAdapter);	
+   				 , list);
+   		 	listView.setAdapter(arrayAdapter);	
     	}
          
-		protected List<String> doInBackground(String... urls) {		
-			return Constants.WEBSITE_LIST;
+		protected List<Website> doInBackground(String... urls) {		
+			return Globals.websitesList;
 			 						
 		}
 			

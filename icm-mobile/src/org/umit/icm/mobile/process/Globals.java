@@ -50,7 +50,7 @@ public class Globals {
 	public static void intialize() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
 		while(iterator.hasNext()){               
-			Globals.websitesList.add(new Website(iterator.toString(), "false", "false"));						       			
+			Globals.websitesList.add(new Website(iterator.next(), "false", "false"));						       			
         }  
 		
 	}
