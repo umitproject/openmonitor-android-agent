@@ -21,11 +21,15 @@
 
 package org.umit.icm.mobile.process;
 
-import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import android.content.res.Resources;
+import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
+import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+import org.umit.icm.mobile.utils.Constants;
 
 
 public class Globals {
@@ -40,5 +44,14 @@ public class Globals {
 	.setAgentID(1)
 	.setToken("1")
 	.build();*/
-	public static String scanStatus = " "; 
+	public static String scanStatus = " ";
+	public static List<Website> websitesList = new ArrayList<Website>();
+	
+	public static void intialize() {
+		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
+		while(iterator.hasNext()){               
+			Globals.websitesList.add(new Website(iterator.toString(), "false", "false"));						       			
+        }  
+		
+	}
 }

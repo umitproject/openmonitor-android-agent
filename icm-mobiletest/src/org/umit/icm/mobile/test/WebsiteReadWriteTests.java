@@ -22,7 +22,12 @@
 package org.umit.icm.mobile.test;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;
@@ -35,6 +40,21 @@ public class WebsiteReadWriteTests extends AndroidTestCase {
     	website.writeWebsite();
     	Website newWebsite = website.readWebsite("url");
         Assert.assertTrue(website.equals(newWebsite));
+    }
+    
+    public void testWebsiteListReadWrite() throws Throwable {
+    	Website website1 = new Website("url1","1","1");
+    	Website website2 = new Website("url2","2","2");
+    	List<Website> websiteList = new ArrayList<Website>();
+    	websiteList.add(website1);
+    	websiteList.add(website2);
+    	
+    	SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR
+    			, websiteList);
+    	List<Website> newWebsiteList 
+    	= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);
+        Assert.assertTrue(websiteList.get(0).equals(newWebsiteList.get(0)));
+        Assert.assertTrue(websiteList.get(1).equals(newWebsiteList.get(1)));
     }
     
    

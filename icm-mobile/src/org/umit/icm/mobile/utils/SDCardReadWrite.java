@@ -259,4 +259,48 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	public static void writeWebsitesList(String dir
+			, List<Website> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.WEBSITES_LIST_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));
+			objOutStream.writeObject(data);
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write websites list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<Website> readWebsitesList(String dir
+			) throws IOException, RuntimeException{
+		List<Website> websites = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.WEBSITES_LIST_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+	    	    websites = ((List<Website>) objInputStream.readObject());
+	      		return websites;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read website exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
 }
