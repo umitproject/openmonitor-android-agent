@@ -22,31 +22,29 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 public class Website {
 	private String url;
-	private String content;
-	private List<String> header;
-	
-	public Website(String url, String content, List<String> header) {
-		super();
-		this.url = url;
-		this.content = content;
-		this.header = header;
-	}
+	private String status;
+	private String check;			
 	
 	public Website() {
 		super();
-		this.url = new String();
-		this.content = new String();
-		this.header = new ArrayList<String>();
+		url = "";
+		status = "";
+		check = "";
+	}		
+	
+	public Website(String url, String status, String check) {
+		super();
+		this.url = url;
+		this.status = status;
+		this.check = check;
 	}
-
+	
 	public String getUrl() {
 		return url;
 	}
@@ -55,24 +53,24 @@ public class Website {
 		this.url = url;
 	}
 
-	public String getContent() {
-		return content;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public List<String> getHeader() {
-		return header;
+	public String getCheck() {
+		return check;
 	}
 
-	public void setHeader(List<String> header) {
-		this.header = header;
+	public void setCheck(String check) {
+		this.check = check;
 	}
-	
+
 	public void writeWebsite() throws IOException {
-		Website website = new Website(this.url, this.content, this.header);
+		Website website = new Website(this.url, this.status, this.check);
 		SDCardReadWrite.writeWebsite(Constants.WEBSITES_DIR, website);
 	}
 	
@@ -81,9 +79,9 @@ public class Website {
 	}
 	
 	public boolean equals(Website website) {
-		if((website.getUrl().equals(this.getUrl()))
-				&& website.getContent().equals(this.getContent())
-				&& website.getHeader().equals(this.getHeader()))
+		if(website.getUrl().equals(this.getUrl())
+				&& website.getStatus().equals(this.getStatus())
+				&& website.getCheck().equals(this.getCheck()))
 			return true;
 		return false;
 	}

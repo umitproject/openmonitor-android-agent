@@ -22,9 +22,6 @@
 package org.umit.icm.mobile.test;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.umit.icm.mobile.connectivity.Website;
 
 import junit.framework.Assert;
@@ -33,12 +30,8 @@ import android.test.AndroidTestCase;
 
 public class WebsiteReadWriteTests extends AndroidTestCase {
 
-    public void testWebsiteReadWrite() throws Throwable {
-    	List <String> list = new ArrayList<String>();
-    	list.add("one");
-    	list.add("two");
-    	list.add("three");
-    	Website website = new Website("url", "content", list);
+    public void testWebsiteReadWrite() throws Throwable {    	
+    	Website website = new Website("url", "status", "check");
     	website.writeWebsite();
     	Website newWebsite = website.readWebsite("url");
         Assert.assertTrue(website.equals(newWebsite));
