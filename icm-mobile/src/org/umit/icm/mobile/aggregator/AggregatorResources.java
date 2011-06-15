@@ -49,9 +49,10 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.Constants;
 
+
 public class AggregatorResources {
 
-	 public static ClientResource getClientResource(String url) {
+	 public static ClientResource getClientResource(String url) {	
 		 return new ClientResource(Constants.AGGREGATOR_URL + url);
 	 }
 	 
@@ -61,7 +62,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {		 		 
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(registerAgent.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 		 
 		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
@@ -73,7 +74,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(getPeerList.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 		 
 		 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -85,7 +86,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(getSuperPeerList.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation());  
 		 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -97,7 +98,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(getEvents.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(getEvents.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 
 		 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -109,7 +110,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(sendWebsiteReport.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -121,7 +122,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(sendServiceReport.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(sendServiceReport.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -133,7 +134,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(newVersion.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(newVersion.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 
 		 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -145,7 +146,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(newTests.toByteArray()).toString());
+				 , new String(Base64.encodeBase64(newTests.toByteArray()).toString()));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation()); 
 		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -157,7 +158,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(websiteSuggestion.toByteArray()).toString());		 		 		 
+				 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));		 		 		 
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation());  
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
@@ -169,7 +170,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , Base64.encodeBase64(serviceSuggestion.toByteArray()).toString());		 		 		 
+				 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));		 		 		 
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation()); 
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
