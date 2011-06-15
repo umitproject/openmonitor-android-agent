@@ -24,7 +24,9 @@ package org.umit.icm.mobile.aggregator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+
 import org.apache.commons.codec.binary.Base64;
+import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -129,8 +131,11 @@ public class AggregatorResources {
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response 
-		 = clientResource.post(Base64.encodeBase64(websiteSuggestion.toByteArray())); 
+		 Form form = new Form();
+		 form.add(Constants.AGGR_MSG_KEY
+				 , Base64.encodeBase64(websiteSuggestion.toByteArray()).toString());		 		 		 
+			 Representation response 
+			 = clientResource.post(form.encode());  
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -138,7 +143,11 @@ public class AggregatorResources {
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException {
-		 Representation response = clientResource.post(Base64.encodeBase64(serviceSuggestion.toByteArray())); 
+		 Form form = new Form();
+		 form.add(Constants.AGGR_MSG_KEY
+				 , Base64.encodeBase64(serviceSuggestion.toByteArray()).toString());		 		 		 
+			 Representation response 
+			 = clientResource.post(form.encode()); 
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 

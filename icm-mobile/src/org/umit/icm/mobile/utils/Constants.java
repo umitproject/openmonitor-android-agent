@@ -68,7 +68,7 @@ public class Constants {
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
-	public static String AGGREGATOR_URL = "http://icm-dev.appspot.com/";
+	public static String AGGREGATOR_URL = "http://icm-dev.appspot.com";
 	public static String AGGR_REGISTER_AGENT = "/api/registeragent/";
 	public static String AGGR_GET_PEER_LIST = "/api/getpeerlist/";
 	public static String AGGR_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
@@ -82,4 +82,5 @@ public class Constants {
 	public static String AGGR_TESTS = "/api/tests/";
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
+	public static String AGGR_MSG_KEY = "msg";
 }

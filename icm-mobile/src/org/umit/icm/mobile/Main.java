@@ -25,6 +25,7 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.TestAggregatorCommunication;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
@@ -99,6 +100,7 @@ public class Main extends TabActivity {
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}							
+				TestAggregatorCommunication.testServiceSuggestion();
 				Globals.scanStatus = getString(R.string.scan_on);
 				startService(new Intent(Main.this, WebsiteConnectivityService.class));
 				

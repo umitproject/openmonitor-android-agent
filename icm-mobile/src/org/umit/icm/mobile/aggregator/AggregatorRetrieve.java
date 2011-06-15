@@ -156,15 +156,15 @@ public class AggregatorRetrieve {
 			return true;
 	 }
 	 
-	 public static boolean sendServiceSuggestion(
+	 public static TestSuggestionResponse sendServiceSuggestion(
 			ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
-		 	MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
-		 	MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
-			return true;
+		 	//MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
+		 	//MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
+			return testSuggestionResponse;
 	 }
 }
