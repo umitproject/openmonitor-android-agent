@@ -27,28 +27,29 @@ import java.io.UnsupportedEncodingException;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
+import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import android.util.Log;
 
 public class TestAggregatorCommunication {
 	public static void testServiceSuggestion () {
-		RequestHeader requestHeader = RequestHeader.newBuilder()
-		.setAgentID(10)
-		.setToken("token")
-		.build();
-		ServiceSuggestion serviceSuggestion = ServiceSuggestion.newBuilder()
-		.setEmailAddress("email")
-		.setHostName("hostname")
-		.setIp("ip")
-		.setServiceName("servicename")
-		.setHeader(requestHeader)
-		.build();
+		
 		
 		try {
+			RequestHeader header = RequestHeader.newBuilder()
+			.setAgentID(10)
+			.setToken("token")
+			.build();
+			WebsiteSuggestion websiteSuggestion = WebsiteSuggestion.newBuilder()
+			.setEmailAddress("email")
+			.setWebsiteURL("www.SuckOnThisPython.com")
+			.setHeader(header)
+			.build();
+			TestSuggestionResponse testSuggestionResponse 
+			= AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
 			
-			TestSuggestionResponse testSuggestionResponse = AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
 			Log.w("####Aggre", Integer.toString(testSuggestionResponse.getHeader().getCurrentTestVersionNo()));
-			Log.w("####Aggre", Integer.toString(testSuggestionResponse.getHeader().getCurrentVersionNo()));
+			Log.w("####Aggre", Integer.toString(testSuggestionResponse.getHeader().getCurrentTestVersionNo()));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

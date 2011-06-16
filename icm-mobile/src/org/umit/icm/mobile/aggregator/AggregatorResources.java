@@ -64,7 +64,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 		 
+		 = clientResource.post(form.getWebRepresentation(null)); 		 
 		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
 	 }
 	 
@@ -76,7 +76,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 		 
+		 = clientResource.post(form.getWebRepresentation(null)); 		 
 		 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -88,7 +88,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation());  
+		 = clientResource.post(form.getWebRepresentation(null));  
 		 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -100,7 +100,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getEvents.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 
+		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -112,7 +112,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 
+		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -124,7 +124,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(sendServiceReport.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 
+		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -136,7 +136,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(newVersion.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 
+		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -148,7 +148,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(newTests.toByteArray()).toString()));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation()); 
+		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -160,7 +160,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));		 		 		 
 		 Representation response 
-			 = clientResource.post(form.getWebRepresentation());  
+			 = clientResource.post(form.getWebRepresentation(null));  
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
@@ -172,8 +172,20 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));		 		 		 
 		 Representation response 
-			 = clientResource.post(form.getWebRepresentation()); 
+			 = clientResource.post(form.getWebRepresentation(null)); 
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+	 }
+	 
+	 public static String testSuggestion(
+			 String serviceSuggestion, 
+			 ClientResource clientResource) 
+	 throws UnsupportedEncodingException, IOException {
+		 Form form = new Form();
+		 form.add(Constants.AGGR_MSG_KEY
+				 , serviceSuggestion);		 		 			 		  		 
+		 Representation response 
+			 = clientResource.post(form.getWebRepresentation(null)); 
+		 return new String(response.getText());
 	 }
 
 }

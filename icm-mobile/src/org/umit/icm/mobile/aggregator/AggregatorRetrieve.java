@@ -144,16 +144,16 @@ public class AggregatorRetrieve {
 			return newTestsResponse;
 	 }
 	 
-	 public static boolean sendWebsiteSuggestion(
+	 public static TestSuggestionResponse sendWebsiteSuggestion(
 			WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);
-		 	MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
-		 	MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
-			return true;
+		 	//MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
+		 	//MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
+			return testSuggestionResponse;
 	 }
 	 
 	 public static TestSuggestionResponse sendServiceSuggestion(
@@ -166,5 +166,15 @@ public class AggregatorRetrieve {
 		 	//MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
 		 	//MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
 			return testSuggestionResponse;
+	 }
+	 
+	 public static String testSuggestion(
+			 String serviceSuggestion) 
+	 throws UnsupportedEncodingException, IOException {
+		 ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
+		 	String testSuggestionResponse
+		 	= AggregatorResources.testSuggestion(serviceSuggestion, clientResource);
+		 	return testSuggestionResponse;
 	 }
 }

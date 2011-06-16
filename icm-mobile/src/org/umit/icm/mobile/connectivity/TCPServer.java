@@ -63,4 +63,8 @@ public class TCPServer {
 		this.response = response;
 	}		
 	
+	public void closeConnection() throws IOException {
+		serverSocket.close();
+	}
+	
 }
