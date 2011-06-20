@@ -23,9 +23,12 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
+
 
 public class Service implements Serializable {	
 	/**
@@ -33,22 +36,22 @@ public class Service implements Serializable {
 	 */
 	private static final long serialVersionUID = -1170206072134882104L;
 	private String name;
-	private int port;
+	private List<Integer> ports;
 	private String status;
 	private String check;			
 		
 	public Service() {
 		super();
 		name = "";
-		port = 0;
+		ports = new ArrayList<Integer>();
 		status = "";
 		check = "";
 	}		
 
-	public Service(String name, int port, String status, String check) {
+	public Service(String name, List<Integer> ports, String status, String check) {
 		super();
 		this.name = name;
-		this.port = port;
+		this.ports = ports;
 		this.status = status;
 		this.check = check;
 	}
@@ -61,12 +64,12 @@ public class Service implements Serializable {
 		this.name = name;
 	}
 
-	public int getPort() {
-		return port;
+	public List<Integer> getPorts() {
+		return ports;
 	}
 
-	public void setPort(int port) {
-		this.port = port;
+	public void setPorts(List<Integer> ports) {
+		this.ports = ports;
 	}
 
 	public String getStatus() {
@@ -87,20 +90,21 @@ public class Service implements Serializable {
 
 	public void writeService() throws IOException {
 		Service service 
-		= new Service(this.name, this.port, this.status, this.check);
+		= new Service(this.name, this.ports, this.status, this.check);
 		SDCardReadWrite.writeService(Constants.SERVICES_DIR, service);
 	}
 	
-	public Service readService(String port) throws IOException {
-		return SDCardReadWrite.readService(Constants.SERVICES_DIR, port);
+	public Service readService(String name) throws IOException {
+		return SDCardReadWrite.readService(Constants.SERVICES_DIR, name);
 	}
 	
 	public boolean equals(Service service) {
 		if(service.getCheck().equals(this.getCheck())
 				&& service.getName().equals(this.getName())
-				&& service.getPort() == this.getPort()
+				&& service.getPorts().size() == this.getPorts().size()
 				&& service.getStatus().equals(this.getStatus()))
 			return true;
 		return false;
 	}
+	
 }

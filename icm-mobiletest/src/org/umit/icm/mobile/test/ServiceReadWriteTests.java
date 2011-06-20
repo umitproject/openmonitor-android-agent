@@ -23,6 +23,9 @@ package org.umit.icm.mobile.test;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.umit.icm.mobile.connectivity.Service;
 
 import junit.framework.Assert;
@@ -31,11 +34,14 @@ import android.test.AndroidTestCase;
 
 public class ServiceReadWriteTests extends AndroidTestCase {
 
-    public void testWebsiteReadWrite() throws Throwable {    	
-    	Service service = new Service("name",8080 , "status", "check");
+    public void testServiceReadWrite() throws Throwable {
+    	List<Integer> ports = new ArrayList<Integer>();
+    	ports.add(8080);
+    	ports.add(8000);
+    	Service service = new Service("name", ports , "status", "check");
     	service.writeService();
     	Service newService 
-    	= service.readService(Integer.toString(service.getPort()));
+    	= service.readService(service.getName());
         Assert.assertTrue(service.equals(newService));
     }        
        

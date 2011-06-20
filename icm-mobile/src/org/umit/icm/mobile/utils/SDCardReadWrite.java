@@ -311,7 +311,7 @@ public class SDCardReadWrite {
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
 		keyDir.mkdirs();
-    	File file = new File(keyDir, Integer.toString(data.getPort())
+    	File file = new File(keyDir, data.getName()
     			+ Constants.SERVICE_FILE);
     	if(!file.exists()){
     		file.createNewFile();
@@ -321,7 +321,7 @@ public class SDCardReadWrite {
 				    new BufferedOutputStream(new FileOutputStream(file)));
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getName());
-			objOutStream.writeObject(Integer.toString(data.getPort()));
+			objOutStream.writeObject(data.getPorts());
 			objOutStream.writeObject(data.getStatus());
     	} catch (Exception e) {
   		    throw new RuntimeException("writeService exception", e);
@@ -331,11 +331,11 @@ public class SDCardReadWrite {
 	}
 	
 	public static Service readService(String dir
-			, String port) throws IOException , RuntimeException{
+			, String name) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
-    	File file = new File(keyDir, port
+    	File file = new File(keyDir, name
     			+ Constants.SERVICE_FILE);
     	Service service = new Service();
     	InputStream inputStream = new FileInputStream(file.toString());
@@ -344,7 +344,7 @@ public class SDCardReadWrite {
   	  	try {
 	    	    service.setCheck((String) objInputStream.readObject());
 	    	    service.setName((String) objInputStream.readObject());
-	    	    service.setPort(Integer.parseInt((String) objInputStream.readObject()));
+	    	    service.setPorts((List<Integer>) objInputStream.readObject());
 	    	    service.setStatus((String) objInputStream.readObject());
 	    	    
 	    	    return service;
