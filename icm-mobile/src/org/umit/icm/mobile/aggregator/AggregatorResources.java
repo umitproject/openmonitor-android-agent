@@ -146,7 +146,7 @@ public class AggregatorResources {
 	 throws UnsupportedEncodingException, IOException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(newTests.toByteArray()).toString()));
+				 , new String(Base64.encodeBase64(newTests.toByteArray())));
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null)); 
 		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));

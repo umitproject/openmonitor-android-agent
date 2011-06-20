@@ -24,6 +24,10 @@ package org.umit.icm.mobile.aggregator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import org.umit.icm.mobile.proto.MessageProtos.NewTests;
+import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
+import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
+import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
@@ -40,16 +44,15 @@ public class TestAggregatorCommunication {
 			.setAgentID(10)
 			.setToken("token")
 			.build();
-			WebsiteSuggestion websiteSuggestion = WebsiteSuggestion.newBuilder()
-			.setEmailAddress("email")
-			.setWebsiteURL("www.SuckOnThisPython.com")
+			NewTests newVersion = NewTests.newBuilder()
+			.setCurrentTestVersionNo(10)									
 			.setHeader(header)
 			.build();
-			TestSuggestionResponse testSuggestionResponse 
-			= AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
+			NewTestsResponse newVersionResponse 
+			= AggregatorRetrieve.checkTests(newVersion);
 			
-			Log.w("####Aggre", Integer.toString(testSuggestionResponse.getHeader().getCurrentTestVersionNo()));
-			Log.w("####Aggre", Integer.toString(testSuggestionResponse.getHeader().getCurrentTestVersionNo()));
+			Log.w("####Aggre", Integer.toString(newVersionResponse.getHeader().getCurrentTestVersionNo()));
+			Log.w("####Aggre", Integer.toString(newVersionResponse.getHeader().getCurrentTestVersionNo()));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

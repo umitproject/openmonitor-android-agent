@@ -127,8 +127,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
 		 	NewVersionResponse newVersionResponse
 		 	= AggregatorResources.checkVersion(newVersion, clientResource);
-		 	MessageConversion.updateAgentVersion(newVersionResponse.getHeader());
-			MessageConversion.updateTestsVersion(newVersionResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(newVersionResponse.getHeader());
+			//MessageConversion.updateTestsVersion(newVersionResponse.getHeader());
 			return newVersionResponse;
 	 }
 	 
@@ -139,8 +139,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
 		 	NewTestsResponse newTestsResponse 
 		 	= AggregatorResources.checkTests(newTests, clientResource);
-		 	MessageConversion.updateAgentVersion(newTestsResponse.getHeader());
-			MessageConversion.updateTestsVersion(newTestsResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(newTestsResponse.getHeader());
+			//MessageConversion.updateTestsVersion(newTestsResponse.getHeader());
 			return newTestsResponse;
 	 }
 	 
