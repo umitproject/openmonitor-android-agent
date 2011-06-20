@@ -36,6 +36,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.TestObject;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
@@ -300,6 +301,57 @@ public class SDCardReadWrite {
   		    throw new RuntimeException("read website exception", e);
   	  	} finally {
   		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writeService(String dir
+			, Service data) throws IOException , RuntimeException{
+		ObjectOutputStream objOutStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir, Integer.toString(data.getPort())
+    			+ Constants.SERVICE_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));
+			objOutStream.writeObject(data.getCheck());
+			objOutStream.writeObject(data.getName());
+			objOutStream.writeObject(Integer.toString(data.getPort()));
+			objOutStream.writeObject(data.getStatus());
+    	} catch (Exception e) {
+  		    throw new RuntimeException("writeService exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static Service readService(String dir
+			, String port) throws IOException , RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, port
+    			+ Constants.SERVICE_FILE);
+    	Service service = new Service();
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+	    	    service.setCheck((String) objInputStream.readObject());
+	    	    service.setName((String) objInputStream.readObject());
+	    	    service.setPort(Integer.parseInt((String) objInputStream.readObject()));
+	    	    service.setStatus((String) objInputStream.readObject());
+	    	    
+	    	    return service;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("readService exception", e);
+  	  	} finally {
+  		  objInputStream.close();
   	  	}
 	}
 	

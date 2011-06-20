@@ -45,6 +45,9 @@ public class Constants {
 	public static String WEBSITES_DIR = "/websites";
 	public static String WEBSITE_FILE = "-site.web";
 	public static String WEBSITES_LIST_FILE = "websites.list";
+	public static String SERVICES_DIR = "/services";
+	public static String SERVICE_FILE = ".service";
+	public static String SERVICES_LIST_FILE = "services.list";
 	public static String TESTS_DIR = "/tests";
 	public static String TESTS_FILE = "tests.test";
 	public static List<String> WEBSITE_LIST = new ArrayList<String>()
