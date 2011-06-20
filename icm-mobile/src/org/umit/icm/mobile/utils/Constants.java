@@ -24,6 +24,8 @@ package org.umit.icm.mobile.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.umit.icm.mobile.connectivity.Service;
+
 public class Constants {
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
 	public static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
@@ -86,4 +88,46 @@ public class Constants {
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
+	
+	public static List<Service> SERVICE_LIST = new ArrayList<Service>()
+	{
+	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2L;
+		private List<Integer> ports = new ArrayList<Integer>();
+
+		{
+			ports.add(443);
+			ports.add(1863);
+			add(new Service("msn", ports,"open", "true"));
+			ports.clear();
+			ports.add(5222);			
+			add(new Service("gtalk", ports,"open", "true"));
+			ports.clear();
+			ports.add(21);			
+			add(new Service("ftp", ports,"open", "true"));
+			ports.clear();
+			ports.add(80);			
+			add(new Service("http", ports,"open", "true"));
+			ports.clear();
+			ports.add(22);			
+			add(new Service("ssh", ports,"open", "true"));
+			ports.clear();
+			ports.add(5060);			
+			add(new Service("sip", ports,"open", "true"));
+			ports.clear();
+			ports.add(21);			
+			add(new Service("ftp", ports,"open", "true"));
+			ports.clear();
+			ports.add(110);			
+			add(new Service("pop3", ports,"open", "true"));
+			ports.clear();
+			ports.add(143);			
+			add(new Service("imap", ports,"open", "true"));
+			ports.clear();
+			ports.add(25);			
+			add(new Service("smtp", ports,"open", "true"));
+		
+		}};
 }
