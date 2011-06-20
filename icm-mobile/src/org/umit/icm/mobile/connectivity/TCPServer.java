@@ -28,12 +28,16 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import android.util.Log;
+
 
 public class TCPServer {
 	
 	ServerSocket serverSocket;
 	String response;
 	String request;
+	Thread thread;
+	private volatile boolean stop = false;
 	
 	public TCPServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
@@ -41,22 +45,39 @@ public class TCPServer {
 		request = "";
 	}
 	
-	public void runServer() throws IOException {
-		
-		 while(true)
-         {
-            Socket aSocket = serverSocket.accept();
-            BufferedReader bufferedReader =
-               new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-            DataOutputStream dataOutputStream = new DataOutputStream(aSocket.getOutputStream());
-            request = bufferedReader.readLine();                        
-            dataOutputStream.writeBytes(response);
-         }
-		
+	public void runServer() {
+		 	thread = new Thread() {
+			 public void run() {		 
+				  try {
+					  	while(!stop) {						 					 
+						Log.w("##Server", "loop");
+			            Socket aSocket = serverSocket.accept();
+			            Log.w("##Server", "accept");
+			            BufferedReader bufferedReader =
+			               new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
+			            DataOutputStream dataOutputStream = new DataOutputStream(aSocket.getOutputStream());
+			            Log.w("##Server", "pre-read");
+			            request = bufferedReader.readLine();                        
+			            Log.w("##Server", "read" + request);
+			            dataOutputStream.writeBytes(response + '\n');
+			            Log.w("##Server", "write");
+					 } 
+		         } catch (Exception e) {
+					 throw new RuntimeException("run Server Exception", e);
+				 }
+			 }
+				 
+		 };
+		 thread.start();
 	}
 
 	public String getResponse() {
 		return response;
+	}
+	
+	public String getRequest() {
+		Log.w("##Server", "get" + request);
+		return request;
 	}
 
 	public void setResponse(String response) {
@@ -64,7 +85,9 @@ public class TCPServer {
 	}		
 	
 	public void closeConnection() throws IOException {
+		stop = true;
 		serverSocket.close();
+		Log.w("##Server", "close");
 	}
 	
 }
