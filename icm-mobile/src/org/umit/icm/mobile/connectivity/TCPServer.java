@@ -48,8 +48,8 @@ public class TCPServer {
 	public void runServer() {
 		 	thread = new Thread() {
 			 public void run() {		 
-				  try {
-					  	while(!stop) {						 					 
+				 while(!stop){
+					  	 try {						 					 
 						Log.w("##Server", "loop");
 			            Socket aSocket = serverSocket.accept();
 			            Log.w("##Server", "accept");
@@ -61,10 +61,17 @@ public class TCPServer {
 			            Log.w("##Server", "read" + request);
 			            dataOutputStream.writeBytes(response + '\n');
 			            Log.w("##Server", "write");
-					 } 
-		         } catch (Exception e) {
-					 throw new RuntimeException("run Server Exception", e);
-				 }
+					 } catch (Exception e) {
+						 throw new RuntimeException("run Server Exception", e);
+					 }
+		         } 
+				try {
+					serverSocket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			 }
 				 
 		 };
@@ -84,9 +91,8 @@ public class TCPServer {
 		this.response = response;
 	}		
 	
-	public void closeConnection() throws IOException {
-		stop = true;
-		serverSocket.close();
+	public void closeConnection() {
+		stop = true;		
 		Log.w("##Server", "close");
 	}
 	
