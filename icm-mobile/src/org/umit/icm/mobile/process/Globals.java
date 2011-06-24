@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
@@ -46,6 +47,7 @@ public class Globals {
 	.build();*/
 	public static String scanStatus = " ";
 	public static List<Website> websitesList = new ArrayList<Website>();
+	public static List<Service> servicesList = new ArrayList<Service>();
 	
 	public static void intializeWebsitesList() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
@@ -53,5 +55,9 @@ public class Globals {
 			Globals.websitesList.add(new Website(iterator.next(), "false", "false"));						       			
         }  
 		
+	}
+	
+	public static void intializeServicesList() {		
+		servicesList = Constants.SERVICE_LIST;				
 	}
 }

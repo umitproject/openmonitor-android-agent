@@ -109,7 +109,7 @@ public class InformationActivity extends Activity{
     		 }
    		 	arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
    				 ,android.R.layout.simple_list_item_1 
-   				 , list);
+   				 , list);   		 	
    		 	listView.setAdapter(arrayAdapter);	
     	}
          
