@@ -47,7 +47,7 @@ public class Globals {
 	public static String scanStatus = " ";
 	public static List<Website> websitesList = new ArrayList<Website>();
 	
-	public static void intialize() {
+	public static void intializeWebsitesList() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
 		while(iterator.hasNext()){               
 			Globals.websitesList.add(new Website(iterator.next(), "false", "false"));						       			

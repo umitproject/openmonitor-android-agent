@@ -83,7 +83,7 @@ public class InformationActivity extends Activity{
 				= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);									
 
 			} else {
-				Globals.intialize();
+				Globals.intializeWebsitesList();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
