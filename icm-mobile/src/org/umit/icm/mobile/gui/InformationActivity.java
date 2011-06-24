@@ -92,9 +92,25 @@ public class InformationActivity extends Activity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			if ((SDCardReadWrite.fileExists(Constants.SERVICES_LIST_FILE
+					, Constants.SERVICES_DIR) == true)){					
+				Globals.servicesList 
+				= SDCardReadWrite.readServicesList(Constants.SERVICES_DIR);									
+
+			} else {
+				Globals.intializeServicesList();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
-        
-        new UpdateList().execute("");
+		new UpdateList().execute("");
     }
     private class UpdateList extends AsyncTask<String,String,List<Website>> {
   	  

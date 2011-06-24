@@ -50,7 +50,8 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton, filterButton;
+	private Button sendButton, intervalButton, scanButton
+	, filterButton, servicesFilterButton;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class ControlActivity extends Activity {
         intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
         filterButton = (Button) this.findViewById(R.id.filterButton);
+        servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		
@@ -89,6 +91,14 @@ public class ControlActivity extends Activity {
         filterButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       				            		 
 	       		Intent intent = new Intent(ControlActivity.this, WebsiteFilterActivity.class);	       		
+	            startActivity(intent); 
+	       	}
+
+	   	}  );
+        
+        servicesFilterButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       				            		 
+	       		Intent intent = new Intent(ControlActivity.this, ServiceFilterActivity.class);	       		
 	            startActivity(intent); 
 	       	}
 

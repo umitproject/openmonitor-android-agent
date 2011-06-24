@@ -64,4 +64,12 @@
 		android:layout_centerHorizontal="true"
 		android:layout_below="@id/scanButton"
 		android:id="@+id/filterButton"/>
+		
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:text="@string/filter_button_services" 
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/filterButton"
+		android:id="@+id/serviceFilterButton"/>
 </RelativeLayout>
