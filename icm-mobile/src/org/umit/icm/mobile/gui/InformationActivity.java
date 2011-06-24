@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.Globals;
@@ -40,17 +41,20 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
    	
 	private ListView listView;
-	private TextView ipTextView;
+	private TextView ipTextView, goToServices, goToWebsites;
 	ArrayAdapter<String> arrayAdapter;
+	ViewFlipper viewFlipper;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +64,26 @@ public class InformationActivity extends Activity{
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         int ipAddress = wifiInfo.getIpAddress();
         ipTextView = (TextView) findViewById(R.id.ipTextView);
+        goToServices = (TextView) findViewById(R.id.goToServices);       
+        goToWebsites = (TextView) findViewById(R.id.goToWebsites);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));    
         listView = (ListView)findViewById(R.id.ListView01);  
+        viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
+        
+        goToServices.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	                		 
+	       		viewFlipper.showNext();
+	       	}
+
+	   	}  );
+        
+        goToWebsites.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	                		 
+	       		viewFlipper.showPrevious();
+	       	}
+
+	   	}  );
+        
         listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

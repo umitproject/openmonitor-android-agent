@@ -48,4 +48,6 @@
     <string name="retrieving_website">Retrieving Website</string>
     <string name="filter_button_websites">Filter Websites</string>
     <string name="filter_button_services">Filter Services</string>
+    <string name="flip_services">View Services</string>
+    <string name="flip_websites">View Websites</string>
 </resources>
