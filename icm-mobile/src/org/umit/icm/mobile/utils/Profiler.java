@@ -21,27 +21,26 @@
 
 package org.umit.icm.mobile.utils;
 
-import org.umit.icm.mobile.proto.MessageProtos.Trace;
 
 import android.util.Log;
 
 public class Profiler {
 	
+	static void init() {
+	}
 	
 	private static long timeTaken() {
 		long start = 0;
 		long end = 0;
+		init();
 		start = System.currentTimeMillis();
 		task();
 		end = System.currentTimeMillis()-start;
 		return end;
 	}
 	
-	private static void task() {
-		Trace trace = Trace.newBuilder()
-		.setHop(10)
-		.setIp("IP")				
-		.build();
+	private static void task() {	
+		
 	}
 	
 	public static void runProfiler() {
