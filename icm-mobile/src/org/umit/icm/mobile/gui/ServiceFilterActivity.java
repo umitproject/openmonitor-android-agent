@@ -46,9 +46,9 @@ public class ServiceFilterActivity extends Activity{
    	
 	private ListView listView;	
 	Button backButton;
-	private WebsiteTextCheckboxAdapter websiteTextCheckboxAdapter;	
-	private List<WebsiteTextCheckbox> listWebsitesCheckbox;
-	private String currentURL;
+	private WebsiteTextCheckboxAdapter serviceTextCheckboxAdapter;	
+	private List<WebsiteTextCheckbox> listServicesCheckbox;
+	private String currentName;
 	private Service currentService;
 	private boolean currentCheck;
 		
@@ -57,7 +57,7 @@ public class ServiceFilterActivity extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.servicefilteractivity);        
-        listWebsitesCheckbox 
+        listServicesCheckbox 
         = new ArrayList<WebsiteTextCheckbox>();
         Iterator<Service> iterator = Globals.servicesList.iterator();
         Log.w("###", Integer.toString(Globals.servicesList.size()));
@@ -66,7 +66,7 @@ public class ServiceFilterActivity extends Activity{
         backButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	   
 	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
-	       		= listWebsitesCheckbox.iterator();	       		
+	       		= listServicesCheckbox.iterator();	       		
 	       		int i = 0;
 	       		String check = "";
 	       		Service service = new Service();
@@ -98,21 +98,21 @@ public class ServiceFilterActivity extends Activity{
 	   	}  );
                     
         listView = (ListView)findViewById(R.id.ListView01);
-        websiteTextCheckboxAdapter 
+        serviceTextCheckboxAdapter 
         = new WebsiteTextCheckboxAdapter(ServiceFilterActivity.this);
                 
         while(iterator.hasNext()){               
 			currentService = iterator.next();
-			currentURL = currentService.getName();
+			currentName = currentService.getName();
 			if (currentService.getCheck().equals("true"))
 				currentCheck = true;
 			else 
 				currentCheck = false;			
-			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, currentCheck));						       			
+			listServicesCheckbox.add(new WebsiteTextCheckbox(currentName, currentCheck));						       			
         }  
         
-        websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
-        listView.setAdapter(websiteTextCheckboxAdapter);
+        serviceTextCheckboxAdapter.setListItems(listServicesCheckbox);        	
+        listView.setAdapter(serviceTextCheckboxAdapter);
                   		                       
     }
  	          
