@@ -69,6 +69,27 @@ public class SDCardReadWrite {
     		}
 		}
 	
+	public static void writeStringAppend(String fileName
+			, String dir, String data) throws IOException, RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir, fileName);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    		FileWriter fileWriter = new FileWriter(file, true);
+    		try {
+    			fileWriter.write(data);
+			
+    		} catch (Exception e) {
+		    throw new RuntimeException("SDCardWrite exception", e);
+    		} finally {
+			fileWriter.close();
+    		}
+		}
+	
 	public static String readString(String fileName
 			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
