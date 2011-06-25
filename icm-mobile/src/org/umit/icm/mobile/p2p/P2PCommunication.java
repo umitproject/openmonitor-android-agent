@@ -24,6 +24,8 @@ package org.umit.icm.mobile.p2p;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.utils.AESCrypto;
@@ -34,28 +36,35 @@ public class P2PCommunication {
 	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
 		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
+		String cipherString =
+			new String(Base64.encodeBase64(cipherBytes));
 		// TODO HTTP send
 		// TODO HTTP respond
-		byte [] response = null;
+		String responseString = "";
+		byte [] response = Base64.decodeBase64(responseString.getBytes());		 
 		return AESCrypto.decrypt(symmetricKey, response);
 	}
 	
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
 		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
+		String cipherString =
+			new String(Base64.encodeBase64(cipherBytes));
 		// TODO HTTP send
 		// TODO HTTP respond
 		PublicKey peerPublicKey = CryptoKeyReader.getPeerPublicKey(agentInfo.getAgentIP());
-		byte [] response = null;
+		String responseString = "";
+		byte [] response = Base64.decodeBase64(responseString.getBytes());
 		return RSACrypto.decryptPublic(peerPublicKey, response);
 	}
 	
-	public static void checkResponse(ResponseHeader header) throws Exception {
-		int myCurrentTestVersionNo = 0, myCurrentVersionNo = 0;
-		if (header.getCurrentTestVersionNo() > myCurrentTestVersionNo)
+	public static void checkResponse(ResponseHeader header) throws Exception {		
+		if (header.getCurrentTestVersionNo() 
+				> Globals.versionManager.getTestsVersion())
 			;
 			// TODO contact aggregator to update testversion
-		if (header.getCurrentVersionNo() > myCurrentVersionNo)
+		if (header.getCurrentVersionNo() 
+				> Globals.versionManager.getAgentVersion())
 			;
 			// TODO contact aggregator to update agentversion
 	}
