@@ -33,8 +33,17 @@ public class ProfilerRun {
 	public static void run() {	
 		profileTraceBuild();
 		profileTraceRouteBuild();
-		profileICMReport();
+		profileICMReport();		
 		profileRSAGenerateKey();
+		profileRSAEncrypt();
+		profileRSADecrypt();
+		profileRSAPrivateEncrypt();
+		profileRSAPrivateDecrypt();
+		profileAESEncrypt();
+		profileAESDecrypt();
+		profileSDCardWriteString();
+		profileSDCardReadString();
+		profileWebsiteReportDetailBuild();
 	}
 		
 	private static void profileTraceBuild (){
@@ -126,6 +135,177 @@ public class ProfilerRun {
 			
 			public String taskName() {
 				return "RSA KeyPair Generate";
+			}
+		});
+	}
+	
+	private static void profileRSAEncrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					KeyPair keyPair = RSACrypto.generateKey();
+					String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "RSA Public Encryption";
+			}
+		});
+	}
+	
+	private static void profileRSADecrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					KeyPair keyPair = RSACrypto.generateKey();
+					String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
+					String str = RSACrypto.decryptPrivate(keyPair.getPrivate(), cipherText);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "RSA Public Decryption";
+			}
+		});
+	}
+	
+	private static void profileRSAPrivateEncrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					KeyPair keyPair = RSACrypto.generateKey();
+					String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "RSA Private Encryption";
+			}
+		});
+	}
+	
+	private static void profileRSAPrivateDecrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					KeyPair keyPair = RSACrypto.generateKey();
+					String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
+					String str = RSACrypto.decryptPublic(keyPair.getPublic(), cipherText);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "RSA Private Decryption";
+			}
+		});
+	}
+	
+	private static void profileAESEncrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					String cipherText = AESCrypto.encrypt("secretICMMobilePassword"
+			    			, "This is a test string");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "AES Encryption";
+			}
+		});
+	}
+	
+	private static void profileAESDecrypt() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					String cipherText = AESCrypto.encrypt("secretICMMobilePassword"
+			    			, "This is a test string");
+					String str = AESCrypto.decrypt("secretICMMobilePassword", cipherText);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "AES Decryption";
+			}
+		});
+	}
+	
+	private static void profileSDCardWriteString() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					SDCardReadWrite.writeString("sdtest.txt", "/test" , "This is a test string");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "SDCard Write String";
+			}
+		});
+	}
+	
+	private static void profileSDCardReadString() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					String readString = SDCardReadWrite.readString("sdtest.txt", "/test");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "SDCard Read String";
+			}
+		});
+	}
+	
+	private static void profileWebsiteReportDetailBuild() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setStatusCode(10)
+				.setWebsiteURL("url")
+				.build();
+			}
+			
+			public String taskName() {
+				return "WebsiteReportDetail Build";
 			}
 		});
 	}
