@@ -36,17 +36,19 @@ public class MessageConversion {
 	}
 	
 	public static void updateAgentVersion (ResponseHeader header) throws IOException {
-		VersionManager versionManager = new VersionManager();
-		if (header.getCurrentVersionNo() > versionManager.getAgentVersion()) {
-			versionManager.setAgentVersion(header.getCurrentVersionNo());
+		
+		if (header.getCurrentVersionNo() 
+				> Globals.versionManager.getAgentVersion()) {
+			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
 			// TODO patch current binary
 		}
 	}
 	
 	public static void updateTestsVersion (ResponseHeader header) throws IOException {
-		VersionManager versionManager = new VersionManager();
-		if (header.getCurrentTestVersionNo() > versionManager.getTestsVersion()) {
-			versionManager.setTestsVersion(header.getCurrentTestVersionNo());
+		
+		if (header.getCurrentTestVersionNo() 
+				> Globals.versionManager.getTestsVersion()) {
+			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
 			// TODO update current tests
 		}
 	}
