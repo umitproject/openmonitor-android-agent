@@ -88,6 +88,7 @@ public class Constants {
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
+	public static int MY_TCP_PORT = 5555;
 	
 	public static List<Service> SERVICE_LIST = new ArrayList<Service>()
 	{

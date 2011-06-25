@@ -25,6 +25,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
@@ -36,9 +37,13 @@ public class P2PCommunication {
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		String cipherString =
 			new String(Base64.encodeBase64(cipherBytes));
-		// TODO HTTP send
-		// TODO HTTP respond
-		String responseString = "";
+		
+		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
+				, agentInfo.getAgentPort());
+		Globals.tcpClient.writeLine(cipherString);
+		Globals.tcpClient.closeConnection();
+				
+		String responseString = Globals.tcpServer.getRequest();
 		byte [] response = Base64.decodeBase64(responseString.getBytes());		 
 		return AESCrypto.decrypt(symmetricKey, response);
 	}
@@ -48,12 +53,16 @@ public class P2PCommunication {
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		String cipherString =
 			new String(Base64.encodeBase64(cipherBytes));
-		// TODO HTTP send
-		// TODO HTTP respond
+		
+		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
+				, agentInfo.getAgentPort());
+		Globals.tcpClient.writeLine(cipherString);
+		Globals.tcpClient.closeConnection();
+		
 		PublicKey peerPublicKey = CryptoKeyReader.getPeerPublicKey(agentInfo.getAgentIP());
-		String responseString = "";
+		String responseString = Globals.tcpServer.getRequest();
 		byte [] response = Base64.decodeBase64(responseString.getBytes());
 		return RSACrypto.decryptPublic(peerPublicKey, response);
-	}
+	}	
 		
 }

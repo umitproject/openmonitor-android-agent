@@ -21,11 +21,14 @@
 
 package org.umit.icm.mobile.process;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.TCPClient;
+import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
@@ -60,4 +63,12 @@ public class Globals {
 	public static void intializeServicesList() {		
 		servicesList = Constants.SERVICE_LIST;				
 	}
+	
+	public static TCPServer tcpServer;
+	
+	public static void intializeTCPServer() throws IOException {		
+		tcpServer = new TCPServer(Constants.MY_TCP_PORT);				
+	}
+	
+	public static TCPClient tcpClient;
 }
