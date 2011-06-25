@@ -22,30 +22,41 @@
 package org.umit.icm.mobile.utils;
 
 
+import java.io.IOException;
+
 import android.util.Log;
 
 public class Profiler {
 	
-	static void init() {
+	public Profiler() {
+		
 	}
-	
-	private static long timeTaken() {
+		
+	private static long timeTaken(TaskInterface taskInterface) {
 		long start = 0;
 		long end = 0;
-		init();
 		start = System.currentTimeMillis();
-		task();
+		taskInterface.task();
 		end = System.currentTimeMillis()-start;
 		return end;
 	}
-	
-	private static void task() {	
-		
-	}
-	
-	public static void runProfiler() {
-		Log.w("##Profile", Long.toString(timeTaken()));
-	}
-	
+			
+	public static void runProfiler(TaskInterface taskInterface) {
+		Log.w(taskInterface.taskName(), Long.toString(timeTaken(taskInterface)));
+		try {
+			SDCardReadWrite.writeStringAppend(Constants.PROFILER_FILE
+					, Constants.PROFILER_DIR
+					, taskInterface.taskName()
+					+ ": " + Long.toString(timeTaken(taskInterface))
+					+ " ms");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}			
 	
 }
+

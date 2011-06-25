@@ -49,6 +49,8 @@ public class Constants {
 	public static String WEBSITES_LIST_FILE = "websites.list";
 	public static String SERVICES_DIR = "/services";
 	public static String SERVICE_FILE = ".service";
+	public static String PROFILER_DIR = "/profiler";
+	public static String PROFILER_FILE = "profile.txt";
 	public static String SERVICES_LIST_FILE = "services.list";
 	public static String TESTS_DIR = "/tests";
 	public static String TESTS_FILE = "tests.test";

@@ -31,6 +31,7 @@ import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
@@ -100,7 +101,7 @@ public class Main extends TabActivity {
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}							
 				//TestAggregatorCommunication.testServiceSuggestion();
-				//Profiler.runProfiler();
+				ProfilerRun.run();
 				Globals.scanStatus = getString(R.string.scan_on);
 				startService(new Intent(Main.this, WebsiteConnectivityService.class));
 				
