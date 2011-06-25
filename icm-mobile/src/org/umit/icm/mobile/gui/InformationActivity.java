@@ -51,7 +51,7 @@ import android.text.format.Formatter;
 
 public class InformationActivity extends Activity{
    	
-	private ListView listView;
+	private ListView listView, listViewServices;
 	private TextView ipTextView, goToServices, goToWebsites;
 	ArrayAdapter<String> arrayAdapter;
 	ViewFlipper viewFlipper;
@@ -67,7 +67,8 @@ public class InformationActivity extends Activity{
         goToServices = (TextView) findViewById(R.id.goToServices);       
         goToWebsites = (TextView) findViewById(R.id.goToWebsites);
         ipTextView.append(Formatter.formatIpAddress(ipAddress));    
-        listView = (ListView)findViewById(R.id.ListView01);  
+        listView = (ListView)findViewById(R.id.ListView01);
+        listViewServices = (ListView)findViewById(R.id.ListView02);
         viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
         
         goToServices.setOnClickListener(new OnClickListener() { 

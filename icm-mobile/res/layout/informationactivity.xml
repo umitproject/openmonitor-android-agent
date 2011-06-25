@@ -27,60 +27,54 @@
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent">
 
-<RelativeLayout 
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content"
-	    android:text="@string/app_name"     
-	    android:id="@+id/IMCTextView"/>
-	    
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/IMCTextView" 
-	    android:text="@string/flip_services"
-	    android:clickable="true"
-	    android:id="@+id/goToServices"/>
-	    
-	<ListView 
-		android:id="@+id/ListView01"
-		android:layout_width="wrap_content"
-		android:layout_below="@id/goToServices" 
-		android:layout_height="wrap_content" />
-		       
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
-	    android:layout_below="@id/ListView01"
-	    android:text="@string/text_ip"
-	    android:id="@+id/ipTextView"/>
-</RelativeLayout>
+	<RelativeLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+		<TextView  
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
+		    android:text="@string/app_name"     
+		    android:id="@+id/IMCTextView"/>
+		    
+		<TextView  
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/IMCTextView" 
+		    android:text="@string/flip_services"
+		    android:clickable="true"
+		    android:id="@+id/goToServices"/>
+		    
+		<ListView 
+			android:id="@+id/ListView01"
+			android:layout_width="wrap_content"
+			android:layout_below="@id/goToServices" 
+			android:layout_height="wrap_content" />
+			       
+		<TextView  
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content" 
+		    android:layout_below="@id/ListView01"
+		    android:text="@string/text_ip"
+		    android:id="@+id/ipTextView"/>
+	</RelativeLayout>
 
-<RelativeLayout 
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">	    
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content"	     
-	    android:text="@string/flip_websites"
-	    android:clickable="true"
-	    android:id="@+id/goToWebsites"/>
-	    
-	<ListView 
-		android:id="@+id/ListView02"
-		android:layout_width="wrap_content"
-		android:layout_below="@id/goToWebsites" 
-		android:layout_height="wrap_content" />
-		       
-	<TextView  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
-	    android:layout_below="@id/ListView01"
-	    android:text="@string/text_ip"
-	    android:id="@+id/ipTextView2"/>
-	    </RelativeLayout>
+	<RelativeLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">	    
+		<TextView  
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"	     
+		    android:text="@string/flip_websites"
+		    android:clickable="true"
+		    android:id="@+id/goToWebsites"/>
+		    
+		<ListView 
+			android:id="@+id/ListView02"
+			android:layout_width="wrap_content"
+			android:layout_below="@id/goToWebsites" 
+			android:layout_height="wrap_content" />
+		
+	</RelativeLayout>
 </ViewFlipper>
