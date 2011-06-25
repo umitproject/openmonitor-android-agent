@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
@@ -53,7 +53,7 @@ public class InformationActivity extends Activity{
    	
 	private ListView listView, listViewServices;
 	private TextView ipTextView, goToServices, goToWebsites;
-	ArrayAdapter<String> arrayAdapter;
+	ArrayAdapter<String> arrayAdapter, arrayAdapterServices;
 	ViewFlipper viewFlipper;
 		
     @Override
@@ -134,6 +134,7 @@ public class InformationActivity extends Activity{
 		}
 			
 		new UpdateList().execute("");
+		new UpdateListServices().execute("");
     }
     private class UpdateList extends AsyncTask<String,String,List<Website>> {
   	  
@@ -158,5 +159,30 @@ public class InformationActivity extends Activity{
 		}
 			
     }    
+    
+    private class UpdateListServices extends AsyncTask<String,String,List<Service>> {
+    	  
+    	protected void onPostExecute(List<Service> result) {
+    		List<String> list = new ArrayList<String>();
+    		Iterator<Service> iterator = result.iterator();
+    		Service service = new Service();
+    		 while(iterator.hasNext()){  
+    			 service = iterator.next();
+    			 if(service.getCheck().equals("true"))
+    				 list.add(service.getName());
+    		 }
+   		 	arrayAdapterServices = new ArrayAdapter<String>(InformationActivity.this
+   				 ,android.R.layout.simple_list_item_1 
+   				 , list);   		 	
+   		 	listViewServices.setAdapter(arrayAdapterServices);	
+    	}
+         
+		protected List<Service> doInBackground(String... urls) {		
+			return Globals.servicesList;
+			 						
+		}
+			
+    }    
+      	
       	
 }
