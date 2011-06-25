@@ -25,9 +25,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
-import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
-import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
@@ -57,15 +55,5 @@ public class P2PCommunication {
 		byte [] response = Base64.decodeBase64(responseString.getBytes());
 		return RSACrypto.decryptPublic(peerPublicKey, response);
 	}
-	
-	public static void checkResponse(ResponseHeader header) throws Exception {		
-		if (header.getCurrentTestVersionNo() 
-				> Globals.versionManager.getTestsVersion())
-			;
-			// TODO contact aggregator to update testversion
-		if (header.getCurrentVersionNo() 
-				> Globals.versionManager.getAgentVersion())
-			;
-			// TODO contact aggregator to update agentversion
-	}
+		
 }
