@@ -22,17 +22,24 @@
 package org.umit.icm.mobile.utils;
 
 
+import java.security.KeyPair;
+
 import org.umit.icm.mobile.proto.MessageProtos.*;
 
 public class ProfilerRun {
 	
-	public static void run() {
+	
+	
+	public static void run() {	
 		profileTraceBuild();
 		profileTraceRouteBuild();
+		profileICMReport();
+		profileRSAGenerateKey();
 	}
 		
 	private static void profileTraceBuild (){
-		Profiler.runProfiler(new TaskInterface () {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				Trace trace = Trace.newBuilder()
 				.setHop(10)
@@ -48,7 +55,8 @@ public class ProfilerRun {
 	}
 	
 	private static void profileTraceRouteBuild (){
-		Profiler.runProfiler(new TaskInterface () {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				Trace trace = Trace.newBuilder()
 				.setHop(10)
@@ -66,6 +74,58 @@ public class ProfilerRun {
 			
 			public String taskName() {
 				return "TraceRoute Build";
+			}
+		});
+	}
+	
+	private static void profileICMReport() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				Trace trace = Trace.newBuilder()
+				.setHop(10)
+				.setIp("IP")
+				.addPacketsTiming(10)
+				.build();
+				
+				TraceRoute traceRoute = TraceRoute.newBuilder()
+				.setHops(10)
+				.setPacketSize(10)
+				.setTarget("target")
+				.addTraces(trace)
+				.build();
+				
+				ICMReport icmReport = ICMReport.newBuilder()
+				.setAgentID(10)
+				.setReportID(10)
+				.setTestID(10)
+				.setTimeUTC(10)
+				.setTimeZone(10)
+				.setTraceroute(traceRoute)
+				.addPassedNode("node1")
+				.build();
+			}
+			
+			public String taskName() {
+				return "ICMReport Build";
+			}
+		});
+	}
+	
+	private static void profileRSAGenerateKey() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					KeyPair keyPair = RSACrypto.generateKey();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "RSA KeyPair Generate";
 			}
 		});
 	}

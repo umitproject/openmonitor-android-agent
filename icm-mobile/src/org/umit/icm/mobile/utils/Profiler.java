@@ -28,27 +28,31 @@ import android.util.Log;
 
 public class Profiler {
 	
+	private long start;
+	private long end;
+	
 	public Profiler() {
-		
+		start = 0;
+		end = 0;
 	}
-		
-	private static long timeTaken(TaskInterface taskInterface) {
-		long start = 0;
-		long end = 0;
+	
+	private long timeTaken(TaskInterface taskInterface) {
+		start = 0;
+		end = 0;
 		start = System.currentTimeMillis();
 		taskInterface.task();
 		end = System.currentTimeMillis()-start;
 		return end;
 	}
 			
-	public static void runProfiler(TaskInterface taskInterface) {
-		Log.w(taskInterface.taskName(), Long.toString(timeTaken(taskInterface)));
+	public void runProfiler(TaskInterface taskInterface) {
+		Log.w(taskInterface.taskName(), "Done");
 		try {
 			SDCardReadWrite.writeStringAppend(Constants.PROFILER_FILE
 					, Constants.PROFILER_DIR
 					, taskInterface.taskName()
 					+ ": " + Long.toString(timeTaken(taskInterface))
-					+ " ms");
+					+ " ms\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
