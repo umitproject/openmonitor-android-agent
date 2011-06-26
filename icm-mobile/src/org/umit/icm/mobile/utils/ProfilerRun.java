@@ -22,9 +22,20 @@
 package org.umit.icm.mobile.utils;
 
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.KeyPair;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpException;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
+import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.proto.MessageProtos.*;
+
+import android.util.Log;
 
 public class ProfilerRun {
 	
@@ -44,6 +55,19 @@ public class ProfilerRun {
 		profileSDCardWriteString();
 		profileSDCardReadString();
 		profileWebsiteReportDetailBuild();
+		profileWebsiteReportBuild();
+		profileServiceReportDetailBuild();
+		profileServiceReportBuild();
+		profileRequestHeader();
+		profileResponseHeader();
+		profileRegisterAgent();
+		profileRegisterAgentResponse();
+		profileWebsiteOpen();
+		profileWebsiteReadWrite();
+		profileWebsiteListReadWrite();
+		profileBase64Encode();
+		profileBase64Decode();
+		profileAggrSendServiceSuggestion();
 	}
 		
 	private static void profileTraceBuild (){
@@ -292,6 +316,54 @@ public class ProfilerRun {
 		});
 	}
 	
+	private static void profileWebsiteReportBuild() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setStatusCode(10)
+				.setWebsiteURL("url")
+				.build();
+				
+				Trace trace = Trace.newBuilder()
+				.setHop(10)
+				.setIp("IP")
+				.addPacketsTiming(10)
+				.build();
+				
+				TraceRoute traceRoute = TraceRoute.newBuilder()
+				.setHops(10)
+				.setPacketSize(10)
+				.setTarget("target")
+				.addTraces(trace)
+				.build();
+				
+				ICMReport icmReport = ICMReport.newBuilder()
+				.setAgentID(10)
+				.setReportID(10)
+				.setTestID(10)
+				.setTimeUTC(10)
+				.setTimeZone(10)
+				.setTraceroute(traceRoute)
+				.addPassedNode("node1")
+				.build();
+				
+				WebsiteReport websiteReport = WebsiteReport.newBuilder()
+				.setHeader(icmReport)
+				.setHtmlResponse("response")
+				.setReport(websiteReportDetail)
+				.setRedirectLink("link")			
+				.build();
+				}
+			
+			public String taskName() {
+				return "WebsiteReport Build";
+			}
+		});
+	}
+	
 	private static void profileWebsiteReportDetailBuild() {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
@@ -309,4 +381,289 @@ public class ProfilerRun {
 			}
 		});
 	}
+	
+	private static void profileServiceReportDetailBuild() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setServiceName("service")
+				.setStatusCode(10)
+				.build();
+			}
+			
+			public String taskName() {
+				return "ServiceReportDetail Build";
+			}
+		});
+	}
+	
+	private static void profileServiceReportBuild() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setServiceName("service")
+				.setStatusCode(10)
+				.build();
+				
+				Trace trace = Trace.newBuilder()
+				.setHop(10)
+				.setIp("IP")
+				.addPacketsTiming(10)
+				.build();
+				
+				TraceRoute traceRoute = TraceRoute.newBuilder()
+				.setHops(10)
+				.setPacketSize(10)
+				.setTarget("target")
+				.addTraces(trace)
+				.build();
+				
+				ICMReport icmReport = ICMReport.newBuilder()
+				.setAgentID(10)
+				.setReportID(10)
+				.setTestID(10)
+				.setTimeUTC(10)
+				.setTimeZone(10)
+				.setTraceroute(traceRoute)
+				.addPassedNode("node1")
+				.build();
+				
+				ServiceReport serviceReport = ServiceReport.newBuilder()
+				.setHeader(icmReport)
+				.setReport(serviceReportDetail)				
+				.build();
+				}
+			
+			public String taskName() {
+				return "ServiceReport Build";
+			}
+		});
+	}
+	
+	private static void profileRequestHeader() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+			}
+			
+			public String taskName() {
+				return "RequestHeader Build";
+			}
+		});
+	}
+	
+	private static void profileResponseHeader() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				ResponseHeader responseHeader = ResponseHeader.newBuilder()
+				.setCurrentTestVersionNo(10)
+				.setCurrentVersionNo(10)
+				.build();
+			}
+			
+			public String taskName() {
+				return "ResponseHeader Build";
+			}
+		});
+	}
+	
+	private static void profileRegisterAgent() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				RegisterAgent registerAgent = RegisterAgent.newBuilder()
+				.setIp("ip")
+				.setVersionNo(10)
+				.build();
+			}
+			
+			public String taskName() {
+				return "RegisterAgent Build";
+			}
+		});
+	}
+	
+	private static void profileRegisterAgentResponse() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				ResponseHeader responseHeader = ResponseHeader.newBuilder()
+				.setCurrentTestVersionNo(10)
+				.setCurrentVersionNo(10)
+				.build();
+				
+				RegisterAgentResponse registerAgentResponse 
+				= RegisterAgentResponse.newBuilder()
+				.setAgentID(10)
+				.setCipheredPublicKey("key")
+				.setHeader(responseHeader)
+				.setPrivateKey("key")
+				.setPublicKey("key")
+				.setToken("token")
+				.build();
+			}
+			
+			public String taskName() {
+				return "RegisterAgentResponse Build";
+			}
+		});
+	}
+	
+	private static void profileWebsiteOpen() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				try {
+					WebsiteOpen.getContent(
+							WebsiteOpen.openURLConnection(
+									"http://www.google.com"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (HttpException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public String taskName() {
+				return "WebsiteOpen";
+			}
+		});
+	}	
+	
+	private static void profileWebsiteReadWrite() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				Website website = new Website("url", "status", "check");
+				try {
+					website.writeWebsite();
+					Website newWebsite = website.readWebsite("url");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			public String taskName() {
+				return "WebsiteReadWrite";
+			}
+		});
+	}	
+	
+	private static void profileWebsiteListReadWrite() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){
+				Website website1 = new Website("url1","1","1");
+		    	Website website2 = new Website("url2","2","2");
+		    	List<Website> websiteList = new ArrayList<Website>();
+		    	websiteList.add(website1);
+		    	websiteList.add(website2);
+		    	
+		    	try {
+					SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR
+							, websiteList);
+					List<Website> newWebsiteList 
+			    	= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+				
+			}
+			
+			public String taskName() {
+				return "WebsiteListReadWrite";
+			}
+		});
+	}
+	
+	private static void profileBase64Encode() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){				
+		    	
+		    	String testString = "ICMMobileAgent";
+		    	String encodedString = new String(Base64.encodeBase64(testString.getBytes()));
+		    					
+			}
+			
+			public String taskName() {
+				return "Base64Encode";
+			}
+		});
+	}	
+	
+	private static void profileBase64Decode() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){				
+		    	
+		    	String testString = "ICMMobileAgent";
+		    	String encodedString = new String(Base64.encodeBase64(testString.getBytes()));
+		    	String str = new String(Base64.decodeBase64(encodedString.getBytes()));
+		    					
+			}
+			
+			public String taskName() {
+				return "Base64Decode";
+			}
+		});
+	}	
+	
+	private static void profileAggrSendServiceSuggestion() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				ServiceSuggestion serviceSuggestion =
+					ServiceSuggestion.newBuilder()
+					.setEmailAddress("email")
+					.setHostName("name")
+					.setIp("ip")
+					.setServiceName("name")
+					.setHeader(requestHeader)
+					.build();
+		    	try {
+					TestSuggestionResponse testSuggestionResponse = 
+						AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
+					String str = Integer.toString(testSuggestionResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		    	
+		    					
+			}
+			
+			public String taskName() {
+				return "AggrComm SendServiceSuggestion";
+			}
+		});
+	}	
 }
