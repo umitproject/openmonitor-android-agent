@@ -68,6 +68,9 @@ public class ProfilerRun {
 		profileBase64Encode();
 		profileBase64Decode();
 		profileAggrSendServiceSuggestion();
+		profileAggrSendWebsiteSuggestion();
+		profileAggrCheckTests();
+		profileAggrCheckVersion();
 	}
 		
 	private static void profileTraceBuild (){
@@ -665,5 +668,112 @@ public class ProfilerRun {
 				return "AggrComm SendServiceSuggestion";
 			}
 		});
-	}	
+	}
+	
+	private static void profileAggrSendWebsiteSuggestion() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				WebsiteSuggestion websiteSuggestion 
+				= WebsiteSuggestion.newBuilder()
+				.setEmailAddress("email")
+				.setHeader(requestHeader)
+				.setWebsiteURL("website")
+				.build();
+		    	try {
+					TestSuggestionResponse testSuggestionResponse = 
+						AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
+					String str = Integer.toString(testSuggestionResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		    	
+		    					
+			}
+			
+			public String taskName() {
+				return "AggrComm SendServiceSuggestion";
+			}
+		});
+	}
+	
+	private static void profileAggrCheckTests() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				NewTests newTests = NewTests.newBuilder()
+				.setHeader(requestHeader)
+				.setCurrentTestVersionNo(10)
+				.build();
+				
+				try {
+					NewTestsResponse newTestsResponse = 
+						AggregatorRetrieve.checkTests(newTests);
+					String str = Integer.toString(newTestsResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    					
+			}
+			
+			public String taskName() {
+				return "AggrComm NewTests";
+			}
+		});
+	}
+	
+	private static void profileAggrCheckVersion() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				NewVersion newVersion = NewVersion.newBuilder()
+				.setHeader(requestHeader)
+				.setAgentType("mobile")
+				.setAgentVersionNo(10)
+				.build();
+				
+				try {
+					NewVersionResponse newVersionResponse = 
+						AggregatorRetrieve.checkVersion(newVersion);
+					String str = Integer.toString(newVersionResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    					
+			}
+			
+			public String taskName() {
+				return "AggrComm NewVersion";
+			}
+		});
+	}
 }
