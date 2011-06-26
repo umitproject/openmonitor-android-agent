@@ -701,7 +701,7 @@ public class ProfilerRun {
 			}
 			
 			public String taskName() {
-				return "AggrComm SendServiceSuggestion";
+				return "AggrComm SendWebsiteSuggestion";
 			}
 		});
 	}
