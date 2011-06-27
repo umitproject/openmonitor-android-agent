@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
+import java.security.PrivateKey;
 
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.MessageConversion;
@@ -41,6 +42,8 @@ public class AggregatorActions {
 		MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
 		Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
 		Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
+		Globals.keyManager.setMyCipheredKey(
+				registerAgentResponse.getCipheredPublicKey().getBytes());
 		
 		return true;
 	}
