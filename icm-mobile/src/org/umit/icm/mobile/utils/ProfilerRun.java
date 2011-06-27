@@ -71,6 +71,12 @@ public class ProfilerRun {
 		profileAggrSendWebsiteSuggestion();
 		profileAggrCheckTests();
 		profileAggrCheckVersion();
+		profileAggrSendWebsiteReport();
+		profileAggrSendServiceReport();
+		profileAggrGetEvents();
+		profileAggrGetPeerList();
+		profileAggrGetSuperPeerList();
+		profileAggrRegisterAgent();
 	}
 		
 	private static void profileTraceBuild (){
@@ -773,6 +779,284 @@ public class ProfilerRun {
 			
 			public String taskName() {
 				return "AggrComm NewVersion";
+			}
+		});
+	}
+	
+	private static void profileAggrSendServiceReport() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setServiceName("service")
+				.setStatusCode(10)
+				.build();
+				
+				Trace trace = Trace.newBuilder()
+				.setHop(10)
+				.setIp("IP")
+				.addPacketsTiming(10)
+				.build();
+				
+				TraceRoute traceRoute = TraceRoute.newBuilder()
+				.setHops(10)
+				.setPacketSize(10)
+				.setTarget("target")
+				.addTraces(trace)
+				.build();
+				
+				ICMReport icmReport = ICMReport.newBuilder()
+				.setAgentID(10)
+				.setReportID(10)
+				.setTestID(10)
+				.setTimeUTC(10)
+				.setTimeZone(10)
+				.setTraceroute(traceRoute)
+				.addPassedNode("node1")
+				.build();
+				
+				ServiceReport serviceReport = ServiceReport.newBuilder()
+				.setHeader(icmReport)
+				.setReport(serviceReportDetail)				
+				.build(); 
+				
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(requestHeader)
+				.setReport(serviceReport)
+				.build();
+				
+				try {
+					boolean bool = AggregatorRetrieve.sendServiceReport(sendServiceReport);
+					if (bool == true)
+						Log.w(taskName(), "true");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+				
+			
+			
+			public String taskName() {
+				return "AggrComm SendServiceReport";
+			}
+		});
+	}
+	
+	private static void profileAggrSendWebsiteReport() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
+				.setBandwidth(10)
+				.setResponseTime(10)
+				.setStatusCode(10)
+				.setWebsiteURL("url")
+				.build();
+				
+				Trace trace = Trace.newBuilder()
+				.setHop(10)
+				.setIp("IP")
+				.addPacketsTiming(10)
+				.build();
+				
+				TraceRoute traceRoute = TraceRoute.newBuilder()
+				.setHops(10)
+				.setPacketSize(10)
+				.setTarget("target")
+				.addTraces(trace)
+				.build();
+				
+				ICMReport icmReport = ICMReport.newBuilder()
+				.setAgentID(10)
+				.setReportID(10)
+				.setTestID(10)
+				.setTimeUTC(10)
+				.setTimeZone(10)
+				.setTraceroute(traceRoute)
+				.addPassedNode("node1")
+				.build();
+				
+				WebsiteReport websiteReport = WebsiteReport.newBuilder()
+				.setHeader(icmReport)
+				.setReport(websiteReportDetail)				
+				.build(); 
+				
+				SendWebsiteReport sendWebsiteReport 
+				= SendWebsiteReport.newBuilder()
+				.setHeader(requestHeader)
+				.setReport(websiteReport)
+				.build();
+				
+				try {
+					boolean bool = AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
+					if (bool == true)
+						Log.w(taskName(), "true");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+				
+			
+			
+			public String taskName() {
+				return "AggrComm SendWebsiteReport";
+			}
+		});
+	}
+	
+	private static void profileAggrGetEvents() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();																
+				 
+				GetEvents getEvents = GetEvents.newBuilder()
+				.setHeader(requestHeader)
+				.setGeoLat(10)
+				.setGeoLon(10)
+				.addLocations("location")
+				.build();
+				
+				try {
+					GetEventsResponse getEventsResponse = AggregatorRetrieve.getEvents(getEvents);
+					String str = Integer.toString(getEventsResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+				
+			
+			
+			public String taskName() {
+				return "AggrComm GetEvents";
+			}
+		});
+	}
+	
+	private static void profileAggrGetSuperPeerList() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();																
+				 
+				GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+				.setHeader(requestHeader)				
+				.build();
+				
+				try {
+					GetSuperPeerListResponse getSuperPeerListResponse 
+					= AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+					String str = Integer.toString(getSuperPeerListResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+							
+			
+			public String taskName() {
+				return "AggrComm GetSuperPeerList";
+			}
+		});
+	}
+	
+	private static void profileAggrGetPeerList() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){					
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();																
+				 
+				GetPeerList getPeerList = GetPeerList.newBuilder()
+				.setHeader(requestHeader)				
+				.build();
+				
+				try {
+					GetPeerListResponse getPeerListResponse 
+					= AggregatorRetrieve.getPeerList(getPeerList);
+					String str = Integer.toString(getPeerListResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+							
+			
+			public String taskName() {
+				return "AggrComm GetPeerList";
+			}
+		});
+	}
+	
+	private static void profileAggrRegisterAgent() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){																								
+				 
+				RegisterAgent registerAgent = RegisterAgent.newBuilder()
+				.setIp("ip")
+				.setVersionNo(10)
+				.build();
+				
+				try {
+					RegisterAgentResponse registerAgentResponse 
+					= AggregatorRetrieve.registerAgent(registerAgent);
+					String str 
+					= Integer.toString(registerAgentResponse.getHeader().getCurrentVersionNo());
+					Log.w(taskName(), str);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+							
+			
+			public String taskName() {
+				return "AggrComm RegisterAgent";
 			}
 		});
 	}
