@@ -23,6 +23,7 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.MessageConversion;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
@@ -38,6 +39,9 @@ public class AggregatorActions {
 	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws IOException {
 		MessageConversion.updateAgentVersion(registerAgentResponse.getHeader());
 		MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
+		Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
+		Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
+		
 		return true;
 	}
 	
