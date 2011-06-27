@@ -55,8 +55,8 @@ public class AggregatorRetrieve {
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
 			= AggregatorResources.registerAgent(registerAgent, clientResource); 
-			MessageConversion.updateAgentVersion(registerAgentResponse.getHeader());
-			MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
+			//MessageConversion.updateAgentVersion(registerAgentResponse.getHeader());
+			//MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
 			return registerAgentResponse;
 	 }
 	
@@ -67,8 +67,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
 		 	GetPeerListResponse getPeerListResponse
 		 	= AggregatorResources.getPeerList(getPeerList, clientResource);
-		 	MessageConversion.updateAgentVersion(getPeerListResponse.getHeader());
-		 	MessageConversion.updateTestsVersion(getPeerListResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(getPeerListResponse.getHeader());
+		 	//MessageConversion.updateTestsVersion(getPeerListResponse.getHeader());
 		 	return getPeerListResponse;
 	 }
 	 
@@ -79,8 +79,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse
 		 	= AggregatorResources.getSuperPeerList(getSuperPeerList, clientResource);
-		 	MessageConversion.updateAgentVersion(getSuperPeerListResponse.getHeader());
-		 	MessageConversion.updateTestsVersion(getSuperPeerListResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(getSuperPeerListResponse.getHeader());
+		 	//MessageConversion.updateTestsVersion(getSuperPeerListResponse.getHeader());
 		 	return getSuperPeerListResponse; 
 	 }
 	 
@@ -91,8 +91,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
 		 	GetEventsResponse getEventsResponse 
 		 	= AggregatorResources.getEvents(getEvents, clientResource);
-		 	MessageConversion.updateAgentVersion(getEventsResponse.getHeader());
-		 	MessageConversion.updateTestsVersion(getEventsResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(getEventsResponse.getHeader());
+		 	//MessageConversion.updateTestsVersion(getEventsResponse.getHeader());
 		 	return getEventsResponse;
 	 }
 	 
@@ -103,8 +103,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
 		 	SendReportResponse sendReportResponse
 		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport, clientResource);
-		 	MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
-			MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
+			//MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
 			return true;
 	 }
 	 
@@ -115,8 +115,8 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
 		 	SendReportResponse sendReportResponse 
 		 	= AggregatorResources.sendServiceReport(sendServiceReport, clientResource);
-		 	MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
-			MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
+		 	//MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
+			//MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
 			return true;
 	 }	
 	 
