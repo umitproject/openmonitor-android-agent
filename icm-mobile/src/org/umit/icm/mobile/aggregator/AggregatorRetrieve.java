@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.restlet.resource.ClientResource;
-import org.umit.icm.mobile.process.MessageConversion;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -48,48 +47,44 @@ import org.umit.icm.mobile.utils.Constants;
 
 public class AggregatorRetrieve {
 	
-	 public static RegisterAgentResponse registerAgent(
+	 public static boolean registerAgent(
 			RegisterAgent registerAgent) 
 	 throws UnsupportedEncodingException, IOException {
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
 			= AggregatorResources.registerAgent(registerAgent, clientResource); 
-			
-			return registerAgentResponse;
+			return AggregatorActions.registerAgentAction(registerAgentResponse);			
 	 }
 	
-	 public static GetPeerListResponse getPeerList(
+	 public static boolean getPeerList(
 			GetPeerList getPeerList) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
 		 	GetPeerListResponse getPeerListResponse
 		 	= AggregatorResources.getPeerList(getPeerList, clientResource);
-		 	
-		 	return getPeerListResponse;
+		 	return AggregatorActions.getPeerListAction(getPeerListResponse);		 	
 	 }
 	 
-	 public static GetSuperPeerListResponse getSuperPeerList(
+	 public static boolean getSuperPeerList(
 			GetSuperPeerList getSuperPeerList) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse
 		 	= AggregatorResources.getSuperPeerList(getSuperPeerList, clientResource);
-		 	
-		 	return getSuperPeerListResponse; 
+		 	return AggregatorActions.getSuperPeerListAction(getSuperPeerListResponse);		 	
 	 }
 	 
-	 public static GetEventsResponse getEvents(
+	 public static boolean getEvents(
 			GetEvents getEvents) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
 		 	GetEventsResponse getEventsResponse 
-		 	= AggregatorResources.getEvents(getEvents, clientResource);
-		 	
-		 	return getEventsResponse;
+		 	= AggregatorResources.getEvents(getEvents, clientResource);	 	
+		 	return AggregatorActions.getEventsAction(getEventsResponse);
 	 }
 	 
 	 public static boolean sendWebsiteReport(
@@ -98,9 +93,8 @@ public class AggregatorRetrieve {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
 		 	SendReportResponse sendReportResponse
-		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport, clientResource);
-		 	
-			return true;
+		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport, clientResource);		 	
+			return AggregatorActions.sendReportAction(sendReportResponse);
 	 }
 	 
 	 public static boolean sendServiceReport(
@@ -110,52 +104,47 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
 		 	SendReportResponse sendReportResponse 
 		 	= AggregatorResources.sendServiceReport(sendServiceReport, clientResource);
-
-			return true;
+		 	return AggregatorActions.sendReportAction(sendReportResponse);			
 	 }	
 	 
-	 public static NewVersionResponse checkVersion(
+	 public static boolean checkVersion(
 			NewVersion newVersion) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
 		 	NewVersionResponse newVersionResponse
-		 	= AggregatorResources.checkVersion(newVersion, clientResource);
-		 	
-			return newVersionResponse;
+		 	= AggregatorResources.checkVersion(newVersion, clientResource);		 	
+			return AggregatorActions.checkVersionAction(newVersionResponse);
 	 }
 	 
-	 public static NewTestsResponse checkTests(
+	 public static boolean checkTests(
 			NewTests newTests) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
 		 	NewTestsResponse newTestsResponse 
-		 	= AggregatorResources.checkTests(newTests, clientResource);
-		 	
-			return newTestsResponse;
+		 	= AggregatorResources.checkTests(newTests, clientResource);		 	
+			return AggregatorActions.newTestsAction(newTestsResponse);
 	 }
 	 
-	 public static TestSuggestionResponse sendWebsiteSuggestion(
+	 public static boolean sendWebsiteSuggestion(
 			WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
-		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);
-		 	
-			return testSuggestionResponse;
+		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);		 	
+			return AggregatorActions.sendSuggestionAction(testSuggestionResponse);
 	 }
 	 
-	 public static TestSuggestionResponse sendServiceSuggestion(
+	 public static boolean sendServiceSuggestion(
 			ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
-		 	
-			return testSuggestionResponse;
+		 	return AggregatorActions.sendSuggestionAction(testSuggestionResponse);			
 	 }
 	 
 	 public static String testSuggestion(
