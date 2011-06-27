@@ -656,10 +656,10 @@ public class ProfilerRun {
 					.setHeader(requestHeader)
 					.build();
 		    	try {
-					TestSuggestionResponse testSuggestionResponse = 
+					boolean bool = 
 						AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
-					String str = Integer.toString(testSuggestionResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -692,10 +692,10 @@ public class ProfilerRun {
 				.setWebsiteURL("website")
 				.build();
 		    	try {
-					TestSuggestionResponse testSuggestionResponse = 
+					boolean bool = 
 						AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
-					String str = Integer.toString(testSuggestionResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -727,10 +727,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					NewTestsResponse newTestsResponse = 
+					boolean bool = 
 						AggregatorRetrieve.checkTests(newTests);
-					String str = Integer.toString(newTestsResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -763,10 +763,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					NewVersionResponse newVersionResponse = 
+					boolean bool = 
 						AggregatorRetrieve.checkVersion(newVersion);
-					String str = Integer.toString(newVersionResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -941,9 +941,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					GetEventsResponse getEventsResponse = AggregatorRetrieve.getEvents(getEvents);
-					String str = Integer.toString(getEventsResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					boolean bool 
+					= AggregatorRetrieve.getEvents(getEvents);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -975,10 +976,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					GetSuperPeerListResponse getSuperPeerListResponse 
+					boolean bool 
 					= AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
-					String str = Integer.toString(getSuperPeerListResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1009,10 +1010,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					GetPeerListResponse getPeerListResponse 
+					boolean bool 
 					= AggregatorRetrieve.getPeerList(getPeerList);
-					String str = Integer.toString(getPeerListResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1040,11 +1041,10 @@ public class ProfilerRun {
 				.build();
 				
 				try {
-					RegisterAgentResponse registerAgentResponse 
+					boolean bool 
 					= AggregatorRetrieve.registerAgent(registerAgent);
-					String str 
-					= Integer.toString(registerAgentResponse.getHeader().getCurrentVersionNo());
-					Log.w(taskName(), str);
+					if (bool == true)
+						Log.w(taskName(), "true");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
