@@ -41,6 +41,8 @@ public class Globals {
 	= new RuntimeParameters();
 	public static VersionManager versionManager 
 	= new VersionManager();
+	public static KeyManager keyManager
+	= new KeyManager();
 	public static WebsiteConnectivity websiteTest 
 	= new WebsiteConnectivity();
 	/*public static RequestHeader requestHeader
