@@ -45,8 +45,7 @@ public class TestManager {
 	}
 	
 	public void addTest(TestObject test) throws IOException, RuntimeException {
-		this.currentTests.add(test);
-		writeTests(currentTests);
+		this.currentTests.add(test);		
 	}
 	
 	private void writeTests(List<TestObject> tests) throws IOException, RuntimeException {
@@ -71,6 +70,10 @@ public class TestManager {
 			e.printStackTrace();
 		}
 			return true;
+	}
+	
+	public void writeTests() throws IOException, RuntimeException {
+		SDCardReadWrite.writeTests(Constants.TESTS_DIR, currentTests);
 	}
 
 }
