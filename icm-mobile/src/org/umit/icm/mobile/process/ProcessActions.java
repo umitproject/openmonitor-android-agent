@@ -22,6 +22,10 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
@@ -30,6 +34,7 @@ import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 public class ProcessActions {	
 	
@@ -118,7 +123,31 @@ public class ProcessActions {
 		}
 		
 		Globals.keyManager.setMyCipheredKey(
-				registerAgentResponse.getCipheredPublicKey().getBytes());
+				registerAgentResponse.getCipheredPublicKey().getBytes());		 
+		try {
+			PrivateKey privateKey = RSACrypto.stringToPrivateKey(registerAgentResponse.getPrivateKey());
+			Globals.keyManager.setMyPrivateKey(privateKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			PublicKey publicKey = RSACrypto.stringToPublicKey(registerAgentResponse.getPublicKey());
+			Globals.keyManager.setMyPublicKey(publicKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return true;
 	}
 }
