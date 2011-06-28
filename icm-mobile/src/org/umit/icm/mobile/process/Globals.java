@@ -43,6 +43,8 @@ public class Globals {
 	= new VersionManager();
 	public static KeyManager keyManager
 	= new KeyManager();
+	public static TestManager testManager
+	= new TestManager();
 	public static WebsiteConnectivity websiteTest 
 	= new WebsiteConnectivity();
 	/*public static RequestHeader requestHeader
