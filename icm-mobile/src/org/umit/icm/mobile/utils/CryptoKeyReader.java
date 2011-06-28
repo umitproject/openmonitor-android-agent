@@ -39,6 +39,11 @@ public class CryptoKeyReader {
 		return AESCrypto.readKey(Constants.MY_SECRET_KEY_FILE);
 	}
 	
+	public static byte[] getMyCipheredKey() throws IOException, RuntimeException {
+		return SDCardReadWrite.readString(
+				Constants.MY_CIPHERED_KEY_FILE, Constants.KEYS_DIR).getBytes();
+	}
+	
 	public static PublicKey getPeerPublicKey(String peerIP) throws IOException {
 		return RSACrypto.readPublicKey(peerIP+Constants.PEER_PUBLIC_KEY_FILE);
 	}
