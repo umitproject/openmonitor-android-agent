@@ -23,7 +23,6 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 
-import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
@@ -38,34 +37,26 @@ public class AggregatorActions {
 	
 	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws IOException {
 		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
-		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());
-		Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
-		Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
-		Globals.keyManager.setMyCipheredKey(
-				registerAgentResponse.getCipheredPublicKey().getBytes());
-		
-		return true;
+		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
+		return ProcessActions.registerAgent(registerAgentResponse);
 	}
 	
 	public static boolean getPeerListAction(GetPeerListResponse getPeerListResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
-	 	ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());
-		return true;
+	 	return ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());		
 	}
 	
 	public static boolean getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
-	 	ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
-		return true;
+	 	return ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
 	}
 	
 	public static boolean getEventsAction(GetEventsResponse getEventsResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getEventsResponse.getHeader());
-	 	ProcessActions.updateEventsList(getEventsResponse.getEventsList());
-		return true;
+	 	return ProcessActions.updateEventsList(getEventsResponse.getEventsList());
 	}
 	
 	public static boolean sendReportAction(SendReportResponse sendReportResponse) throws IOException {

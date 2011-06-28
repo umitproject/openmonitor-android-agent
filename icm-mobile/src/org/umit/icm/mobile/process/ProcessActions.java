@@ -28,6 +28,7 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
+import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 
 public class ProcessActions {	
@@ -101,6 +102,23 @@ public class ProcessActions {
 	public static boolean updateSuperPeersList(List<AgentData> superPeers) {
 		for(int i = 0 ; i < superPeers.size(); i++)
 			Globals.superPeersList.add(superPeers.get(i));
+		return true;
+	}
+	
+	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
+		try {
+			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
+			Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Globals.keyManager.setMyCipheredKey(
+				registerAgentResponse.getCipheredPublicKey().getBytes());
 		return true;
 	}
 }
