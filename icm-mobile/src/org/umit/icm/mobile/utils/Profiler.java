@@ -51,8 +51,8 @@ public class Profiler {
 			SDCardReadWrite.writeStringAppend(Constants.PROFILER_FILE
 					, Constants.PROFILER_DIR
 					, taskInterface.taskName()
-					+ ": " + Long.toString(timeTaken(taskInterface))
-					+ " ms\n");
+					+ "," + Long.toString(timeTaken(taskInterface))
+					+ ",ms,\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
