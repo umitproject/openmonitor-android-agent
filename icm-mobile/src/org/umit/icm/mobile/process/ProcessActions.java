@@ -22,7 +22,9 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
@@ -80,6 +82,12 @@ public class ProcessActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return true;
+	}
+	
+	public static boolean updateEventsList(List<Event> events) {
+		for(int i = 0 ; i < events.size(); i++)
+			Globals.eventsList.add(events.get(i));
 		return true;
 	}
 }
