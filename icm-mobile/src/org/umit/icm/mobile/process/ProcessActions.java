@@ -49,19 +49,11 @@ public class ProcessActions {
 		}
 	}
 	
-	public static void newTestsResponseAdd(NewTestsResponse response) {
-		TestManager testManager = new TestManager();
-		for (int i = 0 ; i < response.getTestsCount() ; i++) {
-			try {
-				testManager.addTest(MessageConversion.testToTestObject(response.getTests(i)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	public static void newTestsResponseAdd(NewTestsResponse response) throws IOException, RuntimeException {		
+		for (int i = 0 ; i < response.getTestsCount() ; i++) {			
+				Globals.testManager.addTest(MessageConversion.testToTestObject(response.getTests(i)));			
+		}		
+		Globals.testManager.writeTests();
 	}
 	
 	/*public static void initializeRequestHeader() throws IOException, RuntimeException {
@@ -75,7 +67,16 @@ public class ProcessActions {
 		return true;
 	}
 	
-	public static boolean updateTests(NewTestsResponse newTestsResponse) {	
+	public static boolean updateTests(NewTestsResponse newTestsResponse) {
+		try {
+			newTestsResponseAdd(newTestsResponse);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 }
