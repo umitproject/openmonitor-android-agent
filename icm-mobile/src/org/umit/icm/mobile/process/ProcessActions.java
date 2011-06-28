@@ -24,6 +24,7 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 import java.util.List;
 
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
@@ -88,6 +89,18 @@ public class ProcessActions {
 	public static boolean updateEventsList(List<Event> events) {
 		for(int i = 0 ; i < events.size(); i++)
 			Globals.eventsList.add(events.get(i));
+		return true;
+	}
+	
+	public static boolean updatePeersList(List<AgentData> peers) {
+		for(int i = 0 ; i < peers.size(); i++)
+			Globals.peersList.add(peers.get(i));
+		return true;
+	}
+	
+	public static boolean updateSuperPeersList(List<AgentData> superPeers) {
+		for(int i = 0 ; i < superPeers.size(); i++)
+			Globals.superPeersList.add(superPeers.get(i));
 		return true;
 	}
 }
