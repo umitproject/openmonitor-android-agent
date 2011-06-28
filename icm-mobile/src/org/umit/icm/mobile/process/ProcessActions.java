@@ -35,7 +35,7 @@ public class ProcessActions {
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
 			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
-			// TODO patch current binary
+			// TODO call Aggregator checkVersion webservice
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class ProcessActions {
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
-			// TODO update current tests
+			// TODO call aggregator newTests webservice
 		}
 	}
 	
@@ -63,7 +63,8 @@ public class ProcessActions {
 		.build();
 	}*/
 	
-	public static boolean updateAgent(NewVersionResponse newVersionResponse) {	
+	public static boolean updateAgent(NewVersionResponse newVersionResponse) {
+		// TODO patch current binary
 		return true;
 	}
 	
