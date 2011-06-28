@@ -24,13 +24,13 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
-import org.umit.icm.mobile.proto.MessageProtos.Test;
 
 public class ProcessActions {	
 	
-	public static void updateAgentVersion (ResponseHeader header) throws IOException {
+	public static void updateAgentVersion(ResponseHeader header) 
+		throws IOException {
 		
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
@@ -39,7 +39,8 @@ public class ProcessActions {
 		}
 	}
 	
-	public static void updateTestsVersion (ResponseHeader header) throws IOException {
+	public static void updateTestsVersion(ResponseHeader header)
+		throws IOException {
 		
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
@@ -48,7 +49,7 @@ public class ProcessActions {
 		}
 	}
 	
-	public static void newTestsResponseAdd (NewTestsResponse response) {
+	public static void newTestsResponseAdd(NewTestsResponse response) {
 		TestManager testManager = new TestManager();
 		for (int i = 0 ; i < response.getTestsCount() ; i++) {
 			try {
@@ -69,4 +70,12 @@ public class ProcessActions {
 		.setToken(Globals.runtimeParameters.getToken())
 		.build();
 	}*/
+	
+	public static boolean updateAgent(NewVersionResponse newVersionResponse) {	
+		return true;
+	}
+	
+	public static boolean updateTests(NewTestsResponse newTestsResponse) {	
+		return true;
+	}
 }

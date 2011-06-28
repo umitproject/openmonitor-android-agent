@@ -22,7 +22,6 @@
 package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
-import java.security.PrivateKey;
 
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.ProcessActions;
@@ -73,15 +72,11 @@ public class AggregatorActions {
 	}
 	
 	public static boolean checkVersionAction(NewVersionResponse newVersionResponse) throws IOException {
-		ProcessActions.updateAgentVersion(newVersionResponse.getHeader());
-		ProcessActions.updateTestsVersion(newVersionResponse.getHeader());
-		return true;
+		return ProcessActions.updateAgent(newVersionResponse);				
 	}
 	
 	public static boolean newTestsAction(NewTestsResponse newTestsResponse) throws IOException {
-		ProcessActions.updateAgentVersion(newTestsResponse.getHeader());
-		ProcessActions.updateTestsVersion(newTestsResponse.getHeader());
-		return true;
+		return ProcessActions.updateTests(newTestsResponse);		
 	}
 	
 	public static boolean sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) throws IOException {
