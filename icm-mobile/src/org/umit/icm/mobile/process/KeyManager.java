@@ -21,8 +21,14 @@
 
 package org.umit.icm.mobile.process;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+
+
+import org.umit.icm.mobile.utils.CryptoKeyWriter;
 
 public class KeyManager {
 	private byte[] mySecretKey;
@@ -35,20 +41,42 @@ public class KeyManager {
 		// TODO Auto-generated constructor stub
 	}
 
+	public KeyManager(byte[] mySecretKey, PrivateKey myPrivateKey,
+			PublicKey myPublicKey, byte[] myCipheredKey) {
+		super();
+		this.mySecretKey = mySecretKey;
+		this.myPrivateKey = myPrivateKey;
+		this.myPublicKey = myPublicKey;
+		this.myCipheredKey = myCipheredKey;
+	}
+
 	public byte[] getMySecretKey() {
 		return mySecretKey;
 	}
 
-	public void setMySecretKey(byte[] mySecretKey) {
+	public void setMySecretKey(byte[] mySecretKey) throws IOException {
 		this.mySecretKey = mySecretKey;
+		CryptoKeyWriter.writeMySecretKey(mySecretKey);
 	}
 
 	public PrivateKey getMyPrivateKey() {
 		return myPrivateKey;
 	}
 
-	public void setMyPrivateKey(PrivateKey myPrivateKey) {
+	public void setMyPrivateKey(PrivateKey myPrivateKey) {		
 		this.myPrivateKey = myPrivateKey;
+		try {
+			CryptoKeyWriter.writeMyPrivateKey(this.myPrivateKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public PublicKey getMyPublicKey() {
@@ -57,6 +85,18 @@ public class KeyManager {
 
 	public void setMyPublicKey(PublicKey myPublicKey) {
 		this.myPublicKey = myPublicKey;
+		try {
+			CryptoKeyWriter.writeMyPublicKey(this.myPublicKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public byte[] getMyCipheredKey() {
@@ -64,7 +104,17 @@ public class KeyManager {
 	}
 
 	public void setMyCipheredKey(byte[] myCipheredKey) {
-		this.myCipheredKey = myCipheredKey;
+		this.myCipheredKey = myCipheredKey;		
+		try {
+			CryptoKeyWriter.writeMyCipheredKey(this.myCipheredKey);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }
