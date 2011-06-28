@@ -34,10 +34,13 @@ import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
@@ -161,6 +164,22 @@ public class RSACrypto {
     		  objInputStream.close();
     	  }
     	    	
+    }
+    
+    public static PublicKey stringToPublicKey(String publicKeyString) 
+    	throws NoSuchAlgorithmException, InvalidKeySpecException {
+    	X509EncodedKeySpec spec =
+    	      new X509EncodedKeySpec(publicKeyString.getBytes());
+    	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    	    return keyFactory.generatePublic(spec);
+    }
+    
+    public static PrivateKey stringToPrivateKey(String privateKeyString) 
+	throws NoSuchAlgorithmException, InvalidKeySpecException {
+	X509EncodedKeySpec spec =
+	      new X509EncodedKeySpec(privateKeyString.getBytes());
+	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	    return keyFactory.generatePrivate(spec);
     }
 
 }
