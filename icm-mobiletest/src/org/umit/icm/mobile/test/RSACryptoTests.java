@@ -27,6 +27,7 @@ import java.security.KeyPair;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 import junit.framework.Assert;
@@ -68,6 +69,22 @@ public class RSACryptoTests extends AndroidTestCase {
     			, privateKeySpec.getPrivateExponent());
         Assert.assertEquals(RSACrypto.readPrivateKey("rsaKey.priv")
         		, keyPair.getPrivate());
+    }
+    
+    public void testPublicStringConversion() throws Throwable {
+    	keyPair = RSACrypto.generateKey();
+    	String publicKey 
+    	= new String(Base64.encodeBase64(keyPair.getPublic().getEncoded()));    	
+        Assert.assertEquals(RSACrypto.stringToPublicKey(publicKey)
+        		,keyPair.getPublic());
+    }
+    
+    public void testPrivateStringConversion() throws Throwable {
+    	keyPair = RSACrypto.generateKey();    	
+    	String privateKey 
+    	= new String(Base64.encodeBase64(keyPair.getPrivate().getEncoded()));    	
+        Assert.assertEquals(RSACrypto.stringToPrivateKey(privateKey)
+        		,keyPair.getPrivate());
     }
 
 }
