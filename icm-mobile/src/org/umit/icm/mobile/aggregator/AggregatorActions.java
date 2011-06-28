@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.security.PrivateKey;
 
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.process.MessageConversion;
+import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
@@ -38,8 +38,8 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 public class AggregatorActions {
 	
 	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws IOException {
-		MessageConversion.updateAgentVersion(registerAgentResponse.getHeader());
-		MessageConversion.updateTestsVersion(registerAgentResponse.getHeader());
+		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
+		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());
 		Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
 		Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
 		Globals.keyManager.setMyCipheredKey(
@@ -49,44 +49,44 @@ public class AggregatorActions {
 	}
 	
 	public static boolean getPeerListAction(GetPeerListResponse getPeerListResponse) throws IOException {
-		MessageConversion.updateAgentVersion(getPeerListResponse.getHeader());
-	 	MessageConversion.updateTestsVersion(getPeerListResponse.getHeader());
+		ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws IOException {
-		MessageConversion.updateAgentVersion(getSuperPeerListResponse.getHeader());
-	 	MessageConversion.updateTestsVersion(getSuperPeerListResponse.getHeader());
+		ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean getEventsAction(GetEventsResponse getEventsResponse) throws IOException {
-		MessageConversion.updateAgentVersion(getEventsResponse.getHeader());
-	 	MessageConversion.updateTestsVersion(getEventsResponse.getHeader());
+		ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(getEventsResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean sendReportAction(SendReportResponse sendReportResponse) throws IOException {
-		MessageConversion.updateAgentVersion(sendReportResponse.getHeader());
-		MessageConversion.updateTestsVersion(sendReportResponse.getHeader());
+		ProcessActions.updateAgentVersion(sendReportResponse.getHeader());
+		ProcessActions.updateTestsVersion(sendReportResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean checkVersionAction(NewVersionResponse newVersionResponse) throws IOException {
-		MessageConversion.updateAgentVersion(newVersionResponse.getHeader());
-		MessageConversion.updateTestsVersion(newVersionResponse.getHeader());
+		ProcessActions.updateAgentVersion(newVersionResponse.getHeader());
+		ProcessActions.updateTestsVersion(newVersionResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean newTestsAction(NewTestsResponse newTestsResponse) throws IOException {
-		MessageConversion.updateAgentVersion(newTestsResponse.getHeader());
-		MessageConversion.updateTestsVersion(newTestsResponse.getHeader());
+		ProcessActions.updateAgentVersion(newTestsResponse.getHeader());
+		ProcessActions.updateTestsVersion(newTestsResponse.getHeader());
 		return true;
 	}
 	
 	public static boolean sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) throws IOException {
-		MessageConversion.updateAgentVersion(testSuggestionResponse.getHeader());
-	 	MessageConversion.updateTestsVersion(testSuggestionResponse.getHeader());
+		ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(testSuggestionResponse.getHeader());
 		return true;
 	}
 }
