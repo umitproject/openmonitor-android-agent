@@ -57,8 +57,7 @@ public class CryptoKeyWriter {
 	}
 	
 	public static void writeMyCipheredKey(byte[] myCipheredKey) throws IOException, RuntimeException {
-		SDCardReadWrite.writeString(Constants.MY_CIPHERED_KEY_FILE
-				, Constants.KEYS_DIR, new String(myCipheredKey));
+		AESCrypto.saveKey(Constants.MY_CIPHERED_KEY_FILE, myCipheredKey);
 	}
 	
 	public static void writePeerPublicKey(PublicKey publicKey, String peerIP) 
