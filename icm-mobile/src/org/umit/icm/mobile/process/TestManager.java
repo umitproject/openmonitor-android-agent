@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.umit.icm.mobile.utils.Constants;
@@ -31,7 +32,7 @@ public class TestManager {
 	private List<TestObject> currentTests;
 	
 	public TestManager() {
-		currentTests = null;
+		currentTests = new ArrayList<TestObject>();
 	}
 
 	public List<TestObject> getCurrentTests() throws IOException, RuntimeException {
