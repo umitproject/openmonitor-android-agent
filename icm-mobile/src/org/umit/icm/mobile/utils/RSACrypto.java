@@ -38,11 +38,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
+
+import org.apache.commons.codec.binary.Base64;
 
 import android.os.Environment;
 
@@ -169,15 +172,15 @@ public class RSACrypto {
     public static PublicKey stringToPublicKey(String publicKeyString) 
     	throws NoSuchAlgorithmException, InvalidKeySpecException {
     	X509EncodedKeySpec spec =
-    	      new X509EncodedKeySpec(publicKeyString.getBytes());
+    	      new X509EncodedKeySpec(Base64.decodeBase64(publicKeyString.getBytes()));
     	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
     	    return keyFactory.generatePublic(spec);
     }
     
     public static PrivateKey stringToPrivateKey(String privateKeyString) 
-	throws NoSuchAlgorithmException, InvalidKeySpecException {
-	X509EncodedKeySpec spec =
-	      new X509EncodedKeySpec(privateKeyString.getBytes());
+	throws NoSuchAlgorithmException, InvalidKeySpecException {    	
+    	PKCS8EncodedKeySpec spec =
+    	      new PKCS8EncodedKeySpec(Base64.decodeBase64(privateKeyString.getBytes()));	
 	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 	    return keyFactory.generatePrivate(spec);
     }
