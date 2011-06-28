@@ -50,12 +50,14 @@ public class AggregatorActions {
 	public static boolean getPeerListAction(GetPeerListResponse getPeerListResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
+	 	ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());
 		return true;
 	}
 	
 	public static boolean getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
+	 	ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
 		return true;
 	}
 	
