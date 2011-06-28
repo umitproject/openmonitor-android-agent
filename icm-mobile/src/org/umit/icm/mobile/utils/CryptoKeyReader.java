@@ -21,24 +21,25 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class CryptoKeyReader {
 	
-	public static PublicKey getMyPublicKey() throws Exception {
+	public static PublicKey getMyPublicKey() throws IOException {
 		return RSACrypto.readPublicKey(Constants.MY_PUBLIC_KEY_FILE);
 	}
 	
-	public static PrivateKey getMyPrivateKey() throws Exception {
+	public static PrivateKey getMyPrivateKey() throws IOException {
 		return RSACrypto.readPrivateKey(Constants.MY_PRIVATE_KEY_FILE);
 	}
 	
-	public static byte[] getMySecretKey() throws Exception {
+	public static byte[] getMySecretKey() throws IOException {
 		return AESCrypto.readKey(Constants.MY_SECRET_KEY_FILE);
 	}
 	
-	public static PublicKey getPeerPublicKey(String peerIP) throws Exception {
+	public static PublicKey getPeerPublicKey(String peerIP) throws IOException {
 		return RSACrypto.readPublicKey(peerIP+Constants.PEER_PUBLIC_KEY_FILE);
 	}
 }
