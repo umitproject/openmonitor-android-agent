@@ -50,7 +50,9 @@ public class ProcessActions {
 	}
 	
 	public static void newTestsResponseAdd(NewTestsResponse response) throws IOException, RuntimeException {		
-		for (int i = 0 ; i < response.getTestsCount() ; i++) {			
+		for (int i = 0 ; i < response.getTestsCount() ; i++) {		
+				if(response.getTests(i).equals(null))
+					break;
 				Globals.testManager.addTest(MessageConversion.testToTestObject(response.getTests(i)));			
 		}		
 		Globals.testManager.writeTests();
