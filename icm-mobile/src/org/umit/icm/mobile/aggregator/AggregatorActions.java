@@ -62,6 +62,7 @@ public class AggregatorActions {
 	public static boolean getEventsAction(GetEventsResponse getEventsResponse) throws IOException {
 		ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getEventsResponse.getHeader());
+	 	ProcessActions.updateEventsList(getEventsResponse.getEventsList());
 		return true;
 	}
 	
