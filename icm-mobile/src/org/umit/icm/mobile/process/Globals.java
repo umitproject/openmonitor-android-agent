@@ -32,6 +32,7 @@ import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.Constants;
 
@@ -55,6 +56,7 @@ public class Globals {
 	public static String scanStatus = " ";
 	public static List<Website> websitesList = new ArrayList<Website>();
 	public static List<Service> servicesList = new ArrayList<Service>();
+	public static List<Event> eventsList = new ArrayList<Event>();
 	
 	public static void intializeWebsitesList() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
