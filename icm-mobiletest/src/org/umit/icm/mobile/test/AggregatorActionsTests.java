@@ -54,8 +54,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
         Assert.assertEquals(Globals.versionManager.getTestsVersion(), 20);
         Assert.assertEquals(Globals.runtimeParameters.getAgentID(), 11);
         Assert.assertTrue(Globals.runtimeParameters.getToken().equals("token"));
-        
-        
+                        
     }        
 
 }
