@@ -21,7 +21,6 @@
 
 package org.umit.icm.mobile.p2p;
 
-import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.*;
 import org.umit.icm.mobile.p2p.P2PCommunication;
 
@@ -30,61 +29,49 @@ public class MessageSender {
 		public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());
 			SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(sendReportResponse.getHeader());
-			ProcessActions.updateTestsVersion(sendReportResponse.getHeader());			
+			P2PActions.sendReportAction(sendReportResponse);	
 		}
 		
 		public static void sendServiceReport(AgentData agentData, SendServiceReport serviceReport) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, serviceReport.toByteArray());
 			SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);	  
-			ProcessActions.updateAgentVersion(sendReportResponse.getHeader());
-			ProcessActions.updateTestsVersion(sendReportResponse.getHeader());
+			P2PActions.sendReportAction(sendReportResponse);
 		}
 		
-		public static GetEventsResponse receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
+		public static void receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, getEvents.toByteArray());
 			GetEventsResponse getEventsResponse = GetEventsResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
-			ProcessActions.updateTestsVersion(getEventsResponse.getHeader());
-			return getEventsResponse;
+			P2PActions.receiveEventsAction(getEventsResponse);			
 		}
 		
-		public static GetPeerListResponse receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
+		public static void receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
 			GetPeerListResponse getPeerListResponse = GetPeerListResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
-			ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
-			return getPeerListResponse;
+			P2PActions.getPeerListAction(getPeerListResponse);			
 		}
 		
-		public static GetSuperPeerListResponse receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
+		public static void receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
 			GetSuperPeerListResponse getSuperPeerListResponse = GetSuperPeerListResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
-			ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
-			return getSuperPeerListResponse;
+			P2PActions.getSuperPeerListAction(getSuperPeerListResponse);
 		}
 		
-		public static AssignTaskResponse receiveTaskList(AgentData agentData, AssignTask assignTask) throws Exception {
+		public static void receiveTaskList(AgentData agentData, AssignTask assignTask) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, assignTask.toByteArray());
 			AssignTaskResponse assignTaskResponse = AssignTaskResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(assignTaskResponse.getHeader());
-			ProcessActions.updateTestsVersion(assignTaskResponse.getHeader());
-			return assignTaskResponse;
+			P2PActions.receiveTaskListAction(assignTaskResponse);
 		}				
 		
 		public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());
 			TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
-			ProcessActions.updateTestsVersion(testSuggestionResponse.getHeader());
+			P2PActions.sendSuggestionAction(testSuggestionResponse);
 		}
 		
 		public static void sendServiceSuggestion(AgentData agentData, ServiceSuggestion serviceSuggestion) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray());
 			TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
-			ProcessActions.updateTestsVersion(testSuggestionResponse.getHeader());
+			P2PActions.sendSuggestionAction(testSuggestionResponse);
 		}
 		
 }
