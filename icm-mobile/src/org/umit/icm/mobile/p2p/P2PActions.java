@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse;
+import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
@@ -121,5 +122,9 @@ public class P2PActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse) {
+		
 	}
 }
