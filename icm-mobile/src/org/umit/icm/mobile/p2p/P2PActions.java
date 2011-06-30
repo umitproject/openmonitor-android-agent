@@ -62,6 +62,8 @@ public class P2PActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ProcessActions.updateEventsList(getEventsResponse.getEventsList());
 	}
 	
 	public static void getPeerListAction(GetPeerListResponse getPeerListResponse) {
@@ -77,6 +79,8 @@ public class P2PActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());
 	}
 	
 	public static void getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) {
@@ -92,6 +96,8 @@ public class P2PActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
 	}
 	
 	public static void receiveTaskListAction(AssignTaskResponse assignTaskResponse) {
@@ -107,6 +113,8 @@ public class P2PActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ProcessActions.updateTests(assignTaskResponse.getTestsList());
 	}
 	
 	public static void sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) {
