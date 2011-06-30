@@ -74,4 +74,10 @@ public class MessageSender {
 			P2PActions.sendSuggestionAction(testSuggestionResponse);
 		}
 		
+		public static void authenticatePeer(AgentData agentData, AuthenticatePeer authenticatePeer) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray());
+			AuthenticatePeerResponse authenticatePeerResponse = AuthenticatePeerResponse.parseFrom(response);
+			P2PActions.authenticatePeerAction(authenticatePeerResponse);
+		}
+		
 }
