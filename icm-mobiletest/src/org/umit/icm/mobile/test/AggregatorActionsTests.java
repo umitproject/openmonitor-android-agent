@@ -46,6 +46,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setHeader(responseHeader)
     	.setPrivateKey("privateKey")
     	.setPublicKey("publicKey")
+    	.setAggregatorPublicKey("aggregatorPublicKey")    	
     	.build();
     	
     	AggregatorActions.registerAgentAction(registerAgentResponse);
@@ -148,6 +149,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setServideCode(21)
     	.setTestID(31)
     	.setWebsiteURL("url1")
+    	.setTestType("WEB")
     	.build();
     	
     	Test test2 = Test.newBuilder()
@@ -155,6 +157,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setServideCode(22)
     	.setTestID(32)
     	.setWebsiteURL("url2")
+    	.setTestType("SERVICE")
     	.build();
     	
     	NewTestsResponse newTestsResponse = NewTestsResponse.newBuilder()
@@ -174,8 +177,9 @@ public class AggregatorActionsTests extends AndroidTestCase {
     private boolean compareTests(Test test1 , Test test2) {
     	if(test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
     			&& test1.getServideCode() == test2.getServideCode()
-    			&& test1.getTestID() == test1.getTestID()
-    			&& test1.getWebsiteURL().equals(test2.getWebsiteURL())    			)
+    			&& test1.getTestID() == test2.getTestID()
+    			&& test1.getWebsiteURL().equals(test2.getWebsiteURL())
+    			&& test1.getTestType().equals(test2.getTestType()))
     		return true;
     	return false;
     }
