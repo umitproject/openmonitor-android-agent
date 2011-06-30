@@ -71,8 +71,13 @@ public class TCPClient {
     }
     
     public void writeLine(String line) throws IOException {
-    	dataOutputStream.writeBytes(line + '\n');    	
+    	dataOutputStream.writeBytes(line + '\n');    	    	
     	Log.w("##Client", "write");
+    }
+    
+    public void writeLine(byte[] line) throws IOException {
+    	dataOutputStream.write(line);    	    	
+    	Log.w("##Client", "writeByte");
     }
     
     public InetAddress getInetAddress() {
