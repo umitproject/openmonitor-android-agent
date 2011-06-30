@@ -13867,6 +13867,627 @@ public final class MessageProtos {
     }
   }
   
+  public static final class AuthenticatePeer extends
+      com.google.protobuf.GeneratedMessage {
+    // Use AuthenticatePeer.newBuilder() to construct.
+    private AuthenticatePeer() {}
+    
+    private static final AuthenticatePeer defaultInstance = new AuthenticatePeer();
+    public static AuthenticatePeer getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AuthenticatePeer getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_fieldAccessorTable;
+    }
+    
+    // required int64 agentID = 1;
+    public static final int AGENTID_FIELD_NUMBER = 1;
+    private boolean hasAgentID;
+    private long agentID_ = 0L;
+    public boolean hasAgentID() { return hasAgentID; }
+    public long getAgentID() { return agentID_; }
+    
+    // required string cipheredPublicKey = 2;
+    public static final int CIPHEREDPUBLICKEY_FIELD_NUMBER = 2;
+    private boolean hasCipheredPublicKey;
+    private java.lang.String cipheredPublicKey_ = "";
+    public boolean hasCipheredPublicKey() { return hasCipheredPublicKey; }
+    public java.lang.String getCipheredPublicKey() { return cipheredPublicKey_; }
+    
+    // optional int32 agentPort = 3;
+    public static final int AGENTPORT_FIELD_NUMBER = 3;
+    private boolean hasAgentPort;
+    private int agentPort_ = 0;
+    public boolean hasAgentPort() { return hasAgentPort; }
+    public int getAgentPort() { return agentPort_; }
+    
+    public final boolean isInitialized() {
+      if (!hasAgentID) return false;
+      if (!hasCipheredPublicKey) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasAgentID()) {
+        output.writeInt64(1, getAgentID());
+      }
+      if (hasCipheredPublicKey()) {
+        output.writeString(2, getCipheredPublicKey());
+      }
+      if (hasAgentPort()) {
+        output.writeInt32(3, getAgentPort());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasAgentID()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, getAgentID());
+      }
+      if (hasCipheredPublicKey()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getCipheredPublicKey());
+      }
+      if (hasAgentPort()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, getAgentPort());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer result;
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer();
+        return builder;
+      }
+      
+      protected org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.getDefaultInstance()) return this;
+        if (other.hasAgentID()) {
+          setAgentID(other.getAgentID());
+        }
+        if (other.hasCipheredPublicKey()) {
+          setCipheredPublicKey(other.getCipheredPublicKey());
+        }
+        if (other.hasAgentPort()) {
+          setAgentPort(other.getAgentPort());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setAgentID(input.readInt64());
+              break;
+            }
+            case 18: {
+              setCipheredPublicKey(input.readString());
+              break;
+            }
+            case 24: {
+              setAgentPort(input.readInt32());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required int64 agentID = 1;
+      public boolean hasAgentID() {
+        return result.hasAgentID();
+      }
+      public long getAgentID() {
+        return result.getAgentID();
+      }
+      public Builder setAgentID(long value) {
+        result.hasAgentID = true;
+        result.agentID_ = value;
+        return this;
+      }
+      public Builder clearAgentID() {
+        result.hasAgentID = false;
+        result.agentID_ = 0L;
+        return this;
+      }
+      
+      // required string cipheredPublicKey = 2;
+      public boolean hasCipheredPublicKey() {
+        return result.hasCipheredPublicKey();
+      }
+      public java.lang.String getCipheredPublicKey() {
+        return result.getCipheredPublicKey();
+      }
+      public Builder setCipheredPublicKey(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCipheredPublicKey = true;
+        result.cipheredPublicKey_ = value;
+        return this;
+      }
+      public Builder clearCipheredPublicKey() {
+        result.hasCipheredPublicKey = false;
+        result.cipheredPublicKey_ = getDefaultInstance().getCipheredPublicKey();
+        return this;
+      }
+      
+      // optional int32 agentPort = 3;
+      public boolean hasAgentPort() {
+        return result.hasAgentPort();
+      }
+      public int getAgentPort() {
+        return result.getAgentPort();
+      }
+      public Builder setAgentPort(int value) {
+        result.hasAgentPort = true;
+        result.agentPort_ = value;
+        return this;
+      }
+      public Builder clearAgentPort() {
+        result.hasAgentPort = false;
+        result.agentPort_ = 0;
+        return this;
+      }
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.getDescriptor();
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.internalForceInit();
+    }
+  }
+  
+  public static final class AuthenticatePeerResponse extends
+      com.google.protobuf.GeneratedMessage {
+    // Use AuthenticatePeerResponse.newBuilder() to construct.
+    private AuthenticatePeerResponse() {}
+    
+    private static final AuthenticatePeerResponse defaultInstance = new AuthenticatePeerResponse();
+    public static AuthenticatePeerResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AuthenticatePeerResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable;
+    }
+    
+    // required string secretKey = 1;
+    public static final int SECRETKEY_FIELD_NUMBER = 1;
+    private boolean hasSecretKey;
+    private java.lang.String secretKey_ = "";
+    public boolean hasSecretKey() { return hasSecretKey; }
+    public java.lang.String getSecretKey() { return secretKey_; }
+    
+    public final boolean isInitialized() {
+      if (!hasSecretKey) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasSecretKey()) {
+        output.writeString(1, getSecretKey());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasSecretKey()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getSecretKey());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse result;
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse();
+        return builder;
+      }
+      
+      protected org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.getDefaultInstance()) return this;
+        if (other.hasSecretKey()) {
+          setSecretKey(other.getSecretKey());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setSecretKey(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string secretKey = 1;
+      public boolean hasSecretKey() {
+        return result.hasSecretKey();
+      }
+      public java.lang.String getSecretKey() {
+        return result.getSecretKey();
+      }
+      public Builder setSecretKey(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSecretKey = true;
+        result.secretKey_ = value;
+        return this;
+      }
+      public Builder clearSecretKey() {
+        result.hasSecretKey = false;
+        result.secretKey_ = getDefaultInstance().getSecretKey();
+        return this;
+      }
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.getDescriptor();
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.internalForceInit();
+    }
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_umit_icm_mobile_proto_Trace_descriptor;
   private static
@@ -14047,6 +14668,16 @@ public final class MessageProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -14164,8 +14795,11 @@ public final class MessageProtos {
       "eName\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(\t\022\020\n\010hos" +
       "tName\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026TestSuggestio" +
       "nResponse\0229\n\006header\030\001 \002(\0132).org.umit.icm" +
-      ".mobile.proto.ResponseHeaderB\017B\rMessageP" +
-      "rotos"
+      ".mobile.proto.ResponseHeader\"Q\n\020Authenti" +
+      "catePeer\022\017\n\007agentID\030\001 \002(\003\022\031\n\021cipheredPub",
+      "licKey\030\002 \002(\t\022\021\n\tagentPort\030\003 \001(\005\"-\n\030Authe" +
+      "nticatePeerResponse\022\021\n\tsecretKey\030\001 \002(\tB\017" +
+      "B\rMessageProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14460,6 +15094,22 @@ public final class MessageProtos {
               new java.lang.String[] { "Header", },
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor =
+            getDescriptor().getMessageTypes().get(36);
+          internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor,
+              new java.lang.String[] { "AgentID", "CipheredPublicKey", "AgentPort", },
+              org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.class,
+              org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor =
+            getDescriptor().getMessageTypes().get(37);
+          internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor,
+              new java.lang.String[] { "SecretKey", },
+              org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.class,
+              org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.Builder.class);
           return null;
         }
       };
