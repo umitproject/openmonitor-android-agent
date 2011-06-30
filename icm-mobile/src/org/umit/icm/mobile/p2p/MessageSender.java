@@ -71,14 +71,7 @@ public class MessageSender {
 			ProcessActions.updateAgentVersion(assignTaskResponse.getHeader());
 			ProcessActions.updateTestsVersion(assignTaskResponse.getHeader());
 			return assignTaskResponse;
-		}
-		
-		public static void sendSymmetricKey(AgentData agentData, SendPrivateKey sendPrivateKey) throws Exception {
-			byte[] response = P2PCommunication.sendMessagePublic(agentData, sendPrivateKey.toByteArray());
-			SendPrivateKeyResponse sendPrivateKeyResponse = SendPrivateKeyResponse.parseFrom(response);
-			ProcessActions.updateAgentVersion(sendPrivateKeyResponse.getHeader());
-			ProcessActions.updateTestsVersion(sendPrivateKeyResponse.getHeader());
-		}
+		}				
 		
 		public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {
 			byte[] response = P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());
