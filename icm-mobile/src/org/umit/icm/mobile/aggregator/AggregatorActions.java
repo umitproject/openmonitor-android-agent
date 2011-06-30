@@ -70,7 +70,7 @@ public class AggregatorActions {
 	}
 	
 	public static boolean newTestsAction(NewTestsResponse newTestsResponse) throws IOException {
-		return ProcessActions.updateTests(newTestsResponse);		
+		return ProcessActions.updateTests(newTestsResponse.getTestsList());		
 	}
 	
 	public static boolean sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) throws IOException {

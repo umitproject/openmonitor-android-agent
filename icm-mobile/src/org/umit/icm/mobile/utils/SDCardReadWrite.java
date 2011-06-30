@@ -38,7 +38,6 @@ import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
-import org.umit.icm.mobile.process.TestObject;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
@@ -236,51 +235,7 @@ public class SDCardReadWrite {
   		  inputStream.close();
   	  	}
 	}
-	
-	public static void writeTests(String dir
-			, List<TestObject> data) throws IOException, RuntimeException{
-		ObjectOutputStream objOutStream = null;
-		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
-		keyDir.mkdirs();
-    	File file = new File(keyDir
-    			, Constants.TESTS_FILE);
-    	if(!file.exists()){
-    		file.createNewFile();
-    	}
-    	try {
-			objOutStream = new ObjectOutputStream(
-				    new BufferedOutputStream(new FileOutputStream(file)));
-			objOutStream.writeObject(data);
-    	} catch (Exception e) {
-  		    throw new RuntimeException("write tests exception", e);
-  	  	} finally {
-    		objOutStream.close();
-    	}
-	}
-	
-	public static List<TestObject> readTests(String dir
-			, String name) throws IOException, RuntimeException{
-		List<TestObject> tests = null;
-		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
-    	File file = new File(keyDir
-    			, Constants.TESTS_FILE);
-    	InputStream inputStream = new FileInputStream(file.toString());
-  	  	ObjectInputStream objInputStream =
-  	    new ObjectInputStream(new BufferedInputStream(inputStream));
-  	  	try {
-	    	    tests = ((List<TestObject>) objInputStream.readObject());
-	      		return tests;
-  	  	} catch (Exception e) {
-  		    throw new RuntimeException("read website exception", e);
-  	  	} finally {
-  		  inputStream.close();
-  	  	}
-	}
-	
+			
 	public static void writeWebsitesList(String dir
 			, List<Website> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;

@@ -35,6 +35,7 @@ import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.Constants;
 
 
@@ -45,8 +46,6 @@ public class Globals {
 	= new VersionManager();
 	public static KeyManager keyManager
 	= new KeyManager();
-	public static TestManager testManager
-	= new TestManager();
 	public static WebsiteConnectivity websiteTest 
 	= new WebsiteConnectivity();
 	/*public static RequestHeader requestHeader
@@ -60,6 +59,7 @@ public class Globals {
 	public static List<Event> eventsList = new ArrayList<Event>();
 	public static List<AgentData> peersList = new ArrayList<AgentData>();
 	public static List<AgentData> superPeersList = new ArrayList<AgentData>();
+	public static List<Test> testsList = new ArrayList<Test>();
 	
 	public static void intializeWebsitesList() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();

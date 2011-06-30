@@ -30,10 +30,10 @@ import java.util.List;
 
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
+import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 public class ProcessActions {	
@@ -57,16 +57,7 @@ public class ProcessActions {
 			// TODO call aggregator newTests webservice
 		}
 	}
-	
-	public static void newTestsResponseAdd(NewTestsResponse response) throws IOException, RuntimeException {		
-		for (int i = 0 ; i < response.getTestsCount() ; i++) {		
-				if(response.getTests(i).equals(null))
-					break;
-				Globals.testManager.addTest(MessageConversion.testToTestObject(response.getTests(i)));			
-		}		
-		Globals.testManager.writeTests();
-	}
-	
+			
 	/*public static void initializeRequestHeader() throws IOException, RuntimeException {
 		Globals.requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -79,16 +70,9 @@ public class ProcessActions {
 		return true;
 	}
 	
-	public static boolean updateTests(NewTestsResponse newTestsResponse) {
-		try {
-			newTestsResponseAdd(newTestsResponse);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static boolean updateTests(List<Test> tests) {
+		for(int i = 0 ; i < tests.size(); i++)
+			Globals.testsList.add(tests.get(i));
 		return true;
 	}
 	

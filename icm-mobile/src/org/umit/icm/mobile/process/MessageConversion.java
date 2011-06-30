@@ -21,13 +21,7 @@
 
 package org.umit.icm.mobile.process;
 
-import org.umit.icm.mobile.proto.MessageProtos.Test;
 
 public class MessageConversion {
-	
-	public static TestObject testToTestObject (Test test) {
-		return new TestObject(
-				test.getTestID(), test.getWebsiteURL(),
-				test.getServideCode(), test.getExecuteAtTimeUTC());
-	}
+		
 }
