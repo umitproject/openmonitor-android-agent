@@ -24,7 +24,6 @@ package org.umit.icm.mobile.p2p;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.utils.AESCrypto;
@@ -34,34 +33,30 @@ import org.umit.icm.mobile.utils.RSACrypto;
 public class P2PCommunication {
 	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
 		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
-		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);
-		String cipherString =
-			new String(Base64.encodeBase64(cipherBytes));
+		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);	
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(cipherString);
+		Globals.tcpClient.writeLine(cipherBytes);
 		Globals.tcpClient.closeConnection();
 				
 		String responseString = Globals.tcpServer.getRequest();
-		byte [] response = Base64.decodeBase64(responseString.getBytes());		 
+		byte [] response = responseString.getBytes();		 
 		return AESCrypto.decrypt(symmetricKey, response);
 	}
 	
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
 		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
-		String cipherString =
-			new String(Base64.encodeBase64(cipherBytes));
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(cipherString);
+		Globals.tcpClient.writeLine(cipherBytes);
 		Globals.tcpClient.closeConnection();
 		
 		PublicKey peerPublicKey = CryptoKeyReader.getPeerPublicKey(agentInfo.getAgentIP());
 		String responseString = Globals.tcpServer.getRequest();
-		byte [] response = Base64.decodeBase64(responseString.getBytes());
+		byte [] response = responseString.getBytes();
 		return RSACrypto.decryptPublic(peerPublicKey, response);
 	}	
 		
