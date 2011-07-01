@@ -615,4 +615,31 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	public static FileOutputStream returnFileOutputStream(String filename, String dir
+			) throws IOException, RuntimeException{		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, filename);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	
+    	return new FileOutputStream(file);
+			
+	}				
+	
+	public static FileInputStream returnFileInputStream(String filename
+			, String dir) throws IOException , RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, filename
+    			+ Constants.SERVICE_FILE);
+    	
+    	return new FileInputStream(file.toString());
+  	  
+	}
 }
