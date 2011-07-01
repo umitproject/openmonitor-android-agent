@@ -30,7 +30,7 @@ public class MessageQueue {
 
 	private Queue<QueueObject> messageQ; 
 	
-	MessageQueue() {
+	public MessageQueue() {
 		messageQ = new LinkedList<QueueObject>();
 	}
 	
