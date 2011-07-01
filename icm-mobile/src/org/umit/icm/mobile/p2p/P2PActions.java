@@ -24,7 +24,6 @@ package org.umit.icm.mobile.p2p;
 import java.io.IOException;
 
 import org.umit.icm.mobile.process.ProcessActions;
-import org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
