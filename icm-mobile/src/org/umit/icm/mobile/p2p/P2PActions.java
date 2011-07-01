@@ -31,6 +31,7 @@ import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
+import org.umit.icm.mobile.utils.CryptoKeyWriter;
 
 public class P2PActions {
 	
@@ -132,7 +133,12 @@ public class P2PActions {
 		}
 	}
 	
-	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse) {
-		
+	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse, String peerIP) {
+		try {
+			CryptoKeyWriter.writePeerSecretKey(authenticatePeerResponse.getSecretKey().getBytes(), peerIP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
