@@ -28,13 +28,13 @@ import org.umit.icm.mobile.utils.Constants;
 
 public class MessageQueue {
 
-	private Queue<Object> messageQ; 
+	private Queue<QueueObject> messageQ; 
 	
 	MessageQueue() {
-		messageQ = new LinkedList<Object>();
+		messageQ = new LinkedList<QueueObject>();
 	}
 	
-	public boolean addMessage(Object message) {
+	public boolean addMessage(QueueObject message) {
 		if(messageQ.size()<=Constants.P2P_MESSAGE_QUEUE_SIZE) {
 			messageQ.offer(message);
 			return true;
@@ -44,13 +44,12 @@ public class MessageQueue {
 			
 	}
 	
-	public Object removeMessage(Object message) {
-		if(messageQ.size()!= 0) {
-			return messageQ.offer(message);
+	public QueueObject removeMessage() {
+		if(messageQ.size()!= 0) {			
+			return messageQ.poll();
 		}
-		else
-			return false;
-			
+		
+		return null;
 	}
 	
 }
