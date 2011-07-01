@@ -38,6 +38,14 @@ import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
+import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
+import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
@@ -348,7 +356,7 @@ public class SDCardReadWrite {
 				    new BufferedOutputStream(new FileOutputStream(file)));
 			objOutStream.writeObject(data);
     	} catch (Exception e) {
-  		    throw new RuntimeException("write websites list exception", e);
+  		    throw new RuntimeException("write services list exception", e);
   	  	} finally {
     		objOutStream.close();
     	}
@@ -369,7 +377,239 @@ public class SDCardReadWrite {
 	    	    services = ((List<Service>) objInputStream.readObject());
 	      		return services;
   	  	} catch (Exception e) {
-  		    throw new RuntimeException("read website exception", e);
+  		    throw new RuntimeException("read services list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writePeersList(String dir
+			, List<AgentData> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.PEERS_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	
+    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
+    	.setCurrentTestVersionNo(21)
+    	.setCurrentVersionNo(21)
+    	.build();
+    	
+    	GetPeerListResponse getPeerListResponse 
+    	= GetPeerListResponse.newBuilder()
+    	.setHeader(responseHeader)
+    	.addAllKnownPeers(data)    	
+    	.build();
+    	    	
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));									
+			 getPeerListResponse.writeTo(objOutStream);				 
+				
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write peers list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<AgentData> readPeersList(String dir
+			) throws IOException, RuntimeException{		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.PEERS_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+  	  		GetPeerListResponse getPeerListResponse 
+  	  		= GetPeerListResponse.parseFrom(objInputStream); 	  	
+	    	
+	      	return getPeerListResponse.getKnownPeersList();
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read peers list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writeSuperPeersList(String dir
+			, List<AgentData> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.SUPER_PEERS_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	
+    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
+    	.setCurrentTestVersionNo(21)
+    	.setCurrentVersionNo(21)
+    	.build();
+    	
+    	GetSuperPeerListResponse getSuperPeerListResponse 
+    	= GetSuperPeerListResponse.newBuilder()
+    	.setHeader(responseHeader)
+    	.addAllKnownSuperPeers(data)    	
+    	.build();
+    	    	
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));									
+			 getSuperPeerListResponse.writeTo(objOutStream);				 
+				
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write super peers list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<AgentData> readSuperPeersList(String dir
+			) throws IOException, RuntimeException{		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.SUPER_PEERS_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+  	  		GetSuperPeerListResponse getSuperPeerListResponse 
+  	  		= GetSuperPeerListResponse.parseFrom(objInputStream); 	  	
+	    	
+	      	return getSuperPeerListResponse.getKnownSuperPeersList();
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read super peers list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writeEventsList(String dir
+			, List<Event> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.EVENTS_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	
+    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
+    	.setCurrentTestVersionNo(21)
+    	.setCurrentVersionNo(21)
+    	.build();
+    	
+    	GetEventsResponse getEventsResponse 
+    	= GetEventsResponse.newBuilder()
+    	.addAllEvents(data)
+    	.setHeader(responseHeader)
+    	.build();
+    	    	
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));									
+			 getEventsResponse.writeTo(objOutStream);				 
+				
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write events list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<Event> readEventsList(String dir
+			) throws IOException, RuntimeException{		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.EVENTS_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+  	  		GetEventsResponse getEventsResponse
+  	  		= GetEventsResponse.parseFrom(objInputStream); 	  	
+	    	
+	      	return getEventsResponse.getEventsList();
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read events list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	public static void writeTestsList(String dir
+			, List<Test> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, Constants.TESTS_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	
+    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
+    	.setCurrentTestVersionNo(21)
+    	.setCurrentVersionNo(21)
+    	.build();
+    	
+    	NewTestsResponse newTestsResponse = NewTestsResponse.newBuilder()
+    	.addAllTests(data)
+    	.setTestVersionNo(10)
+    	.setHeader(responseHeader)
+    	.build();
+    	    	
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));									
+			 newTestsResponse.writeTo(objOutStream);				 
+				
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write tests list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	public static List<Test> readTestsList(String dir
+			) throws IOException, RuntimeException{		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, Constants.TESTS_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+  	  		NewTestsResponse newTestsResponse
+  	  		= NewTestsResponse.parseFrom(objInputStream); 	  	
+	    	
+	      	return newTestsResponse.getTestsList();
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read tests list exception", e);
   	  	} finally {
   		  inputStream.close();
   	  	}
