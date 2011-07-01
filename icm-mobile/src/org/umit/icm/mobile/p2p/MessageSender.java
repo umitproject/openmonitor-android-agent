@@ -56,10 +56,10 @@ public class MessageSender {
 			P2PActions.getSuperPeerListAction(getSuperPeerListResponse);
 		}
 		
-		public static void receiveTaskList(AgentData agentData, AssignTask assignTask) throws Exception {
-			byte[] response = P2PCommunication.sendMessage(agentData, assignTask.toByteArray());
-			AssignTaskResponse assignTaskResponse = AssignTaskResponse.parseFrom(response);
-			P2PActions.receiveTaskListAction(assignTaskResponse);
+		public static void receiveTaskList(AgentData agentData, NewTests newTests) throws Exception {
+			byte[] response = P2PCommunication.sendMessage(agentData, newTests.toByteArray());
+			NewTestsResponse newTestsResponse = NewTestsResponse.parseFrom(response);
+			P2PActions.receiveTaskListAction(newTestsResponse);
 		}				
 		
 		public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {

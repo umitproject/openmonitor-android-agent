@@ -29,6 +29,7 @@ import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
@@ -101,21 +102,21 @@ public class P2PActions {
 		ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
 	}
 	
-	public static void receiveTaskListAction(AssignTaskResponse assignTaskResponse) {
+	public static void receiveTaskListAction(NewTestsResponse newTestsResponse) {
 		try {
-			ProcessActions.updateAgentVersion(assignTaskResponse.getHeader());
+			ProcessActions.updateAgentVersion(newTestsResponse.getHeader());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			ProcessActions.updateTestsVersion(assignTaskResponse.getHeader());
+			ProcessActions.updateTestsVersion(newTestsResponse.getHeader());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		ProcessActions.updateTests(assignTaskResponse.getTestsList());
+		ProcessActions.updateTests(newTestsResponse.getTestsList());
 	}
 	
 	public static void sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) {
