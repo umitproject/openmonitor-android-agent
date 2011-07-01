@@ -40,6 +40,9 @@ public class Constants {
 	public static String INTERVAL_FILE = "interval.param";
 	public static String TOKEN_FILE = "token.param";
 	public static String AGENTID_FILE = "agentid.param";
+	public static String PEERS_FILE = "peers.param";
+	public static String SUPER_PEERS_FILE = "superpeers.param";
+	public static String EVENTS_FILE = "events.param";
 	public static String TESTS_VERSION_FILE = "tests.ver";
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
