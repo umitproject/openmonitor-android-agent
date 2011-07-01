@@ -74,11 +74,11 @@ public class CryptoReadWriteTests extends AndroidTestCase {
     	return true;
     }
     
-    public void testPeerPublicKeyReadWrite() throws Throwable {
-    	keyPair = RSACrypto.generateKey();
-    	CryptoKeyWriter.writePeerPublicKey(keyPair.getPublic(), "1.1.1.1");    	    	
-        Assert.assertEquals(CryptoKeyReader.getPeerPublicKey("1.1.1.1") 
-        		,keyPair.getPublic());
+    public void testPeerSecretKeyReadWrite() throws Throwable {
+    	byte[] key = AESCrypto.generateKey(
+    			"secretICMMobilePassword".getBytes());
+    	CryptoKeyWriter.writePeerSecretKey(key, "Peer1");
+        Assert.assertTrue(byteArrayEquals(CryptoKeyReader.getPeerSecretKey("Peer1"), key));
     }
     
 }

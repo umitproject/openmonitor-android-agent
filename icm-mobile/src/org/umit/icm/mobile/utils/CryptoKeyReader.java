@@ -43,7 +43,7 @@ public class CryptoKeyReader {
 		return AESCrypto.readKey(Constants.MY_CIPHERED_KEY_FILE);
 	}
 	
-	public static PublicKey getPeerPublicKey(String peerIP) throws IOException {
-		return RSACrypto.readPublicKey(peerIP+Constants.PEER_PUBLIC_KEY_FILE);
+	public static byte[] getPeerSecretKey(String peerIP) throws IOException {
+		return AESCrypto.readKey(peerIP+Constants.PEER_SECRET_KEY_FILE);
 	}
 }

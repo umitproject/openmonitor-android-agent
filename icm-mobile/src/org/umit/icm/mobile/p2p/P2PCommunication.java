@@ -22,7 +22,6 @@
 package org.umit.icm.mobile.p2p;
 
 import java.security.PrivateKey;
-import java.security.PublicKey;
 
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
@@ -41,8 +40,9 @@ public class P2PCommunication {
 		Globals.tcpClient.closeConnection();
 				
 		String responseString = Globals.tcpServer.getRequest();
-		byte [] response = responseString.getBytes();		 
-		return AESCrypto.decrypt(symmetricKey, response);
+		byte [] response = responseString.getBytes();	
+		byte[] peerSecretKey = CryptoKeyReader.getPeerSecretKey(agentInfo.getAgentIP());
+		return AESCrypto.decrypt(peerSecretKey, response);
 	}
 	
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
@@ -53,11 +53,11 @@ public class P2PCommunication {
 				, agentInfo.getAgentPort());
 		Globals.tcpClient.writeLine(cipherBytes);
 		Globals.tcpClient.closeConnection();
-		
-		PublicKey peerPublicKey = CryptoKeyReader.getPeerPublicKey(agentInfo.getAgentIP());
+				
 		String responseString = Globals.tcpServer.getRequest();
 		byte [] response = responseString.getBytes();
-		return RSACrypto.decryptPublic(peerPublicKey, response);
+		return RSACrypto.decryptPublic(
+				RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), response);
 	}	
 		
 }

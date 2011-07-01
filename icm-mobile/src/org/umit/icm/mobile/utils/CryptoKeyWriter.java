@@ -60,13 +60,7 @@ public class CryptoKeyWriter {
 		AESCrypto.saveKey(Constants.MY_CIPHERED_KEY_FILE, myCipheredKey);
 	}
 	
-	public static void writePeerPublicKey(PublicKey publicKey, String peerIP) 
-	throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-	RSAPublicKeySpec publicKeySpec 
-	= keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
-	RSACrypto.saveKey(peerIP+Constants.PEER_PUBLIC_KEY_FILE
-			, publicKeySpec.getModulus()
-			, publicKeySpec.getPublicExponent());
+	public static void writePeerSecretKey(byte[] secretKey, String peerIP) throws IOException {
+		AESCrypto.saveKey(peerIP+Constants.PEER_SECRET_KEY_FILE, secretKey);
 	}
 }
