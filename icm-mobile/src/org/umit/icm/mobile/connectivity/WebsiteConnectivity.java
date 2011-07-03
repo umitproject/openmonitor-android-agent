@@ -32,6 +32,8 @@ import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
@@ -109,8 +111,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		listNodes.add("node1");
 		listNodes.add("node2");
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(10)
-		.setAgentID(10)
+		.setReportID(IDGenerator.generateReportID())
+		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)
 		.setTimeUTC(calendar.getTimeInMillis())
