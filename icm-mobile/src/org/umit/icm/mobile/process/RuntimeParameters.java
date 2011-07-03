@@ -52,7 +52,8 @@ public class RuntimeParameters {
 
 	public void setToken(String token) throws IOException, RuntimeException {
 		this.token = token;
-		writeToken(token);
+		writeToken(token);		
+		Globals.initializeRequestHeader();
 	}
 
 	public long getAgentID() throws IOException, RuntimeException {
@@ -63,6 +64,7 @@ public class RuntimeParameters {
 	public void setAgentID(long agentID) throws IOException, RuntimeException {
 		this.agentID = agentID;
 		writeAgentID(agentID);
+		Globals.initializeRequestHeader();
 	}
 
 	public int getScanInterval() throws IOException, RuntimeException {
