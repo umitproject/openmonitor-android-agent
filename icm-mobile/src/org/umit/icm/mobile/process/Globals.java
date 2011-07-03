@@ -31,7 +31,6 @@ import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
-import org.umit.icm.mobile.gui.WebsiteTextCheckbox;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
@@ -48,11 +47,7 @@ public class Globals {
 	= new KeyManager();
 	public static WebsiteConnectivity websiteTest 
 	= new WebsiteConnectivity();
-	/*public static RequestHeader requestHeader
-	= RequestHeader.newBuilder()
-	.setAgentID(1)
-	.setToken("1")
-	.build();*/
+	public static RequestHeader requestHeader;	
 	public static String scanStatus = " ";
 	public static List<Website> websitesList = new ArrayList<Website>();
 	public static List<Service> servicesList = new ArrayList<Service>();
@@ -80,4 +75,11 @@ public class Globals {
 	}
 	
 	public static TCPClient tcpClient;
+	
+	public static void initializeRequestHeader() throws IOException, RuntimeException {
+		Globals.requestHeader = RequestHeader.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setToken(Globals.runtimeParameters.getToken())
+		.build();
+	}
 }
