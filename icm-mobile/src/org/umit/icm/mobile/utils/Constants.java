@@ -137,4 +137,6 @@ public class Constants {
 			add(new Service("smtp", ports,"open", "true"));
 		
 		}};
+		
+		public static boolean runProfiler = false;
 }

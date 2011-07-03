@@ -100,8 +100,8 @@ public class Main extends TabActivity {
 				        		, Constants.VERSIONS_DIR) == false )) {					
 					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
 				}							
-				//TestAggregatorCommunication.testServiceSuggestion();
-				ProfilerRun.run();
+				if(Constants.runProfiler == true)
+					ProfilerRun.run();
 				Globals.scanStatus = getString(R.string.scan_on);
 				startService(new Intent(Main.this, WebsiteConnectivityService.class));
 				
