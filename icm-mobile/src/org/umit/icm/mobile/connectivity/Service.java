@@ -29,10 +29,12 @@ import java.util.List;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
-
+/**
+ * This is the Service class. Provides getter/setters for Service
+ */
 public class Service implements Serializable {	
 	/**
-	 * 
+	 * Service serialUID
 	 */
 	private static final long serialVersionUID = -1170206072134882104L;
 	private String name;
@@ -87,13 +89,37 @@ public class Service implements Serializable {
 	public void setCheck(String check) {
 		this.check = check;
 	}
-
+	
+	/**
+	 * Writes the {@link Service} to disk using   
+	                          
+	{@link SDCardReadWrite#writeService} method.
+	 * 
+	 *	   	                          		                         	 	                      
+	
+	@see         SDCardReadWrite
+	 */
 	public void writeService() throws IOException {
 		Service service 
 		= new Service(this.name, this.ports, this.status, this.check);
 		SDCardReadWrite.writeService(Constants.SERVICES_DIR, service);
 	}
 	
+	/**
+	 * Returns a {@link Service} object read from disk using   
+	                          
+	{@link SDCardReadWrite#readService} method.
+	 * 
+	 *	
+	
+	@param  name  An object of the type String
+	 *  	                          	
+	                          
+	@return      Service
+	 *     	                          		                         	 	                      
+	
+	@see         SDCardReadWrite
+	 */
 	public Service readService(String name) throws IOException {
 		return SDCardReadWrite.readService(Constants.SERVICES_DIR, name);
 	}

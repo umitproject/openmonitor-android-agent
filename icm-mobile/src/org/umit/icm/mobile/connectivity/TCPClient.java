@@ -31,7 +31,12 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.util.Log;
+
+/**
+ * This is the TCPClient class. Implements a standard TCP Client.
+ */
 
 public class TCPClient {
 	
@@ -45,6 +50,17 @@ public class TCPClient {
     	bufferedReader = null;
     }
     
+    /**
+	 * Opens the connection by creating a new {@link Socket} using the passed
+	 * ip and port, {@link DataOutputStream} and {@link BufferedReader}. 
+	 * 
+	 *	 
+	                          
+	@param  ip  An object of the type {@link String}
+	 *  	                          	
+	 
+	@param  port  An object of the type int
+	 */
     public void openConnection(String ip, int port) throws UnknownHostException, IOException {
     	Log.w("##Client", "open");
     	socket = new Socket(ip, port);
@@ -52,6 +68,13 @@ public class TCPClient {
     	bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
     
+    /**
+	 * Returns a {@link String} read from the {@link BufferedReader}.
+	 * 
+	 *	 
+	                          	      
+	@return      {@link String}
+	 */
     public String readLine() throws IOException {
     	Log.w("##Client", "read");
     	String line =  bufferedReader.readLine();
@@ -59,6 +82,13 @@ public class TCPClient {
     	return line;
     }
     
+    /**
+	 * Returns a {@link List} of {@link String} objects read from the {@link BufferedReader}.
+	 * 
+	 *	 
+	                          	      
+	@return      {@link List} of {@link String} 
+	 */
     public List<String> readLines() throws IOException {
     	List<String> lines = new ArrayList<String>();
     	String line = bufferedReader.readLine();
@@ -70,23 +100,54 @@ public class TCPClient {
     	return lines;
     }
     
+    /**
+	 * Takes as parameter a {@link String} object and writes it to the
+	 * {@link DataOutputStream}. 
+	 *	 
+	                          	      
+	@param      line  An object of the type {@link String} 
+	 */
     public void writeLine(String line) throws IOException {
     	dataOutputStream.writeBytes(line + '\n');    	    	
     	Log.w("##Client", "write");
     }
     
+    /**
+	 * Takes as parameter a byte[] object and writes it to the
+	 * {@link DataOutputStream}. 
+	 *	 
+	                          	      
+	@param      line  An object of the type byte[] 
+	 */
     public void writeLine(byte[] line) throws IOException {
     	dataOutputStream.write(line);    	    	
     	Log.w("##Client", "writeByte");
     }
     
+    /**
+	 * Returns the current {@link Socket} {@link InetAddress} 
+	 *	 
+	                          	      
+	@return      {@link InetAddress} 
+	 */
     public InetAddress getInetAddress() {
     	return socket.getInetAddress();
     }
     
+    /**
+	 * Returns the current {@link Socket} Port number
+	 *	 
+	                          	      
+	@return      int 
+	 */
     public int getPort() {
     	return socket.getPort();
     }
+    
+    /**
+	 * Closes the open {@link Socket}, {@link DataOutputStream} and 
+	 * {@link BufferedReader} 
+	 */
     public void closeConnection() throws IOException {
     	Log.w("##Client", "close_start");
     	dataOutputStream.close();

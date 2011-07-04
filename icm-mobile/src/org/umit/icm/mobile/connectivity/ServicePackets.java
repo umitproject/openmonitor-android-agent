@@ -23,14 +23,34 @@ package org.umit.icm.mobile.connectivity;
 
 import java.util.Random;
 
+
+/**
+ * This is the ServicePackets class. Holds {@link String} packets of different
+ * {@link Service} type Services.
+ */
+
 public class ServicePackets {
 	
+	/**
+	 * This is the HTTP_GET packet.
+	 */
 	public static String HTTP_GET 
 	=  "GET / HTTP/1.1 " +
 			"User-Agent: Java0 " +
 			"Host: www.google.com " +
 			"Connection: Keep-Alive";
-			
+	
+	/**
+	 * Returns a byte[] object. Takes as parameter a {@link String} and returns 
+	 * a byte[] of the same size as the {@link String} but with random bytes.
+	 * 
+	 *	 
+	                          
+	@param  str  An object of the type String
+	 *  	                          	
+	                          
+	@return      byte[]
+	 */	 
 	public static byte[] generatedRandomBytes(String str) {		
 		byte[] byteArray = new byte[str.length()];
 		new Random().nextBytes(byteArray);

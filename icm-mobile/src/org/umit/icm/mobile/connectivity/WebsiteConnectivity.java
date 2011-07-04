@@ -45,17 +45,35 @@ import com.google.protobuf.ByteString;
 
 import android.util.Log;
 
-// TODO Add sanity checks to all message fields. They may raise exceptions.
-// TODO Catch Runtime exceptions.
+/**
+ * This is the WebsiteConnectivity class which extends {@link AbstractConnectivity}.
+ */
+
 public class WebsiteConnectivity extends AbstractConnectivity{
 	
 	private List<String> listWebsites;
 
+	/**
+	 * This is the default constructor. Populates the Websites list with the
+	 * list from {@link Constants}.
+	 */
 	public WebsiteConnectivity() {
 		super();
 		listWebsites = Constants.WEBSITE_LIST;
 	}
 	
+	/**
+	 * scan method which overrides the {@link AbstractConnectivity#scan}. 
+	 * Iterates through the websites list and for each website calls
+	 * {@link WebsiteOpen#openURLConnection(String)},
+	 * {@link WebsiteOpen#getHeaders(URLConnection)} and
+	 * {@link WebsiteOpen#getContent(URLConnection)}. Passes the website content
+	 * to {@link WebsiteConnectivity#clean(String, String, Map)} 
+	 * 
+	 * 
+	 *
+	 @see         WebsiteOpen
+	 */
 	@Override()
 	public void scan() throws IOException, HttpException {
 											
@@ -102,7 +120,24 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 																		
 	};
 		 
+	/**
+	 * Returns a {@link WebsiteReport}. Uses the passed parameters to generate
+	 * {@link ICMReport}, {@link WebsiteReportDetail} and
+	 * {@link WebsiteReport} messages. 
+	 * 
+	 *	 
+	                          
+	@param  websiteURL  An object of the type {@link String}
+	 *  	                          	
 	
+	@param  websiteContent  An object of the type {@link String}
+	 *  	                          	
+	
+	@param  websiteHeader  An object of the type {@link Map}
+	 *  	                          		              
+	            
+	@return      WebsiteReport
+	 */	
 	public WebsiteReport clean(String websiteURL, String websiteContent
 			, Map<String, String> websiteHeader) 
 	throws IOException, RuntimeException {

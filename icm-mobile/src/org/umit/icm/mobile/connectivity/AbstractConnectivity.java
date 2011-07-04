@@ -24,17 +24,36 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.aggregator.AggregatorActions;
+import org.umit.icm.mobile.aggregator.AggregatorResources;
+
+/**
+ * This is the AbstractConnectivity Class. Provides base constructor and abstract
+ * implementations of clean and scan methods.
+ */
 
 public class AbstractConnectivity {
-		
+	
+	/**
+	 * This is the default base constructor.
+	 */
 	public AbstractConnectivity() {
 		super();		
 	}
 	
+	/**
+	 * Cleans the scanned data and returns a corresponding message.
+	 *	 
+	                                                
+	@return      Object
+	 */
 	public Object clean() throws IOException {
 		return true;
 	}
-
+	
+	/**
+	 * Performs the connectivity test.
+	 */
 	public void scan() throws IOException, HttpException, RuntimeException {
 		
 	}

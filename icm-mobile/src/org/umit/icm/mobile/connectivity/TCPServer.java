@@ -30,6 +30,9 @@ import java.net.Socket;
 
 import android.util.Log;
 
+/**
+ * This is the TCPServer class. Implements a standard TCP Server.
+ */
 
 public class TCPServer {
 	
@@ -39,12 +42,20 @@ public class TCPServer {
 	Thread thread;
 	private volatile boolean stop = false;
 	
+	/**
+	 * This is the default constructor. Takes as parameter a port number.
+	 * Opens a {@link Socket} using the port number.
+	 */	
 	public TCPServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		response = "";
 		request = "";
 	}
 	
+	/**
+	 * This is the main Server thread. Listens on the port and accepts connections.
+	 * Reads requests and Writes responses. Stops running when stop == false.
+	 */
 	public void runServer() {
 		 	thread = new Thread() {
 			 public void run() {		 
@@ -77,20 +88,32 @@ public class TCPServer {
 		 };
 		 thread.start();
 	}
-
+	
+	/**
+	 * Returns the response String.
+	 */
 	public String getResponse() {
 		return response;
 	}
-	
+		
+	/**
+	 * Returns the request String.
+	 */
 	public String getRequest() {
 		Log.w("##Server", "get" + request);
 		return request;
 	}
-
+	
+	/**
+	 * Sets the response.
+	 */
 	public void setResponse(String response) {
 		this.response = response;
 	}		
 	
+	/**
+	 * Stops the thread by asserting stop as true.
+	 */
 	public void closeConnection() {
 		stop = true;		
 		Log.w("##Server", "close");

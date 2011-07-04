@@ -37,6 +37,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 
+/**
+ * This is the WebsiteConnectivityService class which extends {@link Service}.
+ */
+
 public class WebsiteConnectivityService extends Service {
 
 	private Timer timer = new Timer();
@@ -63,6 +67,18 @@ public class WebsiteConnectivityService extends Service {
 		stopScan();
 	}
 	
+	/**
+	 * Starts a new {@link Timer} and runs a {@link TimerTask} at the default
+	 * scan interval. Starts {@link WebsiteConnectivity#scan()}. Exists if
+	 * there is no Internet access check by {@link WebsiteOpen#checkInternetAccess(ConnectivityManager)}.
+	 * 
+	 * 
+	 
+	 @see         RuntimeParameters
+	 *
+	 
+	@see         Timer
+	 */	 	 
 	private void startScan() {
 		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
 		 RuntimeParameters runtimeParameters = new RuntimeParameters();
@@ -88,6 +104,13 @@ public class WebsiteConnectivityService extends Service {
 		}, 0, interval * 1000); 
 	}
 	
+	/**
+	 * Cancels the {@link Timer}.
+	 * 
+	 * 
+	 
+	@see         Timer
+	 */	 
 	void stopScan() {
 		if (timer != null){
 			timer.cancel();		
@@ -95,6 +118,21 @@ public class WebsiteConnectivityService extends Service {
 				
 	}
 	
+	
+	/**
+	 * Broadcasts an {@link Intent} message to {@link ControlActivity} to
+	 * change the scan status.
+	 * 
+	 * 
+	 
+	 @see         Intent
+	 *
+	 
+	 @see         Context
+	 *
+	 
+	@see         Timer
+	 */	 
 	void stopScanNotify() {
 		if (timer != null){
 			timer.cancel();
