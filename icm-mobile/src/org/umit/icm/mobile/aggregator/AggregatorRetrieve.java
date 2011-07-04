@@ -45,8 +45,33 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.Constants;
 
+/**
+ * Generates a ClientResource for each webservice and calls the relevant 
+ * AggregatorResources and AggregatorActions methods.
+ */
+
 public class AggregatorRetrieve {
 	
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#registerAgent} on the passed message and 
+	 * {@link AggregatorActions#registerAgentAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  registerAgent  An object of the type RegisterAgent
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean registerAgent(
 			RegisterAgent registerAgent) 
 	 throws UnsupportedEncodingException, IOException {
@@ -57,6 +82,26 @@ public class AggregatorRetrieve {
 			return AggregatorActions.registerAgentAction(registerAgentResponse);			
 	 }
 	
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#getPeerList} on the passed message and 
+	 * {@link AggregatorActions#getPeerListAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  getPeerList  An object of the type GetPeerList
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */	
 	 public static boolean getPeerList(
 			GetPeerList getPeerList) 
 	 throws UnsupportedEncodingException, IOException {
@@ -67,6 +112,26 @@ public class AggregatorRetrieve {
 		 	return AggregatorActions.getPeerListAction(getPeerListResponse);		 	
 	 }
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#getSuperPeerList} on the passed message and 
+	 * {@link AggregatorActions#getSuperPeerListAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  getSuperPeerList  An object of the type GetSuperPeerList
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */	 
 	 public static boolean getSuperPeerList(
 			GetSuperPeerList getSuperPeerList) 
 	 throws UnsupportedEncodingException, IOException {
@@ -77,6 +142,26 @@ public class AggregatorRetrieve {
 		 	return AggregatorActions.getSuperPeerListAction(getSuperPeerListResponse);		 	
 	 }
 	 
+	 /**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#getEvents} on the passed message and 
+	 * {@link AggregatorActions#getEventsAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  getEvents  An object of the type GetEvents
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean getEvents(
 			GetEvents getEvents) 
 	 throws UnsupportedEncodingException, IOException {
@@ -87,6 +172,26 @@ public class AggregatorRetrieve {
 		 	return AggregatorActions.getEventsAction(getEventsResponse);
 	 }
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#sendWebsiteReport} on the passed message and 
+	 * {@link AggregatorActions#sendReportAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  sendWebsiteReport  An object of the type SendWebsiteReport
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean sendWebsiteReport(
 			SendWebsiteReport sendWebsiteReport) 
 	 throws UnsupportedEncodingException, IOException {
@@ -97,6 +202,26 @@ public class AggregatorRetrieve {
 			return AggregatorActions.sendReportAction(sendReportResponse);
 	 }
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#sendServiceReport} on the passed message and 
+	 * {@link AggregatorActions#sendReportAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  sendServiceReport  An object of the type SendServiceReport
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean sendServiceReport(
 			SendServiceReport sendServiceReport) 
 	 throws UnsupportedEncodingException, IOException {
@@ -107,6 +232,26 @@ public class AggregatorRetrieve {
 		 	return AggregatorActions.sendReportAction(sendReportResponse);			
 	 }	
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#checkVersion} on the passed message and 
+	 * {@link AggregatorActions#checkVersionAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  newVersion  An object of the type NewVersion
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean checkVersion(
 			NewVersion newVersion) 
 	 throws UnsupportedEncodingException, IOException {
@@ -117,6 +262,26 @@ public class AggregatorRetrieve {
 			return AggregatorActions.checkVersionAction(newVersionResponse);
 	 }
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#checkTests} on the passed message and 
+	 * {@link AggregatorActions#newTestsAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  newTests  An object of the type NewTests
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean checkTests(
 			NewTests newTests) 
 	 throws UnsupportedEncodingException, IOException {
@@ -127,6 +292,26 @@ public class AggregatorRetrieve {
 			return AggregatorActions.newTestsAction(newTestsResponse);
 	 }
 	 
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#sendWebsiteSuggestion} on the passed message and 
+	 * {@link AggregatorActions#sendSuggestionAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  websiteSuggestion  An object of the type WebsiteSuggestion
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
+	 
+	@see         AggregatorResources
+	 */
 	 public static boolean sendWebsiteSuggestion(
 			WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
@@ -136,7 +321,27 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);		 	
 			return AggregatorActions.sendSuggestionAction(testSuggestionResponse);
 	 }
+
+    /**
+	 * Returns a boolean object from   
+	                          
+	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+	 * and {@link AggregatorResources#sendServiceSuggestion} on the passed message and 
+	 * {@link AggregatorActions#sendSuggestionAction} on the response message.
+	 * 
+	 *	 
+	                          
+	@param  serviceSuggestion  An object of the type ServiceSuggestion
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         AggregatorActions
+	 *
 	 
+	@see         AggregatorResources
+	 */
 	 public static boolean sendServiceSuggestion(
 			ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException {
@@ -145,15 +350,5 @@ public class AggregatorRetrieve {
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
 		 	return AggregatorActions.sendSuggestionAction(testSuggestionResponse);			
-	 }
-	 
-	 public static String testSuggestion(
-			 String serviceSuggestion) 
-	 throws UnsupportedEncodingException, IOException {
-		 ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
-		 	String testSuggestionResponse
-		 	= AggregatorResources.testSuggestion(serviceSuggestion, clientResource);
-		 	return testSuggestionResponse;
 	 }
 }

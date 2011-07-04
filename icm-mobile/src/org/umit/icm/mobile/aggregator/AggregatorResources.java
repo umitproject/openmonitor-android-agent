@@ -49,13 +49,53 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.Constants;
 
-
+/**
+ * Encodes the passed message using {@link Base64} and POSTs it to corresponding
+ * webservice ClientResource. 
+ */
 public class AggregatorResources {
+	
+	/**
+	 * Returns a ClientResource object. url is passed to the ClientResource
+	 * constructor.
+	 * 
+	 *	 
+	                          
+	@param  url  An object of the type String
+	 *  	                          	
+	                          
+	@return      ClientResource
+	 *  
 
+	@see         ClientResource
+	 */
 	 public static ClientResource getClientResource(String url) {	
 		 return new ClientResource(Constants.AGGREGATOR_URL + url);
 	 }
 	 
+	/**
+	 * Returns a RegisterAgentResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a RegisterAgentResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  registerAgent  An object of the type RegisterAgent
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      RegisterAgentResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
 	 public static RegisterAgentResponse registerAgent(
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
@@ -68,6 +108,29 @@ public class AggregatorResources {
 		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
 	 }
 	 
+	/**
+	 * Returns a GetPeerListResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a GetPeerListResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  getPeerList  An object of the type GetPeerList
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      GetPeerListResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
 	 public static GetPeerListResponse getPeerList(
 			 GetPeerList getPeerList, 
 			 ClientResource clientResource) 
@@ -80,6 +143,29 @@ public class AggregatorResources {
 		 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a GetSuperPeerListResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a GetSuperPeerListResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  getSuperPeerList  An object of the type GetSuperPeerList
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      GetsuperPeerListResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
 	 public static GetSuperPeerListResponse getSuperPeerList(
 			 GetSuperPeerList getSuperPeerList, 
 			 ClientResource clientResource) 
@@ -92,6 +178,29 @@ public class AggregatorResources {
 		 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a GetEventsResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a GetEventsResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  getEvents  An object of the type GetEvents
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      GetEventsResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
 	 public static GetEventsResponse getEvents(
 			 GetEvents getEvents, 
 			 ClientResource clientResource) 
@@ -104,6 +213,29 @@ public class AggregatorResources {
 		 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a SendReportResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a SendReportResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  sendWebsiteReport  An object of the type SendWebsiteReport
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      SendReportResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
 	 public static SendReportResponse sendWebsiteReport(
 			 SendWebsiteReport sendWebsiteReport, 
 			 ClientResource clientResource) 
@@ -116,6 +248,29 @@ public class AggregatorResources {
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a SendReportResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a SendReportResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  sendServiceReport  An object of the type SendServiceReport
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      SendReportResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */		
 	 public static SendReportResponse sendServiceReport(
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
@@ -128,6 +283,29 @@ public class AggregatorResources {
 		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a NewVersionResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a NewVersionResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  newVersion  An object of the type NewVersion
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      NewVersionResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */		
 	 public static NewVersionResponse checkVersion(
 			 NewVersion newVersion, 
 			 ClientResource clientResource) 
@@ -140,6 +318,29 @@ public class AggregatorResources {
 		 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a NewTestsResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a NewTestsResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  newTests  An object of the type NewTests
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      NewTestsResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */		
 	 public static NewTestsResponse checkTests(
 			 NewTests newTests, 
 			 ClientResource clientResource) 
@@ -152,6 +353,29 @@ public class AggregatorResources {
 		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a TestSuggestionResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a TestSuggestionResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  websiteSuggestion  An object of the type WebsiteSuggestion
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      TestSuggestionResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */		
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
@@ -164,6 +388,29 @@ public class AggregatorResources {
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 	 }
 	 
+	/**
+	 * Returns a TestSuggestionResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a TestSuggestionResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  serviceSuggestion  An object of the type ServiceSuggestion
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      TestSuggestionResponse
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */	
 	 public static TestSuggestionResponse sendServiceSuggestion(
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
@@ -174,18 +421,6 @@ public class AggregatorResources {
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null)); 
 		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-	 }
-	 
-	 public static String testSuggestion(
-			 String serviceSuggestion, 
-			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
-		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , serviceSuggestion);		 		 			 		  		 
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null)); 
-		 return new String(response.getText());
 	 }
 
 }
