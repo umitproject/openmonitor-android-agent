@@ -41,6 +41,11 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+/**
+ * The main entry point of the application. Populates the Tabs and initializes
+ * default parameters and runs services.
+ */
+
 public class Main extends TabActivity {
  
     @Override
