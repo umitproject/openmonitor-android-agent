@@ -30,8 +30,29 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
+/**
+ * Helper class which writes Crypto keys to disk.
+ */
+
 public class CryptoKeyWriter {
 	
+	/**
+	 * Writes the passed {@link PublicKey} to disk. Calls {@link KeyFactory},
+	 * {@link RSAPublicKeySpec} and {@link RSACrypto}.
+	 * 
+	 *	 
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *  	                          	
+	                          
+	@see         KeyFactory
+	 *
+
+	@see         RSAPublicKeySpec
+	 *
+	
+	@see         RSACrypto
+	 */
 	public static void writeMyPublicKey(PublicKey publicKey) 
 		throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
@@ -42,6 +63,23 @@ public class CryptoKeyWriter {
     			, publicKeySpec.getPublicExponent());
 	}
 	
+	/**
+	 * Writes the passed {@link PrivateKey} to disk. Calls {@link KeyFactory},
+	 * {@link RSAPrivateKeySpec} and {@link RSACrypto}.
+	 * 
+	 *	 
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 *  	                          	
+	                          
+	@see         KeyFactory
+	 *
+
+	@see         RSAPrivateKeySpec
+	 *
+	
+	@see         RSACrypto
+	 */
 	public static void writeMyPrivateKey(PrivateKey privateKey) 
 	throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
@@ -50,16 +88,50 @@ public class CryptoKeyWriter {
 	RSACrypto.saveKey(Constants.MY_PRIVATE_KEY_FILE
 			, privateKeySpec.getModulus()
 			, privateKeySpec.getPrivateExponent());
-}
+	}
 	
+	/**
+	 * Writes the passed {@link PublicKey} to disk. Calls {@link AESCrypto}.
+	 * 
+	 *	 
+	                          
+	@param  secretKey  An object of the type byte[]
+	 *  	                          	
+
+	@see         AESCrypto
+	 */
 	public static void writeMySecretKey(byte[] secretKey) throws IOException {
 		AESCrypto.saveKey(Constants.MY_SECRET_KEY_FILE, secretKey);
 	}
 	
+	/**
+	 * Writes the passed byte[] to disk. Calls {@link AESCrypto}.
+	 * 
+	 *	 
+	                          
+	@param  myCipheredKey  An object of the type byte[]
+	 *  	                          	
+
+	@see         AESCrypto
+	 */
 	public static void writeMyCipheredKey(byte[] myCipheredKey) throws IOException, RuntimeException {
 		AESCrypto.saveKey(Constants.MY_CIPHERED_KEY_FILE, myCipheredKey);
 	}
 	
+	/**
+	 * Writes the passed byte[] to disk and appends the {@link String} peerIP
+	 * to the filename. Calls {@link AESCrypto}.
+	 * 
+	 *	 
+	                          
+	@param  secretKey  An object of the type byte[]
+	 *  
+	  
+	@param  peerIP  An object of the type {@link String}
+	 *	                          	
+
+	@see         AESCrypto
+	 */
 	public static void writePeerSecretKey(byte[] secretKey, String peerIP) throws IOException {
 		AESCrypto.saveKey(peerIP+Constants.PEER_SECRET_KEY_FILE, secretKey);
 	}

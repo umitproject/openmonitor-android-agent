@@ -21,7 +21,18 @@
 
 package org.umit.icm.mobile.utils;
 
+/**
+ * Interface for Profiler Task
+ */
+
 public interface TaskInterface {
+	/**
+	 * The task itself.
+	 */
 	void task();
+	
+	/**
+	 * Returns the name of the task.
+	 */
 	String taskName();
 }

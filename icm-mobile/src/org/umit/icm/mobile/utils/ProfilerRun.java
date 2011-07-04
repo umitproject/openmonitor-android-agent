@@ -37,10 +37,15 @@ import org.umit.icm.mobile.proto.MessageProtos.*;
 
 import android.util.Log;
 
+/**
+ * Holds tasks that need to be profiled.
+ */
+
 public class ProfilerRun {
 	
-	
-	
+	/**
+	 * runs individual profile tasks. 
+	 */	
 	public static void run() {	
 		profileTraceBuild();
 		profileTraceRouteBuild();
@@ -78,9 +83,21 @@ public class ProfilerRun {
 		profileAggrGetSuperPeerList();
 		profileAggrRegisterAgent();
 	}
-		
+	
+	/**
+	 * Individual profiler task
+	 */
 	private static void profileTraceBuild (){
 		Profiler profiler = new Profiler();
+		
+		/**
+		 * Passes an instance of TaskInterface using the task
+		 * to runProfiler.
+		 *
+		 * 
+		 
+		 @see Profiler
+		 */
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				Trace trace = Trace.newBuilder()

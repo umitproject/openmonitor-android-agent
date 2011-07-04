@@ -21,8 +21,29 @@
 
 package org.umit.icm.mobile.utils;
 
-public class CryptoHelper {
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.RSAPublicKeySpec;
 
+/**
+ * Helper class with methods to convert byte[] to {@link String} hex and 
+ * vice versa.
+ */
+public class CryptoHelper {
+	
+	/**
+	 * Returns a Hex {@link String} of the passed byte[].
+	 * 
+	 *	 
+	                          
+	@param  buf  An object of the type byte[]
+	 * 
+	
+	@return {@link String}	                          	
+	 *
+	 
+	@see         StringBuffer
+	 */
 	public static String toHex (byte buf[]) {
         StringBuffer strbuf = new StringBuffer(buf.length * 2);
         int i;
@@ -36,7 +57,17 @@ public class CryptoHelper {
 
         return strbuf.toString();
      }
-
+	
+	/**
+	 * Returns byte[] of the passed {@link String}.
+	 * 
+	 *	 
+	                          
+	@param  hex  An object of the type {@link String}
+	 * 
+	
+	@return byte[]                          	
+	 */
     public static byte[] toByte (String hex) {
         byte[] bts = new byte[hex.length() / 2];
         for (int i = 0; i < bts.length; i++) {

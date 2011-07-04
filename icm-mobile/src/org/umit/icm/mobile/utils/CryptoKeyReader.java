@@ -25,24 +25,90 @@ import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+/**
+ * Helper class which reads Crypto keys from disk.
+ */
+
 public class CryptoKeyReader {
 	
+	/**
+	 * Returns {@link PublicKey} read from disk using 
+	 * {@link RSACrypto#readPublicKey(String)}.
+	 * 
+	 *
+	
+	@return PublicKey
+     *		
+
+	@see         PublicKey
+	 *
+	
+	@see         RSACrypto
+	 */
 	public static PublicKey getMyPublicKey() throws IOException {
 		return RSACrypto.readPublicKey(Constants.MY_PUBLIC_KEY_FILE);
 	}
 	
+	/**
+	 * Returns {@link PrivateKey} read from disk using 
+	 * {@link RSACrypto#readPrivateKey(String)}.
+	 * 
+	 *
+	
+	@return PrivateKey
+     *		
+
+	@see         PrivateKey
+	 *
+	
+	@see         RSACrypto
+	 */
 	public static PrivateKey getMyPrivateKey() throws IOException {
 		return RSACrypto.readPrivateKey(Constants.MY_PRIVATE_KEY_FILE);
 	}
 	
+	/**
+	 * Returns secret key byte[] read from disk using 
+	 * {@link AESCrypto#readKey(String)}.
+	 * 
+	 *
+	
+	@return byte[]
+     *		
+	
+	@see         AESCrypto
+	 */
 	public static byte[] getMySecretKey() throws IOException {
 		return AESCrypto.readKey(Constants.MY_SECRET_KEY_FILE);
 	}
 	
+	/**
+	 * Returns cipheredkey byte[] read from disk using 
+	 * {@link AESCrypto#readKey(String)}.
+	 * 
+	 *
+	
+	@return byte[]
+     *		
+	
+	@see         AESCrypto
+	 */
 	public static byte[] getMyCipheredKey() throws IOException {
 		return AESCrypto.readKey(Constants.MY_CIPHERED_KEY_FILE);
 	}
 	
+	/**
+	 * Returns secret key byte[] read from disk using 
+	 * {@link AESCrypto#readKey(String)} and filename appended with {@link String}
+	 * peerIP.
+	 * 
+	 *
+	
+	@return byte[]
+     *		
+	
+	@see         AESCrypto
+	 */
 	public static byte[] getPeerSecretKey(String peerIP) throws IOException {
 		return AESCrypto.readKey(peerIP+Constants.PEER_SECRET_KEY_FILE);
 	}

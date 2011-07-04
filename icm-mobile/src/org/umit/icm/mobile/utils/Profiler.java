@@ -26,6 +26,10 @@ import java.io.IOException;
 
 import android.util.Log;
 
+/**
+ * Implements the Profiler
+ */
+
 public class Profiler {
 	
 	private long start;
@@ -35,7 +39,21 @@ public class Profiler {
 		start = 0;
 		end = 0;
 	}
-	
+		
+	/**
+	 * Returns a long object. Calculates the time taken in milliseconds
+	 * by the {@link TaskInterface#task()}. Uses {@link System}. 
+	 * 
+	 *	 
+	                          
+	@param  taskInterface  An object of the type {@link TaskInterface}
+	 *  	                          	
+	                          
+	@return      long
+	 *  	                        
+	 
+	@see         System
+	 */
 	private long timeTaken(TaskInterface taskInterface) {
 		start = 0;
 		end = 0;
@@ -44,7 +62,19 @@ public class Profiler {
 		end = System.currentTimeMillis()-start;
 		return end;
 	}
-			
+	
+	/**
+	 * Runs each individual task and writes its time taken calculated by
+	 * {@link Profiler#timeTaken(TaskInterface)} to disk by calling
+	 * {@link SDCardReadWrite#writeStringAppend(String, String, String)}.
+	 * 
+	 *	 
+	                          
+	@param  taskInterface  An object of the type {@link TaskInterface}
+	 *  	                          	 	                        
+	 
+	@see         SDCardReadWrite
+	 */
 	public void runProfiler(TaskInterface taskInterface) {
 		Log.w(taskInterface.taskName(), "Done");
 		try {
@@ -63,4 +93,3 @@ public class Profiler {
 	}			
 	
 }
-

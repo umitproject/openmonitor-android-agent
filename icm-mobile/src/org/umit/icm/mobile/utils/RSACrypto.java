@@ -49,60 +49,223 @@ import org.apache.commons.codec.binary.Base64;
 
 import android.os.Environment;
 
+/**
+ * Provides methods for RSA asymmetric cryptography
+ */
+
 public class RSACrypto {
 	
-
+	/**
+	 * Returns an encrypted {@link String} of the Plain text passed. 
+	 * Calls {@link RSACrypto#encryptPublic(PublicKey, byte[])}. Uses 
+	 * {@link PublicKey} and {@link CryptoHelper#toHex(byte[])}.
+	 *	 
+	                          
+	@param  plainText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *   	
+	
+    @return {@link String}	                          
+	 *
+	 
+	@see         CryptoHelper
+	 */
 	public static String encryptPublic(PublicKey publicKey, String plainText) throws Exception {
 		byte[] cipherText = encryptPublic(publicKey, plainText.getBytes());
 		return CryptoHelper.toHex(cipherText);
 	}
 	
+	/**
+	 * Returns an decrypted {@link String} of the cipher text passed. 
+	 * Calls {@link RSACrypto#decryptPrivate(PrivateKey, byte[])}. Uses 
+	 * {@link PrivateKey} and {@link CryptoHelper#toByte(String)}.
+	 *	 
+	                          
+	@param  cipherText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 *   	                          
+	
+	@return {@link String}	                          
+	 *	 
+	
+	@see         CryptoHelper
+	 */
 	public static String decryptPrivate(PrivateKey privateKey, String cipherText) throws Exception {
 		byte[] cipherTextBytes = CryptoHelper.toByte(cipherText);
 		return new String(decryptPrivate(privateKey, cipherTextBytes));
 	}
 	
+	/**
+	 * Returns an encrypted {@link String} of the Plain text passed. 
+	 * Calls {@link RSACrypto#encryptPrivate(PrivateKey, byte[])}. Uses 
+	 * {@link PrivateKey} and {@link CryptoHelper#toHex(byte[])}.
+	 *	 
+	                          
+	@param  plainText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 *   	                          
+	
+	@return {@link String}	                          
+	 *
+	 
+	@see         CryptoHelper
+	 */
 	public static String encryptPrivate(PrivateKey privateKey, String plainText) throws Exception {
 		byte[] cipherText = encryptPrivate(privateKey, plainText.getBytes());
 		return CryptoHelper.toHex(cipherText);
 	}
 	
+	/**
+	 * Returns a decrypted {@link String} of the cipher text passed. 
+	 * Calls {@link RSACrypto#decryptPublic(PublicKey, byte[])}. Uses 
+	 * {@link PublicKey} and {@link CryptoHelper#toByte(String)}.
+	 *	 
+	                          
+	@param  cipherText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *   	                          
+	
+	@return {@link String}	                          
+	 *
+	 
+	@see         CryptoHelper
+	 */
 	public static String decryptPublic(PublicKey publicKey, String cipherText) throws Exception {
 		byte[] cipherTextBytes = CryptoHelper.toByte(cipherText);
 		return new String(decryptPublic(publicKey, cipherTextBytes));
 	}
-
+	
+	/**
+	 * Returns an RSA KeyPair generated using 
+	 * {@link KeyPairGenerator#generateKeyPair()}. 
+	 * 
+	 *	 
+	                          
+	@return {@link KeyPair}	                          
+	 *
+	 	                          	
+	@see         KeyPairGenerator
+	 */
 	public static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
 		keyPairGen.initialize(Constants.RSA_KEY_SIZE);
 		return keyPairGen.generateKeyPair();   
 	}
-
+	
+	/**
+	 * Returns an encrypted byte[] of the Plain text passed. 
+	 * Uses{@link PublicKey} and {@link Cipher}.
+	 *	 
+	 *	                          		
+	
+	@param  plainBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 * 
+	
+    @return byte[]	                          
+	 *
+	 
+	@see         Cipher
+	 */
 	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
-
+	
+	/**
+	 * Returns an decrypted byte[] of the cipher bytes passed. 
+	 * Uses {@link PrivateKey} and {@link Cipher}.
+	 *	 
+	                          
+	@param  cipherBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 *   	                          
+	
+	@return byte[]	                          
+	 *	 
+	
+	@see         Cipher
+	 */
 	public static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, privateKey);
 	    return cipher.doFinal(cipherBytes);
 	}
 	
+	/**
+	 * Returns an encrypted byte[] of the Plain text passed. 
+	 * Uses{@link PrivateKey} and {@link Cipher}.
+	 *	 
+	 *	                          		
+	
+	@param  plainBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 * 
+	
+    @return byte[]	                          
+	 *
+	 
+	@see         Cipher
+	 */
 	public static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 	    return cipher.doFinal(plainBytes);
 	}
 	
+	/**
+	 * Returns an decrypted byte[] of the cipher bytes passed. 
+	 * Uses {@link PublicKey} and {@link Cipher}.
+	 *	 
+	                          
+	@param  cipherBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *   	                          
+	
+	@return byte[]	                          
+	 *	 
+	
+	@see         Cipher
+	 */
 	public static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
 	   	Cipher cipher = Cipher.getInstance("RSA");
 	    cipher.init(Cipher.DECRYPT_MODE, publicKey);
 	    return cipher.doFinal(cipherBytes);
 	}
 	
+	/**
+	 * Writes an RSA key to disk.
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  modulus  An object of the type {@link BigInteger}
+	 *   	                          
+	 
+	@param  exponential  An object of the type {@link BigInteger}
+	 *   	                             
+
+	@see         SDCardReadWrite
+	 */
     public static void saveKey(String fileName, BigInteger modulus, BigInteger exponential) 
     throws IOException{
     	
@@ -123,6 +286,18 @@ public class RSACrypto {
     	
     }
     
+	/**
+	 * Reads an RSA {@link PublicKey} from disk.
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	
+	@return  {@link PublicKey}
+	 * 
+
+	@see         SDCardReadWrite
+	 */
     public static PublicKey readPublicKey(String fileName) throws IOException{
     	
     	File sdCard = Environment.getExternalStorageDirectory();
@@ -146,6 +321,19 @@ public class RSACrypto {
     	    	
     }
     
+    /**
+	 * Reads an RSA {@link PrivateKey} from disk.
+	 *	 
+	 *
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	
+	@return  {@link PrivateKey}
+	 * 
+
+	@see         SDCardReadWrite
+	 */
     public static PrivateKey readPrivateKey(String fileName) throws IOException{
     	
     	File sdCard = Environment.getExternalStorageDirectory();
@@ -169,6 +357,21 @@ public class RSACrypto {
     	    	
     }
     
+    /**
+	 * Converts a {@link String} to {@link PublicKey}.
+	 *	 
+	                          
+	@param  publicKeyString  An object of the type {@link String}
+	 *  	                          	
+	
+	@return  {@link PublicKey}
+	 * 
+
+	@see         X509EncodedKeySpec
+	 *
+	 
+	@see         KeyFactory
+	 */    
     public static PublicKey stringToPublicKey(String publicKeyString) 
     	throws NoSuchAlgorithmException, InvalidKeySpecException {
     	X509EncodedKeySpec spec =
@@ -177,6 +380,21 @@ public class RSACrypto {
     	    return keyFactory.generatePublic(spec);
     }
     
+    /**
+	 * Converts a {@link String} to {@link PrivateKey}.
+	 *	 
+	                          
+	@param  privateKeyString  An object of the type {@link String}
+	 *  	                          	
+	
+	@return  {@link PrivateKey}
+	 * 
+
+	@see         PKCS8EncodedKeySpec
+	 *
+	 
+	@see         KeyFactory
+	 */    
     public static PrivateKey stringToPrivateKey(String privateKeyString) 
 	throws NoSuchAlgorithmException, InvalidKeySpecException {    	
     	PKCS8EncodedKeySpec spec =

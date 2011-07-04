@@ -30,6 +30,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
@@ -39,20 +42,73 @@ import javax.crypto.spec.SecretKeySpec;
 
 import android.os.Environment;
 
+/**
+ * Provides methods for AES symmetric cryptography
+ */
+
 public class AESCrypto {
-
-
+	
+	/**
+	 * Returns an encrypted {@link String} of the Plain text passed. 
+	 * Calls {@link AESCrypto#encrypt(byte[], byte[])}. Uses 
+	 * {@link CryptoHelper#toHex(byte[])}.
+	 *	 
+	                          
+	@param  plainText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  key  An object of the type {@link String}
+	 *   	
+	
+    @return {@link String}	                          
+	 *
+	 
+	@see         CryptoHelper
+	 */
 	public static String encrypt(String key, String plainText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
 		byte[] cipherText = encrypt(generatedKey, plainText.getBytes());
 		return CryptoHelper.toHex(cipherText);
 	}
 	
+	/**
+	 * Returns an decrypted {@link String} of the cipher text passed. 
+	 * Calls {@link AESCrypto#decrypt(byte[], byte[])}. Uses 
+	 * {@link CryptoHelper#toByte(String)}.
+	 *	 
+	                          
+	@param  cipherText  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  key  An object of the type {@link String}
+	 *   	                          
+	
+	@return {@link String}	                          
+	 *	 
+	
+	@see         CryptoHelper
+	 */
 	public static String decrypt(String key, String cipherText) throws Exception {
 		byte[] generatedKey = generateKey(key.getBytes());
 		return new String(decrypt(generatedKey, CryptoHelper.toByte(cipherText)));
 	}
-
+	
+	/**
+	 * Returns an AES secret key using the passed byte[] as seed. 
+	 *	 
+	 *
+	                          
+	@param  key  An object of the type byte[]
+	 *  	                          	 	                          
+	
+	@return byte[]                       
+	 *	 
+	
+	@see         SecureRandom
+	 *
+	 
+	@see         KeyGenerator
+	 */
 	public static byte[] generateKey(byte[] key) throws Exception {
 		KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 		SecureRandom randomGen = SecureRandom.getInstance("SHA1PRNG");
@@ -61,7 +117,24 @@ public class AESCrypto {
 	    SecretKey secretKey = keyGen.generateKey();
 	    return secretKey.getEncoded();
 	}
-
+	
+	/**
+	 * Returns an encrypted byte[] of the Plain bytes passed. 
+	 * Encrypts using {@link Cipher}.
+	 *
+	 *	 
+	                          
+	@param  plainBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  byteKey  An object of the type byte[]
+	 *   	
+	
+    @return byte[]                        
+	 *
+	 
+	@see         Cipher
+	 */
 	public static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
@@ -69,6 +142,22 @@ public class AESCrypto {
 	    return cipher.doFinal(plainBytes);		
 	}
 
+	/**
+	 * Returns an decrypted byte[] of the cipher bytes passed. 
+	 * Uses {@link Cipher}.
+	 *	 
+	                          
+	@param  cipherBytes  An object of the type byte[]
+	 *  	                          	
+	                          
+	@param  byteKey  An object of the type byte[]
+	 *   	                          
+	
+	@return byte[]	                          
+	 *	 
+	
+	@see         Cipher
+	 */
 	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES");
@@ -76,6 +165,18 @@ public class AESCrypto {
 	    return cipher.doFinal(cipherBytes);
 	}
 	
+	/**
+	 * Writes an AES key to disk.
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  secretKey  An object of the type byte[]
+	 *   	                          
+
+	@see         SDCardReadWrite
+	 */
 	 public static void saveKey(String fileName, byte[] secretKey) 
 	    throws IOException{
 	    	
@@ -97,6 +198,18 @@ public class AESCrypto {
 	    	
 	    }
 	 
+		/**
+		 * Reads an AES key from disk.
+		 *	 
+		                          
+		@param  fileName  An object of the type {@link String}
+		 *  	                          	
+		
+		@return  byte[]
+		 * 
+
+		@see         SDCardReadWrite
+		 */
 	 public static byte[] readKey(String fileName) throws IOException{
 	    	
 	    	File sdCard = Environment.getExternalStorageDirectory();

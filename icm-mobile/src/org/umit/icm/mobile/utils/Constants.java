@@ -26,6 +26,9 @@ import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
 
+/**
+ * Holds the application wide constants.
+ */
 public class Constants {
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
 	public static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
@@ -59,7 +62,7 @@ public class Constants {
 	public static String TESTS_DIR = "/tests";
 	public static String TESTS_FILE = "tests.test";
 	public static List<String> WEBSITE_LIST = new ArrayList<String>()
-	{/**
+	{  /**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
@@ -98,7 +101,7 @@ public class Constants {
 	
 	public static List<Service> SERVICE_LIST = new ArrayList<Service>()
 	{
-	/**
+     	/**
 		 * 
 		 */
 		private static final long serialVersionUID = 2L;

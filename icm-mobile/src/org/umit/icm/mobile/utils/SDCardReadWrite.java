@@ -50,11 +50,35 @@ import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
 import android.os.Environment;
 
-
-
+/**
+ * Provides methods for reading and writing different objects to the SDCard
+ * storage.
+ */
 public class SDCardReadWrite {
 	private static File sdCard;
 	
+	/**
+	 * Writes a {@link String} to the specified filename in directory.
+	 * 
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  data  An object of the type {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeString(String fileName
 			, String dir, String data) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -76,6 +100,28 @@ public class SDCardReadWrite {
     		}
 		}
 	
+	/**
+	 * Appends a {@link String} to the specified filename in directory.
+	 * 
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@param  data  An object of the type {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeStringAppend(String fileName
 			, String dir, String data) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -97,6 +143,29 @@ public class SDCardReadWrite {
     		}
 		}
 	
+	/**
+	 * Returns a {@link String} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          	
+	                          
+	@return  {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static String readString(String fileName
 			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -115,6 +184,27 @@ public class SDCardReadWrite {
 		}
 	}
 	
+	/**
+	 * Checks if a certain file in a specified directory exists or not.
+	 * 
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          		                          	
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	
+	@return boolean
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static boolean fileExists(String fileName
 			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -127,6 +217,27 @@ public class SDCardReadWrite {
     	return false;
 	}
 	
+	/**
+	 * Checks if a certain file in a specified directory is empty or not.
+	 * 
+	 *	 
+	                          
+	@param  fileName  An object of the type {@link String}
+	 *  	                          		                          	
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	
+	@return boolean
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static boolean fileNotEmpty(String fileName
 			, String dir) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -141,6 +252,25 @@ public class SDCardReadWrite {
     	return true;
 	}
 	
+	/**
+	 * Writes a {@link Website} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link Website}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeWebsite(String dir
 			, Website data) throws IOException , RuntimeException{
 		ObjectOutputStream objOutStream = null;
@@ -166,6 +296,29 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link Website} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  url  An object of the type {@link String}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static Website readWebsite(String dir
 			, String url) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -190,6 +343,16 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Checks if the SDCard is present or not.
+	 * 
+	 *	 
+	
+	@return boolean	                          	
+	*
+	
+	@see         Environment
+	 */
 	public static boolean checkSDCard() {
 		
 		String storageState = android.os.Environment.getExternalStorageState();
@@ -199,6 +362,25 @@ public class SDCardReadWrite {
 		return false;
 	}
 	
+	/**
+	 * Writes a {@link WebsiteReport} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link WebsiteReport}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         FileOutputStream
+	 */
 	public static void writeWebsiteReport(String dir
 			, WebsiteReport data) throws IOException, RuntimeException{
 		OutputStream outputStream = null;
@@ -223,6 +405,29 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link WebsiteReport} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 
+	                                              
+	@return  {@link WebsiteReport}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  url  An object of the type {@link String}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static WebsiteReport readWebsiteReport(String dir
 			, String url) throws IOException, RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -243,7 +448,26 @@ public class SDCardReadWrite {
   		  inputStream.close();
   	  	}
 	}
-			
+	
+	/**
+	 * Writes a {@link List} of {@link Website} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link Website}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeWebsitesList(String dir
 			, List<Website> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;
@@ -267,6 +491,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link Website} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link Website}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<Website> readWebsitesList(String dir
 			) throws IOException, RuntimeException{
 		List<Website> websites = null;
@@ -288,6 +532,26 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link Service} object to the default 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  data  An object of the type {@link String}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeService(String dir
 			, Service data) throws IOException , RuntimeException{
 		ObjectOutputStream objOutStream = null;
@@ -314,6 +578,29 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link Service} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link Service}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  name  An object of the type {@link String}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static Service readService(String dir
 			, String name) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -339,6 +626,25 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link List} of {@link Service} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link Service}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeServicesList(String dir
 			, List<Service> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;
@@ -362,6 +668,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link Service} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link Service}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<Service> readServicesList(String dir
 			) throws IOException, RuntimeException{
 		List<Service> services = null;
@@ -383,6 +709,25 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link List} of {@link AgentData} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link AgentData}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writePeersList(String dir
 			, List<AgentData> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;		
@@ -419,6 +764,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link AgentData} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link AgentData}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<AgentData> readPeersList(String dir
 			) throws IOException, RuntimeException{		
 		sdCard = Environment.getExternalStorageDirectory();
@@ -441,6 +806,25 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link List} of {@link AgentData} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link AgentData}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeSuperPeersList(String dir
 			, List<AgentData> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;		
@@ -477,6 +861,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link AgentData} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link AgentData}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<AgentData> readSuperPeersList(String dir
 			) throws IOException, RuntimeException{		
 		sdCard = Environment.getExternalStorageDirectory();
@@ -499,6 +903,25 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link List} of {@link Event} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link Event}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         ObjectOutputStream
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeEventsList(String dir
 			, List<Event> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;		
@@ -535,6 +958,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link Event} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link Event}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         ObjectInputStream
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<Event> readEventsList(String dir
 			) throws IOException, RuntimeException{		
 		sdCard = Environment.getExternalStorageDirectory();
@@ -557,6 +1000,25 @@ public class SDCardReadWrite {
   	  	}
 	}
 	
+	/**
+	 * Writes a {@link List} of {@link Test} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link Test}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         ObjectOutputStream
+	 *
+	 
+	@see         Environment
+	 */
 	public static void writeTestsList(String dir
 			, List<Test> data) throws IOException, RuntimeException{
 		ObjectOutputStream objOutStream = null;		
@@ -593,6 +1055,26 @@ public class SDCardReadWrite {
     	}
 	}
 	
+	/**
+	 * Returns a {@link List} of {@link Test} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link Test}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see		 ObjectInputStream         
+	 *
+	 
+	@see         Environment
+	 */
 	public static List<Test> readTestsList(String dir
 			) throws IOException, RuntimeException{		
 		sdCard = Environment.getExternalStorageDirectory();
@@ -614,32 +1096,5 @@ public class SDCardReadWrite {
   		  inputStream.close();
   	  	}
 	}
-	
-	public static FileOutputStream returnFileOutputStream(String filename, String dir
-			) throws IOException, RuntimeException{		
-		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
-		keyDir.mkdirs();
-    	File file = new File(keyDir
-    			, filename);
-    	if(!file.exists()){
-    		file.createNewFile();
-    	}
-    	
-    	return new FileOutputStream(file);
-			
-	}				
-	
-	public static FileInputStream returnFileInputStream(String filename
-			, String dir) throws IOException , RuntimeException{
-		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
-    	File file = new File(keyDir, filename
-    			+ Constants.SERVICE_FILE);
-    	
-    	return new FileInputStream(file.toString());
-  	  
-	}
+
 }
