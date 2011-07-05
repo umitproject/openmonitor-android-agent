@@ -23,6 +23,10 @@ package org.umit.icm.mobile.p2p;
 
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 
+/**
+ * This is the queue object type class. Provides setters and getters.
+ */
+
 public class QueueObject {
 	private AgentData agentInfo;
 	private byte[] message;

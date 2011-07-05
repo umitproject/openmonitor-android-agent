@@ -28,23 +28,71 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
+import org.umit.icm.mobile.connectivity.TCPClient;
+
+/**
+ * Provides sender functions for P2P messages.
+ */
 
 public class P2PCommunication {
+	
+	/**
+	 * Sends the byte[] message to the {@link AgentData} agentInfo.
+	 * Uses symmetric key cryptography and opens a TCP connection to the peer
+	 * using {@link TCPClient}. Returns the response message byte[]
+	 * 
+	 * 
+	
+	 @param agentInfo recipient peer data of type {@link AgentData}
+	 *
+	 
+	 @return byte[]
+	 *
+	 
+	 @see CryptoKeyReader
+	 *
+	 
+	 @see AESCrypto
+	 *
+	 
+	 @see TCPClient
+	 */
 	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
 		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);	
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(cipherBytes);
+		Globals.tcpClient.writeLine(cipherBytes);		
+		String responseString = Globals.tcpClient.readLine();
 		Globals.tcpClient.closeConnection();
-				
-		String responseString = Globals.tcpServer.getRequest();
+		
 		byte [] response = responseString.getBytes();	
 		byte[] peerSecretKey = CryptoKeyReader.getPeerSecretKey(agentInfo.getAgentIP());
 		return AESCrypto.decrypt(peerSecretKey, response);
 	}
 	
+	/**
+	 * Sends the byte[] message to the {@link AgentData} agentInfo.
+	 * Uses asymmetric key cryptography and opens a TCP connection to the peer
+	 * using {@link TCPClient}. Returns the response message byte[]
+	 * 
+	 * 
+	
+	 @param agentInfo recipient peer data of type {@link AgentData}
+	 *
+	 
+	 @return byte[]
+	 *
+	 
+	 @see CryptoKeyReader
+	 *
+	 
+	 @see RSACrypto
+	 *
+	 
+	 @see TCPClient
+	 */
 	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
 		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
@@ -52,9 +100,9 @@ public class P2PCommunication {
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
 		Globals.tcpClient.writeLine(cipherBytes);
+		String responseString = Globals.tcpClient.readLine();
 		Globals.tcpClient.closeConnection();
-				
-		String responseString = Globals.tcpServer.getRequest();
+		
 		byte [] response = responseString.getBytes();
 		return RSACrypto.decryptPublic(
 				RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), response);

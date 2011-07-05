@@ -33,8 +33,23 @@ import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
 
+/**
+ * Performs actions on p2p response messages.
+ */
+
 public class P2PActions {
 	
+	/**
+	 * Called after a {@link SendReportResponse} message is received.
+	 * Calls {@link ProcessActions} methods.
+	 * 
+	 * 
+	 
+	 @param sendReportResponse Response message of type {@link SendReportResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void sendReportAction(SendReportResponse sendReportResponse) {
 		try {
 			ProcessActions.updateAgentVersion(sendReportResponse.getHeader());
@@ -50,6 +65,18 @@ public class P2PActions {
 		}
 	}
 	
+	/**
+	 * Called after a {@link GetEventsResponse} message is received.
+	 * Calls {@link ProcessActions} methods. Also updates the global
+	 * events list
+	 * 
+	 * 
+	 
+	 @param getEventsResponse Response message of type {@link GetEventsResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void receiveEventsAction(GetEventsResponse getEventsResponse) {
 		try {
 			ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
@@ -67,6 +94,18 @@ public class P2PActions {
 		ProcessActions.updateEventsList(getEventsResponse.getEventsList());
 	}
 	
+	/**
+	 * Called after a {@link GetPeerListResponse} message is received.
+	 * Calls {@link ProcessActions} methods. Also updates the global
+	 * peers list.
+	 * 
+	 * 
+	 
+	 @param getPeerListResponse Response message of type {@link GetPeerListResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void getPeerListAction(GetPeerListResponse getPeerListResponse) {
 		try {
 			ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
@@ -84,6 +123,18 @@ public class P2PActions {
 		ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());
 	}
 	
+	/**
+	 * Called after a {@link GetSuperPeerListResponse} message is received.
+	 * Calls {@link ProcessActions} methods. Also updates the global
+	 * super peers list.
+	 * 
+	 * 
+	 
+	 @param getSuperPeerListResponse Response message of type {@link GetSuperPeerListResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) {
 		try {
 			ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
@@ -101,6 +152,18 @@ public class P2PActions {
 		ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
 	}
 	
+	/**
+	 * Called after a {@link NewTestsResponse} message is received.
+	 * Calls {@link ProcessActions} methods. Also updates the global
+	 * test list.
+	 * 
+	 * 
+	 
+	 @param newTestsResponse Response message of type {@link NewTestsResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void receiveTaskListAction(NewTestsResponse newTestsResponse) {
 		try {
 			ProcessActions.updateAgentVersion(newTestsResponse.getHeader());
@@ -118,6 +181,17 @@ public class P2PActions {
 		ProcessActions.updateTests(newTestsResponse.getTestsList());
 	}
 	
+	/**
+	 * Called after a {@link TestSuggestionResponse} message is received.
+	 * Calls {@link ProcessActions} methods. 
+	 * 
+	 * 
+	 
+	 @param testSuggestionResponse Response message of type {@link TestSuggestionResponse}
+	 *
+	 
+	 @see ProcessActions
+	 */
 	public static void sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) {
 		try {
 			ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
@@ -133,6 +207,20 @@ public class P2PActions {
 		}
 	}
 	
+	/**
+	 * Called after a {@link AuthenticatePeerResponse} message is received.
+	 * Calls {@link CryptoKeyWriter#writePeerSecretKey(byte[], String)}
+	 * 
+	 * 
+	 
+	 @param authenticatePeerResponse Response message of type {@link AuthenticatePeerResponse}
+	 *
+	 
+	 @param peerIP Response message of type {@link String}
+	 *
+	 
+	 @see CryptoKeyWriter
+	 */
 	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse, String peerIP) {
 		try {
 			CryptoKeyWriter.writePeerSecretKey(authenticatePeerResponse.getSecretKey().getBytes(), peerIP);

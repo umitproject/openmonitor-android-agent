@@ -26,6 +26,10 @@ import java.util.Queue;
 
 import org.umit.icm.mobile.utils.Constants;
 
+/**
+ * Provides a queueing mechanism for the P2P messages.
+ */
+
 public class MessageQueue {
 
 	private Queue<QueueObject> messageQ; 
@@ -34,6 +38,22 @@ public class MessageQueue {
 		messageQ = new LinkedList<QueueObject>();
 	}
 	
+	/**
+	 * Adds a message to the queue.
+	 * 
+	 * 
+	 
+	 @param message A message of type {@link QueueObject}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see Queue
+	 *
+	 
+	 @see QueueObject
+	 */
 	public boolean addMessage(QueueObject message) {
 		if(messageQ.size()<=Constants.P2P_MESSAGE_QUEUE_SIZE) {
 			messageQ.offer(message);
@@ -44,6 +64,19 @@ public class MessageQueue {
 			
 	}
 	
+	/**
+	 * Returns a {@link QueueObject} at the beginning of the queue.
+	 * 
+	 * 
+	 
+	 @return QueueObject
+	 *
+	 
+	 @see Queue
+	 *
+	 
+	 @see QueueObject
+	 */
 	public QueueObject removeMessage() {
 		if(messageQ.size()!= 0) {			
 			return messageQ.poll();
