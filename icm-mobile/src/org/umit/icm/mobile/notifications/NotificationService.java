@@ -32,6 +32,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
+/**
+ * The Notification Service which notifies the user of any event.
+ */
+
 public class NotificationService extends Service {
 
 	private NotificationManager nManager;
@@ -41,6 +45,12 @@ public class NotificationService extends Service {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * Initializes the notification manager and calls 
+	 * {@link NotificationService#showNotification()}
+	 */
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -51,6 +61,9 @@ public class NotificationService extends Service {
 		
 	}
 	
+	/**
+	 * Stops the service
+	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -60,23 +73,27 @@ public class NotificationService extends Service {
 	
 	}
 	
-    
+	/**
+	 * Shows dummy notification
+	 *
+	 * 
+	 @see Notification
+	 *
+	 
+	 @see NotificationManager
+	 */
     private void showNotification() {
     
         CharSequence text = getText(R.string.start_service);
-
     
         Notification notification = new Notification(R.drawable.icon, text,
                 System.currentTimeMillis());
 
-
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, InformationActivity.class), 0);
 
-
         notification.setLatestEventInfo(this, getText(R.string.service_name),
                        text, contentIntent);
-
 
         nManager.notify(R.string.start_service, notification);
     }
