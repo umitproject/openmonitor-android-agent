@@ -36,8 +36,23 @@ import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.RSACrypto;
 
+/**
+ * Performs actions based on aggregator and P2P communication responses.
+ */
+
 public class ProcessActions {	
-	
+	/**
+	 * Checks if the response agent version is higher than the current
+	 * agent number. If yes, updates the agent version and makes a webservice
+	 * call to the aggregator to be the latest version.
+	 * 
+	 *
+	 
+	 @param header Response header of type {@link ResponseHeader}
+	 *
+	 
+	 @see VersionManager
+	 */
 	public static void updateAgentVersion(ResponseHeader header) 
 		throws IOException {
 		
@@ -48,6 +63,18 @@ public class ProcessActions {
 		}
 	}
 	
+	/**
+	 * Checks if the response tests version is higher than the current
+	 * tests number. If yes, updates the tests version and makes a webservice
+	 * call to the aggregator to get the latest tests version.
+	 * 
+	 *
+	 
+	 @param header Response header of type {@link ResponseHeader}
+	 *
+	 
+	 @see VersionManager
+	 */
 	public static void updateTestsVersion(ResponseHeader header)
 		throws IOException {
 		
@@ -58,42 +85,111 @@ public class ProcessActions {
 		}
 	}
 			
-	/*public static void initializeRequestHeader() throws IOException, RuntimeException {
-		Globals.requestHeader = RequestHeader.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setToken(Globals.runtimeParameters.getToken())
-		.build();
-	}*/
-	
+	/**
+	 * Patches the current agent
+	 * 
+	 *
+	 
+	 @param newVersionResponse Response header of type {@link NewVersionResponse}
+	 */
 	public static boolean updateAgent(NewVersionResponse newVersionResponse) {
 		// TODO patch current binary
 		return true;
 	}
 	
+	/**
+	 * Adds the new tests to {@link Globals#testsList}.
+	 * 
+	 *
+	 
+	 @param tests	{@link List} of {@link Test}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see Test
+	 */
 	public static boolean updateTests(List<Test> tests) {
 		for(int i = 0 ; i < tests.size(); i++)
 			Globals.testsList.add(tests.get(i));
 		return true;
 	}
 	
+	/**
+	 * Adds new events to {@link Globals#eventsList}.
+	 * 
+	 *
+	 
+	 @param events	{@link List} of {@link Event}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see Event
+	 */
 	public static boolean updateEventsList(List<Event> events) {
 		for(int i = 0 ; i < events.size(); i++)
 			Globals.eventsList.add(events.get(i));
 		return true;
 	}
 	
+	/**
+	 * Adds new peers to {@link Globals#peersList}.
+	 * 
+	 *
+	 
+	 @param peers	{@link List} of {@link AgentData}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see AgentData
+	 */
 	public static boolean updatePeersList(List<AgentData> peers) {
 		for(int i = 0 ; i < peers.size(); i++)
 			Globals.peersList.add(peers.get(i));
 		return true;
 	}
 	
+	/**
+	 * Adds new super peers to {@link Globals#superPeersList}.
+	 * 
+	 *
+	 
+	 @param superPeers	{@link List} of {@link AgentData}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see AgentData
+	 */
 	public static boolean updateSuperPeersList(List<AgentData> superPeers) {
 		for(int i = 0 ; i < superPeers.size(); i++)
 			Globals.superPeersList.add(superPeers.get(i));
 		return true;
 	}
 	
+	/**
+	 * Adds the various parameters: {agentID, token, cipheredKey, publicKey
+	 * and privateKey} received from the aggregator after registration.
+	 * 
+	 *
+	 
+	 @param registerAgentResponse	Response message of {@link RegisterAgentResponse}
+	 *
+	 
+	 @return boolean
+	 *
+	 
+	 @see KeyManager
+	 *
+	 
+	 @see RuntimeParameters
+	 */
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
 		try {
 			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());

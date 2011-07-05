@@ -21,6 +21,10 @@
 
 package org.umit.icm.mobile.process;
 
+/**
+ * Manages the SecretKey, PrivateKey, PublicKey and CipheredKey.
+ */
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -40,7 +44,23 @@ public class KeyManager {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * The value constructor.
+	 *
+	 *
+	 
+	 @param mySecretKey SecretKey of type byte[]
+	 *
+	 
+	 @param myPrivateKey PrivateKey of type {@link PrivateKey}
+	 *
+	 
+	 @param myPublicKey PublicKey of type {@link PublicKey}
+	 *
+	 
+	 @param myCipheredKey CipheredKey of type byte[]
+	 */
 	public KeyManager(byte[] mySecretKey, PrivateKey myPrivateKey,
 			PublicKey myPublicKey, byte[] myCipheredKey) {
 		super();
@@ -53,7 +73,17 @@ public class KeyManager {
 	public byte[] getMySecretKey() {
 		return mySecretKey;
 	}
-
+	
+	/**
+	 * Writes the SecretKey to disk.
+	 *
+	 *
+	 
+	 @param mySecretKey SecretKey of type byte[]
+	 *
+	 
+	 @see CryptoKeyWriter
+	 */
 	public void setMySecretKey(byte[] mySecretKey) throws IOException {
 		this.mySecretKey = mySecretKey;
 		CryptoKeyWriter.writeMySecretKey(mySecretKey);
@@ -62,7 +92,17 @@ public class KeyManager {
 	public PrivateKey getMyPrivateKey() {
 		return myPrivateKey;
 	}
-
+	
+	/**
+	 * Writes the PrivateKey to disk.
+	 *
+	 *
+	 
+	 @param myPrivateKey PrivateKey of type {@link PrivateKey}
+	 *
+	 
+	 @see CryptoKeyWriter
+	 */
 	public void setMyPrivateKey(PrivateKey myPrivateKey) {		
 		this.myPrivateKey = myPrivateKey;
 		try {
@@ -82,7 +122,17 @@ public class KeyManager {
 	public PublicKey getMyPublicKey() {
 		return myPublicKey;
 	}
-
+	
+	/**
+	 * Writes the PublicKey to disk.
+	 *
+	 *
+	 
+	 @param myPublicKey PublicKey of type {@link PublicKey}
+	 *
+	 
+	 @see CryptoKeyWriter
+	 */
 	public void setMyPublicKey(PublicKey myPublicKey) {
 		this.myPublicKey = myPublicKey;
 		try {
@@ -102,7 +152,17 @@ public class KeyManager {
 	public byte[] getMyCipheredKey() {
 		return myCipheredKey;
 	}
-
+	
+	/**
+	 * Writes the CipheredKey to disk.
+	 *
+	 *
+	 
+	 @param myCipheredKey CipheredKey of type byte[]
+	 *
+	 
+	 @see CryptoKeyWriter
+	 */
 	public void setMyCipheredKey(byte[] myCipheredKey) {
 		this.myCipheredKey = myCipheredKey;		
 		try {

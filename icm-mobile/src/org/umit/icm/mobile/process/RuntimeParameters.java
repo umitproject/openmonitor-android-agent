@@ -26,6 +26,11 @@ import java.io.IOException;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
+
+/**
+ * Holds parameters that are needed at runtime. Provides setters and getters.
+ */
+
 public class RuntimeParameters {
 	private int scanInterval;
 	private String scanStatus;

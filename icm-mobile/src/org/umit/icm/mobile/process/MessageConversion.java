@@ -21,6 +21,9 @@
 
 package org.umit.icm.mobile.process;
 
+/**
+ * Holds methods to convert one data type into another.
+ */
 
 public class MessageConversion {
 		

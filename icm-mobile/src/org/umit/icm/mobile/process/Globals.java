@@ -37,25 +37,86 @@ import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.Constants;
 
+/**
+ * Holds application wide Globals.
+ */
 
 public class Globals {
+	/**
+	 * Global {@link RuntimeParameters}
+	 */
 	public static RuntimeParameters runtimeParameters 
 	= new RuntimeParameters();
+	
+	/**
+	 * Global {@link VersionManager}
+	 */
 	public static VersionManager versionManager 
 	= new VersionManager();
+	
+	/**
+	 * Global {@link KeyManager}
+	 */
 	public static KeyManager keyManager
 	= new KeyManager();
+	
+	/**
+	 * Global {@link WebsiteConnectivity}
+	 */
 	public static WebsiteConnectivity websiteTest 
 	= new WebsiteConnectivity();
-	public static RequestHeader requestHeader;	
+	
+	/**
+	 * Global {@link RequestHeader}
+	 */
+	public static RequestHeader requestHeader;
+	
+	/**
+	 * Global {@link String} to hold scan status
+	 */
 	public static String scanStatus = " ";
+	
+	/**
+	 * Global {@link List} of {@link Website}
+	 */
 	public static List<Website> websitesList = new ArrayList<Website>();
+	
+	/**
+	 * Global {@link List} of {@link Service}
+	 */
 	public static List<Service> servicesList = new ArrayList<Service>();
+	
+	/**
+	 * Global {@link List} of {@link Event}
+	 */
 	public static List<Event> eventsList = new ArrayList<Event>();
+	
+	/**
+	 * Global {@link List} of {@link AgentData}
+	 */
 	public static List<AgentData> peersList = new ArrayList<AgentData>();
+	
+	/**
+	 * Global {@link List} of {@link AgentData}
+	 */
 	public static List<AgentData> superPeersList = new ArrayList<AgentData>();
+	
+	/**
+	 * Global {@link List} of {@link Test}
+	 */
 	public static List<Test> testsList = new ArrayList<Test>();
 	
+	/**
+	 * Initializes the {@link Globals#websitesList} with 
+	 * {@link Constants#WEBSITE_LIST}
+	 * 
+	 *	 
+	                    
+	@see         Website
+	 *
+	
+	@see         Constants
+	 */
 	public static void intializeWebsitesList() {
 		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
 		while(iterator.hasNext()){               
@@ -64,18 +125,54 @@ public class Globals {
 		
 	}
 	
+	/**
+	 * Initializes the {@link Globals#servicesList} with 
+	 * {@link Constants#SERVICE_LIST}
+	 * 
+	 *	 
+	                    
+	@see         Service
+	 *
+	
+	@see         Constants
+	 */
 	public static void intializeServicesList() {		
 		servicesList = Constants.SERVICE_LIST;				
 	}
 	
+	/**
+	 * Global {@link TCPServer}
+	 */
 	public static TCPServer tcpServer;
 	
+	/**
+	 * Initializes the {@link Globals#tcpServer} with 
+	 * {@link Constants#MY_TCP_PORT}
+	 * 
+	 *	 
+	                    
+	@see         TCPServer
+	 */
 	public static void intializeTCPServer() throws IOException {		
 		tcpServer = new TCPServer(Constants.MY_TCP_PORT);				
 	}
 	
+	/**
+	 * Global {@link TCPClient}
+	 */
 	public static TCPClient tcpClient;
 	
+	/**
+	 * Initializes the {@link Globals#requestHeader} with 
+	 * {@link Globals#runtimeParameters}
+	 * 
+	 *	 
+	                    
+	@see         RequestHeader
+	 *
+	
+	@see         RuntimeParameters
+	 */
 	public static void initializeRequestHeader() throws IOException, RuntimeException {
 		Globals.requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())

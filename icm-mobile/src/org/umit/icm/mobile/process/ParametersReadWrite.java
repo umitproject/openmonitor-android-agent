@@ -26,7 +26,18 @@ import java.io.IOException;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
+/**
+ * Writes various lists to disk.
+ */
+
 public class ParametersReadWrite {
+	
+	/**
+	 * Writes {@link Globals#peersList} to disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
 	public void writePeerList() {
 			try {
 				SDCardReadWrite.writePeersList(Constants.PARAMETERS_DIR
@@ -38,8 +49,15 @@ public class ParametersReadWrite {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	
 	}
 	
+	/**
+	 * Reads {@link Globals#peersList} from disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
 	public void readPeerList() {
 		try {
 			Globals.peersList 
@@ -51,5 +69,122 @@ public class ParametersReadWrite {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}
+	
+	/**
+	 * Writes {@link Globals#superPeersList} to disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void writeSuperPeerList() {
+			try {
+				SDCardReadWrite.writeSuperPeersList(Constants.PARAMETERS_DIR
+						, Globals.superPeersList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+	}
+	
+	/**
+	 * Reads {@link Globals#superPeersList} from disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void readSuperPeerList() {
+		try {
+			Globals.superPeersList 
+			= SDCardReadWrite.readSuperPeersList(Constants.PARAMETERS_DIR);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Writes {@link Globals#eventsList} to disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void writeEventList() {
+			try {
+				SDCardReadWrite.writeEventsList(Constants.PARAMETERS_DIR
+						, Globals.eventsList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+	}
+	
+	/**
+	 * Reads {@link Globals#eventsList} from disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void readEventList() {
+		try {
+			Globals.eventsList
+			= SDCardReadWrite.readEventsList(Constants.PARAMETERS_DIR);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Writes {@link Globals#testsList} to disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void writeTestList() {
+			try {
+				SDCardReadWrite.writeTestsList(Constants.PARAMETERS_DIR
+						, Globals.testsList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+	}
+	
+	/**
+	 * Reads {@link Globals#testsList} from disk.
+	 * 
+	
+	 @see		SDCardReadWrite
+	 */
+	public void readTestList() {
+		try {
+			Globals.testsList 
+			= SDCardReadWrite.readTestsList(Constants.PARAMETERS_DIR);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

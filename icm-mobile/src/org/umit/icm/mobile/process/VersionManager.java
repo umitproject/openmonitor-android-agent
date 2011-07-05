@@ -26,6 +26,10 @@ import java.io.IOException;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
+/**
+ * Holds agent version number and tests version number. Provides setters and getters.
+ */
+
 public class VersionManager {
 	private int agentVersion;
 	private int testsVersion;

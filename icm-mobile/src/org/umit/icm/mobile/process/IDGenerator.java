@@ -21,8 +21,21 @@
 
 package org.umit.icm.mobile.process;
 
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
+
+/**
+ * Provides methods for generating IDs for various entities.
+ */
+
 public class IDGenerator {
 	
+	/**
+	 * Returns a long object with an ID for the ICMReport
+	 * 
+	 *	 
+	                    
+	@return        	long
+	 */
 	public static long generateReportID() {
 		return 100;
 	}
