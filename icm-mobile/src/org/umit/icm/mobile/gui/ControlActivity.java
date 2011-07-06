@@ -28,6 +28,7 @@ import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
+import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 //import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.Globals;
@@ -85,6 +86,15 @@ public class ControlActivity extends Activity {
 	       		SuggestionDialog suggestionDialog = 
 	       			new SuggestionDialog(ControlActivity.this, "", new OnReadyListener());
 	            suggestionDialog.show();	        		
+	       	}
+
+	    }  );
+        
+        mapSelectionButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		MapSelectionDialog MapSelectionDialog = 
+	       			new MapSelectionDialog(ControlActivity.this, "");
+	            MapSelectionDialog.show();	        		
 	       	}
 
 	    }  );

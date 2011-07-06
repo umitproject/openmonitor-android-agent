@@ -61,7 +61,8 @@ public class Main extends TabActivity {
                           resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(tabSpec);
         
-        intent = new Intent().setClass(this, MapActivityTab.class);
+        intent = new Intent().setClass(this, MapActivityTab.class)
+        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         tabSpec = tabHost.newTabSpec(getString(R.string.tab_map)).setIndicator(getString(R.string.tab_map),
                           resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
         tabHost.addTab(tabSpec);

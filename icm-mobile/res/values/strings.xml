@@ -54,4 +54,6 @@
     <string name="gps_disabled">GPS Disabled</string>
     <string name="gps_enabled">GPS Enabled</string>
     <string name="map_selection">Select Map Package</string>
+    <string name="google_rb">Google Maps</string>
+    <string name="osm_rb">Open Street Maps</string>
 </resources>
