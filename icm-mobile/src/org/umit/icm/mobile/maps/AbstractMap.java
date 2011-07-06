@@ -21,6 +21,13 @@
 
 package org.umit.icm.mobile.maps;
 
+import java.util.List;
+
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
+import com.google.android.maps.OverlayItem;
+
+
 import android.content.Context;
 import android.view.View;
 
@@ -28,25 +35,7 @@ import android.view.View;
  * This is the abstract map class.
  */
 
-public class AbstractMap {
-		
-	
-	
-	public AbstractMap() {
-		super();
-		
-	}
-	
-	public boolean getEvents(){
-		return true;
-	}
-	
-	public boolean collateEvents(){
-		return true;
-	}
-	
-	public View getView(Context context){
-		View newView = null;
-		return newView;
-	}
+public interface AbstractMap {	
+	public View getView(Context context, MapView mapView, GeoPoint geoPoint);
+	public List<OverlayItem> getOverlayList(Context context);
 }

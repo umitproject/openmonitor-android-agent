@@ -31,7 +31,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 
 
 import com.google.android.maps.GeoPoint;
@@ -45,7 +44,7 @@ import com.google.android.maps.OverlayItem;
  * Implementation of GoogleMaps. This class extends AbstractMap.
  */
 
-public class GoogleMaps extends AbstractMap {
+public class GoogleMaps implements AbstractMap {
 	
 	MapController mapController;
 	GeoPoint geoPoint;
@@ -157,5 +156,5 @@ public class GoogleMaps extends AbstractMap {
 	public static double getLon(GeoPoint geoPoint)	{                        
         return (geoPoint.getLongitudeE6()/1E6);
 	}
-	
+		
 }

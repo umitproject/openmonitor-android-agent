@@ -21,17 +21,21 @@
 
 package org.umit.icm.mobile.maps;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.View;
 
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import com.google.android.maps.OverlayItem;
+
 /**
  * Implementation of OSM. This class extends AbstractMap.
  */
 
-public class OSMMaps extends AbstractMap {
+public class OSMMaps implements AbstractMap {
 		
 	
 	
@@ -40,7 +44,7 @@ public class OSMMaps extends AbstractMap {
 		
 	}
 	
-	@Override	
+	
 	public View getView(Context context){
 		final  MapView osmMapView = new MapView(context, 256);
 		return osmMapView;
@@ -55,5 +59,19 @@ public class OSMMaps extends AbstractMap {
             (int) (lon * 1E6));
         
         return geoPoint;
+	}
+
+	@Override
+	public List<OverlayItem> getOverlayList(Context context) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public View getView(Context context,
+			com.google.android.maps.MapView mapView,
+			com.google.android.maps.GeoPoint geoPoint) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
