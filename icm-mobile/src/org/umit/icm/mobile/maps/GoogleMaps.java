@@ -120,8 +120,7 @@ public class GoogleMaps extends AbstractMap {
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
         	Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.location_changed) 
-    		+ " " + Globals.scanStatus;
+    		CharSequence text = context.getString(R.string.location_changed);     		
     		int duration = Toast.LENGTH_SHORT;
 
     		Toast toast = Toast.makeText(context, text, duration);
@@ -137,8 +136,7 @@ public class GoogleMaps extends AbstractMap {
 		@Override
 		public void onProviderDisabled(String provider) {
 			Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.gps_disabled) 
-    		+ " " + Globals.scanStatus;
+    		CharSequence text = context.getString(R.string.gps_disabled);     		
     		int duration = Toast.LENGTH_SHORT;
 
     		Toast toast = Toast.makeText(context, text, duration);
@@ -148,8 +146,7 @@ public class GoogleMaps extends AbstractMap {
 		@Override
 		public void onProviderEnabled(String provider) {
 			Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.gps_enabled) 
-    		+ " " + Globals.scanStatus;
+    		CharSequence text = context.getString(R.string.gps_enabled);     		
     		int duration = Toast.LENGTH_SHORT;
 
     		Toast toast = Toast.makeText(context, text, duration);
