@@ -72,11 +72,12 @@ public class GoogleMaps extends AbstractMap {
 					, location.getLongitude());		
 			
 		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-			//location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			//geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					//, location.getLongitude());
-			//locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-					//, 0, 0, networkProviderLocationListener);
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+					, 0, 0, networkProviderLocationListener);
+			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					, location.getLongitude());
+			
 		}							
 		
 		class MapActivityTabOverlay extends Overlay 
@@ -111,6 +112,32 @@ public class GoogleMaps extends AbstractMap {
 	}
 	
 	LocationListener GPSLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+        
+        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					, location.getLongitude());
+        }
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			
+			
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+		
+			
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+			// TODO Auto-generated method stub
+			
+		}
+    };
+    
+    LocationListener networkProviderLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
         
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
