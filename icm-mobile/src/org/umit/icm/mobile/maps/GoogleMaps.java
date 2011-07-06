@@ -21,21 +21,25 @@
 
 package org.umit.icm.mobile.maps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Point;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 /**
  * Implementation of GoogleMaps. This class extends AbstractMap.
@@ -45,55 +49,98 @@ public class GoogleMaps extends AbstractMap {
 	
 	MapController mapController;
 	GeoPoint geoPoint;
-		
-		
+				
 	public GoogleMaps() {
-		super();
-		
+		super();		
 	}
-	
-	
+		
 	public MapView getView(final Context context, MapView mapView, GeoPoint geoPoint){
 		final  MapView googleMapView = mapView;				
 		
-		this.geoPoint = geoPoint;
+		this.geoPoint = geoPoint;				
 		
-		
-		class MapActivityTabOverlay extends Overlay 
-	    {
-			
-	        public boolean draw(Canvas canvas, MapView mapView, 
-	        boolean shadow, long when) 
-	        {
-	            super.draw(canvas, mapView, shadow);                   
-	            
-	            Point point = new Point();
-	            mapView.getProjection().toPixels(GoogleMaps.this.geoPoint, point);
-	 
-	            Bitmap bitMap = BitmapFactory.decodeResource(
-	                context.getResources(), R.drawable.dot);            
-	            canvas.drawBitmap(bitMap, point.x, point.y, null);         
-	            return true;
-	        }
-	    } 
+	    class GoogleMapMarker extends ItemizedOverlay<OverlayItem> {
+
+	    	private List<OverlayItem> overlayList;
+	    	private Context context;
+	    
+	    	public GoogleMapMarker(Drawable defaultMarker) {
+	    		   super(boundCenterBottom(defaultMarker));
+	    	}
+	    	
+
+	    	public GoogleMapMarker(Drawable drawable, Context context, List<OverlayItem> overlayList) {
+	    		super(drawable);
+	    		this.context = context;
+	    		this.overlayList = overlayList;
+	    		this.
+	    		populate();
+	    		
+	    	}	 
+
+	    	@Override
+	    	protected OverlayItem createItem(int i) {
+	    		return overlayList.get(i);
+	    	}
+	    	
+	    	@Override
+	    	public int size() {
+	    		return overlayList.size();
+	    	}
+	    	
+	    	@Override
+	    	protected boolean onTap(int index) {
+		        OverlayItem overlayItem = overlayList.get(index);
+		        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		        dialog.setTitle(overlayItem.getTitle());
+		        dialog.setMessage(overlayItem.getSnippet());
+		        dialog.setPositiveButton("Okay", new OnClickListener() {    
+		            public void onClick(DialogInterface dialog, int which) {
+		                dialog.dismiss();
+		            }
+		        });
+		        dialog.show();
+		        return true;
+	    	}
+	    }
 		mapController = googleMapView.getController();
 		googleMapView.setBuiltInZoomControls(true);
         
-        mapController.animateTo(geoPoint);
-        mapController.setZoom(17); 
-        MapActivityTabOverlay mapOverlay = new MapActivityTabOverlay();
-        List<Overlay> listOfOverlays = googleMapView.getOverlays();
-        listOfOverlays.clear();
-        listOfOverlays.add(mapOverlay);
+        mapController.animateTo(geoPoint);        
         googleMapView.invalidate();
+        
+        List<Overlay> overlayList = googleMapView.getOverlays();
+        Drawable drawable = context.getResources().getDrawable(R.drawable.dot);
+        GoogleMapMarker googleMapOverlay 
+        = new GoogleMapMarker(drawable, context, getOverlayList(context));        
+        overlayList.add(googleMapOverlay);
+        googleMapView.invalidate();       
  
-		return googleMapView;
+        return googleMapView;
 	}
 	
-	
-	public void refreshOverlap(){
+	public List<OverlayItem> getOverlayList(Context context) {
+		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
+		Drawable drawable = context.getResources().getDrawable(R.drawable.dot);
+		OverlayItem overlayItem 
+		= new OverlayItem(geoPoint, "Title", "Info");
+		drawable.setBounds(0,0, 20, 20);
+		overlayItem.setMarker(drawable);
+		overlayList.add(overlayItem);
 		
+		double lat = getLat(geoPoint);
+		double lon = getLon(geoPoint);
+		GeoPoint gpt = getGeoPoint(lat+0.01,lon); 		
+		Drawable drawable2 = context.getResources().getDrawable(R.drawable.icon);
+		OverlayItem overlayItem2 
+		= new OverlayItem(gpt, "Title2", "Info2");
+		drawable2.setBounds(0,0, 20, 20);
+		overlayItem2.setMarker(drawable2);
+		overlayList.add(overlayItem2);
+		
+		return overlayList;
 	}
+	
 	public static GeoPoint getGeoPoint(double lat, double lon)	{
 		                 
         GeoPoint geoPoint = new GeoPoint(
@@ -101,6 +148,14 @@ public class GoogleMaps extends AbstractMap {
             (int) (lon * 1E6));
         
         return geoPoint;
+	}
+	
+	public static double getLat(GeoPoint geoPoint)	{                        
+            return (geoPoint.getLatitudeE6()/1E6);
+	}
+	
+	public static double getLon(GeoPoint geoPoint)	{                        
+        return (geoPoint.getLongitudeE6()/1E6);
 	}
 	
 }
