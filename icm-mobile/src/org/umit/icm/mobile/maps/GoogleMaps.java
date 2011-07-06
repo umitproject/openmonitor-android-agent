@@ -24,6 +24,7 @@ package org.umit.icm.mobile.maps;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Globals;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -34,6 +35,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import com.google.android.maps.GeoPoint;
@@ -49,7 +51,9 @@ public class GoogleMaps extends AbstractMap {
 	
 	LocationManager locationManager;
 	MapController mapController;
-	GeoPoint geoPoint; 
+	GeoPoint geoPoint;
+	Context context;
+	Location location;
 		
 	public GoogleMaps() {
 		super();
@@ -58,10 +62,9 @@ public class GoogleMaps extends AbstractMap {
 	
 	
 	public MapView getView(final Context context, MapView mapView){
-		final  MapView googleMapView = mapView;
-		Location location;
+		final  MapView googleMapView = mapView;				
 		
-		
+		this.context = context;
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
@@ -116,6 +119,13 @@ public class GoogleMaps extends AbstractMap {
         
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
+        	Context context = GoogleMaps.this.context;
+    		CharSequence text = context.getString(R.string.location_changed) 
+    		+ " " + Globals.scanStatus;
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(context, text, duration);
+    		toast.show();
         }
 
 		@Override
@@ -126,13 +136,24 @@ public class GoogleMaps extends AbstractMap {
 
 		@Override
 		public void onProviderDisabled(String provider) {
-		
-			
+			Context context = GoogleMaps.this.context;
+    		CharSequence text = context.getString(R.string.gps_disabled) 
+    		+ " " + Globals.scanStatus;
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(context, text, duration);
+    		toast.show();
 		}
 
 		@Override
 		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
+			Context context = GoogleMaps.this.context;
+    		CharSequence text = context.getString(R.string.gps_enabled) 
+    		+ " " + Globals.scanStatus;
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(context, text, duration);
+    		toast.show();
 			
 		}
     };

@@ -56,8 +56,7 @@ public class MapActivityTab extends MapActivity{
 	 *
 	 
 	 @see OSMMaps
-	 */
-	
+	 */	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
