@@ -51,7 +51,7 @@ import android.widget.Toast;
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
-	, filterButton, servicesFilterButton;
+	, filterButton, servicesFilterButton, mapSelectionButton;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class ControlActivity extends Activity {
         scanButton = (Button) this.findViewById(R.id.scanButton);
         filterButton = (Button) this.findViewById(R.id.filterButton);
         servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
+        mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		
