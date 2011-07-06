@@ -124,12 +124,7 @@ public class MapActivityTab extends MapActivity{
 					, location.getLongitude());
         	
         	mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
-        	
-    		CharSequence text = getString(R.string.location_changed);     		
-    		int duration = Toast.LENGTH_SHORT;
-
-    		Toast toast = Toast.makeText(MapActivityTab.this, text, duration);
-    		toast.show();
+     
         }
 
 		@Override
@@ -164,6 +159,7 @@ public class MapActivityTab extends MapActivity{
         
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
+        	mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
         }
 
 		@Override

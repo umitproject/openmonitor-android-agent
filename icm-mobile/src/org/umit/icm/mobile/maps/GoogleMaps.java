@@ -24,18 +24,12 @@ package org.umit.icm.mobile.maps;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.process.Globals;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.widget.Toast;
 
 
 import com.google.android.maps.GeoPoint;
