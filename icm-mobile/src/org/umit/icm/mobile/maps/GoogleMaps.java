@@ -105,7 +105,8 @@ public class GoogleMaps implements AbstractMap {
 		mapController = googleMapView.getController();
 		googleMapView.setBuiltInZoomControls(true);
         
-        mapController.animateTo(geoPoint);        
+        mapController.animateTo(geoPoint);     
+        mapController.setZoom(15);
         googleMapView.invalidate();
         
         List<Overlay> overlayList = googleMapView.getOverlays();
