@@ -54,7 +54,9 @@ public class MapActivityTab extends MapActivity{
 	LocationManager locationManager;
 	Location location;
 	GeoPoint geoPoint;
+	GeoPoint osmGeoPoint;
 	GoogleMaps googleMap;
+	OSMMaps osmMap; 
 	
 	/**
 	 * The onCreate method which makes a call to either {@link GoogleMaps}
@@ -73,31 +75,28 @@ public class MapActivityTab extends MapActivity{
         setContentView(R.layout.mapactivity);
         ISPButton = (Button) findViewById(R.id.ISPButton);
         mapView = (MapView) findViewById(R.id.mapView);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+					 , 0, 0, GPSLocationListener);
+			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			
+		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+					, 0, 0, networkProviderLocationListener);
+			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);				
+		}				
         
         if(Globals.mapView.equals("Google")) {
-        	googleMap = new GoogleMaps();            
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-    			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-    					 , 0, 0, GPSLocationListener);
-    			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-    			
-    			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-    					, location.getLongitude());		
-    			
-    		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-    			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-    					, 0, 0, networkProviderLocationListener);
-    			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-    			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-    					, location.getLongitude());
-    			
-    		}							
+        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					, location.getLongitude());
+        	googleMap = new GoogleMaps();                        			
     		mapView = googleMap.getView(this, mapView, geoPoint);
             
         } else if(Globals.mapView.equals("OSMDroid")) {                                                
-            OSMMaps osmMap = new OSMMaps();
-            setContentView(osmMap.getView(this));
+            osmMap = new OSMMaps();
+            setContentView(osmMap.getView(this
+            		, location.getLatitude(), location.getLongitude()));
         }         
         
         ISPButton.setOnClickListener(new OnClickListener() { 
@@ -119,11 +118,20 @@ public class MapActivityTab extends MapActivity{
 	
 	LocationListener GPSLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
+        	 if(Globals.mapView.equals("Google")) {
+        		 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+     					, location.getLongitude());
+             	
+             	 mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
+                 
+             } else if(Globals.mapView.equals("OSMDroid")) {                                                
+            	 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+      					, location.getLongitude());
+                 setContentView(osmMap.getView(MapActivityTab.this
+                 		, location.getLatitude(), location.getLongitude()));
+             }
         
-        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
         	
-        	mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
      
         }
 

@@ -27,6 +27,7 @@ import android.content.Context;
 import android.view.View;
 
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 import com.google.android.maps.OverlayItem;
@@ -36,23 +37,25 @@ import com.google.android.maps.OverlayItem;
  */
 
 public class OSMMaps implements AbstractMap {
-		
-	
+	MapController mapController;
+	GeoPoint geoPoint;
 	
 	public OSMMaps() {
-		super();
-		
+		super();		
 	}
-	
-	
-	public View getView(Context context){
+		
+	public View getView(Context context, double lat, double lon){
 		final  MapView osmMapView = new MapView(context, 256);
+		this.geoPoint = OSMMaps.getGeoPoint(lat, lon);
+		mapController = osmMapView.getController();
+		osmMapView.setBuiltInZoomControls(true);		
+		mapController.setZoom(14);
+		mapController.animateTo(this.geoPoint);     		
+        osmMapView.invalidate();
 		return osmMapView;
 	}
 	
-	
-	
-	public GeoPoint getGeoPoint(double lat, double lon)	{
+	public static GeoPoint getGeoPoint(double lat, double lon)	{
         
         GeoPoint geoPoint = new GeoPoint(
             (int) (lat * 1E6), 
