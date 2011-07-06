@@ -179,4 +179,9 @@ public class Globals {
 		.setToken(Globals.runtimeParameters.getToken())
 		.build();
 	}
+	
+	/**
+	 * Global {@link String} to select map view
+	 */
+	public static String mapView = "Google";
 }

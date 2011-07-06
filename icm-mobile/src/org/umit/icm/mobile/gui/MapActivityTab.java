@@ -22,14 +22,11 @@
 package org.umit.icm.mobile.gui;
 
 
-
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.R.id;
-import org.umit.icm.mobile.R.layout;
 import org.umit.icm.mobile.maps.GoogleMaps;
 import org.umit.icm.mobile.maps.OSMMaps;
+import org.umit.icm.mobile.process.Globals;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 
@@ -39,12 +36,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * This is the map activity. 
+ */
+
 public class MapActivityTab extends MapActivity{
     /** Called when the activity is first created. */
 	private Button ISPButton;
 	String package1;
 	MapView mapView;
-		
+	
+	/**
+	 * The onCreate method which makes a call to either {@link GoogleMaps}
+	 * or {@link OSMMaps}
+	 * 
+	 * 
+	 
+	 @see GoogleMaps
+	 *
+	 
+	 @see OSMMaps
+	 */
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,12 +64,14 @@ public class MapActivityTab extends MapActivity{
         setContentView(R.layout.mapactivity);
         ISPButton = (Button) findViewById(R.id.ISPButton);
         mapView = (MapView) findViewById(R.id.mapView);
-        GoogleMaps googleMap = new GoogleMaps();
-        mapView = googleMap.getView(this, mapView);
         
-                  
-        //OSMMaps osmMap = new OSMMaps();
-        //setContentView(osmMap.getView(this));
+        if(Globals.mapView.equals("Google")) {
+        	GoogleMaps googleMap = new GoogleMaps();
+            mapView = googleMap.getView(this, mapView);
+        } else if(Globals.mapView.equals("OSMDroid")) {                                                
+            OSMMaps osmMap = new OSMMaps();
+            setContentView(osmMap.getView(this));
+        }         
         
         ISPButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  
@@ -76,4 +90,3 @@ public class MapActivityTab extends MapActivity{
 		return false;
 	}
 }
-
