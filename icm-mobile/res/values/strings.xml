@@ -50,4 +50,6 @@
     <string name="filter_button_services">Filter Services</string>
     <string name="flip_services">View Services</string>
     <string name="flip_websites">View Websites</string>
+    <string name="gps_disabled">GPS Disabled</string>
+    <string name="gps_enabled">GPS Enabled</string>
 </resources>

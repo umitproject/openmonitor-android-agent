@@ -30,6 +30,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -42,6 +47,9 @@ import com.google.android.maps.Overlay;
 
 public class GoogleMaps extends AbstractMap {
 	
+	LocationManager locationManager;
+	MapController mapController;
+	GeoPoint geoPoint; 
 		
 	public GoogleMaps() {
 		super();
@@ -51,8 +59,25 @@ public class GoogleMaps extends AbstractMap {
 	
 	public MapView getView(final Context context, MapView mapView){
 		final  MapView googleMapView = mapView;
-		MapController mapController;
-		final GeoPoint geoPoint = GoogleMaps.getGeoPoint(52.212077, 0.091496); 
+		Location location;
+		
+		
+		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+					 , 0, 0, GPSLocationListener);
+			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			
+			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					, location.getLongitude());		
+			
+		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			//location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			//geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					//, location.getLongitude());
+			//locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+					//, 0, 0, networkProviderLocationListener);
+		}							
 		
 		class MapActivityTabOverlay extends Overlay 
 	    {
@@ -72,7 +97,7 @@ public class GoogleMaps extends AbstractMap {
 	        }
 	    } 
 		mapController = googleMapView.getController();
-        
+		googleMapView.setBuiltInZoomControls(true);
         
         mapController.animateTo(geoPoint);
         mapController.setZoom(17); 
@@ -84,6 +109,32 @@ public class GoogleMaps extends AbstractMap {
  
 		return googleMapView;
 	}
+	
+	LocationListener GPSLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+        
+        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+					, location.getLongitude());
+        }
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			
+			
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+		
+			
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+			// TODO Auto-generated method stub
+			
+		}
+    };
 	
 	public void refreshOverlap(){
 		
