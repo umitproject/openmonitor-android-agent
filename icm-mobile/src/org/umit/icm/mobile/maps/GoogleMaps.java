@@ -49,11 +49,9 @@ import com.google.android.maps.Overlay;
 
 public class GoogleMaps extends AbstractMap {
 	
-	LocationManager locationManager;
 	MapController mapController;
 	GeoPoint geoPoint;
-	Context context;
-	Location location;
+		
 		
 	public GoogleMaps() {
 		super();
@@ -61,27 +59,11 @@ public class GoogleMaps extends AbstractMap {
 	}
 	
 	
-	public MapView getView(final Context context, MapView mapView){
+	public MapView getView(final Context context, MapView mapView, GeoPoint geoPoint){
 		final  MapView googleMapView = mapView;				
 		
-		this.context = context;
-		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-					 , 0, 0, GPSLocationListener);
-			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			
-			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());		
-			
-		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-					, 0, 0, networkProviderLocationListener);
-			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
-			
-		}							
+		this.geoPoint = geoPoint;
+		
 		
 		class MapActivityTabOverlay extends Overlay 
 	    {
@@ -92,7 +74,7 @@ public class GoogleMaps extends AbstractMap {
 	            super.draw(canvas, mapView, shadow);                   
 	            
 	            Point point = new Point();
-	            mapView.getProjection().toPixels(geoPoint, point);
+	            mapView.getProjection().toPixels(GoogleMaps.this.geoPoint, point);
 	 
 	            Bitmap bitMap = BitmapFactory.decodeResource(
 	                context.getResources(), R.drawable.dot);            
@@ -114,72 +96,6 @@ public class GoogleMaps extends AbstractMap {
 		return googleMapView;
 	}
 	
-	LocationListener GPSLocationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-        
-        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
-        	Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.location_changed);     		
-    		int duration = Toast.LENGTH_SHORT;
-
-    		Toast toast = Toast.makeText(context, text, duration);
-    		toast.show();
-        }
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			
-			
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.gps_disabled);     		
-    		int duration = Toast.LENGTH_SHORT;
-
-    		Toast toast = Toast.makeText(context, text, duration);
-    		toast.show();
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			Context context = GoogleMaps.this.context;
-    		CharSequence text = context.getString(R.string.gps_enabled);     		
-    		int duration = Toast.LENGTH_SHORT;
-
-    		Toast toast = Toast.makeText(context, text, duration);
-    		toast.show();
-			
-		}
-    };
-    
-    LocationListener networkProviderLocationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-        
-        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
-        }
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			
-			
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-		
-			
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
-			
-		}
-    };
 	
 	public void refreshOverlap(){
 		
