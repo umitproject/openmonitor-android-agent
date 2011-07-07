@@ -36,6 +36,7 @@ import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 /**
  * Holds application wide Globals.
@@ -174,6 +175,12 @@ public class Globals {
 	@see         RuntimeParameters
 	 */
 	public static void initializeRequestHeader() throws IOException, RuntimeException {
+		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
+				, Constants.PARAMETERS_DIR) == false )
+				|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
+					, Constants.PARAMETERS_DIR) == false )) {					
+			Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
+		}
 		Globals.requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setToken(Globals.runtimeParameters.getToken())
