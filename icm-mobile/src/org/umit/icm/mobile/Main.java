@@ -94,6 +94,18 @@ public class Main extends TabActivity {
 				        		, Constants.PARAMETERS_DIR) == false )) {					
 					Globals.runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
 				}
+				if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
+							, Constants.PARAMETERS_DIR) == false )
+						|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
+								, Constants.PARAMETERS_DIR) == false )) {					
+					Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);					
+				}
+				if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
+						, Constants.PARAMETERS_DIR) == false )
+						|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
+							, Constants.PARAMETERS_DIR) == false )) {					
+					Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
+				}
 				if ((SDCardReadWrite.fileExists(Constants.AGENT_VERSION_FILE
 						, Constants.VERSIONS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.AGENT_VERSION_FILE
