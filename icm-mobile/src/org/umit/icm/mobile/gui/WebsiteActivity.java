@@ -26,6 +26,7 @@ import java.io.IOException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -107,7 +108,18 @@ public class WebsiteActivity extends Activity{
 			= website.substring(11) + Constants.WEBSITE_FILE;
 			try {
 				if(SDCardReadWrite.fileExists(websiteFilename, Constants.WEBSITES_DIR)) {
-					websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap("hello", drawable));
+					WebsiteReport websiteReport 
+					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);
+					if(websiteReport.getReport().getStatusCode() == 200) {
+						websiteTextBitmapAdapter.addItem(
+								new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
+					} else {
+						websiteTextBitmapAdapter.addItem(
+								new WebsiteTextBitmap( getString(R.string.differentation_status), getResources().getDrawable(R.drawable.reddot)));
+					}
+					websiteTextBitmapAdapter.addItem(
+							new WebsiteTextBitmap(getString(R.string.status_code) + " " +
+									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)
