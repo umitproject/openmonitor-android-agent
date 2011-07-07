@@ -56,4 +56,5 @@
     <string name="map_selection">Select Map Package</string>
     <string name="google_rb">Google Maps</string>
     <string name="osm_rb">Open Street Maps</string>
+    <string name="google_maps_api_key">0ypQ-LmtOI2bSFZESidxGq7QFVTIbNzqzTGSxOA</string>
 </resources>
