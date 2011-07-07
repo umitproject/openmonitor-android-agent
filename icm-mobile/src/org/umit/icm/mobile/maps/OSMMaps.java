@@ -153,9 +153,9 @@ public class OSMMaps implements AbstractMap {
 
 	@Override
 	public View getView(Context context,
-			com.google.android.maps.MapView mapView,
 			com.google.android.maps.GeoPoint geoPoint) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

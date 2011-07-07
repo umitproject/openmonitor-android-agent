@@ -36,7 +36,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -45,8 +44,7 @@ import android.widget.Toast;
 
 public class MapActivityTab extends MapActivity{
     /** Called when the activity is first created. */
-	String package1;
-	MapView mapView;
+	String package1;	
 	LocationManager locationManager;
 	Location location;
 	GeoPoint geoPoint;
@@ -84,7 +82,7 @@ public class MapActivityTab extends MapActivity{
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
         	googleMap = new GoogleMaps();                        			
-        	setContentView(googleMap.getView(this, mapView, geoPoint));
+        	setContentView(googleMap.getView(this, geoPoint));
             
         } else if(Globals.mapView.equals("OSMDroid")) {                                                
             osmMap = new OSMMaps();
@@ -105,7 +103,7 @@ public class MapActivityTab extends MapActivity{
         		 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
      					, location.getLongitude());
              	
-             	 mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
+        		 setContentView(googleMap.getView(MapActivityTab.this, geoPoint));
                  
              } else if(Globals.mapView.equals("OSMDroid")) {                                                
             	 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
@@ -148,7 +146,7 @@ public class MapActivityTab extends MapActivity{
         
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
-        	mapView = googleMap.getView(MapActivityTab.this, mapView, geoPoint);
+        	 setContentView(googleMap.getView(MapActivityTab.this, geoPoint));
         }
 
 		@Override

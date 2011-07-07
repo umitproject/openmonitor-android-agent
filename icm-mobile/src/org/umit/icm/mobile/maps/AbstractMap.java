@@ -36,6 +36,6 @@ import android.view.View;
  */
 
 public interface AbstractMap {	
-	public View getView(Context context, MapView mapView, GeoPoint geoPoint);
+	public View getView(Context context, GeoPoint geoPoint);
 	public List<OverlayItem> getOverlayList(Context context);
 }
