@@ -95,7 +95,17 @@ public class OSMMaps implements AbstractMap {
                     }
                     @Override
                     public boolean onItemLongPress(final int index,
-                            final OverlayItem item) {      
+                            final OverlayItem item) {    
+                    	AlertDialog.Builder dialog 
+                    	= new AlertDialog.Builder(OSMMaps.this.context);
+        		        dialog.setTitle(item.getTitle());
+        		        dialog.setMessage(item.getSnippet());
+        		        dialog.setPositiveButton("Okay", new OnClickListener() {    
+        		            public void onClick(DialogInterface dialog, int which) {
+        		                dialog.dismiss();
+        		            }
+        		        });
+        		        dialog.show();
                     	return true;
                     }
                 }, resourceProxy);
