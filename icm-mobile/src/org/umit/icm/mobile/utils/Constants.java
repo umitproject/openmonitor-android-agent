@@ -142,4 +142,6 @@ public class Constants {
 		}};
 		
 		public static boolean runProfiler = false;
+		public static long DEFAULT_AGENT_ID = 911;
+		public static String DEFAULT_TOKEN = "myToken";
 }
