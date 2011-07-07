@@ -26,6 +26,8 @@ import java.io.IOException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -101,6 +103,25 @@ public class WebsiteActivity extends Activity{
 			}
 			Drawable drawable = new BitmapDrawable(favicon);
 			websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(website, drawable));
+			String websiteFilename 
+			= website.substring(11) + Constants.WEBSITE_FILE;
+			try {
+				if(SDCardReadWrite.fileExists(websiteFilename, Constants.WEBSITES_DIR)) {
+					websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap("hello", drawable));
+				} else {
+					websiteTextBitmapAdapter.addItem(
+							new WebsiteTextBitmap(getString(R.string.no_scan)
+									, getResources().getDrawable(R.drawable.bluedot)));
+				}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return websiteTextBitmapAdapter;
 			 						
 		}			
