@@ -66,30 +66,39 @@ public class MapActivityTab extends MapActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);                       
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-					 , 0, 0, GPSLocationListener);
-			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			
-		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
-					, 0, 0, networkProviderLocationListener);
-			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);				
-		}				
-        
-        if(Globals.mapView.equals("Google")) {
-        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
-        	googleMap = new GoogleMaps();                        			
-        	setContentView(googleMap.getView(this
-        			, location.getLatitude(), location.getLongitude()));
-            
-        } else if(Globals.mapView.equals("OSMDroid")) {                                                
-            osmMap = new OSMMaps();
-            setContentView(osmMap.getView(this
-            		, location.getLatitude(), location.getLongitude()));
-        }         
-               
+        if((locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        		|| (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))) {
+			if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+						 , 0, 0, GPSLocationListener);
+				location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				
+			} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+						, 0, 0, networkProviderLocationListener);
+				location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);				
+			}				
+	        
+	        if(Globals.mapView.equals("Google")) {
+	        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
+						, location.getLongitude());
+	        	googleMap = new GoogleMaps();                        			
+	        	setContentView(googleMap.getView(this
+	        			, location.getLatitude(), location.getLongitude()));
+	            
+	        } else if(Globals.mapView.equals("OSMDroid")) {                                                
+	            osmMap = new OSMMaps();
+	            setContentView(osmMap.getView(this
+	            		, location.getLatitude(), location.getLongitude()));
+	        }         
+        }
+        else {
+        	CharSequence text = getString(R.string.location_disabled);     		
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(MapActivityTab.this, text, duration);
+    		toast.show();
+        }
     }
 	@Override
 	protected boolean isRouteDisplayed() {
