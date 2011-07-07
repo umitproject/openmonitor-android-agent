@@ -32,13 +32,10 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -48,7 +45,6 @@ import android.widget.Toast;
 
 public class MapActivityTab extends MapActivity{
     /** Called when the activity is first created. */
-	private Button ISPButton;
 	String package1;
 	MapView mapView;
 	LocationManager locationManager;
@@ -71,10 +67,7 @@ public class MapActivityTab extends MapActivity{
 	 */	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.mapactivity);
-        ISPButton = (Button) findViewById(R.id.ISPButton);
-        mapView = (MapView) findViewById(R.id.mapView);
+        super.onCreate(savedInstanceState);                       
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
@@ -91,24 +84,14 @@ public class MapActivityTab extends MapActivity{
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
         	googleMap = new GoogleMaps();                        			
-    		mapView = googleMap.getView(this, mapView, geoPoint);
+        	setContentView(googleMap.getView(this, mapView, geoPoint));
             
         } else if(Globals.mapView.equals("OSMDroid")) {                                                
             osmMap = new OSMMaps();
             setContentView(osmMap.getView(this
             		, location.getLatitude(), location.getLongitude()));
         }         
-        
-        ISPButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  
-	       		Bundle bundle = new Bundle();	
-	       	 	bundle.putString("package1","Blank");         		 
-	       		Intent i = new Intent(MapActivityTab.this, ISPActivity.class);
-	       		i.putExtras(bundle);
-	             startActivity(i); 
-	       	}
-
-	   	}  );
+               
     }
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -130,9 +113,7 @@ public class MapActivityTab extends MapActivity{
                  setContentView(osmMap.getView(MapActivityTab.this
                  		, location.getLatitude(), location.getLongitude()));
              }
-        
-        	
-     
+                	     
         }
 
 		@Override

@@ -54,7 +54,8 @@ public class GoogleMaps implements AbstractMap {
 	}
 		
 	public MapView getView(final Context context, MapView mapView, GeoPoint geoPoint){
-		final  MapView googleMapView = mapView;				
+		final  MapView googleMapView 
+		= new MapView(context, context.getString(R.string.google_maps_api_key));			
 		
 		this.geoPoint = geoPoint;				
 		
