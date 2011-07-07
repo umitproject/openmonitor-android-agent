@@ -113,8 +113,12 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
 				} catch (RuntimeException e) {
-					
+					e.printStackTrace();
+			}	catch (IOException e) {
+					e.printStackTrace();
 			}			
+				
+				
 									
 		}
 																		
