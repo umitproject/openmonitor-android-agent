@@ -53,11 +53,11 @@ public class GoogleMaps implements AbstractMap {
 		super();		
 	}
 		
-	public MapView getView(final Context context, GeoPoint geoPoint){
+	public MapView getView(final Context context, double lat, double lon){
 		final  MapView googleMapView 
 		= new MapView(context, context.getString(R.string.google_maps_api_key));			
 		
-		this.geoPoint = geoPoint;				
+		this.geoPoint = GoogleMaps.getGeoPoint(lat, lon);				
 		
 	    class GoogleMapMarker extends ItemizedOverlay<OverlayItem> {
 

@@ -24,7 +24,6 @@ package org.umit.icm.mobile.maps;
 import java.util.List;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 
@@ -36,6 +35,6 @@ import android.view.View;
  */
 
 public interface AbstractMap {	
-	public View getView(Context context, GeoPoint geoPoint);
+	public View getView(Context context, double lat, double lon);
 	public List<OverlayItem> getOverlayList(Context context);
 }

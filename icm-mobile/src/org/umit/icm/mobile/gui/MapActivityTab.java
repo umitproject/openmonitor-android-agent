@@ -29,7 +29,6 @@ import org.umit.icm.mobile.process.Globals;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapView;
 
 import android.content.Context;
 import android.location.Location;
@@ -82,7 +81,8 @@ public class MapActivityTab extends MapActivity{
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
         	googleMap = new GoogleMaps();                        			
-        	setContentView(googleMap.getView(this, geoPoint));
+        	setContentView(googleMap.getView(this
+        			, location.getLatitude(), location.getLongitude()));
             
         } else if(Globals.mapView.equals("OSMDroid")) {                                                
             osmMap = new OSMMaps();
@@ -103,7 +103,8 @@ public class MapActivityTab extends MapActivity{
         		 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
      					, location.getLongitude());
              	
-        		 setContentView(googleMap.getView(MapActivityTab.this, geoPoint));
+        		 setContentView(googleMap.getView(MapActivityTab.this
+        				 ,location.getLatitude(), location.getLongitude()));
                  
              } else if(Globals.mapView.equals("OSMDroid")) {                                                
             	 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
@@ -146,7 +147,8 @@ public class MapActivityTab extends MapActivity{
         
         	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
 					, location.getLongitude());
-        	 setContentView(googleMap.getView(MapActivityTab.this, geoPoint));
+        	 setContentView(googleMap.getView(MapActivityTab.this
+        			 , location.getLatitude(), location.getLongitude()));
         }
 
 		@Override
