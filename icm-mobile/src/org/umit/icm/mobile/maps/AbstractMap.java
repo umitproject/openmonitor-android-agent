@@ -23,7 +23,6 @@ package org.umit.icm.mobile.maps;
 
 import java.util.List;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
 
