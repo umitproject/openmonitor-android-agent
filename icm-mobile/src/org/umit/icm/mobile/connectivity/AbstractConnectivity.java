@@ -24,8 +24,7 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
-import org.umit.icm.mobile.aggregator.AggregatorActions;
-import org.umit.icm.mobile.aggregator.AggregatorResources;
+
 
 /**
  * This is the AbstractConnectivity Class. Provides base constructor and abstract
