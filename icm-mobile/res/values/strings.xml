@@ -60,4 +60,5 @@
     <string name="no_scan">No Scan Performed Yet</string>
     <string name="normal_status">Status: Normal</string>
     <string name="differentation_status">Status: Differentiation</string>
+    <string name="status_code">Status Code:</string>
 </resources>
