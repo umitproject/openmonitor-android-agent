@@ -78,7 +78,7 @@ public class TCPClient {
     public String readLine() throws IOException {
     	Log.w("##Client", "read");
     	String line =  bufferedReader.readLine();
-    	Log.w("##Client", "read2" + line);
+    	Log.w("##Client", "readafter" + line);
     	return line;
     }
     
@@ -89,15 +89,15 @@ public class TCPClient {
 	                          	      
 	@return      {@link List} of {@link String} 
 	 */
-    public List<String> readLines() throws IOException {
-    	List<String> lines = new ArrayList<String>();
-    	String line = bufferedReader.readLine();
-    	while(line != null) {
-    		line = bufferedReader.readLine();
-    		lines.add(line);
+    public String readLines() throws IOException {
+    	Log.w("##Client", "readlines");
+    	String line = null;
+    	StringBuffer lines = new StringBuffer();
+    	 while (((line = bufferedReader.readLine()) != null) && (!(line.equals("")))) {   		
+    		lines.append(line);    		  		
     	}
-    	
-    	return lines;
+    	Log.w("##Client", "readlinesloopafter");
+    	return lines.toString();
     }
     
     /**
