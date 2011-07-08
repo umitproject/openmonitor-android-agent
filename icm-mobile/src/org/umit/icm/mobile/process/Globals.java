@@ -161,7 +161,14 @@ public class Globals {
 	/**
 	 * Global {@link TCPClient}
 	 */
-	public static TCPClient tcpClient;
+	public static TCPClient tcpClient
+	= new TCPClient();
+	
+	/**
+	 * Global {@link TCPClient} used for Connectivity Tests
+	 */
+	public static TCPClient tcpClientConnectivity
+	= new TCPClient();
 	
 	/**
 	 * Initializes the {@link Globals#requestHeader} with 
