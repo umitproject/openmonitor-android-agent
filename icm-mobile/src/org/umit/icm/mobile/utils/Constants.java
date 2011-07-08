@@ -98,12 +98,9 @@ public class Constants {
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
 	public static int MY_TCP_PORT = 5555;
-	
+	/*
 	public static List<Service> SERVICE_LIST = new ArrayList<Service>()
 	{
-     	/**
-		 * 
-		 */
 		private static final long serialVersionUID = 2L;
 		private List<Integer> ports = new ArrayList<Integer>();
 
@@ -140,7 +137,32 @@ public class Constants {
 			add(new Service("smtp", ports,"open", "true"));
 		
 		}};
+		*/
+	
+	public static List<Service> SERVICE_LIST = new ArrayList<Service>()
+	{
+     	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2L;
+		private List<Integer> ports = new ArrayList<Integer>();
+
+		{
+			ports.add(443);			
+			add(new Service("https", ports,"open", "true"));
+			ports.clear();
+			ports.add(80);									
+			add(new Service("http", ports,"open", "true"));
+			ports.clear();
+			ports.add(110);						
+			add(new Service("pop3", ports,"open", "true"));
+			ports.clear();
+			ports.add(143);			
+			add(new Service("imap", ports,"open", "true"));
+			ports.clear();
+			
 		
+		}};
 		public static boolean runProfiler = false;
 		public static long DEFAULT_AGENT_ID = 911;
 		public static String DEFAULT_TOKEN = "myToken";
