@@ -42,7 +42,7 @@ public class TCPClientServerTests extends AndroidTestCase {
     	String serverResponse = tcpClient.readLine();
     	tcpClient.closeConnection();
     	tcpServer.closeConnection();
-        Assert.assertTrue(serverResponse.equals("Server Response"));        
+    	Assert.assertTrue(serverResponse.equals("Server Response"));        
         
     }        
 
