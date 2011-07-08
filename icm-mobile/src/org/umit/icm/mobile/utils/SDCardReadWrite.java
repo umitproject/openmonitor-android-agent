@@ -569,6 +569,7 @@ public class SDCardReadWrite {
 				    new BufferedOutputStream(new FileOutputStream(file)));
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getName());
+			objOutStream.writeObject(data.getIp());
 			objOutStream.writeObject(data.getPorts());
 			objOutStream.writeObject(data.getStatus());
     	} catch (Exception e) {
@@ -615,6 +616,7 @@ public class SDCardReadWrite {
   	  	try {
 	    	    service.setCheck((String) objInputStream.readObject());
 	    	    service.setName((String) objInputStream.readObject());
+	    	    service.setIp((String) objInputStream.readObject());
 	    	    service.setPorts((List<Integer>) objInputStream.readObject());
 	    	    service.setStatus((String) objInputStream.readObject());
 	    	    
