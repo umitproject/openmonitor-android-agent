@@ -100,6 +100,16 @@ public class WebsiteConnectivityService extends Service {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))
 						stopScanNotify();					
 				} 
+				
+				try {
+					Globals.serviceTest.scan();
+				} catch (IOException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();					
+				} catch (HttpException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();					
+				}
 			}	
 		}, 0, interval * 1000); 
 	}
