@@ -99,6 +99,20 @@ public class InformationActivity extends Activity{
           }
         });
         
+        listViewServices.setClickable(true);
+        listViewServices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+          @Override
+          public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        	  String item = (String) listViewServices.getItemAtPosition(position);
+        	  Bundle bundle = new Bundle();	
+        	  bundle.putString("serviceclicked",item);         		 
+        	  Intent intent = new Intent(InformationActivity.this, ServiceActivity.class);
+        	  intent.putExtras(bundle);
+        	  startActivity(intent); 
+          }
+        });
+        
         try {
 			if ((SDCardReadWrite.fileExists(Constants.WEBSITES_LIST_FILE
 					, Constants.WEBSITES_DIR) == true)){					

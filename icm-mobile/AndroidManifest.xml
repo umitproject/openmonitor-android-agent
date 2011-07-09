@@ -28,6 +28,7 @@
         <service android:name=".connectivity.WebsiteConnectivityService"></service>
         <activity android:name=".gui.WebsiteFilterActivity"></activity>
         <activity android:name=".gui.ServiceFilterActivity"></activity>
+        <activity android:name=".gui.ServiceActivity"></activity>
     
     </application>
     <uses-sdk android:minSdkVersion="4" />
