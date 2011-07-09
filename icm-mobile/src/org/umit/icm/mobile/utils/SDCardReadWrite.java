@@ -45,6 +45,7 @@ import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
+import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
@@ -1094,6 +1095,93 @@ public class SDCardReadWrite {
 	      	return newTestsResponse.getTestsList();
   	  	} catch (Exception e) {
   		    throw new RuntimeException("read tests list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
+	/**
+	 * Writes a {@link WebsiteReport} to the default filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link WebsiteReport}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         FileOutputStream
+	 */
+	public static void writeServiceReport(String dir
+			, ServiceReport data) throws IOException, RuntimeException{
+		OutputStream outputStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, data.getReport().getServiceName()
+    			+ Constants.SERVICE_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			outputStream = new FileOutputStream(file);
+			data.writeTo(outputStream);
+			
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write service report exception", e);
+  	  	} finally {
+    		outputStream.close();
+    	}
+	}
+	
+	/**
+	 * Returns a {@link WebsiteReport} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 
+	                                              
+	@return  {@link WebsiteReport}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  url  An object of the type {@link String}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
+	public static ServiceReport readServiceReport(String dir
+			, String url) throws IOException, RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, url
+    			+ Constants.SERVICE_FILE);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	
+  	  	try {
+	      		ServiceReport serviceReport 
+	      		= ServiceReport.parseFrom(inputStream);
+	      		return serviceReport;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read service report exception", e);
   	  	} finally {
   		  inputStream.close();
   	  	}
