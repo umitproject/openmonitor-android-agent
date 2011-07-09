@@ -23,20 +23,13 @@ package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.WebsiteOpen;
-import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
+import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -89,22 +82,21 @@ public class ServiceActivity extends Activity{
 			= new WebsiteTextBitmapAdapter(ServiceActivity.this);							
 			websiteTextBitmapAdapter.addItem(
 					new WebsiteTextBitmap(service, getResources().getDrawable(R.drawable.bluedot)));
-			/*String websiteFilename 
-			= website.substring(11) + Constants.WEBSITE_FILE;
+			String serviceFilename 
+			= service + Constants.SERVICE_FILE;
 			try {
-				if(SDCardReadWrite.fileExists(websiteFilename, Constants.WEBSITES_DIR)) {
-					WebsiteReport websiteReport 
-					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);
-					if(websiteReport.getReport().getStatusCode() == 200) {
+				if(SDCardReadWrite.fileExists(serviceFilename, Constants.SERVICES_DIR)) {
+					ServiceReport serviceReport 
+					= SDCardReadWrite.readServiceReport(Constants.SERVICES_DIR
+							, service);
+					if(serviceReport.getReport().getStatusCode() == 0) {
 						websiteTextBitmapAdapter.addItem(
 								new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
 					} else {
 						websiteTextBitmapAdapter.addItem(
 								new WebsiteTextBitmap( getString(R.string.differentation_status), getResources().getDrawable(R.drawable.reddot)));
 					}
-					websiteTextBitmapAdapter.addItem(
-							new WebsiteTextBitmap(getString(R.string.status_code) + " " +
-									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
+					
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)
@@ -117,8 +109,7 @@ public class ServiceActivity extends Activity{
 			} catch (RuntimeException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			*/
+			}			
 			return websiteTextBitmapAdapter;
 			 						
 		}			
