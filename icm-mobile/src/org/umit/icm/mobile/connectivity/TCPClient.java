@@ -24,12 +24,12 @@ package org.umit.icm.mobile.connectivity;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 import android.util.Log;
@@ -42,12 +42,12 @@ public class TCPClient {
 	
 	private Socket socket;
     private DataOutputStream dataOutputStream; 
-    private BufferedReader bufferedReader; 
+    private BufferedReader bufferedReader;    
     
     public TCPClient() {
     	socket = null;
     	dataOutputStream = null;
-    	bufferedReader = null;
+    	bufferedReader = null;    	
     }
     
     /**
@@ -65,7 +65,7 @@ public class TCPClient {
     	Log.w("##Client", "open");
     	socket = new Socket(ip, port);
     	dataOutputStream = new DataOutputStream(socket.getOutputStream());
-    	bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    	bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));    	
     }
     
     /**
@@ -83,22 +83,39 @@ public class TCPClient {
     }
     
     /**
-	 * Returns a {@link List} of {@link String} objects read from the {@link BufferedReader}.
+	 * Returns a byte[] read from the {@link BufferedReader}.
 	 * 
 	 *	 
 	                          	      
-	@return      {@link List} of {@link String} 
+	@return      byte[]
+	 */
+    public byte[] readBytes() throws IOException {
+    	Log.w("##Client", "readbytes");
+    	InputStream inputStream = socket.getInputStream();    	
+    	long length = inputStream.available();
+    	byte[] bytes = new byte[(int) length];
+    	inputStream.read(bytes);
+    	return bytes;
+    }
+    
+    /**
+	 * Returns a {@link String} object read from the {@link BufferedReader}.
+	 * 
+	 *	 
+	                          	      
+	@return      {@link String} 
 	 */
     public String readLines() throws IOException {
-    	Log.w("##Client", "readlines");
+    	Log.w("##Client", "readlines");    	
     	String line = null;
-    	StringBuffer lines = new StringBuffer();
+    	StringBuffer lines = new StringBuffer();    	
     	 while (((line = bufferedReader.readLine()) != null) && (!(line.equals("")))) {   		
     		lines.append(line);    		  		
-    	}
-    	Log.w("##Client", "readlinesloopafter");
-    	return lines.toString();
+    	 }    	    	    	 
+    	 return lines.toString();    	
+    	    	    	
     }
+    
     
     /**
 	 * Takes as parameter a {@link String} object and writes it to the
@@ -152,7 +169,7 @@ public class TCPClient {
     	Log.w("##Client", "close_start");
     	dataOutputStream.close();
     	bufferedReader.close();
-    	socket.close();
+    	socket.close();    	
     	Log.w("##Client", "close");
     }
     
