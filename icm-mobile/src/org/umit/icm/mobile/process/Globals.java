@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.ServiceConnectivity;
 import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
@@ -198,4 +199,10 @@ public class Globals {
 	 * Global {@link String} to select map view
 	 */
 	public static String mapView = "Google";
+	
+	/**
+	 * Global {@link ServiceConnectivity}
+	 */
+	public static ServiceConnectivity serviceTest 
+	= new ServiceConnectivity();
 }
