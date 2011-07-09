@@ -33,7 +33,6 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
  * This is the Service class. Provides getter/setters for Service
  */
 public class Service implements Serializable {	
-	
 	/**
 	 * Service serial UID
 	 */
