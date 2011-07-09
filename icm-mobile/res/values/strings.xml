@@ -62,4 +62,5 @@
     <string name="differentation_status">Status: Differentiation</string>
     <string name="status_code">Status Code:</string>
     <string name="location_disabled">Error! Both GPS and Network Provider Disabled</string>
+    <string name="retrieving_service">Retrieving Service</string>
 </resources>

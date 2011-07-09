@@ -50,7 +50,7 @@ public class ServiceActivity extends Activity{
         super.onCreate(icicle);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         progressDialog = ProgressDialog.show(this, 
-        		getString(R.string.loading)	, getString(R.string.retrieving_website)
+        		getString(R.string.loading)	, getString(R.string.retrieving_service)
         		, true, false);
         Bundle bundle = this.getIntent().getExtras();
         service = bundle.getString("serviceclicked");
