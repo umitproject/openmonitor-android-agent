@@ -35,10 +35,7 @@ public class ServicePackets {
 	 * This is the HTTP_GET packet.
 	 */
 	public static String HTTP_GET 
-	=  "GET / HTTP/1.1 " +
-			"User-Agent: Java0 " +
-			"Host: www.google.com " +
-			"Connection: Keep-Alive";
+	= "GET / HTTP/1.1\r\n\r\n";
 	
 	/**
 	 * Returns a byte[] object. Takes as parameter a {@link String} and returns 
