@@ -149,17 +149,16 @@ public class Constants {
 
 		{
 			ports.add(443);			
-			add(new Service("https", ports,"open", "true"));
+			add(new Service("https", ports, "203.135.62.113" ,"open", "true"));
 			ports.clear();
-			ports.add(80);									
-			add(new Service("http", ports,"open", "true"));
-			ports.clear();
-			ports.add(110);						
-			add(new Service("pop3", ports,"open", "true"));
-			ports.clear();
-			ports.add(143);			
-			add(new Service("imap", ports,"open", "true"));
-			ports.clear();
+			ports.add(80);												
+			add(new Service("http", ports, "www.google.com" ,"open", "true"));
+			//ports.add(110);						
+			//add(new Service("pop3", ports,"open", "true"));
+			//ports.clear();
+			//ports.add(143);			
+			//add(new Service("imap", ports,"open", "true"));
+			//ports.clear();
 			
 		
 		}};

@@ -24,7 +24,6 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.HttpException;
@@ -71,48 +70,67 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 @see         TCPClient
 	 */
 	@Override()
-	public void scan() throws IOException, HttpException {													
-		Iterator<Service> iterator = listServices.iterator();
-		Service currentService = new Service();	
-		String serviceResponsePacket = "";
+	public void scan() throws IOException, HttpException {
+		String HTTPResponse = ServiceHTTP.connect();
+		Log.w("######httpResponse", HTTPResponse);
 		byte[] serviceResponseBytes = null;
-		ServiceReport serviceReport = ServiceReport.getDefaultInstance();		
-			
-		while(iterator.hasNext()){               
-			currentService = iterator.next();			
-			Globals.tcpClientConnectivity.openConnection(
-					currentService.getIp(), currentService.getPorts().get(0));
-			Globals.tcpClientConnectivity.writeLine(ServicePackets.HTTP_GET);			
-			serviceResponsePacket			
-			= Globals.tcpClientConnectivity.readLines();
-			Globals.tcpClientConnectivity.closeConnection();
-			Log.w("#####packet", serviceResponsePacket);
-			Globals.tcpClientConnectivity.openConnection(
-					currentService.getIp(), currentService.getPorts().get(0));
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			serviceResponseBytes
-			= Globals.tcpClientConnectivity.readBytes();
-			if(!serviceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
-			Globals.tcpClientConnectivity.closeConnection();
-			
-				try {
-				serviceReport = (ServiceReport) clean(currentService
-							, serviceResponsePacket, serviceResponseBytes);
-					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-							, serviceReport);						
-						
-				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
-				Log.w("######name", serviceReport.getReport().getServiceName());
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-			}	catch (IOException e) {
-					e.printStackTrace();
-			}												
-									
-		}
-																	
+		ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
+		Globals.tcpClientConnectivity.openConnection(
+				ServiceHTTP.getService().getIp()
+				, ServiceHTTP.getService().getPorts().get(0));
+		Globals.tcpClientConnectivity.writeLine(
+				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+		serviceResponseBytes
+		= Globals.tcpClientConnectivity.readBytes();
+		if(!serviceResponseBytes.equals(null))
+			Log.w("#####bytes", "bytes");
+		Globals.tcpClientConnectivity.closeConnection();
+		
+			try {
+			serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
+						, HTTPResponse, serviceResponseBytes);
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+						, serviceReport);						
+					
+			Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
+			Log.w("######name", serviceReport.getReport().getServiceName());
+			Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+		}	catch (IOException e) {
+				e.printStackTrace();
+		}	
+		
+		String HTTPSResponse = ServiceHTTPS.connect();
+		Log.w("######httpsResponse", HTTPSResponse);
+		byte[] httpsServiceResponseBytes = null;
+		ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
+		Globals.tcpClientConnectivity.openConnection(
+				ServiceHTTPS.getService().getIp()
+				, ServiceHTTPS.getService().getPorts().get(0));
+		Globals.tcpClientConnectivity.writeLine(
+				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+		httpsServiceResponseBytes
+		= Globals.tcpClientConnectivity.readBytes();
+		if(!httpsServiceResponseBytes.equals(null))
+			Log.w("#####bytes", "bytes");
+		Globals.tcpClientConnectivity.closeConnection();
+		
+			try {
+			serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService()
+						, HTTPSResponse, httpsServiceResponseBytes);
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+						, serviceReportHTTPS);						
+					
+			Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
+			Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
+			Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPorts().get(0)));
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+		}	catch (IOException e) {
+				e.printStackTrace();
+		}	
+																											
 	};
 		 
 	/**
@@ -150,9 +168,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.build();
 		
 		int statusCode = 0;
-		if(bytes.equals(null) && serviceContent.equals(""))
+		if(bytes.equals(null) && serviceContent.equals(null))
 			statusCode = 1;
-		else if (!bytes.equals(null) && serviceContent.equals(""))
+		else if (!bytes.equals(null) && serviceContent.equals(null))
 			statusCode = 1;
 		ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
 		.setServiceName(service.getName())
