@@ -129,7 +129,41 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				e.printStackTrace();
 		}	catch (IOException e) {
 				e.printStackTrace();
-		}	
+		}
+		try {
+		String FTPResponse = ServiceFTP.connect();
+		Log.w("######ftpResponse", FTPResponse);
+		byte[] ftpServiceResponseBytes = null;
+		ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
+		Globals.tcpClientConnectivity.openConnection(
+				ServiceFTP.getService().getIp()
+				, ServiceFTP.getService().getPorts().get(0));
+		Globals.tcpClientConnectivity.writeLine(
+				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+		ftpServiceResponseBytes
+		= Globals.tcpClientConnectivity.readBytes();
+		if(!ftpServiceResponseBytes.equals(null))
+			Log.w("#####bytes", "bytes");
+		Globals.tcpClientConnectivity.closeConnection();
+		
+			try {
+			serviceReportFTP = (ServiceReport) clean(ServiceFTP.getService()
+						, FTPResponse, ftpServiceResponseBytes);
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+						, serviceReportFTP);						
+					
+			Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
+			Log.w("######name", serviceReportFTP.getReport().getServiceName());
+			Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+		}	catch (IOException e) {
+				e.printStackTrace();
+		}
+		} catch (IOException e) {
+				e.printStackTrace();
+		}
+			
 																											
 	};
 		 
