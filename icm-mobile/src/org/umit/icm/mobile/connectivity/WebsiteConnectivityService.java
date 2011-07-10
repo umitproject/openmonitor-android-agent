@@ -91,7 +91,7 @@ public class WebsiteConnectivityService extends Service {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				/*try {
+				try {
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
@@ -100,7 +100,7 @@ public class WebsiteConnectivityService extends Service {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))
 						stopScanNotify();					
 				} 
-				*/
+				
 				try {
 					Globals.serviceTest.scan();
 				} catch (IOException e) {
