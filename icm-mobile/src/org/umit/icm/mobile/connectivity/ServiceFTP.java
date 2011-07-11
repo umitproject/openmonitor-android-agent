@@ -29,7 +29,6 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.http.client.HttpClient;
 
 /**
  * This is the FTP Service class. Holds {@link ServiceFTP#connect()},

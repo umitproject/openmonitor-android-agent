@@ -21,9 +21,6 @@
 
 package org.umit.icm.mobile.utils;
 
-import java.security.KeyFactory;
-import java.security.PublicKey;
-import java.security.spec.RSAPublicKeySpec;
 
 /**
  * Helper class with methods to convert byte[] to {@link String} hex and 

@@ -21,7 +21,6 @@
 
 package org.umit.icm.mobile.gui.dialogs;
 
-import java.util.regex.Pattern;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;

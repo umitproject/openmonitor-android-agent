@@ -21,7 +21,6 @@
 
 package org.umit.icm.mobile.process;
 
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 /**
  * Provides methods for generating IDs for various entities.
