@@ -155,10 +155,10 @@ public class Constants {
 			add(new Service("http", ports, "www.google.com" ,"open", "true"));
 			ports.add(21);						
 			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true"));
-			//ports.clear();
-			//ports.add(143);			
-			//add(new Service("imap", ports,"open", "true"));
-			//ports.clear();
+			ports.clear();
+			ports.add(995);			
+			add(new Service("pop3", ports, "pop.gmail.com", "open", "true"));
+			ports.clear();
 			
 		
 		}};
