@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.mail.MessagingException;
+
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
@@ -109,6 +111,9 @@ public class WebsiteConnectivityService extends Service {
 				} catch (HttpException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
+				} catch (MessagingException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();
 				}
 			}	
 		}, 0, interval * 1000); 
