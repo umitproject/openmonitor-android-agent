@@ -60,6 +60,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		HTTPSScan();
 		FTPScan();
 		POP3Scan();
+		IMAPScan();
 	};
 		 
 	/**
@@ -271,6 +272,47 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
 				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServicePOP3.getService().getPorts().get(0)));
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+			}	catch (IOException e) {
+					e.printStackTrace();
+			}		
+	}
+	
+	/**
+	 * For IMAP service calls
+	 * {@link ServiceIMAP#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
+	 * 
+	 */
+	public void IMAPScan() throws IOException, MessagingException {
+		
+			String IMAPResponse = ServiceIMAP.connect();
+			Log.w("######imapResponse", IMAPResponse);
+			byte[] imapServiceResponseBytes = null;
+			ServiceReport serviceReportIMAP = ServiceReport.getDefaultInstance();						         
+			Globals.tcpClientConnectivity.openConnection(
+					ServiceIMAP.getService().getIp()
+					, ServiceIMAP.getService().getPorts().get(0));
+			Globals.tcpClientConnectivity.writeLine(
+					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+			imapServiceResponseBytes
+			= Globals.tcpClientConnectivity.readBytes();
+			if(!imapServiceResponseBytes.equals(null))
+				Log.w("#####bytes", "bytes");
+			Globals.tcpClientConnectivity.closeConnection();
+			
+				try {
+				serviceReportIMAP = (ServiceReport) clean(ServiceIMAP.getService()
+							, IMAPResponse, imapServiceResponseBytes);
+					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+							, serviceReportIMAP);						
+						
+				Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
+				Log.w("######name", serviceReportIMAP.getReport().getServiceName());
+				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPorts().get(0)));
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 			}	catch (IOException e) {
