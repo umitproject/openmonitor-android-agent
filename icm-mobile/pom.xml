@@ -41,6 +41,11 @@
 		    <id>maven-restlet</id>  
 		    <name>Public online Restlet repository</name>  
 		    <url>http://maven.restlet.org</url>  
+	    </repository> 	    
+	    <repository>  
+		    <id>stanford-prpl-research-group</id>  
+		    <name>stanford-prpl-research-group</name>  
+		    <url>http://prpl.stanford.edu:8081/nexus/content/repositories/thirdparty</url>  
 	    </repository> 
 	</repositories>
 
@@ -89,9 +94,19 @@
     		<version>1.3.2</version>
 		</dependency>
 		<dependency>
-    		<groupId>javax.mail</groupId>
+    		<groupId>javamail-android</groupId>
     		<artifactId>mail</artifactId>
-    		<version>1.4</version>
+    		<version>1.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>javamail-android</groupId>
+    		<artifactId>activation</artifactId>
+    		<version>1.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>javamail-android</groupId>
+    		<artifactId>additional</artifactId>
+    		<version>1.0</version>
 		</dependency>
     </dependencies>
 
