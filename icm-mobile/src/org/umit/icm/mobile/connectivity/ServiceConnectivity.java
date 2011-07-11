@@ -263,7 +263,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.closeConnection();
 			
 				try {
-				serviceReportPOP3 = (ServiceReport) clean(ServiceFTP.getService()
+				serviceReportPOP3 = (ServiceReport) clean(ServicePOP3.getService()
 							, POP3Response, pop3ServiceResponseBytes);
 					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 							, serviceReportPOP3);						
