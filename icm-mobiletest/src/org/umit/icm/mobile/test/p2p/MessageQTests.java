@@ -71,13 +71,4 @@ public class MessageQTests extends AndroidTestCase {
 		Assert.assertEquals(messageQ.removeMessage(), obj3);
 	}
 		
-	private boolean compareAgentData(AgentData agent1, AgentData agent2) {
-    	if(agent1.getAgentIP().equals(agent2.getAgentIP())
-    			&& agent1.getAgentPort() == agent2.getAgentPort()
-    			&& agent1.getPeerStatus().equals(agent2.getPeerStatus())
-    			&& agent1.getPublicKey().equals(agent2.getPublicKey())
-    			&& agent1.getToken().equals(agent2.getToken()))
-    		return true;
-    	return false;
-    }
 }
