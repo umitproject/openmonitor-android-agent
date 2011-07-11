@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,126 +46,17 @@ import android.util.Log;
 
 public class ServiceConnectivity extends AbstractConnectivity{
 	
-	private List<Service> listServices;
-
-	/**
-	 * This is the default constructor. Populates the Services list with the
-	 * list from {@link Constants}.
-	 */
-	public ServiceConnectivity() {
-		super();
-		listServices = Constants.SERVICE_LIST;
-	}
-	
 	/**
 	 * scan method which overrides the {@link AbstractConnectivity#scan}. 
-	 * Iterates through the services list and for each services calls
-	 * {@link TCPClient#writeLine(String)},
-	 * {@link TCPClient#readLines()},
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])} 
-	 * 
-	 * 
+	 * Calls the scan method of each service. 
+	 * 	  
 	 *
-	 @see         TCPClient
 	 */
 	@Override()
 	public void scan() throws IOException, HttpException {
-		String HTTPResponse = ServiceHTTP.connect();
-		Log.w("######httpResponse", HTTPResponse);
-		byte[] serviceResponseBytes = null;
-		ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
-		Globals.tcpClientConnectivity.openConnection(
-				ServiceHTTP.getService().getIp()
-				, ServiceHTTP.getService().getPorts().get(0));
-		Globals.tcpClientConnectivity.writeLine(
-				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-		serviceResponseBytes
-		= Globals.tcpClientConnectivity.readBytes();
-		if(!serviceResponseBytes.equals(null))
-			Log.w("#####bytes", "bytes");
-		Globals.tcpClientConnectivity.closeConnection();
-		
-			try {
-			serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
-						, HTTPResponse, serviceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReport);						
-					
-			Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
-			Log.w("######name", serviceReport.getReport().getServiceName());
-			Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-		}	catch (IOException e) {
-				e.printStackTrace();
-		}	
-		
-		String HTTPSResponse = ServiceHTTPS.connect();
-		Log.w("######httpsResponse", HTTPSResponse);
-		byte[] httpsServiceResponseBytes = null;
-		ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
-		Globals.tcpClientConnectivity.openConnection(
-				ServiceHTTPS.getService().getIp()
-				, ServiceHTTPS.getService().getPorts().get(0));
-		Globals.tcpClientConnectivity.writeLine(
-				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-		httpsServiceResponseBytes
-		= Globals.tcpClientConnectivity.readBytes();
-		if(!httpsServiceResponseBytes.equals(null))
-			Log.w("#####bytes", "bytes");
-		Globals.tcpClientConnectivity.closeConnection();
-		
-			try {
-			serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService()
-						, HTTPSResponse, httpsServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportHTTPS);						
-					
-			Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
-			Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
-			Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPorts().get(0)));
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-		}	catch (IOException e) {
-				e.printStackTrace();
-		}
-		try {
-		String FTPResponse = ServiceFTP.connect();
-		Log.w("######ftpResponse", FTPResponse);
-		byte[] ftpServiceResponseBytes = null;
-		ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
-		Globals.tcpClientConnectivity.openConnection(
-				ServiceFTP.getService().getIp()
-				, ServiceFTP.getService().getPorts().get(0));
-		Globals.tcpClientConnectivity.writeLine(
-				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-		ftpServiceResponseBytes
-		= Globals.tcpClientConnectivity.readBytes();
-		if(!ftpServiceResponseBytes.equals(null))
-			Log.w("#####bytes", "bytes");
-		Globals.tcpClientConnectivity.closeConnection();
-		
-			try {
-			serviceReportFTP = (ServiceReport) clean(ServiceFTP.getService()
-						, FTPResponse, ftpServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportFTP);						
-					
-			Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
-			Log.w("######name", serviceReportFTP.getReport().getServiceName());
-			Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-		}	catch (IOException e) {
-				e.printStackTrace();
-		}
-		} catch (IOException e) {
-				e.printStackTrace();
-		}
-			
-																											
+		HTTPScan();
+		HTTPSScan();
+		FTPScan();																											
 	};
 		 
 	/**
@@ -217,6 +109,129 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.build();
 		
 		return serviceReport;
+	}
+	
+	/**
+	 * For HTTP service calls
+	 * {@link ServiceHTTP#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
+	 * 
+	 */
+	public void HTTPScan() throws UnknownHostException, IOException {
+		String HTTPResponse = ServiceHTTP.connect();
+		Log.w("######httpResponse", HTTPResponse);
+		byte[] serviceResponseBytes = null;
+		ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
+		Globals.tcpClientConnectivity.openConnection(
+				ServiceHTTP.getService().getIp()
+				, ServiceHTTP.getService().getPorts().get(0));
+		Globals.tcpClientConnectivity.writeLine(
+				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+		serviceResponseBytes
+		= Globals.tcpClientConnectivity.readBytes();
+		if(!serviceResponseBytes.equals(null))
+			Log.w("#####bytes", "bytes");
+		Globals.tcpClientConnectivity.closeConnection();
+		
+			try {
+			serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
+						, HTTPResponse, serviceResponseBytes);
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+						, serviceReport);						
+					
+			Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
+			Log.w("######name", serviceReport.getReport().getServiceName());
+			Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+		}	catch (IOException e) {
+				e.printStackTrace();
+		}	
+		
+	}
+	
+	/**
+	 * For HTTPS service calls
+	 * {@link ServiceHTTPS#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
+	 * 
+	 */
+	public void HTTPSScan() throws UnknownHostException, IOException {
+
+		String HTTPSResponse = ServiceHTTPS.connect();
+		Log.w("######httpsResponse", HTTPSResponse);
+		byte[] httpsServiceResponseBytes = null;
+		ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
+		Globals.tcpClientConnectivity.openConnection(
+				ServiceHTTPS.getService().getIp()
+				, ServiceHTTPS.getService().getPorts().get(0));
+		Globals.tcpClientConnectivity.writeLine(
+				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+		httpsServiceResponseBytes
+		= Globals.tcpClientConnectivity.readBytes();
+		if(!httpsServiceResponseBytes.equals(null))
+			Log.w("#####bytes", "bytes");
+		Globals.tcpClientConnectivity.closeConnection();
+		
+			try {
+			serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService()
+						, HTTPSResponse, httpsServiceResponseBytes);
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+						, serviceReportHTTPS);						
+					
+			Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
+			Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
+			Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPorts().get(0)));
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+		}	catch (IOException e) {
+				e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * For FTP service calls
+	 * {@link ServiceFTP#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
+	 * 
+	 */
+	public void FTPScan() throws IOException {
+		
+			String FTPResponse = ServiceFTP.connect();
+			Log.w("######ftpResponse", FTPResponse);
+			byte[] ftpServiceResponseBytes = null;
+			ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
+			Globals.tcpClientConnectivity.openConnection(
+					ServiceFTP.getService().getIp()
+					, ServiceFTP.getService().getPorts().get(0));
+			Globals.tcpClientConnectivity.writeLine(
+					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+			ftpServiceResponseBytes
+			= Globals.tcpClientConnectivity.readBytes();
+			if(!ftpServiceResponseBytes.equals(null))
+				Log.w("#####bytes", "bytes");
+			Globals.tcpClientConnectivity.closeConnection();
+			
+				try {
+				serviceReportFTP = (ServiceReport) clean(ServiceFTP.getService()
+							, FTPResponse, ftpServiceResponseBytes);
+					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+							, serviceReportFTP);						
+						
+				Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
+				Log.w("######name", serviceReportFTP.getReport().getServiceName());
+				Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+			}	catch (IOException e) {
+					e.printStackTrace();
+			}		
 	}
 		
 }
