@@ -23,6 +23,8 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
+
 import org.apache.http.HttpException;
 
 
@@ -51,9 +53,9 @@ public class AbstractConnectivity {
 	}
 	
 	/**
-	 * Performs the connectivity test.
+	 * Performs the connectivity test.	 
 	 */
-	public void scan() throws IOException, HttpException, RuntimeException {
+	public void scan() throws IOException, HttpException, RuntimeException, MessagingException {
 		
 	}
 	
