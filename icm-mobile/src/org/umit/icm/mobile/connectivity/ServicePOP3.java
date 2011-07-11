@@ -70,8 +70,10 @@ public class ServicePOP3 {
         Session session = Session.getInstance(properties, null);
         Store store = new POP3SSLStore(session, urlName);
         store.connect();
-        if(store.isConnected())
+        if(store.isConnected()) {
+        	store.close();
         	return "connected";
+        }
         return null;
 	}
 	
