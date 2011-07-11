@@ -159,6 +159,9 @@ public class Constants {
 			ports.add(995);			
 			add(new Service("pop3", ports, "pop.gmail.com", "open", "true"));
 			ports.clear();
+			ports.add(993);			
+			add(new Service("imap", ports, "imap.gmail.com", "open", "true"));
+			ports.clear();
 			
 		
 		}};
