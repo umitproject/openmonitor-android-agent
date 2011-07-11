@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.IDGenerator;
@@ -48,15 +50,16 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	
 	/**
 	 * scan method which overrides the {@link AbstractConnectivity#scan}. 
-	 * Calls the scan method of each service. 
+	 * Calls the scan method of each service. 	
 	 * 	  
 	 *
 	 */
 	@Override()
-	public void scan() throws IOException, HttpException {
+	public void scan() throws IOException, HttpException, MessagingException {
 		HTTPScan();
 		HTTPSScan();
-		FTPScan();																											
+		FTPScan();
+		POP3Scan();
 	};
 		 
 	/**
@@ -227,6 +230,47 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportFTP.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+			}	catch (IOException e) {
+					e.printStackTrace();
+			}		
+	}
+	
+	/**
+	 * For POP3 service calls
+	 * {@link ServicePOP3#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
+	 * 
+	 */
+	public void POP3Scan() throws IOException, MessagingException {
+		
+			String POP3Response = ServicePOP3.connect();
+			Log.w("######pop3Response", POP3Response);
+			byte[] pop3ServiceResponseBytes = null;
+			ServiceReport serviceReportPOP3 = ServiceReport.getDefaultInstance();						         
+			Globals.tcpClientConnectivity.openConnection(
+					ServicePOP3.getService().getIp()
+					, ServicePOP3.getService().getPorts().get(0));
+			Globals.tcpClientConnectivity.writeLine(
+					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+			pop3ServiceResponseBytes
+			= Globals.tcpClientConnectivity.readBytes();
+			if(!pop3ServiceResponseBytes.equals(null))
+				Log.w("#####bytes", "bytes");
+			Globals.tcpClientConnectivity.closeConnection();
+			
+				try {
+				serviceReportPOP3 = (ServiceReport) clean(ServiceFTP.getService()
+							, POP3Response, pop3ServiceResponseBytes);
+					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+							, serviceReportPOP3);						
+						
+				Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
+				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
+				Log.w("######port", Integer.toString(ServicePOP3.getService().getPorts().get(0)));
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 			}	catch (IOException e) {
