@@ -36,8 +36,23 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
+/**
+ * This is the HTTPS Service class. Holds {@link ServiceHTTPS#connect()},
+ * {@link ServiceHTTPS#getService()} and {@link ServiceHTTPS#getService()} methods.
+ */
+
 public class ServiceHTTPS {
-	 	 
+	
+	/**
+	 * Returns an HTTPS Response String.
+	 * 
+	 *	 	                           	                          		             	            
+	           
+	@return      String
+	 *
+	 
+	@see HttpClient
+	 */
 	public static String connect() {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -66,12 +81,29 @@ public class ServiceHTTPS {
 		}
 	}
 	
+	/**
+	 * Returns a {@link Service} object for HTTPS. 
+	 * 
+	 *	 
+
+	@see  Service
+	 *  	                          		              
+	            
+	@return      Service
+	 */	
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(443);												
 		return new Service("https", ports, "campusmail.lums.edu.pk" , "open", "true");
 	}
 	
+	/**
+	 * Returns a String for service scanning URL. 
+	 * 
+	 *	  	                          		              
+	            
+	@return      String
+	 */	
 	public static String getServiceURL() {
 		return "https://campusmail.lums.edu.pk";
 	}

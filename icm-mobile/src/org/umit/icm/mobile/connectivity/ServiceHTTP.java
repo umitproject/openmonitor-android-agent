@@ -34,10 +34,26 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+
 import android.util.Log;
 
+/**
+ * This is the HTTP Service class. Holds {@link ServiceHTTP#connect()},
+ * {@link ServiceHTTP#getService()} and {@link ServiceHTTP#getService()} methods.
+ */
+
 public class ServiceHTTP {
-	 	 
+	
+	/**
+	 * Returns a an HTTP Response String.
+	 * 
+	 *	 	                           	                          		             	            
+	           
+	@return      String
+	 *
+	 
+	@see HttpClient
+	 */	
 	public static String connect() {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -66,12 +82,29 @@ public class ServiceHTTP {
 		}
 	}
 	
+	/**
+	 * Returns a {@link Service} object from HTTP. 
+	 * 
+	 *	 
+
+	@see  Service
+	 *  	                          		              
+	            
+	@return      Service
+	 */	
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(80);												
 		return new Service("http", ports, "www.google.com" , "open", "true");
 	}
 	
+	/**
+	 * Returns a String for service scanning URL. 
+	 * 
+	 *	  	                          		              
+	            
+	@return      String
+	 */	
 	public static String getServiceURL() {
 		return "http://www.google.com";
 	}

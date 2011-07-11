@@ -29,10 +29,26 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.http.client.HttpClient;
 
+/**
+ * This is the FTP Service class. Holds {@link ServiceFTP#connect()},
+ * {@link ServiceFTP#getService()} and {@link ServiceFTP#getService()} methods.
+ */
 
 public class ServiceFTP {
-	 	 
+	
+
+	/**
+	 * Returns an FTP Response String.
+	 * 
+	 *	 	                           	                          		             	            
+	           
+	@return      String
+	 *
+	 
+	@see FTPClient
+	 */
 	public static String connect() throws SocketException, IOException {
 		
 		FTPClient ftpClient = new FTPClient();
@@ -46,12 +62,29 @@ public class ServiceFTP {
 		return reply;		
 	}
 	
+	/**
+	 * Returns a {@link Service} object for FTP. 
+	 * 
+	 *	 
+
+	@see  Service
+	 *  	                          		              
+	            
+	@return      Service
+	 */	
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(21);												
 		return new Service("ftp", ports, "ftp.secureftp-test.com" , "open", "true");
 	}
 	
+	/**
+	 * Returns a String for service scanning URL. 
+	 * 
+	 *	  	                          		              
+	            
+	@return      String
+	 */	
 	public static String getServiceURL() {
 		return "ftp.secureftp-test.com";
 	}
