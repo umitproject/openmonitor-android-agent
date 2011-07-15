@@ -22,7 +22,10 @@
 package org.umit.icm.mobile.test.utils;
 
 
+import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
+
+import twitter4j.auth.AccessToken;
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;
@@ -35,5 +38,14 @@ public class SDCardReadWriteTests extends AndroidTestCase {
         String readString = SDCardReadWrite.readString("sdtest.txt", "/test");
         Assert.assertEquals("This is a test string", readString);
     }
+    
+   /* public void testAccessTokenReadWrite() throws Throwable {
+    	AccessToken accessToken = new AccessToken("token", "tokenSecret");
+    	SDCardReadWrite.writeAccessToken(Constants.KEYS_DIR, accessToken);
+        AccessToken accessToken2 
+        = SDCardReadWrite.readAccessToken(Constants.KEYS_DIR);
+        Assert.assertTrue(accessToken.equals(accessToken2));
+    }
+    */
 
 }
