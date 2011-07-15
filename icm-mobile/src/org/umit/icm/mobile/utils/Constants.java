@@ -168,4 +168,7 @@ public class Constants {
 		public static boolean runProfiler = false;
 		public static long DEFAULT_AGENT_ID = 911;
 		public static String DEFAULT_TOKEN = "myToken";
+		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
+		public static String TWITTER_CONSUMER_KEY_SECRET 
+		= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
 }
