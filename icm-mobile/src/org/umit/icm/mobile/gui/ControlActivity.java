@@ -31,6 +31,7 @@ import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
+import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
@@ -97,19 +98,9 @@ public class ControlActivity extends Activity {
         
         enableTwitterButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
-	       		 TwitterUpdate twitterUpdate = new TwitterUpdate();
-	       		 try {
-					twitterUpdate.requestToken(ControlActivity.this);
-				} catch (TwitterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (HttpException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	       		TwitterDialog twitterDialog = 
+	       			new TwitterDialog(ControlActivity.this, "");
+	       		twitterDialog.show();	       
 	       	}
 
 	    }  );
