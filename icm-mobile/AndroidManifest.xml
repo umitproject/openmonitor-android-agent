@@ -15,7 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".notifications.NotificationService"></service>
+        <service android:name=".notifications.NotificationService">
+        	<intent-filter>
+            	<action android:name="org.umit.icm.mobile.NOTIFICATION_SERVICE" />            	
+            </intent-filter>
+        </service>
         <activity android:name=".gui.ControlActivity">
             <intent-filter>
             	<action android:name="org.umit.icm.mobile.CONTROL_ACTIVITY" />            	

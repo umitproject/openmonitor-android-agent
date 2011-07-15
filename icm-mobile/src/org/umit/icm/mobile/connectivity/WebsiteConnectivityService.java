@@ -37,6 +37,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.os.IBinder;
 
 /**
@@ -115,6 +116,14 @@ public class WebsiteConnectivityService extends Service {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();
 				}
+				Context context = getApplicationContext();
+	       		Bundle bundle = new Bundle();	
+	        	bundle.putString("notification"
+	        			, getString(R.string.scan_complete)
+	        			 + getString(R.string.scan_complete_id));	        	
+				Intent intent = new Intent("org.umit.icm.mobile.NOTIFICATION_SERVICE");
+				intent.putExtras(bundle);
+				context.sendBroadcast(intent);
 			}	
 		}, 0, interval * 1000); 
 	}

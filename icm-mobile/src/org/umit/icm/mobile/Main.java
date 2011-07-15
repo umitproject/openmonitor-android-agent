@@ -29,6 +29,7 @@ import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
+import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.ProfilerRun;
@@ -121,7 +122,8 @@ public class Main extends TabActivity {
 				if(Constants.runProfiler == true)
 					ProfilerRun.run();
 				Globals.scanStatus = getString(R.string.scan_on);
-				startService(new Intent(Main.this, WebsiteConnectivityService.class));				
+				startService(new Intent(Main.this, WebsiteConnectivityService.class));
+				startService(new Intent(Main.this,NotificationService.class));
 								
 		        				
 			} catch (IOException e) {

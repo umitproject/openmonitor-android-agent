@@ -63,4 +63,6 @@
     <string name="status_code">Status Code:</string>
     <string name="location_disabled">Error! Both GPS and Network Provider Disabled</string>
     <string name="retrieving_service">Retrieving Service</string>
+    <string name="scan_complete">Scan Completed</string>
+    <string name="scan_complete_id">:1</string>
 </resources>

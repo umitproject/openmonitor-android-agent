@@ -30,7 +30,6 @@ import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
-//import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
@@ -117,14 +116,10 @@ public class ControlActivity extends Activity {
         
         
         intervalButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  
-	       		
-	       		//startService(new Intent(ControlActivity.this,NotificationService.class));
-	       		//stopService(new Intent(ControlActivity.this,NotificationService.class));
-	       		
+	       	public void onClick(View v) {  	       			       		       			
 	       		IntervalDialog intervalDialog = 
 	       			new IntervalDialog(ControlActivity.this, "", new OnReadyIntervalListener());
-	            intervalDialog.show();
+	            intervalDialog.show(); 
 	       		
 	       	}
 

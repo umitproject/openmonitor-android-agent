@@ -28,9 +28,13 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.IBinder;
-import android.widget.Toast;
+import android.util.Log;
 
 /**
  * The Notification Service which notifies the user of any event.
@@ -38,7 +42,7 @@ import android.widget.Toast;
 
 public class NotificationService extends Service {
 
-	private NotificationManager nManager;
+	private NotificationManager mNotificationManager;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -55,9 +59,22 @@ public class NotificationService extends Service {
 	public void onCreate() {
 		super.onCreate();
 
-		nManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		Toast.makeText(this,"Service created", Toast.LENGTH_LONG).show();
-		showNotification();		
+		mNotificationManager 
+		= (NotificationManager)getSystemService(NOTIFICATION_SERVICE);		
+		BroadcastReceiver receiver = new BroadcastReceiver() {
+			   
+			@Override
+			public void onReceive(Context context, Intent intent) {	
+				Bundle bundle = intent.getExtras();
+		        String message = bundle.getString("notification");
+				if(intent.getAction().equals("org.umit.icm.mobile.NOTIFICATION_SERVICE")) {
+					showNotification(message);	
+			      }				
+			}
+		  };
+
+		registerReceiver(receiver
+				, new IntentFilter("org.umit.icm.mobile.NOTIFICATION_SERVICE"));		
 		
 	}
 	
@@ -66,10 +83,7 @@ public class NotificationService extends Service {
 	 */
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
-       	
-        nManager.cancel(R.string.start_service);
-		Toast.makeText(this, "Service stopped" , Toast.LENGTH_LONG).show();
+		super.onDestroy();       		
 	
 	}
 	
@@ -82,20 +96,27 @@ public class NotificationService extends Service {
 	 
 	 @see NotificationManager
 	 */
-    private void showNotification() {
-    
-        CharSequence text = getText(R.string.start_service);
-    
-        Notification notification = new Notification(R.drawable.icon, text,
+    private void showNotification(String message) {    	
+    	String[] tokens = message.split(":");    	
+    	String text = tokens[0];
+    	int id = Integer.parseInt(tokens[1]);
+    	
+        Notification notification = new Notification(R.drawable.yellowdot, text,
                 System.currentTimeMillis());
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, InformationActivity.class), 0);
 
-        notification.setLatestEventInfo(this, getText(R.string.service_name),
+        notification.setLatestEventInfo(this, text,
                        text, contentIntent);
 
-        nManager.notify(R.string.start_service, notification);
+        mNotificationManager.notify(id, notification);
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        mNotificationManager.cancel(id);
     }
-       
 }
