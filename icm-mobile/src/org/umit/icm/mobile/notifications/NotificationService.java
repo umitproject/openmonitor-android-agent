@@ -34,7 +34,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 /**
  * The Notification Service which notifies the user of any event.

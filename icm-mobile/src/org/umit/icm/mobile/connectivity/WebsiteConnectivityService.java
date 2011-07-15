@@ -29,6 +29,7 @@ import javax.mail.MessagingException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.utils.Constants;
@@ -117,13 +118,11 @@ public class WebsiteConnectivityService extends Service {
 						stopScanNotify();
 				}
 				Context context = getApplicationContext();
-	       		Bundle bundle = new Bundle();	
-	        	bundle.putString("notification"
-	        			, getString(R.string.scan_complete)
-	        			 + getString(R.string.scan_complete_id));	        	
-				Intent intent = new Intent("org.umit.icm.mobile.NOTIFICATION_SERVICE");
-				intent.putExtras(bundle);
-				context.sendBroadcast(intent);
+				NotificationHelper.sendNotification(
+						getString(R.string.scan_complete_id)
+						, getString(R.string.scan_complete)
+						, context);
+
 			}	
 		}, 0, interval * 1000); 
 	}
