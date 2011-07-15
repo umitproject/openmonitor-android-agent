@@ -36,28 +36,37 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 public class TwitterUpdate {
-	private Twitter twitter;  
+	private Twitter twitter;
+	private RequestToken requestToken;
+	private AccessToken accessToken;
 	
 	public TwitterUpdate() {
 		twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
 		Constants.TWITTER_CONSUMER_KEY_SECRET);
+		accessToken = null;
+		requestToken = null;
 	}
 	
-	public void sendTweet(String tweet) throws TwitterException {	
-		AccessToken accessToken 
-		= new AccessToken("335996967-B9MuARWy52D6CGxspSeW1GPOIY8cYrfmLoP45l4n"
-				, "A1ZYDJ6MmvGlBks5M5BfWjUOyazRZ9jUS5XyguDRk");
-		twitter.setOAuthAccessToken(accessToken);
-		twitter.updateStatus(tweet);
+	public void sendTweet(String tweet) throws TwitterException {
+		if(accessToken != null) {
+			twitter.setOAuthAccessToken(accessToken);
+			twitter.updateStatus(tweet);
+		}		
 	}
 	
-	public void requestToken(Context context) throws TwitterException, IOException, HttpException {
-		RequestToken requestToken = twitter.getOAuthRequestToken();	    
-	    Intent browserIntent 
-	    = new Intent(Intent.ACTION_VIEW
-	    		, Uri.parse(requestToken.getAuthorizationURL()));
-	    context.startActivity(browserIntent);	   	    	    	    
+	public void requestToken(Context context) throws TwitterException, IOException, HttpException {		
+			requestToken = twitter.getOAuthRequestToken();	    
+		    Intent browserIntent 
+		    = new Intent(Intent.ACTION_VIEW
+		    		, Uri.parse(requestToken.getAuthorizationURL()));
+		    context.startActivity(browserIntent);				   	    	    	   
+	}
+	
+	public void enterPin(String pin) throws TwitterException {
+		if(requestToken != null) {
+		accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+		}
 	}
 	
 }
