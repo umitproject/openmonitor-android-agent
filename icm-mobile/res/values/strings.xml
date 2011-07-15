@@ -66,4 +66,6 @@
     <string name="scan_complete">Scan Completed</string>
     <string name="scan_complete_id">:1</string>
     <string name="enable_twitter_button">Enable Twitter</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="enable_pin">Enable Pin</string>
 </resources>

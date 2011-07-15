@@ -25,10 +25,10 @@
     android:layout_width="wrap_content" android:layout_height="wrap_content">
     
     <EditText 
-    		android:id="@+id/etInterval"
+    		android:id="@+id/etPin"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
-			android:hint="@string/edit_text_interval"
+			android:hint="@string/enter_pin"
 			android:textSize="20sp"
 			android:numeric="decimal"/>			
 		
@@ -36,10 +36,10 @@
 		<Button 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
-			android:text="@string/interval_button" 
-			android:layout_below="@id/etInterval"
+			android:text="@string/enable_pin" 
+			android:layout_below="@id/etPin"
 			android:textSize="20sp"
 			android:layout_centerHorizontal="true"
-			android:id="@+id/intervalButton"/>
+			android:id="@+id/pinButton"/>
 		
 </RelativeLayout>

@@ -55,9 +55,9 @@ public class TwitterDialog extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twitterdialog);
-        Button buttonSet = (Button) findViewById(R.id.intervalButton);
+        Button buttonSet = (Button) findViewById(R.id.pinButton);
         buttonSet.setOnClickListener(new intervalListener());                
-        etEnable = (EditText) findViewById(R.id.etInterval);       
+        etEnable = (EditText) findViewById(R.id.etPin);       
 		
     }
         
