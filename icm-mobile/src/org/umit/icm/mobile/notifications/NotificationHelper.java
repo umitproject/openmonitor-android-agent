@@ -22,8 +22,6 @@
 package org.umit.icm.mobile.notifications;
 
 
-import java.util.Timer;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
