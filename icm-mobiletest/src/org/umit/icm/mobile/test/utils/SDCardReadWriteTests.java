@@ -39,13 +39,12 @@ public class SDCardReadWriteTests extends AndroidTestCase {
         Assert.assertEquals("This is a test string", readString);
     }
     
-   /* public void testAccessTokenReadWrite() throws Throwable {
-    	AccessToken accessToken = new AccessToken("token", "tokenSecret");
+    public void testAccessTokenReadWrite() throws Throwable {
+    	AccessToken accessToken = new AccessToken("99999-token", "tokenSecret");
     	SDCardReadWrite.writeAccessToken(Constants.KEYS_DIR, accessToken);
         AccessToken accessToken2 
         = SDCardReadWrite.readAccessToken(Constants.KEYS_DIR);
         Assert.assertTrue(accessToken.equals(accessToken2));
-    }
-    */
+    }   
 
 }
