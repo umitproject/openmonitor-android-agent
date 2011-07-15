@@ -1216,7 +1216,8 @@ public class SDCardReadWrite {
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
 		keyDir.mkdirs();
-    	File file = new File(Constants.ACCESS_TOKEN_FILE);
+    	File file = new File(keyDir,
+    			Constants.ACCESS_TOKEN_FILE);    	
     	if(!file.exists()){
     		file.createNewFile();
     	}
