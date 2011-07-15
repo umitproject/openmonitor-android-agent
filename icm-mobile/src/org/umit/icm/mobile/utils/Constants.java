@@ -31,6 +31,7 @@ import org.umit.icm.mobile.connectivity.Service;
  */
 public class Constants {
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
+	public static String ACCESS_TOKEN_FILE = "accessToken.token";
 	public static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
 	public static String MY_SECRET_KEY_FILE = "mySecretKey.sec";
 	public static String MY_CIPHERED_KEY_FILE = "myCipheredKey.ciph";

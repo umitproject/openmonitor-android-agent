@@ -49,6 +49,8 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 
+import twitter4j.auth.AccessToken;
+
 import android.os.Environment;
 
 /**
@@ -1184,6 +1186,89 @@ public class SDCardReadWrite {
   		    throw new RuntimeException("read service report exception", e);
   	  	} finally {
   		  inputStream.close();
+  	  	}
+	}
+	
+	/**
+	 * Writes a {@link AccessToken} object to the default 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+
+	@param  dir  An object of the type {@link String}
+	 *  
+	 
+	@param  data  An object of the type {@link AccessToken}
+	 *  
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileWriter
+	 *
+	 
+	@see         Environment
+	 */
+	public static void writeAccessToken(String dir
+			, AccessToken data) throws IOException , RuntimeException{
+		ObjectOutputStream objOutStream = null;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(Constants.ACCESS_TOKEN_FILE);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));
+			objOutStream.writeObject(data.getToken());
+			objOutStream.writeObject(data.getTokenSecret());
+    	} catch (Exception e) {
+  		    throw new RuntimeException("writeAccessToken exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	/**
+	 * Returns a {@link AccessToken} object of the file content from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link AccessToken}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         FileReader
+	 *
+	 
+	@see         Environment
+	 */
+	public static AccessToken readAccessToken(String dir) throws IOException , RuntimeException{
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir, 
+    			Constants.ACCESS_TOKEN_FILE);    	
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+	    	    String token = ((String) objInputStream.readObject());	    	    
+	    	    String tokenSecret = ((String) objInputStream.readObject());
+	    	    return new AccessToken(token, tokenSecret);
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("readToken exception", e);
+  	  	} finally {
+  		  objInputStream.close();
   	  	}
 	}
 
