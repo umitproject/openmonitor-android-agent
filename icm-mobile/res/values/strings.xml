@@ -65,4 +65,5 @@
     <string name="retrieving_service">Retrieving Service</string>
     <string name="scan_complete">Scan Completed</string>
     <string name="scan_complete_id">:1</string>
+    <string name="enable_twitter_button">Enable Twitter</string>
 </resources>

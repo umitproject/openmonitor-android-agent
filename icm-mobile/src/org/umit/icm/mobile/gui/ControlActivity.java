@@ -24,6 +24,7 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
@@ -34,6 +35,9 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
+import org.umit.icm.mobile.social.TwitterUpdate;
+
+import twitter4j.TwitterException;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -51,7 +55,8 @@ import android.widget.Toast;
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
-	, filterButton, servicesFilterButton, mapSelectionButton;
+	, filterButton, servicesFilterButton, mapSelectionButton,
+	enableTwitterButton;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,7 @@ public class ControlActivity extends Activity {
         filterButton = (Button) this.findViewById(R.id.filterButton);
         servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
         mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
+        enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		
@@ -85,6 +91,25 @@ public class ControlActivity extends Activity {
 	       		SuggestionDialog suggestionDialog = 
 	       			new SuggestionDialog(ControlActivity.this, "", new OnReadyListener());
 	            suggestionDialog.show();	        		
+	       	}
+
+	    }  );
+        
+        enableTwitterButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		 TwitterUpdate twitterUpdate = new TwitterUpdate();
+	       		 try {
+					twitterUpdate.requestToken(ControlActivity.this);
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (HttpException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	       	}
 
 	    }  );

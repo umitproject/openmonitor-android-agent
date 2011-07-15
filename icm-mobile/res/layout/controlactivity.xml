@@ -80,4 +80,12 @@
 		android:layout_centerHorizontal="true"
 		android:layout_below="@id/serviceFilterButton"
 		android:id="@+id/mapSelectionButton"/>
+						
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:text="@string/enable_twitter_button" 
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/mapSelectionButton"
+		android:id="@+id/enableTwitterButton"/>
 </RelativeLayout>
