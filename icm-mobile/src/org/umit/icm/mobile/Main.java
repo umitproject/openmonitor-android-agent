@@ -123,14 +123,13 @@ public class Main extends TabActivity {
 					ProfilerRun.run();
 				Globals.scanStatus = getString(R.string.scan_on);
 				startService(new Intent(Main.this, WebsiteConnectivityService.class));
-				startService(new Intent(Main.this,NotificationService.class));
-								
+				startService(new Intent(Main.this,NotificationService.class));								
 		        				
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {
 				e.printStackTrace();
-			}
+			} 
 	            
         }
     }
