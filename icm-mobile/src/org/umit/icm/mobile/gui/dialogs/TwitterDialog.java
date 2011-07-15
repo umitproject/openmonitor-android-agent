@@ -29,6 +29,7 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.social.TwitterUpdate;
 
 import twitter4j.TwitterException;
+import twitter4j.auth.AccessToken;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -42,6 +43,7 @@ public class TwitterDialog extends Dialog {
 	
     EditText etEnable;
     private Context context;
+    private TwitterUpdate twitterUpdate;
        
     
     public TwitterDialog(Context context, String interval 
@@ -57,7 +59,21 @@ public class TwitterDialog extends Dialog {
         setContentView(R.layout.twitterdialog);
         Button buttonSet = (Button) findViewById(R.id.pinButton);
         buttonSet.setOnClickListener(new intervalListener());                
-        etEnable = (EditText) findViewById(R.id.etPin);       
+        etEnable = (EditText) findViewById(R.id.etPin);  
+        twitterUpdate = new TwitterUpdate();
+  		 try {
+			twitterUpdate.requestToken(context);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		
     }
         
@@ -65,24 +81,17 @@ public class TwitterDialog extends Dialog {
 
 		@Override
 		public void onClick(View arg0) {
-		/*	if (!etEnable.getText().toString().equals(""))
-				newInterval = Integer.parseInt(etEnable.getText().toString());
-			readyListener.ready(Integer.toString(newInterval)); */
-			 TwitterUpdate twitterUpdate = new TwitterUpdate();
-       		 try {
-				twitterUpdate.requestToken(context);
-			} catch (TwitterException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (!etEnable.getText().toString().equals("")) {
+				String pin = etEnable.getText().toString();
+				try {
+					twitterUpdate.enterPin(pin);
+					twitterUpdate.sendTweet("First Tweet using app.");
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				TwitterDialog.this.dismiss();
 			}
-		
-			TwitterDialog.this.dismiss();
 					        	                 		
 			}
 
