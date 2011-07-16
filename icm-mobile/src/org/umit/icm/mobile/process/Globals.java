@@ -36,6 +36,7 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
+import org.umit.icm.mobile.social.TwitterUpdate;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -49,6 +50,12 @@ public class Globals {
 	 */
 	public static RuntimeParameters runtimeParameters 
 	= new RuntimeParameters();
+	
+	/**
+	 * Global {@link TwitterUpdate}
+	 */
+	public static TwitterUpdate twitterUpdate 
+	= new TwitterUpdate();		
 	
 	/**
 	 * Global {@link VersionManager}
