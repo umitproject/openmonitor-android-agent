@@ -107,6 +107,12 @@ public class Main extends TabActivity {
 							, Constants.PARAMETERS_DIR) == false )) {					
 					Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
 				}
+				if ((SDCardReadWrite.fileExists(Constants.TWITTER_STATUS_FILE
+						, Constants.PARAMETERS_DIR) == false )
+						|| (SDCardReadWrite.fileNotEmpty(Constants.TWITTER_STATUS_FILE
+							, Constants.PARAMETERS_DIR) == false )) {					
+					Globals.runtimeParameters.setToken(Constants.DEFAULT_TWITTER_STATUS);					
+				}
 				if ((SDCardReadWrite.fileExists(Constants.AGENT_VERSION_FILE
 						, Constants.VERSIONS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.AGENT_VERSION_FILE

@@ -50,8 +50,10 @@ public class Constants {
 	public static String TESTS_VERSION_FILE = "tests.ver";
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
+	public static String TWITTER_STATUS_FILE = "twitter.param";
 	public static int DEFAULT_SCAN_INTERVAL = 10;
 	public static String DEFAULT_SCAN_STATUS = "On";
+	public static String DEFAULT_TWITTER_STATUS = "On";
 	public static String WEBSITES_DIR = "/websites";
 	public static String WEBSITE_FILE = "-site.web";
 	public static String WEBSITES_LIST_FILE = "websites.list";

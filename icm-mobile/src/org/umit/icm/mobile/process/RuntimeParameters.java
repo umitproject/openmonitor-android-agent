@@ -36,14 +36,16 @@ public class RuntimeParameters {
 	private String scanStatus;
 	private String token;
 	private long agentID;
+	private String twitter;
 	
 	public RuntimeParameters(int scanInterval, String scanStatus, String token,
-			long agentID) {
+			long agentID, String twitter) {
 		super();
 		this.scanInterval = scanInterval;
 		this.scanStatus = scanStatus;
 		this.token = token;
 		this.agentID = agentID;
+		this.twitter = twitter;
 	}
 	
 	public RuntimeParameters() {
@@ -90,8 +92,18 @@ public class RuntimeParameters {
 	public void setScanStatus(String scanStatus) throws IOException, RuntimeException {
 		this.scanStatus = scanStatus;
 		writeScanStatus(scanStatus);
-	}
+	}		
 	
+	public String getTwitter() throws IOException, RuntimeException {
+		twitter = readTwitterStatus();
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) throws IOException, RuntimeException {
+		this.twitter = twitter;
+		writeTwitterStatus(twitter);
+	}
+
 	private String readScanStatus() throws IOException, RuntimeException {
 		return SDCardReadWrite.readString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR);
@@ -129,6 +141,16 @@ public class RuntimeParameters {
 
 	private void writeToken(String token) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.TOKEN_FILE
+				, Constants.PARAMETERS_DIR, token);
+	}
+	
+	private String readTwitterStatus() throws IOException, RuntimeException {
+		return SDCardReadWrite.readString(Constants.TWITTER_STATUS_FILE
+				, Constants.PARAMETERS_DIR);
+	}
+
+	private void writeTwitterStatus(String token) throws IOException, RuntimeException {
+		SDCardReadWrite.writeString(Constants.TWITTER_STATUS_FILE
 				, Constants.PARAMETERS_DIR, token);
 	}
 }
