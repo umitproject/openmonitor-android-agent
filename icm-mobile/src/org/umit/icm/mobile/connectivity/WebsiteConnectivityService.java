@@ -34,6 +34,8 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.utils.Constants;
 
+import twitter4j.TwitterException;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -121,7 +123,23 @@ public class WebsiteConnectivityService extends Service {
 						getString(R.string.scan_complete_id)
 						, getString(R.string.scan_complete)
 						, context);
-
+				try {
+					if(Globals.runtimeParameters.getTwitter().equals("On")) {
+						try {
+							Globals.twitterUpdate.sendTweet(getString(R.string.scan_complete));
+						} catch (TwitterException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}	
 		}, 0, interval * 1000); 
 	}

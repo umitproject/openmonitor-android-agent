@@ -27,7 +27,6 @@ import java.io.IOException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.social.TwitterUpdate;
 
 import twitter4j.TwitterException;
 
@@ -73,7 +72,7 @@ public class TwitterDialog extends Dialog {
 				String pin = etEnable.getText().toString();
 				try {
 					Globals.twitterUpdate.enterPin(pin);
-					Globals.twitterUpdate.sendTweet("First Tweet using app.");
+					Globals.runtimeParameters.setTwitter("On");
 				} catch (TwitterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
