@@ -24,7 +24,6 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
@@ -36,9 +35,6 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
-import org.umit.icm.mobile.social.TwitterUpdate;
-
-import twitter4j.TwitterException;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
