@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.social.TwitterUpdate;
 
 import twitter4j.TwitterException;
@@ -41,9 +42,7 @@ import android.widget.EditText;
 public class TwitterDialog extends Dialog {
 	
     EditText etEnable;
-    private Context context;
-    private TwitterUpdate twitterUpdate;
-       
+    private Context context;          
     
     public TwitterDialog(Context context, String interval 
             ) {
@@ -57,22 +56,12 @@ public class TwitterDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twitterdialog);
         Button buttonSet = (Button) findViewById(R.id.pinButton);
-        buttonSet.setOnClickListener(new intervalListener());                
-        etEnable = (EditText) findViewById(R.id.etPin);  
-        twitterUpdate = new TwitterUpdate();
-  		 try {
-			twitterUpdate.requestToken(context);
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+        buttonSet.setOnClickListener(new intervalListener());    
+        Button buttonEnable = (Button) findViewById(R.id.enableButton);
+        buttonEnable.setOnClickListener(new enableListener());
+        Button buttonDisable = (Button) findViewById(R.id.disableButton);
+        buttonDisable.setOnClickListener(new disableListener());    
+        etEnable = (EditText) findViewById(R.id.etPin);          
 		
     }
         
@@ -83,8 +72,8 @@ public class TwitterDialog extends Dialog {
 			if (!etEnable.getText().toString().equals("")) {
 				String pin = etEnable.getText().toString();
 				try {
-					twitterUpdate.enterPin(pin);
-					twitterUpdate.sendTweet("First Tweet using app.");
+					Globals.twitterUpdate.enterPin(pin);
+					Globals.twitterUpdate.sendTweet("First Tweet using app.");
 				} catch (TwitterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -98,8 +87,50 @@ public class TwitterDialog extends Dialog {
 				TwitterDialog.this.dismiss();
 			}
 					        	                 		
-		}
+		}			
 
     }
+    
+    private class enableListener implements android.view.View.OnClickListener {
+
+		@Override
+		public void onClick(View arg0) {
+					
+	  		 try {
+				Globals.twitterUpdate.requestToken(context);
+			} catch (TwitterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (HttpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+					        	                 		
+		}			
+
+    }
+    
+    private class disableListener implements android.view.View.OnClickListener {
+
+		@Override
+		public void onClick(View arg0) {
+		
+			try {
+				Globals.runtimeParameters.setTwitter("Off");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					        	                 		
+		}			
+
+    }        
     
 }
