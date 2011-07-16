@@ -49,6 +49,11 @@ public class TwitterUpdate {
 		requestToken = null;
 	}
 	
+	public void reset() {
+		accessToken = null;
+		requestToken = null;
+	}
+	
 	public void setAccessToken(AccessToken accessToken) {
 		this.accessToken = accessToken;
 	}
