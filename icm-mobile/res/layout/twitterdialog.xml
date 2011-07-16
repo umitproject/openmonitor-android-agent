@@ -30,16 +30,33 @@
 			android:layout_height="wrap_content" 
 			android:hint="@string/enter_pin"
 			android:textSize="20sp"
-			android:numeric="decimal"/>			
-		
+			android:numeric="decimal"/>
+			
+	<Button 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:text="@string/enable_twitter_button" 
+			android:layout_below="@id/etPin"
+			android:textSize="20sp"
+			android:layout_centerHorizontal="true"
+			android:id="@+id/enableButton"/>
+			
+ 	<Button 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:text="@string/disable_twitter_button" 
+			android:layout_below="@id/enableButton"
+			android:textSize="20sp"
+			android:layout_centerHorizontal="true"
+			android:id="@+id/disableButton"/>						
 
-		<Button 
+	<Button 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
 			android:text="@string/enable_pin" 
 			android:layout_below="@id/etPin"
 			android:textSize="20sp"
 			android:layout_centerHorizontal="true"
-			android:id="@+id/pinButton"/>
+			android:id="@+id/disableButton"/>
 		
 </RelativeLayout>
