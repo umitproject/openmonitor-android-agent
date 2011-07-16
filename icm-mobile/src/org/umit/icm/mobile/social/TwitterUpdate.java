@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +49,10 @@ public class TwitterUpdate {
 		requestToken = null;
 	}
 	
+	public void setAccessToken() {
+		
+	}
+	
 	public void sendTweet(String tweet) throws TwitterException {
 		if(accessToken != null) {
 			twitter.setOAuthAccessToken(accessToken);
@@ -63,9 +68,10 @@ public class TwitterUpdate {
 		    context.startActivity(browserIntent);				   	    	    	   
 	}
 	
-	public void enterPin(String pin) throws TwitterException {
+	public void enterPin(String pin) throws TwitterException, IOException, RuntimeException {
 		if(requestToken != null) {
-		accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+			accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+			SDCardReadWrite.writeAccessToken(Constants.KEYS_DIR, accessToken);
 		}
 	}
 	
