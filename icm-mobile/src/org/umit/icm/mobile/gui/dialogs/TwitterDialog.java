@@ -29,7 +29,6 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.social.TwitterUpdate;
 
 import twitter4j.TwitterException;
-import twitter4j.auth.AccessToken;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -89,12 +88,18 @@ public class TwitterDialog extends Dialog {
 				} catch (TwitterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				TwitterDialog.this.dismiss();
 			}
 					        	                 		
-			}
+		}
 
-    	}
+    }
     
 }
