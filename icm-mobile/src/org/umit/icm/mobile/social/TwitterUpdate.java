@@ -49,8 +49,8 @@ public class TwitterUpdate {
 		requestToken = null;
 	}
 	
-	public void setAccessToken() {
-		
+	public void setAccessToken(AccessToken accessToken) {
+		this.accessToken = accessToken;
 	}
 	
 	public void sendTweet(String tweet) throws TwitterException {
