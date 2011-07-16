@@ -94,9 +94,11 @@ public class TwitterDialog extends Dialog {
 
 		@Override
 		public void onClick(View arg0) {
-					
+			
 	  		 try {
-				Globals.twitterUpdate.requestToken(context);
+	  			Globals.runtimeParameters.setTwitter("Off");
+				Globals.twitterUpdate.reset();
+				Globals.twitterUpdate.requestToken(context);				
 			} catch (TwitterException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,6 +129,7 @@ public class TwitterDialog extends Dialog {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			TwitterDialog.this.dismiss();
 					        	                 		
 		}			
 
