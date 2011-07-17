@@ -24,6 +24,7 @@ package org.umit.icm.mobile.social;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -58,8 +59,8 @@ public class TwitterUpdate {
 		this.accessToken = accessToken;
 	}
 	
-	public void sendTweet(String tweet) throws TwitterException {
-		if(accessToken != null) {
+	public void sendTweet(String tweet) throws TwitterException, IOException, RuntimeException {
+		if(accessToken != null && Globals.runtimeParameters.getTwitter().equals("On")) {			
 			twitter.setOAuthAccessToken(accessToken);
 			twitter.updateStatus(tweet);
 		}		

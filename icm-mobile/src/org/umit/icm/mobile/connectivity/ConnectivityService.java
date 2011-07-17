@@ -123,19 +123,15 @@ public class ConnectivityService extends Service {
 						getString(R.string.scan_complete_id)
 						, getString(R.string.scan_complete)
 						, context);
-				try {
-					if(Globals.runtimeParameters.getTwitter().equals("On")) {
-						try {
-							Globals.twitterUpdate.sendTweet(getString(R.string.scan_complete));
-						} catch (TwitterException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				} catch (IOException e) {
+				try {											
+						Globals.twitterUpdate.sendTweet(getString(R.string.scan_complete));						
+				} catch (RuntimeException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (RuntimeException e) {
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
