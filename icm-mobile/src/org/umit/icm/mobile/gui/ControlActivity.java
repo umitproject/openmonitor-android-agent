@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
 //import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
-import org.umit.icm.mobile.connectivity.WebsiteConnectivityService;
+import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
@@ -143,14 +143,14 @@ public class ControlActivity extends Activity {
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_on));
 	       			Globals.scanStatus = getString(R.string.scan_off);
-	       			stopService(new Intent(ControlActivity.this, WebsiteConnectivityService.class));
+	       			stopService(new Intent(ControlActivity.this, ConnectivityService.class));
 	       		}
 	       			
 	       		else{
 	       			scanButton.setText(getString(R.string.scan_text)
 		       				+" "+ getString(R.string.scan_off));
 	       			Globals.scanStatus = getString(R.string.scan_on);
-	       			startService(new Intent(ControlActivity.this, WebsiteConnectivityService.class));
+	       			startService(new Intent(ControlActivity.this, ConnectivityService.class));
 	       		}
 	       			
 	       		try {

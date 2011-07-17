@@ -46,7 +46,7 @@ import android.os.IBinder;
  * This is the WebsiteConnectivityService class which extends {@link Service}.
  */
 
-public class WebsiteConnectivityService extends Service {
+public class ConnectivityService extends Service {
 
 	private Timer timer = new Timer();
 	private ConnectivityManager connectivityManager;
