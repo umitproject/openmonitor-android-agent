@@ -64,6 +64,7 @@
     <string name="location_disabled">Error! Both GPS and Network Provider Disabled</string>
     <string name="retrieving_service">Retrieving Service</string>
     <string name="scan_complete">Scan Completed</string>
+    <string name="scan_complete_at">Scan Completed At:</string>
     <string name="scan_complete_id">:1</string>
     <string name="enable_twitter_button">Enable Twitter</string>
     <string name="disable_twitter_button">Disable Twitter</string>

@@ -19,6 +19,9 @@
         	<intent-filter>
             	<action android:name="org.umit.icm.mobile.NOTIFICATION_SERVICE" />            	
             </intent-filter>
+            <intent-filter>
+            	<action android:name="org.umit.icm.mobile.TWITTER_SERVICE" />            	
+            </intent-filter>
         </service>
         <activity android:name=".gui.ControlActivity">
             <intent-filter>

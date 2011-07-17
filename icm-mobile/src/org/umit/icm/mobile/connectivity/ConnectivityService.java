@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,8 +34,6 @@ import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.utils.Constants;
-
-import twitter4j.TwitterException;
 
 import android.app.Service;
 import android.content.Context;
@@ -119,23 +118,15 @@ public class ConnectivityService extends Service {
 						stopScanNotify();
 				}
 				Context context = getApplicationContext();
+				Calendar calendar = Calendar.getInstance();
 				NotificationHelper.sendNotification(
 						getString(R.string.scan_complete_id)
 						, getString(R.string.scan_complete)
 						, context);
-				try {											
-						Globals.twitterUpdate.sendTweet(getString(R.string.scan_complete));						
-				} catch (RuntimeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (TwitterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				Globals.twitterUpdate.sendTweet(
+						getString(R.string.scan_complete_at) + " "	
+						+ String.valueOf(calendar.getTime())
+						, context);								
 			}	
 		}, 0, interval * 1000); 
 	}

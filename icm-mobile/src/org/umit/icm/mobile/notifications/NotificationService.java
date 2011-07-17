@@ -21,8 +21,13 @@
 
 package org.umit.icm.mobile.notifications;
 
+import java.io.IOException;
+
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.gui.InformationActivity;
+import org.umit.icm.mobile.process.Globals;
+
+import twitter4j.TwitterException;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -73,7 +78,33 @@ public class NotificationService extends Service {
 		  };
 
 		registerReceiver(receiver
-				, new IntentFilter("org.umit.icm.mobile.NOTIFICATION_SERVICE"));		
+				, new IntentFilter("org.umit.icm.mobile.NOTIFICATION_SERVICE"));
+		
+		BroadcastReceiver twitterReceiver = new BroadcastReceiver() {
+			   
+			@Override
+			public void onReceive(Context context, Intent intent) {	
+				Bundle bundle = intent.getExtras();
+		        String message = bundle.getString("twitter");
+				if(intent.getAction().equals("org.umit.icm.mobile.TWITTER_SERVICE")) {
+					try {
+						Globals.twitterUpdate.sendTweet(message);
+					} catch (TwitterException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RuntimeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}	
+			      }				
+			}
+		  };
+
+		registerReceiver(twitterReceiver
+				, new IntentFilter("org.umit.icm.mobile.TWITTER_SERVICE"));	
 		
 	}
 	

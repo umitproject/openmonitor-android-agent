@@ -31,6 +31,7 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -47,10 +48,13 @@ public class TwitterUpdate {
 		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
 		Constants.TWITTER_CONSUMER_KEY_SECRET);
 		accessToken = null;
-		requestToken = null;
+		requestToken = null;		
 	}
 	
 	public void reset() {
+		twitter = new TwitterFactory().getInstance();
+		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
+		Constants.TWITTER_CONSUMER_KEY_SECRET);
 		accessToken = null;
 		requestToken = null;
 	}
@@ -80,5 +84,14 @@ public class TwitterUpdate {
 			SDCardReadWrite.writeAccessToken(Constants.KEYS_DIR, accessToken);
 		}
 	}
+	
+	public void sendTweet(String message, Context context) {		
+		Bundle bundle = new Bundle();	
+		bundle.putString("twitter"
+				, message);	        	
+		Intent intent = new Intent("org.umit.icm.mobile.TWITTER_SERVICE");
+		intent.putExtras(bundle);
+		context.sendBroadcast(intent);
+	}	
 	
 }
