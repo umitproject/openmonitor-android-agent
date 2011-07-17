@@ -40,8 +40,9 @@ import android.widget.EditText;
 
 public class TwitterDialog extends Dialog {
 	
-    EditText etEnable;
-    private Context context;          
+    private EditText etEnable;
+    private Context context;
+    private Button buttonSet, buttonEnable, buttonDisable;
     
     public TwitterDialog(Context context, String interval 
             ) {
@@ -54,13 +55,15 @@ public class TwitterDialog extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twitterdialog);
-        Button buttonSet = (Button) findViewById(R.id.pinButton);
+        buttonSet = (Button) findViewById(R.id.pinButton);
         buttonSet.setOnClickListener(new intervalListener());    
-        Button buttonEnable = (Button) findViewById(R.id.enableButton);
+        buttonEnable = (Button) findViewById(R.id.enableButton);
         buttonEnable.setOnClickListener(new enableListener());
-        Button buttonDisable = (Button) findViewById(R.id.disableButton);
+        buttonDisable = (Button) findViewById(R.id.disableButton);
         buttonDisable.setOnClickListener(new disableListener());    
-        etEnable = (EditText) findViewById(R.id.etPin);          
+        etEnable = (EditText) findViewById(R.id.etPin);         
+        etEnable.setVisibility(View.INVISIBLE);
+        buttonSet.setVisibility(View.INVISIBLE);
 		
     }
         
@@ -98,7 +101,11 @@ public class TwitterDialog extends Dialog {
 	  		 try {
 	  			Globals.runtimeParameters.setTwitter("Off");
 				Globals.twitterUpdate.reset();
-				Globals.twitterUpdate.requestToken(context);				
+				Globals.twitterUpdate.requestToken(context);
+				etEnable.setVisibility(View.VISIBLE);
+		        buttonSet.setVisibility(View.VISIBLE);
+		        buttonEnable.setVisibility(View.INVISIBLE);
+		        buttonDisable.setVisibility(View.INVISIBLE);
 			} catch (TwitterException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
