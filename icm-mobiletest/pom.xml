@@ -50,6 +50,7 @@
     <dependency>
       <groupId>org.umit.icm.mobile</groupId>
       <artifactId>icm-mobile</artifactId>
+      <scope>provided</scope>
       <type>apk</type>
       <version>1.0.0-test-maven</version>
     </dependency>
