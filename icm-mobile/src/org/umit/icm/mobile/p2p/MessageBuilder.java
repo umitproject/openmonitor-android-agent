@@ -21,16 +21,65 @@
 
 package org.umit.icm.mobile.p2p;
 
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
+/**
+ * Holds helper methods to generate a byte[] P2P message.
+ */
+
 public class MessageBuilder {
 	
-	 public static byte[] intToByteArray(int integer) {
+	/**
+	 * Returns the byte[] equivalent of an int
+	 *
+	 *
+	 
+	 @param integer Parameter of type int
+	 *
+	 
+	 @return byte[] 
+	 */
+	public static byte[] intToByteArray(int integer) {
 	        return new byte[] {
 	                (byte)(integer >>> 24),
 	                (byte)(integer >>> 16),
 	                (byte)(integer >>> 8),
-	                (byte)integer};
+	                (byte)integer
+	                };
 	 }
 	 
+	/**
+	 * Returns the int equivalent of a byte[]
+	 *
+	 *
+	 
+	 @param byteArray Parameter of type byte[]
+	 *
+	 
+	 @return int 
+	 */
+	 public static int byteArrayToInt(byte[] byteArray) {
+	        return    ((byteArray[0] << 24)
+	                + ((byteArray[1] & 0xFF) << 16)
+	                + ((byteArray[2] & 0xFF) << 8)
+	                + (byteArray[3] & 0xFF)
+	                );
+	}
+	 
+	/**
+	 * Returns a byte[] which is a concatenation of the input byte arrays.
+	 *
+	 *
+	 
+	 @param arrayA Parameter of type byte[]
+	 *
+	 
+	 @param arrayB Parameter of type byte[]
+	 *
+	 
+	 @return byte[] 
+	 */
 	 public static byte[] byteArrayAppend(byte[] arrayA, byte[] arrayB) {
 		 byte[] newArray = new byte[arrayA.length + arrayB.length];
 		 int offset = 0;
