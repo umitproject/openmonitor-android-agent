@@ -21,9 +21,6 @@
 
 package org.umit.icm.mobile.p2p;
 
-import java.security.PrivateKey;
-import java.security.PublicKey;
-
 /**
  * Holds helper methods to generate a byte[] P2P message.
  */
