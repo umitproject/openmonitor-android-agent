@@ -78,16 +78,9 @@ public class MessageBuilder {
 	 @return byte[] 
 	 */
 	 public static byte[] byteArrayAppend(byte[] arrayA, byte[] arrayB) {
-		 byte[] newArray = new byte[arrayA.length + arrayB.length];
-		 int offset = 0;
-		 for (int i = 0 ; i < arrayA.length ; i++) {
-			 newArray[i] = arrayA[i];
-			 offset++;
-		 }		 
-		 for (int i = 0 ; i < arrayB.length ; i++) {
-			 newArray[offset] = arrayB[i];
-			 offset++;
-		 }
+		 byte[] newArray = new byte[arrayA.length + arrayB.length];		 		 		 
+		 System.arraycopy(arrayA, 0, newArray, 0, arrayA.length);
+		 System.arraycopy(arrayB, 0, newArray, arrayA.length, arrayB.length);		
 		 return newArray;
 	 }
 }
