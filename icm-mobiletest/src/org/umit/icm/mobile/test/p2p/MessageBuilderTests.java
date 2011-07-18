@@ -33,5 +33,34 @@ public class MessageBuilderTests extends AndroidTestCase {
 		int integer = 35;
 		byte[] byteArray = MessageBuilder.intToByteArray(integer);
 		Assert.assertEquals(integer, MessageBuilder.byteArrayToInt(byteArray));
-	}	
+	}
+	
+	public void testByteArrayAppend() throws Throwable {
+		byte[] arrayA = new byte[2];
+		byte[] arrayB = new byte[2];
+		byte[] arrayC = new byte[4];
+		
+		arrayA[0] = (byte) 1;
+		arrayA[1] = (byte) 2;
+		arrayB[0] = (byte) 3;
+		arrayB[1] = (byte) 4;
+		
+		arrayC[0] = (byte) 1;
+		arrayC[1] = (byte) 2;
+		arrayC[2] = (byte) 3;
+		arrayC[3] = (byte) 4;
+
+		Assert.assertEquals(arrayC.length, arrayA.length + arrayB.length);
+		Assert.assertTrue(byteArrayEquals(arrayC, MessageBuilder.byteArrayAppend(arrayA, arrayB)));
+	}
+	
+	private boolean byteArrayEquals(byte[] arrayA, byte[] arrayB) {
+		if(arrayA.length != arrayB.length)
+			return false;
+		for(int i = 0; i < arrayA.length ; i++) {
+			if(arrayA[i] != arrayB[i])
+				return false;
+		}
+		return true;					
+	}
 }
