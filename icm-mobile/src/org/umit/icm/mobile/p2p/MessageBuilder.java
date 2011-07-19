@@ -83,4 +83,35 @@ public class MessageBuilder {
 		 System.arraycopy(arrayB, 0, newArray, arrayA.length, arrayB.length);		
 		 return newArray;
 	 }
+	 
+	 /**
+		 * Returns a byte[] which is a concatenation of the three input byte arrays.
+		 *
+		 *
+		 
+		 @param arrayA Parameter of type byte[]
+		 *
+		 
+		 @param arrayB Parameter of type byte[]
+		 *
+		 
+		 @param arrayC Parameter of type byte[]
+		 *
+		 		 
+		 @return byte[] 
+		 */
+		 public static byte[] byteArrayAppendThree(byte[] arrayA, byte[] arrayB, byte[] arrayC) {
+			 byte[] newArray = new byte[arrayA.length + arrayB.length + arrayC.length];		 		 		 
+			 System.arraycopy(arrayA, 0, newArray, 0, arrayA.length);
+			 System.arraycopy(arrayB, 0, newArray, arrayA.length, arrayB.length);
+			 System.arraycopy(arrayC, 0, newArray, arrayA.length + arrayB.length, arrayC.length);
+			 return newArray;
+		 }
+	 
+	 public static byte[] generateMessage(int id, byte[] message) {
+		 byte[] idByte = intToByteArray(id);
+		 int length = (idByte.length) * 2 + message.length;
+		 byte[] lengthByte = intToByteArray(length);
+		 return byteArrayAppendThree(lengthByte, idByte, message);		 
+	 }
 }
