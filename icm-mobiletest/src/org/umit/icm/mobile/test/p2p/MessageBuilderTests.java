@@ -54,6 +54,31 @@ public class MessageBuilderTests extends AndroidTestCase {
 		Assert.assertTrue(byteArrayEquals(arrayC, MessageBuilder.byteArrayAppend(arrayA, arrayB)));
 	}
 	
+	public void testByteArrayAppendThree() throws Throwable {
+		byte[] arrayA = new byte[2];
+		byte[] arrayB = new byte[2];
+		byte[] arrayC = new byte[2];
+		byte[] arrayD = new byte[6];
+		
+		arrayA[0] = (byte) 1;
+		arrayA[1] = (byte) 2;
+		arrayB[0] = (byte) 3;
+		arrayB[1] = (byte) 4;
+		arrayC[0] = (byte) 5;
+		arrayC[1] = (byte) 6;
+		
+		arrayD[0] = (byte) 1;
+		arrayD[1] = (byte) 2;
+		arrayD[2] = (byte) 3;
+		arrayD[3] = (byte) 4;
+		arrayD[4] = (byte) 5;
+		arrayD[5] = (byte) 6;
+
+		Assert.assertEquals(arrayD.length, arrayA.length + arrayB.length + arrayC.length);
+		Assert.assertTrue(byteArrayEquals(arrayD, MessageBuilder.byteArrayAppendThree(arrayA, arrayB, arrayC)));
+	}
+	
+	
 	private boolean byteArrayEquals(byte[] arrayA, byte[] arrayB) {
 		if(arrayA.length != arrayB.length)
 			return false;
