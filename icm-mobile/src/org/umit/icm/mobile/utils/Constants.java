@@ -38,9 +38,10 @@ public class Constants {
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
 	public static int AES_KEY_SIZE = 128;
-	public static String KEYS_DIR = "/keys";
-	public static String PARAMETERS_DIR = "/params";
-	public static String VERSIONS_DIR = "/versions";
+	public static String ICM_ROOT_DIR = "/icm-mobile";
+	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
+	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
+	public static String VERSIONS_DIR = ICM_ROOT_DIR + "/versions";
 	public static String INTERVAL_FILE = "interval.param";
 	public static String TOKEN_FILE = "token.param";
 	public static String AGENTID_FILE = "agentid.param";
@@ -54,15 +55,15 @@ public class Constants {
 	public static int DEFAULT_SCAN_INTERVAL = 10;
 	public static String DEFAULT_SCAN_STATUS = "On";
 	public static String DEFAULT_TWITTER_STATUS = "On";
-	public static String WEBSITES_DIR = "/websites";
+	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";
 	public static String WEBSITE_FILE = "-site.web";
 	public static String WEBSITES_LIST_FILE = "websites.list";
-	public static String SERVICES_DIR = "/services";
+	public static String SERVICES_DIR = ICM_ROOT_DIR + "/services";
 	public static String SERVICE_FILE = ".service";
-	public static String PROFILER_DIR = "/profiler";
+	public static String PROFILER_DIR = ICM_ROOT_DIR + "/profiler";
 	public static String PROFILER_FILE = "profile.csv";
 	public static String SERVICES_LIST_FILE = "services.list";
-	public static String TESTS_DIR = "/tests";
+	public static String TESTS_DIR = ICM_ROOT_DIR + "/tests";
 	public static String TESTS_FILE = "tests.test";
 	public static List<String> WEBSITE_LIST = new ArrayList<String>()
 	{  /**
