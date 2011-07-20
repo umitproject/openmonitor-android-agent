@@ -92,11 +92,27 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
 			
 				websiteContent = WebsiteOpen.getContent(urlConnection);
+				Globals.tcpClientConnectivity.openConnection(
+						currentURL.substring(7)
+						, ServiceHTTP.getService().getPorts().get(0));
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));				
+				if(!Globals.tcpClientConnectivity.readBytes().equals(null))
+					Log.w("#####bytes: " +currentURL , "bytes");
+				Globals.tcpClientConnectivity.closeConnection();
 			} else {
 				String newURL = websiteHeader.get("location");
 				urlConnection = WebsiteOpen.openURLConnection(newURL);
 				
 				websiteContent = WebsiteOpen.getContent(urlConnection);
+				Globals.tcpClientConnectivity.openConnection(
+						newURL.substring(7)
+						, ServiceHTTPS.getService().getPorts().get(0));
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));				
+				if(!Globals.tcpClientConnectivity.readBytes().equals(null))
+					Log.w("#####bytes: " +newURL , "bytes");
+				Globals.tcpClientConnectivity.closeConnection();
 			}
 				try {
 				websiteReport = (WebsiteReport) clean(currentURL
