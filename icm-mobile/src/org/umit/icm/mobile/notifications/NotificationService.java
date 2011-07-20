@@ -39,6 +39,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.widget.Toast;
 
 /**
  * The Notification Service which notifies the user of any event.
@@ -91,7 +92,10 @@ public class NotificationService extends Service {
 						Globals.twitterUpdate.sendTweet(message);
 					} catch (TwitterException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						String text = "Twitter: " + e.getErrorMessage();
+			        	int duration = Toast.LENGTH_LONG;
+			    		Toast toast = Toast.makeText(context, text, duration);
+			    		toast.show();						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
