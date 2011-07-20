@@ -39,6 +39,9 @@ public class ServicePackets {
 	public static String HTTP_GET 
 	= "GET / HTTP/1.1\r\n\r\n";
 	
+	public static String HTTP_GET_DETAILED 
+	= "GET / HTTP/1.1..User-Agent: Java0..Host: www.google.com..Connection: Keep-Alive..\r\n\r\n";
+	
 	/**
 	 * Returns a byte[] object. Takes as parameter a {@link String} and returns 
 	 * a byte[] of the same size as the {@link String} but with random bytes.
@@ -57,6 +60,7 @@ public class ServicePackets {
 	}
 	
 	public static void populateServicesMap() {
-		Globals.servicePacketsMap.put("http", HTTP_GET);
+		Globals.servicePacketsMap.put("http_old", HTTP_GET);
+		Globals.servicePacketsMap.put("http", HTTP_GET_DETAILED);
 	}
 }
