@@ -80,9 +80,9 @@ public class Constants {
 		add("http://www.cnn.com");
 		add("http://www.bbc.com");
 		add("http://www.gmail.com");
-		add("http://www.umitproject.org/");
-		add("http://www.flickr.com/");
-		add("http://www.hotmail.com/");
+		add("http://www.umitproject.org");
+		add("http://www.flickr.com");
+		add("http://www.hotmail.com");
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
