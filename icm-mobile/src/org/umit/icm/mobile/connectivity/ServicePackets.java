@@ -23,6 +23,8 @@ package org.umit.icm.mobile.connectivity;
 
 import java.util.Random;
 
+import org.umit.icm.mobile.process.Globals;
+
 
 /**
  * This is the ServicePackets class. Holds {@link String} packets of different
@@ -52,5 +54,9 @@ public class ServicePackets {
 		byte[] byteArray = new byte[str.length()];
 		new Random().nextBytes(byteArray);
 		return byteArray;
+	}
+	
+	public static void populateServicesMap() {
+		Globals.servicePacketsMap.put("http", HTTP_GET);
 	}
 }

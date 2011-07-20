@@ -132,7 +132,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				ServiceHTTP.getService().getIp()
 				, ServiceHTTP.getService().getPorts().get(0));
 		Globals.tcpClientConnectivity.writeLine(
-				ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
 		serviceResponseBytes
 		= Globals.tcpClientConnectivity.readBytes();
 		if(!serviceResponseBytes.equals(null))

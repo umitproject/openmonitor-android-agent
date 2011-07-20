@@ -23,8 +23,10 @@ package org.umit.icm.mobile.process;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.ServiceConnectivity;
@@ -212,4 +214,7 @@ public class Globals {
 	 */
 	public static ServiceConnectivity serviceTest 
 	= new ServiceConnectivity();
+	
+	public static Map<String, String> servicePacketsMap 
+	= new HashMap <String, String>();
 }
