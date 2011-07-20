@@ -90,28 +90,41 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 			
 			if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
-			
+				long startTimeContent = System.nanoTime();
 				websiteContent = WebsiteOpen.getContent(urlConnection);
+				long elapsedTimeContent = System.nanoTime() - startTimeContent;
 				Globals.tcpClientConnectivity.openConnection(
 						currentURL.substring(7)
 						, ServiceHTTP.getService().getPorts().get(0));
+				long startTimeBytes = System.nanoTime();
 				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));				
-				if(!Globals.tcpClientConnectivity.readBytes().equals(null))
+						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
+				byte[] responseBytes = Globals.tcpClientConnectivity.readBytes();
+				long elapsedTimeBytes = System.nanoTime() - startTimeBytes;				
+				if(!responseBytes.equals(null)) {					
 					Log.w("#####bytes: " +currentURL , "bytes");
+					checkThrottling(responseBytes, elapsedTimeBytes
+							, websiteContent, elapsedTimeContent);
+				}					
 				Globals.tcpClientConnectivity.closeConnection();
 			} else {
 				String newURL = websiteHeader.get("location");
 				urlConnection = WebsiteOpen.openURLConnection(newURL);
-				
+				long startTimeContent = System.nanoTime();
 				websiteContent = WebsiteOpen.getContent(urlConnection);
+				long elapsedTimeContent = System.nanoTime() - startTimeContent;				
 				Globals.tcpClientConnectivity.openConnection(
 						newURL.substring(7)
 						, ServiceHTTPS.getService().getPorts().get(0));
+				long startTimeBytes = System.nanoTime();
 				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));				
-				if(!Globals.tcpClientConnectivity.readBytes().equals(null))
-					Log.w("#####bytes: " +newURL , "bytes");
+						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
+				byte[] responseBytes = Globals.tcpClientConnectivity.readBytes();
+				long elapsedTimeBytes = System.nanoTime() - startTimeBytes;		
+				if(!responseBytes.equals(null)) {					
+					checkThrottling(responseBytes, elapsedTimeBytes
+							, websiteContent, elapsedTimeContent);
+				}
 				Globals.tcpClientConnectivity.closeConnection();
 			}
 				try {
@@ -190,6 +203,12 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setHtmlMedia(ByteString.copyFromUtf8("media"))
 		.build();
 		return websiteReport;
+	}
+	
+	private void checkThrottling(byte[] byteResponse, long byteTime,
+			String stringResponse, long stringTime) {
+		long byteThroughput = byteResponse.length / byteTime;
+		long stringThroughput = stringResponse.getBytes().length / stringTime;
 	}
 		
 }
