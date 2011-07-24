@@ -62,6 +62,15 @@ public class ConnectivityService extends Service {
 		super.onCreate();
 		connectivityManager
 	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		try {
+			Globals.initializeRequestHeader();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		startScan();
 	}
 	
