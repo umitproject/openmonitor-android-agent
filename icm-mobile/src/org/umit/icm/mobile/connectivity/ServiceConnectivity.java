@@ -125,34 +125,37 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void HTTPScan() throws UnknownHostException, IOException {
 		String HTTPResponse = ServiceHTTP.connect();
-		Log.w("######httpResponse", HTTPResponse);
-		byte[] serviceResponseBytes = null;
-		ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
-		Globals.tcpClientConnectivity.openConnection(
-				ServiceHTTP.getService().getIp()
-				, ServiceHTTP.getService().getPorts().get(0));
-		Globals.tcpClientConnectivity.writeLine(
-				ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-		serviceResponseBytes
-		= Globals.tcpClientConnectivity.readBytes();
-		if(!serviceResponseBytes.equals(null))
-			Log.w("#####bytes", "bytes");
-		Globals.tcpClientConnectivity.closeConnection();
-		
-			try {
-			serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
-						, HTTPResponse, serviceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReport);						
-					
-			Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
-			Log.w("######name", serviceReport.getReport().getServiceName());
-			Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-		}	catch (IOException e) {
-				e.printStackTrace();
-		}	
+		if(!HTTPResponse.equals(null)) {
+			Log.w("######httpResponse", HTTPResponse);
+			byte[] serviceResponseBytes = null;
+			ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
+			Globals.tcpClientConnectivity.openConnection(
+					ServiceHTTP.getService().getIp()
+					, ServiceHTTP.getService().getPorts().get(0));
+			Globals.tcpClientConnectivity.writeLine(
+					ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
+			serviceResponseBytes
+			= Globals.tcpClientConnectivity.readBytes();
+			if(!serviceResponseBytes.equals(null))
+				Log.w("#####bytes", "bytes");
+			Globals.tcpClientConnectivity.closeConnection();
+			
+				try {
+				serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
+							, HTTPResponse, serviceResponseBytes);
+					SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+							, serviceReport);						
+						
+				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
+				Log.w("######name", serviceReport.getReport().getServiceName());
+				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+			}	catch (IOException e) {
+					e.printStackTrace();
+			}
+		}
+			
 		
 	}
 	

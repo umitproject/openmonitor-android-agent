@@ -77,7 +77,7 @@ public class ServiceHTTP {
 		      return new String(byteArrayOutputStream.toByteArray());
 		  }
 		  catch (IOException e) {
-			     Log.w("####", e.getLocalizedMessage());
+			     Log.w("ServiceHTTPException: ", e.getLocalizedMessage());
 			     return null;
 		}
 	}
