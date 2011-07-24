@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.p2p;
 
+import android.util.Log;
+
 /**
  * Holds helper methods to generate a byte[] P2P message.
  */
@@ -110,8 +112,11 @@ public class MessageBuilder {
 	 
 	 public static byte[] generateMessage(int id, byte[] message) {
 		 byte[] idByte = intToByteArray(id);
-		 int length = (idByte.length) * 2 + message.length;
+		 int length = idByte.length + message.length;
 		 byte[] lengthByte = intToByteArray(length);
-		 return byteArrayAppendThree(lengthByte, idByte, message);		 
+		 Log.w("###length", Integer.toString(byteArrayToInt(lengthByte)));
+		 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 return byteArrayAppendThree(lengthByte, idByte, message);
+		 
 	 }
 }
