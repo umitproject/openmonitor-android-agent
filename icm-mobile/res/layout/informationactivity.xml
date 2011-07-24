@@ -43,6 +43,7 @@
 		    android:layout_below="@id/IMCTextView" 
 		    android:text="@string/flip_services"
 		    android:clickable="true"
+		    android:textSize="20sp"
 		    android:id="@+id/goToServices"/>
 		    
 		<ListView 
@@ -68,6 +69,7 @@
 		    android:layout_height="wrap_content"	     
 		    android:text="@string/flip_websites"
 		    android:clickable="true"
+		    android:textSize="20sp"
 		    android:id="@+id/goToWebsites"/>
 		    
 		<ListView 
