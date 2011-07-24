@@ -156,7 +156,7 @@ public class ProfilerRun {
 				
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(10)
-				.setReportID(10)
+				.setReportID(Integer.toString(10))
 				.setTestID(10)
 				.setTimeUTC(10)
 				.setTimeZone(10)
@@ -349,6 +349,8 @@ public class ProfilerRun {
 				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
 				.setBandwidth(10)
 				.setResponseTime(10)
+				.setRedirectLink("link")
+				.setHtmlResponse("response")
 				.setStatusCode(10)
 				.setWebsiteURL("url")
 				.build();
@@ -368,19 +370,17 @@ public class ProfilerRun {
 				
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(10)
-				.setReportID(10)
+				.setReportID(Integer.toString(10))
 				.setTestID(10)
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
-				.addPassedNode("node1")
+				.addPassedNode("node1")				
 				.build();
 				
 				WebsiteReport websiteReport = WebsiteReport.newBuilder()
-				.setHeader(icmReport)
-				.setHtmlResponse("response")
-				.setReport(websiteReportDetail)
-				.setRedirectLink("link")			
+				.setHeader(icmReport)				
+				.setReport(websiteReportDetail)						
 				.build();
 				}
 			
@@ -452,7 +452,7 @@ public class ProfilerRun {
 				
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(10)
-				.setReportID(10)
+				.setReportID(Integer.toString(10))
 				.setTestID(10)
 				.setTimeUTC(10)
 				.setTimeZone(10)
@@ -831,7 +831,7 @@ public class ProfilerRun {
 				
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(10)
-				.setReportID(10)
+				.setReportID(Integer.toString(10))
 				.setTestID(10)
 				.setTimeUTC(10)
 				.setTimeZone(10)
@@ -901,7 +901,7 @@ public class ProfilerRun {
 				
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(10)
-				.setReportID(10)
+				.setReportID(Integer.toString(10))
 				.setTestID(10)
 				.setTimeUTC(10)
 				.setTimeZone(10)

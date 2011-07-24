@@ -89,7 +89,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		listNodes.add("node1");
 		listNodes.add("node2");
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(IDGenerator.generateReportID())
+		.setReportID(Long.toString(IDGenerator.generateReportID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)

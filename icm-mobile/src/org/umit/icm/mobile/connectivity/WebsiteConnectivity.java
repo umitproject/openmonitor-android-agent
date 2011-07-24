@@ -132,11 +132,14 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 							, websiteContent, websiteHeader);
 					SDCardReadWrite.writeWebsiteReport
 					(Constants.WEBSITES_DIR, websiteReport);
-				if (websiteReport.getHtmlResponse().length()!=0) {
-					if(websiteReport.getHtmlResponse().length()>100)
-						Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, 100));
+				if (websiteReport.getReport().getHtmlResponse().length()!=0) {
+					if(websiteReport.getReport().getHtmlResponse().length()>100)
+						Log.w("#####Content"
+								, websiteReport.getReport().getHtmlResponse().substring(1, 100));
 					else
-						Log.w("#####Content", websiteReport.getHtmlResponse().substring(1, websiteReport.getHtmlResponse().length()));
+						Log.w("#####Content"
+								, websiteReport.getReport().getHtmlResponse().substring(1
+										, websiteReport.getReport().getHtmlResponse().length()));
 				}
 						
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
@@ -179,7 +182,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		listNodes.add("node1");
 		listNodes.add("node2");
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(IDGenerator.generateReportID())
+		.setReportID(Long.toString(IDGenerator.generateReportID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)
@@ -193,14 +196,14 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setBandwidth(0)
 		.setResponseTime(0)
 		.setStatusCode(statusCode)
+		.setHtmlResponse(websiteContent)
 		.setWebsiteURL(websiteURL)
+		.setHtmlMedia(ByteString.copyFromUtf8("media"))
 		.build();
 		
-		WebsiteReport websiteReport = WebsiteReport.newBuilder()
-		.setHtmlResponse(websiteContent)
+		WebsiteReport websiteReport = WebsiteReport.newBuilder()		
 		.setReport(websiteReportDetail)
-		.setHeader(icmReport)
-		.setHtmlMedia(ByteString.copyFromUtf8("media"))
+		.setHeader(icmReport)	
 		.build();
 		return websiteReport;
 	}
