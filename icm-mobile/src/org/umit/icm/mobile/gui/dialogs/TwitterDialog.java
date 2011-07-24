@@ -42,7 +42,7 @@ public class TwitterDialog extends Dialog {
 	
     private EditText etEnable;
     private Context context;
-    private Button buttonSet, buttonEnable, buttonDisable;
+    private Button buttonSet;
     
     public TwitterDialog(Context context, String interval 
             ) {
@@ -56,14 +56,30 @@ public class TwitterDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twitterdialog);
         buttonSet = (Button) findViewById(R.id.pinButton);
-        buttonSet.setOnClickListener(new intervalListener());    
-        buttonEnable = (Button) findViewById(R.id.enableButton);
-        buttonEnable.setOnClickListener(new enableListener());
-        buttonDisable = (Button) findViewById(R.id.disableButton);
-        buttonDisable.setOnClickListener(new disableListener());    
+        buttonSet.setOnClickListener(new intervalListener());                                
         etEnable = (EditText) findViewById(R.id.etPin);         
-        etEnable.setVisibility(View.INVISIBLE);
-        buttonSet.setVisibility(View.INVISIBLE);
+        try {
+			Globals.runtimeParameters.setTwitter("Off");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Globals.twitterUpdate.reset();
+		try {
+			Globals.twitterUpdate.requestToken(context);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		
     }
         
@@ -91,55 +107,6 @@ public class TwitterDialog extends Dialog {
 					        	                 		
 		}			
 
-    }
-    
-    private class enableListener implements android.view.View.OnClickListener {
-
-		@Override
-		public void onClick(View arg0) {
-			
-	  		 try {
-	  			Globals.runtimeParameters.setTwitter("Off");
-				Globals.twitterUpdate.reset();
-				Globals.twitterUpdate.requestToken(context);
-				etEnable.setVisibility(View.VISIBLE);
-		        buttonSet.setVisibility(View.VISIBLE);
-		        buttonEnable.setVisibility(View.INVISIBLE);
-		        buttonDisable.setVisibility(View.INVISIBLE);
-			} catch (TwitterException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-					        	                 		
-		}			
-
-    }
-    
-    private class disableListener implements android.view.View.OnClickListener {
-
-		@Override
-		public void onClick(View arg0) {
-		
-			try {
-				Globals.runtimeParameters.setTwitter("Off");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			TwitterDialog.this.dismiss();
-					        	                 		
-		}			
-
-    }        
+    }    
     
 }

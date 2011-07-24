@@ -68,6 +68,19 @@ public class ControlActivity extends Activity {
         enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
+		try {
+			if(Globals.runtimeParameters.getTwitter().equals("Off")) {
+				enableTwitterButton.setText(getString(R.string.enable_twitter_button));
+			} else {
+				enableTwitterButton.setText(getString(R.string.disable_twitter_button));
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (RuntimeException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		BroadcastReceiver receiver = new BroadcastReceiver() {
 		   
@@ -93,10 +106,25 @@ public class ControlActivity extends Activity {
 	    }  );
         
         enableTwitterButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       		
-	       		TwitterDialog twitterDialog = 
-	       			new TwitterDialog(ControlActivity.this, "");
-	       		twitterDialog.show();	       
+	       	public void onClick(View v) {  
+	       		try {
+					if(Globals.runtimeParameters.getTwitter().equals("Off")) {
+						TwitterDialog twitterDialog = 
+							new TwitterDialog(ControlActivity.this, "");
+						twitterDialog.show();	     
+						enableTwitterButton.setText(getString(R.string.disable_twitter_button));
+					} else {
+						Globals.runtimeParameters.setTwitter("Off");
+						enableTwitterButton.setText(getString(R.string.enable_twitter_button));
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	       		  
 	       	}
 
 	    }  );
