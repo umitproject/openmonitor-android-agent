@@ -257,16 +257,21 @@ public class ControlActivity extends Activity {
         	.setHeader(Globals.requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
-        	try {
-				if(AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion))
-					return "true";
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	
+				try {
+					if(AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion))
+						return "true";
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
         	return "false";
 		}
 			
@@ -292,16 +297,21 @@ public class ControlActivity extends Activity {
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();
-        	try {
-				if(AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion))
-					return "true";
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	
+				try {
+					if(AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion))
+						return "true";
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
         	return "false";
 		}
 			
