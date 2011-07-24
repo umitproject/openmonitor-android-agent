@@ -53,7 +53,7 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
-	enableTwitterButton;
+	enableTwitterButton;	
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -297,6 +297,6 @@ public class ControlActivity extends Activity {
         	return "true";			 						
 		}
 			
-    }
+    }    
       	 
 }
