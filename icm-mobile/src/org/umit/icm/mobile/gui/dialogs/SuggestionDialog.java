@@ -108,7 +108,9 @@ public class SuggestionDialog extends Dialog {
     	    					&& (etIP.getText().toString().equals(""))){
 	    	    			readyListener.ready(wRB.getText() 
 	    	    	    			+ "&" + etSuggest.getText().toString() 
-	    	    	    			+ "&" + etEmail.getText().toString());
+	    	    	    			+ "&" + etEmail.getText().toString()    	    				    	    			
+	    	    	    			+ "&" + "host" 
+	    	    					+ "&" + "ip");
 	    	                SuggestionDialog.this.dismiss(); 
     	    			} else {
     	    				CharSequence text = context.getString(R.string.remove_host_ip);
