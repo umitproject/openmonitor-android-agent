@@ -22,17 +22,17 @@
 package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
-//import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
@@ -251,19 +251,23 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {	
-			RequestHeader requestHeader
-			= RequestHeader.newBuilder()
-			.setAgentID(1)
-			.setToken("1")
-			.build();
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
         	.setEmailAddress(args[0])
-        	.setHeader(requestHeader)
+        	.setHeader(Globals.requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
-        	//return AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion);
-        	return "true";			 						
+        	try {
+				if(AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion))
+					return "true";
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	return "false";
 		}
 			
     }  
@@ -280,21 +284,25 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
-			RequestHeader requestHeader
-			= RequestHeader.newBuilder()
-			.setAgentID(1)
-			.setToken("1")
-			.build();
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
         	.setEmailAddress(args[0])
         	.setServiceName(args[1])
-        	.setHeader(requestHeader)
+        	.setHeader(Globals.requestHeader)
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();
-        	//AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion);
-        	return "true";			 						
+        	try {
+				if(AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion))
+					return "true";
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	return "false";
 		}
 			
     }    
