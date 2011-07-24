@@ -21,17 +21,32 @@
 
 package org.umit.icm.mobile.test.aggregator;
 
+import java.io.IOException;
+
 import junit.framework.Assert;
 
 import org.umit.icm.mobile.aggregator.AggregatorActions;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.*;
+import org.umit.icm.mobile.utils.AESCrypto;
 
 import android.test.AndroidTestCase;
 
 
 public class AggregatorActionsTests extends AndroidTestCase {
-
+	
+	protected void setUp() {
+		try {
+			Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     public void testRegisterAgent() throws Throwable {
     	ResponseHeader responseHeader = ResponseHeader.newBuilder()
     	.setCurrentTestVersionNo(20)
