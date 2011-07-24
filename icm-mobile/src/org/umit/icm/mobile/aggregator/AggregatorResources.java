@@ -99,7 +99,7 @@ public class AggregatorResources {
 	 public static RegisterAgentResponse registerAgent(
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {		 		 
+	 throws UnsupportedEncodingException, IOException, RuntimeException {		 		 
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
@@ -134,7 +134,7 @@ public class AggregatorResources {
 	 public static GetPeerListResponse getPeerList(
 			 GetPeerList getPeerList, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
@@ -169,7 +169,7 @@ public class AggregatorResources {
 	 public static GetSuperPeerListResponse getSuperPeerList(
 			 GetSuperPeerList getSuperPeerList, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
@@ -204,7 +204,7 @@ public class AggregatorResources {
 	 public static GetEventsResponse getEvents(
 			 GetEvents getEvents, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getEvents.toByteArray())));
@@ -239,7 +239,7 @@ public class AggregatorResources {
 	 public static SendReportResponse sendWebsiteReport(
 			 SendWebsiteReport sendWebsiteReport, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
@@ -274,7 +274,7 @@ public class AggregatorResources {
 	 public static SendReportResponse sendServiceReport(
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(sendServiceReport.toByteArray())));
@@ -309,7 +309,7 @@ public class AggregatorResources {
 	 public static NewVersionResponse checkVersion(
 			 NewVersion newVersion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(newVersion.toByteArray())));
@@ -344,7 +344,7 @@ public class AggregatorResources {
 	 public static NewTestsResponse checkTests(
 			 NewTests newTests, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(newTests.toByteArray())));
@@ -379,7 +379,7 @@ public class AggregatorResources {
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));		 		 		 
@@ -414,7 +414,7 @@ public class AggregatorResources {
 	 public static TestSuggestionResponse sendServiceSuggestion(
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException {
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));		 		 		 
