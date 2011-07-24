@@ -92,11 +92,10 @@ public class MessageBuilderTests extends AndroidTestCase {
 		byte[] message = MessageBuilder.generateMessage(id, arrayD);
 		
 		byte[] byteID = MessageBuilder.intToByteArray(id);
-		byte[] bytelength = MessageBuilder.intToByteArray(14);
+		byte[] bytelength = MessageBuilder.intToByteArray(10);
 		
 		byte[] message2 = MessageBuilder.byteArrayAppendThree(bytelength, byteID, arrayD);
-		Assert.assertEquals(message.length, arrayD.length + 8);
-		
+		Assert.assertEquals(message.length, arrayD.length + 8);		
 		Assert.assertTrue(byteArrayEquals(message, message2));
 	}
 		

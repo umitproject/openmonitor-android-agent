@@ -34,6 +34,7 @@ public class MessageQTests extends AndroidTestCase {
 	public void testMessageQ() throws Throwable {
 		AgentData agent1 = AgentData.newBuilder()
 		.setAgentIP("IP1")
+		.setAgentID("ID1")
 		.setAgentPort(11)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey1")
@@ -42,6 +43,7 @@ public class MessageQTests extends AndroidTestCase {
 		
 		AgentData agent2 = AgentData.newBuilder()
 		.setAgentIP("IP2")
+		.setAgentID("ID2")
 		.setAgentPort(12)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey2")
@@ -50,6 +52,7 @@ public class MessageQTests extends AndroidTestCase {
 		
 		AgentData agent3 = AgentData.newBuilder()
 		.setAgentIP("IP3")
+		.setAgentID("ID3")
 		.setAgentPort(13)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey3")
