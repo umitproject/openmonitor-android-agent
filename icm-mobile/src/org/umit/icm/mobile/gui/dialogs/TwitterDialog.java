@@ -64,9 +64,7 @@ public class TwitterDialog extends Dialog {
         progressDialog = ProgressDialog.show(context, 
         		context.getString(R.string.loading)	, context.getString(R.string.retrieving_website)
         		, true, false);
-        new LaunchBrowser().execute();
-        
-        
+        new LaunchBrowser().execute();                
     }
         
     private class intervalListener implements android.view.View.OnClickListener {

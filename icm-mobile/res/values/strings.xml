@@ -71,4 +71,6 @@
     <string name="change_twitter_status">Change Twitter Status</string>
     <string name="enter_pin">Enter Pin</string>
     <string name="enable_pin">Enable Pin</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Unselect All</string>
 </resources>

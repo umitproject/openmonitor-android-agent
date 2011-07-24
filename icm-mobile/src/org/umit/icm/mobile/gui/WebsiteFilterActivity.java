@@ -44,7 +44,7 @@ import android.widget.ListView;
 public class WebsiteFilterActivity extends Activity{
    	
 	private ListView listView;	
-	Button backButton;
+	Button backButton, selectAllButton, unselectAllButton;
 	private WebsiteTextCheckboxAdapter websiteTextCheckboxAdapter;	
 	private List<WebsiteTextCheckbox> listWebsitesCheckbox;
 	private String currentURL;
@@ -94,6 +94,33 @@ public class WebsiteFilterActivity extends Activity{
 	       	}
 
 	   	}  );
+        
+        selectAllButton = (Button) findViewById(R.id.selectAllButton);        
+        selectAllButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	   
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
+	       		= listWebsitesCheckbox.iterator();	  	       		
+	       		while(iteratorCheck.hasNext()) {
+	       			iteratorCheck.next().setCheck(true);	       			
+	       		}
+	       		websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
+	            listView.setAdapter(websiteTextCheckboxAdapter);
+	       	}
+	   	}  );
+        
+        unselectAllButton = (Button) findViewById(R.id.unselectAllButton);        
+        unselectAllButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	   
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
+	       		= listWebsitesCheckbox.iterator();	  	       		
+	       		while(iteratorCheck.hasNext()) {
+	       			iteratorCheck.next().setCheck(false);	       			
+	       		}
+	       		websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
+	            listView.setAdapter(websiteTextCheckboxAdapter);	
+	       	}
+	   	}  );
+
                     
         listView = (ListView)findViewById(R.id.ListView01);
         websiteTextCheckboxAdapter 
