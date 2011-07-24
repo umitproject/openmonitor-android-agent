@@ -32,6 +32,7 @@ import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -83,7 +84,8 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try {
+	        try { /*Register Agent should be called here*/
+	        	Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
 				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
 						, Constants.PARAMETERS_DIR) == false) 
 					|| (SDCardReadWrite.fileNotEmpty(Constants.INTERVAL_FILE
@@ -131,14 +133,21 @@ public class Main extends TabActivity {
 				}							
 				if(Constants.runProfiler == true)
 					ProfilerRun.run();
-				Globals.scanStatus = getString(R.string.scan_on);
+				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();
 				startService(new Intent(Main.this, ConnectivityService.class));
-				startService(new Intent(Main.this,NotificationService.class));				
+				startService(new Intent(Main.this,NotificationService.class));
+				/*Globals.tcpClientConnectivity.openConnection("202.206.64.11", 3128);
+				Globals.tcpClientConnectivity.writeLine("hello");
+				Log.w("###Main_read", Globals.tcpClientConnectivity.readLines());				
+				Globals.tcpClientConnectivity.closeConnection();*/
 		        				
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	            

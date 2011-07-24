@@ -38,6 +38,7 @@ import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
@@ -94,7 +95,8 @@ public class SDCardReadWrite {
     	}
     		FileWriter fileWriter = new FileWriter(file, false);
     		try {
-    			fileWriter.write(data);
+    			byte[] encryptedString = AESCrypto.encrypt(Globals.keyManager.getMySecretKey(), data.getBytes());
+    			fileWriter.write(CryptoHelper.toHex(encryptedString));
 			
     		} catch (Exception e) {
 		    throw new RuntimeException("SDCardWrite exception", e);
@@ -137,7 +139,8 @@ public class SDCardReadWrite {
     	}
     		FileWriter fileWriter = new FileWriter(file, true);
     		try {
-    			fileWriter.write(data);
+    			byte[] encryptedString = AESCrypto.encrypt(Globals.keyManager.getMySecretKey(), data.getBytes());
+    			fileWriter.write(CryptoHelper.toHex(encryptedString));
 			
     		} catch (Exception e) {
 		    throw new RuntimeException("SDCardWrite exception", e);
@@ -178,7 +181,8 @@ public class SDCardReadWrite {
 		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader); 
 		try {
-			return bufferedReader.readLine();
+			String encryptedString = bufferedReader.readLine();
+			return new String(AESCrypto.decrypt(Globals.keyManager.getMySecretKey(), CryptoHelper.toByte(encryptedString)));
 			
 		} catch (Exception e) {
 		    throw new RuntimeException("SDCardRead exception", e);
