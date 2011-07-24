@@ -38,11 +38,25 @@
 		android:text="@string/back_button"
 		android:layout_below="@id/IMCTextView"
 		android:id="@+id/backButton"/>
+		
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:text="@string/select_all"
+		android:layout_below="@id/backButton"
+		android:id="@+id/selectAllButton"/>
+		
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:text="@string/unselect_all"
+		android:layout_below="@id/selectAllButton"
+		android:id="@+id/unselectAllButton"/>
 	    
 	<ListView 
 		android:id="@+id/ListView01"
 		android:layout_width="wrap_content"
-		android:layout_below="@id/backButton" 
+		android:layout_below="@id/unselectAllButton" 
 		android:layout_height="wrap_content" />
 		      
 </RelativeLayout>

@@ -45,7 +45,7 @@ import android.widget.ListView;
 public class ServiceFilterActivity extends Activity{
    	
 	private ListView listView;	
-	Button backButton;
+	private Button backButton, selectAllButton, unselectAllButton;
 	private WebsiteTextCheckboxAdapter serviceTextCheckboxAdapter;	
 	private List<WebsiteTextCheckbox> listServicesCheckbox;
 	private String currentName;
@@ -109,7 +109,33 @@ public class ServiceFilterActivity extends Activity{
 			else 
 				currentCheck = false;			
 			listServicesCheckbox.add(new WebsiteTextCheckbox(currentName, currentCheck));						       			
-        }  
+        } 
+        
+        selectAllButton = (Button) findViewById(R.id.selectAllButton);        
+        selectAllButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	   
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
+	       		= listServicesCheckbox.iterator();	  	       		
+	       		while(iteratorCheck.hasNext()) {
+	       			iteratorCheck.next().setCheck(true);	       			
+	       		}
+	       		serviceTextCheckboxAdapter.setListItems(listServicesCheckbox);        	
+	            listView.setAdapter(serviceTextCheckboxAdapter);
+	       	}
+	   	}  );
+        
+        unselectAllButton = (Button) findViewById(R.id.unselectAllButton);        
+        unselectAllButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	   
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
+	       		= listServicesCheckbox.iterator();	  	       		
+	       		while(iteratorCheck.hasNext()) {
+	       			iteratorCheck.next().setCheck(false);	       			
+	       		}
+	       		serviceTextCheckboxAdapter.setListItems(listServicesCheckbox);        	
+	            listView.setAdapter(serviceTextCheckboxAdapter);	
+	       	}
+	   	}  );
         
         serviceTextCheckboxAdapter.setListItems(listServicesCheckbox);        	
         listView.setAdapter(serviceTextCheckboxAdapter);
