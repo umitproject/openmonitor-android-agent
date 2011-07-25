@@ -518,6 +518,7 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<Website> readWebsitesList(String dir
 			) throws IOException, RuntimeException{
 		List<Website> websites = null;
@@ -609,6 +610,7 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
+	@SuppressWarnings("unchecked")
 	public static Service readService(String dir
 			, String name) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -697,6 +699,7 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<Service> readServicesList(String dir
 			) throws IOException, RuntimeException{
 		List<Service> services = null;
