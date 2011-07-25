@@ -36,16 +36,25 @@ public class P2PTesting {
 		//Globals.tcpClientConnectivity.writeLine("hello");
 		Globals.tcpClientConnectivity.writeLine(MessageBuilder.generateMessage(
 				1, getTestMessage()));
-		byte [] response = Globals.tcpClientConnectivity.readBytes();
-		byte [] idbyte = new byte[4];
-		idbyte[0] = response[0];
-		idbyte[1] = response[1];
-		idbyte[2] = response[2];
-		idbyte[3] = response[3];
-		int id = MessageBuilder.byteArrayToInt(idbyte);
-		//AuthenticatePeerResponse authenticatePeerResponse
-		//= AuthenticatePeerResponse.parseFrom();
-		Log.w("###Main_read", Integer.toString(id));				
+		byte [] response = Globals.tcpClientConnectivity.readBytes2();
+		Log.w("###Response: ", Integer.toString(response.length));	
+		if(response.length!=0) {
+			byte [] idbyte = MessageBuilder.getSubArray(response, 0, 3);
+			Log.w("###idbyte: ", Integer.toString(idbyte.length));
+			
+			//byte [] lenbyte = MessageBuilder.getSubArray(response, 4, 8);
+			//Log.w("###lenbyte: ", Integer.toString(lenbyte.length));
+			
+			int id = MessageBuilder.byteArrayToInt(idbyte);
+			//int len = MessageBuilder.byteArrayToInt(lenbyte);
+			//AuthenticatePeerResponse authenticatePeerResponse
+			//= AuthenticatePeerResponse.parseFrom();
+			Log.w("###ID: ", Integer.toString(id));				
+			//Log.w("###Length: ", Integer.toString(len));
+		} else {
+			Log.w("### ", "Blank response");
+		}
+				
 		Globals.tcpClientConnectivity.closeConnection();
         			
 	}
