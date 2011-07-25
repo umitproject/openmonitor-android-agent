@@ -83,53 +83,28 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		String currentURL = new String();
 		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 		URLConnection urlConnection = null;
+		long startTimeContent, elapsedTimeContent;
 			
 		while(iterator.hasNext()){               
+			startTimeContent = elapsedTimeContent = 0;
 			currentURL = iterator.next(); 
 			urlConnection = WebsiteOpen.openURLConnection(currentURL);
 			websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 			
 			if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
-				long startTimeContent = System.nanoTime();
+				startTimeContent = System.currentTimeMillis();
 				websiteContent = WebsiteOpen.getContent(urlConnection);
-				long elapsedTimeContent = System.nanoTime() - startTimeContent;
-				Globals.tcpClientConnectivity.openConnection(
-						currentURL.substring(7)
-						, ServiceHTTP.getService().getPorts().get(0));
-				long startTimeBytes = System.nanoTime();
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-				byte[] responseBytes = Globals.tcpClientConnectivity.readBytes();
-				long elapsedTimeBytes = System.nanoTime() - startTimeBytes;				
-				if(!responseBytes.equals(null)) {					
-					Log.w("#####bytes: " +currentURL , "bytes");
-					checkThrottling(responseBytes, elapsedTimeBytes
-							, websiteContent, elapsedTimeContent);
-				}					
-				Globals.tcpClientConnectivity.closeConnection();
+				elapsedTimeContent = System.currentTimeMillis() - startTimeContent;																																
 			} else {
 				String newURL = websiteHeader.get("location");
 				urlConnection = WebsiteOpen.openURLConnection(newURL);
-				long startTimeContent = System.nanoTime();
+				startTimeContent = System.currentTimeMillis();
 				websiteContent = WebsiteOpen.getContent(urlConnection);
-				long elapsedTimeContent = System.nanoTime() - startTimeContent;				
-				Globals.tcpClientConnectivity.openConnection(
-						newURL.substring(7)
-						, ServiceHTTPS.getService().getPorts().get(0));
-				long startTimeBytes = System.nanoTime();
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-				byte[] responseBytes = Globals.tcpClientConnectivity.readBytes();
-				long elapsedTimeBytes = System.nanoTime() - startTimeBytes;		
-				if(!responseBytes.equals(null)) {					
-					checkThrottling(responseBytes, elapsedTimeBytes
-							, websiteContent, elapsedTimeContent);
-				}
-				Globals.tcpClientConnectivity.closeConnection();
+				elapsedTimeContent = System.currentTimeMillis() - startTimeContent;																					
 			}
 				try {
 				websiteReport = (WebsiteReport) clean(currentURL
-							, websiteContent, websiteHeader);
+							, websiteContent, websiteHeader, elapsedTimeContent);
 					SDCardReadWrite.writeWebsiteReport
 					(Constants.WEBSITES_DIR, websiteReport);
 				if (websiteReport.getReport().getHtmlResponse().length()!=0) {
@@ -141,7 +116,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 								, websiteReport.getReport().getHtmlResponse().substring(1
 										, websiteReport.getReport().getHtmlResponse().length()));
 				}
-						
+				Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
+				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
 				} catch (RuntimeException e) {
@@ -149,9 +125,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			}	catch (IOException e) {
 					e.printStackTrace();
 			}			
-				
-				
-									
+																	
 		}
 																		
 	};
@@ -175,7 +149,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	@return      WebsiteReport
 	 */	
 	public WebsiteReport clean(String websiteURL, String websiteContent
-			, Map<String, String> websiteHeader) 
+			, Map<String, String> websiteHeader, long responseTime) 
 	throws IOException, RuntimeException {
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
@@ -193,8 +167,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		int statusCode = WebsiteOpen.getStatusCode(websiteHeader);
 					
 		WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
-		.setBandwidth(0)
-		.setResponseTime(0)
+		.setBandwidth((int)getThroughput(websiteContent, responseTime))
+		.setResponseTime((int)responseTime)
 		.setStatusCode(statusCode)
 		.setHtmlResponse(websiteContent)
 		.setWebsiteURL(websiteURL)
@@ -208,10 +182,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		return websiteReport;
 	}
 	
-	private void checkThrottling(byte[] byteResponse, long byteTime,
-			String stringResponse, long stringTime) {
-		long byteThroughput = byteResponse.length / byteTime;
-		long stringThroughput = stringResponse.getBytes().length / stringTime;
+	private long getThroughput(String stringResponse, long stringTime) {		
+		return (stringResponse.getBytes().length / stringTime);
 	}
 		
 }
