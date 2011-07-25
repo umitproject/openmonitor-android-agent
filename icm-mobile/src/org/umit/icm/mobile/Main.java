@@ -33,6 +33,7 @@ import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.p2p.MessageBuilder;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.utils.AESCrypto;
@@ -90,57 +91,11 @@ public class Main extends TabActivity {
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/
 	        	Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
-				if ((SDCardReadWrite.fileExists(Constants.INTERVAL_FILE
-						, Constants.PARAMETERS_DIR) == false) 
-					|| (SDCardReadWrite.fileNotEmpty(Constants.INTERVAL_FILE
-				        		, Constants.PARAMETERS_DIR) == false )) {					
-					Globals.runtimeParameters.setScanInterval(Constants.DEFAULT_SCAN_INTERVAL);
-				}
-				if ((SDCardReadWrite.fileExists(Constants.SCAN_FILE
-				        		, Constants.PARAMETERS_DIR) == false )
-						|| (SDCardReadWrite.fileNotEmpty(Constants.SCAN_FILE
-				        		, Constants.PARAMETERS_DIR) == false )) {					
-					Globals.runtimeParameters.setScanStatus(Constants.DEFAULT_SCAN_STATUS);					
-				}
-				if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
-							, Constants.PARAMETERS_DIR) == false )
-						|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
-								, Constants.PARAMETERS_DIR) == false )) {					
-					Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);					
-				}
-				if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
-						, Constants.PARAMETERS_DIR) == false )
-						|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
-							, Constants.PARAMETERS_DIR) == false )) {					
-					Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
-				}
-				if ((SDCardReadWrite.fileExists(Constants.TWITTER_STATUS_FILE
-						, Constants.PARAMETERS_DIR) == false )
-						|| (SDCardReadWrite.fileNotEmpty(Constants.TWITTER_STATUS_FILE
-							, Constants.PARAMETERS_DIR) == false )) {					
-					Globals.runtimeParameters.setTwitter(Constants.DEFAULT_TWITTER_STATUS);					
-				} else {
-					Globals.twitterUpdate.setAccessToken(
-							SDCardReadWrite.readAccessToken(Constants.KEYS_DIR));
-				}
-				if ((SDCardReadWrite.fileExists(Constants.AGENT_VERSION_FILE
-						, Constants.VERSIONS_DIR) == false) 
-					|| (SDCardReadWrite.fileNotEmpty(Constants.AGENT_VERSION_FILE
-				        		, Constants.VERSIONS_DIR) == false )) {					
-					Globals.versionManager.setAgentVersion(Constants.DEFAULT_AGENT_VERSION);
-				}
-				if ((SDCardReadWrite.fileExists(Constants.TESTS_VERSION_FILE
-						, Constants.VERSIONS_DIR) == false) 
-					|| (SDCardReadWrite.fileNotEmpty(Constants.TESTS_VERSION_FILE
-				        		, Constants.VERSIONS_DIR) == false )) {					
-					Globals.versionManager.setTestsVersion(Constants.DEFAULT_TESTS_VERSION);
-				}							
-				if(Constants.runProfiler == true)
-					ProfilerRun.run();
+				Initialization.checkFiles();		
+				Initialization.startServices(Main.this);
+				Initialization.checkProfiler();
 				Globals.scanStatus = getString(R.string.scan_on);								
-				ServicePackets.populateServicesMap();
-				startService(new Intent(Main.this, ConnectivityService.class));
-				startService(new Intent(Main.this,NotificationService.class));
+				ServicePackets.populateServicesMap();				
 				/*AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 				.setAgentID(10)
 				.setAgentPort(8000)
