@@ -119,4 +119,26 @@ public class MessageBuilder {
 		 return byteArrayAppendThree(lengthByte, idByte, message);
 		 
 	 }
+	 
+	/**
+	 * Returns a byte sub array of byte[] .
+	 *
+	 *
+	 
+	 @param array Parameter of type byte[]
+	 *
+	 
+	 @param start Parameter of type int
+	 *
+	 
+	 @param end Parameter of type int
+	 *
+	 		 
+	 @return byte[] 
+	 */
+	 public static byte[] getSubArray(byte[] array, int start, int end) {
+		 byte[] newArray = new byte[end - start];
+		 System.arraycopy(array, start, newArray, 0, end - start);		 
+		 return newArray;
+	 }
 }
