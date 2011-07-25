@@ -115,7 +115,7 @@ public class MessageBuilderTests extends AndroidTestCase {
 		subArrayD[2] = (byte) 5;
 		subArrayD[3] = (byte) 6;
 		
-		byte[] newSubArray = MessageBuilder.getSubArray(arrayD, 2, 6);
+		byte[] newSubArray = MessageBuilder.getSubArray(arrayD, 2, 5);
 										
 		Assert.assertTrue(byteArrayEquals(subArrayD, newSubArray));
 	}
