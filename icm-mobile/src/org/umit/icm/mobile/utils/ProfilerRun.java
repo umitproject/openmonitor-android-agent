@@ -100,7 +100,7 @@ public class ProfilerRun {
 		 */
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				Trace trace = Trace.newBuilder()
+				Trace.newBuilder()
 				.setHop(10)
 				.setIp("IP")
 				.addPacketsTiming(10)
@@ -123,7 +123,7 @@ public class ProfilerRun {
 				.addPacketsTiming(10)
 				.build();
 				
-				TraceRoute traceRoute = TraceRoute.newBuilder()
+				TraceRoute.newBuilder()
 				.setHops(10)
 				.setPacketSize(10)
 				.setTarget("target")
@@ -154,7 +154,7 @@ public class ProfilerRun {
 				.addTraces(trace)
 				.build();
 				
-				ICMReport icmReport = ICMReport.newBuilder()
+				ICMReport.newBuilder()
 				.setAgentID(10)
 				.setReportID(Integer.toString(10))
 				.setTestID(10)
@@ -176,7 +176,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				try {
-					KeyPair keyPair = RSACrypto.generateKey();
+					RSACrypto.generateKey();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -195,7 +195,7 @@ public class ProfilerRun {
 			public void task (){
 				try {
 					KeyPair keyPair = RSACrypto.generateKey();
-					String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
+					RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -215,7 +215,7 @@ public class ProfilerRun {
 				try {
 					KeyPair keyPair = RSACrypto.generateKey();
 					String cipherText = RSACrypto.encryptPublic(keyPair.getPublic(), "This is a test string");
-					String str = RSACrypto.decryptPrivate(keyPair.getPrivate(), cipherText);
+					RSACrypto.decryptPrivate(keyPair.getPrivate(), cipherText);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -234,7 +234,7 @@ public class ProfilerRun {
 			public void task (){
 				try {
 					KeyPair keyPair = RSACrypto.generateKey();
-					String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
+					RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -254,7 +254,7 @@ public class ProfilerRun {
 				try {
 					KeyPair keyPair = RSACrypto.generateKey();
 					String cipherText = RSACrypto.encryptPrivate(keyPair.getPrivate(), "This is a test string");
-					String str = RSACrypto.decryptPublic(keyPair.getPublic(), cipherText);
+					RSACrypto.decryptPublic(keyPair.getPublic(), cipherText);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -272,7 +272,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				try {
-					String cipherText = AESCrypto.encrypt("secretICMMobilePassword"
+					AESCrypto.encrypt("secretICMMobilePassword"
 			    			, "This is a test string");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -293,7 +293,7 @@ public class ProfilerRun {
 				try {
 					String cipherText = AESCrypto.encrypt("secretICMMobilePassword"
 			    			, "This is a test string");
-					String str = AESCrypto.decrypt("secretICMMobilePassword", cipherText);
+					AESCrypto.decrypt("secretICMMobilePassword", cipherText);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -329,7 +329,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				try {
-					String readString = SDCardReadWrite.readString("sdtest.txt", "/test");
+					SDCardReadWrite.readString("sdtest.txt", "/test");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -378,7 +378,7 @@ public class ProfilerRun {
 				.addPassedNode("node1")				
 				.build();
 				
-				WebsiteReport websiteReport = WebsiteReport.newBuilder()
+				WebsiteReport.newBuilder()
 				.setHeader(icmReport)				
 				.setReport(websiteReportDetail)						
 				.build();
@@ -394,7 +394,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
+				WebsiteReportDetail.newBuilder()
 				.setBandwidth(10)
 				.setResponseTime(10)
 				.setStatusCode(10)
@@ -412,7 +412,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
+				ServiceReportDetail.newBuilder()
 				.setBandwidth(10)
 				.setResponseTime(10)
 				.setServiceName("service")
@@ -460,7 +460,7 @@ public class ProfilerRun {
 				.addPassedNode("node1")
 				.build();
 				
-				ServiceReport serviceReport = ServiceReport.newBuilder()
+				ServiceReport.newBuilder()
 				.setHeader(icmReport)
 				.setReport(serviceReportDetail)				
 				.build();
@@ -476,7 +476,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				RequestHeader requestHeader = RequestHeader.newBuilder()
+				RequestHeader.newBuilder()
 				.setAgentID(10)
 				.setToken("token")
 				.build();
@@ -492,7 +492,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				ResponseHeader responseHeader = ResponseHeader.newBuilder()
+				ResponseHeader.newBuilder()
 				.setCurrentTestVersionNo(10)
 				.setCurrentVersionNo(10)
 				.build();
@@ -508,7 +508,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				RegisterAgent registerAgent = RegisterAgent.newBuilder()
+				RegisterAgent.newBuilder()
 				.setIp("ip")
 				.setVersionNo(10)
 				.build();
@@ -529,8 +529,7 @@ public class ProfilerRun {
 				.setCurrentVersionNo(10)
 				.build();
 				
-				RegisterAgentResponse registerAgentResponse 
-				= RegisterAgentResponse.newBuilder()
+				RegisterAgentResponse.newBuilder()
 				.setAgentID(10)
 				.setCipheredPublicKey("key")
 				.setHeader(responseHeader)
@@ -576,7 +575,7 @@ public class ProfilerRun {
 				Website website = new Website("url", "status", "check");
 				try {
 					website.writeWebsite();
-					Website newWebsite = website.readWebsite("url");
+					website.readWebsite("url");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -603,8 +602,7 @@ public class ProfilerRun {
 		    	try {
 					SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR
 							, websiteList);
-					List<Website> newWebsiteList 
-			    	= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);
+					SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -628,7 +626,7 @@ public class ProfilerRun {
 			public void task (){				
 		    	
 		    	String testString = "ICMMobileAgent";
-		    	String encodedString = new String(Base64.encodeBase64(testString.getBytes()));
+		    	new String(Base64.encodeBase64(testString.getBytes()));
 		    					
 			}
 			
@@ -645,7 +643,7 @@ public class ProfilerRun {
 		    	
 		    	String testString = "ICMMobileAgent";
 		    	String encodedString = new String(Base64.encodeBase64(testString.getBytes()));
-		    	String str = new String(Base64.decodeBase64(encodedString.getBytes()));
+		    	new String(Base64.decodeBase64(encodedString.getBytes()));
 		    					
 			}
 			
