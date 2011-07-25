@@ -91,9 +91,19 @@ public class TCPClient {
 	 */
     public byte[] readBytes() throws IOException {
     	Log.w("##Client", "readbytes");
-    	InputStream inputStream = socket.getInputStream();    	
+    	socket.setKeepAlive(true);
+    	socket.setSoTimeout(0);
+    	InputStream inputStream = socket.getInputStream();     	
     	long length = inputStream.available();
     	byte[] bytes = new byte[(int) length];
+    	inputStream.read(bytes);
+    	return bytes;
+    }
+    
+    public byte[] readBytes2() throws IOException {
+    	Log.w("##Client2", "readbytes");    	
+    	InputStream inputStream = socket.getInputStream();
+    	byte[] bytes = new byte[16];
     	inputStream.read(bytes);
     	return bytes;
     }
