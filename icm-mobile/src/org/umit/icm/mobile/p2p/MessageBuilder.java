@@ -137,6 +137,7 @@ public class MessageBuilder {
 	 @return byte[] 
 	 */
 	 public static byte[] getSubArray(byte[] array, int start, int end) {
+		 end++;
 		 byte[] newArray = new byte[end - start];
 		 System.arraycopy(array, start, newArray, 0, end - start);		 
 		 return newArray;
