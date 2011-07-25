@@ -215,6 +215,14 @@ public class Globals {
 	public static ServiceConnectivity serviceTest 
 	= new ServiceConnectivity();
 	
+	/**
+	 * Global HashMap to hold services packets
+	 */
 	public static Map<String, String> servicePacketsMap 
 	= new HashMap <String, String>();
+	
+	/**
+	 * Global IP address of app.
+	 */
+	public static int myIP = 0;
 }
