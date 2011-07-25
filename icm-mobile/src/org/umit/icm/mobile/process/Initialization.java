@@ -36,6 +36,8 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
 /**
  * Holds initialization methods.
@@ -190,6 +192,12 @@ public class Initialization {
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setToken(Globals.runtimeParameters.getToken())
 		.build();
+	}
+	
+	public static void initializeIP(Context context) {
+		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        Globals.myIP = wifiInfo.getIpAddress();
 	}
 	
 }

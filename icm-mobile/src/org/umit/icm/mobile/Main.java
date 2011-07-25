@@ -94,6 +94,7 @@ public class Main extends TabActivity {
 				Initialization.checkFiles();		
 				Initialization.startServices(Main.this);
 				Initialization.checkProfiler();
+				Initialization.initializeIP(Main.this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				/*AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()

@@ -37,8 +37,6 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -60,14 +58,11 @@ public class InformationActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.informationactivity);
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        int ipAddress = wifiInfo.getIpAddress();
+        setContentView(R.layout.informationactivity);        
         ipTextView = (TextView) findViewById(R.id.ipTextView);
         goToServices = (TextView) findViewById(R.id.goToServices);       
         goToWebsites = (TextView) findViewById(R.id.goToWebsites);
-        ipTextView.append(Formatter.formatIpAddress(ipAddress));    
+        ipTextView.append(Formatter.formatIpAddress(Globals.myIP));    
         listView = (ListView)findViewById(R.id.ListView01);
         listViewServices = (ListView)findViewById(R.id.ListView02);
         viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
