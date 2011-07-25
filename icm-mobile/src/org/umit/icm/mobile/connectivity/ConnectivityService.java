@@ -32,6 +32,7 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.process.RuntimeParameters;
 import org.umit.icm.mobile.utils.Constants;
 
@@ -63,7 +64,7 @@ public class ConnectivityService extends Service {
 		connectivityManager
 	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		try {
-			Globals.initializeRequestHeader();
+			Initialization.initializeRequestHeader();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

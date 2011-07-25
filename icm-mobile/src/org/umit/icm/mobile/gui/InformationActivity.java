@@ -31,6 +31,7 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -120,7 +121,7 @@ public class InformationActivity extends Activity{
 				= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);									
 
 			} else {
-				Globals.intializeWebsitesList();
+				Initialization.intializeWebsitesList();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -137,7 +138,7 @@ public class InformationActivity extends Activity{
 				= SDCardReadWrite.readServicesList(Constants.SERVICES_DIR);									
 
 			} else {
-				Globals.intializeServicesList();
+				Initialization.intializeServicesList();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

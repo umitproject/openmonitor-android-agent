@@ -21,10 +21,8 @@
 
 package org.umit.icm.mobile.process;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +37,6 @@ import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.social.TwitterUpdate;
-import org.umit.icm.mobile.utils.Constants;
-import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 /**
  * Holds application wide Globals.
@@ -115,58 +111,12 @@ public class Globals {
 	/**
 	 * Global {@link List} of {@link Test}
 	 */
-	public static List<Test> testsList = new ArrayList<Test>();
-	
-	/**
-	 * Initializes the {@link Globals#websitesList} with 
-	 * {@link Constants#WEBSITE_LIST}
-	 * 
-	 *	 
-	                    
-	@see         Website
-	 *
-	
-	@see         Constants
-	 */
-	public static void intializeWebsitesList() {
-		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
-		while(iterator.hasNext()){               
-			Globals.websitesList.add(new Website(iterator.next(), "false", "false"));						       			
-        }  
-		
-	}
-	
-	/**
-	 * Initializes the {@link Globals#servicesList} with 
-	 * {@link Constants#SERVICE_LIST}
-	 * 
-	 *	 
-	                    
-	@see         Service
-	 *
-	
-	@see         Constants
-	 */
-	public static void intializeServicesList() {		
-		servicesList = Constants.SERVICE_LIST;				
-	}
+	public static List<Test> testsList = new ArrayList<Test>();		
 	
 	/**
 	 * Global {@link TCPServer}
 	 */
-	public static TCPServer tcpServer;
-	
-	/**
-	 * Initializes the {@link Globals#tcpServer} with 
-	 * {@link Constants#MY_TCP_PORT}
-	 * 
-	 *	 
-	                    
-	@see         TCPServer
-	 */
-	public static void intializeTCPServer() throws IOException {		
-		tcpServer = new TCPServer(Constants.MY_TCP_PORT);				
-	}
+	public static TCPServer tcpServer;	
 	
 	/**
 	 * Global {@link TCPClient}
@@ -178,31 +128,7 @@ public class Globals {
 	 * Global {@link TCPClient} used for Connectivity Tests
 	 */
 	public static TCPClient tcpClientConnectivity
-	= new TCPClient();
-	
-	/**
-	 * Initializes the {@link Globals#requestHeader} with 
-	 * {@link Globals#runtimeParameters}
-	 * 
-	 *	 
-	                    
-	@see         RequestHeader
-	 *
-	
-	@see         RuntimeParameters
-	 */
-	public static void initializeRequestHeader() throws IOException, RuntimeException {
-		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
-				, Constants.PARAMETERS_DIR) == false )
-				|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
-					, Constants.PARAMETERS_DIR) == false )) {					
-			Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
-		}
-		Globals.requestHeader = RequestHeader.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setToken(Globals.runtimeParameters.getToken())
-		.build();
-	}
+	= new TCPClient();		
 	
 	/**
 	 * Global {@link String} to select map view

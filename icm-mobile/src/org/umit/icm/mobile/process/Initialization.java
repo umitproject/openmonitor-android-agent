@@ -22,9 +22,14 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.umit.icm.mobile.connectivity.ConnectivityService;
+import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.TCPServer;
+import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -116,4 +121,75 @@ public class Initialization {
 		if(Constants.runProfiler == true)
 			ProfilerRun.run();
 	}
+	
+	/**
+	 * Initializes the {@link Globals#websitesList} with 
+	 * {@link Constants#WEBSITE_LIST}
+	 * 
+	 *	 
+	                    
+	@see         Website
+	 *
+	
+	@see         Constants
+	 */
+	public static void intializeWebsitesList() {
+		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
+		while(iterator.hasNext()){               
+			Globals.websitesList.add(new Website(iterator.next(), "false", "false"));						       			
+        }  
+		
+	}
+	
+	/**
+	 * Initializes the {@link Globals#servicesList} with 
+	 * {@link Constants#SERVICE_LIST}
+	 * 
+	 *	 
+	                    
+	@see         Service
+	 *
+	
+	@see         Constants
+	 */
+	public static void intializeServicesList() {		
+		Globals.servicesList = Constants.SERVICE_LIST;				
+	}
+	
+	/**
+	 * Initializes the {@link Globals#tcpServer} with 
+	 * {@link Constants#MY_TCP_PORT}
+	 * 
+	 *	 
+	                    
+	@see         TCPServer
+	 */
+	public static void intializeTCPServer() throws IOException {		
+		Globals.tcpServer = new TCPServer(Constants.MY_TCP_PORT);				
+	}
+	
+	/**
+	 * Initializes the {@link Globals#requestHeader} with 
+	 * {@link Globals#runtimeParameters}
+	 * 
+	 *	 
+	                    
+	@see         RequestHeader
+	 *
+	
+	@see         RuntimeParameters
+	 */
+	public static void initializeRequestHeader() throws IOException, RuntimeException {
+		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
+				, Constants.PARAMETERS_DIR) == false )
+				|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
+					, Constants.PARAMETERS_DIR) == false )) {					
+			Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
+		}
+		Globals.requestHeader = RequestHeader.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setToken(Globals.runtimeParameters.getToken())
+		.build();
+	}
+	
 }
