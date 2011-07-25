@@ -25,27 +25,20 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.ServicePackets;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
-import org.umit.icm.mobile.notifications.NotificationService;
-import org.umit.icm.mobile.p2p.MessageBuilder;
+import org.umit.icm.mobile.p2p.P2PTesting;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
-import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
-import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.utils.AESCrypto;
-import org.umit.icm.mobile.utils.Constants;
-import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -97,27 +90,7 @@ public class Main extends TabActivity {
 				Initialization.initializeIP(Main.this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
-				/*AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
-				.setAgentID(10)
-				.setAgentPort(8000)
-				.setCipheredPublicKey("cipheredPublicKey")
-				.build();
-				Globals.tcpClientConnectivity.openConnection("202.206.64.11", 3128);
-				//Globals.tcpClientConnectivity.writeLine("hello");
-				Globals.tcpClientConnectivity.writeLine(MessageBuilder.generateMessage(
-						1, authenticatePeer.toByteArray()));
-				byte [] response = Globals.tcpClientConnectivity.readBytes();
-				byte [] idbyte = new byte[4];
-				idbyte[0] = response[0];
-				idbyte[1] = response[1];
-				idbyte[2] = response[2];
-				idbyte[3] = response[3];
-				int id = MessageBuilder.byteArrayToInt(idbyte);
-				//AuthenticatePeerResponse authenticatePeerResponse
-				//= AuthenticatePeerResponse.parseFrom();
-				Log.w("###Main_read", Integer.toString(id));				
-				Globals.tcpClientConnectivity.closeConnection();
-		        	*/			
+				P2PTesting.testRequestResponse();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {
