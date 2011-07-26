@@ -29,7 +29,6 @@ import org.umit.icm.mobile.connectivity.ServicePackets;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
-import org.umit.icm.mobile.p2p.P2PTesting;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.utils.AESCrypto;
@@ -48,7 +47,15 @@ import android.widget.Toast;
  */
 
 public class Main extends TabActivity {
- 
+	
+
+	/**
+	 * OnCreate method populates the tabHost with the three tabs: 1) Information,
+	 * 2) Map, 3) Control.
+	 * Checks if SDCard is present. If not, ends application.
+	 * Calls various initialization methods from {@link Initialization}
+	 */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +97,7 @@ public class Main extends TabActivity {
 				Initialization.initializeIP(Main.this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
-				P2PTesting.testRequestResponse();
+				//P2PTesting.testRequestResponse();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {
