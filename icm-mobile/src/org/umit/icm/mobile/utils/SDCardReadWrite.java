@@ -251,6 +251,9 @@ public class SDCardReadWrite {
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
     	File file = new File(keyDir, fileName);
+    	if(!file.exists()){
+    		return false;
+    	}    	
     	FileReader fileReader = new FileReader(file);
     	BufferedReader bufferedReader = new BufferedReader(fileReader);
     	if(bufferedReader.readLine() == null){
