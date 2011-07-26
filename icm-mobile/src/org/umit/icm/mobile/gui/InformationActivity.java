@@ -48,6 +48,11 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 import android.text.format.Formatter;
 
+/**
+ * InformationActivity that constitutes the Information tab. 
+ * Displays the Websites list and Services list.
+ */
+
 public class InformationActivity extends Activity{
    	
 	private ListView listView, listViewServices;
@@ -131,7 +136,6 @@ public class InformationActivity extends Activity{
 					, Constants.SERVICES_DIR) == true)){					
 				Globals.servicesList 
 				= SDCardReadWrite.readServicesList(Constants.SERVICES_DIR);									
-
 			} else {
 				Initialization.intializeServicesList();
 			}
@@ -164,8 +168,7 @@ public class InformationActivity extends Activity{
     	}
          
 		protected List<Website> doInBackground(String... urls) {		
-			return Globals.websitesList;
-			 						
+			return Globals.websitesList;			 						
 		}
 			
     }    
@@ -192,7 +195,6 @@ public class InformationActivity extends Activity{
 			 						
 		}
 			
-    }    
-      	
+    }          	
       	
 }

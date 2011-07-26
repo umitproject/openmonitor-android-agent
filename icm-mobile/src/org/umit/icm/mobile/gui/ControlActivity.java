@@ -48,6 +48,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * ControlActivity that handles the Control tab.
+ * Lets the user manipulate various cross-application parameters.
+ */
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
