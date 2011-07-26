@@ -29,6 +29,7 @@ import java.util.List;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -36,6 +37,7 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -140,6 +142,43 @@ public class ServiceFilterActivity extends Activity{
         serviceTextCheckboxAdapter.setListItems(listServicesCheckbox);        	
         listView.setAdapter(serviceTextCheckboxAdapter);
                   		                       
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+        	Iterator<WebsiteTextCheckbox> iteratorCheck 
+       		= listServicesCheckbox.iterator();	       		
+       		int i = 0;
+       		String check = "";
+       		Service service = new Service();
+       		WebsiteTextCheckbox websiteTextCheckbox = null;
+    		while(iteratorCheck.hasNext()){ 
+    			websiteTextCheckbox = iteratorCheck.next();
+    			if(websiteTextCheckbox.isCheck() == true) {
+    				check = "true";	    				
+    			}    				
+    			else
+    				check = "false";
+    			service = Globals.servicesList.get(i);
+    			service.setCheck(check);
+    			Globals.servicesList.set(i, 
+    					service);						       				    			
+    			i++;
+            } 
+    		try {
+				SDCardReadWrite.writeServicesList(Constants.SERVICES_DIR,
+						Globals.servicesList);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+			}
+       		ServiceFilterActivity.this.finish();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
  	          
 }
