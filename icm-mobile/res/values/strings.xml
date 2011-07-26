@@ -75,4 +75,6 @@
     <string name="unselect_all">Unselect All</string>
     <string name="throughput">Throughput:</string>
     <string name="response_time">Response Time:</string>
+    <string name="response_time_unit">ms</string>
+    <string name="throughput_unit">bytes/ms</string>
 </resources>

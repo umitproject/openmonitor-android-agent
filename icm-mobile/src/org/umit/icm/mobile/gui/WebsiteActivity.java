@@ -122,10 +122,12 @@ public class WebsiteActivity extends Activity{
 									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.throughput) + " " +
-									Integer.toString(websiteReport.getReport().getBandwidth()), drawable));
+									Integer.toString(websiteReport.getReport().getBandwidth())
+									 + " " + getString(R.string.throughput_unit), drawable));
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.response_time) + " " +
-									Integer.toString(websiteReport.getReport().getResponseTime()), drawable));
+									Integer.toString(websiteReport.getReport().getResponseTime())
+									+ " " + getString(R.string.response_time_unit), drawable));
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)
