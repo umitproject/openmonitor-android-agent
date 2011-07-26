@@ -73,4 +73,6 @@
     <string name="enable_pin">Enable Pin</string>
     <string name="select_all">Select All</string>
     <string name="unselect_all">Unselect All</string>
+    <string name="throughput">Throughput:</string>
+    <string name="response_time">Response Time:</string>
 </resources>
