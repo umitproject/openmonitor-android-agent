@@ -120,6 +120,12 @@ public class WebsiteActivity extends Activity{
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.status_code) + " " +
 									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
+					websiteTextBitmapAdapter.addItem(
+							new WebsiteTextBitmap(getString(R.string.throughput) + " " +
+									Integer.toString(websiteReport.getReport().getBandwidth()), drawable));
+					websiteTextBitmapAdapter.addItem(
+							new WebsiteTextBitmap(getString(R.string.response_time) + " " +
+									Integer.toString(websiteReport.getReport().getResponseTime()), drawable));
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)
