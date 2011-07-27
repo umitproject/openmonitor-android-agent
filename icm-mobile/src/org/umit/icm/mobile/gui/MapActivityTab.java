@@ -49,6 +49,7 @@ public class MapActivityTab extends MapActivity{
 	private GoogleMaps googleMap;
 	private OSMMaps osmMap; 
 	private MapView googleMapView;
+	private org.osmdroid.views.MapView osmMapView;
 	
 	/**
 	 * The onCreate method which makes a call to either {@link GoogleMaps}
@@ -87,8 +88,9 @@ public class MapActivityTab extends MapActivity{
 		            
 		        } else if(Globals.mapView.equals("OSMDroid")) {                                                
 		            osmMap = new OSMMaps();
-		            setContentView(osmMap.getView(this
-		            		, locationLocal.getLatitude(), locationLocal.getLongitude()));
+		            osmMapView = osmMap.getView(this
+		            		, locationLocal.getLatitude(), locationLocal.getLongitude());
+		            setContentView(osmMapView);
 		        }
 	        } else {
 	        	CharSequence text = getString(R.string.location_disabled);     		
@@ -119,8 +121,8 @@ public class MapActivityTab extends MapActivity{
         				 ,location.getLatitude(), location.getLongitude());
                  
              } else if(Globals.mapView.equals("OSMDroid")) {                                                
-                 setContentView(osmMap.getView(MapActivityTab.this
-                 		, location.getLatitude(), location.getLongitude()));
+                 osmMap.updateView(osmMapView, MapActivityTab.this
+                 		, location.getLatitude(), location.getLongitude());
              }
                 	     
         }
@@ -154,8 +156,14 @@ public class MapActivityTab extends MapActivity{
     
     LocationListener networkProviderLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-        	 setContentView(googleMap.getView(MapActivityTab.this
-        			 , location.getLatitude(), location.getLongitude()));
+        	 if(Globals.mapView.equals("Google")) {
+        		 googleMap.updateView(googleMapView, MapActivityTab.this
+        				 ,location.getLatitude(), location.getLongitude());
+                 
+             } else if(Globals.mapView.equals("OSMDroid")) {                                                
+                 osmMap.updateView(osmMapView, MapActivityTab.this
+                 		, location.getLatitude(), location.getLongitude());
+             }
         }
 
 		@Override

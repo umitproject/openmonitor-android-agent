@@ -60,7 +60,7 @@ public class OSMMaps implements AbstractMap {
 		super();		
 	}
 		
-	public View getView(Context context, double lat, double lon){
+	public MapView getView(Context context, double lat, double lon){
 		final  MapView osmMapView = new MapView(context, 256);
 		this.context = context;
 		this.geoPoint = OSMMaps.getGeoPoint(lat, lon);
@@ -113,6 +113,59 @@ public class OSMMaps implements AbstractMap {
         overlayList.add(osmOverlay);
         osmMapView.invalidate();
 		return osmMapView;
+	}
+	
+	public void updateView(MapView osmMapView, Context context, double lat, double lon){		
+		this.context = context;
+		this.geoPoint = OSMMaps.getGeoPoint(lat, lon);
+		this.resourceProxy = new DefaultResourceProxyImpl(context);
+		Drawable drawable = context.getResources().getDrawable(R.drawable.dot);
+		
+		
+		mapController = osmMapView.getController();
+		osmMapView.setBuiltInZoomControls(true);
+		osmMapView.setMultiTouchControls(true);
+		mapController.setZoom(14);
+		mapController.setCenter(this.geoPoint);  		
+        osmMapView.invalidate();
+        
+        List<Overlay> overlayList = osmMapView.getOverlays();
+        this.osmOverlay = new ItemizedIconOverlay<OverlayItem>(getOSMOverlayList(context),
+                drawable, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    @Override
+                    public boolean onItemSingleTapUp(final int index,
+                            final OverlayItem item) {
+                    	AlertDialog.Builder dialog 
+                    	= new AlertDialog.Builder(OSMMaps.this.context);
+        		        dialog.setTitle(item.getTitle());
+        		        dialog.setMessage(item.getSnippet());
+        		        dialog.setPositiveButton("Okay", new OnClickListener() {    
+        		            public void onClick(DialogInterface dialog, int which) {
+        		                dialog.dismiss();
+        		            }
+        		        });
+        		        dialog.show();
+                        return true; 
+                    }
+                    @Override
+                    public boolean onItemLongPress(final int index,
+                            final OverlayItem item) {    
+                    	AlertDialog.Builder dialog 
+                    	= new AlertDialog.Builder(OSMMaps.this.context);
+        		        dialog.setTitle(item.getTitle());
+        		        dialog.setMessage(item.getSnippet());
+        		        dialog.setPositiveButton("Okay", new OnClickListener() {    
+        		            public void onClick(DialogInterface dialog, int which) {
+        		                dialog.dismiss();
+        		            }
+        		        });
+        		        dialog.show();
+                    	return true;
+                    }
+                }, resourceProxy);
+	     
+        overlayList.add(osmOverlay);
+        osmMapView.invalidate();	
 	}
 	
 	public List<OverlayItem> getOSMOverlayList(Context context) {
