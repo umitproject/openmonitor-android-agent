@@ -122,6 +122,71 @@ public class GoogleMaps implements AbstractMap {
         return googleMapView;
 	}
 	
+	public void updateView(MapView googleMapView, final Context context, double lat, double lon){			
+		
+		this.geoPoint = GoogleMaps.getGeoPoint(lat, lon);				
+		
+	    class GoogleMapMarker extends ItemizedOverlay<OverlayItem> {
+
+	    	private List<OverlayItem> overlayList;
+	    	private Context context;
+	    
+	    	public GoogleMapMarker(Drawable defaultMarker) {
+	    		   super(boundCenterBottom(defaultMarker));
+	    	}
+	    	
+
+	    	public GoogleMapMarker(Drawable drawable, Context context, List<OverlayItem> overlayList) {
+	    		super(drawable);
+	    		this.context = context;
+	    		this.overlayList = overlayList;
+	    		this.
+	    		populate();
+	    		
+	    	}	 
+
+	    	@Override
+	    	protected OverlayItem createItem(int i) {
+	    		return overlayList.get(i);
+	    	}
+	    	
+	    	@Override
+	    	public int size() {
+	    		return overlayList.size();
+	    	}
+	    	
+	    	@Override
+	    	protected boolean onTap(int index) {
+		        OverlayItem overlayItem = overlayList.get(index);
+		        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		        dialog.setTitle(overlayItem.getTitle());
+		        dialog.setMessage(overlayItem.getSnippet());
+		        dialog.setPositiveButton("Okay", new OnClickListener() {    
+		            public void onClick(DialogInterface dialog, int which) {
+		                dialog.dismiss();
+		            }
+		        });
+		        dialog.show();
+		        return true;
+	    	}
+	    }
+		mapController = googleMapView.getController();
+		googleMapView.setBuiltInZoomControls(true);
+        
+        mapController.setCenter(geoPoint);     
+        mapController.setZoom(15);
+        googleMapView.invalidate();
+        
+        List<Overlay> overlayList = googleMapView.getOverlays();
+        Drawable drawable = context.getResources().getDrawable(R.drawable.dot);
+        GoogleMapMarker googleMapOverlay 
+        = new GoogleMapMarker(drawable, context, getOverlayList(context));        
+        overlayList.add(googleMapOverlay);
+        googleMapView.invalidate();       
+ 
+     
+	}
+	
 	public List<OverlayItem> getOverlayList(Context context) {
 		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
 		Drawable drawable = context.getResources().getDrawable(R.drawable.reddot);

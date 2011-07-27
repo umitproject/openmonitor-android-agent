@@ -27,8 +27,8 @@ import org.umit.icm.mobile.maps.GoogleMaps;
 import org.umit.icm.mobile.maps.OSMMaps;
 import org.umit.icm.mobile.process.Globals;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
 
 import android.content.Context;
 import android.location.Location;
@@ -43,13 +43,12 @@ import android.widget.Toast;
 
 public class MapActivityTab extends MapActivity{
     /** Called when the activity is first created. */
-	String package1;	
-	LocationManager locationManager;
-	Location location;
-	GeoPoint geoPoint;
-	GeoPoint osmGeoPoint;
-	GoogleMaps googleMap;
-	OSMMaps osmMap; 
+		
+	private LocationManager locationManager;
+	private Location locationLocal;	
+	private GoogleMaps googleMap;
+	private OSMMaps osmMap; 
+	private MapView googleMapView;
 	
 	/**
 	 * The onCreate method which makes a call to either {@link GoogleMaps}
@@ -64,33 +63,40 @@ public class MapActivityTab extends MapActivity{
 	 */	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);                       
+        super.onCreate(savedInstanceState);   
+        locationLocal = new Location("default");
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if((locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         		|| (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))) {
 			if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
 						 , 0, 0, GPSLocationListener);
-				location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				locationLocal = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);				
 				
 			} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER
 						, 0, 0, networkProviderLocationListener);
-				location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);				
+				locationLocal = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);				
 			}				
-	        
-	        if(Globals.mapView.equals("Google")) {
-	        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-						, location.getLongitude());
-	        	googleMap = new GoogleMaps();                        			
-	        	setContentView(googleMap.getView(this
-	        			, location.getLatitude(), location.getLongitude()));
-	            
-	        } else if(Globals.mapView.equals("OSMDroid")) {                                                
-	            osmMap = new OSMMaps();
-	            setContentView(osmMap.getView(this
-	            		, location.getLatitude(), location.getLongitude()));
-	        }         
+	        if(locationLocal != null) {
+	        	if(Globals.mapView.equals("Google")) {		        	
+		        	googleMap = new GoogleMaps();                       
+		        	googleMapView = googleMap.getView(this
+		        			, locationLocal.getLatitude(), locationLocal.getLongitude()); 
+		        	setContentView(googleMapView);
+		            
+		        } else if(Globals.mapView.equals("OSMDroid")) {                                                
+		            osmMap = new OSMMaps();
+		            setContentView(osmMap.getView(this
+		            		, locationLocal.getLatitude(), locationLocal.getLongitude()));
+		        }
+	        } else {
+	        	CharSequence text = getString(R.string.location_disabled);     		
+	    		int duration = Toast.LENGTH_SHORT;
+
+	    		Toast toast = Toast.makeText(MapActivityTab.this, text, duration);
+	    		toast.show();
+	        }	                 
         }
         else {
         	CharSequence text = getString(R.string.location_disabled);     		
@@ -109,15 +115,10 @@ public class MapActivityTab extends MapActivity{
 	LocationListener GPSLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
         	 if(Globals.mapView.equals("Google")) {
-        		 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-     					, location.getLongitude());
-             	
-        		 setContentView(googleMap.getView(MapActivityTab.this
-        				 ,location.getLatitude(), location.getLongitude()));
+        		 googleMap.updateView(googleMapView, MapActivityTab.this
+        				 ,location.getLatitude(), location.getLongitude());
                  
              } else if(Globals.mapView.equals("OSMDroid")) {                                                
-            	 geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-      					, location.getLongitude());
                  setContentView(osmMap.getView(MapActivityTab.this
                  		, location.getLatitude(), location.getLongitude()));
              }
@@ -153,28 +154,22 @@ public class MapActivityTab extends MapActivity{
     
     LocationListener networkProviderLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-        
-        	geoPoint = GoogleMaps.getGeoPoint(location.getLatitude()
-					, location.getLongitude());
         	 setContentView(googleMap.getView(MapActivityTab.this
         			 , location.getLatitude(), location.getLongitude()));
         }
 
 		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			
-			
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-		
+		public void onStatusChanged(String provider, int status, Bundle extras) {			
 			
 		}
 
 		@Override
-		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
+		public void onProviderDisabled(String provider) {		
+			
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {			
 			
 		}
     };
