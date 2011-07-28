@@ -36,7 +36,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 /**
- * This is the WebsiteConnectivityService class which extends {@link Service}.
+ * This is the GetEventsService class which extends {@link Service}.
  */
 
 public class GetEventsService extends Service {

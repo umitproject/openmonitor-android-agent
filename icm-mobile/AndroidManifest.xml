@@ -37,6 +37,7 @@
         <activity android:name=".gui.ServiceActivity"></activity>
         <service android:name=".connectivity.ConnectivityService"></service>
         <service android:name=".aggregator.GetEventsService"></service>
+        <service android:name=".aggregator.GetUpdatesService"></service>
     
     </application>
     <uses-sdk android:minSdkVersion="4" />
