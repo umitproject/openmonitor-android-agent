@@ -62,16 +62,7 @@ public class ConnectivityService extends Service {
 
 		super.onCreate();
 		connectivityManager
-	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-		try {
-			Initialization.initializeRequestHeader();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);		
 		startScan();
 	}
 	
@@ -100,12 +91,13 @@ public class ConnectivityService extends Service {
 				interval = runtimeParameters.getScanInterval();
 		 } catch (Exception e) {
 				e.printStackTrace();
-		 }
+		 }	
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
 				try {
+					Initialization.initializeRequestHeader();
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
