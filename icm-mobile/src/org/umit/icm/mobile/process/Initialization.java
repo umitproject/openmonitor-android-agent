@@ -71,7 +71,13 @@ public class Initialization {
 					, Constants.PARAMETERS_DIR) == false )
 				|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 						, Constants.PARAMETERS_DIR) == false )) {					
-			Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);					
+			Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);
+			/* Aggregator Call
+			RegisterAgent registerAgent = RegisterAgent.newBuilder()
+			.setIp(Integer.toString(Globals.myIP))
+			.setVersionNo(Globals.versionManager.getAgentVersion())
+			.build();
+			*/
 		}
 		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
 				, Constants.PARAMETERS_DIR) == false )
