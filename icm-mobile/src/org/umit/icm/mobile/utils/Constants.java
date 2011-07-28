@@ -175,4 +175,5 @@ public class Constants {
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 
 		= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
+		public static int DEFAULT_GET_EVENTS_INTERVAL = 100;
 }
