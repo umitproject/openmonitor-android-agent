@@ -151,18 +151,6 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	public WebsiteReport clean(String websiteURL, String websiteContent
 			, Map<String, String> websiteHeader, long responseTime) 
 	throws IOException, RuntimeException {
-		List<String> listNodes = new ArrayList<String>();
-		Calendar calendar = Calendar.getInstance();
-		listNodes.add("node1");
-		listNodes.add("node2");
-		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(Long.toString(IDGenerator.generateReportID()))
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setTestID(10)
-		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(calendar.getTimeInMillis())
-		.addAllPassedNode(listNodes)
-		.build();
 		
 		int statusCode = WebsiteOpen.getStatusCode(websiteHeader);
 					
@@ -171,10 +159,21 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setResponseTime((int)responseTime)
 		.setStatusCode(statusCode)
 		.setHtmlResponse(websiteContent)
-		.setWebsiteURL(websiteURL)
-		.setHtmlMedia(ByteString.copyFromUtf8("media"))
+		.setWebsiteURL(websiteURL)		
 		.build();
 		
+		List<String> listNodes = new ArrayList<String>();
+		Calendar calendar = Calendar.getInstance();
+		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));		
+		ICMReport icmReport = ICMReport.newBuilder()
+		.setReportID(Integer.toString(websiteReportDetail.hashCode()))
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setTestID(10)
+		.setTimeZone(Calendar.ZONE_OFFSET)
+		.setTimeUTC(calendar.getTimeInMillis())
+		.addAllPassedNode(listNodes)
+		.build();
+				
 		WebsiteReport websiteReport = WebsiteReport.newBuilder()		
 		.setReport(websiteReportDetail)
 		.setHeader(icmReport)	
