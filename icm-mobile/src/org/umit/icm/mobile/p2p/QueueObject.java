@@ -30,12 +30,14 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 public class QueueObject {
 	private AgentData agentInfo;
 	private byte[] message;
+	private int messageID;
 	
-	public QueueObject(AgentData agentInfo, byte[] message) {
+	public QueueObject(AgentData agentInfo, byte[] message, int messageID) {
 		super();
 		this.agentInfo = AgentData.newBuilder(agentInfo)
 		.build();		 
 		this.message = message;
+		this.messageID = messageID;
 	}
 
 	public AgentData getAgentInfo() {
@@ -52,6 +54,14 @@ public class QueueObject {
 
 	public void setMessage(byte[] message) {
 		this.message = message;
+	}
+
+	public int getMessageID() {
+		return messageID;
+	}
+
+	public void setMessageID(int messageID) {
+		this.messageID = messageID;
 	}	
 	
 }
