@@ -24,6 +24,7 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.umit.icm.mobile.aggregator.AggregatorService;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
@@ -126,8 +127,7 @@ public class Initialization {
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
 		context.startService(new Intent(context, NotificationService.class));
-		//context.startService(new Intent(context, GetEventsService.class));
-		//context.startService(new Intent(context, GetUpdatesService.class));
+		context.startService(new Intent(context, AggregatorService.class));		
 	}
 	
 	public static void checkProfiler() {

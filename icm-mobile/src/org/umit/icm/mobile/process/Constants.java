@@ -175,7 +175,7 @@ public class Constants {
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 
 		= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
-		public static int DEFAULT_GET_EVENTS_INTERVAL = 100;
+		public static int DEFAULT_GET_EVENTS_INTERVAL = 300;
 		public static int DEFAULT_GET_UPDATES_INTERVAL = 550;
 		public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 30;
 }
