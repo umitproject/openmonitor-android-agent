@@ -29,6 +29,8 @@ import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
@@ -106,21 +108,8 @@ public class P2PActions {
 	 
 	 @see ProcessActions
 	 */
-	public static void getPeerListAction(GetPeerListResponse getPeerListResponse) {
-		try {
-			ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());
+	public static void getPeerListAction(P2PGetPeerListResponse getPeerListResponse) {	
+		ProcessActions.updatePeersList(getPeerListResponse.getPeersList());
 	}
 	
 	/**
@@ -135,21 +124,8 @@ public class P2PActions {
 	 
 	 @see ProcessActions
 	 */
-	public static void getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) {
-		try {
-			ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());
+	public static void getSuperPeerListAction(P2PGetSuperPeerListResponse getSuperPeerListResponse) {		
+		ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getPeersList());
 	}
 	
 	/**

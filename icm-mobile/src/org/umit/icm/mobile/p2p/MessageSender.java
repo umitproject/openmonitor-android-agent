@@ -102,7 +102,7 @@ public class MessageSender {
 	 * 
 	 * 
 	 
-	 @param getPeerList message of type {@link GetPeerList}
+	 @param getPeerList message of type {@link P2PGetPeerList}
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
@@ -113,9 +113,9 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void receivePeerList(AgentData agentData, GetPeerList getPeerList) throws Exception {
+	public static void receivePeerList(AgentData agentData, P2PGetPeerList getPeerList) throws Exception {
 		byte[] response = P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
-		GetPeerListResponse getPeerListResponse = GetPeerListResponse.parseFrom(response);
+		P2PGetPeerListResponse getPeerListResponse = P2PGetPeerListResponse.parseFrom(response);
 		P2PActions.getPeerListAction(getPeerListResponse);			
 	}
 	
@@ -124,7 +124,7 @@ public class MessageSender {
 	 * 
 	 * 
 	 
-	 @param getSuperPeerList message of type {@link GetSuperPeerList}
+	 @param getSuperPeerList message of type {@link P2PGetSuperPeerList}
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
@@ -135,9 +135,9 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) throws Exception {
+	public static void receiveSuperPeerList(AgentData agentData, P2PGetSuperPeerList getSuperPeerList) throws Exception {
 		byte[] response = P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
-		GetSuperPeerListResponse getSuperPeerListResponse = GetSuperPeerListResponse.parseFrom(response);
+		P2PGetSuperPeerListResponse getSuperPeerListResponse = P2PGetSuperPeerListResponse.parseFrom(response);
 		P2PActions.getSuperPeerListAction(getSuperPeerListResponse);
 	}
 	
