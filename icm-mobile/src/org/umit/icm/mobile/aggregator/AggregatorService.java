@@ -51,8 +51,7 @@ public class AggregatorService extends Service {
 	private Timer superPeersTimer = new Timer();
 	private Timer eventsTimer = new Timer();
 	private Timer accessTimer = new Timer();
-	private Context context;
-		
+			
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -67,8 +66,7 @@ public class AggregatorService extends Service {
 		startPeers();
 		startSuperPeers();
 		startEvents();
-		startAccess();
-		context = getApplicationContext();
+		startAccess();		
 	}
 	
 	@Override
@@ -274,7 +272,7 @@ public class AggregatorService extends Service {
 	 */	 	 
 	private void startAccess() {
 		 int interval = Constants.DEFAULT_AGGREGATOR_ACCESS_INTERVAL;
-		 final AggregatorAccess aggregatorAccess = new AggregatorAccess(context);
+		 final AggregatorAccess aggregatorAccess = new AggregatorAccess(AggregatorService.this);
 		 accessTimer = new Timer();
 		 accessTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
