@@ -178,14 +178,14 @@ public class Constants {
 		public static int DEFAULT_GET_EVENTS_INTERVAL = 300;
 		public static int DEFAULT_GET_UPDATES_INTERVAL = 550;
 		public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 30;
-		public static int AUTHENTICATE_PEER_ID = 1;
-		public static int AUTHENTICATE_PEER_RESPONSE_ID = 2;
-		public static int GET_PEER_LIST_ID = 3;
-		public static int GET_PEER_LIST_RESPONSE_ID = 4;
-		public static int GET_SUPER_PEER_LIST_ID = 5;
-		public static int GET_SUPER_PEER_LIST_RESPONSE_ID = 6;
-		public static int UPDATE_AGENT_ID = 7;
-		public static int UPDATE_AGENT_RESPONSE_ID = 8;
-		public static int UPDATE_TEST_ID = 9;
-		public static int UPDATE_TEST_RESPONSE_ID = 10;
+		public static final int AUTHENTICATE_PEER_ID = 1;
+		public static final int AUTHENTICATE_PEER_RESPONSE_ID = 2;
+		public static final int GET_PEER_LIST_ID = 3;
+		public static final int GET_PEER_LIST_RESPONSE_ID = 4;
+		public static final int GET_SUPER_PEER_LIST_ID = 5;
+		public static final int GET_SUPER_PEER_LIST_RESPONSE_ID = 6;
+		public static final int UPDATE_AGENT_ID = 7;
+		public static final int UPDATE_AGENT_RESPONSE_ID = 8;
+		public static final int UPDATE_TEST_ID = 9;
+		public static final int UPDATE_TEST_RESPONSE_ID = 10;
 }
