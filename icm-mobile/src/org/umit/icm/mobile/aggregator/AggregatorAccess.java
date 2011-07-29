@@ -32,6 +32,10 @@ import org.umit.icm.mobile.process.Globals;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+/**
+ * To check if the aggregator can be reached.
+ */
+
 public class AggregatorAccess {
 	
 	private ConnectivityManager connectivityManager;
@@ -41,6 +45,14 @@ public class AggregatorAccess {
 	    = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);		
 	}
 	
+	/**
+	 * Sets the {@link Globals#aggregatorCommunication} object to false if the 
+	 * aggregator can't be reached.
+	 * 
+	 * 
+	 
+	 @see WebsiteOpen 
+	 */
 	public void aggregatorCheck() {
 		
 		Globals.aggregatorCommunication = false;
