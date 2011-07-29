@@ -41,7 +41,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     public void testPeersList() throws Throwable {
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID("ID1")
+    	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey1")
@@ -50,7 +50,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID("ID2")
+    	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey2")
@@ -72,7 +72,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     public void testSuperPeersList() throws Throwable {
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID("ID1")
+    	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey1")
@@ -81,7 +81,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID("ID2")
+    	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey2")

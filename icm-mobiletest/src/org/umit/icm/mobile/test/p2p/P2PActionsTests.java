@@ -35,14 +35,9 @@ public class P2PActionsTests extends AndroidTestCase {
 
     
     public void testGetPeerList() throws Throwable {
-    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
-    	.setCurrentTestVersionNo(24)
-    	.setCurrentVersionNo(24)
-    	.build();
-
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID("ID1")
+    	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey1")
@@ -51,18 +46,17 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID("ID2")
+    	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey2")
     	.setToken("token2")
     	.build();
     	
-    	GetPeerListResponse getPeerListResponse 
-    	= GetPeerListResponse.newBuilder()
-    	.setHeader(responseHeader)
-    	.addKnownPeers(agent1)
-    	.addKnownPeers(agent2)
+    	P2PGetPeerListResponse getPeerListResponse 
+    	= P2PGetPeerListResponse.newBuilder()    	
+    	.addPeers(agent1)
+    	.addPeers(agent2)
     	.build();
     	
     	P2PActions.getPeerListAction(getPeerListResponse);
@@ -77,21 +71,16 @@ public class P2PActionsTests extends AndroidTestCase {
     			&& agent1.getAgentPort() == agent2.getAgentPort()
     			&& agent1.getPeerStatus().equals(agent2.getPeerStatus())
     			&& agent1.getPublicKey().equals(agent2.getPublicKey())
-    			&& agent1.getAgentID().equals(agent2.getAgentID())
+    			&& agent1.getAgentID() == agent2.getAgentID()
     			&& agent1.getToken().equals(agent2.getToken()))
     		return true;
     	return false;
     }
     
     public void testGetSuperPeerList() throws Throwable {
-    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
-    	.setCurrentTestVersionNo(25)
-    	.setCurrentVersionNo(25)
-    	.build();
-
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP3")
-    	.setAgentID("ID3")
+    	.setAgentID(3)
     	.setAgentPort(13)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey3")
@@ -100,18 +89,17 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP4")
-    	.setAgentID("ID4")
+    	.setAgentID(4)
     	.setAgentPort(14)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey4")
     	.setToken("token4")
     	.build();
     	
-    	GetSuperPeerListResponse getSuperPeerListResponse 
-    	= GetSuperPeerListResponse.newBuilder()
-    	.setHeader(responseHeader)
-    	.addKnownSuperPeers(agent1)
-    	.addKnownSuperPeers(agent2)
+    	P2PGetSuperPeerListResponse getSuperPeerListResponse 
+    	= P2PGetSuperPeerListResponse.newBuilder()    	
+    	.addPeers(agent1)
+    	.addPeers(agent2)
     	.build();
     	
     	P2PActions.getSuperPeerListAction(getSuperPeerListResponse);

@@ -34,7 +34,7 @@ public class MessageQTests extends AndroidTestCase {
 	public void testMessageQ() throws Throwable {
 		AgentData agent1 = AgentData.newBuilder()
 		.setAgentIP("IP1")
-		.setAgentID("ID1")
+		.setAgentID(1)
 		.setAgentPort(11)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey1")
@@ -43,7 +43,7 @@ public class MessageQTests extends AndroidTestCase {
 		
 		AgentData agent2 = AgentData.newBuilder()
 		.setAgentIP("IP2")
-		.setAgentID("ID2")
+		.setAgentID(2)
 		.setAgentPort(12)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey2")
@@ -52,16 +52,16 @@ public class MessageQTests extends AndroidTestCase {
 		
 		AgentData agent3 = AgentData.newBuilder()
 		.setAgentIP("IP3")
-		.setAgentID("ID3")
+		.setAgentID(3)
 		.setAgentPort(13)
 		.setPeerStatus("On")
 		.setPublicKey("publicKey3")
 		.setToken("token3")
 		.build();
 		
-		QueueObject obj1 = new QueueObject(agent1, "what".getBytes());
-		QueueObject obj2 = new QueueObject(agent2, "what".getBytes());
-		QueueObject obj3 = new QueueObject(agent3, "what".getBytes());
+		QueueObject obj1 = new QueueObject(agent1, "what".getBytes(), 1);
+		QueueObject obj2 = new QueueObject(agent2, "what".getBytes(), 2);
+		QueueObject obj3 = new QueueObject(agent3, "what".getBytes(), 3);
 		
 		MessageQueue messageQ = new MessageQueue();
 		

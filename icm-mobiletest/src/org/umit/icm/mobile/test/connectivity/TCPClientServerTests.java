@@ -25,7 +25,6 @@ package org.umit.icm.mobile.test.connectivity;
 
 import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
-import org.umit.icm.mobile.p2p.MessageBuilder;
 
 import junit.framework.Assert;
 import android.test.AndroidTestCase;

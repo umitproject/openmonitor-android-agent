@@ -83,14 +83,14 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setPeerStatus("On")
     	.setPublicKey("publicKey1")
     	.setToken("token1")
-    	.setAgentID("ID1")
+    	.setAgentID(1)
     	.build();
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
     	.setAgentPort(12)
     	.setPeerStatus("On")
-    	.setAgentID("ID2")
+    	.setAgentID(2)
     	.setPublicKey("publicKey2")
     	.setToken("token2")
     	.build();
@@ -114,7 +114,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
     			&& agent1.getAgentPort() == agent2.getAgentPort()
     			&& agent1.getPeerStatus().equals(agent2.getPeerStatus())
     			&& agent1.getPublicKey().equals(agent2.getPublicKey())
-    			&& agent1.getAgentID().equals(agent2.getAgentID())
+    			&& agent1.getAgentID() == agent2.getAgentID()
     			&& agent1.getToken().equals(agent2.getToken()))
     		return true;
     	return false;
@@ -128,7 +128,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
 
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP3")
-    	.setAgentID("ID3")
+    	.setAgentID(3)
     	.setAgentPort(13)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey3")
@@ -137,7 +137,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP4")
-    	.setAgentID("ID4")
+    	.setAgentID(4)
     	.setAgentPort(14)
     	.setPeerStatus("On")
     	.setPublicKey("publicKey4")
