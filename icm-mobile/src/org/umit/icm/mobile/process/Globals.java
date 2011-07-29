@@ -151,4 +151,9 @@ public class Globals {
 	 * Global IP address of app.
 	 */
 	public static int myIP = 0;
+	
+	/**
+	 * Global boolean object to check if aggregator is reachable.
+	 */
+	public static boolean aggregatorCommunication = true;
 }
