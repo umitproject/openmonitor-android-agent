@@ -31,6 +31,7 @@ import org.umit.icm.mobile.process.Globals;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 /**
  * To check if the aggregator can be reached.
@@ -55,13 +56,18 @@ public class AggregatorAccess {
 	 */
 	public void aggregatorCheck() {
 		
-		Globals.aggregatorCommunication = false;
-		if(WebsiteOpen.checkInternetAccess(connectivityManager)) {			
+		if(!WebsiteOpen.checkInternetAccess(connectivityManager)) {
+			Globals.aggregatorCommunication = false;
+			Log.w("Aggregator Access", "No Internet");
+		} else {			
 			try {
 				Map<String, String> header = 
 					WebsiteOpen.getHeaders(WebsiteOpen.openURLConnection(Constants.AGGREGATOR_URL));
 				if(WebsiteOpen.getStatusCode(header) == 200) {
 					Globals.aggregatorCommunication = true;
+				} else {
+					Globals.aggregatorCommunication = false;
+					Log.w("Aggregator Access", "Aggregator can't be reached");
 				}
 				
 			} catch (IOException e) {
