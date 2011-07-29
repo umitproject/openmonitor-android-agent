@@ -4820,12 +4820,12 @@ public final class MessageProtos {
       return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AgentData_fieldAccessorTable;
     }
     
-    // required string agentID = 1;
+    // required int64 agentID = 1;
     public static final int AGENTID_FIELD_NUMBER = 1;
     private boolean hasAgentID;
-    private java.lang.String agentID_ = "";
+    private long agentID_ = 0L;
     public boolean hasAgentID() { return hasAgentID; }
-    public java.lang.String getAgentID() { return agentID_; }
+    public long getAgentID() { return agentID_; }
     
     // required string agentIP = 2;
     public static final int AGENTIP_FIELD_NUMBER = 2;
@@ -4875,7 +4875,7 @@ public final class MessageProtos {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (hasAgentID()) {
-        output.writeString(1, getAgentID());
+        output.writeInt64(1, getAgentID());
       }
       if (hasAgentIP()) {
         output.writeString(2, getAgentIP());
@@ -4903,7 +4903,7 @@ public final class MessageProtos {
       size = 0;
       if (hasAgentID()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(1, getAgentID());
+          .computeInt64Size(1, getAgentID());
       }
       if (hasAgentIP()) {
         size += com.google.protobuf.CodedOutputStream
@@ -5117,8 +5117,8 @@ public final class MessageProtos {
               }
               break;
             }
-            case 10: {
-              setAgentID(input.readString());
+            case 8: {
+              setAgentID(input.readInt64());
               break;
             }
             case 18: {
@@ -5146,24 +5146,21 @@ public final class MessageProtos {
       }
       
       
-      // required string agentID = 1;
+      // required int64 agentID = 1;
       public boolean hasAgentID() {
         return result.hasAgentID();
       }
-      public java.lang.String getAgentID() {
+      public long getAgentID() {
         return result.getAgentID();
       }
-      public Builder setAgentID(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasAgentID = true;
+      public Builder setAgentID(long value) {
+        result.hasAgentID = true;
         result.agentID_ = value;
         return this;
       }
       public Builder clearAgentID() {
         result.hasAgentID = false;
-        result.agentID_ = getDefaultInstance().getAgentID();
+        result.agentID_ = 0L;
         return this;
       }
       
@@ -17353,7 +17350,7 @@ public final class MessageProtos {
       "Key\030\006 \002(\t\022\033\n\023aggregatorPublicKey\030\007 \002(\t\"G" +
       "\n\013GetPeerList\0228\n\006header\030\001 \002(\0132(.org.umit" +
       ".icm.mobile.proto.RequestHeader\"v\n\tAgent" +
-      "Data\022\017\n\007agentID\030\001 \002(\t\022\017\n\007agentIP\030\002 \002(\t\022\021" +
+      "Data\022\017\n\007agentID\030\001 \002(\003\022\017\n\007agentIP\030\002 \002(\t\022\021" +
       "\n\tagentPort\030\003 \002(\005\022\r\n\005token\030\004 \002(\t\022\021\n\tpubl" +
       "icKey\030\005 \002(\t\022\022\n\npeerStatus\030\006 \002(\t\"\212\001\n\023GetP" +
       "eerListResponse\0229\n\006header\030\001 \002(\0132).org.um",
