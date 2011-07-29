@@ -22,7 +22,7 @@
 package org.umit.icm.mobile.test.utils;
 
 
-import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import twitter4j.auth.AccessToken;

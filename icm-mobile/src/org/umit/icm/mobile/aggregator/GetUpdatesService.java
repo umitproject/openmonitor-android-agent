@@ -26,11 +26,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
-import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Service;
 import android.content.Intent;

@@ -24,8 +24,8 @@ package org.umit.icm.mobile.gui;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;

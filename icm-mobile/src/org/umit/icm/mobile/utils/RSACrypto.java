@@ -46,6 +46,7 @@ import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
 
 import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.process.Constants;
 
 import android.os.Environment;
 

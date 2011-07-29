@@ -26,8 +26,8 @@ import java.io.IOException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;

@@ -23,7 +23,6 @@ package org.umit.icm.mobile.process;
 
 import java.io.IOException;
 
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 /**

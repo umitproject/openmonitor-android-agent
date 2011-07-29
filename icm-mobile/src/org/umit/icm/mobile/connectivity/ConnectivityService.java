@@ -31,10 +31,10 @@ import javax.mail.MessagingException;
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.notifications.NotificationHelper;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.process.RuntimeParameters;
-import org.umit.icm.mobile.utils.Constants;
 
 import android.app.Service;
 import android.content.Context;

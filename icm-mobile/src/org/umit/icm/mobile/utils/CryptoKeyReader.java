@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import org.umit.icm.mobile.process.Constants;
+
 /**
  * Helper class which reads Crypto keys from disk.
  */

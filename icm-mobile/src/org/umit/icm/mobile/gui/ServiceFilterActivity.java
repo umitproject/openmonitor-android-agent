@@ -29,8 +29,8 @@ import java.util.List;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;

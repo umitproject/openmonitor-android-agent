@@ -26,10 +26,10 @@ package org.umit.icm.mobile.test.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import junit.framework.Assert;

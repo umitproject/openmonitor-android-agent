@@ -19,7 +19,7 @@
  * USA
  */
 
-package org.umit.icm.mobile.utils;
+package org.umit.icm.mobile.process;
 
 import java.util.ArrayList;
 import java.util.List;

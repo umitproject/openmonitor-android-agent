@@ -24,8 +24,8 @@ package org.umit.icm.mobile.social;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.utils.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;

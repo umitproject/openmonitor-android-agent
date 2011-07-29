@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Website;
-import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import junit.framework.Assert;

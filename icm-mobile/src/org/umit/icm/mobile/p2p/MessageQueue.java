@@ -24,7 +24,7 @@ package org.umit.icm.mobile.p2p;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.process.Constants;
 
 /**
  * Provides a queueing mechanism for the P2P messages.

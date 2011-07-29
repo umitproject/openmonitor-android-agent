@@ -24,7 +24,7 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.umit.icm.mobile.utils.Constants;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 /**

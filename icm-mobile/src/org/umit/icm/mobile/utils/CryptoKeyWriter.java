@@ -30,6 +30,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
+import org.umit.icm.mobile.process.Constants;
+
 /**
  * Helper class which writes Crypto keys to disk.
  */
