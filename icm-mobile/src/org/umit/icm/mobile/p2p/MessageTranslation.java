@@ -21,6 +21,7 @@
 
 package org.umit.icm.mobile.p2p;
 
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AgentUpdate;
 import org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
@@ -52,34 +53,34 @@ public class MessageTranslation {
 	public static void translateMessage(int id, byte[] message) throws InvalidProtocolBufferException {
 		
 		switch(id) {
-		case 1: 
+		case Constants.AUTHENTICATE_PEER_ID: 
 			AuthenticatePeer.parseFrom(message);
 			break;
-		case 2:
+		case Constants.AUTHENTICATE_PEER_RESPONSE_ID:
 			AuthenticatePeerResponse.parseFrom(message);
 			break;
-		case 3:
-			P2PGetSuperPeerList.parseFrom(message);
+		case Constants.GET_PEER_LIST_ID:
+			P2PGetPeerList.parseFrom(message);
 			break;
-		case 4:
-			P2PGetSuperPeerListResponse.parseFrom(message);
-			break;
-		case 5:
-			P2PGetPeerList.parseFrom(message); 
-			break;
-		case 6:
+		case Constants.GET_PEER_LIST_RESPONSE_ID:
 			P2PGetPeerListResponse.parseFrom(message);
 			break;
-		case 7:
+		case Constants.GET_SUPER_PEER_LIST_ID:
+			P2PGetSuperPeerList.parseFrom(message); 
+			break;
+		case Constants.GET_SUPER_PEER_LIST_RESPONSE_ID:
+			P2PGetSuperPeerListResponse.parseFrom(message);
+			break;
+		case Constants.UPDATE_AGENT_ID:
 			AgentUpdate.parseFrom(message);
 			break;
-		case 8:
+		case Constants.UPDATE_AGENT_RESPONSE_ID:
 			AgentUpdateResponse.parseFrom(message);
 			break;
-		case 9:
+		case Constants.UPDATE_TEST_ID:
 			TestModuleUpdate.parseFrom(message);
 			break;
-		case 10:
+		case Constants.UPDATE_TEST_RESPONSE_ID:
 			TestModuleUpdateResponse.parseFrom(message);
 			break;
 		default:
