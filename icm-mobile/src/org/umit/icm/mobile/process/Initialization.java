@@ -131,7 +131,7 @@ public class Initialization {
 	}
 	
 	public static void checkProfiler() {
-		if(Constants.runProfiler == true)
+		if(Constants.RUN_PROFILER == true)
 			ProfilerRun.run();
 	}
 	
