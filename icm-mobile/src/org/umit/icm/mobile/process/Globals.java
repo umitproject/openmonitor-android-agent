@@ -32,6 +32,7 @@ import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
+import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
@@ -156,4 +157,10 @@ public class Globals {
 	 * Global boolean object to check if aggregator is reachable.
 	 */
 	public static boolean aggregatorCommunication = true;
+	
+	/**
+	 * Global P2P message queue
+	 */
+	public static MessageQueue messageQ 
+	= new MessageQueue();
 }
