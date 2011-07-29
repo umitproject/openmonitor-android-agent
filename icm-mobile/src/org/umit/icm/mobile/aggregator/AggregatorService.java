@@ -35,6 +35,7 @@ import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -49,6 +50,8 @@ public class AggregatorService extends Service {
 	private Timer peersTimer = new Timer();
 	private Timer superPeersTimer = new Timer();
 	private Timer eventsTimer = new Timer();
+	private Timer accessTimer = new Timer();
+	private Context context;
 		
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -64,6 +67,8 @@ public class AggregatorService extends Service {
 		startPeers();
 		startSuperPeers();
 		startEvents();
+		startAccess();
+		context = getApplicationContext();
 	}
 	
 	@Override
@@ -73,6 +78,7 @@ public class AggregatorService extends Service {
 		stopPeers();
 		stopSuperPeers();
 		stopEvents();
+		stopAccess();
 	}
 	
 	/**
@@ -254,6 +260,40 @@ public class AggregatorService extends Service {
 	void stopEvents() {
 		if (eventsTimer != null){
 			eventsTimer.cancel();		
+		}
+				
+	}
+	
+	/**
+	 * Starts a new {@link Timer} and runs a {@link TimerTask} at the default
+	 * interval. Sends GetEvents messages to the aggregator.
+	 * 
+	 * 
+
+	@see         Timer
+	 */	 	 
+	private void startAccess() {
+		 int interval = Constants.DEFAULT_AGGREGATOR_ACCESS_INTERVAL;
+		 final AggregatorAccess aggregatorAccess = new AggregatorAccess(context);
+		 accessTimer = new Timer();
+		 accessTimer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				aggregatorAccess.aggregatorCheck();
+			}	
+		}, 0, interval * 1000); 
+	}
+	
+	/**
+	 * Cancels the {@link Timer}.
+	 * 
+	 * 
+	 
+	@see         Timer
+	 */	 
+	void stopAccess() {
+		if (accessTimer != null){
+			accessTimer.cancel();		
 		}
 				
 	}
