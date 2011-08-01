@@ -32,7 +32,6 @@ import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.utils.AESCrypto;
-import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
 import android.content.Intent;
