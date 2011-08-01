@@ -41,6 +41,8 @@ public class BingSearch {
 	private static String SOURCES_VALUE = "web+spell";
 	private static String WEB_COUNT_KEY = "Web.Count=";
 	private static String WEB_COUNT_VALUE = "3";
+	private static String WEB_OFFSET_KEY = "Web.Offset=";
+	private static String WEB_OFFSET_VALUE = "0";
 	private static String JSON_TYPE_KEY = "JsonType=";
 	private static String JSON_TYPE_VALUE = "raw";
 	private String version;
@@ -48,6 +50,7 @@ public class BingSearch {
 	private String sources;
 	private String webCount;
 	private String jsonType;
+	private String offset;
 	
 	public BingSearch() {
 		version = VERSION_VALUE;
@@ -55,6 +58,7 @@ public class BingSearch {
 		sources = SOURCES_VALUE;
 		webCount = WEB_COUNT_VALUE;
 		jsonType = JSON_TYPE_VALUE;
+		offset = WEB_OFFSET_VALUE;
 	}
 	
 	public String getWebCount() {
@@ -134,6 +138,9 @@ public class BingSearch {
 		+ SEPARATOR
 		+ WEB_COUNT_KEY
 		+ webCount
+		+ SEPARATOR
+		+ WEB_OFFSET_KEY
+		+ offset
 		+ SEPARATOR
 		+ JSON_TYPE_KEY
 		+ jsonType
