@@ -27,6 +27,10 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 
+import twitter4j.internal.org.json.JSONArray;
+import twitter4j.internal.org.json.JSONException;
+import twitter4j.internal.org.json.JSONObject;
+
 public class BingSearch {
 	
 	private static String BASE_URL = "http://api.bing.net/json.aspx?";
@@ -153,8 +157,14 @@ public class BingSearch {
 				WebsiteOpen.openURLConnection(queryString));
 	}
 	
-	public String search(String query) throws IOException, HttpException {
-		return retrieveQuery(query);
+	public JSONObject search(String query) throws IOException, HttpException, JSONException {
+		return clean(retrieveQuery(query));
+	}
+	
+	private JSONObject clean(String response) throws JSONException {
+		JSONObject jsonObjectResponse = new JSONObject(response);				
+		JSONArray jsonArrayResponse = jsonObjectResponse.toJSONArray(jsonObjectResponse.names());
+		return jsonArrayResponse.getJSONObject(0).getJSONObject("Web");
 	}
 	
 }
