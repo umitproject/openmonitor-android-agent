@@ -37,12 +37,27 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import twitter4j.internal.org.json.JSONObject;
 
+/**
+ * TwitterUpdate class that registers with Twitter and sends Tweets.
+ * 
+ */
 public class TwitterUpdate {
 	private Twitter twitter;
 	private RequestToken requestToken;
 	private AccessToken accessToken;
 	
+	/**
+	 * Default constructor which initiates the Twitter object and adds keys. 
+	 * 
+	 * 
+	 
+	 @see TwitterFactory
+	 *
+	 
+	 @see Twitter
+	 */
 	public TwitterUpdate() {
 		twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
@@ -51,6 +66,16 @@ public class TwitterUpdate {
 		requestToken = null;		
 	}
 	
+	/**
+	 * Resets the core objects. 
+	 * 
+	 * 
+	 
+	 @see TwitterFactory
+	 *
+	 
+	 @see Twitter
+	 */
 	public void reset() {
 		twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
@@ -63,6 +88,16 @@ public class TwitterUpdate {
 		this.accessToken = accessToken;
 	}
 	
+	/**
+	 * Sends a Tweet. 
+	 * 
+	 * 
+	 
+	 @param	tweet 	An object of type String which contains the Tweet.
+	 *
+	 
+	 @see Twitter
+	 */
 	public void sendTweet(String tweet) throws TwitterException, IOException, RuntimeException {
 		if(accessToken != null && Globals.runtimeParameters.getTwitter().equals("On")) {			
 			twitter.setOAuthAccessToken(accessToken);
@@ -70,6 +105,16 @@ public class TwitterUpdate {
 		}		
 	}
 	
+	/**
+	 * Requests a new Token. 
+	 * 
+	 * 
+	 
+	 @param context	An object of type {@link Context}
+	 *
+	 
+	 @see Intent
+	 */
 	public void requestToken(Context context) throws TwitterException, IOException, HttpException {		
 			requestToken = twitter.getOAuthRequestToken();	    
 		    Intent browserIntent 
@@ -78,6 +123,18 @@ public class TwitterUpdate {
 		    context.startActivity(browserIntent);				   	    	    	   
 	}
 	
+	/**
+	 * Takes as input a pin and gets the associated Token and writes it to disk. 
+	 * 
+	 * 
+	 
+	 @param	pin		Object of type String which is the Twitter pin.
+	 *
+	 
+	 @see Twitter
+	 *
+	 @see SDCardReadWrite
+	 */
 	public void enterPin(String pin) throws TwitterException, IOException, RuntimeException {
 		if(requestToken != null) {
 			accessToken = twitter.getOAuthAccessToken(requestToken, pin);
@@ -85,6 +142,16 @@ public class TwitterUpdate {
 		}
 	}
 	
+	/**
+	 * Sends a Tweet using the Notification Service. 
+	 * 
+	 * 
+	 
+	 @param	message		An object of type String which represents the Tweet.
+	 *
+	 
+	 @see Intent 
+	 */
 	public void sendTweet(String message, Context context) {		
 		Bundle bundle = new Bundle();	
 		bundle.putString("twitter"
