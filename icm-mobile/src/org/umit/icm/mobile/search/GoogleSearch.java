@@ -29,7 +29,7 @@ import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import twitter4j.internal.org.json.JSONException;
 import twitter4j.internal.org.json.JSONObject;
 
-public class GoogleSearch {	
+public class GoogleSearch implements AbstractSearch {	
 	
 	private static String BASE_URL = "https://ajax.googleapis.com/ajax/services/search/web?";	
 	private static String SEPARATOR = "&";

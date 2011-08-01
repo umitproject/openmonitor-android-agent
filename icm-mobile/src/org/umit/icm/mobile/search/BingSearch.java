@@ -31,7 +31,7 @@ import twitter4j.internal.org.json.JSONArray;
 import twitter4j.internal.org.json.JSONException;
 import twitter4j.internal.org.json.JSONObject;
 
-public class BingSearch {
+public class BingSearch implements AbstractSearch {
 	
 	private static String BASE_URL = "http://api.bing.net/json.aspx?";
 	private static String APP_ID_KEY = "AppId=";
