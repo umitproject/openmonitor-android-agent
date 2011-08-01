@@ -40,7 +40,7 @@ public class BingSearch {
 	private static String SOURCES_KEY = "Sources=";
 	private static String SOURCES_VALUE = "web+spell";
 	private static String WEB_COUNT_KEY = "Web.Count=";
-	private static String WEB_COUNT_VALUE = "1";
+	private static String WEB_COUNT_VALUE = "3";
 	private static String JSON_TYPE_KEY = "JsonType=";
 	private static String JSON_TYPE_VALUE = "raw";
 	private String version;
