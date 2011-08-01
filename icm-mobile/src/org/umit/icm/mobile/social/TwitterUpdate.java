@@ -37,7 +37,6 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import twitter4j.internal.org.json.JSONObject;
 
 /**
  * TwitterUpdate class that registers with Twitter and sends Tweets.
