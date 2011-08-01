@@ -29,6 +29,11 @@ import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import twitter4j.internal.org.json.JSONException;
 import twitter4j.internal.org.json.JSONObject;
 
+
+/**
+ * GoogleSearch class that implements the interface {@link AbstractSearch}.
+ */
+
 public class GoogleSearch implements AbstractSearch {	
 	
 	private static String BASE_URL = "https://ajax.googleapis.com/ajax/services/search/web?";	
@@ -70,7 +75,12 @@ public class GoogleSearch implements AbstractSearch {
 		this.version = version;
 	}
 
-
+	/**
+	 * Returns a String object that is the query string url.
+	 * 
+	 * 
+	 @param	query	An object of type {@link String}
+	 */
 	private String buildQuery(String query) {
 		return BASE_URL 		
 		+ SEPARATOR
@@ -88,16 +98,43 @@ public class GoogleSearch implements AbstractSearch {
 		;
 	}
 	
+	/**
+	 * Returns a String object that is the query response.
+	 * 
+	 * 
+	 @param	query	An object of type {@link String}
+	 *
+	 
+	 @see WebsiteOpen
+	 */
 	private String retrieveQuery(String query) throws IOException, HttpException {
 		String queryString = buildQuery(query);
 		return WebsiteOpen.getContent(
 				WebsiteOpen.openURLConnection(queryString));
 	}
 	
+	/**
+	 * Returns a {@link JSONObject} that is the cleaned query result.
+	 * Calls {@link	GoogleSearch#clean(String)}
+	 * 
+	 * 
+	 
+	 @param	query	An object of type {@link String}
+	 */
 	public JSONObject search(String query) throws IOException, HttpException, JSONException {
 		return clean(retrieveQuery(query));
 	}
 	
+	/**
+	 * Returns a {@JSONObject} that is the cleaned query result.
+	 * 
+	 * 
+	 
+	 @param	query	An object of type {@link String}
+	 *
+	 
+	 @see JSONObject
+	 */
 	private JSONObject clean(String response) throws JSONException {
 		JSONObject jsonObjectResponse = new JSONObject(response);						
 		return jsonObjectResponse.getJSONObject("responseData");		

@@ -28,6 +28,24 @@ import org.apache.http.HttpException;
 import twitter4j.internal.org.json.JSONException;
 import twitter4j.internal.org.json.JSONObject;
 
+
+/**
+ * AbstractSearch interface that needs to be implemented by every search engine
+ * API.
+ */
+
 public interface AbstractSearch {
+	
+
+	/**
+	 * returns a {@link JSONObject} object with the results of the query.
+	 * 
+	 * 
+	 
+	 @return JSONObject
+	 *
+	 
+	 @param query 	An object of type {@link String}
+	 */
 	public JSONObject search(String query) throws IOException, HttpException, JSONException;
 }
