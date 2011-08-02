@@ -86,9 +86,10 @@ public class Constants {
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
-	public static String AGGREGATOR_URL = "http://5.icm-dev.appspot.com";
+	public static String AGGREGATOR_URL = "http://icm-dev.appspot.com";
 	public static String AGGR_REGISTER_AGENT = "/api/registeragent/";
 	public static String AGGR_GET_PEER_LIST = "/api/getpeerlist/";
+	public static String AGGR_CHECK_AGGREGATOR = "/api/checkaggregator/";	
 	public static String AGGR_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
 	public static String AGGR_GET_EVENTS = "/api/getevents/";
 	public static String AGGR_SEND_WEBSITE_REPORT = "/api/sendwebsitereport/";
