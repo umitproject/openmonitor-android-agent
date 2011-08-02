@@ -257,7 +257,7 @@ public class AggregatorActions {
 	public static boolean checkAggregatorAction(CheckAggregatorResponse checkAggregatorResponse) throws IOException {
 		ProcessActions.updateAgentVersion(checkAggregatorResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(checkAggregatorResponse.getHeader());
-	 	if(checkAggregatorResponse.getStatus().equalsIgnoreCase("OK"))
+	 	if(checkAggregatorResponse.getStatus().equalsIgnoreCase("ON"))
 	 		return true;
 	 	else
 	 		return false;		
