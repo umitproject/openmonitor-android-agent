@@ -776,7 +776,7 @@ public class ProfilerRun {
 				
 				NewVersion newVersion = NewVersion.newBuilder()
 				.setHeader(requestHeader)
-				.setAgentType("mobile")
+				.setAgentType("MOBILE")
 				.setAgentVersionNo(10)
 				.build();
 				
