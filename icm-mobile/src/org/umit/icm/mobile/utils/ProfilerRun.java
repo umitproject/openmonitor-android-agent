@@ -537,6 +537,7 @@ public class ProfilerRun {
 				.setPrivateKey("key")
 				.setPublicKey("key")
 				.setToken("token")
+				.setAggregatorPublicKey("key")
 				.build();
 			}
 			
