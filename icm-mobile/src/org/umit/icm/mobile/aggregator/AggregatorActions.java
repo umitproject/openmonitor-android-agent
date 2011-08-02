@@ -24,6 +24,7 @@ package org.umit.icm.mobile.aggregator;
 import java.io.IOException;
 
 import org.umit.icm.mobile.process.ProcessActions;
+import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
@@ -234,5 +235,31 @@ public class AggregatorActions {
 		ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(testSuggestionResponse.getHeader());
 		return true;
+	}
+	
+	/**
+	 * Returns a boolean object. Calls {@link ProcessActions#updateAgentVersion} and 
+	 * {@link ProcessActions#updateTestsVersion} on the ResponseHeader.
+	 * 
+	 *	 
+	                          
+	@param  checkAggregatorResponse  An object of the type CheckAggregatorResponse
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */
+	public static boolean checkAggregatorAction(CheckAggregatorResponse checkAggregatorResponse) throws IOException {
+		ProcessActions.updateAgentVersion(checkAggregatorResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(checkAggregatorResponse.getHeader());
+	 	if(checkAggregatorResponse.getStatus().equalsIgnoreCase("OK"))
+	 		return true;
+	 	else
+	 		return false;		
 	}
 }

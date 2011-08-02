@@ -26,6 +26,8 @@ import java.io.UnsupportedEncodingException;
 
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
+import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -354,4 +356,29 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
 		 	return AggregatorActions.sendSuggestionAction(testSuggestionResponse);			
 	 }
+	 
+	    /**
+		 * Returns a boolean object from {@link AggregatorActions} method. 
+		 * Calls {@link AggregatorResources#checkAggregatorStatus(org.umit.icm.mobile.proto.MessageProtos.CheckAggregator, ClientResource)}
+		 * on the passed message 
+		 * 
+		 *	 
+		                          
+		@param  checkAggregator  An object of the type CheckAggregator
+		 *  	                          	
+		                          
+		@return      boolean
+		 *  		                          		
+		 
+		@see         AggregatorResources
+		 */
+		 public static boolean checkAggregatorStatus(
+				CheckAggregator checkAggregator) 
+		 throws UnsupportedEncodingException, IOException, RuntimeException {
+			 	ClientResource clientResource 
+			 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
+			 	CheckAggregatorResponse checkAggregatorResponse
+			 	= AggregatorResources.checkAggregatorStatus(checkAggregator, clientResource);
+			 	return AggregatorActions.checkAggregatorAction(checkAggregatorResponse);			
+		 }
 }
