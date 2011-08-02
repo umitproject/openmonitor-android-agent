@@ -83,6 +83,7 @@ public class ProfilerRun {
 		profileAggrGetPeerList();
 		profileAggrGetSuperPeerList();
 		profileAggrRegisterAgent();
+		profileAggrCheckAggregator();
 	}
 	
 	/**
@@ -1074,6 +1075,41 @@ public class ProfilerRun {
 			
 			public String taskName() {
 				return "AggrComm RegisterAgent";
+			}
+		});
+	}
+	
+	private static void profileAggrCheckAggregator() {
+		Profiler profiler = new Profiler();
+		profiler.runProfiler(new TaskInterface () {
+			public void task (){																								
+				 
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(10)
+				.setToken("token")
+				.build();
+				
+				CheckAggregator checkAggregator = CheckAggregator.newBuilder()
+				.setHeader(requestHeader)
+				.build();
+				
+				try {
+					boolean bool 
+					= AggregatorRetrieve.checkAggregatorStatus(checkAggregator);
+					if (bool == true)
+						Log.w(taskName(), "true");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+							
+			
+			public String taskName() {
+				return "AggrComm CheckAggregator";
 			}
 		});
 	}
