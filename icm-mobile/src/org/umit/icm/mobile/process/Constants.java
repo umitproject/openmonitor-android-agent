@@ -126,8 +126,8 @@ public class Constants {
 			ports.add(993);			
 			add(new Service("imap", ports, "imap.gmail.com", "open", "true"));
 			ports.clear();
-			ports.add(443);			
-			add(new Service("msn", ports, "Login.live.com", "open", "true"));
+			ports.add(1863);			
+			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true"));
 			ports.clear();		
 			ports.add(5222);			
 			add(new Service("gtalk", ports, "talk.google.com", "open", "true"));
