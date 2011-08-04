@@ -61,6 +61,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		FTPScan();
 		POP3Scan();
 		IMAPScan();
+		GtalkScan();
 	};
 		 
 	/**
@@ -334,5 +335,48 @@ public class ServiceConnectivity extends AbstractConnectivity{
 
 			}
 		}
+	
+	/**
+	 * For Gtalk service calls
+	 * {@link ServiceGtalk#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
+	 * 
+	 */
+	public void GtalkScan() throws IOException, MessagingException {
 		
+			String GtalkResponse = ServiceGtalk.connect();
+			if(!GtalkResponse.equals(null)) {
+				Log.w("######gtalkResponse", GtalkResponse);
+				byte[] gtalkServiceResponseBytes = null;
+				ServiceReport serviceReportGtalk = ServiceReport.getDefaultInstance();						         
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceGtalk.getService().getIp()
+						, ServiceGtalk.getService().getPorts().get(0));
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				gtalkServiceResponseBytes
+				= Globals.tcpClientConnectivity.readBytes();
+				if(!gtalkServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+				Globals.tcpClientConnectivity.closeConnection();
+				
+					try {
+						serviceReportGtalk = (ServiceReport) clean(ServiceGtalk.getService()
+								, GtalkResponse, gtalkServiceResponseBytes);
+						SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+								, serviceReportGtalk);						
+							
+						Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
+						Log.w("######name", serviceReportGtalk.getReport().getServiceName());
+						Log.w("######port", Integer.toString(ServiceGtalk.getService().getPorts().get(0)));
+						} catch (RuntimeException e) {
+						e.printStackTrace();
+						}	catch (IOException e) {
+						e.printStackTrace();
+						}		
+
+				}
+		}		
 }
