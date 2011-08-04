@@ -62,6 +62,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		POP3Scan();
 		IMAPScan();
 		GtalkScan();
+		MSNScan();
 	};
 		 
 	/**
@@ -379,4 +380,48 @@ public class ServiceConnectivity extends AbstractConnectivity{
 
 				}
 		}		
+	
+	/**
+	 * For MSN service calls
+	 * {@link ServiceMSN#connect()}	 	
+	 * {@link TCPClient#writeLine(byte[])}, and
+	 * {@link TCPClient#readBytes()}. Passes the services content
+	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
+	 * 
+	 */
+	public void MSNScan() throws IOException, MessagingException {
+		
+			String msnResponse = ServiceMSN.connect();
+			if(!msnResponse.equals(null)) {
+				Log.w("######msnResponse", msnResponse);
+				byte[] msnServiceResponseBytes = null;
+				ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceMSN.getService().getIp()
+						, ServiceMSN.getService().getPorts().get(0));
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
+				msnServiceResponseBytes
+				= Globals.tcpClientConnectivity.readBytes();
+				if(!msnServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+				Globals.tcpClientConnectivity.closeConnection();
+				
+					try {
+						serviceReportMSN = (ServiceReport) clean(ServiceMSN.getService()
+								, msnResponse, msnServiceResponseBytes);
+						SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
+								, serviceReportMSN);						
+							
+						Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
+						Log.w("######name", serviceReportMSN.getReport().getServiceName());
+						Log.w("######port", Integer.toString(ServiceMSN.getService().getPorts().get(0)));
+						} catch (RuntimeException e) {
+						e.printStackTrace();
+						}	catch (IOException e) {
+						e.printStackTrace();
+						}		
+
+				}
+		}	
 }
