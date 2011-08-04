@@ -47,10 +47,6 @@
 		    <name>stanford-prpl-research-group</name>  
 		    <url>http://prpl.stanford.edu:8081/nexus/content/repositories/thirdparty</url>  
 	    </repository> 
-	    <repository>
-  			<id>java-jml-maven-repository</id>
-  			<url>http://java-jml.sourceforge.net/maven</url>
-		</repository>
 	</repositories>
 
     <dependencies>
@@ -118,11 +114,6 @@
            <version>[2.2,)</version>
            <scope>compile</scope>
        </dependency>
-       <dependency>
-  			<groupId>net.sourceforge.java-jml</groupId>
-  			<artifactId>jml</artifactId>
-  			<version>1.0b4</version>
-	   </dependency>
     </dependencies>
 
     <build>
