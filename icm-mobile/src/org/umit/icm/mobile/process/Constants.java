@@ -128,7 +128,10 @@ public class Constants {
 			ports.clear();
 			ports.add(443);			
 			add(new Service("msn", ports, "Login.live.com", "open", "true"));
-			ports.clear();			
+			ports.clear();		
+			ports.add(5222);			
+			add(new Service("gtalk", ports, "talk.google.com", "open", "true"));
+			ports.clear();	
 		
 		}};
 		public static boolean RUN_PROFILER = false;
