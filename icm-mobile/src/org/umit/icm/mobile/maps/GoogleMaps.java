@@ -22,9 +22,12 @@
 package org.umit.icm.mobile.maps;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -182,30 +185,33 @@ public class GoogleMaps implements AbstractMap {
         GoogleMapMarker googleMapOverlay 
         = new GoogleMapMarker(drawable, context, getOverlayList(context));        
         overlayList.add(googleMapOverlay);
-        googleMapView.invalidate();       
- 
-     
+        googleMapView.invalidate();             
 	}
 	
 	public List<OverlayItem> getOverlayList(Context context) {
 		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
-		Drawable drawable = context.getResources().getDrawable(R.drawable.reddot);
-		OverlayItem overlayItem 
-		= new OverlayItem(geoPoint, "Title", "Info");
-		drawable.setBounds(0,0, 10, 10);
-		overlayItem.setMarker(drawable);
-		overlayList.add(overlayItem);
 		
-		double lat = getLat(geoPoint);
-		double lon = getLon(geoPoint);
-		GeoPoint gpt = getGeoPoint(lat+0.01,lon); 		
-		Drawable drawable2 = context.getResources().getDrawable(R.drawable.greendot);
-		OverlayItem overlayItem2 
-		= new OverlayItem(gpt, "Title2", "Info2");
-		drawable2.setBounds(0,0, 10, 10);
-		overlayItem2.setMarker(drawable2);
-		overlayList.add(overlayItem2);
-		
+		Iterator<Event> iterator = Globals.eventsList.iterator();
+		while(iterator.hasNext()){
+			Event event = iterator.next();
+			Drawable drawable = context.getResources().getDrawable(R.drawable.greendot);
+			double lat = getLat(geoPoint);
+			double lon = getLon(geoPoint);
+			GeoPoint gpt = getGeoPoint(lat+0.01,lon);
+			
+			if(event.getEventType().equals("CENSOR")
+					||event.getEventType().equals("THROTTLING") 
+					|| event.getEventType().equals("OFF_LINE")) {
+				drawable = context.getResources().getDrawable(R.drawable.reddot);
+			}
+			
+			OverlayItem overlayItem 
+			= new OverlayItem(gpt, event.getTestType(), event.getEventType() + "\n" +
+					event.getTimeUTC() + "\n");
+			drawable.setBounds(0,0, 10, 10);
+			overlayItem.setMarker(drawable);
+			overlayList.add(overlayItem);				
+		}											
 		return overlayList;
 	}
 	
