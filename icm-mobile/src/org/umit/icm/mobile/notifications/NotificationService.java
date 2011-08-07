@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.gui.InformationActivity;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 
 import twitter4j.TwitterException;
@@ -89,7 +90,7 @@ public class NotificationService extends Service {
 		        String message = bundle.getString("twitter");
 				if(intent.getAction().equals("org.umit.icm.mobile.TWITTER_SERVICE")) {
 					try {
-						Globals.twitterUpdate.sendTweet(message);
+						Globals.twitterUpdate.sendTweet(message + " " + Constants.TWITTER_HASHTAG);
 					} catch (TwitterException e) {
 						// TODO Auto-generated catch block
 						String text = "Twitter: " + e.getErrorMessage();

@@ -154,4 +154,5 @@ public class Constants {
 		public static final int UPDATE_TEST_ID = 9;
 		public static final int UPDATE_TEST_RESPONSE_ID = 10;
 		public static final String BING_SEARCH_API = "930F43D8FAD299B1368D22FB4B32467E11EC1BE8";
+		public static final String TWITTER_HASHTAG = "#ICMMobileAgent";
 }
