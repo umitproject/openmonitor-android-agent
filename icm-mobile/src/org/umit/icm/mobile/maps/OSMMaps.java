@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.maps;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -41,6 +42,8 @@ import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 
 
 
@@ -169,23 +172,28 @@ public class OSMMaps implements AbstractMap {
 	
 	public List<OverlayItem> getOSMOverlayList(Context context) {
 		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
-		Drawable drawable = context.getResources().getDrawable(R.drawable.reddot);
-		OverlayItem overlayItem 
-		= new OverlayItem("Info", "Title", geoPoint);
-		drawable.setBounds(0,0, 10, 10);
-		overlayItem.setMarker(drawable);
-		overlayList.add(overlayItem);
 		
-		double lat = getLat(geoPoint);
-		double lon = getLon(geoPoint);
-		GeoPoint gpt = getGeoPoint(lat+0.01,lon); 		
-		Drawable drawable2 = context.getResources().getDrawable(R.drawable.greendot);
-		OverlayItem overlayItem2 
-		= new OverlayItem("Info2", "Title2", gpt);
-		drawable2.setBounds(0,0, 10, 10);
-		overlayItem2.setMarker(drawable2);
-		overlayList.add(overlayItem2);
-		
+		Iterator<Event> iterator = Globals.eventsList.iterator();
+		while(iterator.hasNext()){
+			Event event = iterator.next();
+			Drawable drawable = context.getResources().getDrawable(R.drawable.greendot);
+			double lat = getLat(geoPoint);
+			double lon = getLon(geoPoint);
+			GeoPoint gpt = getGeoPoint(lat+0.01,lon);
+			
+			if(event.getEventType().equals("CENSOR")
+					||event.getEventType().equals("THROTTLING") 
+					|| event.getEventType().equals("OFF_LINE")) {
+				drawable = context.getResources().getDrawable(R.drawable.reddot);
+			}
+			
+			OverlayItem overlayItem 
+			= new OverlayItem(event.getTestType(), event.getEventType() + "\n" +
+					event.getTimeUTC() + "\n", gpt);
+			drawable.setBounds(0,0, 10, 10);
+			overlayItem.setMarker(drawable);
+			overlayList.add(overlayItem);	
+		}
 		return overlayList;
 	}
 	
