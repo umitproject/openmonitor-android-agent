@@ -117,12 +117,28 @@ public class MapActivityTab extends MapActivity{
 	LocationListener GPSLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
         	 if(Globals.mapView.equals("Google")) {
-        		 googleMap.updateView(googleMapView, MapActivityTab.this
-        				 ,location.getLatitude(), location.getLongitude());
+        		 if(googleMapView == null) {        			 
+        			 googleMap = new GoogleMaps();                       
+ 		        	googleMapView = googleMap.getView(MapActivityTab.this
+ 		        			,location.getLatitude(), location.getLongitude()); 
+ 		        	setContentView(googleMapView);
+        		 } else {
+        			 googleMap.updateView(googleMapView, MapActivityTab.this
+            				 ,location.getLatitude(), location.getLongitude());
+        		 }
+        		 
                  
-             } else if(Globals.mapView.equals("OSMDroid")) {                                                
-                 osmMap.updateView(osmMapView, MapActivityTab.this
-                 		, location.getLatitude(), location.getLongitude());
+             } else if(Globals.mapView.equals("OSMDroid")) {
+            	 if(osmMapView == null) {        			 
+            		 osmMap = new OSMMaps();
+ 		            osmMapView = osmMap.getView(MapActivityTab.this
+ 		            		, location.getLatitude(), location.getLongitude());
+ 		            setContentView(osmMapView);
+        		 } else {
+        			 osmMap.updateView(osmMapView, MapActivityTab.this
+                      		, location.getLatitude(), location.getLongitude());
+        		 }
+                 
              }
                 	     
         }
@@ -157,13 +173,28 @@ public class MapActivityTab extends MapActivity{
     LocationListener networkProviderLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
         	 if(Globals.mapView.equals("Google")) {
-        		 googleMap.updateView(googleMapView, MapActivityTab.this
-        				 ,location.getLatitude(), location.getLongitude());
+        		 if(googleMapView == null) {        			 
+        			 googleMap = new GoogleMaps();                       
+ 		        	googleMapView = googleMap.getView(MapActivityTab.this
+ 		        			,location.getLatitude(), location.getLongitude()); 
+ 		        	setContentView(googleMapView);
+        		 } else {
+        			 googleMap.updateView(googleMapView, MapActivityTab.this
+            				 ,location.getLatitude(), location.getLongitude());
+        		 }
+        		 
                  
-             } else if(Globals.mapView.equals("OSMDroid")) {                                                
-                 osmMap.updateView(osmMapView, MapActivityTab.this
-                 		, location.getLatitude(), location.getLongitude());
-             }
+             } else if(Globals.mapView.equals("OSMDroid")) {
+            	 if(osmMapView == null) {        			 
+            		 osmMap = new OSMMaps();
+ 		            osmMapView = osmMap.getView(MapActivityTab.this
+ 		            		, location.getLatitude(), location.getLongitude());
+ 		            setContentView(osmMapView);
+        		 } else {
+        			 osmMap.updateView(osmMapView, MapActivityTab.this
+                      		, location.getLatitude(), location.getLongitude());
+        		 }                 
+             }                
         }
 
 		@Override
