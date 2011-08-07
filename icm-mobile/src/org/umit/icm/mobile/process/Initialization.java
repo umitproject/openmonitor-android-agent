@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Iterator;
 
 import org.umit.icm.mobile.aggregator.AggregatorService;
@@ -30,6 +31,7 @@ import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -209,6 +211,32 @@ public class Initialization {
 		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         Globals.myIP = wifiInfo.getIpAddress();
+	}
+	
+	/*Only used for testing
+	 * Should be deprecated eventually.
+	 */
+	public static void initializeEventsList() {
+		Calendar calendar = Calendar.getInstance();
+		
+		Event eventA = Event.newBuilder()
+		.setTestType("WEB")
+		.setEventType("CENSOR")
+		.setTimeUTC(calendar.getTimeInMillis())
+		.setSinceTimeUTC(calendar.getTimeInMillis())
+		.addLocations("location1")
+		.build();
+		
+		Event eventB = Event.newBuilder()
+		.setTestType("SERVICE")
+		.setEventType("CENSOR")
+		.setTimeUTC(calendar.getTimeInMillis())
+		.setSinceTimeUTC(calendar.getTimeInMillis())
+		.addLocations("location2")
+		.build();
+		
+		Globals.eventsList.add(eventA);
+		Globals.eventsList.add(eventB);
 	}
 	
 }

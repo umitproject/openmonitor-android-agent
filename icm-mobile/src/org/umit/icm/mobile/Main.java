@@ -96,7 +96,7 @@ public class Main extends TabActivity {
 				Initialization.checkProfiler();
 				Initialization.initializeIP(Main.this);
 				Globals.scanStatus = getString(R.string.scan_on);								
-				ServicePackets.populateServicesMap();
+				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
 			} catch (IOException e) {
 				e.printStackTrace();

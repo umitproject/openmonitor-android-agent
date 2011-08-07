@@ -98,6 +98,7 @@ public class ConnectivityService extends Service {
 			public void run() {
 				try {
 					Initialization.initializeRequestHeader();
+					Initialization.initializeEventsList();
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
