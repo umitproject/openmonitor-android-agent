@@ -256,5 +256,21 @@ public class AggregatorActionsTests extends AndroidTestCase {
     		return true;
     	return false;
     }
+    
+    public void testLogin() throws Throwable {
+    	ResponseHeader responseHeader = ResponseHeader.newBuilder()
+    	.setCurrentTestVersionNo(25)
+    	.setCurrentVersionNo(25)
+    	.build();
+    	
+    	LoginResponse loginResponse = LoginResponse.newBuilder()
+    	.setHeader(responseHeader)
+    	.build();
+    	
+    	AggregatorActions.loginAction(loginResponse);
+
+        Assert.assertEquals(Globals.versionManager.getAgentVersion(), 25);
+        Assert.assertEquals(Globals.versionManager.getTestsVersion(), 25);                        
+    } 
 
 }
