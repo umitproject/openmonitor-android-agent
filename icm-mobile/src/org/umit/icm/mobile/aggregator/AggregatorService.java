@@ -32,6 +32,7 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 
 import android.app.Service;
@@ -226,9 +227,14 @@ public class AggregatorService extends Service {
 		eventsTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
+				Location location = Location.newBuilder()
+				.setLatitude(0.0)
+				.setLongitude(0.0)
+				.build();
+				
 				GetEvents getEvents = GetEvents.newBuilder()
 				.setHeader(Globals.requestHeader)
-				.addLocations("location1")
+				.addLocations(location)
 				.build();
 				
 				try {

@@ -117,7 +117,7 @@ public class P2PActionsTests extends AndroidTestCase {
 
     	Test test1 = Test.newBuilder()
     	.setExecuteAtTimeUTC(11)
-    	.setServideCode(21)
+    	.setServiceCode(21)
     	.setTestID(31)
     	.setWebsiteURL("url1")
     	.setTestType("WEB")
@@ -125,7 +125,7 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	Test test2 = Test.newBuilder()
     	.setExecuteAtTimeUTC(12)
-    	.setServideCode(22)
+    	.setServiceCode(22)
     	.setTestID(32)
     	.setWebsiteURL("url2")
     	.setTestType("SERVICE")
@@ -147,7 +147,7 @@ public class P2PActionsTests extends AndroidTestCase {
     
     private boolean compareTests(Test test1 , Test test2) {
     	if(test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
-    			&& test1.getServideCode() == test2.getServideCode()
+    			&& test1.getServiceCode() == test2.getServiceCode()
     			&& test1.getTestID() == test2.getTestID()
     			&& test1.getWebsiteURL().equals(test2.getWebsiteURL())
     			&& test1.getTestType().equals(test2.getTestType()))
@@ -160,10 +160,15 @@ public class P2PActionsTests extends AndroidTestCase {
     	.setCurrentTestVersionNo(27)
     	.setCurrentVersionNo(27)
     	.build();
-
+    	
+    	Location location = Location.newBuilder()
+    	.setLatitude(10.1)
+    	.setLongitude(10.1)
+    	.build();
+    	
     	Event event1 = Event.newBuilder()
     	.setEventType("CENSOR")
-    	.addLocations("Islamabad")
+    	.addLocations(location)
     	.setSinceTimeUTC(100)
     	.setTimeUTC(1000)
     	.setTestType("SERVICE")
@@ -171,7 +176,7 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	Event event2 = Event.newBuilder()
     	.setEventType("OFF_LINE")
-    	.addLocations("Islamabad2")
+    	.addLocations(location)
     	.setSinceTimeUTC(101)
     	.setTimeUTC(1001)
     	.setTestType("WEB")

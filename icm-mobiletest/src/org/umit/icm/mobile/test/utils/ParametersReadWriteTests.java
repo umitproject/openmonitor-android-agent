@@ -29,6 +29,7 @@ import java.util.List;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -102,9 +103,14 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     
     public void testEventsList() throws Throwable {
     	
+    	Location location = Location.newBuilder()
+    	.setLatitude(10.1)
+    	.setLongitude(10.1)
+    	.build();
+    	
     	Event event1 = Event.newBuilder()
     	.setEventType("CENSOR")
-    	.addLocations("Islamabad")
+    	.addLocations(location)
     	.setSinceTimeUTC(100)
     	.setTimeUTC(1000)
     	.setTestType("SERVICE")
@@ -112,7 +118,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     	
     	Event event2 = Event.newBuilder()
     	.setEventType("OFF_LINE")
-    	.addLocations("Islamabad2")
+    	.addLocations(location)
     	.setSinceTimeUTC(101)
     	.setTimeUTC(1001)
     	.setTestType("WEB")
@@ -134,7 +140,7 @@ public void testTestsList() throws Throwable {
     	
 		Test test1 = Test.newBuilder()
 		.setExecuteAtTimeUTC(11)
-		.setServideCode(21)
+		.setServiceCode(21)
 		.setTestID(31)
 		.setWebsiteURL("url1")
 		.setTestType("WEB")
@@ -142,7 +148,7 @@ public void testTestsList() throws Throwable {
 		
 		Test test2 = Test.newBuilder()
 		.setExecuteAtTimeUTC(12)
-		.setServideCode(22)
+		.setServiceCode(22)
 		.setTestID(32)
 		.setWebsiteURL("url2")
 		.setTestType("SERVICE")

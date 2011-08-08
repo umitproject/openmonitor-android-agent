@@ -949,13 +949,16 @@ public class ProfilerRun {
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
 				.setToken("token")
-				.build();																
+				.build();
+				
+				Location location = Location.newBuilder()
+				.setLatitude(10.1)
+				.setLongitude(10.1)
+				.build();
 				 
 				GetEvents getEvents = GetEvents.newBuilder()
-				.setHeader(requestHeader)
-				.setGeoLat(10)
-				.setGeoLon(10)
-				.addLocations("location")
+				.setHeader(requestHeader)				
+				.addLocations(location)
 				.build();
 				
 				try {

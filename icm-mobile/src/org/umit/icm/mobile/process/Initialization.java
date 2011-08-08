@@ -32,6 +32,7 @@ import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -219,12 +220,17 @@ public class Initialization {
 	public static void initializeEventsList() {
 		Calendar calendar = Calendar.getInstance();
 		
+		Location location = Location.newBuilder()
+		.setLatitude(0)
+		.setLongitude(0)
+		.build();
+		
 		Event eventA = Event.newBuilder()
 		.setTestType("WEB")
 		.setEventType("CENSOR")
 		.setTimeUTC(calendar.getTimeInMillis())
 		.setSinceTimeUTC(calendar.getTimeInMillis())
-		.addLocations("location1")
+		.addLocations(location)
 		.build();
 		
 		Event eventB = Event.newBuilder()
@@ -232,7 +238,7 @@ public class Initialization {
 		.setEventType("CENSOR")
 		.setTimeUTC(calendar.getTimeInMillis())
 		.setSinceTimeUTC(calendar.getTimeInMillis())
-		.addLocations("location2")
+		.addLocations(location)
 		.build();
 		
 		Globals.eventsList.add(eventA);
