@@ -75,7 +75,7 @@ public class TwitterUpdate {
 	 
 	 @see Twitter
 	 */
-	public void reset() {
+	public synchronized void reset() {
 		twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,
 		Constants.TWITTER_CONSUMER_KEY_SECRET);
@@ -83,7 +83,7 @@ public class TwitterUpdate {
 		requestToken = null;
 	}
 	
-	public void setAccessToken(AccessToken accessToken) {
+	public synchronized void setAccessToken(AccessToken accessToken) {
 		this.accessToken = accessToken;
 	}
 	
@@ -97,7 +97,7 @@ public class TwitterUpdate {
 	 
 	 @see Twitter
 	 */
-	public void sendTweet(String tweet) throws TwitterException, IOException, RuntimeException {
+	public synchronized void sendTweet(String tweet) throws TwitterException, IOException, RuntimeException {
 		if(accessToken != null && Globals.runtimeParameters.getTwitter().equals("On")) {			
 			twitter.setOAuthAccessToken(accessToken);
 			twitter.updateStatus(tweet);
@@ -114,7 +114,7 @@ public class TwitterUpdate {
 	 
 	 @see Intent
 	 */
-	public void requestToken(Context context) throws TwitterException, IOException, HttpException {		
+	public synchronized void requestToken(Context context) throws TwitterException, IOException, HttpException {		
 			requestToken = twitter.getOAuthRequestToken();	    
 		    Intent browserIntent 
 		    = new Intent(Intent.ACTION_VIEW
@@ -134,7 +134,7 @@ public class TwitterUpdate {
 	 *
 	 @see SDCardReadWrite
 	 */
-	public void enterPin(String pin) throws TwitterException, IOException, RuntimeException {
+	public synchronized void enterPin(String pin) throws TwitterException, IOException, RuntimeException {
 		if(requestToken != null) {
 			accessToken = twitter.getOAuthAccessToken(requestToken, pin);
 			SDCardReadWrite.writeAccessToken(Constants.KEYS_DIR, accessToken);
@@ -151,7 +151,7 @@ public class TwitterUpdate {
 	 
 	 @see Intent 
 	 */
-	public void sendTweet(String message, Context context) {		
+	public synchronized void sendTweet(String message, Context context) {		
 		Bundle bundle = new Bundle();	
 		bundle.putString("twitter"
 				, message);	        	

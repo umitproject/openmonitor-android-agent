@@ -51,104 +51,104 @@ public class RuntimeParameters {
 		super();
 	}
 
-	public String getToken() throws IOException, RuntimeException {
+	public synchronized String getToken() throws IOException, RuntimeException {
 		token = readToken();
 		return token;
 	}
 
-	public void setToken(String token) throws IOException, RuntimeException {
+	public synchronized void setToken(String token) throws IOException, RuntimeException {
 		this.token = token;
 		writeToken(token);		
 		Initialization.initializeRequestHeader();
 	}
 
-	public long getAgentID() throws IOException, RuntimeException {
+	public synchronized long getAgentID() throws IOException, RuntimeException {
 		agentID = readAgentID();
 		return agentID;
 	}
 
-	public void setAgentID(long agentID) throws IOException, RuntimeException {
+	public synchronized void setAgentID(long agentID) throws IOException, RuntimeException {
 		this.agentID = agentID;
 		writeAgentID(agentID);
 		Initialization.initializeRequestHeader();
 	}
 
-	public int getScanInterval() throws IOException, RuntimeException {
+	public synchronized int getScanInterval() throws IOException, RuntimeException {
 		scanInterval = readScanInterval();
 		return scanInterval;
 	}
 
-	public void setScanInterval(int scanInterval) throws IOException, RuntimeException {
+	public synchronized void setScanInterval(int scanInterval) throws IOException, RuntimeException {
 		this.scanInterval = scanInterval;
 		writeScanInterval(scanInterval);
 	}
 
-	public String getScanStatus() throws IOException, RuntimeException {
+	public synchronized String getScanStatus() throws IOException, RuntimeException {
 		scanStatus = readScanStatus();
 		return scanStatus;
 	}
 
-	public void setScanStatus(String scanStatus) throws IOException, RuntimeException {
+	public synchronized void setScanStatus(String scanStatus) throws IOException, RuntimeException {
 		this.scanStatus = scanStatus;
 		writeScanStatus(scanStatus);
 	}		
 	
-	public String getTwitter() throws IOException, RuntimeException {
+	public synchronized String getTwitter() throws IOException, RuntimeException {
 		twitter = readTwitterStatus();
 		return twitter;
 	}
 
-	public void setTwitter(String twitter) throws IOException, RuntimeException {
+	public synchronized void setTwitter(String twitter) throws IOException, RuntimeException {
 		this.twitter = twitter;
 		writeTwitterStatus(twitter);
 	}
 
-	private String readScanStatus() throws IOException, RuntimeException {
+	private synchronized String readScanStatus() throws IOException, RuntimeException {
 		return SDCardReadWrite.readString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR);
 	}
 
-	private void writeScanStatus(String scanStatus) throws IOException, RuntimeException {
+	private synchronized void writeScanStatus(String scanStatus) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.SCAN_FILE
 				, Constants.PARAMETERS_DIR, scanStatus);
 	}
 	
-	private int readScanInterval() throws IOException, RuntimeException {
+	private synchronized int readScanInterval() throws IOException, RuntimeException {
 		return Integer.parseInt(SDCardReadWrite.readString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR));
 	}
 
-	private void writeScanInterval(int scanStatus) throws IOException, RuntimeException {
+	private synchronized void writeScanInterval(int scanStatus) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.INTERVAL_FILE
 				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
 	}
 	
-	private long readAgentID() throws IOException, RuntimeException {
+	private synchronized long readAgentID() throws IOException, RuntimeException {
 		return Long.parseLong(SDCardReadWrite.readString(Constants.AGENTID_FILE
 				, Constants.PARAMETERS_DIR));
 	}
 
-	private void writeAgentID(long agentID) throws IOException, RuntimeException {
+	private synchronized void writeAgentID(long agentID) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.AGENTID_FILE
 				, Constants.PARAMETERS_DIR, Long.toString(agentID));
 	}
 	
-	private String readToken() throws IOException, RuntimeException {
+	private synchronized String readToken() throws IOException, RuntimeException {
 		return SDCardReadWrite.readString(Constants.TOKEN_FILE
 				, Constants.PARAMETERS_DIR);
 	}
 
-	private void writeToken(String token) throws IOException, RuntimeException {
+	private synchronized void writeToken(String token) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.TOKEN_FILE
 				, Constants.PARAMETERS_DIR, token);
 	}
 	
-	private String readTwitterStatus() throws IOException, RuntimeException {
+	private synchronized String readTwitterStatus() throws IOException, RuntimeException {
 		return SDCardReadWrite.readString(Constants.TWITTER_STATUS_FILE
 				, Constants.PARAMETERS_DIR);
 	}
 
-	private void writeTwitterStatus(String token) throws IOException, RuntimeException {
+	private synchronized void writeTwitterStatus(String token) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.TWITTER_STATUS_FILE
 				, Constants.PARAMETERS_DIR, token);
 	}

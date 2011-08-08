@@ -70,7 +70,7 @@ public class KeyManager {
 		this.myCipheredKey = myCipheredKey;
 	}
 
-	public byte[] getMySecretKey() {
+	public synchronized byte[] getMySecretKey() {
 		return mySecretKey;
 	}
 	
@@ -84,12 +84,12 @@ public class KeyManager {
 	 
 	 @see CryptoKeyWriter
 	 */
-	public void setMySecretKey(byte[] mySecretKey) throws IOException {
+	public synchronized void setMySecretKey(byte[] mySecretKey) throws IOException {
 		this.mySecretKey = mySecretKey;
 		CryptoKeyWriter.writeMySecretKey(mySecretKey);
 	}
 
-	public PrivateKey getMyPrivateKey() {
+	public synchronized PrivateKey getMyPrivateKey() {
 		return myPrivateKey;
 	}
 	
@@ -103,7 +103,7 @@ public class KeyManager {
 	 
 	 @see CryptoKeyWriter
 	 */
-	public void setMyPrivateKey(PrivateKey myPrivateKey) {		
+	public synchronized void setMyPrivateKey(PrivateKey myPrivateKey) {		
 		this.myPrivateKey = myPrivateKey;
 		try {
 			CryptoKeyWriter.writeMyPrivateKey(this.myPrivateKey);
@@ -119,7 +119,7 @@ public class KeyManager {
 		}
 	}
 
-	public PublicKey getMyPublicKey() {
+	public synchronized PublicKey getMyPublicKey() {
 		return myPublicKey;
 	}
 	
@@ -133,7 +133,7 @@ public class KeyManager {
 	 
 	 @see CryptoKeyWriter
 	 */
-	public void setMyPublicKey(PublicKey myPublicKey) {
+	public synchronized void setMyPublicKey(PublicKey myPublicKey) {
 		this.myPublicKey = myPublicKey;
 		try {
 			CryptoKeyWriter.writeMyPublicKey(this.myPublicKey);
@@ -149,7 +149,7 @@ public class KeyManager {
 		}
 	}
 
-	public byte[] getMyCipheredKey() {
+	public synchronized byte[] getMyCipheredKey() {
 		return myCipheredKey;
 	}
 	
@@ -163,7 +163,7 @@ public class KeyManager {
 	 
 	 @see CryptoKeyWriter
 	 */
-	public void setMyCipheredKey(byte[] myCipheredKey) {
+	public synchronized void setMyCipheredKey(byte[] myCipheredKey) {
 		this.myCipheredKey = myCipheredKey;		
 		try {
 			CryptoKeyWriter.writeMyCipheredKey(this.myCipheredKey);

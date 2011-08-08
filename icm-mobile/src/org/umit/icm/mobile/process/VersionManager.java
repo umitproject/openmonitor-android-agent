@@ -38,42 +38,42 @@ public class VersionManager {
 		testsVersion = 0;
 	}
 
-	public int getAgentVersion() throws IOException {
+	public synchronized int getAgentVersion() throws IOException {
 		agentVersion = readAgentVersion();
 		return agentVersion;
 	}
 
-	public void setAgentVersion(int agentVersion) throws IOException {
+	public synchronized void setAgentVersion(int agentVersion) throws IOException {
 		this.agentVersion = agentVersion;
 		writeAgentVersion(agentVersion);
 	}
 
-	public int getTestsVersion() throws IOException {
+	public synchronized int getTestsVersion() throws IOException {
 		testsVersion = readTestsVersion();
 		return testsVersion;
 	}
 
-	public void setTestsVersion(int testsVersion) throws IOException {
+	public synchronized void setTestsVersion(int testsVersion) throws IOException {
 		this.testsVersion = testsVersion;
 		writeTestsVersion(testsVersion);
 	}
 	
-	private int readAgentVersion() throws IOException {
+	private synchronized int readAgentVersion() throws IOException {
 		return Integer.parseInt(SDCardReadWrite.readString(Constants.AGENT_VERSION_FILE
 				, Constants.VERSIONS_DIR));
 	}
 
-	private void writeAgentVersion(int agentVersion) throws IOException {
+	private synchronized void writeAgentVersion(int agentVersion) throws IOException {
 		SDCardReadWrite.writeString(Constants.AGENT_VERSION_FILE
 				, Constants.VERSIONS_DIR, Integer.toString(agentVersion));
 	}
 	
-	private int readTestsVersion() throws IOException {
+	private synchronized int readTestsVersion() throws IOException {
 		return Integer.parseInt(SDCardReadWrite.readString(Constants.TESTS_VERSION_FILE
 				, Constants.VERSIONS_DIR));
 	}
 
-	private void writeTestsVersion(int testsVersion) throws IOException {
+	private synchronized void writeTestsVersion(int testsVersion) throws IOException {
 		SDCardReadWrite.writeString(Constants.TESTS_VERSION_FILE
 				, Constants.VERSIONS_DIR, Integer.toString(testsVersion));
 	} 
