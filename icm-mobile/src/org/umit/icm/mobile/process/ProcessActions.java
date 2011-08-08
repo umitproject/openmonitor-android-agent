@@ -110,7 +110,7 @@ public class ProcessActions {
 	 
 	 @see Test
 	 */
-	public static boolean updateTests(List<Test> tests) {
+	public synchronized static boolean updateTests(List<Test> tests) {
 		for(int i = 0 ; i < tests.size(); i++)
 			Globals.testsList.add(tests.get(i));
 		return true;
@@ -129,7 +129,7 @@ public class ProcessActions {
 	 
 	 @see Event
 	 */
-	public static boolean updateEventsList(List<Event> events) {
+	public synchronized static boolean updateEventsList(List<Event> events) {
 		for(int i = 0 ; i < events.size(); i++)
 			Globals.eventsList.add(events.get(i));
 		return true;
@@ -148,7 +148,7 @@ public class ProcessActions {
 	 
 	 @see AgentData
 	 */
-	public static boolean updatePeersList(List<AgentData> peers) {
+	public synchronized static boolean updatePeersList(List<AgentData> peers) {
 		for(int i = 0 ; i < peers.size(); i++)
 			Globals.peersList.add(peers.get(i));
 		return true;
@@ -167,7 +167,7 @@ public class ProcessActions {
 	 
 	 @see AgentData
 	 */
-	public static boolean updateSuperPeersList(List<AgentData> superPeers) {
+	public synchronized static boolean updateSuperPeersList(List<AgentData> superPeers) {
 		for(int i = 0 ; i < superPeers.size(); i++)
 			Globals.superPeersList.add(superPeers.get(i));
 		return true;
