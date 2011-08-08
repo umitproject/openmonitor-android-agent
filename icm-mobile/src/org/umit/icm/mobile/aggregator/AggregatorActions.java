@@ -28,6 +28,7 @@ import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
@@ -261,5 +262,28 @@ public class AggregatorActions {
 	 		return true;
 	 	else
 	 		return false;		
+	}
+	
+	/**
+	 * Returns a boolean true. Calls {@link ProcessActions#updateAgentVersion} and 
+	 * {@link ProcessActions#updateTestsVersion} on the ResponseHeader.
+	 * 
+	 *	 
+	                          
+	@param  loginResponse  An object of the type LoginResponse
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */
+	public static boolean loginAction(LoginResponse loginResponse) throws IOException {
+		ProcessActions.updateAgentVersion(loginResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(loginResponse.getHeader());
+		return true;
 	}
 }

@@ -38,6 +38,9 @@ import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.Login;
+import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
+import org.umit.icm.mobile.proto.MessageProtos.Logout;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
@@ -447,7 +450,7 @@ public class AggregatorResources {
 		 *
 		 
 		@see         ClientResource
-		 */	
+		 */					 
 		 public static CheckAggregatorResponse checkAggregatorStatus(
 				 CheckAggregator checkAggregator, 
 				 ClientResource clientResource) 
@@ -458,6 +461,70 @@ public class AggregatorResources {
 			 Representation response 
 				 = clientResource.post(form.getWebRepresentation(null)); 
 			 return CheckAggregatorResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
+		 
+		/**
+		 * Returns a LoginResponse object. Encodes the passed message to
+		 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+		 * WebRepresentation of the {@link Form} object to the passed 
+		 * {@link ClientResource}. Generates a LoginResponse object from 
+		 * the POST {@link Representation} response.
+		 * 
+		 *	 
+		                          
+		@param  login  An object of the type Login
+		 *  	
+		 
+		@param  clientResource  An object of the type ClientResource
+		 *                           	
+		                          
+		@return      LoginResponse
+		 *  
+		                          
+		@see         Base64
+		 *
+		 
+		@see         ClientResource
+		 */
+		 public static LoginResponse login(
+				 Login login, 
+				 ClientResource clientResource) 
+		 throws UnsupportedEncodingException, IOException, RuntimeException {
+			 Form form = new Form();
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(login.toByteArray())));		 		 		 
+			 Representation response 
+				 = clientResource.post(form.getWebRepresentation(null)); 
+			 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
+		 
+		/**
+		 * Encodes the passed message to {@link Base64} and generates a 
+		 * {@link Form} object for it. POSTs the WebRepresentation of 
+		 * the {@link Form} object to the passed
+		 * {@link ClientResource}. 
+		 * 
+		 *	 
+		                          
+		@param  logout  An object of the type Logout
+		 *  	
+		 
+		@param  clientResource  An object of the type ClientResource
+		 *                           	
+                 
+		@see         Base64
+		 *
+		 
+		@see         ClientResource
+		 */
+		 public static void logout(
+				 Logout logout, 
+				 ClientResource clientResource) 
+		 throws UnsupportedEncodingException, IOException, RuntimeException {
+			 Form form = new Form();
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(logout.toByteArray())));		 		 		 				 
+				 clientResource.post(form.getWebRepresentation(null)); 				 
 		 }
 
 }

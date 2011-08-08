@@ -34,6 +34,9 @@ import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.Login;
+import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
+import org.umit.icm.mobile.proto.MessageProtos.Logout;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
@@ -357,28 +360,72 @@ public class AggregatorRetrieve {
 		 	return AggregatorActions.sendSuggestionAction(testSuggestionResponse);			
 	 }
 	 
-	    /**
-		 * Returns a boolean object from {@link AggregatorActions} method. 
-		 * Calls {@link AggregatorResources#checkAggregatorStatus(org.umit.icm.mobile.proto.MessageProtos.CheckAggregator, ClientResource)}
-		 * on the passed message 
-		 * 
-		 *	 
-		                          
-		@param  checkAggregator  An object of the type CheckAggregator
-		 *  	                          	
-		                          
-		@return      boolean
-		 *  		                          		
-		 
-		@see         AggregatorResources
-		 */
-		 public static boolean checkAggregatorStatus(
-				CheckAggregator checkAggregator) 
-		 throws UnsupportedEncodingException, IOException, RuntimeException {
-			 	ClientResource clientResource 
-			 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
-			 	CheckAggregatorResponse checkAggregatorResponse
-			 	= AggregatorResources.checkAggregatorStatus(checkAggregator, clientResource);
-			 	return AggregatorActions.checkAggregatorAction(checkAggregatorResponse);			
-		 }
+    /**
+	 * Returns a boolean object from {@link AggregatorActions} method. 
+	 * Calls {@link AggregatorResources#checkAggregatorStatus(org.umit.icm.mobile.proto.MessageProtos.CheckAggregator, ClientResource)}
+	 * on the passed message 
+	 * 
+	 *	 
+	                          
+	@param  checkAggregator  An object of the type CheckAggregator
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  		                          		
+	 
+	@see         AggregatorResources
+	 */
+	 public static boolean checkAggregatorStatus(
+			CheckAggregator checkAggregator) 
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
+		 	CheckAggregatorResponse checkAggregatorResponse
+		 	= AggregatorResources.checkAggregatorStatus(checkAggregator, clientResource);
+		 	return AggregatorActions.checkAggregatorAction(checkAggregatorResponse);			
+	 }
+	 
+	/**
+	 * Returns a boolean object from {@link AggregatorActions} method. 
+	 * Calls {@link AggregatorResources#login(org.umit.icm.mobile.proto.MessageProtos.Login, ClientResource)}
+	 * on the passed message 
+	 * 
+	 *	 
+	                          
+	@param  login  An object of the type Login
+	 *  	                          	
+	                          
+	@return      boolean
+	 *  		                          		
+	 
+	@see         AggregatorResources
+	 */
+	 public static boolean login(
+			Login login) 
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
+		 	LoginResponse loginResponse
+		 	= AggregatorResources.login(login, clientResource);
+		 	return AggregatorActions.loginAction(loginResponse);			
+	 }
+	 
+	/**
+	 * Calls {@link AggregatorResources#logout(org.umit.icm.mobile.proto.MessageProtos.Logout, ClientResource)}
+	 * on the passed message 
+	 * 
+	 *	 
+	                          
+	@param  logout  An object of the type Logout
+	 *  	                          	
+
+	@see         AggregatorResources
+	 */
+	 public static void logout(
+			Logout logout) 
+	 throws UnsupportedEncodingException, IOException, RuntimeException {
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
+		 	AggregatorResources.logout(logout, clientResource);		 				
+	 }
 }
