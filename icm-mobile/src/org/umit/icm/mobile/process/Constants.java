@@ -168,4 +168,5 @@ public class Constants {
 		public static String SUPER_SERVICE_SUGGESTION = "/api/servicesuggestion/";
 		public static String SUPER_TESTS = "/api/tests/";
 		public static String SUPER_AUTHENTICATE_PEER = "/api/authenticatepeer/";
+		public static String SUPER_MSG_KEY = "msg";
 }
