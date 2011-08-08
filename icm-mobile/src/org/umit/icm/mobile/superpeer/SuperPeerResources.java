@@ -32,8 +32,6 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
-import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
-import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -42,7 +40,6 @@ import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
-import org.umit.icm.mobile.proto.MessageProtos.Logout;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
@@ -455,7 +452,7 @@ public class SuperPeerResources {
 			 ClientResource clientResource) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
+		 form.add(Constants.SUPER_MSG_KEY
 				 , new String(Base64.encodeBase64(login.toByteArray())));		 		 		 
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null)); 
