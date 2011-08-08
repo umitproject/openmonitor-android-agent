@@ -157,4 +157,15 @@ public class Constants {
 		public static final int UPDATE_TEST_RESPONSE_ID = 10;
 		public static final String BING_SEARCH_API = "930F43D8FAD299B1368D22FB4B32467E11EC1BE8";
 		public static final String TWITTER_HASHTAG = "#ICMMobileAgent";
+		public static String SUPER_GET_PEER_LIST = "/api/getpeerlist/";		
+		public static String SUPER_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
+		public static String SUPER_GET_EVENTS = "/api/getevents/";
+		public static String SUPER_SEND_WEBSITE_REPORT = "/api/sendwebsitereport/";
+		public static String SUPER_SEND_SERVICE_REPORT = "/api/sendservicereport/";
+		public static String SUPER_CHECK_VERSION = "/api/checkversion/";
+		public static String SUPER_CHECK_TESTS = "/api/checktests/";
+		public static String SUPER_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
+		public static String SUPER_SERVICE_SUGGESTION = "/api/servicesuggestion/";
+		public static String SUPER_TESTS = "/api/tests/";
+		public static String SUPER_AUTHENTICATE_PEER = "/api/authenticatepeer/";
 }
