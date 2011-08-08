@@ -63,16 +63,20 @@ public class SuperPeerResources {
 	 * 
 	 *	 
 	                          
-	@param  url  An object of the type String
-	 *  	                          	
+	@param  path  An object of the type String
+	 *  	
+	
+	@param  ip  An object of the type String
+	 *  
+	 	
 	                          
 	@return      ClientResource
 	 *  
 
 	@see         ClientResource
 	 */
-	 public static ClientResource getClientResource(String url) {	
-		 return new ClientResource(Constants.AGGREGATOR_URL + url);
+	 public static ClientResource getClientResource(String ip, String path) {	
+		 return new ClientResource(ip + path);
 	 }
 	 
 	/**

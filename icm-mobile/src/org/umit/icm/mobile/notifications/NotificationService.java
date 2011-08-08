@@ -58,7 +58,7 @@ public class NotificationService extends Service {
 	
 	/**
 	 * Initializes the notification manager and calls 
-	 * {@link NotificationService#showNotification()}
+	 * {@link NotificationService#showNotification(String)}
 	 */
 	
 	@Override

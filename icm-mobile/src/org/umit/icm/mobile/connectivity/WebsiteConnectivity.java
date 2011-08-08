@@ -65,7 +65,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	 * {@link WebsiteOpen#openURLConnection(String)},
 	 * {@link WebsiteOpen#getHeaders(URLConnection)} and
 	 * {@link WebsiteOpen#getContent(URLConnection)}. Passes the website content
-	 * to {@link WebsiteConnectivity#clean(String, String, Map)} 
+	 * to {@link WebsiteConnectivity#clean(String, String, Map, long)} 
 	 * 
 	 * 
 	 *
