@@ -100,10 +100,10 @@ public class TCPClient {
     	return bytes;
     }
     
-    public byte[] readBytes2() throws IOException {
+    public byte[] readBytes(int size) throws IOException {
     	Log.w("##Client2", "readbytes");    	
     	InputStream inputStream = socket.getInputStream();
-    	byte[] bytes = new byte[16];
+    	byte[] bytes = new byte[size];
     	inputStream.read(bytes);
     	return bytes;
     }
