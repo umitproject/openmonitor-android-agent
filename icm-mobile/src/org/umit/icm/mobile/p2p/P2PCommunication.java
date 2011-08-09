@@ -54,7 +54,8 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static void sendMessage(AgentData agentInfo, byte[] message) throws Exception {
+	public static void sendMessage(AgentData agentInfo, byte[] message, int messageID) 
+	throws Exception {
 		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);	
 		
@@ -98,7 +99,8 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static void sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
+	public static void sendMessagePublic(AgentData agentInfo, byte[] message, int messageID) 
+	throws Exception {
 		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		

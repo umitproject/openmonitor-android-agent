@@ -43,8 +43,10 @@ public class MessageSender {
 
 	 @see P2PCommunication
 	 */
-	public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) throws Exception {
-		P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());		
+	public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, websiteReport.toByteArray(),
+				MessageID.SendWebsiteReport);		
 	}
 	
 	/**
@@ -60,8 +62,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void sendServiceReport(AgentData agentData, SendServiceReport serviceReport) throws Exception {
-		P2PCommunication.sendMessage(agentData, serviceReport.toByteArray());		
+	public static void sendServiceReport(AgentData agentData, SendServiceReport serviceReport) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, serviceReport.toByteArray(),
+				MessageID.SendServiceReport);		
 	}
 	
 	/**
@@ -77,8 +81,10 @@ public class MessageSender {
 	 	 
 	 @see P2PCommunication
 	 */
-	public static void receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
-		P2PCommunication.sendMessage(agentData, getEvents.toByteArray());		
+	public static void receiveEvents(AgentData agentData, GetEvents getEvents) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, getEvents.toByteArray(),
+				MessageID.GetEvents);		
 	}
 	
 	/**
@@ -94,8 +100,10 @@ public class MessageSender {
 	 	 
 	 @see P2PCommunication
 	 */
-	public static void receivePeerList(AgentData agentData, P2PGetPeerList getPeerList) throws Exception {
-		P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());				
+	public static void receivePeerList(AgentData agentData, P2PGetPeerList getPeerList) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, getPeerList.toByteArray(),
+				MessageID.P2PGetPeerList);				
 	}
 	
 	/**
@@ -111,8 +119,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void receiveSuperPeerList(AgentData agentData, P2PGetSuperPeerList getSuperPeerList) throws Exception {
-		P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());		
+	public static void receiveSuperPeerList(AgentData agentData, P2PGetSuperPeerList getSuperPeerList) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray(),
+				MessageID.P2PGetSuperPeerList);		
 	}
 	
 	/**
@@ -128,8 +138,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void receiveTaskList(AgentData agentData, NewTests newTests) throws Exception {
-		P2PCommunication.sendMessage(agentData, newTests.toByteArray());		
+	public static void receiveTaskList(AgentData agentData, NewTests newTests) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, newTests.toByteArray(),
+				MessageID.NewTests);		
 	}				
 	
 	/**
@@ -145,8 +157,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {
-		P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());		
+	public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray(),
+				MessageID.WebsiteSuggestion);		
 	}
 	
 	/**
@@ -162,8 +176,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void sendServiceSuggestion(AgentData agentData, ServiceSuggestion serviceSuggestion) throws Exception {
-		P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray());		
+	public static void sendServiceSuggestion(AgentData agentData, ServiceSuggestion serviceSuggestion) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray(),
+				MessageID.ServiceSuggestion);		
 	}
 	
 	/**
@@ -179,8 +195,10 @@ public class MessageSender {
 	 	 
 	 @see P2PCommunication
 	 */
-	public static void authenticatePeer(AgentData agentData, AuthenticatePeer authenticatePeer) throws Exception {
-		P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray());		
+	public static void authenticatePeer(AgentData agentData, AuthenticatePeer authenticatePeer) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray(),
+				MessageID.AuthenticatePeer);		
 	}
 	
 }
