@@ -25,8 +25,7 @@ import org.umit.icm.mobile.proto.MessageProtos.*;
 import org.umit.icm.mobile.p2p.P2PCommunication;
 
 /**
- * Main p2p message sending class. Sends message and calls {@link P2PActions}
- * on the received response.
+ * Main p2p message sending class. Sends messages.
  */
 
 public class MessageSender {
@@ -41,16 +40,11 @@ public class MessageSender {
 	 
 	 @param agentData message of type {@link AgentData}
 	 *
-	 
-	 @see P2PActions
-	 *
-	 
+
 	 @see P2PCommunication
 	 */
 	public static void sendWebsiteReport(AgentData agentData, SendWebsiteReport websiteReport) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());
-		SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);
-		P2PActions.sendReportAction(sendReportResponse);	
+		P2PCommunication.sendMessage(agentData, websiteReport.toByteArray());		
 	}
 	
 	/**
@@ -64,15 +58,10 @@ public class MessageSender {
 	 @param agentData message of type {@link AgentData}
 	 *
 	 
-	 @see P2PActions
-	 *
-	 
 	 @see P2PCommunication
 	 */
 	public static void sendServiceReport(AgentData agentData, SendServiceReport serviceReport) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, serviceReport.toByteArray());
-		SendReportResponse sendReportResponse = SendReportResponse.parseFrom(response);	  
-		P2PActions.sendReportAction(sendReportResponse);
+		P2PCommunication.sendMessage(agentData, serviceReport.toByteArray());		
 	}
 	
 	/**
@@ -85,16 +74,11 @@ public class MessageSender {
 	 
 	 @param agentData message of type {@link AgentData}
 	 *
-	 
-	 @see P2PActions
-	 *
-	 
+	 	 
 	 @see P2PCommunication
 	 */
 	public static void receiveEvents(AgentData agentData, GetEvents getEvents) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, getEvents.toByteArray());
-		GetEventsResponse getEventsResponse = GetEventsResponse.parseFrom(response);
-		P2PActions.receiveEventsAction(getEventsResponse);			
+		P2PCommunication.sendMessage(agentData, getEvents.toByteArray());		
 	}
 	
 	/**
@@ -107,16 +91,11 @@ public class MessageSender {
 	 
 	 @param agentData message of type {@link AgentData}
 	 *
-	 
-	 @see P2PActions
-	 *
-	 
+	 	 
 	 @see P2PCommunication
 	 */
 	public static void receivePeerList(AgentData agentData, P2PGetPeerList getPeerList) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());
-		P2PGetPeerListResponse getPeerListResponse = P2PGetPeerListResponse.parseFrom(response);
-		P2PActions.getPeerListAction(getPeerListResponse);			
+		P2PCommunication.sendMessage(agentData, getPeerList.toByteArray());				
 	}
 	
 	/**
@@ -128,17 +107,12 @@ public class MessageSender {
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
-	 *
-	 
-	 @see P2PActions
-	 *
+	 *	 
 	 
 	 @see P2PCommunication
 	 */
 	public static void receiveSuperPeerList(AgentData agentData, P2PGetSuperPeerList getSuperPeerList) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());
-		P2PGetSuperPeerListResponse getSuperPeerListResponse = P2PGetSuperPeerListResponse.parseFrom(response);
-		P2PActions.getSuperPeerListAction(getSuperPeerListResponse);
+		P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray());		
 	}
 	
 	/**
@@ -150,17 +124,12 @@ public class MessageSender {
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
-	 *
-	 
-	 @see P2PActions
-	 *
+	 *	
 	 
 	 @see P2PCommunication
 	 */
 	public static void receiveTaskList(AgentData agentData, NewTests newTests) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, newTests.toByteArray());
-		NewTestsResponse newTestsResponse = NewTestsResponse.parseFrom(response);
-		P2PActions.receiveTaskListAction(newTestsResponse);
+		P2PCommunication.sendMessage(agentData, newTests.toByteArray());		
 	}				
 	
 	/**
@@ -172,17 +141,12 @@ public class MessageSender {
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
-	 *
-	 
-	 @see P2PActions
-	 *
+	 *	 
 	 
 	 @see P2PCommunication
 	 */
 	public static void sendWebsiteSuggestion(AgentData agentData, WebsiteSuggestion websiteSuggestion) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());
-		TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
-		P2PActions.sendSuggestionAction(testSuggestionResponse);
+		P2PCommunication.sendMessage(agentData, websiteSuggestion.toByteArray());		
 	}
 	
 	/**
@@ -194,17 +158,12 @@ public class MessageSender {
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
-	 *
-	 
-	 @see P2PActions
-	 *
+	 *	 
 	 
 	 @see P2PCommunication
 	 */
 	public static void sendServiceSuggestion(AgentData agentData, ServiceSuggestion serviceSuggestion) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray());
-		TestSuggestionResponse testSuggestionResponse = TestSuggestionResponse.parseFrom(response);
-		P2PActions.sendSuggestionAction(testSuggestionResponse);
+		P2PCommunication.sendMessage(agentData, serviceSuggestion.toByteArray());		
 	}
 	
 	/**
@@ -217,16 +176,11 @@ public class MessageSender {
 	 
 	 @param agentData message of type {@link AgentData}
 	 *
-	 
-	 @see P2PActions
-	 *
-	 
+	 	 
 	 @see P2PCommunication
 	 */
 	public static void authenticatePeer(AgentData agentData, AuthenticatePeer authenticatePeer) throws Exception {
-		byte[] response = P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray());
-		AuthenticatePeerResponse authenticatePeerResponse = AuthenticatePeerResponse.parseFrom(response);
-		P2PActions.authenticatePeerAction(authenticatePeerResponse, agentData.getAgentIP());
+		P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray());		
 	}
 	
 }
