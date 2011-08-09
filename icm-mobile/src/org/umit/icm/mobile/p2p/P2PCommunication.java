@@ -39,16 +39,13 @@ public class P2PCommunication {
 	/**
 	 * Sends the byte[] message to the {@link AgentData} agentInfo.
 	 * Uses symmetric key cryptography and opens a TCP connection to the peer
-	 * using {@link TCPClient}. Returns the response message byte[]
+	 * using {@link TCPClient}.
 	 * 
 	 * 
 	
 	 @param agentInfo recipient peer data of type {@link AgentData}
 	 *
-	 
-	 @return byte[]
-	 *
-	 
+
 	 @see CryptoKeyReader
 	 *
 	 
@@ -57,25 +54,33 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static byte[] sendMessage(AgentData agentInfo, byte[] message) throws Exception {
+	public static void sendMessage(AgentData agentInfo, byte[] message) throws Exception {
 		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);	
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
 		Globals.tcpClient.writeLine(cipherBytes);		
-		String responseString = Globals.tcpClient.readLine();
-		Globals.tcpClient.closeConnection();
+		byte[] messageSizeBytes = Globals.tcpClient.readBytes(4);
+		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
+		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
-		byte [] response = responseString.getBytes();	
+		
 		byte[] peerSecretKey = CryptoKeyReader.getPeerSecretKey(agentInfo.getAgentIP());
-		return AESCrypto.decrypt(peerSecretKey, response);
+		byte [] totalBytes = AESCrypto.decrypt(peerSecretKey, totalBytesEncrypted);
+		
+		byte[] idBytes = MessageBuilder.getSubArray(totalBytes, 0, 3);
+		int id = MessageBuilder.byteArrayToInt(idBytes);
+		byte [] msgBytes = MessageBuilder.getSubArray(totalBytes, 4, messageSize - 1);
+		MessageTranslation.translateMessage(id, msgBytes, agentInfo);
+		Globals.tcpClient.closeConnection();
+
 	}
 	
 	/**
 	 * Sends the byte[] message to the {@link AgentData} agentInfo.
 	 * Uses asymmetric key cryptography and opens a TCP connection to the peer
-	 * using {@link TCPClient}. Returns the response message byte[]
+	 * using {@link TCPClient}.
 	 * 
 	 * 
 	
@@ -93,19 +98,27 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static byte[] sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
+	public static void sendMessagePublic(AgentData agentInfo, byte[] message) throws Exception {
 		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
 		Globals.tcpClient.writeLine(cipherBytes);
-		String responseString = Globals.tcpClient.readLine();
-		Globals.tcpClient.closeConnection();
+		byte[] messageSizeBytes = Globals.tcpClient.readBytes(4);
+		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
+		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
-		byte [] response = responseString.getBytes();
-		return RSACrypto.decryptPublic(
-				RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), response);
+				
+		byte [] totalBytes = 
+			RSACrypto.decryptPublic(
+					RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), totalBytesEncrypted);
+		
+		byte[] idBytes = MessageBuilder.getSubArray(totalBytes, 0, 3);
+		int id = MessageBuilder.byteArrayToInt(idBytes);
+		byte [] msgBytes = MessageBuilder.getSubArray(totalBytes, 4, messageSize - 1);
+		MessageTranslation.translateMessage(id, msgBytes, agentInfo);
+		Globals.tcpClient.closeConnection();								
 	}	
 		
 }
