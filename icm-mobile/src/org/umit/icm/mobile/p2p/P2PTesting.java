@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
+import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 
 import android.util.Log;
 
@@ -32,38 +33,47 @@ public class P2PTesting {
 	public static void testRequestResponse() throws IOException {
 		String ip = "202.206.64.11";
 		int port = 3128;
-		Globals.tcpClientConnectivity.openConnection(ip, port);
-		//Globals.tcpClientConnectivity.writeLine("hello");
+		Globals.tcpClientConnectivity.openConnection(ip, port);		
 		Globals.tcpClientConnectivity.writeLine(MessageBuilder.generateMessage(
-				1, getTestMessage()));
-		byte [] response = Globals.tcpClientConnectivity.readBytes2();
-		Log.w("###Response: ", Integer.toString(response.length));	
+				5001, getTestMessage()));
+		/*read total length*/
+		byte [] response = Globals.tcpClientConnectivity.readBytes(4);
+		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
 		if(response.length!=0) {
-			byte [] idbyte = MessageBuilder.getSubArray(response, 0, 3);
-			Log.w("###idbyte: ", Integer.toString(idbyte.length));
+			byte [] sizeBytes = MessageBuilder.getSubArray(response, 0, 3);
+			Log.w("###Len sizeBytes: ", Integer.toString(sizeBytes.length));									
+			int size = MessageBuilder.byteArrayToInt(sizeBytes);						
+			Log.w("###size: ", Integer.toString(size));				
 			
-			//byte [] lenbyte = MessageBuilder.getSubArray(response, 4, 8);
-			//Log.w("###lenbyte: ", Integer.toString(lenbyte.length));
-			
-			int id = MessageBuilder.byteArrayToInt(idbyte);
-			//int len = MessageBuilder.byteArrayToInt(lenbyte);
-			//AuthenticatePeerResponse authenticatePeerResponse
-			//= AuthenticatePeerResponse.parseFrom();
-			Log.w("###ID: ", Integer.toString(id));				
-			//Log.w("###Length: ", Integer.toString(len));
-		} else {
-			Log.w("### ", "Blank response");
-		}
+			/*read actual message now*/
+			response = Globals.tcpClientConnectivity.readBytes(size);
+			Log.w("###Len ResponseMessage: ", Integer.toString(response.length));	
+			if(response.length!=0) {
+				byte[] idBytes = MessageBuilder.getSubArray(response, 0, 3);
+				Log.w("###Len idBytes: ", Integer.toString(idBytes.length));																
+				int id = MessageBuilder.byteArrayToInt(idBytes);				
+				Log.w("###id ", Integer.toString(id));
+				byte [] msg = MessageBuilder.getSubArray(response, 4, size - 1);
 				
+				AuthenticatePeerResponse authenticatePeerResponse
+				= AuthenticatePeerResponse.parseFrom(msg);
+				Log.w("###msg ", authenticatePeerResponse.getSecretKey());
+				
+				} else {
+					Log.w("### ", "Blank response");
+				}					
+	        			
+			} else {
+				Log.w("### ", "Blank response");
+		}
 		Globals.tcpClientConnectivity.closeConnection();
-        			
 	}
 	
 	public static byte[] getTestMessage() {
 		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 		.setAgentID(10)
 		.setAgentPort(8000)
-		.setAgentType(1)
+		.setAgentType(3)
 		.setCipheredPublicKey("cipheredPublicKey")
 		.build();
 		return authenticatePeer.toByteArray();
