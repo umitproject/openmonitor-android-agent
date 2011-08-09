@@ -21,17 +21,7 @@
 
 package org.umit.icm.mobile.p2p;
 
-import org.umit.icm.mobile.process.Constants;
-import org.umit.icm.mobile.proto.MessageProtos.AgentUpdate;
-import org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse;
-import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
-import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
-import org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdate;
-import org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdateResponse;
+import org.umit.icm.mobile.proto.MessageProtos.*;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -53,36 +43,162 @@ public class MessageTranslation {
 	public static void translateMessage(int id, byte[] message) throws InvalidProtocolBufferException {
 		
 		switch(id) {
-		case Constants.AUTHENTICATE_PEER_ID: 
-			AuthenticatePeer.parseFrom(message);
-			break;
-		case Constants.AUTHENTICATE_PEER_RESPONSE_ID:
-			AuthenticatePeerResponse.parseFrom(message);
-			break;
-		case Constants.GET_PEER_LIST_ID:
-			P2PGetPeerList.parseFrom(message);
-			break;
-		case Constants.GET_PEER_LIST_RESPONSE_ID:
-			P2PGetPeerListResponse.parseFrom(message);
-			break;
-		case Constants.GET_SUPER_PEER_LIST_ID:
-			P2PGetSuperPeerList.parseFrom(message); 
-			break;
-		case Constants.GET_SUPER_PEER_LIST_RESPONSE_ID:
-			P2PGetSuperPeerListResponse.parseFrom(message);
-			break;
-		case Constants.UPDATE_AGENT_ID:
+		case MessageID.AgentUpdate: 
 			AgentUpdate.parseFrom(message);
 			break;
-		case Constants.UPDATE_AGENT_RESPONSE_ID:
+		
+		case MessageID.AgentUpdateResponse: 
 			AgentUpdateResponse.parseFrom(message);
 			break;
-		case Constants.UPDATE_TEST_ID:
+		
+		case MessageID.AuthenticatePeer: 
+			AuthenticatePeer.parseFrom(message);
+			break;
+		
+		case MessageID.AuthenticatePeerResponse: 
+			AuthenticatePeerResponse.parseFrom(message);
+			break;
+		
+		case MessageID.CheckAggregator: 
+			CheckAggregator.parseFrom(message);
+			break;
+		
+		case MessageID.CheckAggregatorResponse: 
+			CheckAggregatorResponse.parseFrom(message);
+			break;
+		
+		case MessageID.ForwardingMessage: 
+			ForwardingMessage.parseFrom(message);
+			break;
+		
+		case MessageID.ForwardingMessageResponse: 
+			ForwardingMessageResponse.parseFrom(message);
+			break;
+		
+		case MessageID.GetEvents: 
+			GetEvents.parseFrom(message);
+			break;
+		
+		case MessageID.GetEventsResponse: 
+			GetEventsResponse.parseFrom(message);
+			break;
+		
+		case MessageID.GetPeerList: 
+			GetPeerList.parseFrom(message);
+			break;
+		
+		case MessageID.GetPeerListResponse: 
+			GetPeerListResponse.parseFrom(message);
+			break;
+		
+		case MessageID.GetSuperPeerList: 
+			GetSuperPeerList.parseFrom(message);
+			break;
+			
+		case MessageID.GetSuperPeerListResponse: 
+			GetSuperPeerListResponse.parseFrom(message);
+			break;
+		
+		case MessageID.Login: 
+			Login.parseFrom(message);
+			break;
+		
+		case MessageID.LoginResponse: 
+			LoginResponse.parseFrom(message);
+			break;
+		
+		case MessageID.Logout: 
+			Logout.parseFrom(message);
+			break;
+		
+		case MessageID.NewTests: 
+			NewTests.parseFrom(message);
+			break;
+		
+		case MessageID.NewTestsResponse: 
+			NewTestsResponse.parseFrom(message);
+			break;
+			
+		case MessageID.NewVersion: 
+			NewVersion.parseFrom(message);
+			break;
+		
+		case MessageID.NewVersionResponse: 
+			NewVersionResponse.parseFrom(message);
+			break;
+		
+		case MessageID.P2PGetPeerList: 
+			P2PGetPeerList.parseFrom(message);
+			break;
+		
+		case MessageID.P2PGetPeerListResponse: 
+			P2PGetPeerListResponse.parseFrom(message);
+			break;
+		
+		case MessageID.P2PGetSuperPeerList: 
+			P2PGetSuperPeerList.parseFrom(message);
+			break;
+		
+		case MessageID.P2PGetSuperPeerListResponse: 
+			P2PGetSuperPeerListResponse.parseFrom(message);
+			break;
+		
+		case MessageID.RegisterAgent: 
+			RegisterAgent.parseFrom(message);
+			break;
+		
+		case MessageID.RegisterAgentResponse: 
+			RegisterAgentResponse.parseFrom(message);
+			break;
+		
+		case MessageID.SendPrivateKey: 
+			SendPrivateKey.parseFrom(message);
+			break;
+		
+		case MessageID.SendPrivateKeyResponse: 
+			SendPrivateKeyResponse.parseFrom(message);
+			break;
+		
+		case MessageID.SendServiceReport: 
+			SendServiceReport.parseFrom(message);
+			break;
+		
+		case MessageID.SendWebsiteReport: 
+			SendWebsiteReport.parseFrom(message);
+			break;
+		
+		case MessageID.SendReportResponse: 
+			SendReportResponse.parseFrom(message);
+			break;
+		
+		case MessageID.ServiceSuggestion: 
+			ServiceSuggestion.parseFrom(message);
+			break;
+		
+		case MessageID.TestModuleUpdate: 
 			TestModuleUpdate.parseFrom(message);
 			break;
-		case Constants.UPDATE_TEST_RESPONSE_ID:
+		
+		case MessageID.TestModuleUpdateResponse: 
 			TestModuleUpdateResponse.parseFrom(message);
 			break;
+		
+		case MessageID.TestSuggestionResponse: 
+			TestSuggestionResponse.parseFrom(message);
+			break;
+		
+		case MessageID.UpgradeToSuper: 
+			UpgradeToSuper.parseFrom(message);
+			break;
+		
+		case MessageID.UpgradeToSuperResponse: 
+			UpgradeToSuperResponse.parseFrom(message);
+			break;
+		
+		case MessageID.WebsiteSuggestion: 
+			WebsiteSuggestion.parseFrom(message);
+			break;
+	
 		default:
 			throw new RuntimeException("Invalid message");
 		}				
