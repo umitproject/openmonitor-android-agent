@@ -7296,6 +7296,314 @@ public final class MessageProtos {
     }
   }
   
+  public static final class Location extends
+      com.google.protobuf.GeneratedMessage {
+    // Use Location.newBuilder() to construct.
+    private Location() {}
+    
+    private static final Location defaultInstance = new Location();
+    public static Location getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Location getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
+    }
+    
+    // required double longitude = 1;
+    public static final int LONGITUDE_FIELD_NUMBER = 1;
+    private boolean hasLongitude;
+    private double longitude_ = 0D;
+    public boolean hasLongitude() { return hasLongitude; }
+    public double getLongitude() { return longitude_; }
+    
+    // required double latitude = 2;
+    public static final int LATITUDE_FIELD_NUMBER = 2;
+    private boolean hasLatitude;
+    private double latitude_ = 0D;
+    public boolean hasLatitude() { return hasLatitude; }
+    public double getLatitude() { return latitude_; }
+    
+    public final boolean isInitialized() {
+      if (!hasLongitude) return false;
+      if (!hasLatitude) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasLongitude()) {
+        output.writeDouble(1, getLongitude());
+      }
+      if (hasLatitude()) {
+        output.writeDouble(2, getLatitude());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasLongitude()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, getLongitude());
+      }
+      if (hasLatitude()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, getLatitude());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.Location prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private org.umit.icm.mobile.proto.MessageProtos.Location result;
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.Location.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.Location();
+        return builder;
+      }
+      
+      protected org.umit.icm.mobile.proto.MessageProtos.Location internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new org.umit.icm.mobile.proto.MessageProtos.Location();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.Location.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.Location getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public org.umit.icm.mobile.proto.MessageProtos.Location build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.Location buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.Location buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        org.umit.icm.mobile.proto.MessageProtos.Location returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.Location) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.Location)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.Location other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance()) return this;
+        if (other.hasLongitude()) {
+          setLongitude(other.getLongitude());
+        }
+        if (other.hasLatitude()) {
+          setLatitude(other.getLatitude());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 9: {
+              setLongitude(input.readDouble());
+              break;
+            }
+            case 17: {
+              setLatitude(input.readDouble());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required double longitude = 1;
+      public boolean hasLongitude() {
+        return result.hasLongitude();
+      }
+      public double getLongitude() {
+        return result.getLongitude();
+      }
+      public Builder setLongitude(double value) {
+        result.hasLongitude = true;
+        result.longitude_ = value;
+        return this;
+      }
+      public Builder clearLongitude() {
+        result.hasLongitude = false;
+        result.longitude_ = 0D;
+        return this;
+      }
+      
+      // required double latitude = 2;
+      public boolean hasLatitude() {
+        return result.hasLatitude();
+      }
+      public double getLatitude() {
+        return result.getLatitude();
+      }
+      public Builder setLatitude(double value) {
+        result.hasLatitude = true;
+        result.latitude_ = value;
+        return this;
+      }
+      public Builder clearLatitude() {
+        result.hasLatitude = false;
+        result.latitude_ = 0D;
+        return this;
+      }
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.getDescriptor();
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.internalForceInit();
+    }
+  }
+  
   public static final class GetEvents extends
       com.google.protobuf.GeneratedMessage {
     // Use GetEvents.newBuilder() to construct.
@@ -18677,57 +18985,57 @@ public final class MessageProtos {
     }
   }
   
-  public static final class Location extends
+  public static final class ForwardingMessage extends
       com.google.protobuf.GeneratedMessage {
-    // Use Location.newBuilder() to construct.
-    private Location() {}
+    // Use ForwardingMessage.newBuilder() to construct.
+    private ForwardingMessage() {}
     
-    private static final Location defaultInstance = new Location();
-    public static Location getDefaultInstance() {
+    private static final ForwardingMessage defaultInstance = new ForwardingMessage();
+    public static ForwardingMessage getDefaultInstance() {
       return defaultInstance;
     }
     
-    public Location getDefaultInstanceForType() {
+    public ForwardingMessage getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_ForwardingMessage_fieldAccessorTable;
     }
     
-    // required double longitude = 1;
-    public static final int LONGITUDE_FIELD_NUMBER = 1;
-    private boolean hasLongitude;
-    private double longitude_ = 0D;
-    public boolean hasLongitude() { return hasLongitude; }
-    public double getLongitude() { return longitude_; }
+    // required int64 destination = 1;
+    public static final int DESTINATION_FIELD_NUMBER = 1;
+    private boolean hasDestination;
+    private long destination_ = 0L;
+    public boolean hasDestination() { return hasDestination; }
+    public long getDestination() { return destination_; }
     
-    // required double latitude = 2;
-    public static final int LATITUDE_FIELD_NUMBER = 2;
-    private boolean hasLatitude;
-    private double latitude_ = 0D;
-    public boolean hasLatitude() { return hasLatitude; }
-    public double getLatitude() { return latitude_; }
+    // required string encodedMessage = 2;
+    public static final int ENCODEDMESSAGE_FIELD_NUMBER = 2;
+    private boolean hasEncodedMessage;
+    private java.lang.String encodedMessage_ = "";
+    public boolean hasEncodedMessage() { return hasEncodedMessage; }
+    public java.lang.String getEncodedMessage() { return encodedMessage_; }
     
     public final boolean isInitialized() {
-      if (!hasLongitude) return false;
-      if (!hasLatitude) return false;
+      if (!hasDestination) return false;
+      if (!hasEncodedMessage) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (hasLongitude()) {
-        output.writeDouble(1, getLongitude());
+      if (hasDestination()) {
+        output.writeInt64(1, getDestination());
       }
-      if (hasLatitude()) {
-        output.writeDouble(2, getLatitude());
+      if (hasEncodedMessage()) {
+        output.writeString(2, getEncodedMessage());
       }
       getUnknownFields().writeTo(output);
     }
@@ -18738,70 +19046,70 @@ public final class MessageProtos {
       if (size != -1) return size;
     
       size = 0;
-      if (hasLongitude()) {
+      if (hasDestination()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(1, getLongitude());
+          .computeInt64Size(1, getDestination());
       }
-      if (hasLatitude()) {
+      if (hasEncodedMessage()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, getLatitude());
+          .computeStringSize(2, getEncodedMessage());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
     
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(byte[] data)
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(java.io.InputStream input)
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(java.io.InputStream input)
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeDelimitedFrom(input).buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -18811,25 +19119,25 @@ public final class MessageProtos {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.Location prototype) {
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private org.umit.icm.mobile.proto.MessageProtos.Location result;
+      private org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage result;
       
-      // Construct using org.umit.icm.mobile.proto.MessageProtos.Location.newBuilder()
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new org.umit.icm.mobile.proto.MessageProtos.Location();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage();
         return builder;
       }
       
-      protected org.umit.icm.mobile.proto.MessageProtos.Location internalGetResult() {
+      protected org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage internalGetResult() {
         return result;
       }
       
@@ -18838,7 +19146,7 @@ public final class MessageProtos {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new org.umit.icm.mobile.proto.MessageProtos.Location();
+        result = new org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage();
         return this;
       }
       
@@ -18848,24 +19156,24 @@ public final class MessageProtos {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.umit.icm.mobile.proto.MessageProtos.Location.getDescriptor();
+        return org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.getDescriptor();
       }
       
-      public org.umit.icm.mobile.proto.MessageProtos.Location getDefaultInstanceForType() {
-        return org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance();
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public org.umit.icm.mobile.proto.MessageProtos.Location build() {
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private org.umit.icm.mobile.proto.MessageProtos.Location buildParsed()
+      private org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -18874,32 +19182,32 @@ public final class MessageProtos {
         return buildPartial();
       }
       
-      public org.umit.icm.mobile.proto.MessageProtos.Location buildPartial() {
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        org.umit.icm.mobile.proto.MessageProtos.Location returnMe = result;
+        org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.Location) {
-          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.Location)other);
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.Location other) {
-        if (other == org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance()) return this;
-        if (other.hasLongitude()) {
-          setLongitude(other.getLongitude());
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.getDefaultInstance()) return this;
+        if (other.hasDestination()) {
+          setDestination(other.getDestination());
         }
-        if (other.hasLatitude()) {
-          setLatitude(other.getLatitude());
+        if (other.hasEncodedMessage()) {
+          setEncodedMessage(other.getEncodedMessage());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -18926,12 +19234,12 @@ public final class MessageProtos {
               }
               break;
             }
-            case 9: {
-              setLongitude(input.readDouble());
+            case 8: {
+              setDestination(input.readInt64());
               break;
             }
-            case 17: {
-              setLatitude(input.readDouble());
+            case 18: {
+              setEncodedMessage(input.readString());
               break;
             }
           }
@@ -18939,39 +19247,313 @@ public final class MessageProtos {
       }
       
       
-      // required double longitude = 1;
-      public boolean hasLongitude() {
-        return result.hasLongitude();
+      // required int64 destination = 1;
+      public boolean hasDestination() {
+        return result.hasDestination();
       }
-      public double getLongitude() {
-        return result.getLongitude();
+      public long getDestination() {
+        return result.getDestination();
       }
-      public Builder setLongitude(double value) {
-        result.hasLongitude = true;
-        result.longitude_ = value;
+      public Builder setDestination(long value) {
+        result.hasDestination = true;
+        result.destination_ = value;
         return this;
       }
-      public Builder clearLongitude() {
-        result.hasLongitude = false;
-        result.longitude_ = 0D;
+      public Builder clearDestination() {
+        result.hasDestination = false;
+        result.destination_ = 0L;
         return this;
       }
       
-      // required double latitude = 2;
-      public boolean hasLatitude() {
-        return result.hasLatitude();
+      // required string encodedMessage = 2;
+      public boolean hasEncodedMessage() {
+        return result.hasEncodedMessage();
       }
-      public double getLatitude() {
-        return result.getLatitude();
+      public java.lang.String getEncodedMessage() {
+        return result.getEncodedMessage();
       }
-      public Builder setLatitude(double value) {
-        result.hasLatitude = true;
-        result.latitude_ = value;
+      public Builder setEncodedMessage(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasEncodedMessage = true;
+        result.encodedMessage_ = value;
         return this;
       }
-      public Builder clearLatitude() {
-        result.hasLatitude = false;
-        result.latitude_ = 0D;
+      public Builder clearEncodedMessage() {
+        result.hasEncodedMessage = false;
+        result.encodedMessage_ = getDefaultInstance().getEncodedMessage();
+        return this;
+      }
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.getDescriptor();
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.internalForceInit();
+    }
+  }
+  
+  public static final class ForwardingMessageResponse extends
+      com.google.protobuf.GeneratedMessage {
+    // Use ForwardingMessageResponse.newBuilder() to construct.
+    private ForwardingMessageResponse() {}
+    
+    private static final ForwardingMessageResponse defaultInstance = new ForwardingMessageResponse();
+    public static ForwardingMessageResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ForwardingMessageResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_fieldAccessorTable;
+    }
+    
+    // required string encodedMessage = 1;
+    public static final int ENCODEDMESSAGE_FIELD_NUMBER = 1;
+    private boolean hasEncodedMessage;
+    private java.lang.String encodedMessage_ = "";
+    public boolean hasEncodedMessage() { return hasEncodedMessage; }
+    public java.lang.String getEncodedMessage() { return encodedMessage_; }
+    
+    public final boolean isInitialized() {
+      if (!hasEncodedMessage) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasEncodedMessage()) {
+        output.writeString(1, getEncodedMessage());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasEncodedMessage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getEncodedMessage());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse result;
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse();
+        return builder;
+      }
+      
+      protected org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.getDefaultInstance()) return this;
+        if (other.hasEncodedMessage()) {
+          setEncodedMessage(other.getEncodedMessage());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setEncodedMessage(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string encodedMessage = 1;
+      public boolean hasEncodedMessage() {
+        return result.hasEncodedMessage();
+      }
+      public java.lang.String getEncodedMessage() {
+        return result.getEncodedMessage();
+      }
+      public Builder setEncodedMessage(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasEncodedMessage = true;
+        result.encodedMessage_ = value;
+        return this;
+      }
+      public Builder clearEncodedMessage() {
+        result.hasEncodedMessage = false;
+        result.encodedMessage_ = getDefaultInstance().getEncodedMessage();
         return this;
       }
     }
@@ -19080,6 +19662,11 @@ public final class MessageProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_GetSuperPeerListResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor;
   private static
@@ -19241,10 +19828,15 @@ public final class MessageProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+    internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
+      internal_static_org_umit_icm_mobile_proto_ForwardingMessage_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -19308,93 +19900,96 @@ public final class MessageProtos {
       "e\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobile." +
       "proto.ResponseHeader\022=\n\017knownSuperPeers\030" +
       "\002 \003(\0132$.org.umit.icm.mobile.proto.AgentD" +
-      "ata\"\271\001\n\tGetEvents\0228\n\006header\030\001 \002(\0132(.org." +
-      "umit.icm.mobile.proto.RequestHeader\0226\n\tl" +
-      "ocations\030\002 \003(\0132#.org.umit.icm.mobile.pro" +
-      "to.Location\022:\n\ragentLocation\030\003 \001(\0132#.org" +
-      ".umit.icm.mobile.proto.Location\"\231\002\n\005Even" +
-      "t\022\020\n\010testType\030\001 \002(\t\022\021\n\teventType\030\002 \002(\t\022\017",
-      "\n\007timeUTC\030\003 \002(\003\022\024\n\014sinceTimeUTC\030\004 \002(\003\0226\n" +
-      "\tlocations\030\005 \003(\0132#.org.umit.icm.mobile.p" +
-      "roto.Location\022E\n\rwebsiteReport\030\006 \001(\0132..o" +
-      "rg.umit.icm.mobile.proto.WebsiteReportDe" +
-      "tail\022E\n\rserviceReport\030\007 \001(\0132..org.umit.i" +
-      "cm.mobile.proto.ServiceReportDetail\"\200\001\n\021" +
-      "GetEventsResponse\0229\n\006header\030\001 \002(\0132).org." +
-      "umit.icm.mobile.proto.ResponseHeader\0220\n\006" +
-      "events\030\002 \003(\0132 .org.umit.icm.mobile.proto" +
-      ".Event\"\207\001\n\021SendWebsiteReport\0228\n\006header\030\001",
-      " \002(\0132(.org.umit.icm.mobile.proto.Request" +
-      "Header\0228\n\006report\030\002 \002(\0132(.org.umit.icm.mo" +
-      "bile.proto.WebsiteReport\"\207\001\n\021SendService" +
-      "Report\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mo" +
-      "bile.proto.RequestHeader\0228\n\006report\030\002 \002(\013" +
-      "2(.org.umit.icm.mobile.proto.ServiceRepo" +
-      "rt\"O\n\022SendReportResponse\0229\n\006header\030\001 \002(\013" +
-      "2).org.umit.icm.mobile.proto.ResponseHea" +
-      "der\"q\n\nNewVersion\0228\n\006header\030\001 \002(\0132(.org." +
-      "umit.icm.mobile.proto.RequestHeader\022\026\n\016a",
-      "gentVersionNo\030\002 \002(\005\022\021\n\tagentType\030\003 \002(\t\"\207" +
-      "\001\n\022NewVersionResponse\0229\n\006header\030\001 \002(\0132)." +
-      "org.umit.icm.mobile.proto.ResponseHeader" +
-      "\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update\030\003 \001(\014\022\021\n" +
-      "\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n\006header\030\001" +
-      " \002(\0132(.org.umit.icm.mobile.proto.Request" +
-      "Header\022\034\n\024currentTestVersionNo\030\002 \002(\005\"k\n\004" +
-      "Test\022\016\n\006testID\030\001 \002(\003\022\022\n\nwebsiteURL\030\002 \001(\t" +
-      "\022\023\n\013serviceCode\030\003 \001(\005\022\030\n\020executeAtTimeUT" +
-      "C\030\004 \001(\003\022\020\n\010testType\030\005 \002(\t\"\224\001\n\020NewTestsRe",
-      "sponse\0229\n\006header\030\001 \002(\0132).org.umit.icm.mo" +
-      "bile.proto.ResponseHeader\022.\n\005tests\030\002 \003(\013" +
-      "2\037.org.umit.icm.mobile.proto.Test\022\025\n\rtes" +
-      "tVersionNo\030\003 \002(\005\"F\n\nAssignTask\0228\n\006header" +
-      "\030\001 \002(\0132(.org.umit.icm.mobile.proto.Reque" +
-      "stHeader\"\177\n\022AssignTaskResponse\0229\n\006header" +
+      "ata\"/\n\010Location\022\021\n\tlongitude\030\001 \002(\001\022\020\n\010la" +
+      "titude\030\002 \002(\001\"\271\001\n\tGetEvents\0228\n\006header\030\001 \002" +
+      "(\0132(.org.umit.icm.mobile.proto.RequestHe" +
+      "ader\0226\n\tlocations\030\002 \003(\0132#.org.umit.icm.m" +
+      "obile.proto.Location\022:\n\ragentLocation\030\003 " +
+      "\001(\0132#.org.umit.icm.mobile.proto.Location",
+      "\"\231\002\n\005Event\022\020\n\010testType\030\001 \002(\t\022\021\n\teventTyp" +
+      "e\030\002 \002(\t\022\017\n\007timeUTC\030\003 \002(\003\022\024\n\014sinceTimeUTC" +
+      "\030\004 \002(\003\0226\n\tlocations\030\005 \003(\0132#.org.umit.icm" +
+      ".mobile.proto.Location\022E\n\rwebsiteReport\030" +
+      "\006 \001(\0132..org.umit.icm.mobile.proto.Websit" +
+      "eReportDetail\022E\n\rserviceReport\030\007 \001(\0132..o" +
+      "rg.umit.icm.mobile.proto.ServiceReportDe" +
+      "tail\"\200\001\n\021GetEventsResponse\0229\n\006header\030\001 \002" +
+      "(\0132).org.umit.icm.mobile.proto.ResponseH" +
+      "eader\0220\n\006events\030\002 \003(\0132 .org.umit.icm.mob",
+      "ile.proto.Event\"\207\001\n\021SendWebsiteReport\0228\n" +
+      "\006header\030\001 \002(\0132(.org.umit.icm.mobile.prot" +
+      "o.RequestHeader\0228\n\006report\030\002 \002(\0132(.org.um" +
+      "it.icm.mobile.proto.WebsiteReport\"\207\001\n\021Se" +
+      "ndServiceReport\0228\n\006header\030\001 \002(\0132(.org.um" +
+      "it.icm.mobile.proto.RequestHeader\0228\n\006rep" +
+      "ort\030\002 \002(\0132(.org.umit.icm.mobile.proto.Se" +
+      "rviceReport\"O\n\022SendReportResponse\0229\n\006hea" +
+      "der\030\001 \002(\0132).org.umit.icm.mobile.proto.Re" +
+      "sponseHeader\"q\n\nNewVersion\0228\n\006header\030\001 \002",
+      "(\0132(.org.umit.icm.mobile.proto.RequestHe" +
+      "ader\022\026\n\016agentVersionNo\030\002 \002(\005\022\021\n\tagentTyp" +
+      "e\030\003 \002(\t\"\207\001\n\022NewVersionResponse\0229\n\006header" +
       "\030\001 \002(\0132).org.umit.icm.mobile.proto.Respo" +
-      "nseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umit.icm." +
-      "mobile.proto.Test\"J\n\016UpgradeToSuper\0228\n\006h" +
-      "eader\030\001 \002(\0132(.org.umit.icm.mobile.proto.",
-      "RequestHeader\"\222\001\n\026UpgradeToSuperResponse" +
-      "\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobile.p" +
-      "roto.ResponseHeader\022\020\n\010newToken\030\002 \002(\t\022\025\n" +
-      "\rnewPrivateKey\030\003 \002(\t\022\024\n\014newPublicKey\030\004 \002" +
-      "(\t\"g\n\016SendPrivateKey\0228\n\006header\030\001 \002(\0132(.o" +
-      "rg.umit.icm.mobile.proto.RequestHeader\022\033" +
-      "\n\023symmetricPrivateKey\030\002 \002(\t\"S\n\026SendPriva" +
-      "teKeyResponse\0229\n\006header\030\001 \002(\0132).org.umit" +
-      ".icm.mobile.proto.ResponseHeader\"w\n\021Webs" +
-      "iteSuggestion\0228\n\006header\030\001 \002(\0132(.org.umit",
-      ".icm.mobile.proto.RequestHeader\022\022\n\nwebsi" +
-      "teURL\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(\t\"\226\001\n\021Se" +
-      "rviceSuggestion\0228\n\006header\030\001 \002(\0132(.org.um" +
-      "it.icm.mobile.proto.RequestHeader\022\023\n\013ser" +
-      "viceName\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(\t\022\020\n\010" +
-      "hostName\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026TestSugges" +
-      "tionResponse\0229\n\006header\030\001 \002(\0132).org.umit." +
-      "icm.mobile.proto.ResponseHeader\"d\n\020Authe" +
-      "nticatePeer\022\021\n\tagentType\030\001 \002(\005\022\017\n\007agentI" +
-      "D\030\002 \002(\003\022\031\n\021cipheredPublicKey\030\003 \002(\t\022\021\n\tag",
-      "entPort\030\004 \001(\005\"-\n\030AuthenticatePeerRespons" +
-      "e\022\021\n\tsecretKey\030\001 \002(\t\"$\n\023P2PGetSuperPeerL" +
-      "ist\022\r\n\005count\030\001 \002(\005\"R\n\033P2PGetSuperPeerLis" +
-      "tResponse\0223\n\005peers\030\001 \003(\0132$.org.umit.icm." +
-      "mobile.proto.AgentData\"\037\n\016P2PGetPeerList" +
-      "\022\r\n\005count\030\001 \002(\005\"M\n\026P2PGetPeerListRespons" +
-      "e\0223\n\005peers\030\001 \003(\0132$.org.umit.icm.mobile.p" +
-      "roto.AgentData\"F\n\013AgentUpdate\022\017\n\007version" +
-      "\030\001 \002(\t\022\023\n\013downloadURL\030\002 \002(\t\022\021\n\tcheckCode" +
-      "\030\003 \001(\005\"6\n\023AgentUpdateResponse\022\017\n\007version",
-      "\030\001 \002(\t\022\016\n\006result\030\002 \002(\t\"K\n\020TestModuleUpda" +
-      "te\022\017\n\007version\030\001 \002(\t\022\023\n\013downloadURL\030\002 \002(\t" +
-      "\022\021\n\tcheckCode\030\003 \001(\005\";\n\030TestModuleUpdateR" +
-      "esponse\022\017\n\007version\030\001 \002(\t\022\016\n\006result\030\002 \002(\t" +
-      "\"K\n\017CheckAggregator\0228\n\006header\030\001 \002(\0132(.or" +
-      "g.umit.icm.mobile.proto.RequestHeader\"d\n" +
-      "\027CheckAggregatorResponse\0229\n\006header\030\001 \002(\013" +
-      "2).org.umit.icm.mobile.proto.ResponseHea" +
-      "der\022\016\n\006status\030\002 \002(\t\"/\n\010Location\022\021\n\tlongi" +
-      "tude\030\001 \002(\001\022\020\n\010latitude\030\002 \002(\001B\017B\rMessageP",
-      "rotos"
+      "nseHeader\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update" +
+      "\030\003 \001(\014\022\021\n\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n" +
+      "\006header\030\001 \002(\0132(.org.umit.icm.mobile.prot" +
+      "o.RequestHeader\022\034\n\024currentTestVersionNo\030" +
+      "\002 \002(\005\"k\n\004Test\022\016\n\006testID\030\001 \002(\003\022\022\n\nwebsite" +
+      "URL\030\002 \001(\t\022\023\n\013serviceCode\030\003 \001(\005\022\030\n\020execut",
+      "eAtTimeUTC\030\004 \001(\003\022\020\n\010testType\030\005 \002(\t\"\224\001\n\020N" +
+      "ewTestsResponse\0229\n\006header\030\001 \002(\0132).org.um" +
+      "it.icm.mobile.proto.ResponseHeader\022.\n\005te" +
+      "sts\030\002 \003(\0132\037.org.umit.icm.mobile.proto.Te" +
+      "st\022\025\n\rtestVersionNo\030\003 \002(\005\"F\n\nAssignTask\022" +
+      "8\n\006header\030\001 \002(\0132(.org.umit.icm.mobile.pr" +
+      "oto.RequestHeader\"\177\n\022AssignTaskResponse\022" +
+      "9\n\006header\030\001 \002(\0132).org.umit.icm.mobile.pr" +
+      "oto.ResponseHeader\022.\n\005tests\030\002 \003(\0132\037.org." +
+      "umit.icm.mobile.proto.Test\"J\n\016UpgradeToS",
+      "uper\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobi" +
+      "le.proto.RequestHeader\"\222\001\n\026UpgradeToSupe" +
+      "rResponse\0229\n\006header\030\001 \002(\0132).org.umit.icm" +
+      ".mobile.proto.ResponseHeader\022\020\n\010newToken" +
+      "\030\002 \002(\t\022\025\n\rnewPrivateKey\030\003 \002(\t\022\024\n\014newPubl" +
+      "icKey\030\004 \002(\t\"g\n\016SendPrivateKey\0228\n\006header\030" +
+      "\001 \002(\0132(.org.umit.icm.mobile.proto.Reques" +
+      "tHeader\022\033\n\023symmetricPrivateKey\030\002 \002(\t\"S\n\026" +
+      "SendPrivateKeyResponse\0229\n\006header\030\001 \002(\0132)" +
+      ".org.umit.icm.mobile.proto.ResponseHeade",
+      "r\"w\n\021WebsiteSuggestion\0228\n\006header\030\001 \002(\0132(" +
+      ".org.umit.icm.mobile.proto.RequestHeader" +
+      "\022\022\n\nwebsiteURL\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001" +
+      "(\t\"\226\001\n\021ServiceSuggestion\0228\n\006header\030\001 \002(\013" +
+      "2(.org.umit.icm.mobile.proto.RequestHead" +
+      "er\022\023\n\013serviceName\030\002 \002(\t\022\024\n\014emailAddress\030" +
+      "\003 \001(\t\022\020\n\010hostName\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026T" +
+      "estSuggestionResponse\0229\n\006header\030\001 \002(\0132)." +
+      "org.umit.icm.mobile.proto.ResponseHeader" +
+      "\"d\n\020AuthenticatePeer\022\021\n\tagentType\030\001 \002(\005\022",
+      "\017\n\007agentID\030\002 \002(\003\022\031\n\021cipheredPublicKey\030\003 " +
+      "\002(\t\022\021\n\tagentPort\030\004 \001(\005\"-\n\030AuthenticatePe" +
+      "erResponse\022\021\n\tsecretKey\030\001 \002(\t\"$\n\023P2PGetS" +
+      "uperPeerList\022\r\n\005count\030\001 \002(\005\"R\n\033P2PGetSup" +
+      "erPeerListResponse\0223\n\005peers\030\001 \003(\0132$.org." +
+      "umit.icm.mobile.proto.AgentData\"\037\n\016P2PGe" +
+      "tPeerList\022\r\n\005count\030\001 \002(\005\"M\n\026P2PGetPeerLi" +
+      "stResponse\0223\n\005peers\030\001 \003(\0132$.org.umit.icm" +
+      ".mobile.proto.AgentData\"F\n\013AgentUpdate\022\017" +
+      "\n\007version\030\001 \002(\t\022\023\n\013downloadURL\030\002 \002(\t\022\021\n\t",
+      "checkCode\030\003 \001(\005\"6\n\023AgentUpdateResponse\022\017" +
+      "\n\007version\030\001 \002(\t\022\016\n\006result\030\002 \002(\t\"K\n\020TestM" +
+      "oduleUpdate\022\017\n\007version\030\001 \002(\t\022\023\n\013download" +
+      "URL\030\002 \002(\t\022\021\n\tcheckCode\030\003 \001(\005\";\n\030TestModu" +
+      "leUpdateResponse\022\017\n\007version\030\001 \002(\t\022\016\n\006res" +
+      "ult\030\002 \002(\t\"K\n\017CheckAggregator\0228\n\006header\030\001" +
+      " \002(\0132(.org.umit.icm.mobile.proto.Request" +
+      "Header\"d\n\027CheckAggregatorResponse\0229\n\006hea" +
+      "der\030\001 \002(\0132).org.umit.icm.mobile.proto.Re" +
+      "sponseHeader\022\016\n\006status\030\002 \002(\t\"@\n\021Forwardi",
+      "ngMessage\022\023\n\013destination\030\001 \002(\003\022\026\n\016encode" +
+      "dMessage\030\002 \002(\t\"3\n\031ForwardingMessageRespo" +
+      "nse\022\026\n\016encodedMessage\030\001 \002(\tB\017B\rMessagePr" +
+      "otos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19553,8 +20148,16 @@ public final class MessageProtos {
               new java.lang.String[] { "Header", "KnownSuperPeers", },
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse.Builder.class);
-          internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor =
+          internal_static_org_umit_icm_mobile_proto_Location_descriptor =
             getDescriptor().getMessageTypes().get(19);
+          internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_Location_descriptor,
+              new java.lang.String[] { "Longitude", "Latitude", },
+              org.umit.icm.mobile.proto.MessageProtos.Location.class,
+              org.umit.icm.mobile.proto.MessageProtos.Location.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor =
+            getDescriptor().getMessageTypes().get(20);
           internal_static_org_umit_icm_mobile_proto_GetEvents_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor,
@@ -19562,7 +20165,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetEvents.class,
               org.umit.icm.mobile.proto.MessageProtos.GetEvents.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Event_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_org_umit_icm_mobile_proto_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Event_descriptor,
@@ -19570,7 +20173,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Event.class,
               org.umit.icm.mobile.proto.MessageProtos.Event.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetEventsResponse_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_org_umit_icm_mobile_proto_GetEventsResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetEventsResponse_descriptor,
@@ -19578,7 +20181,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_descriptor,
@@ -19586,7 +20189,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport.class,
               org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendServiceReport_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_org_umit_icm_mobile_proto_SendServiceReport_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendServiceReport_descriptor,
@@ -19594,7 +20197,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendServiceReport.class,
               org.umit.icm.mobile.proto.MessageProtos.SendServiceReport.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendReportResponse_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_org_umit_icm_mobile_proto_SendReportResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendReportResponse_descriptor,
@@ -19602,7 +20205,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendReportResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.SendReportResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewVersion_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_org_umit_icm_mobile_proto_NewVersion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewVersion_descriptor,
@@ -19610,7 +20213,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewVersion.class,
               org.umit.icm.mobile.proto.MessageProtos.NewVersion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewVersionResponse_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_org_umit_icm_mobile_proto_NewVersionResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewVersionResponse_descriptor,
@@ -19618,7 +20221,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewTests_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_org_umit_icm_mobile_proto_NewTests_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewTests_descriptor,
@@ -19626,7 +20229,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewTests.class,
               org.umit.icm.mobile.proto.MessageProtos.NewTests.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Test_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_org_umit_icm_mobile_proto_Test_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Test_descriptor,
@@ -19634,7 +20237,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Test.class,
               org.umit.icm.mobile.proto.MessageProtos.Test.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewTestsResponse_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_org_umit_icm_mobile_proto_NewTestsResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewTestsResponse_descriptor,
@@ -19642,7 +20245,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AssignTask_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_org_umit_icm_mobile_proto_AssignTask_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AssignTask_descriptor,
@@ -19650,7 +20253,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AssignTask.class,
               org.umit.icm.mobile.proto.MessageProtos.AssignTask.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_descriptor,
@@ -19658,7 +20261,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_descriptor,
@@ -19666,7 +20269,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuper.class,
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuper.Builder.class);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_descriptor,
@@ -19674,7 +20277,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuperResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuperResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendPrivateKey_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_org_umit_icm_mobile_proto_SendPrivateKey_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendPrivateKey_descriptor,
@@ -19682,7 +20285,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendPrivateKey.class,
               org.umit.icm.mobile.proto.MessageProtos.SendPrivateKey.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendPrivateKeyResponse_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_org_umit_icm_mobile_proto_SendPrivateKeyResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendPrivateKeyResponse_descriptor,
@@ -19690,7 +20293,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendPrivateKeyResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.SendPrivateKeyResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_descriptor,
@@ -19698,7 +20301,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion.class,
               org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_descriptor,
@@ -19706,7 +20309,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.class,
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_descriptor,
@@ -19714,7 +20317,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor,
@@ -19722,7 +20325,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.class,
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor,
@@ -19730,7 +20333,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_descriptor,
@@ -19738,7 +20341,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_descriptor,
@@ -19746,7 +20349,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_descriptor,
@@ -19754,7 +20357,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(44);
+            getDescriptor().getMessageTypes().get(45);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_descriptor,
@@ -19762,7 +20365,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AgentUpdate_descriptor =
-            getDescriptor().getMessageTypes().get(45);
+            getDescriptor().getMessageTypes().get(46);
           internal_static_org_umit_icm_mobile_proto_AgentUpdate_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentUpdate_descriptor,
@@ -19770,7 +20373,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdate.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdate.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_descriptor =
-            getDescriptor().getMessageTypes().get(46);
+            getDescriptor().getMessageTypes().get(47);
           internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_descriptor,
@@ -19778,7 +20381,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_descriptor =
-            getDescriptor().getMessageTypes().get(47);
+            getDescriptor().getMessageTypes().get(48);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_descriptor,
@@ -19786,7 +20389,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdate.class,
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdate.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_descriptor =
-            getDescriptor().getMessageTypes().get(48);
+            getDescriptor().getMessageTypes().get(49);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_descriptor,
@@ -19794,7 +20397,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdateResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdateResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_CheckAggregator_descriptor =
-            getDescriptor().getMessageTypes().get(49);
+            getDescriptor().getMessageTypes().get(50);
           internal_static_org_umit_icm_mobile_proto_CheckAggregator_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_CheckAggregator_descriptor,
@@ -19802,21 +20405,29 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregator.class,
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregator.Builder.class);
           internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_descriptor =
-            getDescriptor().getMessageTypes().get(50);
+            getDescriptor().getMessageTypes().get(51);
           internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_descriptor,
               new java.lang.String[] { "Header", "Status", },
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse.Builder.class);
-          internal_static_org_umit_icm_mobile_proto_Location_descriptor =
-            getDescriptor().getMessageTypes().get(51);
-          internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable = new
+          internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor =
+            getDescriptor().getMessageTypes().get(52);
+          internal_static_org_umit_icm_mobile_proto_ForwardingMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_org_umit_icm_mobile_proto_Location_descriptor,
-              new java.lang.String[] { "Longitude", "Latitude", },
-              org.umit.icm.mobile.proto.MessageProtos.Location.class,
-              org.umit.icm.mobile.proto.MessageProtos.Location.Builder.class);
+              internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor,
+              new java.lang.String[] { "Destination", "EncodedMessage", },
+              org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.class,
+              org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor =
+            getDescriptor().getMessageTypes().get(53);
+          internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor,
+              new java.lang.String[] { "EncodedMessage", },
+              org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.class,
+              org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse.Builder.class);
           return null;
         }
       };
