@@ -40,7 +40,8 @@ public class MessageTranslation {
 	 
 	 @param message message content of type byte[]	 
 	 */
-	public static void translateMessage(int id, byte[] message) throws InvalidProtocolBufferException {
+	public static void translateMessage(int id, byte[] message, AgentData agentData) 
+	throws InvalidProtocolBufferException {
 		
 		switch(id) {
 		case MessageID.AgentUpdate: 
@@ -55,8 +56,10 @@ public class MessageTranslation {
 			AuthenticatePeer.parseFrom(message);
 			break;
 		
-		case MessageID.AuthenticatePeerResponse: 
-			AuthenticatePeerResponse.parseFrom(message);
+		case MessageID.AuthenticatePeerResponse: 		
+			P2PActions.authenticatePeerAction(
+					AuthenticatePeerResponse.parseFrom(message), 
+					agentData.getAgentIP());
 			break;
 		
 		case MessageID.CheckAggregator: 
@@ -80,7 +83,8 @@ public class MessageTranslation {
 			break;
 		
 		case MessageID.GetEventsResponse: 
-			GetEventsResponse.parseFrom(message);
+			P2PActions.receiveEventsAction(
+					GetEventsResponse.parseFrom(message));			
 			break;
 		
 		case MessageID.GetPeerList: 
@@ -116,7 +120,8 @@ public class MessageTranslation {
 			break;
 		
 		case MessageID.NewTestsResponse: 
-			NewTestsResponse.parseFrom(message);
+			P2PActions.receiveTaskListAction(
+					NewTestsResponse.parseFrom(message));			
 			break;
 			
 		case MessageID.NewVersion: 
@@ -132,15 +137,17 @@ public class MessageTranslation {
 			break;
 		
 		case MessageID.P2PGetPeerListResponse: 
-			P2PGetPeerListResponse.parseFrom(message);
+			P2PActions.getPeerListAction(
+					P2PGetPeerListResponse.parseFrom(message));			
 			break;
 		
 		case MessageID.P2PGetSuperPeerList: 
 			P2PGetSuperPeerList.parseFrom(message);
 			break;
 		
-		case MessageID.P2PGetSuperPeerListResponse: 
-			P2PGetSuperPeerListResponse.parseFrom(message);
+		case MessageID.P2PGetSuperPeerListResponse:
+			P2PActions.getSuperPeerListAction(
+					P2PGetSuperPeerListResponse.parseFrom(message));			
 			break;
 		
 		case MessageID.RegisterAgent: 
@@ -168,7 +175,8 @@ public class MessageTranslation {
 			break;
 		
 		case MessageID.SendReportResponse: 
-			SendReportResponse.parseFrom(message);
+			P2PActions.sendReportAction(
+					SendReportResponse.parseFrom(message));			
 			break;
 		
 		case MessageID.ServiceSuggestion: 
@@ -184,7 +192,8 @@ public class MessageTranslation {
 			break;
 		
 		case MessageID.TestSuggestionResponse: 
-			TestSuggestionResponse.parseFrom(message);
+			P2PActions.sendSuggestionAction(
+					TestSuggestionResponse.parseFrom(message));			
 			break;
 		
 		case MessageID.UpgradeToSuper: 
