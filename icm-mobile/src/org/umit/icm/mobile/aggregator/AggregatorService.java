@@ -86,8 +86,7 @@ public class AggregatorService extends Service {
 		peersTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {			
-				try {
-					Thread.sleep(600000);
+				try {					
 					GetPeerList getPeerList = GetPeerList.newBuilder()
 					.setHeader(Globals.requestHeader)
 					.build();
@@ -99,12 +98,9 @@ public class AggregatorService extends Service {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
+				}
 			}	
-		}, 0, interval+30 * 1000); 
+		}, 0, interval * 60 * 1000); 
 	}
 	
 	
@@ -158,7 +154,7 @@ public class AggregatorService extends Service {
 					e.printStackTrace();
 				}				
 			}	
-		}, 0, interval * 1000); 
+		}, 0, interval * 60 * 1000); 
 	}
 	
 	/**
@@ -192,7 +188,7 @@ public class AggregatorService extends Service {
 			public void run() {
 				aggregatorAccess.aggregatorCheck();
 			}	
-		}, 0, interval * 1000); 
+		}, 0, interval * 60 * 1000); 
 	}
 	
 	/**

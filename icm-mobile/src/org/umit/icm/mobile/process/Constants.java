@@ -142,9 +142,9 @@ public class Constants {
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 
 		= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
-		public static int DEFAULT_GET_EVENTS_INTERVAL = 300;
-		public static int DEFAULT_GET_UPDATES_INTERVAL = 550;
-		public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 30;		
+		public static int DEFAULT_GET_EVENTS_INTERVAL = 5;
+		public static int DEFAULT_GET_UPDATES_INTERVAL = 10;
+		public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 1;		
 		public static final String BING_SEARCH_API = "930F43D8FAD299B1368D22FB4B32467E11EC1BE8";
 		public static final String TWITTER_HASHTAG = "#ICMMobileAgent";
 		public static String SUPER_GET_PEER_LIST = "/api/getpeerlist/";		
