@@ -52,7 +52,7 @@ public class Constants {
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
 	public static String TWITTER_STATUS_FILE = "twitter.param";
-	public static int DEFAULT_SCAN_INTERVAL = 60;
+	public static int DEFAULT_SCAN_INTERVAL = 5;
 	public static String DEFAULT_SCAN_STATUS = "On";
 	public static String DEFAULT_TWITTER_STATUS = "On";
 	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";

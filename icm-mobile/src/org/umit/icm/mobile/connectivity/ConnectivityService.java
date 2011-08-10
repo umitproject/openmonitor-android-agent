@@ -131,7 +131,7 @@ public class ConnectivityService extends Service {
 						+ String.valueOf(calendar.getTime())
 						, context);								
 			}	
-		}, 0, interval * 1000); 
+		}, 0, interval * 60 * 1000); 
 	}
 	
 	/**
