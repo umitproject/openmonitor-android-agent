@@ -136,7 +136,7 @@ public class Constants {
 			ports.clear();	
 		
 		}};
-		public static boolean RUN_PROFILER = true;
+		public static boolean RUN_PROFILER = false;
 		public static long DEFAULT_AGENT_ID = 911;
 		public static String DEFAULT_TOKEN = "myToken";
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
