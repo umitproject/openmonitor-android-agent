@@ -33,7 +33,6 @@ import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
-import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 
 import android.app.Service;
 import android.content.Intent;
@@ -45,10 +44,8 @@ import android.os.IBinder;
  */
 
 public class AggregatorService extends Service {
-
-	private Timer testsTimer = new Timer();
-	private Timer peersTimer = new Timer();
-	private Timer superPeersTimer = new Timer();
+	
+	private Timer peersTimer = new Timer();	
 	private Timer eventsTimer = new Timer();
 	private Timer accessTimer = new Timer();
 			
@@ -61,69 +58,20 @@ public class AggregatorService extends Service {
 	@Override
 	public void onCreate() {
 
-		super.onCreate();		
-		startTests();
-		startPeers();
-		startSuperPeers();
+		super.onCreate();				
+		startPeers();		
 		startEvents();
 		startAccess();		
 	}
 	
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
-		stopTests();
+		super.onDestroy();		
 		stopPeers();
-		stopSuperPeers();
 		stopEvents();
 		stopAccess();
-	}
-	
-	/**
-	 * Starts a new {@link Timer} and runs a {@link TimerTask} at the default
-	 * interval. Sends GetTestsList messages to the aggregator.
-	 * 
-	 * 
+	}		
 
-	@see         Timer
-	 */	 	 
-	private void startTests() {
-		 int interval = Constants.DEFAULT_GET_UPDATES_INTERVAL;	
-		testsTimer = new Timer();
-		testsTimer.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {			
-				try {
-					Thread.sleep(300000);
-					NewTests getTestList = NewTests.newBuilder()
-					.setHeader(Globals.requestHeader)
-					.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
-					.build();
-					AggregatorRetrieve.checkTests(getTestList);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-			}	
-		}, 0, interval * 1000); 
-	}
-	
-	/**
-	 * Cancels the {@link Timer}.
-	 * 
-	 * 
-	 
-	@see         Timer
-	 */	 
-	void stopTests() {
-		if (testsTimer != null){
-			testsTimer.cancel();		
-		}					
-	}
-	
 	/**
 	 * Starts a new {@link Timer} and runs a {@link TimerTask} at the default
 	 * interval. Sends GetPeerList messages to the aggregator.
@@ -144,33 +92,6 @@ public class AggregatorService extends Service {
 					.setHeader(Globals.requestHeader)
 					.build();
 					AggregatorRetrieve.getPeerList(getPeerList);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-			}	
-		}, 0, interval+30 * 1000); 
-	}
-	
-	/**
-	 * Starts a new {@link Timer} and runs a {@link TimerTask} at the default
-	 * interval. Sends GetSuperPeerList messages to the aggregator.
-	 * 
-	 * 
-
-	@see         Timer
-	 */	 	 
-	private void startSuperPeers() {
-		 int interval = Constants.DEFAULT_GET_UPDATES_INTERVAL;	
-		peersTimer = new Timer();
-		peersTimer.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {			
-				try {
-					Thread.sleep(900000);
 					GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
 					.setHeader(Globals.requestHeader)
 					.build();
@@ -183,8 +104,9 @@ public class AggregatorService extends Service {
 					e.printStackTrace();
 				}		
 			}	
-		}, 0, interval+60 * 1000); 
-	}	
+		}, 0, interval+30 * 1000); 
+	}
+	
 	
 	/**
 	 * Cancels the {@link Timer}.
@@ -197,20 +119,6 @@ public class AggregatorService extends Service {
 		if (peersTimer != null){
 			peersTimer.cancel();		
 		}					
-	}
-	
-	/**
-	 * Cancels the {@link Timer}.
-	 * 
-	 * 
-	 
-	@see         Timer
-	 */	 
-	void stopSuperPeers() {
-		if (superPeersTimer != null){
-			superPeersTimer.cancel();		
-		}
-							
 	}
 	
 	/**
