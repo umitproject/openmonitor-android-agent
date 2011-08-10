@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.Website;
 
 /**
  * Holds the application wide constants.
@@ -65,24 +66,26 @@ public class Constants {
 	public static String SERVICES_LIST_FILE = "services.list";
 	public static String TESTS_DIR = ICM_ROOT_DIR + "/tests";
 	public static String TESTS_FILE = "tests.test";
-	public static List<String> WEBSITE_LIST = new ArrayList<String>()
-	{  /**
+	public static List<Website> WEBSITE_LIST = new ArrayList<Website>()
+	{ 
+
+	/**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 6933062698660638968L;
 
 	{
-		add("http://www.google.com");
-		add("http://www.facebook.com");
-		add("http://www.youtube.com");
-		add("http://www.twitter.com");
-		add("http://www.yahoo.com");
-		add("http://www.cnn.com");
-		add("http://www.bbc.com");
-		add("http://www.gmail.com");
-		add("http://www.umitproject.org");
-		add("http://www.flickr.com");
-		add("http://www.hotmail.com");
+		add(new Website("http://www.google.com", "false", "true"));
+		add(new Website("http://www.facebook.com", "false", "true"));
+		add(new Website("http://www.youtube.com", "false", "true"));
+		add(new Website("http://www.twitter.com", "false", "true"));
+		add(new Website("http://www.yahoo.com", "false", "true"));
+		add(new Website("http://www.cnn.com", "false", "true"));
+		add(new Website("http://www.bbc.com", "false", "true"));
+		add(new Website("http://www.gmail.com", "false", "true"));
+		add(new Website("http://www.umitproject.org", "false", "true"));
+		add(new Website("http://www.flickr.com", "false", "true"));
+		add(new Website("http://www.hotmail.com", "false", "true"));
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;

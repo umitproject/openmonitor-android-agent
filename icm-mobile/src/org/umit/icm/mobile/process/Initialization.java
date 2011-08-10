@@ -23,7 +23,6 @@ package org.umit.icm.mobile.process;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Iterator;
 
 import org.umit.icm.mobile.aggregator.AggregatorService;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
@@ -150,11 +149,7 @@ public class Initialization {
 	@see         Constants
 	 */
 	public static void intializeWebsitesList() {
-		Iterator<String> iterator = Constants.WEBSITE_LIST.iterator();
-		while(iterator.hasNext()){               
-			Globals.websitesList.add(new Website(iterator.next(), "false", "true"));						       			
-        }  
-		
+		Globals.websitesList = Constants.WEBSITE_LIST;				
 	}
 	
 	/**
