@@ -46,17 +46,14 @@ import android.util.Log;
  * This is the WebsiteConnectivity class which extends {@link AbstractConnectivity}.
  */
 
-public class WebsiteConnectivity extends AbstractConnectivity{
-	
-	private List<String> listWebsites;
+public class WebsiteConnectivity extends AbstractConnectivity{		
 
 	/**
 	 * This is the default constructor. Populates the Websites list with the
 	 * list from {@link Constants}.
 	 */
 	public WebsiteConnectivity() {
-		super();
-		listWebsites = Constants.WEBSITE_LIST;
+		super();		
 	}
 	
 	/**
@@ -74,7 +71,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	@Override()
 	public void scan() throws IOException, HttpException {
 											
-		Iterator<String> iterator = listWebsites.iterator();
+		Iterator<Website> iterator = Globals.websitesList.iterator();
 		String websiteContent = new String();
 		Map<String, String> websiteHeader = new HashMap <String, String>();
 		String currentURL = new String();
@@ -84,7 +81,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			
 		while(iterator.hasNext()){               
 			startTimeContent = elapsedTimeContent = 0;
-			currentURL = iterator.next(); 
+			currentURL = iterator.next().getUrl(); 
 			urlConnection = WebsiteOpen.openURLConnection(currentURL);
 			websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 			
