@@ -74,7 +74,7 @@ public class AggregatorResources {
 
 	@see         ClientResource
 	 */
-	 public static ClientResource getClientResource(String url) {	
+	 public synchronized static ClientResource getClientResource(String url) {	
 		 return new ClientResource(Constants.AGGREGATOR_URL + url);
 	 }
 	 

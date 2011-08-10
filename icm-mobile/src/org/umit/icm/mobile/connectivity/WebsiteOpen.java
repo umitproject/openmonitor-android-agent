@@ -59,7 +59,7 @@ public class WebsiteOpen {
 	
 	@see         URLConnection
 	 */
-	static public URLConnection openURLConnection(String str) throws IOException, HttpException {
+	static synchronized public URLConnection openURLConnection(String str) throws IOException, HttpException {
 		URL url = new URL(str);
 		return url.openConnection();
 	}
@@ -79,7 +79,7 @@ public class WebsiteOpen {
 	
 	@see         InputStream
 	 */
-	static public String getContent(URLConnection urlConnection) throws IOException, HttpException {
+	static synchronized public String getContent(URLConnection urlConnection) throws IOException, HttpException {
 
         InputStream inputStream = urlConnection.getInputStream();
      	return convertStreamToString(inputStream);
@@ -99,7 +99,7 @@ public class WebsiteOpen {
 	
 	@see         InputStream
 	 */
-	static public InputStream getContentStream(URLConnection urlConnection) throws IOException, HttpException {
+	static synchronized public InputStream getContentStream(URLConnection urlConnection) throws IOException, HttpException {
 
         return urlConnection.getInputStream();
     }
@@ -123,7 +123,7 @@ public class WebsiteOpen {
 	
 	@see         BitmapFactory
 	 */
-	static public Bitmap getFavicon(String str) throws IOException, HttpException {
+	static synchronized public Bitmap getFavicon(String str) throws IOException, HttpException {
 		InputStream inputStream = getContentStream(openURLConnection(str + "/favicon.ico"));
 		return BitmapFactory.decodeStream(inputStream);
 	}
@@ -146,7 +146,7 @@ public class WebsiteOpen {
 	
 	@see         URLConnection
 	 */
-	static public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
+	static synchronized public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
 
 		Map<String, String> headerMap = new HashMap <String, String>();
 		String key = new String();
@@ -184,7 +184,7 @@ public class WebsiteOpen {
 	 
 	@see         StringBuilder
 	 */
-	private static String convertStreamToString(InputStream inputStream) throws IOException {
+	private synchronized static String convertStreamToString(InputStream inputStream) throws IOException {
 	   
 	    BufferedReader bufferedReader 
 	    = new BufferedReader(new InputStreamReader(inputStream));
@@ -215,7 +215,7 @@ public class WebsiteOpen {
 	 
 	@see         Matcher
 	 */
-	public static int getStatusCode(Map <String, String> websiteHeader) {
+	public synchronized static int getStatusCode(Map <String, String> websiteHeader) {
 		int statusCode = websiteHeader.size();
 		if(websiteHeader.size()!=0) {
 			Pattern httpCodePattern = 
@@ -242,7 +242,7 @@ public class WebsiteOpen {
 	                          
 	@return      String
 	 */
-	public static String httpOrHttps(Map <String, String> websiteHeader) {
+	public synchronized static String httpOrHttps(Map <String, String> websiteHeader) {
 		String connectionType = "http";
 		int statusCode = getStatusCode(websiteHeader);
 		if (statusCode >= 300 && statusCode <= 307 && statusCode != 306)
@@ -264,7 +264,7 @@ public class WebsiteOpen {
 	                          
 	@see        	ConnectivityManager
 	 */
-	public static boolean checkInternetAccess(
+	public synchronized static boolean checkInternetAccess(
 			ConnectivityManager connectivityManager) {	    
 	    if (connectivityManager.getActiveNetworkInfo() != null
 	            && connectivityManager.getActiveNetworkInfo().isAvailable()
@@ -274,6 +274,5 @@ public class WebsiteOpen {
 	        Log.w("####", "No Internet");
 	        return false;
 	    }
-	}
-    
+	}   
 }

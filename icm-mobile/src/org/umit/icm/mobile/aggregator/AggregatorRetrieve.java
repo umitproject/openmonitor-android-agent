@@ -77,8 +77,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean registerAgent(
-			RegisterAgent registerAgent) 
+	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
@@ -107,8 +106,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */	
-	 public static boolean getPeerList(
-			GetPeerList getPeerList) 
+	 public synchronized static boolean getPeerList(GetPeerList getPeerList) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
@@ -137,8 +135,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */	 
-	 public static boolean getSuperPeerList(
-			GetSuperPeerList getSuperPeerList) 
+	 public synchronized static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
@@ -167,8 +164,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean getEvents(
-			GetEvents getEvents) 
+	 public synchronized static boolean getEvents(GetEvents getEvents) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
@@ -197,8 +193,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean sendWebsiteReport(
-			SendWebsiteReport sendWebsiteReport) 
+	 public synchronized static boolean sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
@@ -227,8 +222,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean sendServiceReport(
-			SendServiceReport sendServiceReport) 
+	 public synchronized static boolean sendServiceReport(SendServiceReport sendServiceReport) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
@@ -257,8 +251,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean checkVersion(
-			NewVersion newVersion) 
+	 public synchronized static boolean checkVersion(NewVersion newVersion) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
@@ -287,8 +280,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean checkTests(
-			NewTests newTests) 
+	 public synchronized static boolean checkTests(NewTests newTests) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
@@ -320,8 +312,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean sendWebsiteSuggestion(
-			WebsiteSuggestion websiteSuggestion) 
+	 public synchronized static boolean sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
@@ -350,8 +341,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean sendServiceSuggestion(
-			ServiceSuggestion serviceSuggestion) 
+	 public synchronized static boolean sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
@@ -375,8 +365,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean checkAggregatorStatus(
-			CheckAggregator checkAggregator) 
+	 public synchronized static boolean checkAggregatorStatus(CheckAggregator checkAggregator) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
@@ -400,8 +389,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public static boolean login(
-			Login login) 
+	 public synchronized static boolean login(Login login) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
@@ -421,8 +409,7 @@ public class AggregatorRetrieve {
 
 	@see         AggregatorResources
 	 */
-	 public static void logout(
-			Logout logout) 
+	 public synchronized static void logout(Logout logout) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
