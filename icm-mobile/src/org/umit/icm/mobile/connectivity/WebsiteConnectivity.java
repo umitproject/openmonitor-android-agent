@@ -99,28 +99,19 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				websiteContent = WebsiteOpen.getContent(urlConnection);
 				elapsedTimeContent = System.currentTimeMillis() - startTimeContent;																					
 			}
-				try {
+			try {
 				websiteReport = (WebsiteReport) clean(currentURL
-							, websiteContent, websiteHeader, elapsedTimeContent);
-					SDCardReadWrite.writeWebsiteReport
-					(Constants.WEBSITES_DIR, websiteReport);
-				if (websiteReport.getReport().getHtmlResponse().length()!=0) {
-					if(websiteReport.getReport().getHtmlResponse().length()>100)
-						Log.w("#####Content"
-								, websiteReport.getReport().getHtmlResponse().substring(1, 100));
-					else
-						Log.w("#####Content"
-								, websiteReport.getReport().getHtmlResponse().substring(1
-										, websiteReport.getReport().getHtmlResponse().length()));
-				}
+						, websiteContent, websiteHeader, elapsedTimeContent);
+				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
+			
 				Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
 				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
-				} catch (RuntimeException e) {
-					e.printStackTrace();
+			} catch (RuntimeException e) {
+				e.printStackTrace();
 			}	catch (IOException e) {
-					e.printStackTrace();
+				e.printStackTrace();
 			}			
 																	
 		}

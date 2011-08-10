@@ -175,8 +175,7 @@ public class TCPClient {
 	 * Closes the open {@link Socket}, {@link DataOutputStream} and 
 	 * {@link BufferedReader} 
 	 */
-    public void closeConnection() throws IOException {
-    	Log.w("##Client", "close_start");
+    public void closeConnection() throws IOException {    	
     	dataOutputStream.close();
     	bufferedReader.close();
     	socket.close();    	
