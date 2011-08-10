@@ -136,7 +136,7 @@ public class Constants {
 			ports.clear();	
 		
 		}};
-		public static boolean RUN_PROFILER = false;
+		public static boolean RUN_PROFILER = true;
 		public static long DEFAULT_AGENT_ID = 911;
 		public static String DEFAULT_TOKEN = "myToken";
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
@@ -160,4 +160,5 @@ public class Constants {
 		public static String SUPER_AUTHENTICATE_PEER = "/api/authenticatepeer/";
 		public static String SUPER_LOGIN = "/api/login/";
 		public static String SUPER_MSG_KEY = "msg";
+		public static String AGENT_TYPE = "MOBILE";
 }

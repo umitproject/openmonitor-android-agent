@@ -513,6 +513,7 @@ public class ProfilerRun {
 				RegisterAgent.newBuilder()
 				.setIp("ip")
 				.setVersionNo(10)
+				.setAgentType(Constants.AGENT_TYPE)
 				.build();
 			}
 			
@@ -1058,6 +1059,7 @@ public class ProfilerRun {
 				 
 				RegisterAgent registerAgent = RegisterAgent.newBuilder()
 				.setIp("ip")
+				.setAgentType(Constants.AGENT_TYPE)
 				.setVersionNo(10)
 				.build();
 				
