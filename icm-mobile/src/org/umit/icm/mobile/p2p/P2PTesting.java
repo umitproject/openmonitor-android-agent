@@ -24,6 +24,7 @@ package org.umit.icm.mobile.p2p;
 import java.io.IOException;
 
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 
@@ -35,7 +36,7 @@ public class P2PTesting {
 		int port = 3128;
 		Globals.tcpClientConnectivity.openConnection(ip, port);		
 		Globals.tcpClientConnectivity.writeLine(MessageBuilder.generateMessage(
-				5001, getTestMessage()));
+				getTestMessage().getMessageID(), getTestMessage().getMessage()));
 		/*read total length*/
 		byte [] response = Globals.tcpClientConnectivity.readBytes(4);
 		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
@@ -69,13 +70,23 @@ public class P2PTesting {
 		Globals.tcpClientConnectivity.closeConnection();
 	}
 	
-	public static byte[] getTestMessage() {
+	private static QueueObject getTestMessage() {		
 		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 		.setAgentID(10)
 		.setAgentPort(8000)
 		.setAgentType(3)
 		.setCipheredPublicKey("cipheredPublicKey")
 		.build();
-		return authenticatePeer.toByteArray();
+		
+		AgentData agentData = AgentData.newBuilder()
+		.setAgentID(10)
+		.setAgentIP("")
+		.setAgentPort(20)
+		.setPeerStatus("On")
+		.setPublicKey("Key")
+		.setToken("token")
+		.build();
+		
+		return new QueueObject(agentData, authenticatePeer.toByteArray(), MessageID.AuthenticatePeer);		
 	}
 }
