@@ -85,21 +85,23 @@ public class AggregatorService extends Service {
 		peersTimer = new Timer();
 		peersTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
-			public void run() {			
-				try {					
-					GetPeerList getPeerList = GetPeerList.newBuilder()
-					.setHeader(Globals.requestHeader)
-					.build();
-					AggregatorRetrieve.getPeerList(getPeerList);
-					GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-					.setHeader(Globals.requestHeader)
-					.build();
-					AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}	
+			public void run() {
+				if(Globals.aggregatorCommunication != false) {
+					try {					
+						GetPeerList getPeerList = GetPeerList.newBuilder()
+						.setHeader(Globals.requestHeader)
+						.build();
+						AggregatorRetrieve.getPeerList(getPeerList);
+						GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+						.setHeader(Globals.requestHeader)
+						.build();
+						AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}	
+			}
 		}, 0, interval * 60 * 1000); 
 	}
 	
@@ -131,29 +133,31 @@ public class AggregatorService extends Service {
 		eventsTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				Location location = Location.newBuilder()
-				.setLatitude(0.0)
-				.setLongitude(0.0)
-				.build();
-				
-				GetEvents getEvents = GetEvents.newBuilder()
-				.setHeader(Globals.requestHeader)
-				.addLocations(location)
-				.build();
-				
-				try {
-					AggregatorRetrieve.getEvents(getEvents);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (RuntimeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
-			}	
+				if(Globals.aggregatorCommunication != false) {
+					Location location = Location.newBuilder()
+					.setLatitude(0.0)
+					.setLongitude(0.0)
+					.build();
+					
+					GetEvents getEvents = GetEvents.newBuilder()
+					.setHeader(Globals.requestHeader)
+					.addLocations(location)
+					.build();
+					
+					try {
+						AggregatorRetrieve.getEvents(getEvents);
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RuntimeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}							
+				}	
+			}			
 		}, 0, interval * 60 * 1000); 
 	}
 	
