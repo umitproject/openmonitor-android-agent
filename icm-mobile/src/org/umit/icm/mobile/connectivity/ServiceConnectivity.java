@@ -30,9 +30,11 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
+import org.umit.icm.mobile.proto.MessageProtos.SendServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -101,7 +103,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(calendar.getTimeInMillis())
+		.setTimeUTC(calendar.getTimeInMillis()/1000)
 		.addAllPassedNode(listNodes)
 		.build();				
 				
@@ -146,6 +148,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
 				Log.w("######name", serviceReport.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReport)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -186,6 +193,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
 				Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportHTTPS)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -226,6 +238,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportFTP.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportFTP)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -266,6 +283,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
 				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServicePOP3.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportPOP3)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -306,6 +328,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportIMAP.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportIMAP)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -346,6 +373,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
 				Log.w("######name", serviceReportGtalk.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceGtalk.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportGtalk)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);				
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -386,6 +418,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
 				Log.w("######name", serviceReportMSN.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceMSN.getService().getPorts().get(0)));
+				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(serviceReportMSN)
+				.build();
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);	
 				} catch (RuntimeException e) {
 				e.printStackTrace();
 				}	catch (IOException e) {
