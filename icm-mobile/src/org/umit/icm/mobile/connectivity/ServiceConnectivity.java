@@ -152,7 +152,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReport)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -197,7 +199,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportHTTPS)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -242,7 +246,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportFTP)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -287,7 +293,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportPOP3)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -332,7 +340,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportIMAP)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -377,7 +387,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportGtalk)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);				
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
@@ -422,7 +434,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setHeader(Globals.requestHeader)
 				.setReport(serviceReportMSN)
 				.build();
-				AggregatorRetrieve.sendServiceReport(sendServiceReport);	
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendServiceReport(sendServiceReport);
+				}					
 				} catch (RuntimeException e) {
 				e.printStackTrace();
 				}	catch (IOException e) {
