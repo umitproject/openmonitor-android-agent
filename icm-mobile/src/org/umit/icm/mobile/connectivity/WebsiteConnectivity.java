@@ -31,10 +31,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
+import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -105,6 +107,13 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
+				.setHeader(Globals.requestHeader)
+				.setReport(websiteReport)
+				.build();
+				if(Globals.aggregatorCommunication != false) {
+					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
+				}				
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}	catch (IOException e) {
@@ -155,7 +164,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(calendar.getTimeInMillis())
+		.setTimeUTC(calendar.getTimeInMillis()/1000)
 		.addAllPassedNode(listNodes)
 		.build();
 				
