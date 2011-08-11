@@ -27,6 +27,10 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
 
 import android.util.Log;
 
@@ -34,11 +38,11 @@ public class P2PTesting {
 	public static void testRequestResponse() throws IOException {
 		String ip = "202.206.64.11";
 		int port = 3128;
-		Globals.tcpClientConnectivity.openConnection(ip, port);		
-		Globals.tcpClientConnectivity.writeLine(MessageBuilder.generateMessage(
+		Globals.tcpClient.openConnection(ip, port);		
+		Globals.tcpClient.writeLine(MessageBuilder.generateMessage(
 				getTestMessage().getMessageID(), getTestMessage().getMessage()));
 		/*read total length*/
-		byte [] response = Globals.tcpClientConnectivity.readBytes(4);
+		byte [] response = Globals.tcpClient.readBytes(4);
 		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
 		if(response.length!=0) {
 			byte [] sizeBytes = MessageBuilder.getSubArray(response, 0, 3);
@@ -47,7 +51,7 @@ public class P2PTesting {
 			Log.w("###size: ", Integer.toString(size));				
 			
 			/*read actual message now*/
-			response = Globals.tcpClientConnectivity.readBytes(size);
+			response = Globals.tcpClient.readBytes(size);
 			Log.w("###Len ResponseMessage: ", Integer.toString(response.length));	
 			if(response.length!=0) {
 				byte[] idBytes = MessageBuilder.getSubArray(response, 0, 3);
@@ -67,7 +71,7 @@ public class P2PTesting {
 			} else {
 				Log.w("### ", "Blank response");
 		}
-		Globals.tcpClientConnectivity.closeConnection();
+		Globals.tcpClient.closeConnection();
 	}
 	
 	private static QueueObject getTestMessage() {		
@@ -88,5 +92,117 @@ public class P2PTesting {
 		.build();
 		
 		return new QueueObject(agentData, authenticatePeer.toByteArray(), MessageID.AuthenticatePeer);		
+	}
+	
+	public static void testRequestResponse2() throws IOException {
+		String ip = "202.206.64.11";
+		int port = 3128;
+		Globals.tcpClient.openConnection(ip, port);		
+		Globals.tcpClient.writeLine(MessageBuilder.generateMessage(
+				getTestMessage2().getMessageID(), getTestMessage2().getMessage()));
+		/*read total length*/
+		byte [] response = Globals.tcpClient.readBytes(4);
+		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
+		if(response.length!=0) {
+			byte [] sizeBytes = MessageBuilder.getSubArray(response, 0, 3);
+			Log.w("###Len sizeBytes: ", Integer.toString(sizeBytes.length));									
+			int size = MessageBuilder.byteArrayToInt(sizeBytes);						
+			Log.w("###size: ", Integer.toString(size));				
+			
+			/*read actual message now*/
+			response = Globals.tcpClient.readBytes(size);
+			Log.w("###Len ResponseMessage: ", Integer.toString(response.length));	
+			if(response.length!=0) {
+				byte[] idBytes = MessageBuilder.getSubArray(response, 0, 3);
+				Log.w("###Len idBytes: ", Integer.toString(idBytes.length));																
+				int id = MessageBuilder.byteArrayToInt(idBytes);				
+				Log.w("###id ", Integer.toString(id));
+				byte [] msg = MessageBuilder.getSubArray(response, 4, size - 1);
+				
+				P2PGetPeerListResponse p2pGetPeerListResponse
+				= P2PGetPeerListResponse.parseFrom(msg);
+				Log.w("###msg ", Integer.toString(p2pGetPeerListResponse.getPeersCount()));
+				
+				} else {
+					Log.w("### ", "Blank response");
+				}					
+	        			
+			} else {
+				Log.w("### ", "Blank response");
+		}
+		Globals.tcpClient.closeConnection();
+	}
+	
+	private static QueueObject getTestMessage2() {		
+		P2PGetPeerList p2pGetPeerList = P2PGetPeerList.newBuilder()
+		.setCount(10)
+		.build();
+		
+		AgentData agentData = AgentData.newBuilder()
+		.setAgentID(10)
+		.setAgentIP("")
+		.setAgentPort(20)
+		.setPeerStatus("On")
+		.setPublicKey("Key")
+		.setToken("token")
+		.build();
+		
+		return new QueueObject(agentData, p2pGetPeerList.toByteArray(), MessageID.P2PGetPeerList);		
+	}
+	
+	public static void testRequestResponse3() throws IOException {
+		String ip = "202.206.64.11";
+		int port = 3128;
+		Globals.tcpClient.openConnection(ip, port);		
+		Globals.tcpClient.writeLine(MessageBuilder.generateMessage(
+				getTestMessage2().getMessageID(), getTestMessage3().getMessage()));
+		/*read total length*/
+		byte [] response = Globals.tcpClient.readBytes(4);
+		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
+		if(response.length!=0) {
+			byte [] sizeBytes = MessageBuilder.getSubArray(response, 0, 3);
+			Log.w("###Len sizeBytes: ", Integer.toString(sizeBytes.length));									
+			int size = MessageBuilder.byteArrayToInt(sizeBytes);						
+			Log.w("###size: ", Integer.toString(size));				
+			
+			/*read actual message now*/
+			response = Globals.tcpClient.readBytes(size);
+			Log.w("###Len ResponseMessage: ", Integer.toString(response.length));	
+			if(response.length!=0) {
+				byte[] idBytes = MessageBuilder.getSubArray(response, 0, 3);
+				Log.w("###Len idBytes: ", Integer.toString(idBytes.length));																
+				int id = MessageBuilder.byteArrayToInt(idBytes);				
+				Log.w("###id ", Integer.toString(id));
+				byte [] msg = MessageBuilder.getSubArray(response, 4, size - 1);
+				
+				P2PGetSuperPeerListResponse p2pGetPeerListResponse
+				= P2PGetSuperPeerListResponse.parseFrom(msg);
+				Log.w("###msg ", Integer.toString(p2pGetPeerListResponse.getPeersCount()));
+				
+				} else {
+					Log.w("### ", "Blank response");
+				}					
+	        			
+			} else {
+				Log.w("### ", "Blank response");
+		}
+		Globals.tcpClient.closeConnection();
+	}
+	
+	private static QueueObject getTestMessage3() {		
+		P2PGetSuperPeerList p2pGetPeerList = P2PGetSuperPeerList.newBuilder()
+		.setCount(10)
+		.build();
+		
+		AgentData agentData = AgentData.newBuilder()
+		.setAgentID(10)
+		.setAgentIP("")
+		.setAgentPort(20)
+		.setPeerStatus("On")
+		.setPublicKey("Key")
+		.setToken("token")
+		.build();
+		
+		return new QueueObject(agentData, p2pGetPeerList.toByteArray(), MessageID.P2PGetSuperPeerList);		
 	}
 }
