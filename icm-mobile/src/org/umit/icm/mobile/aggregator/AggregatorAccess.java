@@ -22,12 +22,17 @@
 package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
+import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -70,6 +75,24 @@ public class AggregatorAccess {
 				} else {
 					Globals.aggregatorCommunication = false;
 					Globals.p2pCommunication = true;
+					AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
+					.setAgentID(Globals.runtimeParameters.getAgentID())
+					.setAgentType(Constants.AGENT_TYPE_NUMBER)
+					.setAgentPort(Constants.MY_TCP_PORT)		
+					.setCipheredPublicKey(new String(Globals.keyManager.getMyCipheredKey()))
+					.build();
+					Iterator<AgentData> iterator = Globals.superPeersList.iterator(); {
+						while(iterator.hasNext()) {
+							if(CryptoKeyReader.checkPeerSecretKey(iterator.next().getAgentIP()) == false) {
+								try {
+									MessageSender.authenticatePeer(iterator.next(), authenticatePeer);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+					}
 					Log.w("Aggregator Access", "Aggregator can't be reached");
 				}
 				
