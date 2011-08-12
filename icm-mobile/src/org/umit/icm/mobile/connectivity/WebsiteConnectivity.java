@@ -110,7 +110,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setHeader(Globals.requestHeader)
 				.setReport(websiteReport)
-				.build();
+				.build();				
 				if(Globals.aggregatorCommunication != false) {
 					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
 				}				
