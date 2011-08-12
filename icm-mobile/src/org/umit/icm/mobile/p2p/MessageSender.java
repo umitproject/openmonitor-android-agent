@@ -214,7 +214,7 @@ public class MessageSender {
 	 	 
 	 @see P2PCommunication
 	 */
-	public static void ForwardMessage(AgentData agentData, ForwardingMessage forwardingMessage) 
+	public static void forwardMessage(AgentData agentData, ForwardingMessage forwardingMessage) 
 	throws Exception {
 		P2PCommunication.sendMessage(agentData, forwardingMessage.toByteArray(),
 				MessageID.ForwardingMessage);		
