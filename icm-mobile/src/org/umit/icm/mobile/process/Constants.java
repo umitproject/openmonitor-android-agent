@@ -165,4 +165,6 @@ public class Constants {
 		public static String SUPER_MSG_KEY = "msg";
 		public static String AGENT_TYPE = "MOBILE";
 		public static int AGENT_TYPE_NUMBER = 3;
+		public static int MAX_PEERS = 10;
+		public static int MAX_SUPER_PEERS = 2;	
 }
