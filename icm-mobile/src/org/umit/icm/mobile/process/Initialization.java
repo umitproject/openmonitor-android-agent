@@ -32,6 +32,7 @@ import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.P2PMessageHeader;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -200,6 +201,11 @@ public class Initialization {
 		Globals.requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setToken(Globals.runtimeParameters.getToken())
+		.build();
+		
+		Globals.p2pMessageHeader = P2PMessageHeader.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setAgentType(Constants.AGENT_TYPE_NUMBER)
 		.build();
 	}
 	
