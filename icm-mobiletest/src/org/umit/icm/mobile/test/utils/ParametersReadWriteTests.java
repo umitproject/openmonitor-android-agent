@@ -30,7 +30,9 @@ import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.Service;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
+import org.umit.icm.mobile.proto.MessageProtos.Website;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import junit.framework.Assert;
@@ -138,21 +140,29 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     
 public void testTestsList() throws Throwable {
     	
-		Test test1 = Test.newBuilder()
-		.setExecuteAtTimeUTC(11)
-		.setServiceCode(21)
-		.setTestID(31)
-		.setWebsiteURL("url1")
-		.setTestType("WEB")
-		.build();
-		
-		Test test2 = Test.newBuilder()
-		.setExecuteAtTimeUTC(12)
-		.setServiceCode(22)
-		.setTestID(32)
-		.setWebsiteURL("url2")
-		.setTestType("SERVICE")
-		.build();
+	Website website = Website.newBuilder()
+	.setUrl("url1")
+	.build();
+	
+	Test test1 = Test.newBuilder()
+	.setExecuteAtTimeUTC(11)
+	.setWebsite(website)
+	.setTestID(31)    	
+	.setTestType("WEB")
+	.build();
+	
+	Service service = Service.newBuilder()
+	.setIp("ip")
+	.setName("name")
+	.setPort(1000)
+	.build();
+	
+	Test test2 = Test.newBuilder()
+	.setExecuteAtTimeUTC(12)    	
+	.setTestID(32)
+	.setService(service)
+	.setTestType("SERVICE")
+	.build();
     	
     	List<Test> testList = new ArrayList<Test>();
     	testList.add(test1);

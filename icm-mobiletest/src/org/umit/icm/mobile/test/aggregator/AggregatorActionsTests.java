@@ -163,20 +163,28 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setCurrentTestVersionNo(23)
     	.setCurrentVersionNo(23)
     	.build();
-
+    	
+    	Website website = Website.newBuilder()
+    	.setUrl("url1")
+    	.build();
+    	
     	Test test1 = Test.newBuilder()
     	.setExecuteAtTimeUTC(11)
-    	.setServiceCode(21)
-    	.setTestID(31)
-    	.setWebsiteURL("url1")
+    	.setWebsite(website)
+    	.setTestID(31)    	
     	.setTestType("WEB")
     	.build();
     	
+    	Service service = Service.newBuilder()
+    	.setIp("ip")
+    	.setName("name")
+    	.setPort(1000)
+    	.build();
+    	
     	Test test2 = Test.newBuilder()
-    	.setExecuteAtTimeUTC(12)
-    	.setServiceCode(22)
+    	.setExecuteAtTimeUTC(12)    	
     	.setTestID(32)
-    	.setWebsiteURL("url2")
+    	.setService(service)
     	.setTestType("SERVICE")
     	.build();
     	
@@ -196,9 +204,12 @@ public class AggregatorActionsTests extends AndroidTestCase {
     
     private boolean compareTests(Test test1 , Test test2) {
     	if(test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
-    			&& test1.getServiceCode() == test2.getServiceCode()
-    			&& test1.getTestID() == test2.getTestID()
-    			&& test1.getWebsiteURL().equals(test2.getWebsiteURL())
+    			&& test1.getWebsite() == test2.getWebsite()
+    			&& test1.getTestID() == test2.getTestID()    			
+    			&& test1.getTestType().equals(test2.getTestType()) ||
+    			test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
+    			&& test1.getService() == test2.getService()
+    			&& test1.getTestID() == test2.getTestID()    			
     			&& test1.getTestType().equals(test2.getTestType()))
     		return true;
     	return false;
