@@ -197,7 +197,7 @@ public class MessageSender {
 	 */
 	public static void authenticatePeer(AgentData agentData, AuthenticatePeer authenticatePeer) 
 	throws Exception {
-		P2PCommunication.sendMessage(agentData, authenticatePeer.toByteArray(),
+		P2PCommunication.sendMessagePublic(agentData, authenticatePeer.toByteArray(),
 				MessageID.AuthenticatePeer);		
 	}
 	
