@@ -23,16 +23,21 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
+import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList;
 
 import android.app.Service;
 import android.content.Intent;
@@ -100,7 +105,25 @@ public class AggregatorService extends Service {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}	
+				} else if(Globals.p2pCommunication != false) {	
+					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+					P2PGetPeerList getPeerList = P2PGetPeerList.newBuilder()
+					.setCount(Constants.MAX_PEERS)
+					.build();					
+					P2PGetSuperPeerList getSuperPeerList = P2PGetSuperPeerList.newBuilder()
+					.setCount(Constants.MAX_PEERS)
+					.build();
+					while(iterator.hasNext()) {
+						try {
+							MessageSender.receivePeerList(iterator.next(), getPeerList);
+							MessageSender.receiveSuperPeerList(iterator.next(), getSuperPeerList);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+					
 			}
 		}, 0, interval * 60 * 1000); 
 	}
@@ -156,7 +179,26 @@ public class AggregatorService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}							
-				}	
+				}	else if(Globals.p2pCommunication != false) {	
+						Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+						Location location = Location.newBuilder()
+						.setLatitude(0.0)
+						.setLongitude(0.0)
+						.build();
+						
+						GetEvents getEvents = GetEvents.newBuilder()
+						.setHeader(Globals.requestHeader)
+						.addLocations(location)
+						.build();
+						while(iterator.hasNext()) {							
+							try {
+								MessageSender.receiveEvents(iterator.next(), getEvents);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					}	
+				}
 			}			
 		}, 0, interval * 60 * 1000); 
 	}
