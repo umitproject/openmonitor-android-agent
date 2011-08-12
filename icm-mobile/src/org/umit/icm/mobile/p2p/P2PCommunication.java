@@ -23,6 +23,7 @@ package org.umit.icm.mobile.p2p;
 
 import java.security.PrivateKey;
 
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.utils.AESCrypto;
@@ -56,8 +57,14 @@ public class P2PCommunication {
 	 */
 	public static void sendMessage(AgentData agentInfo, byte[] message, int messageID) 
 	throws Exception {
-		byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
-		byte [] cipherBytes = AESCrypto.encrypt(symmetricKey, message);	
+		byte [] cipherBytes;
+		byte [] totalBytes;
+		if(Constants.P2P_ENCRYPTION == true) {
+			byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
+			cipherBytes = AESCrypto.encrypt(symmetricKey, message);
+		} else {
+			cipherBytes = message;
+		}
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
@@ -66,9 +73,12 @@ public class P2PCommunication {
 		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
 		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
-		
-		byte[] peerSecretKey = CryptoKeyReader.getPeerSecretKey(agentInfo.getAgentIP());
-		byte [] totalBytes = AESCrypto.decrypt(peerSecretKey, totalBytesEncrypted);
+		if(Constants.P2P_ENCRYPTION == true) {
+			byte[] peerSecretKey = CryptoKeyReader.getPeerSecretKey(agentInfo.getAgentIP());
+			totalBytes = AESCrypto.decrypt(peerSecretKey, totalBytesEncrypted);
+		} else {
+			totalBytes = totalBytesEncrypted;
+		}
 		
 		byte[] idBytes = MessageBuilder.getSubArray(totalBytes, 0, 3);
 		int id = MessageBuilder.byteArrayToInt(idBytes);
@@ -101,8 +111,15 @@ public class P2PCommunication {
 	 */
 	public static void sendMessagePublic(AgentData agentInfo, byte[] message, int messageID) 
 	throws Exception {
-		PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
-		byte [] cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
+		byte [] cipherBytes;
+		byte [] totalBytes;
+		if(Constants.P2P_ENCRYPTION == true) {
+			PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
+			cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
+		}
+		else {
+			cipherBytes = message;
+		}
 		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
@@ -111,10 +128,14 @@ public class P2PCommunication {
 		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
 		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
-				
-		byte [] totalBytes = 
-			RSACrypto.decryptPublic(
-					RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), totalBytesEncrypted);
+		if(Constants.P2P_ENCRYPTION == true) {		
+			totalBytes = 
+				RSACrypto.decryptPublic(
+						RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), totalBytesEncrypted);
+		}
+		else {
+			totalBytes = totalBytesEncrypted;
+		}
 		
 		byte[] idBytes = MessageBuilder.getSubArray(totalBytes, 0, 3);
 		int id = MessageBuilder.byteArrayToInt(idBytes);
