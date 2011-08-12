@@ -76,7 +76,7 @@ public class MessageTranslation {
 		
 		case MessageID.ForwardingMessageResponse: 
 			P2PActions.forwardMessageAction(
-					ForwardingMessageResponse.parseFrom(message));
+					ForwardingMessageResponse.parseFrom(message), agentData);
 			break;
 		
 		case MessageID.GetEvents: 

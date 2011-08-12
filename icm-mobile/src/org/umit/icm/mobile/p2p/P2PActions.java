@@ -23,7 +23,9 @@ package org.umit.icm.mobile.p2p;
 
 import java.io.IOException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.process.ProcessActions;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
@@ -35,6 +37,8 @@ import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
+
+import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
  * Performs actions on p2p response messages.
@@ -207,7 +211,11 @@ public class P2PActions {
 		}
 	}
 	
-	public static void forwardMessageAction(ForwardingMessageResponse forwardingMessageResponse) {
-		
+	public static void forwardMessageAction(ForwardingMessageResponse forwardingMessageResponse
+			, AgentData agentData) throws NumberFormatException, InvalidProtocolBufferException {
+		byte[] decodedMessage 
+		= Base64.decodeBase64(forwardingMessageResponse.getEncodedMessage().getBytes());
+		MessageTranslation.translateMessage(Integer.parseInt(forwardingMessageResponse.getIdentifier())
+				, decodedMessage, agentData);
 	}
 }
