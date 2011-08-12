@@ -201,4 +201,23 @@ public class MessageSender {
 				MessageID.AuthenticatePeer);		
 	}
 	
+	/**
+	 * Sends a {@link ForwardingMessage} message.
+	 * 
+	 * 
+	 
+	 @param forwardingMessage message of type {@link ForwardingMessage}
+	 *
+	 
+	 @param agentData message of type {@link AgentData}
+	 *
+	 	 
+	 @see P2PCommunication
+	 */
+	public static void ForwardMessage(AgentData agentData, ForwardingMessage forwardingMessage) 
+	throws Exception {
+		P2PCommunication.sendMessage(agentData, forwardingMessage.toByteArray(),
+				MessageID.ForwardingMessage);		
+	}
+	
 }
