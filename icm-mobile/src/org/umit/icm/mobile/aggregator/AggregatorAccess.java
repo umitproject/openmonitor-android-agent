@@ -57,6 +57,7 @@ public class AggregatorAccess {
 	public void aggregatorCheck() {
 		
 		if(!WebsiteOpen.checkInternetAccess(connectivityManager)) {
+			Globals.p2pCommunication = false;
 			Globals.aggregatorCommunication = false;
 			Log.w("Aggregator Access", "No Internet");
 		} else {			
@@ -65,8 +66,10 @@ public class AggregatorAccess {
 					WebsiteOpen.getHeaders(WebsiteOpen.openURLConnection(Constants.AGGREGATOR_URL));
 				if(WebsiteOpen.getStatusCode(header) == 200) {
 					Globals.aggregatorCommunication = true;
+					Globals.p2pCommunication = false;
 				} else {
 					Globals.aggregatorCommunication = false;
+					Globals.p2pCommunication = true;
 					Log.w("Aggregator Access", "Aggregator can't be reached");
 				}
 				
