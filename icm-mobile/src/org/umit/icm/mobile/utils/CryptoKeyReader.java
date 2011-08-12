@@ -114,4 +114,19 @@ public class CryptoKeyReader {
 	public static byte[] getPeerSecretKey(String peerIP) throws IOException {
 		return AESCrypto.readKey(peerIP+Constants.PEER_SECRET_KEY_FILE);
 	}
+	
+	/**
+	 * Checks if peer key exists.
+	 * 
+	 *
+	
+	@return boolean
+     *		
+	
+	@see         AESCrypto
+	 */
+	public static boolean checkPeerSecretKey(String peerIP) throws IOException {
+		return SDCardReadWrite.fileExists(peerIP+Constants.PEER_SECRET_KEY_FILE,
+				Constants.KEYS_DIR);
+	}
 }
