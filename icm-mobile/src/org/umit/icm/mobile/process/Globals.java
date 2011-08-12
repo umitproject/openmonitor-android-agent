@@ -163,4 +163,9 @@ public class Globals {
 	 */
 	public static MessageQueue messageQ 
 	= new MessageQueue();
+		
+	/**
+	 * Global boolean object to check if p2p communication is possible.
+	 */
+	public static boolean p2pCommunication = false;
 }
