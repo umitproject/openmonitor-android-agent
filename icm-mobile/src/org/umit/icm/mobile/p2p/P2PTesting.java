@@ -77,8 +77,8 @@ public class P2PTesting {
 	private static QueueObject getTestMessage() {		
 		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 		.setAgentID(10)
-		.setAgentPort(8000)
 		.setAgentType(3)
+		.setAgentPort(8000)		
 		.setCipheredPublicKey("cipheredPublicKey")
 		.build();
 		

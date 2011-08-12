@@ -35,7 +35,6 @@ import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-import org.umit.icm.mobile.proto.MessageProtos.P2PMessageHeader;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.social.TwitterUpdate;
@@ -169,9 +168,4 @@ public class Globals {
 	 * Global boolean object to check if p2p communication is possible.
 	 */
 	public static boolean p2pCommunication = false;
-	
-	/**
-	 * Global {@link P2PMessageHeader}
-	 */
-	public static P2PMessageHeader p2pMessageHeader;
 }
