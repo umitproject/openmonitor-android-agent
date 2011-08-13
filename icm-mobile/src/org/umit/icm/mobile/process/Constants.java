@@ -75,17 +75,17 @@ public class Constants {
 		private static final long serialVersionUID = 6933062698660638968L;
 
 	{
-		add(new Website("http://www.google.com", "false", "true"));
-		add(new Website("http://www.facebook.com", "false", "true"));
-		add(new Website("http://www.youtube.com", "false", "true"));
-		add(new Website("http://www.twitter.com", "false", "true"));
-		add(new Website("http://www.yahoo.com", "false", "true"));
-		add(new Website("http://www.cnn.com", "false", "true"));
-		add(new Website("http://www.bbc.com", "false", "true"));
-		add(new Website("http://www.gmail.com", "false", "true"));
-		add(new Website("http://www.umitproject.org", "false", "true"));
-		add(new Website("http://www.flickr.com", "false", "true"));
-		add(new Website("http://www.hotmail.com", "false", "true"));
+		add(new Website("http://www.google.com", "false", "true", 1001, 0));
+		add(new Website("http://www.facebook.com", "false", "true", 1001, 0));
+		add(new Website("http://www.youtube.com", "false", "true", 1001, 0));
+		add(new Website("http://www.twitter.com", "false", "true", 1001, 0));
+		add(new Website("http://www.yahoo.com", "false", "true", 1001, 0));
+		add(new Website("http://www.cnn.com", "false", "true", 1001, 0));
+		add(new Website("http://www.bbc.com", "false", "true", 1001, 0));
+		add(new Website("http://www.gmail.com", "false", "true", 1001, 0));
+		add(new Website("http://www.umitproject.org", "false", "true", 1001, 0));
+		add(new Website("http://www.flickr.com", "false", "true", 1001, 0));
+		add(new Website("http://www.hotmail.com", "false", "true", 1001, 0));
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;

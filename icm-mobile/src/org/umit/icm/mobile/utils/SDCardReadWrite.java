@@ -300,6 +300,8 @@ public class SDCardReadWrite {
 			objOutStream.writeObject(data.getUrl());
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getStatus());
+			objOutStream.writeObject(Long.toString(data.getTestID()));
+			objOutStream.writeObject(Long.toString(data.getExecuteAtTimeUTC()));
     	} catch (Exception e) {
   		    throw new RuntimeException("writeWebsite exception", e);
   	  	} finally {
@@ -345,6 +347,8 @@ public class SDCardReadWrite {
 	    	    website.setUrl((String) objInputStream.readObject());
 	    	    website.setCheck((String) objInputStream.readObject());
 	    	    website.setStatus((String) objInputStream.readObject());
+	    	    website.setTestID(Long.parseLong((String)objInputStream.readObject()));
+	    	    website.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));
 	    	    
 	    	    return website;
   	  	} catch (Exception e) {

@@ -34,25 +34,48 @@ public class Website implements Serializable {
 	/**
 	 * Website serialUID
 	 */
-	private static final long serialVersionUID = -6731434502898142169L;
+	private static final long serialVersionUID = 5448390156006128227L;
+		
 	private String url;
 	private String status;
-	private String check;			
+	private String check;	
+	private long testID;
+	private long executeAtTimeUTC;
 	
 	public Website() {
 		super();
 		url = "";
 		status = "";
 		check = "";
+		testID = 0;
+		executeAtTimeUTC = 0;
 	}		
 	
-	public Website(String url, String status, String check) {
+	public Website(String url, String status, String check, long testID, long executeAtTimeUTC) {
 		super();
 		this.url = url;
 		this.status = status;
 		this.check = check;
+		this.testID = 0;
+		this.executeAtTimeUTC = 0;
 	}
 	
+	public long getTestID() {
+		return testID;
+	}
+
+	public void setTestID(long testID) {
+		this.testID = testID;
+	}
+
+	public long getExecuteAtTimeUTC() {
+		return executeAtTimeUTC;
+	}
+
+	public void setExecuteAtTimeUTC(long executeAtTimeUTC) {
+		this.executeAtTimeUTC = executeAtTimeUTC;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -87,7 +110,7 @@ public class Website implements Serializable {
 	@see         SDCardReadWrite
 	 */
 	public void writeWebsite() throws IOException {
-		Website website = new Website(this.url, this.status, this.check);
+		Website website = new Website(this.url, this.status, this.check, this.testID, this.executeAtTimeUTC);
 		SDCardReadWrite.writeWebsite(Constants.WEBSITES_DIR, website);
 	}
 	
@@ -113,7 +136,9 @@ public class Website implements Serializable {
 	public boolean equals(Website website) {
 		if(website.getUrl().equals(this.getUrl())
 				&& website.getStatus().equals(this.getStatus())
-				&& website.getCheck().equals(this.getCheck()))
+				&& website.getCheck().equals(this.getCheck())
+				&& website.getTestID() == this.getTestID()
+				&& website.getExecuteAtTimeUTC() == this.getExecuteAtTimeUTC())
 			return true;
 		return false;
 	}
