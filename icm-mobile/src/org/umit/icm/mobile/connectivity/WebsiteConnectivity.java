@@ -23,6 +23,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
@@ -77,13 +79,15 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		String websiteContent = new String();
 		Map<String, String> websiteHeader = new HashMap <String, String>();
 		String currentURL = new String();
+		Website website = new Website();
 		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 		URLConnection urlConnection = null;
 		long startTimeContent, elapsedTimeContent;
 			
 		while(iterator.hasNext()){               
 			startTimeContent = elapsedTimeContent = 0;
-			currentURL = iterator.next().getUrl(); 
+			website = iterator.next();
+			currentURL = website.getUrl(); 
 			urlConnection = WebsiteOpen.openURLConnection(currentURL);
 			websiteHeader = WebsiteOpen.getHeaders(urlConnection);
 			
@@ -99,7 +103,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				elapsedTimeContent = System.currentTimeMillis() - startTimeContent;																					
 			}
 			try {
-				websiteReport = (WebsiteReport) clean(currentURL
+				websiteReport = (WebsiteReport) clean(website
 						, websiteContent, websiteHeader, elapsedTimeContent);
 				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
 			
@@ -117,6 +121,9 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}	catch (IOException e) {
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
 																	
@@ -141,10 +148,11 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	 *  	                          		              
 	            
 	@return      WebsiteReport
+	 * @throws NoSuchAlgorithmException 
 	 */	
-	public WebsiteReport clean(String websiteURL, String websiteContent
+	public WebsiteReport clean(Website website, String websiteContent
 			, Map<String, String> websiteHeader, long responseTime) 
-	throws IOException, RuntimeException {
+	throws IOException, RuntimeException, NoSuchAlgorithmException {
 		
 		int statusCode = WebsiteOpen.getStatusCode(websiteHeader);
 					
@@ -153,18 +161,21 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setResponseTime((int)responseTime)
 		.setStatusCode(statusCode)
 		.setHtmlResponse(websiteContent)
-		.setWebsiteURL(websiteURL)		
+		.setWebsiteURL(website.getUrl())		
 		.build();
 		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
-		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));		
+		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));
+		long timeUTC = (calendar.getTimeInMillis()/1000);
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(Integer.toString(websiteReportDetail.hashCode()))
+		.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID()
+				, timeUTC
+				, website.getTestID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(10)
 		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(calendar.getTimeInMillis()/1000)
+		.setTimeUTC(timeUTC)
 		.addAllPassedNode(listNodes)
 		.build();
 				
