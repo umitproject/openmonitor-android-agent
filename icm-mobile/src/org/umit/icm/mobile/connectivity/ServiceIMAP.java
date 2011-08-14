@@ -90,7 +90,7 @@ public class ServiceIMAP {
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(993);												
-		return new Service("imap", ports, "imap.gmail.com" , "open", "true");
+		return new Service("imap", ports, "imap.gmail.com" , "open", "true", 0, 0);
 	}
 	
 	/**

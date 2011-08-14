@@ -94,7 +94,7 @@ public class ServiceHTTPS {
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(443);												
-		return new Service("https", ports, "campusmail.lums.edu.pk" , "open", "true");
+		return new Service("https", ports, "campusmail.lums.edu.pk" , "open", "true", 0, 0);
 	}
 	
 	/**

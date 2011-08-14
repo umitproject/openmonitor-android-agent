@@ -36,12 +36,15 @@ public class Service implements Serializable {
 	/**
 	 * Service serial UID
 	 */
-	private static final long serialVersionUID = -4063186487837165771L;
+	private static final long serialVersionUID = -1767102046741760141L;
+
 	private String name;
 	private List<Integer> ports;
 	private String status;
 	private String check;	
 	private String ip;
+	private long testID;
+	private long executeAtTimeUTC;
 		
 	public Service() {
 		super();
@@ -50,15 +53,20 @@ public class Service implements Serializable {
 		status = "";
 		check = "";
 		ip = "";
+		testID = 0;
+		executeAtTimeUTC = 0;
 	}		
 
-	public Service(String name, List<Integer> ports, String ip, String status, String check) {
+	public Service(String name, List<Integer> ports, String ip, String status, 
+			String check, long testID, long executeAtTimeUTC) {
 		super();
 		this.name = name;
 		this.ports = ports;
 		this.status = status;
 		this.check = check;
 		this.ip = ip;
+		this.testID = testID;
+		this.executeAtTimeUTC = executeAtTimeUTC;
 	}
 
 	public String getName() {
@@ -100,6 +108,22 @@ public class Service implements Serializable {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+		
+	public long getTestID() {
+		return testID;
+	}
+
+	public void setTestID(long testID) {
+		this.testID = testID;
+	}
+
+	public long getExecuteAtTimeUTC() {
+		return executeAtTimeUTC;
+	}
+
+	public void setExecuteAtTimeUTC(long executeAtTimeUTC) {
+		this.executeAtTimeUTC = executeAtTimeUTC;
+	}
 
 	/**
 	 * Writes the {@link Service} to disk using   
@@ -112,7 +136,8 @@ public class Service implements Serializable {
 	 */
 	public void writeService() throws IOException {
 		Service service 
-		= new Service(this.name, this.ports, this.ip, this.status, this.check);
+		= new Service(this.name, this.ports, this.ip, this.status
+				, this.check, this.testID, this.executeAtTimeUTC);
 		SDCardReadWrite.writeService(Constants.SERVICES_DIR, service);
 	}
 	
@@ -139,6 +164,9 @@ public class Service implements Serializable {
 		if(service.getCheck().equals(this.getCheck())
 				&& service.getName().equals(this.getName())
 				&& service.getIp().equals(this.getIp())
+				&& service.getPorts().size() == this.getPorts().size()
+				&& service.getTestID() == this.getTestID()
+				&& service.getExecuteAtTimeUTC() == this.getExecuteAtTimeUTC()
 				&& service.getPorts().size() == this.getPorts().size()
 				&& service.getStatus().equals(this.getStatus()))
 			return true;

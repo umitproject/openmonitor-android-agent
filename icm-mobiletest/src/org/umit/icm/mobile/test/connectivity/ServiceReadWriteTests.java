@@ -38,7 +38,7 @@ public class ServiceReadWriteTests extends AndroidTestCase {
     	List<Integer> ports = new ArrayList<Integer>();
     	ports.add(8080);
     	ports.add(8000);
-    	Service service = new Service("name", ports, "ip", "status", "check");
+    	Service service = new Service("name", ports, "ip", "status", "check", 1, 1);
     	service.writeService();
     	Service newService 
     	= service.readService(service.getName());
