@@ -23,6 +23,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +34,7 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.SendServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
@@ -81,10 +83,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 *  	                          		              
 	            
 	@return      ServiceReport
+	 * @throws NoSuchAlgorithmException 
 	 */	
 	public ServiceReport clean(Service service, String serviceContent
 			, byte[] bytes) 
-	throws IOException, RuntimeException {
+	throws IOException, RuntimeException, NoSuchAlgorithmException {
 		int statusCode = 0;
 		if(bytes.equals(null) && serviceContent.equals(null))
 			statusCode = 1;
@@ -97,13 +100,16 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
-		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));		
+		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));
+		long timeUTC = (calendar.getTimeInMillis()/1000);
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(Integer.toString(serviceReportDetail.hashCode()))
+		.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID()
+				, timeUTC
+				, service.getTestID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setTestID(10)
+		.setTestID((int)service.getTestID())
 		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(calendar.getTimeInMillis()/1000)
+		.setTimeUTC(timeUTC)
 		.addAllPassedNode(listNodes)
 		.build();				
 				
@@ -159,6 +165,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					e.printStackTrace();
 				}	catch (IOException e) {
 					e.printStackTrace();
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}					
 		}
@@ -205,6 +214,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
+					e.printStackTrace();
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}		
@@ -253,7 +265,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					e.printStackTrace();
 				}	catch (IOException e) {
 					e.printStackTrace();
-			}
+			} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}					
 	}
 
@@ -300,7 +315,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					e.printStackTrace();
 				}	catch (IOException e) {
 					e.printStackTrace();
-			}
+			} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}					
 	}
 	
@@ -347,7 +365,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					e.printStackTrace();
 				}	catch (IOException e) {
 					e.printStackTrace();
-			}		
+			} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
 		}
 	}
 	
@@ -393,6 +414,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				} catch (RuntimeException e) {
 					e.printStackTrace();
 				}	catch (IOException e) {
+					e.printStackTrace();
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
 			}
@@ -441,6 +465,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				e.printStackTrace();
 				}	catch (IOException e) {
 				e.printStackTrace();
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}		
 			}
 		}	
