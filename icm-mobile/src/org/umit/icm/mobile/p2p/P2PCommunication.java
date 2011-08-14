@@ -55,10 +55,13 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static void sendMessage(AgentData agentInfo, byte[] message, int messageID) 
+	public static void sendMessage(AgentData agentInfo, byte[] rawMessage, int messageID) 
 	throws Exception {
 		byte [] cipherBytes;
 		byte [] totalBytes;
+		byte [] message;
+		byte [] completeMessage;
+		message = MessageBuilder.generateMessageWithoutLength(messageID, rawMessage);
 		if(Constants.P2P_ENCRYPTION == true) {
 			byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
 			cipherBytes = AESCrypto.encrypt(symmetricKey, message);
@@ -66,9 +69,12 @@ public class P2PCommunication {
 			cipherBytes = message;
 		}
 		
+		completeMessage = MessageBuilder.byteArrayAppend(
+				MessageBuilder.generateMessageLength(messageID, cipherBytes), 
+				cipherBytes);
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(cipherBytes);		
+		Globals.tcpClient.writeLine(completeMessage);		
 		byte[] messageSizeBytes = Globals.tcpClient.readBytes(4);
 		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
 		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
@@ -109,18 +115,26 @@ public class P2PCommunication {
 	 
 	 @see TCPClient
 	 */
-	public static void sendMessagePublic(AgentData agentInfo, byte[] message, int messageID) 
+	public static void sendMessagePublic(AgentData agentInfo, byte[] rawMessage, int messageID) 
 	throws Exception {
 		byte [] cipherBytes;
 		byte [] totalBytes;
+		byte [] message;
+		byte [] completeMessage;
+		message = MessageBuilder.generateMessageWithoutLength(messageID, rawMessage);
 		if(Constants.P2P_ENCRYPTION == true) {
 			PrivateKey privateKey = CryptoKeyReader.getMyPrivateKey();
 			cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
-		}
-		else {
+		} else {
 			cipherBytes = message;
 		}
 		
+		completeMessage = MessageBuilder.byteArrayAppend(
+				MessageBuilder.generateMessageLength(messageID, cipherBytes), 
+				cipherBytes);
+		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
+				, agentInfo.getAgentPort());
+		Globals.tcpClient.writeLine(completeMessage);
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
 		Globals.tcpClient.writeLine(cipherBytes);
