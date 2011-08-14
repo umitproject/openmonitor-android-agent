@@ -173,7 +173,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				, timeUTC
 				, website.getTestID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setTestID(10)
+		.setTestID((int)website.getTestID())
 		.setTimeZone(Calendar.ZONE_OFFSET)
 		.setTimeUTC(timeUTC)
 		.addAllPassedNode(listNodes)
