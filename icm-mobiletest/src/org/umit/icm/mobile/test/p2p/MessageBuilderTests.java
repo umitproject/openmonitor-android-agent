@@ -119,6 +119,26 @@ public class MessageBuilderTests extends AndroidTestCase {
 										
 		Assert.assertTrue(byteArrayEquals(subArrayD, newSubArray));
 	}
+	
+	public void testGenerateMessageWithoutLength() throws Throwable {
+		int id = 10;
+		
+		byte[] arrayD = new byte[6];
+		arrayD[0] = (byte) 1;
+		arrayD[1] = (byte) 2;
+		arrayD[2] = (byte) 3;
+		arrayD[3] = (byte) 4;
+		arrayD[4] = (byte) 5;
+		arrayD[5] = (byte) 6;
+		
+		byte[] message = MessageBuilder.generateMessage(id, arrayD);
+		
+		byte[] byteLength = MessageBuilder.generateMessageLength(id, arrayD);				
+		byte[] message2 = MessageBuilder.byteArrayAppend(byteLength, 
+				MessageBuilder.generateMessageWithoutLength(id, arrayD));
+		Assert.assertEquals(message.length, message2.length);		
+		Assert.assertTrue(byteArrayEquals(message, message2));
+	}
 		
 	private boolean byteArrayEquals(byte[] arrayA, byte[] arrayB) {
 		if(arrayA.length != arrayB.length)
