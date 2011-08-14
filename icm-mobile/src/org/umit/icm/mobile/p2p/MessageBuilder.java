@@ -86,30 +86,44 @@ public class MessageBuilder {
 		 return newArray;
 	 }
 	 
-	 /**
-		 * Returns a byte[] which is a concatenation of the three input byte arrays.
-		 *
-		 *
-		 
-		 @param arrayA Parameter of type byte[]
-		 *
-		 
-		 @param arrayB Parameter of type byte[]
-		 *
-		 
-		 @param arrayC Parameter of type byte[]
-		 *
-		 		 
-		 @return byte[] 
-		 */
-		 public static byte[] byteArrayAppendThree(byte[] arrayA, byte[] arrayB, byte[] arrayC) {
-			 byte[] newArray = new byte[arrayA.length + arrayB.length + arrayC.length];		 		 		 
-			 System.arraycopy(arrayA, 0, newArray, 0, arrayA.length);
-			 System.arraycopy(arrayB, 0, newArray, arrayA.length, arrayB.length);
-			 System.arraycopy(arrayC, 0, newArray, arrayA.length + arrayB.length, arrayC.length);
-			 return newArray;
-		 }
+	/**
+	 * Returns a byte[] which is a concatenation of the three input byte arrays.
+	 *
+	 *
 	 
+	 @param arrayA Parameter of type byte[]
+	 *
+	 
+	 @param arrayB Parameter of type byte[]
+	 *
+	 
+	 @param arrayC Parameter of type byte[]
+	 *
+	 		 
+	 @return byte[] 
+	 */
+	 public static byte[] byteArrayAppendThree(byte[] arrayA, byte[] arrayB, byte[] arrayC) {
+		 byte[] newArray = new byte[arrayA.length + arrayB.length + arrayC.length];		 		 		 
+		 System.arraycopy(arrayA, 0, newArray, 0, arrayA.length);
+		 System.arraycopy(arrayB, 0, newArray, arrayA.length, arrayB.length);
+		 System.arraycopy(arrayC, 0, newArray, arrayA.length + arrayB.length, arrayC.length);
+		 return newArray;
+	 }
+	 
+	/**
+	 * Returns a byte[] which is the message to be send according to the format
+	 * Length|ID|Message.
+	 *
+	 *
+	 
+	 @param message Parameter of type byte[]
+	 *
+	 
+	 @param id Parameter of type int
+	 *
+	 		 
+	 @return byte[] 
+	 */
 	 public static byte[] generateMessage(int id, byte[] message) {
 		 byte[] idByte = intToByteArray(id);
 		 int length = idByte.length + message.length;
@@ -118,6 +132,46 @@ public class MessageBuilder {
 		 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
 		 return byteArrayAppendThree(lengthByte, idByte, message);
 		 
+	 }
+	 
+	/**
+	 * Returns a byte[] which is the message to be send according to the format
+	 * ID|Message.
+	 *
+	 *
+	 
+	 @param message Parameter of type byte[]
+	 *
+	 
+	 @param id Parameter of type int
+	 *
+	 		 
+	 @return byte[] 
+	 */
+	 public static byte[] generateMessageWithoutLength(int id, byte[] message) {
+		 byte[] idByte = intToByteArray(id);		 		 
+		 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 return byteArrayAppend(idByte, message);
+		 
+	 }
+	 
+	/**
+	 * Returns a byte[] which is the length of the message to be sent.
+	 *
+	 *
+	 
+	 @param message Parameter of type byte[]
+	 *
+	 
+	 @param id Parameter of type int
+	 *
+	 		 
+	 @return byte[] 
+	 */
+	 public static byte[] generateMessageLength(int id, byte[] message) {
+		 byte[] idByte = intToByteArray(id);
+		 int length = idByte.length + message.length;		 
+		 return intToByteArray(length);		 		 
 	 }
 	 
 	/**
