@@ -21,6 +21,11 @@
 
 package org.umit.icm.mobile.process;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import org.umit.icm.mobile.utils.CryptoHelper;
+
 
 /**
  * Provides methods for generating IDs for various entities.
@@ -34,9 +39,13 @@ public class IDGenerator {
 	 *	 
 	                    
 	@return        	long
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public static long generateReportID() {
-		return 100;
+	public static String generateReportID(long agentID, long timeUTC, long testID) throws NoSuchAlgorithmException {
+		MessageDigest messageDigest = MessageDigest.getInstance("MD5");		
+		messageDigest.update(String.valueOf((agentID)).getBytes());
+		messageDigest.update(String.valueOf((timeUTC)).getBytes());
+		messageDigest.update(String.valueOf((testID)).getBytes());
+		return CryptoHelper.toHex(messageDigest.digest());		
 	}
-		
 }
