@@ -26,8 +26,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
@@ -111,8 +114,29 @@ public class ProcessActions {
 	 @see Test
 	 */
 	public synchronized static boolean updateTests(List<Test> tests) {
-		for(int i = 0 ; i < tests.size(); i++)
-			Globals.testsList.add(tests.get(i));
+		List<Integer> ports = new ArrayList<Integer>();
+		for(int i = 0 ; i < tests.size(); i++) {
+			if(tests.get(i).getTestType().equals("WEB")) {
+				Globals.websitesList.add(
+						new Website(tests.get(i).getWebsite().getUrl(), 
+								"false", 
+								"true", 
+								tests.get(i).getTestID(), 
+								tests.get(i).getExecuteAtTimeUTC()));
+			} else if(tests.get(i).getTestType().equals("SERVICE")) {
+				ports.clear();
+				ports.add(tests.get(i).getService().getPort());
+				Globals.servicesList.add(
+						new Service(tests.get(i).getService().getName(), 
+								ports,
+								tests.get(i).getService().getIp(), 
+								"open", 
+								"true", 
+								tests.get(i).getTestID(), 
+								tests.get(i).getExecuteAtTimeUTC()));
+			}
+			
+		}			
 		return true;
 	}
 	
@@ -226,8 +250,7 @@ public class ProcessActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+				
 		return true;
 	}
 }
