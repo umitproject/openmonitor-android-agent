@@ -59,7 +59,7 @@ public class MessageTranslation {
 		case MessageID.AuthenticatePeerResponse: 		
 			P2PActions.authenticatePeerAction(
 					AuthenticatePeerResponse.parseFrom(message), 
-					agentData.getAgentIP());
+					agentData.getAgentIP());				
 			break;
 		
 		case MessageID.CheckAggregator: 
