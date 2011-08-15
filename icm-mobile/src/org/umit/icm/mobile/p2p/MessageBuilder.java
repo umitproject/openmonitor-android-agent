@@ -58,7 +58,11 @@ public class MessageBuilder {
 	 
 	 @return int 
 	 */
-	 public static int byteArrayToInt(byte[] byteArray) {
+	 public static int byteArrayToInt(byte[] byteArray) throws RuntimeException{
+		 if(byteArray.length == 0)
+			 throw new RuntimeException("Input array is empty"); 
+		 else if(byteArray.length != 4)
+			 throw new RuntimeException("Input array does not have four elements");
 	        return    ((byteArray[0] << 24)
 	                + ((byteArray[1] & 0xFF) << 16)
 	                + ((byteArray[2] & 0xFF) << 8)
