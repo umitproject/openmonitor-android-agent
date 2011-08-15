@@ -155,7 +155,7 @@ public class P2PTesting {
 		int port = 3128;
 		Globals.tcpClient.openConnection(ip, port);		
 		Globals.tcpClient.writeLine(MessageBuilder.generateMessage(
-				getTestMessage2().getMessageID(), getTestMessage3().getMessage()));
+				getTestMessage3().getMessageID(), getTestMessage3().getMessage()));
 		/*read total length*/
 		byte [] response = Globals.tcpClient.readBytes(4);
 		Log.w("###Len ResponseSize: ", Integer.toString(response.length));	
