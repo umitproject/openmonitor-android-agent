@@ -92,7 +92,7 @@ public class MessageSender {
 	 * 
 	 * 
 	 
-	 @param getPeerList message of type {@link P2PGetPeerList}
+	 @param getPeerList message of type {@link GetPeerList}
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
@@ -100,10 +100,10 @@ public class MessageSender {
 	 	 
 	 @see P2PCommunication
 	 */
-	public static void receivePeerList(AgentData agentData, P2PGetPeerList getPeerList) 
+	public static void receivePeerList(AgentData agentData, GetPeerList getPeerList) 
 	throws Exception {
 		P2PCommunication.sendMessage(agentData, getPeerList.toByteArray(),
-				MessageID.P2PGetPeerList);				
+				MessageID.GetPeerList);				
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class MessageSender {
 	 * 
 	 * 
 	 
-	 @param getSuperPeerList message of type {@link P2PGetSuperPeerList}
+	 @param getSuperPeerList message of type {@link GetSuperPeerList}
 	 *
 	 
 	 @param agentData message of type {@link AgentData}
@@ -119,10 +119,10 @@ public class MessageSender {
 	 
 	 @see P2PCommunication
 	 */
-	public static void receiveSuperPeerList(AgentData agentData, P2PGetSuperPeerList getSuperPeerList) 
+	public static void receiveSuperPeerList(AgentData agentData, GetSuperPeerList getSuperPeerList) 
 	throws Exception {
 		P2PCommunication.sendMessage(agentData, getSuperPeerList.toByteArray(),
-				MessageID.P2PGetSuperPeerList);		
+				MessageID.GetSuperPeerList);		
 	}
 	
 	/**
