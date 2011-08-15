@@ -31,7 +31,6 @@ import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.connectivity.TCPClient;
 
-import android.util.Log;
 
 /**
  * Provides sender functions for P2P messages.
