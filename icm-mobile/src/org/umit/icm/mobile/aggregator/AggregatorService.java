@@ -36,8 +36,6 @@ import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList;
-import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList;
 
 import android.app.Service;
 import android.content.Intent;
@@ -107,11 +105,14 @@ public class AggregatorService extends Service {
 					}
 				} else if(Globals.p2pCommunication != false) {	
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
-					P2PGetPeerList getPeerList = P2PGetPeerList.newBuilder()
+					GetPeerList getPeerList = GetPeerList.newBuilder()
+					.setHeader(Globals.requestHeader)
 					.setCount(Constants.MAX_PEERS)
-					.build();					
-					P2PGetSuperPeerList getSuperPeerList = P2PGetSuperPeerList.newBuilder()
-					.setCount(Constants.MAX_PEERS)
+					.build();
+					
+					GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+					.setHeader(Globals.requestHeader)
+					.setCount(Constants.MAX_SUPER_PEERS)
 					.build();
 					while(iterator.hasNext()) {
 						try {
