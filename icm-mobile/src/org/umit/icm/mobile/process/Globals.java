@@ -36,7 +36,6 @@ import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
-import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.social.TwitterUpdate;
 
 /**
@@ -108,12 +107,7 @@ public class Globals {
 	 * Global {@link List} of {@link AgentData}
 	 */
 	public static List<AgentData> superPeersList = new ArrayList<AgentData>();
-	
-	/**
-	 * Global {@link List} of {@link Test}
-	 */
-	public static List<Test> testsList = new ArrayList<Test>();		
-	
+
 	/**
 	 * Global {@link TCPServer}
 	 */

@@ -147,43 +147,4 @@ public class ParametersReadWrite {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Writes {@link Globals#testsList} to disk.
-	 * 
-	
-	 @see		SDCardReadWrite
-	 */
-	public void writeTestList() {
-			try {
-				SDCardReadWrite.writeTestsList(Constants.PARAMETERS_DIR
-						, Globals.testsList);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
-	}
-	
-	/**
-	 * Reads {@link Globals#testsList} from disk.
-	 * 
-	
-	 @see		SDCardReadWrite
-	 */
-	public void readTestList() {
-		try {
-			Globals.testsList 
-			= SDCardReadWrite.readTestsList(Constants.PARAMETERS_DIR);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

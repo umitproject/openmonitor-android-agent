@@ -21,6 +21,9 @@
 
 package org.umit.icm.mobile.test.p2p;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.umit.icm.mobile.p2p.P2PActions;
@@ -148,24 +151,27 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	P2PActions.receiveTaskListAction(newTestsResponse);
     		    	
-        Assert.assertTrue(compareTests(Globals.testsList.get(0), test1));
-        Assert.assertTrue(compareTests(Globals.testsList.get(1), test2));
-                        
+    	 Assert.assertTrue(Globals.websitesList.get(Globals.websitesList.size()-1)
+         		.equals(        		
+         		new org.umit.icm.mobile.connectivity.Website(test1.getWebsite().getUrl(), 
+ 						"false", 
+ 						"true", 
+ 						test1.getTestID(), 
+ 						test1.getExecuteAtTimeUTC())));
+         List<Integer> ports = new ArrayList<Integer>();
+         ports.clear();
+ 		ports.add(test2.getService().getPort());
+         Assert.assertTrue(Globals.servicesList.get(Globals.servicesList.size()-1)
+         		.equals(        		
+         		new org.umit.icm.mobile.connectivity.Service(test2.getService().getName(), 
+ 						ports,
+ 						test2.getService().getIp(), 
+ 						"open", 
+ 						"true", 
+ 						test2.getTestID(), 
+ 						test2.getExecuteAtTimeUTC())));                        
     } 
-    
-    private boolean compareTests(Test test1 , Test test2) {
-    	if(test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
-    			&& test1.getWebsite() == test2.getWebsite()
-    			&& test1.getTestID() == test2.getTestID()    			
-    			&& test1.getTestType().equals(test2.getTestType()) ||
-    			test1.getExecuteAtTimeUTC() == test2.getExecuteAtTimeUTC()
-    			&& test1.getService() == test2.getService()
-    			&& test1.getTestID() == test2.getTestID()    			
-    			&& test1.getTestType().equals(test2.getTestType()))
-    		return true;
-    	return false;
-    }
-    
+ 
     public void testGetEvents() throws Throwable {
     	ResponseHeader responseHeader = ResponseHeader.newBuilder()
     	.setCurrentTestVersionNo(27)
