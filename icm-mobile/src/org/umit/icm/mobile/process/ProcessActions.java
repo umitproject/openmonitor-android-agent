@@ -29,10 +29,13 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.NewTests;
+import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
@@ -62,7 +65,12 @@ public class ProcessActions {
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
 			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
-			// TODO call Aggregator checkVersion webservice
+			NewVersion newVersion = NewVersion.newBuilder()
+			.setHeader(Globals.requestHeader)
+			.setAgentVersionNo(Globals.versionManager.getAgentVersion())
+			.setAgentType(Constants.AGENT_TYPE)
+			.build();
+			AggregatorRetrieve.checkVersion(newVersion);
 		}
 	}
 	
@@ -84,7 +92,11 @@ public class ProcessActions {
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
-			// TODO call aggregator newTests webservice
+			NewTests newTests = NewTests.newBuilder()
+			.setHeader(Globals.requestHeader)
+			.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
+			.build();
+			AggregatorRetrieve.checkTests(newTests);
 		}
 	}
 			
