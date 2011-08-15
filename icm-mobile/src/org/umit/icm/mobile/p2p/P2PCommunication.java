@@ -31,6 +31,8 @@ import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.connectivity.TCPClient;
 
+import android.util.Log;
+
 /**
  * Provides sender functions for P2P messages.
  */
@@ -60,7 +62,7 @@ public class P2PCommunication {
 		byte [] cipherBytes;
 		byte [] totalBytes;
 		byte [] message;
-		byte [] completeMessage;
+		byte [] completeMessage;		
 		message = MessageBuilder.generateMessageWithoutLength(messageID, rawMessage);
 		if(Constants.P2P_ENCRYPTION == true) {
 			byte [] symmetricKey = CryptoKeyReader.getMySecretKey();
@@ -70,7 +72,7 @@ public class P2PCommunication {
 		}
 		
 		completeMessage = MessageBuilder.byteArrayAppend(
-				MessageBuilder.generateMessageLength(messageID, cipherBytes), 
+				MessageBuilder.intToByteArray(cipherBytes.length), 
 				cipherBytes);
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
@@ -127,18 +129,14 @@ public class P2PCommunication {
 			cipherBytes = RSACrypto.encryptPrivate(privateKey, message);
 		} else {
 			cipherBytes = message;
-		}
-		
+		}		
 		completeMessage = MessageBuilder.byteArrayAppend(
-				MessageBuilder.generateMessageLength(messageID, cipherBytes), 
-				cipherBytes);
+				MessageBuilder.intToByteArray(cipherBytes.length), 
+				cipherBytes);		
 		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
 				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(completeMessage);
-		Globals.tcpClient.openConnection(agentInfo.getAgentIP()
-				, agentInfo.getAgentPort());
-		Globals.tcpClient.writeLine(cipherBytes);
-		byte[] messageSizeBytes = Globals.tcpClient.readBytes(4);
+		Globals.tcpClient.writeLine(completeMessage);		
+		byte[] messageSizeBytes = Globals.tcpClient.readBytes(4);		
 		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
 		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
