@@ -156,25 +156,6 @@ public class MessageBuilder {
 	 }
 	 
 	/**
-	 * Returns a byte[] which is the length of the message to be sent.
-	 *
-	 *
-	 
-	 @param message Parameter of type byte[]
-	 *
-	 
-	 @param id Parameter of type int
-	 *
-	 		 
-	 @return byte[] 
-	 */
-	 public static byte[] generateMessageLength(int id, byte[] message) {
-		 byte[] idByte = intToByteArray(id);
-		 int length = idByte.length + message.length;		 
-		 return intToByteArray(length);		 		 
-	 }
-	 
-	/**
 	 * Returns a byte sub array of byte[] .
 	 *
 	 *
