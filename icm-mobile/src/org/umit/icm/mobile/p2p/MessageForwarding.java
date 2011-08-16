@@ -25,12 +25,24 @@ import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage;
 
+/**
+ * MessageForwarding class which enables forwarding for P2P messages.
+ */
+
 public class MessageForwarding {
 	
-	public static void ForwardMessage(AgentData agentData, byte[] message, int id) throws Exception {
+	/**
+	 * Packs the message to be sent into a ForwardingMessage and calls 
+	 * MessageSender forwardMessage(AgentData, ForwardingMessage).
+	 * 
+	 * @see MessageSender
+	 */
+	public static void ForwardMessage(AgentData agentData, byte[] message, int id,
+			long destination) 
+	throws Exception {
 		ForwardingMessage forwardingMessage = ForwardingMessage.newBuilder()
 		.setIdentifier(Integer.toString(id))
-		.setDestination(agentData.getAgentID())
+		.setDestination(destination)
 		.setEncodedMessage(new String(Base64.encodeBase64(MessageBuilder.generateMessageWithoutLength(id, message))))
 		.build();
 		
