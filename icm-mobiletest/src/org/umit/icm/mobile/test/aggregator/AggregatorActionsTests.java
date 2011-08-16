@@ -29,6 +29,7 @@ import junit.framework.Assert;
 
 import org.umit.icm.mobile.aggregator.AggregatorActions;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.*;
 import org.umit.icm.mobile.utils.AESCrypto;
 
@@ -40,6 +41,7 @@ public class AggregatorActionsTests extends AndroidTestCase {
 	protected void setUp() {
 		try {
 			Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
+			Initialization.initializeRequestHeader();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
