@@ -46,7 +46,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import android.text.format.Formatter;
 
 /**
  * InformationActivity that constitutes the Information tab. 
@@ -56,18 +55,16 @@ import android.text.format.Formatter;
 public class InformationActivity extends Activity{
    	
 	private ListView listView, listViewServices;
-	private TextView ipTextView, goToServices, goToWebsites;
+	private TextView goToServices, goToWebsites;
 	ArrayAdapter<String> arrayAdapter, arrayAdapterServices;
 	ViewFlipper viewFlipper;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.informationactivity);        
-        ipTextView = (TextView) findViewById(R.id.ipTextView);
+        setContentView(R.layout.informationactivity);                
         goToServices = (TextView) findViewById(R.id.goToServices);       
-        goToWebsites = (TextView) findViewById(R.id.goToWebsites);
-        ipTextView.append(Formatter.formatIpAddress(Globals.myIP));    
+        goToWebsites = (TextView) findViewById(R.id.goToWebsites);         
         listView = (ListView)findViewById(R.id.ListView01);
         listViewServices = (ListView)findViewById(R.id.ListView02);
         viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
