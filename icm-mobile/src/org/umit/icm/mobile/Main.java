@@ -31,6 +31,7 @@ import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
+import org.umit.icm.mobile.process.InitializationThread;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -91,8 +92,8 @@ public class Main extends TabActivity {
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/
 	        	Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
-				Initialization.checkFiles();		
-				Initialization.startServices(Main.this);
+				Initialization.checkFiles();
+				new InitializationThread(Main.this).start();				
 				Initialization.checkProfiler();
 				Initialization.initializeIP(Main.this);
 				Globals.scanStatus = getString(R.string.scan_on);								

@@ -63,8 +63,7 @@ public class ConnectivityService extends Service {
 		super.onCreate();
 		connectivityManager
 	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);		
-		startScan();		
-		initialize();				
+		startScan();							
 	}
 	
 	@Override
@@ -173,23 +172,6 @@ public class ConnectivityService extends Service {
 			
 		}
 				
-	}
-	
-	public void initialize() {
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					Initialization.initializeRequestHeader();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (RuntimeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Initialization.initializeEventsList();
-			}
-		}).start();
-	}
+	}		
 					
 }

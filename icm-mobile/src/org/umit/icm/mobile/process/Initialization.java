@@ -203,6 +203,9 @@ public class Initialization {
 		.build();
 	}
 	
+	/** Initializes the global IP.
+	 * 
+	 */
 	public static void initializeIP(Context context) {
 		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -238,6 +241,6 @@ public class Initialization {
 		
 		Globals.eventsList.add(eventA);
 		Globals.eventsList.add(eventB);
-	}
+	}	
 	
 }
