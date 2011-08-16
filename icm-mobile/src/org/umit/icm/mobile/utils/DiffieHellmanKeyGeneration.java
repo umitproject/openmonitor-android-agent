@@ -34,6 +34,8 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.DHParameterSpec;
 
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+
 /**
  * Uses DiffieHellman key agreement algorithm to generate a shared AES
  * secret key.
@@ -41,7 +43,7 @@ import javax.crypto.spec.DHParameterSpec;
 
 public class DiffieHellmanKeyGeneration {
 	
-	public void generateKeyPair() throws GeneralSecurityException, IOException  {
+	public void generateKeyPair(AgentData agentData) throws GeneralSecurityException, IOException  {
 		DHParameterSpec dhParameterSpec
 		= DiffieHellmanValues.generateDiffieHellmanValues();
 		KeyPairGenerator keyPairGenerator 
