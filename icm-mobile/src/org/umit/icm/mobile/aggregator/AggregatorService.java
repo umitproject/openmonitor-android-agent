@@ -28,6 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
@@ -199,7 +200,7 @@ public class AggregatorService extends Service {
 						.build();
 						while(iterator.hasNext()) {							
 							try {
-								MessageSender.receiveEvents(iterator.next(), getEvents);
+								MessageForwardingAggregator.forwardGetEvents(iterator.next(), getEvents);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

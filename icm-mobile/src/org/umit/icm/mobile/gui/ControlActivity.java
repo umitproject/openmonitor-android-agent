@@ -23,6 +23,7 @@ package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import org.umit.icm.mobile.R;
@@ -32,7 +33,9 @@ import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
+import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
@@ -262,6 +265,7 @@ public class ControlActivity extends Activity {
         	.setWebsiteURL(args[1])
         	.build();
         	
+        	if(Globals.aggregatorCommunication == true) {
 				try {
 					if(AggregatorRetrieve.sendWebsiteSuggestion(websiteSuggestion))
 						return "true";
@@ -278,7 +282,19 @@ public class ControlActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+        	} else if (Globals.p2pCommunication == true) {
+        		Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+        		while(iterator.hasNext()) {
+        			try {
+						MessageForwardingAggregator.forwardWebsiteSuggestion(
+								iterator.next(), websiteSuggestion);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
+        		return "true";
+        	}
         	return "false";
 		}
 			
@@ -304,7 +320,8 @@ public class ControlActivity extends Activity {
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();
-        	
+
+        	if(Globals.aggregatorCommunication == true) {
 				try {
 					if(AggregatorRetrieve.sendServiceSuggestion(serviceSuggestion))
 						return "true";
@@ -321,7 +338,19 @@ public class ControlActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+        	} else if (Globals.p2pCommunication == true) {
+        		Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+        		while(iterator.hasNext()) {
+        			try {
+						MessageForwardingAggregator.forwardServiceSuggestion(
+								iterator.next(), serviceSuggestion);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
+        		return "true";
+        	}
         	return "false";
 		}
 			
