@@ -96,6 +96,8 @@ public class ConnectivityService extends Service {
 			@Override
 			public void run() {
 				try {			
+					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
+						stopScan();
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
