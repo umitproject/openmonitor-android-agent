@@ -42,6 +42,7 @@ public class InitializationThread extends Thread {
 			e.printStackTrace();
 		}
     	Initialization.initializeEventsList();
+    	Initialization.initializerPeersList();
     	Initialization.startServices(context);
     }
 }

@@ -30,6 +30,7 @@ import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
@@ -243,4 +244,20 @@ public class Initialization {
 		Globals.eventsList.add(eventB);
 	}	
 	
-}
+	/*Only used for testing
+	 * Should be deprecated eventually.
+	 */
+	public static void initializerPeersList() {
+		AgentData agentData = AgentData.newBuilder()
+		.setAgentID(10)
+		.setAgentIP("202.206.64.11")
+		.setAgentPort(3128)
+		.setPeerStatus("On")
+		.setPublicKey("Key")
+		.setToken("Token")
+		.build();
+		
+		Globals.superPeersList.add(agentData);
+		Globals.peersList.add(agentData);
+	}
+}		
