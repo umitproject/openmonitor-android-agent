@@ -30,6 +30,7 @@ import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -53,6 +54,7 @@ import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
+import org.umit.icm.mobile.utils.AESCrypto;
 
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
@@ -129,6 +131,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      GetPeerListResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -139,13 +142,28 @@ public class AggregatorResources {
 	 public static GetPeerListResponse getPeerList(
 			 GetPeerList getPeerList, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getPeerList.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
+		 }		 
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 		 
-		 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return GetPeerListResponse.parseFrom(plainBytes);
+		 } else {
+			 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
+		 
 	 }
 	 
 	/**
@@ -164,6 +182,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      GetsuperPeerListResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -174,13 +193,27 @@ public class AggregatorResources {
 	 public static GetSuperPeerListResponse getSuperPeerList(
 			 GetSuperPeerList getSuperPeerList, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getSuperPeerList.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {			 		
+			 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
+		 }
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));  
-		 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return GetSuperPeerListResponse.parseFrom(plainBytes);
+		 } else {
+			 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -199,6 +232,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      GetEventsResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -209,13 +243,27 @@ public class AggregatorResources {
 	 public static GetEventsResponse getEvents(
 			 GetEvents getEvents, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(getEvents.toByteArray())));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getEvents.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(getEvents.toByteArray()))); 
+		 }		 
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 
-		 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return GetEventsResponse.parseFrom(plainBytes);
+		 } else {
+			 return GetEventsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -234,6 +282,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      SendReportResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -244,13 +293,28 @@ public class AggregatorResources {
 	 public static SendReportResponse sendWebsiteReport(
 			 SendWebsiteReport sendWebsiteReport, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendWebsiteReport.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
+		 }
+		 
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 
-		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return SendReportResponse.parseFrom(plainBytes);
+		 } else {
+			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -269,6 +333,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      SendReportResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -279,13 +344,27 @@ public class AggregatorResources {
 	 public static SendReportResponse sendServiceReport(
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(sendServiceReport.toByteArray())));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendServiceReport.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(sendServiceReport.toByteArray()))); 
+		 }		 
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 
-		 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return SendReportResponse.parseFrom(plainBytes);
+		 } else {
+			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -304,6 +383,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      NewVersionResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -314,13 +394,28 @@ public class AggregatorResources {
 	 public static NewVersionResponse checkVersion(
 			 NewVersion newVersion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(newVersion.toByteArray())));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newVersion.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(newVersion.toByteArray())));
+		 }
+		 
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 
-		 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return NewVersionResponse.parseFrom(plainBytes);
+		 } else {
+			 return NewVersionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -339,6 +434,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      NewTestsResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -349,13 +445,27 @@ public class AggregatorResources {
 	 public static NewTestsResponse checkTests(
 			 NewTests newTests, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newTests.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(newTests.toByteArray())));
+		 }
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 
-		 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return NewTestsResponse.parseFrom(plainBytes);
+		 } else {
+			 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -374,6 +484,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      TestSuggestionResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -384,13 +495,27 @@ public class AggregatorResources {
 	 public static TestSuggestionResponse sendWebsiteSuggestion(
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));		 		 		 
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, websiteSuggestion.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));
+		 }
 		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));  
-		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+			 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return TestSuggestionResponse.parseFrom(plainBytes);
+		 } else {
+			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
 	/**
@@ -409,6 +534,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      TestSuggestionResponse
+	 * @throws Exception 
 	 *  
 	                          
 	@see         Base64
@@ -419,112 +545,164 @@ public class AggregatorResources {
 	 public static TestSuggestionResponse sendServiceSuggestion(
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));		 		 		 
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, serviceSuggestion.toByteArray());
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));
+		 }
 		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null)); 
-		 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+			 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return TestSuggestionResponse.parseFrom(plainBytes);
+		 } else {
+			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 }
 	 }
 	 
-	 /**
-		 * Returns a CheckAggregatorResponse object. Encodes the passed message to
-		 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
-		 * WebRepresentation of the {@link Form} object to the passed 
-		 * {@link ClientResource}. Generates a CheckAggregatorResponse object from 
-		 * the POST {@link Representation} response.
-		 * 
-		 *	 
-		                          
-		@param  checkAggregator  An object of the type CheckAggregator
-		 *  	
-		 
-		@param  clientResource  An object of the type ClientResource
-		 *                           	
-		                          
-		@return      CheckAggregatorResponse
-		 *  
-		                          
-		@see         Base64
-		 *
-		 
-		@see         ClientResource
-		 */					 
-		 public static CheckAggregatorResponse checkAggregatorStatus(
-				 CheckAggregator checkAggregator, 
-				 ClientResource clientResource) 
-		 throws UnsupportedEncodingException, IOException, RuntimeException {
-			 Form form = new Form();
+	/**
+	 * Returns a CheckAggregatorResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a CheckAggregatorResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  checkAggregator  An object of the type CheckAggregator
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      CheckAggregatorResponse
+	 * @throws Exception 
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */					 
+	 public static CheckAggregatorResponse checkAggregatorStatus(
+			 CheckAggregator checkAggregator, 
+			 ClientResource clientResource) 
+	 throws Exception {
+		 Form form = new Form();
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, checkAggregator.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(checkAggregator.toByteArray())));		 		 		 
-			 Representation response 
-				 = clientResource.post(form.getWebRepresentation(null)); 
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(checkAggregator.toByteArray())));
+		 }
+		 Representation response 
+			 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return CheckAggregatorResponse.parseFrom(plainBytes);
+		 } else {
 			 return CheckAggregatorResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 		 }
-		 
-		/**
-		 * Returns a LoginResponse object. Encodes the passed message to
-		 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
-		 * WebRepresentation of the {@link Form} object to the passed 
-		 * {@link ClientResource}. Generates a LoginResponse object from 
-		 * the POST {@link Representation} response.
-		 * 
-		 *	 
-		                          
-		@param  login  An object of the type Login
-		 *  	
-		 
-		@param  clientResource  An object of the type ClientResource
-		 *                           	
-		                          
-		@return      LoginResponse
-		 *  
-		                          
-		@see         Base64
-		 *
-		 
-		@see         ClientResource
-		 */
-		 public static LoginResponse login(
-				 Login login, 
-				 ClientResource clientResource) 
-		 throws UnsupportedEncodingException, IOException, RuntimeException {
-			 Form form = new Form();
+	 }
+	 
+	/**
+	 * Returns a LoginResponse object. Encodes the passed message to
+	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
+	 * WebRepresentation of the {@link Form} object to the passed 
+	 * {@link ClientResource}. Generates a LoginResponse object from 
+	 * the POST {@link Representation} response.
+	 * 
+	 *	 
+	                          
+	@param  login  An object of the type Login
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 *                           	
+	                          
+	@return      LoginResponse
+	 * @throws Exception 
+	 *  
+	                          
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
+	 public static LoginResponse login(
+			 Login login, 
+			 ClientResource clientResource) 
+	 throws Exception {
+		 Form form = new Form();
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(login.toByteArray())));		 		 		 
-			 Representation response 
-				 = clientResource.post(form.getWebRepresentation(null)); 
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(login.toByteArray())));
+		 }
+		 Representation response 
+			 = clientResource.post(form.getWebRepresentation(null));
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
+					 Base64.decodeBase64(response.getText().getBytes()));
+			 return LoginResponse.parseFrom(plainBytes);
+		 } else {
 			 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 		 }
-		 
-		/**
-		 * Encodes the passed message to {@link Base64} and generates a 
-		 * {@link Form} object for it. POSTs the WebRepresentation of 
-		 * the {@link Form} object to the passed
-		 * {@link ClientResource}. 
-		 * 
-		 *	 
-		                          
-		@param  logout  An object of the type Logout
-		 *  	
-		 
-		@param  clientResource  An object of the type ClientResource
-		 *                           	
-                 
-		@see         Base64
-		 *
-		 
-		@see         ClientResource
-		 */
-		 public static void logout(
-				 Logout logout, 
-				 ClientResource clientResource) 
-		 throws UnsupportedEncodingException, IOException, RuntimeException {
-			 Form form = new Form();
+	 }
+	 
+	/**
+	 * Encodes the passed message to {@link Base64} and generates a 
+	 * {@link Form} object for it. POSTs the WebRepresentation of 
+	 * the {@link Form} object to the passed
+	 * {@link ClientResource}. 
+	 * 
+	 *	 
+	                          
+	@param  logout  An object of the type Logout
+	 *  	
+	 
+	@param  clientResource  An object of the type ClientResource
+	 * @throws Exception 
+	 *                           	
+             
+	@see         Base64
+	 *
+	 
+	@see         ClientResource
+	 */
+	 public static void logout(
+			 Logout logout, 
+			 ClientResource clientResource) 
+	 throws Exception {
+		 Form form = new Form();
+		 if(Constants.AGGR_ENCRYPTION == true) {
+			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, logout.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(logout.toByteArray())));		 		 		 				 
-				 clientResource.post(form.getWebRepresentation(null)); 				 
+					 , new String(Base64.encodeBase64(cipherBytes)));
+		 } else {
+			 form.add(Constants.AGGR_MSG_KEY
+					 , new String(Base64.encodeBase64(logout.toByteArray())));
 		 }
+			 clientResource.post(form.getWebRepresentation(null)); 				 
+	 }
 
 }

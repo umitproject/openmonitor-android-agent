@@ -274,6 +274,9 @@ public class ControlActivity extends Activity {
 				} catch (RuntimeException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			
         	return "false";
@@ -312,6 +315,9 @@ public class ControlActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

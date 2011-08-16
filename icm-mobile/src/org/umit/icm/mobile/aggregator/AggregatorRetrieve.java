@@ -21,8 +21,6 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
@@ -70,6 +68,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -78,7 +77,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
@@ -99,6 +98,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -107,7 +107,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */	
 	 public synchronized static boolean getPeerList(GetPeerList getPeerList) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
 		 	GetPeerListResponse getPeerListResponse
@@ -128,6 +128,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -136,7 +137,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */	 
 	 public synchronized static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse
@@ -157,6 +158,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -165,7 +167,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean getEvents(GetEvents getEvents) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
 		 	GetEventsResponse getEventsResponse 
@@ -186,6 +188,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -194,7 +197,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
 		 	SendReportResponse sendReportResponse
@@ -215,6 +218,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -223,7 +227,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean sendServiceReport(SendServiceReport sendServiceReport) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
 		 	SendReportResponse sendReportResponse 
@@ -244,6 +248,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -252,7 +257,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean checkVersion(NewVersion newVersion) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
 		 	NewVersionResponse newVersionResponse
@@ -273,6 +278,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -281,7 +287,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean checkTests(NewTests newTests) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
 		 	NewTestsResponse newTestsResponse 
@@ -302,18 +308,14 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
-	 * @throws RuntimeException 
-	 * @throws IOException 
-	 * @throws UnsupportedEncodingException 
-	 *  
-	                          
-	@see         AggregatorActions
+	 * @throws Exception 
+	 * @see         AggregatorActions
 	 *
 	 
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
@@ -334,6 +336,7 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+     * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -342,7 +345,7 @@ public class AggregatorRetrieve {
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
@@ -361,12 +364,13 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+     * @throws Exception 
 	 *  		                          		
 	 
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean checkAggregatorStatus(CheckAggregator checkAggregator) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
 		 	CheckAggregatorResponse checkAggregatorResponse
@@ -385,12 +389,13 @@ public class AggregatorRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  		                          		
 	 
 	@see         AggregatorResources
 	 */
 	 public synchronized static boolean login(Login login) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
 		 	LoginResponse loginResponse
@@ -405,12 +410,13 @@ public class AggregatorRetrieve {
 	 *	 
 	                          
 	@param  logout  An object of the type Logout
+	 * @throws Exception 
 	 *  	                          	
 
 	@see         AggregatorResources
 	 */
 	 public synchronized static void logout(Logout logout) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
 		 	AggregatorResources.logout(logout, clientResource);		 				

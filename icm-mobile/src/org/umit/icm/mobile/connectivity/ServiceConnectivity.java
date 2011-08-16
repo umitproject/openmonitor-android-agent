@@ -168,6 +168,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}					
 		}
@@ -216,6 +219,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				}	catch (IOException e) {
 					e.printStackTrace();
 				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -268,7 +274,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}					
 	}
 
@@ -318,7 +327,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}					
 	}
 	
@@ -368,7 +380,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}		
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
 	}
 	
@@ -416,6 +431,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				}	catch (IOException e) {
 					e.printStackTrace();
 				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
@@ -466,6 +484,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				}	catch (IOException e) {
 				e.printStackTrace();
 				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		

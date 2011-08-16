@@ -102,6 +102,9 @@ public class AggregatorService extends Service {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				} else if(Globals.p2pCommunication != false) {	
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
@@ -177,6 +180,9 @@ public class AggregatorService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (RuntimeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}							

@@ -55,6 +55,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -62,7 +63,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */
-	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws IOException {
+	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws Exception {
 		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
 		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
 		return ProcessActions.registerAgent(registerAgentResponse);
@@ -81,6 +82,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -88,7 +90,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */	
-	public static boolean getPeerListAction(GetPeerListResponse getPeerListResponse) throws IOException {
+	public static boolean getPeerListAction(GetPeerListResponse getPeerListResponse) throws Exception {
 		ProcessActions.updateAgentVersion(getPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getPeerListResponse.getHeader());
 	 	return ProcessActions.updatePeersList(getPeerListResponse.getKnownPeersList());		
@@ -107,6 +109,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -114,7 +117,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */	
-	public static boolean getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws IOException {
+	public static boolean getSuperPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws Exception {
 		ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
 	 	return ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
@@ -133,6 +136,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -140,7 +144,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */	
-	public static boolean getEventsAction(GetEventsResponse getEventsResponse) throws IOException {
+	public static boolean getEventsAction(GetEventsResponse getEventsResponse) throws Exception {
 		ProcessActions.updateAgentVersion(getEventsResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(getEventsResponse.getHeader());
 	 	return ProcessActions.updateEventsList(getEventsResponse.getEventsList());
@@ -156,6 +160,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -163,7 +168,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */	
-	public static boolean sendReportAction(SendReportResponse sendReportResponse) throws IOException {
+	public static boolean sendReportAction(SendReportResponse sendReportResponse) throws Exception {
 		ProcessActions.updateAgentVersion(sendReportResponse.getHeader());
 		ProcessActions.updateTestsVersion(sendReportResponse.getHeader());
 		return true;
@@ -225,6 +230,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -232,7 +238,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */
-	public static boolean sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) throws IOException {
+	public static boolean sendSuggestionAction(TestSuggestionResponse testSuggestionResponse) throws Exception {
 		ProcessActions.updateAgentVersion(testSuggestionResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(testSuggestionResponse.getHeader());
 		return true;
@@ -248,6 +254,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -255,7 +262,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */
-	public static boolean checkAggregatorAction(CheckAggregatorResponse checkAggregatorResponse) throws IOException {
+	public static boolean checkAggregatorAction(CheckAggregatorResponse checkAggregatorResponse) throws Exception {
 		ProcessActions.updateAgentVersion(checkAggregatorResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(checkAggregatorResponse.getHeader());
 	 	if(checkAggregatorResponse.getStatus().equalsIgnoreCase("ON"))
@@ -274,6 +281,7 @@ public class AggregatorActions {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         ProcessActions
@@ -281,7 +289,7 @@ public class AggregatorActions {
 	*
 	@see         AggregatorRetrieve
 	 */
-	public static boolean loginAction(LoginResponse loginResponse) throws IOException {
+	public static boolean loginAction(LoginResponse loginResponse) throws Exception {
 		ProcessActions.updateAgentVersion(loginResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(loginResponse.getHeader());
 		return true;

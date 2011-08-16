@@ -96,6 +96,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -105,7 +106,7 @@ public class SuperPeerRetrieve {
 	 */	
 	 public static boolean getPeerList(
 			GetPeerList getPeerList, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_GET_PEER_LIST);
 		 	GetPeerListResponse getPeerListResponse
@@ -126,6 +127,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -135,7 +137,7 @@ public class SuperPeerRetrieve {
 	 */	 
 	 public static boolean getSuperPeerList(
 			GetSuperPeerList getSuperPeerList, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse
@@ -156,6 +158,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -165,7 +168,7 @@ public class SuperPeerRetrieve {
 	 */
 	 public static boolean getEvents(
 			GetEvents getEvents, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_GET_EVENTS);
 		 	GetEventsResponse getEventsResponse 
@@ -186,6 +189,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -195,7 +199,7 @@ public class SuperPeerRetrieve {
 	 */
 	 public static boolean sendWebsiteReport(
 			SendWebsiteReport sendWebsiteReport, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_SEND_WEBSITE_REPORT);
 		 	SendReportResponse sendReportResponse
@@ -216,6 +220,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -225,7 +230,7 @@ public class SuperPeerRetrieve {
 	 */
 	 public static boolean sendServiceReport(
 			SendServiceReport sendServiceReport, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_SEND_SERVICE_REPORT);
 		 	SendReportResponse sendReportResponse 
@@ -306,19 +311,15 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
-	 * @throws RuntimeException 
-	 * @throws IOException 
-	 * @throws UnsupportedEncodingException 
-	 *  
-	                          
-	@see         AggregatorActions
+	 * @throws Exception 
+	 * @see         AggregatorActions
 	 *
 	 
 	@see         SuperPeerResources
 	 */
 	 public static boolean sendWebsiteSuggestion(
 			WebsiteSuggestion websiteSuggestion, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_WEBSITE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
@@ -339,6 +340,7 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+     * @throws Exception 
 	 *  
 	                          
 	@see         AggregatorActions
@@ -348,7 +350,7 @@ public class SuperPeerRetrieve {
 	 */
 	 public static boolean sendServiceSuggestion(
 			ServiceSuggestion serviceSuggestion, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_SERVICE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
@@ -368,13 +370,14 @@ public class SuperPeerRetrieve {
 	 *  	                          	
 	                          
 	@return      boolean
+	 * @throws Exception 
 	 *  		                          		
 	 
 	@see         SuperPeerResources
 	 */
 	 public static boolean login(
 			Login login, String peerIP) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {
+	 throws Exception {
 		 	ClientResource clientResource 
 		 	= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_LOGIN);
 		 	LoginResponse loginResponse

@@ -55,12 +55,13 @@ public class ProcessActions {
 	 *
 	 
 	 @param header Response header of type {@link ResponseHeader}
+	 * @throws Exception 
 	 *
 	 
 	 @see VersionManager
 	 */
 	public static void updateAgentVersion(ResponseHeader header) 
-		throws IOException {
+		throws Exception {
 		
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
@@ -82,12 +83,13 @@ public class ProcessActions {
 	 *
 	 
 	 @param header Response header of type {@link ResponseHeader}
+	 * @throws Exception 
 	 *
 	 
 	 @see VersionManager
 	 */
 	public static void updateTestsVersion(ResponseHeader header)
-		throws IOException {
+		throws Exception {
 		
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
