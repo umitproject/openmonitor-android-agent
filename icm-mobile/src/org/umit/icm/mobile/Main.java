@@ -94,8 +94,7 @@ public class Main extends TabActivity {
 	        	Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
 				Initialization.checkFiles();
 				new InitializationThread(Main.this).start();				
-				Initialization.checkProfiler();
-				Initialization.initializeIP(Main.this);
+				Initialization.checkProfiler();				
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
