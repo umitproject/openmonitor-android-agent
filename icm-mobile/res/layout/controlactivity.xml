@@ -21,64 +21,83 @@
  * USA
  */
 -->
-<RelativeLayout 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical" 
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">		
-		
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/register_suggestion" 		
-		android:layout_centerHorizontal="true"
-		android:id="@+id/selected"/>
 
-	<Button 
+<LinearLayout android:id="@+id/LinearLayout01"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<ScrollView android:id="@+id/ScrollView01"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/interval_button" 
-		android:layout_below="@id/selected"
-		android:layout_centerHorizontal="true"
-		android:id="@+id/intervalButton"/>
+		android:layout_height="fill_parent">	
+			
+			<RelativeLayout 		
+				android:orientation="vertical" 
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
 		
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/scan_button" 
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/intervalButton"
-		android:id="@+id/scanButton"/>
-		
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/filter_button_websites" 
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/scanButton"
-		android:id="@+id/filterButton"/>
-		
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/filter_button_services" 
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/filterButton"
-		android:id="@+id/serviceFilterButton"/>
-		
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/map_selection" 
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/serviceFilterButton"
-		android:id="@+id/mapSelectionButton"/>
-						
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/change_twitter_status" 
-		android:layout_centerHorizontal="true"
-		android:layout_below="@id/mapSelectionButton"
-		android:id="@+id/enableTwitterButton"/>
-</RelativeLayout>
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/register_suggestion" 		
+					android:layout_centerHorizontal="true"
+					android:id="@+id/selected"/>
+			
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/interval_button" 
+					android:layout_below="@id/selected"
+					android:layout_centerHorizontal="true"
+					android:id="@+id/intervalButton"/>
+					
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/scan_button" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/intervalButton"
+					android:id="@+id/scanButton"/>
+					
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/filter_button_websites" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/scanButton"
+					android:id="@+id/filterButton"/>
+					
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/filter_button_services" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/filterButton"
+					android:id="@+id/serviceFilterButton"/>
+					
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/map_selection" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/serviceFilterButton"
+					android:id="@+id/mapSelectionButton"/>
+									
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/about_button" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/mapSelectionButton"
+					android:id="@+id/enableTwitterButton"/>
+					
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/about_button" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/enableTwitterButton"
+					android:id="@+id/aboutButton"/>
+			</RelativeLayout>
+	</ScrollView>
+</LinearLayout>

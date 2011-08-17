@@ -77,4 +77,8 @@
     <string name="response_time">Response Time:</string>
     <string name="response_time_unit">ms</string>
     <string name="throughput_unit">bytes/ms</string>
+    <string name="about_button">About</string>
+    <string name="about_text">\u00a9 2011 Umit Project</string>
+    <string name="service_suggestion_sent">Service Suggestion Sent</string>     
+    <string name="website_suggestion_sent">Website Suggestion Sent</string>
 </resources>

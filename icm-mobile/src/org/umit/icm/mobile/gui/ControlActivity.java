@@ -40,8 +40,10 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
@@ -60,7 +62,7 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
-	enableTwitterButton;	
+	enableTwitterButton, aboutButton;	
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class ControlActivity extends Activity {
         servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
         mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
         enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
+        aboutButton = (Button) this.findViewById(R.id.aboutButton);
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		try {
@@ -172,6 +175,24 @@ public class ControlActivity extends Activity {
 
 	   	}  );
         
+        aboutButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       			       		       			
+	       		AlertDialog alertDialog = new AlertDialog.Builder(ControlActivity.this).create();
+	       		alertDialog.setTitle(getString(R.string.about_button));
+	       		alertDialog.setMessage(getString(R.string.about_text));
+	       		alertDialog.setIcon(R.drawable.umit_128);
+	       		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		            	 
+		            	dialog.dismiss();
+		          
+		             } });
+	       		alertDialog.show();
+	       		
+	       	}
+
+	   	}  );
+        
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {
 	       		if(Globals.scanStatus.equalsIgnoreCase(getString(R.string.scan_on))){
@@ -251,8 +272,8 @@ public class ControlActivity extends Activity {
     	protected void onPostExecute(String result) {
     		if (result.equals("true")) {
     			int duration = Toast.LENGTH_SHORT;
-        		Toast toast = Toast.makeText(ControlActivity.this
-        				, "Website Suggestion Sent", duration);
+        		Toast toast = Toast.makeText(ControlActivity.this,
+        				getString(R.string.website_suggestion_sent), duration);
         		toast.show();	
     		}
     	}
@@ -305,8 +326,8 @@ public class ControlActivity extends Activity {
     	protected void onPostExecute(String result) {
     		if (result.equals("true")) {
     			int duration = Toast.LENGTH_SHORT;
-        		Toast toast = Toast.makeText(ControlActivity.this
-        				, "Service Suggestion Sent", duration);
+        		Toast toast = Toast.makeText(ControlActivity.this,
+        				getString(R.string.service_suggestion_sent), duration);
         		toast.show();	
     		}
     	}
