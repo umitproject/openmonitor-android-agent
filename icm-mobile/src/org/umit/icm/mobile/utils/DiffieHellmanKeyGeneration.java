@@ -69,6 +69,6 @@ public class DiffieHellmanKeyGeneration {
 		keyAgreement.doPhase(publicKeyResponse, true);
 		 
 		SecretKey secretKey = keyAgreement.generateSecret("AES");
-		CryptoKeyWriter.writePeerSecretKey(secretKey.getEncoded(), "aggregator");
+		CryptoKeyWriter.writePeerSecretKey(secretKey.getEncoded(), agentData.getAgentIP());
 	}
 }
