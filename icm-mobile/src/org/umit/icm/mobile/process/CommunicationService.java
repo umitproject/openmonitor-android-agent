@@ -90,7 +90,7 @@ public class CommunicationService extends Service {
 		peersTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				if(Globals.aggregatorCommunication != false) {
+				if(Globals.aggregatorCommunication == true) {
 					try {					
 						GetPeerList getPeerList = GetPeerList.newBuilder()
 						.setHeader(Globals.requestHeader)
@@ -107,7 +107,7 @@ public class CommunicationService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} else if(Globals.p2pCommunication != false) {	
+				} else if(Globals.p2pCommunication == true) {	
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
 					.setHeader(Globals.requestHeader)
@@ -127,8 +127,7 @@ public class CommunicationService extends Service {
 							e.printStackTrace();
 						}
 					}
-				}
-					
+				}					
 			}
 		}, 0, interval * 60 * 1000); 
 	}
@@ -156,12 +155,12 @@ public class CommunicationService extends Service {
 	@see         Timer
 	 */	 	 
 	private void startEvents() {
-		 int interval = Constants.DEFAULT_GET_EVENTS_INTERVAL;	
+		int interval = Constants.DEFAULT_GET_EVENTS_INTERVAL;	
 		eventsTimer = new Timer();
 		eventsTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				if(Globals.aggregatorCommunication != false) {
+				if(Globals.aggregatorCommunication == true) {
 					Location location = Location.newBuilder()
 					.setLatitude(0.0)
 					.setLongitude(0.0)
@@ -187,24 +186,24 @@ public class CommunicationService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}							
-				}	else if(Globals.p2pCommunication != false) {	
-						Iterator<AgentData> iterator = Globals.superPeersList.iterator();
-						Location location = Location.newBuilder()
-						.setLatitude(0.0)
-						.setLongitude(0.0)
-						.build();
-						
-						GetEvents getEvents = GetEvents.newBuilder()
-						.setHeader(Globals.requestHeader)
-						.addLocations(location)
-						.build();
-						while(iterator.hasNext()) {							
-							try {
-								MessageForwardingAggregator.forwardGetEvents(iterator.next(), getEvents);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+				} else if(Globals.p2pCommunication == true) {	
+					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+					Location location = Location.newBuilder()
+					.setLatitude(0.0)
+					.setLongitude(0.0)
+					.build();
+					
+					GetEvents getEvents = GetEvents.newBuilder()
+					.setHeader(Globals.requestHeader)
+					.addLocations(location)
+					.build();
+					while(iterator.hasNext()) {							
+						try {
+							MessageForwardingAggregator.forwardGetEvents(iterator.next(), getEvents);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}	
 				}
 			}			
@@ -255,7 +254,6 @@ public class CommunicationService extends Service {
 	void stopAccess() {
 		if (accessTimer != null){
 			accessTimer.cancel();		
-		}
-				
+		}				
 	}
 }
