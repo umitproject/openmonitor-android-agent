@@ -58,20 +58,14 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.build();
     	
     	RegisterAgentResponse registerAgentResponse 
-    	= RegisterAgentResponse.newBuilder()
-    	.setToken("token")
-    	.setAgentID(11)
-    	.setCipheredPublicKey("cipheredKey")
-    	.setHeader(responseHeader)
-    	.setPrivateKey("privateKey")
-    	.setPublicKey("publicKey")
-    	.setAggregatorPublicKey("aggregatorPublicKey")    	
+    	= RegisterAgentResponse.newBuilder()    	
+    	.setAgentID(11)    	
+    	.setHeader(responseHeader)    	    
     	.build();
     	
     	AggregatorActions.registerAgentAction(registerAgentResponse);
     	                
-        Assert.assertEquals(Globals.runtimeParameters.getAgentID(), 11);
-        Assert.assertTrue(Globals.runtimeParameters.getToken().equals("token"));
+        Assert.assertEquals(Globals.runtimeParameters.getAgentID(), 11);        
                         
     }    
     
