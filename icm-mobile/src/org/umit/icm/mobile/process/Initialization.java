@@ -260,4 +260,10 @@ public class Initialization {
 		Globals.superPeersList.add(agentData);
 		Globals.peersList.add(agentData);
 	}
+	
+	public static void loadLists() {
+		ParametersReadWrite.readEventList();
+		ParametersReadWrite.readPeerList();
+		ParametersReadWrite.readSuperPeerList();
+	}
 }		
