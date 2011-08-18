@@ -41,6 +41,7 @@ import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
+import org.umit.icm.mobile.utils.CryptoKeyWriter;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
@@ -261,6 +262,8 @@ public class ProcessActions {
 			Globals.keyManager.setMyPrivateKey(privateKey);
 			PublicKey publicKey = RSACrypto.stringToPublicKey(getTokenAndAsymmetricKeysResponse.getPublicKey());
 			Globals.keyManager.setMyPublicKey(publicKey);
+			PublicKey aggregatorPublicKey = RSACrypto.stringToPublicKey(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey());
+			CryptoKeyWriter.writeAggregatorPublicKey(aggregatorPublicKey);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
