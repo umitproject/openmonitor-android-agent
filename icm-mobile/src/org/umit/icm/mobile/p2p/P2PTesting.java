@@ -62,7 +62,7 @@ public class P2PTesting {
 				
 				AuthenticatePeerResponse authenticatePeerResponse
 				= AuthenticatePeerResponse.parseFrom(msg);
-				Log.w("###msg ", authenticatePeerResponse.getSecretKey());
+				Log.w("###msg ", authenticatePeerResponse.getCipheredPublicKey());
 				
 				} else {
 					Log.w("### ", "Blank response");
