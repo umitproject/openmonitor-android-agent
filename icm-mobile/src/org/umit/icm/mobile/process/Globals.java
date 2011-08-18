@@ -32,6 +32,7 @@ import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
+import org.umit.icm.mobile.p2p.AuthenticatedPeers;
 import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
@@ -162,4 +163,10 @@ public class Globals {
 	 * Global boolean object to check if p2p communication is possible.
 	 */
 	public static boolean p2pCommunication = false;
+	
+	/**
+	 * Global authenticate peers object
+	 */
+	public static AuthenticatedPeers authenticatedPeers
+	= new AuthenticatedPeers();
 }
