@@ -57,17 +57,19 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public static void readPeerList() {
-		try {
-			Globals.peersList 
-			= SDCardReadWrite.readPeersList(Constants.PARAMETERS_DIR);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void readPeerList() {		
+		try {			
+			if(SDCardReadWrite.fileExists(Constants.PEERS_FILE, Constants.PARAMETERS_DIR)) {
+				Globals.peersList 
+				= SDCardReadWrite.readPeersList(Constants.PARAMETERS_DIR);			
+				}	
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 	}
 	
 	/**
@@ -98,8 +100,10 @@ public class ParametersReadWrite {
 	 */
 	public static void readSuperPeerList() {
 		try {
+			if(SDCardReadWrite.fileExists(Constants.SUPER_PEERS_FILE, Constants.PARAMETERS_DIR)) {
 			Globals.superPeersList 
 			= SDCardReadWrite.readSuperPeersList(Constants.PARAMETERS_DIR);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,8 +141,10 @@ public class ParametersReadWrite {
 	 */
 	public static void readEventList() {
 		try {
+			if(SDCardReadWrite.fileExists(Constants.EVENTS_FILE, Constants.PARAMETERS_DIR)) {
 			Globals.eventsList
 			= SDCardReadWrite.readEventsList(Constants.PARAMETERS_DIR);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
