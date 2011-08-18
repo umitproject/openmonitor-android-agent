@@ -1291,5 +1291,91 @@ public class SDCardReadWrite {
   		  objInputStream.close();
   	  	}
 	}
+	
+	/**
+	 * Writes a {@link List} of {@link String} to the given filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@param  data  An object of the type {@link List} of {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *   	                          
+	                          
+	@see         File
+	 *
+	 
+	@see         ObjectOutputStream
+	 *
+	 
+	@see         Environment
+	 */
+	public static void writeStringList(String dir, String filename
+			, List<String> data) throws IOException, RuntimeException{
+		ObjectOutputStream objOutStream = null;		
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+		keyDir.mkdirs();
+    	File file = new File(keyDir
+    			, filename);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}    	    	
+    	    	
+    	try {
+			objOutStream = new ObjectOutputStream(
+				    new BufferedOutputStream(new FileOutputStream(file)));									
+				objOutStream.writeObject(data);				 				
+    	} catch (Exception e) {
+  		    throw new RuntimeException("write string list exception", e);
+  	  	} finally {
+    		objOutStream.close();
+    	}
+	}
+	
+	/**
+	 * Returns a {@link List} of {@link String} object from the specified 
+	 * filename in directory.
+	 * 
+	 *	 	                          	
+	                          
+	@return  {@link List} of {@link String}
+	 *   
+
+	@param  dir  An object of the type {@link String}
+	 *  	 	
+	 	                          	                          
+	@see         File
+	 *
+	 
+	@see         ObjectInputStream
+	 *
+	 
+	@see         Environment
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<String> readStringList(String dir, String filename
+			) throws IOException, RuntimeException{
+		List<String> list;
+		sdCard = Environment.getExternalStorageDirectory();
+		File keyDir = new File (sdCard.getAbsolutePath() 
+    			+ dir);
+    	File file = new File(keyDir
+    			, filename);
+    	InputStream inputStream = new FileInputStream(file.toString());
+  	  	ObjectInputStream objInputStream =
+  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+  	  	try {
+  	  		list = ((List<String>) objInputStream.readObject());
+  	  		return list;
+  	  	} catch (Exception e) {
+  		    throw new RuntimeException("read String list exception", e);
+  	  	} finally {
+  		  inputStream.close();
+  	  	}
+	}
+	
 
 }
