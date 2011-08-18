@@ -28,6 +28,7 @@ import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
@@ -293,5 +294,23 @@ public class AggregatorActions {
 		ProcessActions.updateAgentVersion(loginResponse.getHeader());
 	 	ProcessActions.updateTestsVersion(loginResponse.getHeader());
 		return true;
+	}
+	
+	/**
+	 * Calls {@link ProcessActions#getTokenAndAsymmetricKeys(GetTokenAndAsymmetricKeysResponse)}
+	 * 
+	 *	 
+	                          
+	@param  getTokenAndAsymmetricKeysResponse  An object of the type GetTokenAndAsymmetricKeysResponse
+	 *  	                          	
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */
+	public static void getTokenAndAsymmetricKeysAction(GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse) 
+	throws Exception {
+		ProcessActions.getTokenAndAsymmetricKeys(getTokenAndAsymmetricKeysResponse);	 			
 	}
 }
