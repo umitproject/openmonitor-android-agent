@@ -34,6 +34,7 @@ import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
@@ -212,8 +213,7 @@ public class ProcessActions {
 	}
 	
 	/**
-	 * Adds the various parameters: {agentID, token, cipheredKey, publicKey
-	 * and privateKey} received from the aggregator after registration.
+	 * Adds the agentID received from the aggregator after registration.
 	 * 
 	 *
 	 
@@ -221,17 +221,13 @@ public class ProcessActions {
 	 *
 	 
 	 @return boolean
-	 *
-	 
-	 @see KeyManager
-	 *
+	 *	 
 	 
 	 @see RuntimeParameters
 	 */
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
 		try {
-			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
-			Globals.runtimeParameters.setToken(registerAgentResponse.getToken());
+			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,32 +235,44 @@ public class ProcessActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Globals.keyManager.setMyCipheredKey(
-				registerAgentResponse.getCipheredPublicKey().getBytes());		 
-		try {
-			PrivateKey privateKey = RSACrypto.stringToPrivateKey(registerAgentResponse.getPrivateKey());
-			Globals.keyManager.setMyPrivateKey(privateKey);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		try {
-			PublicKey publicKey = RSACrypto.stringToPublicKey(registerAgentResponse.getPublicKey());
-			Globals.keyManager.setMyPublicKey(publicKey);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
 		return true;
+	}
+	
+	/**
+	 * Adds the various parameters: {token, cipheredKey, publicKey
+	 * and privateKey} received from the aggregator after registration.
+	 * 
+	 *
+	 
+	 @param getTokenAndAsymmetricKeysResponse	Response message of {@link GetTokenAndAsymmetricKeysResponse}
+	 *	 
+	 
+	 @see KeyManager
+	 *
+	 
+	 @see RuntimeParameters
+	 */
+	public static void getTokenAndAsymmetricKeys (GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse) {
+		try {
+			Globals.runtimeParameters.setToken(getTokenAndAsymmetricKeysResponse.getToken());
+			Globals.keyManager.setMyCipheredKey(
+					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getBytes());
+			PrivateKey privateKey = RSACrypto.stringToPrivateKey(getTokenAndAsymmetricKeysResponse.getPrivateKey());
+			Globals.keyManager.setMyPrivateKey(privateKey);
+			PublicKey publicKey = RSACrypto.stringToPublicKey(getTokenAndAsymmetricKeysResponse.getPublicKey());
+			Globals.keyManager.setMyPublicKey(publicKey);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
