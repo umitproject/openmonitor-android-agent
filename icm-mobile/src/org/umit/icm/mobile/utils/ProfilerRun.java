@@ -532,14 +532,9 @@ public class ProfilerRun {
 				.setCurrentVersionNo(10)
 				.build();
 				
-				RegisterAgentResponse.newBuilder()
-				.setAgentID(10)
-				.setCipheredPublicKey("key")
+				RegisterAgentResponse.newBuilder()	
 				.setHeader(responseHeader)
-				.setPrivateKey("key")
-				.setPublicKey("key")
-				.setToken("token")
-				.setAggregatorPublicKey("key")
+				.setAgentID(10)				
 				.build();
 			}
 			
