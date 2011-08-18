@@ -60,6 +60,7 @@ public class Constants {
 	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";
 	public static String WEBSITE_FILE = "-site.web";
 	public static String WEBSITES_LIST_FILE = "websites.list";
+	public static String AUTHENTICATED_PEERS_FILE = "authenticatedPeers.list";
 	public static String SERVICES_DIR = ICM_ROOT_DIR + "/services";
 	public static String SERVICE_FILE = ".service";
 	public static String PROFILER_DIR = ICM_ROOT_DIR + "/profiler";
