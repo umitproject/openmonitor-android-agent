@@ -32,6 +32,8 @@ import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys;
+import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
@@ -421,4 +423,32 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
 		 	AggregatorResources.logout(logout, clientResource);		 				
 	 }
+	 
+	/**
+	 * Returns a boolean object from {@link AggregatorActions} method. 
+	 * Calls {@link AggregatorResources#login(org.umit.icm.mobile.proto.MessageProtos.Login, ClientResource)}
+	 * on the passed message 
+	 * 
+	 *	 
+	                          
+	@param  login  An object of the type Login
+	 *  	                          	
+	                          
+	@return      boolean
+	 * @throws Exception 
+	 *  		                          		
+	 
+	@see         AggregatorResources
+	 */
+	 public synchronized static void getTokenAndAsymmetricKeys(
+			 GetTokenAndAsymmetricKeys getTokenAndAsymmetricKeys) 
+	 throws Exception {
+		 	ClientResource clientResource 
+		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_TOKEN_ASYMMETRIC_KEYS);
+		 	GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse
+		 	= AggregatorResources.getTokenAndAsymmetricKeys(
+		 			getTokenAndAsymmetricKeys, clientResource);
+		 	AggregatorActions.getTokenAndAsymmetricKeysAction(getTokenAndAsymmetricKeysResponse);			
+	 }
+	 	
 }
