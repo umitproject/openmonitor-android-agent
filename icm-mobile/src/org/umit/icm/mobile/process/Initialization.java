@@ -24,12 +24,12 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 import java.util.Calendar;
 
-import org.umit.icm.mobile.aggregator.AggregatorService;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
+import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
@@ -130,7 +130,7 @@ public class Initialization {
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
 		context.startService(new Intent(context, NotificationService.class));
-		context.startService(new Intent(context, AggregatorService.class));		
+		context.startService(new Intent(context, CommunicationService.class));		
 	}
 	
 	public static void checkProfiler() {
