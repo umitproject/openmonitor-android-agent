@@ -53,6 +53,10 @@ public class MessageID {
 	static final int WebsiteSuggestion = 2027;
 	static final int TestSuggestionResponse = 2028;
 	static final int ServiceSuggestion = 2029;
+	static final int GenerateSecretKey = 2035;
+	static final int GenerateSecretKeyResponse = 2036;
+	static final int GetTokenAndAsymmetricKeys = 2037;
+	static final int GetTokenAndAsymmetricKeysResponse = 2038;
 
 	/* Messages from SA to DA,MA */
 
