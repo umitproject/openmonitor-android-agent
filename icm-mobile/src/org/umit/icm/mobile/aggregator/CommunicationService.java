@@ -47,7 +47,7 @@ import android.os.IBinder;
  * Runs timerTasks for the various AggregatorRetrieve calls.
  */
 
-public class AggregatorService extends Service {
+public class CommunicationService extends Service {
 	
 	private Timer peersTimer = new Timer();	
 	private Timer eventsTimer = new Timer();
@@ -235,7 +235,7 @@ public class AggregatorService extends Service {
 	 */	 	 
 	private void startAccess() {
 		 int interval = Constants.DEFAULT_AGGREGATOR_ACCESS_INTERVAL;
-		 final AggregatorAccess aggregatorAccess = new AggregatorAccess(AggregatorService.this);
+		 final AggregatorAccess aggregatorAccess = new AggregatorAccess(CommunicationService.this);
 		 accessTimer = new Timer();
 		 accessTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
