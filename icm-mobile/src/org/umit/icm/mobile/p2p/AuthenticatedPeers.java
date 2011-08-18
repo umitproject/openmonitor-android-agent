@@ -32,7 +32,7 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 public class AuthenticatedPeers {
 	private List<String> authenticated;
 	
-	AuthenticatedPeers() {
+	public AuthenticatedPeers() {
 		authenticated 
 		= new ArrayList<String>();
 	}
