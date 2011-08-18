@@ -104,6 +104,8 @@ public class Constants {
 	public static String AGGR_TESTS = "/api/tests/";
 	public static String AGGR_LOGIN = "/api/loginagent/";
 	public static String AGGR_LOGOUT = "/api/logoutagent/";
+	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
+	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
