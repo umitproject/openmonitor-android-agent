@@ -39,7 +39,11 @@ import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.IBinder;
 
 /**
@@ -52,6 +56,11 @@ public class CommunicationService extends Service {
 	private Timer peersTimer = new Timer();	
 	private Timer eventsTimer = new Timer();
 	private Timer accessTimer = new Timer();
+	private LocationManager locationManager;
+	private LocationListener locationListenerGPS;
+	private android.location.Location currentLocationGPS;	
+	private LocationListener locationListenerNetwork;
+	private android.location.Location currentLocationNetwork;
 			
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -65,7 +74,14 @@ public class CommunicationService extends Service {
 		super.onCreate();				
 		startPeers();		
 		startEvents();
-		startAccess();		
+		startAccess();
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			getCurrentLocationGPS();
+		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			getCurrentLocationNetwork();
+		}
+				
 	}
 	
 	@Override
@@ -160,10 +176,19 @@ public class CommunicationService extends Service {
 		eventsTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				if(Globals.aggregatorCommunication == true) {
+				double lat = 0.0;
+				double lon = 0.0;
+				if(currentLocationGPS != null) {
+					lat = currentLocationGPS.getLatitude();
+					lon = currentLocationGPS.getLongitude();
+				} else if(currentLocationNetwork != null) {
+					lat = currentLocationNetwork.getLatitude();
+					lon = currentLocationNetwork.getLongitude();
+				}
+				if(Globals.aggregatorCommunication == true) {					
 					Location location = Location.newBuilder()
-					.setLatitude(0.0)
-					.setLongitude(0.0)
+					.setLatitude(lat)
+					.setLongitude(lon)
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
@@ -189,8 +214,8 @@ public class CommunicationService extends Service {
 				} else if(Globals.p2pCommunication == true) {	
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
 					Location location = Location.newBuilder()
-					.setLatitude(0.0)
-					.setLongitude(0.0)
+					.setLatitude(lat)
+					.setLongitude(lon)
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
@@ -255,5 +280,69 @@ public class CommunicationService extends Service {
 		if (accessTimer != null){
 			accessTimer.cancel();		
 		}				
+	}
+	
+	private void getCurrentLocationGPS() {		
+		locationListenerGPS = new LocationListener() {
+
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				currentLocationGPS = location;
+				
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+	}
+	
+	private void getCurrentLocationNetwork() {		
+		locationListenerNetwork = new LocationListener() {
+
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				currentLocationNetwork = location;
+				
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
 	}
 }
