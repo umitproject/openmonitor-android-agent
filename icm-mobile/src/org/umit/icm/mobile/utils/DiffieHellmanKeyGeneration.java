@@ -34,8 +34,6 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.DHParameterSpec;
 
-import org.umit.icm.mobile.proto.MessageProtos.AgentData;
-
 /**
  * Uses DiffieHellman key agreement algorithm to generate a shared AES
  * secret key.
@@ -43,23 +41,16 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 
 public class DiffieHellmanKeyGeneration {
 	
-	public void generateKeyPair(AgentData agentData) throws GeneralSecurityException, IOException  {
+	public static KeyPair generateKeyPair() throws GeneralSecurityException, IOException  {
 		DHParameterSpec dhParameterSpec
 		= DiffieHellmanValues.generateDiffieHellmanValues();
 		KeyPairGenerator keyPairGenerator 
 		= KeyPairGenerator.getInstance("DH");		 
 		keyPairGenerator.initialize(dhParameterSpec);
-		KeyPair keyPair = keyPairGenerator.generateKeyPair();
-		 
-		PrivateKey privateKey = keyPair.getPrivate();
-		PublicKey publicKey = keyPair.getPublic();
-		 
-		byte[] publicKeyBytes = publicKey.getEncoded();
-		 		 		 
-		//TODO: send publicKeyBytes to aggregator
-		//TODO: receive publicKeyBytesResponse from aggregator
-		 
-		byte[] publicKeyBytesResponse = null;
+		return keyPairGenerator.generateKeyPair();
+	}
+	
+	public static SecretKey generateSecretKey(PrivateKey privateKey, byte[] publicKeyBytesResponse) throws GeneralSecurityException {
 		X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(publicKeyBytesResponse);
 		KeyFactory keyFact = KeyFactory.getInstance("DH");
 		PublicKey publicKeyResponse = keyFact.generatePublic(x509KeySpec);
@@ -68,7 +59,7 @@ public class DiffieHellmanKeyGeneration {
 		keyAgreement.init(privateKey);
 		keyAgreement.doPhase(publicKeyResponse, true);
 		 
-		SecretKey secretKey = keyAgreement.generateSecret("AES");
-		CryptoKeyWriter.writePeerSecretKey(secretKey.getEncoded(), agentData.getAgentIP());
+		return keyAgreement.generateSecret("AES");		
+		
 	}
 }
