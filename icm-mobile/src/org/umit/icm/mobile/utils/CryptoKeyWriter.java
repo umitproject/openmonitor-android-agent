@@ -137,4 +137,31 @@ public class CryptoKeyWriter {
 	public static void writePeerSecretKey(byte[] secretKey, String peerIP) throws IOException {
 		AESCrypto.saveKey(peerIP+Constants.PEER_SECRET_KEY_FILE, secretKey);
 	}
+	
+	/**
+	 * Writes the passed {@link PublicKey} to disk. Calls {@link KeyFactory},
+	 * {@link RSAPublicKeySpec} and {@link RSACrypto}.
+	 * 
+	 *	 
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *  	                          	
+	                          
+	@see         KeyFactory
+	 *
+
+	@see         RSAPublicKeySpec
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static void writeAggregatorPublicKey(PublicKey publicKey) 
+		throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		RSAPublicKeySpec publicKeySpec 
+		= keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+    	RSACrypto.saveKey(Constants.AGGR_PUBLIC_KEY_FILE
+    			, publicKeySpec.getModulus()
+    			, publicKeySpec.getPublicExponent());
+	}
 }

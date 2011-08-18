@@ -129,4 +129,22 @@ public class CryptoKeyReader {
 		return SDCardReadWrite.fileExists(peerIP+Constants.PEER_SECRET_KEY_FILE,
 				Constants.KEYS_DIR);
 	}
+	
+	/**
+	 * Returns {@link PublicKey} read from disk using 
+	 * {@link RSACrypto#readPublicKey(String)}.
+	 * 
+	 *
+	
+	@return PublicKey
+     *		
+
+	@see         PublicKey
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static PublicKey getAggregatorPublicKey() throws IOException {
+		return RSACrypto.readPublicKey(Constants.AGGR_PUBLIC_KEY_FILE);
+	}
 }
