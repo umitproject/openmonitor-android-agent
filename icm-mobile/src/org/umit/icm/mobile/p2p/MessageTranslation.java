@@ -157,15 +157,7 @@ public class MessageTranslation {
 		
 		case MessageID.RegisterAgentResponse: 
 			RegisterAgentResponse.parseFrom(message);
-			break;
-		
-		case MessageID.SendPrivateKey: 
-			SendPrivateKey.parseFrom(message);
-			break;
-		
-		case MessageID.SendPrivateKeyResponse: 
-			SendPrivateKeyResponse.parseFrom(message);
-			break;
+			break;				
 		
 		case MessageID.SendServiceReport: 
 			SendServiceReport.parseFrom(message);
@@ -207,6 +199,22 @@ public class MessageTranslation {
 		
 		case MessageID.WebsiteSuggestion: 
 			WebsiteSuggestion.parseFrom(message);
+			break;
+		
+		case MessageID.GenerateSecretKey: 
+			GenerateSecretKey.parseFrom(message);
+			break;
+			
+		case MessageID.GenerateSecretKeyResponse: 
+			GenerateSecretKeyResponse.parseFrom(message);
+			break;
+			
+		case MessageID.GetTokenAndAsymmetricKeys: 
+			GetTokenAndAsymmetricKeys.parseFrom(message);
+			break;
+			
+		case MessageID.GetTokenAndAsymmetricKeysResponse: 
+			GetTokenAndAsymmetricKeysResponse.parseFrom(message);
 			break;
 	
 		default:
