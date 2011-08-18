@@ -37,7 +37,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void writePeerList() {
+	public static void writePeerList() {
 			try {
 				SDCardReadWrite.writePeersList(Constants.PARAMETERS_DIR
 						, Globals.peersList);
@@ -57,7 +57,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void readPeerList() {
+	public static void readPeerList() {
 		try {
 			Globals.peersList 
 			= SDCardReadWrite.readPeersList(Constants.PARAMETERS_DIR);
@@ -76,7 +76,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void writeSuperPeerList() {
+	public static void writeSuperPeerList() {
 			try {
 				SDCardReadWrite.writeSuperPeersList(Constants.PARAMETERS_DIR
 						, Globals.superPeersList);
@@ -96,7 +96,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void readSuperPeerList() {
+	public static void readSuperPeerList() {
 		try {
 			Globals.superPeersList 
 			= SDCardReadWrite.readSuperPeersList(Constants.PARAMETERS_DIR);
@@ -115,7 +115,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void writeEventList() {
+	public static void writeEventList() {
 			try {
 				SDCardReadWrite.writeEventsList(Constants.PARAMETERS_DIR
 						, Globals.eventsList);
@@ -135,7 +135,7 @@ public class ParametersReadWrite {
 	
 	 @see		SDCardReadWrite
 	 */
-	public void readEventList() {
+	public static void readEventList() {
 		try {
 			Globals.eventsList
 			= SDCardReadWrite.readEventsList(Constants.PARAMETERS_DIR);
