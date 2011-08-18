@@ -59,4 +59,10 @@ public class AuthenticatedPeers {
 				Constants.AUTHENTICATED_PEERS_FILE, this.authenticated);
 	}
 	
+	public synchronized boolean equals(AuthenticatedPeers authenticatedPeers) {
+		if(authenticatedPeers.authenticated.equals(this.authenticated))
+			return true;
+		return false;
+	}
+	
 }
