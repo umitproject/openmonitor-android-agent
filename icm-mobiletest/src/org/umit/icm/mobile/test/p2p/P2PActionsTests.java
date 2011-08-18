@@ -223,20 +223,6 @@ public class P2PActionsTests extends AndroidTestCase {
     			&& event1.getTestType().equals(event2.getTestType()))
     		return true;
     	return false;
-    }
-    
-    public void testAuthenticatePeersAction() throws Throwable {    	
-
-    	AuthenticatePeerResponse authenticatePeerResponse 
-    	= AuthenticatePeerResponse.newBuilder()
-    	.setSecretKey("SecretKey")
-    	.build();
-    	
-    	P2PActions.authenticatePeerAction(authenticatePeerResponse, "Peer1");
-    	               
-        Assert.assertEquals(new String(CryptoKeyReader.getPeerSecretKey("Peer1"))
-        ,"SecretKey");        
-                        
-    } 
+    }       
 
 }
