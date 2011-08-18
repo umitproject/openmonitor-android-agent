@@ -36,6 +36,7 @@ public class Constants {
 	public static String MY_PRIVATE_KEY_FILE = "myPrivateKey.priv";
 	public static String MY_SECRET_KEY_FILE = "mySecretKey.sec";
 	public static String MY_CIPHERED_KEY_FILE = "myCipheredKey.ciph";
+	public static String AGGR_PUBLIC_KEY_FILE = "aggrPublicKey.pub";
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
 	public static int AES_KEY_SIZE = 128;
