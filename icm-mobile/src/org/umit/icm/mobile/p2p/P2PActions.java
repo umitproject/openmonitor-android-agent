@@ -22,8 +22,10 @@
 package org.umit.icm.mobile.p2p;
 
 import java.io.IOException;
+import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
@@ -36,7 +38,9 @@ import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -226,10 +230,21 @@ public class P2PActions {
 	 
 	 @see CryptoKeyWriter
 	 */
-	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse, String peerIP) {
+	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse
+			, AgentData agentData) {
+		String cipheredKey = authenticatePeerResponse.getCipheredPublicKey();
 		try {
-			CryptoKeyWriter.writePeerSecretKey(authenticatePeerResponse.getSecretKey().getBytes(), peerIP);
+			String decipheredKey = RSACrypto.decryptPublic(CryptoKeyReader.getAggregatorPublicKey(), 
+					cipheredKey);
+			PublicKey decipheredPublicKey = RSACrypto.stringToPublicKey(decipheredKey);
+			if(agentData.getPublicKey().equals(decipheredPublicKey)) {
+				Globals.authenticatedPeers.addAuthenticatedPeer(agentData);
+			}
+			
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

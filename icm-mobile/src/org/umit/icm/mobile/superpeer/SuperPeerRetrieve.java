@@ -28,6 +28,7 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.aggregator.AggregatorActions;
 import org.umit.icm.mobile.p2p.P2PActions;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -74,13 +75,13 @@ public class SuperPeerRetrieve {
 	@see         SuperPeerResources
 	 */
 	 public static void authenticatePeer(
-			AuthenticatePeer authenticatePeer, String peerIP) 
+			AuthenticatePeer authenticatePeer, AgentData agentData) 
 	 throws UnsupportedEncodingException, IOException, RuntimeException {
 			ClientResource clientResource 
-			= SuperPeerResources.getClientResource(peerIP, Constants.SUPER_AUTHENTICATE_PEER);
+			= SuperPeerResources.getClientResource(agentData.getAgentIP(), Constants.SUPER_AUTHENTICATE_PEER);
 			AuthenticatePeerResponse authenticatePeerResponse			
 			= SuperPeerResources.authenticatePeer(authenticatePeer, clientResource); 
-			P2PActions.authenticatePeerAction(authenticatePeerResponse, peerIP);			
+			P2PActions.authenticatePeerAction(authenticatePeerResponse, agentData);			
 	 }
 	
 	/**
