@@ -55,6 +55,7 @@ public class InitializationThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Initialization.loadLists();
     	Initialization.initializeEventsList();
     	Initialization.initializerPeersList();
     	Initialization.startServices(context);
