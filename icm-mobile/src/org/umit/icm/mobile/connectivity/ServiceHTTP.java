@@ -63,7 +63,7 @@ public class ServiceHTTP {
 		    HttpResponse httpResponse = httpClient.execute(httpGet);
             StatusLine statusLine = httpResponse.getStatusLine();
 		      if (statusLine.getStatusCode() != 200) {
-		          throw new IOException("Response: " + statusLine.toString());
+		          return "blocked";
 		      }			      
 		      HttpEntity httpEntity = httpResponse.getEntity();
 		      InputStream inputStream = httpEntity.getContent();	
@@ -73,12 +73,15 @@ public class ServiceHTTP {
 		      byte[] buffer = new byte[1024];
 		      while ((bytes = inputStream.read(buffer)) != -1) {
 		    	  byteArrayOutputStream.write(buffer, 0, bytes);
-		      }			      
-		      return new String(byteArrayOutputStream.toByteArray());
+		      }
+		      if(new String(byteArrayOutputStream.toByteArray()) != null)
+		    	  return "normal"; 
+		      else
+		    	  return "blocked";
 		  }
 		  catch (IOException e) {
 			     Log.w("ServiceHTTPException: ", e.getLocalizedMessage());
-			     return null;
+			     return "blocked";
 		}
 	}
 	

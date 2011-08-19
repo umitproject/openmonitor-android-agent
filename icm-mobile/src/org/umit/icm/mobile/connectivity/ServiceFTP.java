@@ -58,7 +58,9 @@ public class ServiceFTP {
 		String reply =  ftpClient.getReplyString();
 		ftpClient.logout();
 		ftpClient.disconnect();
-		return reply;		
+		if(reply != null)			
+			return "normal";
+		return "blocked";
 	}
 	
 	/**

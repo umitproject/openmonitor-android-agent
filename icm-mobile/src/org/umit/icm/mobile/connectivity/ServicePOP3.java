@@ -72,9 +72,9 @@ public class ServicePOP3 {
         store.connect();
         if(store.isConnected()) {
         	store.close();
-        	return "connected";
+        	return "normal";
         }
-        return null;
+        return "blocked";
 	}
 	
 	/**

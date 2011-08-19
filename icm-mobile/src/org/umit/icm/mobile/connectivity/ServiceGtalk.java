@@ -54,7 +54,9 @@ public class ServiceGtalk {
 		Globals.tcpClientConnectivity.writeLine("hello");
 		String reply = Globals.tcpClientConnectivity.readLines();
 		Globals.tcpClientConnectivity.closeConnection();
-		return reply;
+		if(reply != null)
+			return "normal";
+		return "blocked";
 	}
 	
 	/**
