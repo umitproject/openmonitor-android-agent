@@ -56,7 +56,7 @@ public class Constants {
 	public static String TWITTER_STATUS_FILE = "twitter.param";
 	public static int DEFAULT_SCAN_INTERVAL = 5;
 	public static String DEFAULT_SCAN_STATUS = "On";
-	public static String DEFAULT_TWITTER_STATUS = "On";
+	public static String DEFAULT_TWITTER_STATUS = "Off";
 	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";
 	public static String WEBSITE_FILE = "-site.web";
 	public static String WEBSITES_LIST_FILE = "websites.list";
