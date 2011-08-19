@@ -44,7 +44,7 @@ public class WebsiteTextCheckboxAdapter extends BaseAdapter {
     }
     
     public void setListItems(List<WebsiteTextCheckbox> list) { 
-    	listContent = list; 
+    	listContent.addAll(list);     	  
     }
 
     @Override
@@ -68,18 +68,8 @@ public class WebsiteTextCheckboxAdapter extends BaseAdapter {
     
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-         WebsiteCheckView websiteCheckView;
-         if (convertView == null) {
-        	 websiteCheckView 
-        	 = new WebsiteCheckView(context, listContent.get(position));
-         } else { 
-        	 WebsiteTextCheckbox websiteTextCheckbox = listContent.get(position);
-        	 websiteCheckView 
-        	 = (WebsiteCheckView) convertView;
-        	 websiteCheckView.setCheckBoxState(websiteTextCheckbox.isCheck()); 
-        	 websiteCheckView = (WebsiteCheckView) convertView;
-        	 websiteCheckView.setText(listContent.get(position).getText());
-         }
+         WebsiteCheckView websiteCheckView 
+        	 = new WebsiteCheckView(context, listContent.get(position));        	 
          return websiteCheckView;
     }
 }
