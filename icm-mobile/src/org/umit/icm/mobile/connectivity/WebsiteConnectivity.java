@@ -37,7 +37,9 @@ import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.IDGenerator;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
@@ -171,7 +173,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setStatusCode(statusCode)
 		.setHtmlResponse(websiteContent)
 		.setWebsiteURL(website.getUrl())		
-		.build();
+		.build();			
 		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
@@ -192,11 +194,32 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setReport(websiteReportDetail)
 		.setHeader(icmReport)	
 		.build();
+		checkStatus(websiteReport);
 		return websiteReport;
 	}
 	
 	private long getThroughput(String stringResponse, long stringTime) {		
 		return (stringResponse.getBytes().length / stringTime);
+	}
+	
+	private void checkStatus(WebsiteReport websiteReport) {
+		if(websiteReport.getReport().getStatusCode() != 200) {
+			Location location = Location.newBuilder()
+			.setLatitude(0)
+			.setLongitude(0)
+			.build();
+			
+			Event event = Event.newBuilder()
+			.setTestType("WEB")
+			.setEventType("CENSOR")
+			.setTimeUTC(websiteReport.getHeader().getTimeUTC())
+			.setSinceTimeUTC(websiteReport.getHeader().getTimeUTC())
+			.setWebsiteReport(websiteReport.getReport())
+			.addLocations(location)			
+			.build();
+			
+			Globals.eventsList.add(event);
+		}
 	}
 		
 }
