@@ -90,9 +90,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			, byte[] bytes) 
 	throws IOException, RuntimeException, NoSuchAlgorithmException {
 		int statusCode = 0;
-		if(bytes.equals(null) && serviceContent.equals(null))
+		if(serviceContent.equals("blocked"))
 			statusCode = 1;
-		else if (!bytes.equals(null) && serviceContent.equals(null))
+		if((bytes == null) && serviceContent.equals("blocked"))
+			statusCode = 1;
+		else if ((bytes != null) && serviceContent.equals("blocked"))
 			statusCode = 1;
 		ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
 		.setServiceName(service.getName())
