@@ -29,7 +29,6 @@ import junit.framework.Assert;
 import org.umit.icm.mobile.p2p.P2PActions;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.*;
-import org.umit.icm.mobile.utils.CryptoKeyReader;
 
 import android.test.AndroidTestCase;
 
