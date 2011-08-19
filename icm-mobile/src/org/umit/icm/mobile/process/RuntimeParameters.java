@@ -51,56 +51,134 @@ public class RuntimeParameters {
 		super();
 	}
 
-	public synchronized String getToken() throws IOException, RuntimeException {
-		token = readToken();
+	public synchronized String getToken() {
+		try {
+			token = readToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return token;
 	}
 
-	public synchronized void setToken(String token) throws IOException, RuntimeException {
+	public synchronized void setToken(String token) {
 		this.token = token;
-		writeToken(token);		
-		Initialization.initializeRequestHeader();
+		try {
+			writeToken(token);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
 	}
 
-	public synchronized long getAgentID() throws IOException, RuntimeException {
-		agentID = readAgentID();
+	public synchronized long getAgentID() {
+		try {
+			agentID = readAgentID();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return agentID;
 	}
 
-	public synchronized void setAgentID(long agentID) throws IOException, RuntimeException {
+	public synchronized void setAgentID(long agentID) {
 		this.agentID = agentID;
-		writeAgentID(agentID);
-		Initialization.initializeRequestHeader();
+		try {
+			writeAgentID(agentID);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
-	public synchronized int getScanInterval() throws IOException, RuntimeException {
-		scanInterval = readScanInterval();
+	public synchronized int getScanInterval() {
+		try {
+			scanInterval = readScanInterval();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return scanInterval;
 	}
 
-	public synchronized void setScanInterval(int scanInterval) throws IOException, RuntimeException {
+	public synchronized void setScanInterval(int scanInterval) {
 		this.scanInterval = scanInterval;
-		writeScanInterval(scanInterval);
+		try {
+			writeScanInterval(scanInterval);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public synchronized String getScanStatus() throws IOException, RuntimeException {
-		scanStatus = readScanStatus();
+	public synchronized String getScanStatus() {
+		try {
+			scanStatus = readScanStatus();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return scanStatus;
 	}
 
-	public synchronized void setScanStatus(String scanStatus) throws IOException, RuntimeException {
+	public synchronized void setScanStatus(String scanStatus) {
 		this.scanStatus = scanStatus;
-		writeScanStatus(scanStatus);
+		try {
+			writeScanStatus(scanStatus);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}		
 	
-	public synchronized String getTwitter() throws IOException, RuntimeException {
-		twitter = readTwitterStatus();
+	public synchronized String getTwitter() {
+		try {
+			twitter = readTwitterStatus();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return twitter;
 	}
 
-	public synchronized void setTwitter(String twitter) throws IOException, RuntimeException {
+	public synchronized void setTwitter(String twitter) {
 		this.twitter = twitter;
-		writeTwitterStatus(twitter);
+		try {
+			writeTwitterStatus(twitter);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private synchronized String readScanStatus() throws IOException, RuntimeException {
