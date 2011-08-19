@@ -69,7 +69,14 @@ public class ConnectivityService extends Service {
 
 		super.onCreate();
 		connectivityManager
-	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);		
+	    = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			getCurrentLocationGPS();
+		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			getCurrentLocationNetwork();
+		}
+		
 		startScan();							
 	}
 	
@@ -133,6 +140,26 @@ public class ConnectivityService extends Service {
 						getString(R.string.scan_complete_id)
 						, getString(R.string.scan_complete)
 						, context);
+				double lat = 0.0;
+				double lon = 0.0;
+				if(currentLocationGPS != null) {
+					lat = currentLocationGPS.getLatitude();
+					lon = currentLocationGPS.getLongitude();
+				} else if(currentLocationNetwork != null) {
+					lat = currentLocationNetwork.getLatitude();
+					lon = currentLocationNetwork.getLongitude();
+				}
+				String latitude = "";
+				String longitude = "";
+				if(lat != 0.0 && lon != 0.0) {
+					latitude = Double.toString(lat);
+					longitude = Double.toString(lon);
+				}
+				Globals.twitterUpdate.sendTweet(
+						getString(R.string.scan_complete_at) + " "	
+						+ String.valueOf(calendar.getTime()) + " Lat: "
+						+ latitude + " Lon: " + longitude
+						, context);	
 											
 			}	
 		}, 0, interval * 60 * 1000); 
