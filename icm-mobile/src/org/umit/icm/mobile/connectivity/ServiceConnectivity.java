@@ -132,7 +132,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void HTTPScan() throws UnknownHostException, IOException {
 		String HTTPResponse = ServiceHTTP.connect();
-		if(!HTTPResponse.equals(null)) {			
+		if(HTTPResponse != null) {			
 			byte[] serviceResponseBytes = null;
 			ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -191,7 +191,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void HTTPSScan() throws UnknownHostException, IOException {
 		String HTTPSResponse = ServiceHTTPS.connect();
-		if(!HTTPSResponse.equals(null)) {	
+		if(HTTPSResponse != null) {	
 			byte[] httpsServiceResponseBytes = null;
 			ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -249,7 +249,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void FTPScan() throws IOException {		
 		String FTPResponse = ServiceFTP.connect();
-		if(!FTPResponse.equals(null)) {			
+		if(FTPResponse != null) {			
 			byte[] ftpServiceResponseBytes = null;
 			ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -307,7 +307,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void POP3Scan() throws IOException, MessagingException {		
 		String POP3Response = ServicePOP3.connect();
-		if(!POP3Response.equals(null)) {			
+		if(POP3Response != null) {			
 			byte[] pop3ServiceResponseBytes = null;
 			ServiceReport serviceReportPOP3 = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -365,7 +365,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void IMAPScan() throws IOException, MessagingException {		
 		String IMAPResponse = ServiceIMAP.connect();
-		if(!IMAPResponse.equals(null)) {		
+		if(IMAPResponse != null) {		
 			byte[] imapServiceResponseBytes = null;
 			ServiceReport serviceReportIMAP = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -423,7 +423,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void GtalkScan() throws IOException, MessagingException {		
 		String GtalkResponse = ServiceGtalk.connect();
-		if(!GtalkResponse.equals(null)) {			
+		if(GtalkResponse != null) {			
 			byte[] gtalkServiceResponseBytes = null;
 			ServiceReport serviceReportGtalk = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
@@ -481,7 +481,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	public void MSNScan() throws IOException, MessagingException {		
 		String msnResponse = ServiceMSN.connect();
-		if(!msnResponse.equals(null)) {				
+		if(msnResponse != null) {				
 			byte[] msnServiceResponseBytes = null;
 			ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
