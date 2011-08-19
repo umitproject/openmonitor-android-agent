@@ -26,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
@@ -40,8 +41,11 @@ import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
+import twitter4j.TwitterException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -64,6 +68,7 @@ public class ControlActivity extends Activity {
 	private Button sendButton, intervalButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
 	enableTwitterButton, aboutButton;	
+	private ProgressDialog progressDialog;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +122,10 @@ public class ControlActivity extends Activity {
 	       	public void onClick(View v) {  
 	       		try {
 					if(Globals.runtimeParameters.getTwitter().equals("Off")) {
+						  progressDialog = ProgressDialog.show(ControlActivity.this, 
+					        		getString(R.string.loading)	, getString(R.string.retrieving_website)
+					        		, true, false);
+						new LaunchBrowser().execute();  
 						TwitterDialog twitterDialog = 
 							new TwitterDialog(ControlActivity.this, "");
 						twitterDialog.show();	     
@@ -379,5 +388,39 @@ public class ControlActivity extends Activity {
 		}
 			
     }    
+    
+    private class LaunchBrowser extends AsyncTask<String,String,String> {
+  	  
+    	protected void onPostExecute(String str) {  
+    		try {
+    			Globals.runtimeParameters.setTwitter("Off");
+    		} catch (RuntimeException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		Globals.twitterUpdate.reset();
+    		try {
+    			Globals.twitterUpdate.requestToken(ControlActivity.this);
+    		} catch (TwitterException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (HttpException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}		
+    		
+    		progressDialog.dismiss();
+    	}
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+         										
+    }
       	 
 }

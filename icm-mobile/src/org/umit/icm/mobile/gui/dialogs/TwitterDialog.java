@@ -24,16 +24,13 @@ package org.umit.icm.mobile.gui.dialogs;
 
 import java.io.IOException;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
 
 import twitter4j.TwitterException;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,14 +40,11 @@ import android.widget.EditText;
 public class TwitterDialog extends Dialog {
 	
     private EditText etEnable;
-    private Context context;
     private Button buttonSet;
-    private ProgressDialog progressDialog;
-    
+        
     public TwitterDialog(Context context, String interval 
             ) {
-        super(context);    
-        this.context = context;
+        super(context);            
         
     }
     
@@ -60,11 +54,7 @@ public class TwitterDialog extends Dialog {
         setContentView(R.layout.twitterdialog);
         buttonSet = (Button) findViewById(R.id.pinButton);
         buttonSet.setOnClickListener(new intervalListener());                                
-        etEnable = (EditText) findViewById(R.id.etPin);
-        progressDialog = ProgressDialog.show(context, 
-        		context.getString(R.string.loading)	, context.getString(R.string.retrieving_website)
-        		, true, false);
-        new LaunchBrowser().execute();                
+        etEnable = (EditText) findViewById(R.id.etPin);                           
     }
         
     private class intervalListener implements android.view.View.OnClickListener {
@@ -92,39 +82,5 @@ public class TwitterDialog extends Dialog {
 		}			
 
     }   
-    
-    private class LaunchBrowser extends AsyncTask<String,String,String> {
-    	  
-    	protected void onPostExecute(String str) {  
-    		try {
-    			Globals.runtimeParameters.setTwitter("Off");
-    		} catch (RuntimeException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    		Globals.twitterUpdate.reset();
-    		try {
-    			Globals.twitterUpdate.requestToken(context);
-    		} catch (TwitterException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} catch (HttpException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}		
-    		
-    		progressDialog.dismiss();
-    	}
-
-		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-         										
-    }
-    
+            
 }
