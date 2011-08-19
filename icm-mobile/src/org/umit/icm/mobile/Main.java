@@ -90,9 +90,9 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/	        	
+	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-				new InitializationThread(Main.this).start();				
-				Initialization.checkProfiler();				
+				new InitializationThread(Main.this).start();										
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
