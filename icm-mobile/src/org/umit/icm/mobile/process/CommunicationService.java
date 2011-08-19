@@ -58,10 +58,8 @@ public class CommunicationService extends Service {
 	private Timer eventsTimer = new Timer();
 	private Timer accessTimer = new Timer();
 	private LocationManager locationManager;
-	private LocationListener locationListenerGPS;
-	private android.location.Location currentLocationGPS;	
-	private LocationListener locationListenerNetwork;
-	private android.location.Location currentLocationNetwork;
+	private LocationListener locationListenerGPS;	
+	private LocationListener locationListenerNetwork;	
 			
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -189,12 +187,12 @@ public class CommunicationService extends Service {
 			public void run() {
 				double lat = 0.0;
 				double lon = 0.0;
-				if(currentLocationGPS != null) {
-					lat = currentLocationGPS.getLatitude();
-					lon = currentLocationGPS.getLongitude();
-				} else if(currentLocationNetwork != null) {
-					lat = currentLocationNetwork.getLatitude();
-					lon = currentLocationNetwork.getLongitude();
+				if(Globals.currentLocationGPS != null) {
+					lat = Globals.currentLocationGPS.getLatitude();
+					lon = Globals.currentLocationGPS.getLongitude();
+				} else if(Globals.currentLocationNetwork != null) {
+					lat = Globals.currentLocationNetwork.getLatitude();
+					lon = Globals.currentLocationNetwork.getLongitude();
 				}
 				if(Globals.aggregatorCommunication == true) {	
 					RequestHeader requestHeader = RequestHeader.newBuilder()
@@ -308,7 +306,7 @@ public class CommunicationService extends Service {
 
 			@Override
 			public void onLocationChanged(android.location.Location location) {
-				currentLocationGPS = location;
+				Globals.currentLocationGPS = location;
 				
 			}
 
@@ -340,7 +338,7 @@ public class CommunicationService extends Service {
 
 			@Override
 			public void onLocationChanged(android.location.Location location) {
-				currentLocationNetwork = location;
+				Globals.currentLocationNetwork = location;
 				
 			}
 

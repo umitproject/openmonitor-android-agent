@@ -163,4 +163,8 @@ public class Globals {
 	 */
 	public static AuthenticatedPeers authenticatedPeers
 	= new AuthenticatedPeers();
+	
+	public static android.location.Location currentLocationGPS;
+	
+	public static android.location.Location currentLocationNetwork;
 }

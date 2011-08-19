@@ -204,9 +204,19 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	
 	private void checkStatus(WebsiteReport websiteReport) {
 		if(websiteReport.getReport().getStatusCode() != 200) {
+			double lat = 0.0;
+			double lon = 0.0;
+			if(Globals.currentLocationGPS != null) {
+				lat = Globals.currentLocationGPS.getLatitude();
+				lon = Globals.currentLocationGPS.getLongitude();
+			} else if(Globals.currentLocationNetwork != null) {
+				lat = Globals.currentLocationNetwork.getLatitude();
+				lon = Globals.currentLocationNetwork.getLongitude();
+			}
+			
 			Location location = Location.newBuilder()
-			.setLatitude(0)
-			.setLongitude(0)
+			.setLatitude(lat)
+			.setLongitude(lon)
 			.build();
 			
 			Event event = Event.newBuilder()
