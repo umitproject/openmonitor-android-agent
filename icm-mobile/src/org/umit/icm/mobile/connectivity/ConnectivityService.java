@@ -38,7 +38,10 @@ import org.umit.icm.mobile.process.RuntimeParameters;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.os.IBinder;
 
 /**
@@ -49,6 +52,11 @@ public class ConnectivityService extends Service {
 
 	private Timer timer = new Timer();
 	private ConnectivityManager connectivityManager;
+	private LocationManager locationManager;
+	private LocationListener locationListenerGPS;
+	private android.location.Location currentLocationGPS;	
+	private LocationListener locationListenerNetwork;
+	private android.location.Location currentLocationNetwork;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -125,10 +133,7 @@ public class ConnectivityService extends Service {
 						getString(R.string.scan_complete_id)
 						, getString(R.string.scan_complete)
 						, context);
-				Globals.twitterUpdate.sendTweet(
-						getString(R.string.scan_complete_at) + " "	
-						+ String.valueOf(calendar.getTime())
-						, context);								
+											
 			}	
 		}, 0, interval * 60 * 1000); 
 	}
@@ -173,6 +178,71 @@ public class ConnectivityService extends Service {
 			
 		}
 				
-	}		
+	}	
+	
+
+	private void getCurrentLocationGPS() {		
+		locationListenerGPS = new LocationListener() {
+
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				currentLocationGPS = location;
+				
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+	}
+	
+	private void getCurrentLocationNetwork() {		
+		locationListenerNetwork = new LocationListener() {
+
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				currentLocationNetwork = location;
+				
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
+	}
 					
 }
