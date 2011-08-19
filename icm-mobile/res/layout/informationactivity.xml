@@ -31,20 +31,18 @@
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent">
-		    
-		<TextView  
-		    android:layout_width="fill_parent" 
-		    android:layout_height="wrap_content"		     
-		    android:text="@string/flip_services"
-		    android:gravity="center_horizontal"
-		    android:clickable="true"
-		    android:textSize="22sp"
-		    android:id="@+id/goToServices"/>
-		    
+		
+		<Button 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:text="@string/flip_services" 			
+			android:layout_centerHorizontal="true"
+			android:id="@+id/goToServicesButton"/>
+			    
 		<ListView 
 			android:id="@+id/ListView01"
 			android:layout_width="wrap_content"
-			android:layout_below="@id/goToServices" 
+			android:layout_below="@id/goToServicesButton" 
 			android:layout_height="wrap_content" />
 			       	
 	</RelativeLayout>
@@ -52,20 +50,19 @@
 	<RelativeLayout 
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">	    
-		<TextView  
-		    android:layout_width="fill_parent" 
-		    android:layout_height="wrap_content"	     
-		    android:text="@string/flip_websites"
-		    android:gravity="center_horizontal"
-		    android:clickable="true"
-		    android:textSize="22sp"
-		    android:id="@+id/goToWebsites"/>
+	    android:layout_height="fill_parent">
+	    
+	    <Button 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:text="@string/flip_websites" 			
+			android:layout_centerHorizontal="true"
+			android:id="@+id/goToWebsitesButton"/>	    	
 		    
 		<ListView 
 			android:id="@+id/ListView02"
 			android:layout_width="wrap_content"
-			android:layout_below="@id/goToWebsites" 
+			android:layout_below="@id/goToWebsitesButton" 
 			android:layout_height="wrap_content" />
 		
 	</RelativeLayout>

@@ -43,8 +43,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 /**
@@ -53,9 +53,9 @@ import android.widget.ViewFlipper;
  */
 
 public class InformationActivity extends Activity{
-   	
+   		 
 	private ListView listView, listViewServices;
-	private TextView goToServices, goToWebsites;
+	private Button goToServicesButton, goToWebsitesButton;
 	ArrayAdapter<String> arrayAdapter, arrayAdapterServices;
 	ViewFlipper viewFlipper;
 		
@@ -63,20 +63,20 @@ public class InformationActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informationactivity);                
-        goToServices = (TextView) findViewById(R.id.goToServices);       
-        goToWebsites = (TextView) findViewById(R.id.goToWebsites);         
+        goToServicesButton = (Button) findViewById(R.id.goToServicesButton);       
+        goToWebsitesButton = (Button) findViewById(R.id.goToWebsitesButton);         
         listView = (ListView)findViewById(R.id.ListView01);
         listViewServices = (ListView)findViewById(R.id.ListView02);
         viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
         
-        goToServices.setOnClickListener(new OnClickListener() { 
+        goToServicesButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	                		 
 	       		viewFlipper.showNext();
 	       	}
 
 	   	}  );
         
-        goToWebsites.setOnClickListener(new OnClickListener() { 
+        goToWebsitesButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	                		 
 	       		viewFlipper.showPrevious();
 	       	}
