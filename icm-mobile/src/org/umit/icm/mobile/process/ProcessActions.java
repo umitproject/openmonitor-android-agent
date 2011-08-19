@@ -232,9 +232,6 @@ public class ProcessActions {
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
 		try {
 			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

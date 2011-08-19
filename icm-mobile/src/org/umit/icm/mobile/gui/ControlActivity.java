@@ -84,9 +84,6 @@ public class ControlActivity extends Activity {
 			} else {
 				enableTwitterButton.setText(getString(R.string.disable_twitter_button));
 			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		} catch (RuntimeException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -127,9 +124,6 @@ public class ControlActivity extends Activity {
 						Globals.runtimeParameters.setTwitter("Off");
 						enableTwitterButton.setText(getString(R.string.enable_twitter_button));
 					}
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (RuntimeException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -211,8 +205,6 @@ public class ControlActivity extends Activity {
 	       			
 	       		try {
 					Globals.runtimeParameters.setScanStatus(Globals.scanStatus);
-				} catch (IOException e) {
-					e.printStackTrace();
 				} catch (RuntimeException e) {
 						e.printStackTrace();
 				}

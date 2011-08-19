@@ -98,9 +98,6 @@ public class TwitterDialog extends Dialog {
     	protected void onPostExecute(String str) {  
     		try {
     			Globals.runtimeParameters.setTwitter("Off");
-    		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
     		} catch (RuntimeException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();

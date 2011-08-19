@@ -60,8 +60,6 @@ public class IntervalDialog extends Dialog {
         etInterval = (EditText) findViewById(R.id.etInterval);     
         try {
 			newInterval = Globals.runtimeParameters.getScanInterval();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
@@ -81,8 +79,6 @@ public class IntervalDialog extends Dialog {
 			readyListener.ready(Integer.toString(newInterval));
 			try {
 				Globals.runtimeParameters.setScanInterval(newInterval);
-			} catch (IOException e) {
-				e.printStackTrace();
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
