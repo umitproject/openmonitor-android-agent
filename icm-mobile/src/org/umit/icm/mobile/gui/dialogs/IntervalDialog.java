@@ -21,8 +21,6 @@
 
 package org.umit.icm.mobile.gui.dialogs;
 
-import java.io.IOException;
-
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
 

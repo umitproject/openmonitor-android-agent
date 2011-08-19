@@ -36,6 +36,7 @@ import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
@@ -270,11 +271,16 @@ public class ControlActivity extends Activity {
     		}
     	}
          
-		protected String doInBackground(String... args) {	
+		protected String doInBackground(String... args) {
+			RequestHeader requestHeader = RequestHeader.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setToken(Globals.runtimeParameters.getToken())
+			.build();
+			
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
         	.setEmailAddress(args[0])
-        	.setHeader(Globals.requestHeader)
+        	.setHeader(requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
         	
@@ -325,11 +331,16 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
+			RequestHeader requestHeader = RequestHeader.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setToken(Globals.runtimeParameters.getToken())
+			.build();
+			
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
         	.setEmailAddress(args[0])
         	.setServiceName(args[1])
-        	.setHeader(Globals.requestHeader)
+        	.setHeader(requestHeader)
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();

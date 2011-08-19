@@ -38,6 +38,7 @@ import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
@@ -111,8 +112,13 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+				
+				RequestHeader requestHeader = RequestHeader.newBuilder()
+				.setAgentID(Globals.runtimeParameters.getAgentID())
+				.setToken(Globals.runtimeParameters.getToken())
+				.build();
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
-				.setHeader(Globals.requestHeader)
+				.setHeader(requestHeader)
 				.setReport(websiteReport)
 				.build();				
 				if(Globals.aggregatorCommunication != false) {

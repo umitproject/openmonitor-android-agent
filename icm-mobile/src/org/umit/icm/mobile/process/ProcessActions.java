@@ -39,6 +39,7 @@ import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
@@ -68,8 +69,13 @@ public class ProcessActions {
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
 			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
+			RequestHeader requestHeader = RequestHeader.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setToken(Globals.runtimeParameters.getToken())
+			.build();
+			
 			NewVersion newVersion = NewVersion.newBuilder()
-			.setHeader(Globals.requestHeader)
+			.setHeader(requestHeader)
 			.setAgentVersionNo(Globals.versionManager.getAgentVersion())
 			.setAgentType(Constants.AGENT_TYPE)
 			.build();
@@ -96,8 +102,13 @@ public class ProcessActions {
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
+			RequestHeader requestHeader = RequestHeader.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setToken(Globals.runtimeParameters.getToken())
+			.build();
+			
 			NewTests newTests = NewTests.newBuilder()
-			.setHeader(Globals.requestHeader)
+			.setHeader(requestHeader)
 			.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
 			.build();
 			AggregatorRetrieve.checkTests(newTests);

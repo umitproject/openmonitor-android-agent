@@ -21,10 +21,9 @@
 
 package org.umit.icm.mobile.process;
 
-import java.io.IOException;
-
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 import android.content.Context;
 
@@ -34,19 +33,16 @@ public class InitializationThread extends Thread {
     public InitializationThread(Context context) {
         this.context = context;
     }
-    public void run() {
-    	try {
-			Initialization.initializeRequestHeader();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public void run() {    	
 		Initialization.initializeIP(context);
+		
+		RequestHeader requestHeader = RequestHeader.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setToken(Globals.runtimeParameters.getToken())
+		.build();
+		
 		Login login = Login.newBuilder()
-		.setHeader(Globals.requestHeader)
+		.setHeader(requestHeader)
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		try {

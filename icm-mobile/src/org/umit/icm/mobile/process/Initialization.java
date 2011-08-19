@@ -33,7 +33,6 @@ import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -178,30 +177,6 @@ public class Initialization {
 	 */
 	public static void intializeTCPServer() throws IOException {		
 		Globals.tcpServer = new TCPServer(Constants.MY_TCP_PORT);				
-	}
-	
-	/**
-	 * Initializes the {@link Globals#requestHeader} with 
-	 * {@link Globals#runtimeParameters}
-	 * 
-	 *	 
-	                    
-	@see         RequestHeader
-	 *
-	
-	@see         RuntimeParameters
-	 */
-	public static void initializeRequestHeader() throws IOException, RuntimeException {
-		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
-				, Constants.PARAMETERS_DIR) == false )
-				|| (SDCardReadWrite.fileNotEmpty(Constants.TOKEN_FILE
-					, Constants.PARAMETERS_DIR) == false )) {					
-			Globals.runtimeParameters.setToken(Constants.DEFAULT_TOKEN);					
-		}
-		Globals.requestHeader = RequestHeader.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setToken(Globals.runtimeParameters.getToken())
-		.build();
 	}
 	
 	/** Initializes the global IP.

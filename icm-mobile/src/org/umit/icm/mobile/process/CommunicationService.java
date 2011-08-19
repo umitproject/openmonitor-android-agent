@@ -37,6 +37,7 @@ import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 import android.app.Service;
 import android.content.Context;
@@ -107,13 +108,18 @@ public class CommunicationService extends Service {
 			@Override
 			public void run() {
 				if(Globals.aggregatorCommunication == true) {
-					try {					
+					try {		
+						RequestHeader requestHeader = RequestHeader.newBuilder()
+						.setAgentID(Globals.runtimeParameters.getAgentID())
+						.setToken(Globals.runtimeParameters.getToken())
+						.build();
+						
 						GetPeerList getPeerList = GetPeerList.newBuilder()
-						.setHeader(Globals.requestHeader)
+						.setHeader(requestHeader)
 						.build();
 						AggregatorRetrieve.getPeerList(getPeerList);
 						GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-						.setHeader(Globals.requestHeader)
+						.setHeader(requestHeader)
 						.build();
 						AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
 					} catch (IOException e1) {
@@ -123,15 +129,20 @@ public class CommunicationService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} else if(Globals.p2pCommunication == true) {	
+				} else if(Globals.p2pCommunication == true) {
+					RequestHeader requestHeader = RequestHeader.newBuilder()
+					.setAgentID(Globals.runtimeParameters.getAgentID())
+					.setToken(Globals.runtimeParameters.getToken())
+					.build();
+					
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
-					.setHeader(Globals.requestHeader)
+					.setHeader(requestHeader)
 					.setCount(Constants.MAX_PEERS)
 					.build();
 					
 					GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-					.setHeader(Globals.requestHeader)
+					.setHeader(requestHeader)
 					.setCount(Constants.MAX_SUPER_PEERS)
 					.build();
 					while(iterator.hasNext()) {
@@ -185,14 +196,19 @@ public class CommunicationService extends Service {
 					lat = currentLocationNetwork.getLatitude();
 					lon = currentLocationNetwork.getLongitude();
 				}
-				if(Globals.aggregatorCommunication == true) {					
+				if(Globals.aggregatorCommunication == true) {	
+					RequestHeader requestHeader = RequestHeader.newBuilder()
+					.setAgentID(Globals.runtimeParameters.getAgentID())
+					.setToken(Globals.runtimeParameters.getToken())
+					.build();
+					
 					Location location = Location.newBuilder()
 					.setLatitude(lat)
 					.setLongitude(lon)
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
-					.setHeader(Globals.requestHeader)
+					.setHeader(requestHeader)
 					.addLocations(location)
 					.build();
 					
@@ -211,7 +227,12 @@ public class CommunicationService extends Service {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}							
-				} else if(Globals.p2pCommunication == true) {	
+				} else if(Globals.p2pCommunication == true) {
+					RequestHeader requestHeader = RequestHeader.newBuilder()
+					.setAgentID(Globals.runtimeParameters.getAgentID())
+					.setToken(Globals.runtimeParameters.getToken())
+					.build();
+					
 					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
 					Location location = Location.newBuilder()
 					.setLatitude(lat)
@@ -219,7 +240,7 @@ public class CommunicationService extends Service {
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
-					.setHeader(Globals.requestHeader)
+					.setHeader(requestHeader)
 					.addLocations(location)
 					.build();
 					while(iterator.hasNext()) {							
