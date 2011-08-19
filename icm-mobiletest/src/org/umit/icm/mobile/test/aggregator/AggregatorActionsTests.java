@@ -36,20 +36,7 @@ import org.umit.icm.mobile.utils.AESCrypto;
 import android.test.AndroidTestCase;
 
 
-public class AggregatorActionsTests extends AndroidTestCase {
-	
-	protected void setUp() {
-		try {
-			Globals.keyManager.setMySecretKey(AESCrypto.generateKey("password".getBytes()));
-			Initialization.initializeRequestHeader();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+public class AggregatorActionsTests extends AndroidTestCase {	
 	
     public void testRegisterAgent() throws Throwable {
     	ResponseHeader responseHeader = ResponseHeader.newBuilder()
