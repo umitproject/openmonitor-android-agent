@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.p2p;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
@@ -232,11 +233,17 @@ public class P2PActions {
 	 */
 	public static void authenticatePeerAction(AuthenticatePeerResponse authenticatePeerResponse
 			, AgentData agentData) {
-		String cipheredKey = authenticatePeerResponse.getCipheredPublicKey();
+		String cipheredMod = authenticatePeerResponse.getCipheredPublicKey().getMod();
+		String cipheredExp = authenticatePeerResponse.getCipheredPublicKey().getExp();
 		try {
-			String decipheredKey = RSACrypto.decryptPublic(CryptoKeyReader.getAggregatorPublicKey(), 
-					cipheredKey);
-			PublicKey decipheredPublicKey = RSACrypto.stringToPublicKey(decipheredKey);
+			String decipheredMod = RSACrypto.decryptPublic(CryptoKeyReader.getAggregatorPublicKey(), 
+					cipheredMod);			
+			String decipheredExp = RSACrypto.decryptPublic(CryptoKeyReader.getAggregatorPublicKey(), 
+					cipheredExp);
+			
+			BigInteger mod = new BigInteger(decipheredMod);
+			BigInteger exp = new BigInteger(decipheredExp);
+			PublicKey decipheredPublicKey = RSACrypto.generatePublicKey(mod, exp);
 			if(agentData.getPublicKey().equals(decipheredPublicKey)) {
 				Globals.authenticatedPeers.addAuthenticatedPeer(agentData);
 			}

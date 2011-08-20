@@ -32,6 +32,7 @@ import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 
 import android.content.Context;
@@ -75,11 +76,16 @@ public class AggregatorAccess {
 				} else {
 					Globals.aggregatorCommunication = false;
 					Globals.p2pCommunication = true;
+					
+					RSAKey rsaKey = RSAKey.newBuilder()
+					.setExp(Globals.keyManager.getMyCipheredKeyExp())
+					.setMod(Globals.keyManager.getMyCipheredKeyMod())
+					.build();
 					AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 					.setAgentID(Globals.runtimeParameters.getAgentID())
 					.setAgentType(Constants.AGENT_TYPE_NUMBER)
-					.setAgentPort(Constants.MY_TCP_PORT)		
-					.setCipheredPublicKey(new String(Globals.keyManager.getMyCipheredKey()))
+					.setAgentPort(Constants.MY_TCP_PORT)
+					.setCipheredPublicKey(rsaKey)					
 					.build();
 					Iterator<AgentData> iterator 
 					= Globals.runtimesList.getSuperPeersList().iterator(); {

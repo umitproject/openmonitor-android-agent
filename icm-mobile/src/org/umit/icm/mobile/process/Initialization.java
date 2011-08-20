@@ -33,6 +33,7 @@ import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -223,12 +224,16 @@ public class Initialization {
 	 * Should be deprecated eventually.
 	 */
 	public static void initializerPeersList() {
+		RSAKey rsaKey = RSAKey.newBuilder()
+		.setExp("exp")
+		.setMod("mod")
+		.build();
 		AgentData agentData = AgentData.newBuilder()
 		.setAgentID(10)
 		.setAgentIP("202.206.64.11")
 		.setAgentPort(3128)
 		.setPeerStatus("On")
-		.setPublicKey("Key")
+		.setPublicKey(rsaKey)
 		.setToken("Token")
 		.build();
 		

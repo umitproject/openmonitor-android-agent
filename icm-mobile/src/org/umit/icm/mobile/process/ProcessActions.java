@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -261,14 +262,35 @@ public class ProcessActions {
 	public static void getTokenAndAsymmetricKeys (GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse) {
 		try {
 			Globals.runtimeParameters.setToken(getTokenAndAsymmetricKeysResponse.getToken());
-			Globals.keyManager.setMyCipheredKey(
-					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getBytes());
-			PrivateKey privateKey = RSACrypto.stringToPrivateKey(getTokenAndAsymmetricKeysResponse.getPrivateKey());
+			
+			Globals.keyManager.setMyCipheredKeyMod(
+					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getMod());
+			Globals.keyManager.setMyCipheredKeyExp(
+					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getExp());
+			
+			BigInteger privateKeyMod 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPrivateKey().getMod());
+			BigInteger privateKeyExp 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPrivateKey().getExp());
+			PrivateKey privateKey 
+			= RSACrypto.generatePrivateKey(privateKeyMod, privateKeyExp);
 			Globals.keyManager.setMyPrivateKey(privateKey);
-			PublicKey publicKey = RSACrypto.stringToPublicKey(getTokenAndAsymmetricKeysResponse.getPublicKey());
+			
+			BigInteger publicKeyMod 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPublicKey().getMod());
+			BigInteger publicKeyExp 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPublicKey().getExp());
+			PublicKey publicKey 
+			= RSACrypto.generatePublicKey(publicKeyMod, publicKeyExp);										
 			Globals.keyManager.setMyPublicKey(publicKey);
-			PublicKey aggregatorPublicKey = RSACrypto.stringToPublicKey(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey());
-			CryptoKeyWriter.writeAggregatorPublicKey(aggregatorPublicKey);
+			
+			BigInteger publicKeyModAggr 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey().getMod());
+			BigInteger publicKeyExpAggr 
+			= new BigInteger(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey().getExp());
+			PublicKey publicKeyAggr 
+			= RSACrypto.generatePublicKey(publicKeyModAggr, publicKeyExpAggr);													
+			CryptoKeyWriter.writeAggregatorPublicKey(publicKeyAggr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

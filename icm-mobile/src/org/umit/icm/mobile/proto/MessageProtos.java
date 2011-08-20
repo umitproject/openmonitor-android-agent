@@ -4330,6 +4330,320 @@ public final class MessageProtos {
     }
   }
   
+  public static final class RSAKey extends
+      com.google.protobuf.GeneratedMessage {
+    // Use RSAKey.newBuilder() to construct.
+    private RSAKey() {}
+    
+    private static final RSAKey defaultInstance = new RSAKey();
+    public static RSAKey getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public RSAKey getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_RSAKey_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_RSAKey_fieldAccessorTable;
+    }
+    
+    // required string mod = 1;
+    public static final int MOD_FIELD_NUMBER = 1;
+    private boolean hasMod;
+    private java.lang.String mod_ = "";
+    public boolean hasMod() { return hasMod; }
+    public java.lang.String getMod() { return mod_; }
+    
+    // required string exp = 2;
+    public static final int EXP_FIELD_NUMBER = 2;
+    private boolean hasExp;
+    private java.lang.String exp_ = "";
+    public boolean hasExp() { return hasExp; }
+    public java.lang.String getExp() { return exp_; }
+    
+    public final boolean isInitialized() {
+      if (!hasMod) return false;
+      if (!hasExp) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasMod()) {
+        output.writeString(1, getMod());
+      }
+      if (hasExp()) {
+        output.writeString(2, getExp());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasMod()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getMod());
+      }
+      if (hasExp()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getExp());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.RSAKey parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.RSAKey prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private org.umit.icm.mobile.proto.MessageProtos.RSAKey result;
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new org.umit.icm.mobile.proto.MessageProtos.RSAKey();
+        return builder;
+      }
+      
+      protected org.umit.icm.mobile.proto.MessageProtos.RSAKey internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new org.umit.icm.mobile.proto.MessageProtos.RSAKey();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.RSAKey buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        org.umit.icm.mobile.proto.MessageProtos.RSAKey returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.RSAKey) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.RSAKey)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.RSAKey other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) return this;
+        if (other.hasMod()) {
+          setMod(other.getMod());
+        }
+        if (other.hasExp()) {
+          setExp(other.getExp());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setMod(input.readString());
+              break;
+            }
+            case 18: {
+              setExp(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string mod = 1;
+      public boolean hasMod() {
+        return result.hasMod();
+      }
+      public java.lang.String getMod() {
+        return result.getMod();
+      }
+      public Builder setMod(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasMod = true;
+        result.mod_ = value;
+        return this;
+      }
+      public Builder clearMod() {
+        result.hasMod = false;
+        result.mod_ = getDefaultInstance().getMod();
+        return this;
+      }
+      
+      // required string exp = 2;
+      public boolean hasExp() {
+        return result.hasExp();
+      }
+      public java.lang.String getExp() {
+        return result.getExp();
+      }
+      public Builder setExp(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasExp = true;
+        result.exp_ = value;
+        return this;
+      }
+      public Builder clearExp() {
+        result.hasExp = false;
+        result.exp_ = getDefaultInstance().getExp();
+        return this;
+      }
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.getDescriptor();
+    }
+    
+    static {
+      org.umit.icm.mobile.proto.MessageProtos.internalForceInit();
+    }
+  }
+  
   public static final class GenerateSecretKey extends
       com.google.protobuf.GeneratedMessage {
     // Use GenerateSecretKey.newBuilder() to construct.
@@ -4361,16 +4675,17 @@ public final class MessageProtos {
     public boolean hasAgentID() { return hasAgentID; }
     public long getAgentID() { return agentID_; }
     
-    // required string publicKey = 2;
+    // required .org.umit.icm.mobile.proto.RSAKey publicKey = 2;
     public static final int PUBLICKEY_FIELD_NUMBER = 2;
     private boolean hasPublicKey;
-    private java.lang.String publicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasPublicKey() { return hasPublicKey; }
-    public java.lang.String getPublicKey() { return publicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() { return publicKey_; }
     
     public final boolean isInitialized() {
       if (!hasAgentID) return false;
       if (!hasPublicKey) return false;
+      if (!getPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -4380,7 +4695,7 @@ public final class MessageProtos {
         output.writeInt64(1, getAgentID());
       }
       if (hasPublicKey()) {
-        output.writeString(2, getPublicKey());
+        output.writeMessage(2, getPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4397,7 +4712,7 @@ public final class MessageProtos {
       }
       if (hasPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(2, getPublicKey());
+          .computeMessageSize(2, getPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4552,7 +4867,7 @@ public final class MessageProtos {
           setAgentID(other.getAgentID());
         }
         if (other.hasPublicKey()) {
-          setPublicKey(other.getPublicKey());
+          mergePublicKey(other.getPublicKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4584,7 +4899,12 @@ public final class MessageProtos {
               break;
             }
             case 18: {
-              setPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasPublicKey()) {
+                subBuilder.mergeFrom(getPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPublicKey(subBuilder.buildPartial());
               break;
             }
           }
@@ -4610,24 +4930,40 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string publicKey = 2;
+      // required .org.umit.icm.mobile.proto.RSAKey publicKey = 2;
       public boolean hasPublicKey() {
         return result.hasPublicKey();
       }
-      public java.lang.String getPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() {
         return result.getPublicKey();
       }
-      public Builder setPublicKey(java.lang.String value) {
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasPublicKey = true;
         result.publicKey_ = value;
+        return this;
+      }
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasPublicKey = true;
+        result.publicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasPublicKey() &&
+            result.publicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.publicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.publicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.publicKey_ = value;
+        }
+        result.hasPublicKey = true;
         return this;
       }
       public Builder clearPublicKey() {
         result.hasPublicKey = false;
-        result.publicKey_ = getDefaultInstance().getPublicKey();
+        result.publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
     }
@@ -4672,17 +5008,18 @@ public final class MessageProtos {
     public boolean hasHeader() { return hasHeader; }
     public org.umit.icm.mobile.proto.MessageProtos.ResponseHeader getHeader() { return header_; }
     
-    // required string publicKey = 2;
+    // required .org.umit.icm.mobile.proto.RSAKey publicKey = 2;
     public static final int PUBLICKEY_FIELD_NUMBER = 2;
     private boolean hasPublicKey;
-    private java.lang.String publicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasPublicKey() { return hasPublicKey; }
-    public java.lang.String getPublicKey() { return publicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() { return publicKey_; }
     
     public final boolean isInitialized() {
       if (!hasHeader) return false;
       if (!hasPublicKey) return false;
       if (!getHeader().isInitialized()) return false;
+      if (!getPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -4692,7 +5029,7 @@ public final class MessageProtos {
         output.writeMessage(1, getHeader());
       }
       if (hasPublicKey()) {
-        output.writeString(2, getPublicKey());
+        output.writeMessage(2, getPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4709,7 +5046,7 @@ public final class MessageProtos {
       }
       if (hasPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(2, getPublicKey());
+          .computeMessageSize(2, getPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4864,7 +5201,7 @@ public final class MessageProtos {
           mergeHeader(other.getHeader());
         }
         if (other.hasPublicKey()) {
-          setPublicKey(other.getPublicKey());
+          mergePublicKey(other.getPublicKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4901,7 +5238,12 @@ public final class MessageProtos {
               break;
             }
             case 18: {
-              setPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasPublicKey()) {
+                subBuilder.mergeFrom(getPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPublicKey(subBuilder.buildPartial());
               break;
             }
           }
@@ -4946,24 +5288,40 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string publicKey = 2;
+      // required .org.umit.icm.mobile.proto.RSAKey publicKey = 2;
       public boolean hasPublicKey() {
         return result.hasPublicKey();
       }
-      public java.lang.String getPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() {
         return result.getPublicKey();
       }
-      public Builder setPublicKey(java.lang.String value) {
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasPublicKey = true;
         result.publicKey_ = value;
+        return this;
+      }
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasPublicKey = true;
+        result.publicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasPublicKey() &&
+            result.publicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.publicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.publicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.publicKey_ = value;
+        }
+        result.hasPublicKey = true;
         return this;
       }
       public Builder clearPublicKey() {
         result.hasPublicKey = false;
-        result.publicKey_ = getDefaultInstance().getPublicKey();
+        result.publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
     }
@@ -5283,33 +5641,33 @@ public final class MessageProtos {
     public boolean hasToken() { return hasToken; }
     public java.lang.String getToken() { return token_; }
     
-    // required string privateKey = 3;
+    // required .org.umit.icm.mobile.proto.RSAKey privateKey = 3;
     public static final int PRIVATEKEY_FIELD_NUMBER = 3;
     private boolean hasPrivateKey;
-    private java.lang.String privateKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey privateKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasPrivateKey() { return hasPrivateKey; }
-    public java.lang.String getPrivateKey() { return privateKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPrivateKey() { return privateKey_; }
     
-    // required string publicKey = 4;
+    // required .org.umit.icm.mobile.proto.RSAKey publicKey = 4;
     public static final int PUBLICKEY_FIELD_NUMBER = 4;
     private boolean hasPublicKey;
-    private java.lang.String publicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasPublicKey() { return hasPublicKey; }
-    public java.lang.String getPublicKey() { return publicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() { return publicKey_; }
     
-    // required string cipheredPublicKey = 5;
+    // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 5;
     public static final int CIPHEREDPUBLICKEY_FIELD_NUMBER = 5;
     private boolean hasCipheredPublicKey;
-    private java.lang.String cipheredPublicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasCipheredPublicKey() { return hasCipheredPublicKey; }
-    public java.lang.String getCipheredPublicKey() { return cipheredPublicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() { return cipheredPublicKey_; }
     
-    // required string aggregatorPublicKey = 6;
+    // required .org.umit.icm.mobile.proto.RSAKey aggregatorPublicKey = 6;
     public static final int AGGREGATORPUBLICKEY_FIELD_NUMBER = 6;
     private boolean hasAggregatorPublicKey;
-    private java.lang.String aggregatorPublicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey aggregatorPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasAggregatorPublicKey() { return hasAggregatorPublicKey; }
-    public java.lang.String getAggregatorPublicKey() { return aggregatorPublicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getAggregatorPublicKey() { return aggregatorPublicKey_; }
     
     public final boolean isInitialized() {
       if (!hasHeader) return false;
@@ -5319,6 +5677,10 @@ public final class MessageProtos {
       if (!hasCipheredPublicKey) return false;
       if (!hasAggregatorPublicKey) return false;
       if (!getHeader().isInitialized()) return false;
+      if (!getPrivateKey().isInitialized()) return false;
+      if (!getPublicKey().isInitialized()) return false;
+      if (!getCipheredPublicKey().isInitialized()) return false;
+      if (!getAggregatorPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -5331,16 +5693,16 @@ public final class MessageProtos {
         output.writeString(2, getToken());
       }
       if (hasPrivateKey()) {
-        output.writeString(3, getPrivateKey());
+        output.writeMessage(3, getPrivateKey());
       }
       if (hasPublicKey()) {
-        output.writeString(4, getPublicKey());
+        output.writeMessage(4, getPublicKey());
       }
       if (hasCipheredPublicKey()) {
-        output.writeString(5, getCipheredPublicKey());
+        output.writeMessage(5, getCipheredPublicKey());
       }
       if (hasAggregatorPublicKey()) {
-        output.writeString(6, getAggregatorPublicKey());
+        output.writeMessage(6, getAggregatorPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -5361,19 +5723,19 @@ public final class MessageProtos {
       }
       if (hasPrivateKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getPrivateKey());
+          .computeMessageSize(3, getPrivateKey());
       }
       if (hasPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(4, getPublicKey());
+          .computeMessageSize(4, getPublicKey());
       }
       if (hasCipheredPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(5, getCipheredPublicKey());
+          .computeMessageSize(5, getCipheredPublicKey());
       }
       if (hasAggregatorPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(6, getAggregatorPublicKey());
+          .computeMessageSize(6, getAggregatorPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5531,16 +5893,16 @@ public final class MessageProtos {
           setToken(other.getToken());
         }
         if (other.hasPrivateKey()) {
-          setPrivateKey(other.getPrivateKey());
+          mergePrivateKey(other.getPrivateKey());
         }
         if (other.hasPublicKey()) {
-          setPublicKey(other.getPublicKey());
+          mergePublicKey(other.getPublicKey());
         }
         if (other.hasCipheredPublicKey()) {
-          setCipheredPublicKey(other.getCipheredPublicKey());
+          mergeCipheredPublicKey(other.getCipheredPublicKey());
         }
         if (other.hasAggregatorPublicKey()) {
-          setAggregatorPublicKey(other.getAggregatorPublicKey());
+          mergeAggregatorPublicKey(other.getAggregatorPublicKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5581,19 +5943,39 @@ public final class MessageProtos {
               break;
             }
             case 26: {
-              setPrivateKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasPrivateKey()) {
+                subBuilder.mergeFrom(getPrivateKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPrivateKey(subBuilder.buildPartial());
               break;
             }
             case 34: {
-              setPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasPublicKey()) {
+                subBuilder.mergeFrom(getPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPublicKey(subBuilder.buildPartial());
               break;
             }
             case 42: {
-              setCipheredPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasCipheredPublicKey()) {
+                subBuilder.mergeFrom(getCipheredPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCipheredPublicKey(subBuilder.buildPartial());
               break;
             }
             case 50: {
-              setAggregatorPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasAggregatorPublicKey()) {
+                subBuilder.mergeFrom(getAggregatorPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setAggregatorPublicKey(subBuilder.buildPartial());
               break;
             }
           }
@@ -5659,87 +6041,151 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string privateKey = 3;
+      // required .org.umit.icm.mobile.proto.RSAKey privateKey = 3;
       public boolean hasPrivateKey() {
         return result.hasPrivateKey();
       }
-      public java.lang.String getPrivateKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPrivateKey() {
         return result.getPrivateKey();
       }
-      public Builder setPrivateKey(java.lang.String value) {
+      public Builder setPrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPrivateKey = true;
+          throw new NullPointerException();
+        }
+        result.hasPrivateKey = true;
         result.privateKey_ = value;
+        return this;
+      }
+      public Builder setPrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasPrivateKey = true;
+        result.privateKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasPrivateKey() &&
+            result.privateKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.privateKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.privateKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.privateKey_ = value;
+        }
+        result.hasPrivateKey = true;
         return this;
       }
       public Builder clearPrivateKey() {
         result.hasPrivateKey = false;
-        result.privateKey_ = getDefaultInstance().getPrivateKey();
+        result.privateKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
-      // required string publicKey = 4;
+      // required .org.umit.icm.mobile.proto.RSAKey publicKey = 4;
       public boolean hasPublicKey() {
         return result.hasPublicKey();
       }
-      public java.lang.String getPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() {
         return result.getPublicKey();
       }
-      public Builder setPublicKey(java.lang.String value) {
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasPublicKey = true;
         result.publicKey_ = value;
+        return this;
+      }
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasPublicKey = true;
+        result.publicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasPublicKey() &&
+            result.publicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.publicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.publicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.publicKey_ = value;
+        }
+        result.hasPublicKey = true;
         return this;
       }
       public Builder clearPublicKey() {
         result.hasPublicKey = false;
-        result.publicKey_ = getDefaultInstance().getPublicKey();
+        result.publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
-      // required string cipheredPublicKey = 5;
+      // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 5;
       public boolean hasCipheredPublicKey() {
         return result.hasCipheredPublicKey();
       }
-      public java.lang.String getCipheredPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() {
         return result.getCipheredPublicKey();
       }
-      public Builder setCipheredPublicKey(java.lang.String value) {
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasCipheredPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasCipheredPublicKey = true;
         result.cipheredPublicKey_ = value;
+        return this;
+      }
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasCipheredPublicKey = true;
+        result.cipheredPublicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasCipheredPublicKey() &&
+            result.cipheredPublicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.cipheredPublicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.cipheredPublicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.cipheredPublicKey_ = value;
+        }
+        result.hasCipheredPublicKey = true;
         return this;
       }
       public Builder clearCipheredPublicKey() {
         result.hasCipheredPublicKey = false;
-        result.cipheredPublicKey_ = getDefaultInstance().getCipheredPublicKey();
+        result.cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
-      // required string aggregatorPublicKey = 6;
+      // required .org.umit.icm.mobile.proto.RSAKey aggregatorPublicKey = 6;
       public boolean hasAggregatorPublicKey() {
         return result.hasAggregatorPublicKey();
       }
-      public java.lang.String getAggregatorPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getAggregatorPublicKey() {
         return result.getAggregatorPublicKey();
       }
-      public Builder setAggregatorPublicKey(java.lang.String value) {
+      public Builder setAggregatorPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasAggregatorPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasAggregatorPublicKey = true;
         result.aggregatorPublicKey_ = value;
+        return this;
+      }
+      public Builder setAggregatorPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasAggregatorPublicKey = true;
+        result.aggregatorPublicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeAggregatorPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasAggregatorPublicKey() &&
+            result.aggregatorPublicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.aggregatorPublicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.aggregatorPublicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.aggregatorPublicKey_ = value;
+        }
+        result.hasAggregatorPublicKey = true;
         return this;
       }
       public Builder clearAggregatorPublicKey() {
         result.hasAggregatorPublicKey = false;
-        result.aggregatorPublicKey_ = getDefaultInstance().getAggregatorPublicKey();
+        result.aggregatorPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
     }
@@ -7687,12 +8133,12 @@ public final class MessageProtos {
     public boolean hasToken() { return hasToken; }
     public java.lang.String getToken() { return token_; }
     
-    // required string publicKey = 5;
+    // required .org.umit.icm.mobile.proto.RSAKey publicKey = 5;
     public static final int PUBLICKEY_FIELD_NUMBER = 5;
     private boolean hasPublicKey;
-    private java.lang.String publicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasPublicKey() { return hasPublicKey; }
-    public java.lang.String getPublicKey() { return publicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() { return publicKey_; }
     
     // required string peerStatus = 6;
     public static final int PEERSTATUS_FIELD_NUMBER = 6;
@@ -7708,6 +8154,7 @@ public final class MessageProtos {
       if (!hasToken) return false;
       if (!hasPublicKey) return false;
       if (!hasPeerStatus) return false;
+      if (!getPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -7726,7 +8173,7 @@ public final class MessageProtos {
         output.writeString(4, getToken());
       }
       if (hasPublicKey()) {
-        output.writeString(5, getPublicKey());
+        output.writeMessage(5, getPublicKey());
       }
       if (hasPeerStatus()) {
         output.writeString(6, getPeerStatus());
@@ -7758,7 +8205,7 @@ public final class MessageProtos {
       }
       if (hasPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(5, getPublicKey());
+          .computeMessageSize(5, getPublicKey());
       }
       if (hasPeerStatus()) {
         size += com.google.protobuf.CodedOutputStream
@@ -7926,7 +8373,7 @@ public final class MessageProtos {
           setToken(other.getToken());
         }
         if (other.hasPublicKey()) {
-          setPublicKey(other.getPublicKey());
+          mergePublicKey(other.getPublicKey());
         }
         if (other.hasPeerStatus()) {
           setPeerStatus(other.getPeerStatus());
@@ -7973,7 +8420,12 @@ public final class MessageProtos {
               break;
             }
             case 42: {
-              setPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasPublicKey()) {
+                subBuilder.mergeFrom(getPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPublicKey(subBuilder.buildPartial());
               break;
             }
             case 50: {
@@ -8063,24 +8515,40 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string publicKey = 5;
+      // required .org.umit.icm.mobile.proto.RSAKey publicKey = 5;
       public boolean hasPublicKey() {
         return result.hasPublicKey();
       }
-      public java.lang.String getPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getPublicKey() {
         return result.getPublicKey();
       }
-      public Builder setPublicKey(java.lang.String value) {
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasPublicKey = true;
         result.publicKey_ = value;
+        return this;
+      }
+      public Builder setPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasPublicKey = true;
+        result.publicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasPublicKey() &&
+            result.publicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.publicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.publicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.publicKey_ = value;
+        }
+        result.hasPublicKey = true;
         return this;
       }
       public Builder clearPublicKey() {
         result.hasPublicKey = false;
-        result.publicKey_ = getDefaultInstance().getPublicKey();
+        result.publicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
@@ -15634,19 +16102,19 @@ public final class MessageProtos {
     public boolean hasNewToken() { return hasNewToken; }
     public java.lang.String getNewToken() { return newToken_; }
     
-    // required string newPrivateKey = 3;
+    // required .org.umit.icm.mobile.proto.RSAKey newPrivateKey = 3;
     public static final int NEWPRIVATEKEY_FIELD_NUMBER = 3;
     private boolean hasNewPrivateKey;
-    private java.lang.String newPrivateKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey newPrivateKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasNewPrivateKey() { return hasNewPrivateKey; }
-    public java.lang.String getNewPrivateKey() { return newPrivateKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getNewPrivateKey() { return newPrivateKey_; }
     
-    // required string newPublicKey = 4;
+    // required .org.umit.icm.mobile.proto.RSAKey newPublicKey = 4;
     public static final int NEWPUBLICKEY_FIELD_NUMBER = 4;
     private boolean hasNewPublicKey;
-    private java.lang.String newPublicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey newPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasNewPublicKey() { return hasNewPublicKey; }
-    public java.lang.String getNewPublicKey() { return newPublicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getNewPublicKey() { return newPublicKey_; }
     
     public final boolean isInitialized() {
       if (!hasHeader) return false;
@@ -15654,6 +16122,8 @@ public final class MessageProtos {
       if (!hasNewPrivateKey) return false;
       if (!hasNewPublicKey) return false;
       if (!getHeader().isInitialized()) return false;
+      if (!getNewPrivateKey().isInitialized()) return false;
+      if (!getNewPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -15666,10 +16136,10 @@ public final class MessageProtos {
         output.writeString(2, getNewToken());
       }
       if (hasNewPrivateKey()) {
-        output.writeString(3, getNewPrivateKey());
+        output.writeMessage(3, getNewPrivateKey());
       }
       if (hasNewPublicKey()) {
-        output.writeString(4, getNewPublicKey());
+        output.writeMessage(4, getNewPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -15690,11 +16160,11 @@ public final class MessageProtos {
       }
       if (hasNewPrivateKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getNewPrivateKey());
+          .computeMessageSize(3, getNewPrivateKey());
       }
       if (hasNewPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(4, getNewPublicKey());
+          .computeMessageSize(4, getNewPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15852,10 +16322,10 @@ public final class MessageProtos {
           setNewToken(other.getNewToken());
         }
         if (other.hasNewPrivateKey()) {
-          setNewPrivateKey(other.getNewPrivateKey());
+          mergeNewPrivateKey(other.getNewPrivateKey());
         }
         if (other.hasNewPublicKey()) {
-          setNewPublicKey(other.getNewPublicKey());
+          mergeNewPublicKey(other.getNewPublicKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15896,11 +16366,21 @@ public final class MessageProtos {
               break;
             }
             case 26: {
-              setNewPrivateKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasNewPrivateKey()) {
+                subBuilder.mergeFrom(getNewPrivateKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setNewPrivateKey(subBuilder.buildPartial());
               break;
             }
             case 34: {
-              setNewPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasNewPublicKey()) {
+                subBuilder.mergeFrom(getNewPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setNewPublicKey(subBuilder.buildPartial());
               break;
             }
           }
@@ -15966,45 +16446,77 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string newPrivateKey = 3;
+      // required .org.umit.icm.mobile.proto.RSAKey newPrivateKey = 3;
       public boolean hasNewPrivateKey() {
         return result.hasNewPrivateKey();
       }
-      public java.lang.String getNewPrivateKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getNewPrivateKey() {
         return result.getNewPrivateKey();
       }
-      public Builder setNewPrivateKey(java.lang.String value) {
+      public Builder setNewPrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasNewPrivateKey = true;
+          throw new NullPointerException();
+        }
+        result.hasNewPrivateKey = true;
         result.newPrivateKey_ = value;
+        return this;
+      }
+      public Builder setNewPrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasNewPrivateKey = true;
+        result.newPrivateKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeNewPrivateKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasNewPrivateKey() &&
+            result.newPrivateKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.newPrivateKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.newPrivateKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.newPrivateKey_ = value;
+        }
+        result.hasNewPrivateKey = true;
         return this;
       }
       public Builder clearNewPrivateKey() {
         result.hasNewPrivateKey = false;
-        result.newPrivateKey_ = getDefaultInstance().getNewPrivateKey();
+        result.newPrivateKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
-      // required string newPublicKey = 4;
+      // required .org.umit.icm.mobile.proto.RSAKey newPublicKey = 4;
       public boolean hasNewPublicKey() {
         return result.hasNewPublicKey();
       }
-      public java.lang.String getNewPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getNewPublicKey() {
         return result.getNewPublicKey();
       }
-      public Builder setNewPublicKey(java.lang.String value) {
+      public Builder setNewPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasNewPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasNewPublicKey = true;
         result.newPublicKey_ = value;
+        return this;
+      }
+      public Builder setNewPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasNewPublicKey = true;
+        result.newPublicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeNewPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasNewPublicKey() &&
+            result.newPublicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.newPublicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.newPublicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.newPublicKey_ = value;
+        }
+        result.hasNewPublicKey = true;
         return this;
       }
       public Builder clearNewPublicKey() {
         result.hasNewPublicKey = false;
-        result.newPublicKey_ = getDefaultInstance().getNewPublicKey();
+        result.newPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
     }
@@ -17191,12 +17703,12 @@ public final class MessageProtos {
     public boolean hasAgentID() { return hasAgentID; }
     public long getAgentID() { return agentID_; }
     
-    // required string cipheredPublicKey = 3;
+    // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 3;
     public static final int CIPHEREDPUBLICKEY_FIELD_NUMBER = 3;
     private boolean hasCipheredPublicKey;
-    private java.lang.String cipheredPublicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasCipheredPublicKey() { return hasCipheredPublicKey; }
-    public java.lang.String getCipheredPublicKey() { return cipheredPublicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() { return cipheredPublicKey_; }
     
     // optional int32 agentPort = 4;
     public static final int AGENTPORT_FIELD_NUMBER = 4;
@@ -17209,6 +17721,7 @@ public final class MessageProtos {
       if (!hasAgentType) return false;
       if (!hasAgentID) return false;
       if (!hasCipheredPublicKey) return false;
+      if (!getCipheredPublicKey().isInitialized()) return false;
       return true;
     }
     
@@ -17221,7 +17734,7 @@ public final class MessageProtos {
         output.writeInt64(2, getAgentID());
       }
       if (hasCipheredPublicKey()) {
-        output.writeString(3, getCipheredPublicKey());
+        output.writeMessage(3, getCipheredPublicKey());
       }
       if (hasAgentPort()) {
         output.writeInt32(4, getAgentPort());
@@ -17245,7 +17758,7 @@ public final class MessageProtos {
       }
       if (hasCipheredPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getCipheredPublicKey());
+          .computeMessageSize(3, getCipheredPublicKey());
       }
       if (hasAgentPort()) {
         size += com.google.protobuf.CodedOutputStream
@@ -17407,7 +17920,7 @@ public final class MessageProtos {
           setAgentID(other.getAgentID());
         }
         if (other.hasCipheredPublicKey()) {
-          setCipheredPublicKey(other.getCipheredPublicKey());
+          mergeCipheredPublicKey(other.getCipheredPublicKey());
         }
         if (other.hasAgentPort()) {
           setAgentPort(other.getAgentPort());
@@ -17446,7 +17959,12 @@ public final class MessageProtos {
               break;
             }
             case 26: {
-              setCipheredPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasCipheredPublicKey()) {
+                subBuilder.mergeFrom(getCipheredPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCipheredPublicKey(subBuilder.buildPartial());
               break;
             }
             case 32: {
@@ -17494,24 +18012,40 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string cipheredPublicKey = 3;
+      // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 3;
       public boolean hasCipheredPublicKey() {
         return result.hasCipheredPublicKey();
       }
-      public java.lang.String getCipheredPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() {
         return result.getCipheredPublicKey();
       }
-      public Builder setCipheredPublicKey(java.lang.String value) {
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasCipheredPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasCipheredPublicKey = true;
         result.cipheredPublicKey_ = value;
+        return this;
+      }
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasCipheredPublicKey = true;
+        result.cipheredPublicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasCipheredPublicKey() &&
+            result.cipheredPublicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.cipheredPublicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.cipheredPublicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.cipheredPublicKey_ = value;
+        }
+        result.hasCipheredPublicKey = true;
         return this;
       }
       public Builder clearCipheredPublicKey() {
         result.hasCipheredPublicKey = false;
-        result.cipheredPublicKey_ = getDefaultInstance().getCipheredPublicKey();
+        result.cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
       
@@ -17567,22 +18101,23 @@ public final class MessageProtos {
       return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable;
     }
     
-    // required string cipheredPublicKey = 1;
+    // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 1;
     public static final int CIPHEREDPUBLICKEY_FIELD_NUMBER = 1;
     private boolean hasCipheredPublicKey;
-    private java.lang.String cipheredPublicKey_ = "";
+    private org.umit.icm.mobile.proto.MessageProtos.RSAKey cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
     public boolean hasCipheredPublicKey() { return hasCipheredPublicKey; }
-    public java.lang.String getCipheredPublicKey() { return cipheredPublicKey_; }
+    public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() { return cipheredPublicKey_; }
     
     public final boolean isInitialized() {
       if (!hasCipheredPublicKey) return false;
+      if (!getCipheredPublicKey().isInitialized()) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (hasCipheredPublicKey()) {
-        output.writeString(1, getCipheredPublicKey());
+        output.writeMessage(1, getCipheredPublicKey());
       }
       getUnknownFields().writeTo(output);
     }
@@ -17595,7 +18130,7 @@ public final class MessageProtos {
       size = 0;
       if (hasCipheredPublicKey()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(1, getCipheredPublicKey());
+          .computeMessageSize(1, getCipheredPublicKey());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -17747,7 +18282,7 @@ public final class MessageProtos {
       public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse other) {
         if (other == org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.getDefaultInstance()) return this;
         if (other.hasCipheredPublicKey()) {
-          setCipheredPublicKey(other.getCipheredPublicKey());
+          mergeCipheredPublicKey(other.getCipheredPublicKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -17775,7 +18310,12 @@ public final class MessageProtos {
               break;
             }
             case 10: {
-              setCipheredPublicKey(input.readString());
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder subBuilder = org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder();
+              if (hasCipheredPublicKey()) {
+                subBuilder.mergeFrom(getCipheredPublicKey());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCipheredPublicKey(subBuilder.buildPartial());
               break;
             }
           }
@@ -17783,24 +18323,40 @@ public final class MessageProtos {
       }
       
       
-      // required string cipheredPublicKey = 1;
+      // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 1;
       public boolean hasCipheredPublicKey() {
         return result.hasCipheredPublicKey();
       }
-      public java.lang.String getCipheredPublicKey() {
+      public org.umit.icm.mobile.proto.MessageProtos.RSAKey getCipheredPublicKey() {
         return result.getCipheredPublicKey();
       }
-      public Builder setCipheredPublicKey(java.lang.String value) {
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasCipheredPublicKey = true;
+          throw new NullPointerException();
+        }
+        result.hasCipheredPublicKey = true;
         result.cipheredPublicKey_ = value;
+        return this;
+      }
+      public Builder setCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder builderForValue) {
+        result.hasCipheredPublicKey = true;
+        result.cipheredPublicKey_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeCipheredPublicKey(org.umit.icm.mobile.proto.MessageProtos.RSAKey value) {
+        if (result.hasCipheredPublicKey() &&
+            result.cipheredPublicKey_ != org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance()) {
+          result.cipheredPublicKey_ =
+            org.umit.icm.mobile.proto.MessageProtos.RSAKey.newBuilder(result.cipheredPublicKey_).mergeFrom(value).buildPartial();
+        } else {
+          result.cipheredPublicKey_ = value;
+        }
+        result.hasCipheredPublicKey = true;
         return this;
       }
       public Builder clearCipheredPublicKey() {
         result.hasCipheredPublicKey = false;
-        result.cipheredPublicKey_ = getDefaultInstance().getCipheredPublicKey();
+        result.cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
         return this;
       }
     }
@@ -21042,6 +21598,11 @@ public final class MessageProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_RegisterAgentResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_RSAKey_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_RSAKey_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_umit_icm_mobile_proto_GenerateSecretKey_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -21316,127 +21877,138 @@ public final class MessageProtos {
       "ersionNo\030\001 \002(\005\022\021\n\tagentType\030\002 \002(\t\022\n\n\002ip\030" +
       "\003 \001(\t\"c\n\025RegisterAgentResponse\0229\n\006header",
       "\030\001 \002(\0132).org.umit.icm.mobile.proto.Respo" +
-      "nseHeader\022\017\n\007agentID\030\002 \002(\003\"7\n\021GenerateSe" +
-      "cretKey\022\017\n\007agentID\030\001 \002(\003\022\021\n\tpublicKey\030\002 " +
-      "\002(\t\"i\n\031GenerateSecretKeyResponse\0229\n\006head" +
-      "er\030\001 \002(\0132).org.umit.icm.mobile.proto.Res" +
-      "ponseHeader\022\021\n\tpublicKey\030\002 \002(\t\",\n\031GetTok" +
-      "enAndAsymmetricKeys\022\017\n\007agentID\030\001 \002(\003\"\314\001\n" +
-      "!GetTokenAndAsymmetricKeysResponse\0229\n\006he" +
-      "ader\030\001 \002(\0132).org.umit.icm.mobile.proto.R" +
-      "esponseHeader\022\r\n\005token\030\002 \002(\t\022\022\n\nprivateK",
-      "ey\030\003 \002(\t\022\021\n\tpublicKey\030\004 \002(\t\022\031\n\021cipheredP" +
-      "ublicKey\030\005 \002(\t\022\033\n\023aggregatorPublicKey\030\006 " +
-      "\002(\t\"K\n\017CheckAggregator\0228\n\006header\030\001 \002(\0132(" +
-      ".org.umit.icm.mobile.proto.RequestHeader" +
-      "\"d\n\027CheckAggregatorResponse\0229\n\006header\030\001 " +
-      "\002(\0132).org.umit.icm.mobile.proto.Response" +
-      "Header\022\016\n\006status\030\002 \002(\t\"M\n\005Login\0228\n\006heade" +
-      "r\030\001 \002(\0132(.org.umit.icm.mobile.proto.Requ" +
-      "estHeader\022\n\n\002ip\030\002 \001(\t\"B\n\006Logout\0228\n\006heade" +
-      "r\030\001 \002(\0132(.org.umit.icm.mobile.proto.Requ",
-      "estHeader\"J\n\rLoginResponse\0229\n\006header\030\001 \002" +
-      "(\0132).org.umit.icm.mobile.proto.ResponseH" +
-      "eader\"V\n\013GetPeerList\0228\n\006header\030\001 \002(\0132(.o" +
-      "rg.umit.icm.mobile.proto.RequestHeader\022\r" +
-      "\n\005count\030\002 \001(\005\"v\n\tAgentData\022\017\n\007agentID\030\001 " +
-      "\002(\003\022\017\n\007agentIP\030\002 \002(\t\022\021\n\tagentPort\030\003 \002(\005\022" +
-      "\r\n\005token\030\004 \002(\t\022\021\n\tpublicKey\030\005 \002(\t\022\022\n\npee" +
-      "rStatus\030\006 \002(\t\"\212\001\n\023GetPeerListResponse\0229\n" +
-      "\006header\030\001 \002(\0132).org.umit.icm.mobile.prot" +
-      "o.ResponseHeader\0228\n\nknownPeers\030\002 \003(\0132$.o",
-      "rg.umit.icm.mobile.proto.AgentData\"[\n\020Ge" +
-      "tSuperPeerList\0228\n\006header\030\001 \002(\0132(.org.umi" +
-      "t.icm.mobile.proto.RequestHeader\022\r\n\005coun" +
-      "t\030\002 \001(\005\"\224\001\n\030GetSuperPeerListResponse\0229\n\006" +
-      "header\030\001 \002(\0132).org.umit.icm.mobile.proto" +
-      ".ResponseHeader\022=\n\017knownSuperPeers\030\002 \003(\013" +
-      "2$.org.umit.icm.mobile.proto.AgentData\"/" +
-      "\n\010Location\022\021\n\tlongitude\030\001 \002(\001\022\020\n\010latitud" +
-      "e\030\002 \002(\001\"\271\001\n\tGetEvents\0228\n\006header\030\001 \002(\0132(." +
-      "org.umit.icm.mobile.proto.RequestHeader\022",
-      "6\n\tlocations\030\002 \003(\0132#.org.umit.icm.mobile" +
-      ".proto.Location\022:\n\ragentLocation\030\003 \001(\0132#" +
-      ".org.umit.icm.mobile.proto.Location\"\231\002\n\005" +
-      "Event\022\020\n\010testType\030\001 \002(\t\022\021\n\teventType\030\002 \002" +
-      "(\t\022\017\n\007timeUTC\030\003 \002(\003\022\024\n\014sinceTimeUTC\030\004 \002(" +
-      "\003\0226\n\tlocations\030\005 \003(\0132#.org.umit.icm.mobi" +
-      "le.proto.Location\022E\n\rwebsiteReport\030\006 \001(\013" +
-      "2..org.umit.icm.mobile.proto.WebsiteRepo" +
-      "rtDetail\022E\n\rserviceReport\030\007 \001(\0132..org.um" +
-      "it.icm.mobile.proto.ServiceReportDetail\"",
-      "\200\001\n\021GetEventsResponse\0229\n\006header\030\001 \002(\0132)." +
+      "nseHeader\022\017\n\007agentID\030\002 \002(\003\"\"\n\006RSAKey\022\013\n\003" +
+      "mod\030\001 \002(\t\022\013\n\003exp\030\002 \002(\t\"Z\n\021GenerateSecret" +
+      "Key\022\017\n\007agentID\030\001 \002(\003\0224\n\tpublicKey\030\002 \002(\0132" +
+      "!.org.umit.icm.mobile.proto.RSAKey\"\214\001\n\031G" +
+      "enerateSecretKeyResponse\0229\n\006header\030\001 \002(\013" +
+      "2).org.umit.icm.mobile.proto.ResponseHea" +
+      "der\0224\n\tpublicKey\030\002 \002(\0132!.org.umit.icm.mo" +
+      "bile.proto.RSAKey\",\n\031GetTokenAndAsymmetr" +
+      "icKeys\022\017\n\007agentID\030\001 \002(\003\"\330\002\n!GetTokenAndA",
+      "symmetricKeysResponse\0229\n\006header\030\001 \002(\0132)." +
       "org.umit.icm.mobile.proto.ResponseHeader" +
-      "\0220\n\006events\030\002 \003(\0132 .org.umit.icm.mobile.p" +
-      "roto.Event\"\207\001\n\021SendWebsiteReport\0228\n\006head" +
-      "er\030\001 \002(\0132(.org.umit.icm.mobile.proto.Req" +
-      "uestHeader\0228\n\006report\030\002 \002(\0132(.org.umit.ic" +
-      "m.mobile.proto.WebsiteReport\"\207\001\n\021SendSer" +
-      "viceReport\0228\n\006header\030\001 \002(\0132(.org.umit.ic" +
-      "m.mobile.proto.RequestHeader\0228\n\006report\030\002" +
-      " \002(\0132(.org.umit.icm.mobile.proto.Service",
-      "Report\"O\n\022SendReportResponse\0229\n\006header\030\001" +
-      " \002(\0132).org.umit.icm.mobile.proto.Respons" +
-      "eHeader\"q\n\nNewVersion\0228\n\006header\030\001 \002(\0132(." +
-      "org.umit.icm.mobile.proto.RequestHeader\022" +
-      "\026\n\016agentVersionNo\030\002 \002(\005\022\021\n\tagentType\030\003 \002" +
-      "(\t\"\207\001\n\022NewVersionResponse\0229\n\006header\030\001 \002(" +
-      "\0132).org.umit.icm.mobile.proto.ResponseHe" +
-      "ader\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update\030\003 \001(" +
-      "\014\022\021\n\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n\006head" +
-      "er\030\001 \002(\0132(.org.umit.icm.mobile.proto.Req",
-      "uestHeader\022\034\n\024currentTestVersionNo\030\002 \002(\005" +
-      "\"\026\n\007Website\022\013\n\003url\030\001 \002(\t\"1\n\007Service\022\014\n\004n" +
-      "ame\030\001 \002(\t\022\014\n\004port\030\002 \002(\005\022\n\n\002ip\030\003 \002(\t\"\254\001\n\004" +
-      "Test\022\016\n\006testID\030\001 \002(\003\0223\n\007website\030\002 \001(\0132\"." +
-      "org.umit.icm.mobile.proto.Website\0223\n\007ser" +
-      "vice\030\003 \001(\0132\".org.umit.icm.mobile.proto.S" +
-      "ervice\022\030\n\020executeAtTimeUTC\030\004 \001(\003\022\020\n\010test" +
-      "Type\030\005 \002(\t\"\224\001\n\020NewTestsResponse\0229\n\006heade" +
+      "\022\r\n\005token\030\002 \002(\t\0225\n\nprivateKey\030\003 \002(\0132!.or" +
+      "g.umit.icm.mobile.proto.RSAKey\0224\n\tpublic" +
+      "Key\030\004 \002(\0132!.org.umit.icm.mobile.proto.RS" +
+      "AKey\022<\n\021cipheredPublicKey\030\005 \002(\0132!.org.um" +
+      "it.icm.mobile.proto.RSAKey\022>\n\023aggregator" +
+      "PublicKey\030\006 \002(\0132!.org.umit.icm.mobile.pr" +
+      "oto.RSAKey\"K\n\017CheckAggregator\0228\n\006header\030" +
+      "\001 \002(\0132(.org.umit.icm.mobile.proto.Reques",
+      "tHeader\"d\n\027CheckAggregatorResponse\0229\n\006he" +
+      "ader\030\001 \002(\0132).org.umit.icm.mobile.proto.R" +
+      "esponseHeader\022\016\n\006status\030\002 \002(\t\"M\n\005Login\0228" +
+      "\n\006header\030\001 \002(\0132(.org.umit.icm.mobile.pro" +
+      "to.RequestHeader\022\n\n\002ip\030\002 \001(\t\"B\n\006Logout\0228" +
+      "\n\006header\030\001 \002(\0132(.org.umit.icm.mobile.pro" +
+      "to.RequestHeader\"J\n\rLoginResponse\0229\n\006hea" +
+      "der\030\001 \002(\0132).org.umit.icm.mobile.proto.Re" +
+      "sponseHeader\"V\n\013GetPeerList\0228\n\006header\030\001 " +
+      "\002(\0132(.org.umit.icm.mobile.proto.RequestH",
+      "eader\022\r\n\005count\030\002 \001(\005\"\231\001\n\tAgentData\022\017\n\007ag" +
+      "entID\030\001 \002(\003\022\017\n\007agentIP\030\002 \002(\t\022\021\n\tagentPor" +
+      "t\030\003 \002(\005\022\r\n\005token\030\004 \002(\t\0224\n\tpublicKey\030\005 \002(" +
+      "\0132!.org.umit.icm.mobile.proto.RSAKey\022\022\n\n" +
+      "peerStatus\030\006 \002(\t\"\212\001\n\023GetPeerListResponse" +
+      "\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobile.p" +
+      "roto.ResponseHeader\0228\n\nknownPeers\030\002 \003(\0132" +
+      "$.org.umit.icm.mobile.proto.AgentData\"[\n" +
+      "\020GetSuperPeerList\0228\n\006header\030\001 \002(\0132(.org." +
+      "umit.icm.mobile.proto.RequestHeader\022\r\n\005c",
+      "ount\030\002 \001(\005\"\224\001\n\030GetSuperPeerListResponse\022" +
+      "9\n\006header\030\001 \002(\0132).org.umit.icm.mobile.pr" +
+      "oto.ResponseHeader\022=\n\017knownSuperPeers\030\002 " +
+      "\003(\0132$.org.umit.icm.mobile.proto.AgentDat" +
+      "a\"/\n\010Location\022\021\n\tlongitude\030\001 \002(\001\022\020\n\010lati" +
+      "tude\030\002 \002(\001\"\271\001\n\tGetEvents\0228\n\006header\030\001 \002(\013" +
+      "2(.org.umit.icm.mobile.proto.RequestHead" +
+      "er\0226\n\tlocations\030\002 \003(\0132#.org.umit.icm.mob" +
+      "ile.proto.Location\022:\n\ragentLocation\030\003 \001(" +
+      "\0132#.org.umit.icm.mobile.proto.Location\"\231",
+      "\002\n\005Event\022\020\n\010testType\030\001 \002(\t\022\021\n\teventType\030" +
+      "\002 \002(\t\022\017\n\007timeUTC\030\003 \002(\003\022\024\n\014sinceTimeUTC\030\004" +
+      " \002(\003\0226\n\tlocations\030\005 \003(\0132#.org.umit.icm.m" +
+      "obile.proto.Location\022E\n\rwebsiteReport\030\006 " +
+      "\001(\0132..org.umit.icm.mobile.proto.WebsiteR" +
+      "eportDetail\022E\n\rserviceReport\030\007 \001(\0132..org" +
+      ".umit.icm.mobile.proto.ServiceReportDeta" +
+      "il\"\200\001\n\021GetEventsResponse\0229\n\006header\030\001 \002(\013" +
+      "2).org.umit.icm.mobile.proto.ResponseHea" +
+      "der\0220\n\006events\030\002 \003(\0132 .org.umit.icm.mobil",
+      "e.proto.Event\"\207\001\n\021SendWebsiteReport\0228\n\006h" +
+      "eader\030\001 \002(\0132(.org.umit.icm.mobile.proto." +
+      "RequestHeader\0228\n\006report\030\002 \002(\0132(.org.umit" +
+      ".icm.mobile.proto.WebsiteReport\"\207\001\n\021Send" +
+      "ServiceReport\0228\n\006header\030\001 \002(\0132(.org.umit" +
+      ".icm.mobile.proto.RequestHeader\0228\n\006repor" +
+      "t\030\002 \002(\0132(.org.umit.icm.mobile.proto.Serv" +
+      "iceReport\"O\n\022SendReportResponse\0229\n\006heade" +
       "r\030\001 \002(\0132).org.umit.icm.mobile.proto.Resp" +
-      "onseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umit.icm",
-      ".mobile.proto.Test\022\025\n\rtestVersionNo\030\003 \002(" +
-      "\005\"F\n\nAssignTask\0228\n\006header\030\001 \002(\0132(.org.um" +
-      "it.icm.mobile.proto.RequestHeader\"\177\n\022Ass" +
-      "ignTaskResponse\0229\n\006header\030\001 \002(\0132).org.um" +
-      "it.icm.mobile.proto.ResponseHeader\022.\n\005te" +
-      "sts\030\002 \003(\0132\037.org.umit.icm.mobile.proto.Te" +
-      "st\"J\n\016UpgradeToSuper\0228\n\006header\030\001 \002(\0132(.o" +
-      "rg.umit.icm.mobile.proto.RequestHeader\"\222" +
-      "\001\n\026UpgradeToSuperResponse\0229\n\006header\030\001 \002(" +
-      "\0132).org.umit.icm.mobile.proto.ResponseHe",
-      "ader\022\020\n\010newToken\030\002 \002(\t\022\025\n\rnewPrivateKey\030" +
-      "\003 \002(\t\022\024\n\014newPublicKey\030\004 \002(\t\"w\n\021WebsiteSu" +
-      "ggestion\0228\n\006header\030\001 \002(\0132(.org.umit.icm." +
-      "mobile.proto.RequestHeader\022\022\n\nwebsiteURL" +
-      "\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(\t\"\226\001\n\021Service" +
-      "Suggestion\0228\n\006header\030\001 \002(\0132(.org.umit.ic" +
-      "m.mobile.proto.RequestHeader\022\023\n\013serviceN" +
-      "ame\030\002 \002(\t\022\024\n\014emailAddress\030\003 \001(\t\022\020\n\010hostN" +
-      "ame\030\004 \002(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026TestSuggestionR" +
-      "esponse\0229\n\006header\030\001 \002(\0132).org.umit.icm.m",
-      "obile.proto.ResponseHeader\"d\n\020Authentica" +
-      "tePeer\022\021\n\tagentType\030\001 \002(\005\022\017\n\007agentID\030\002 \002" +
-      "(\003\022\031\n\021cipheredPublicKey\030\003 \002(\t\022\021\n\tagentPo" +
-      "rt\030\004 \001(\005\"5\n\030AuthenticatePeerResponse\022\031\n\021" +
-      "cipheredPublicKey\030\001 \002(\t\"$\n\023P2PGetSuperPe" +
-      "erList\022\r\n\005count\030\001 \002(\005\"R\n\033P2PGetSuperPeer" +
-      "ListResponse\0223\n\005peers\030\001 \003(\0132$.org.umit.i" +
-      "cm.mobile.proto.AgentData\"\037\n\016P2PGetPeerL" +
-      "ist\022\r\n\005count\030\001 \002(\005\"M\n\026P2PGetPeerListResp" +
-      "onse\0223\n\005peers\030\001 \003(\0132$.org.umit.icm.mobil",
-      "e.proto.AgentData\"F\n\013AgentUpdate\022\017\n\007vers" +
-      "ion\030\001 \002(\t\022\023\n\013downloadURL\030\002 \002(\t\022\021\n\tcheckC" +
-      "ode\030\003 \001(\005\"6\n\023AgentUpdateResponse\022\017\n\007vers" +
-      "ion\030\001 \002(\t\022\016\n\006result\030\002 \002(\t\"K\n\020TestModuleU" +
-      "pdate\022\017\n\007version\030\001 \002(\t\022\023\n\013downloadURL\030\002 " +
-      "\002(\t\022\021\n\tcheckCode\030\003 \001(\005\";\n\030TestModuleUpda" +
-      "teResponse\022\017\n\007version\030\001 \002(\t\022\016\n\006result\030\002 " +
-      "\002(\t\"T\n\021ForwardingMessage\022\023\n\013destination\030" +
-      "\001 \002(\003\022\022\n\nidentifier\030\002 \002(\t\022\026\n\016encodedMess" +
-      "age\030\003 \002(\t\"G\n\031ForwardingMessageResponse\022\022",
-      "\n\nidentifier\030\001 \002(\t\022\026\n\016encodedMessage\030\002 \002" +
-      "(\tB\017B\rMessageProtos"
+      "onseHeader\"q\n\nNewVersion\0228\n\006header\030\001 \002(\013",
+      "2(.org.umit.icm.mobile.proto.RequestHead" +
+      "er\022\026\n\016agentVersionNo\030\002 \002(\005\022\021\n\tagentType\030" +
+      "\003 \002(\t\"\207\001\n\022NewVersionResponse\0229\n\006header\030\001" +
+      " \002(\0132).org.umit.icm.mobile.proto.Respons" +
+      "eHeader\022\023\n\013downloadURL\030\002 \001(\t\022\016\n\006update\030\003" +
+      " \001(\014\022\021\n\tversionNo\030\004 \002(\005\"b\n\010NewTests\0228\n\006h" +
+      "eader\030\001 \002(\0132(.org.umit.icm.mobile.proto." +
+      "RequestHeader\022\034\n\024currentTestVersionNo\030\002 " +
+      "\002(\005\"\026\n\007Website\022\013\n\003url\030\001 \002(\t\"1\n\007Service\022\014" +
+      "\n\004name\030\001 \002(\t\022\014\n\004port\030\002 \002(\005\022\n\n\002ip\030\003 \002(\t\"\254",
+      "\001\n\004Test\022\016\n\006testID\030\001 \002(\003\0223\n\007website\030\002 \001(\013" +
+      "2\".org.umit.icm.mobile.proto.Website\0223\n\007" +
+      "service\030\003 \001(\0132\".org.umit.icm.mobile.prot" +
+      "o.Service\022\030\n\020executeAtTimeUTC\030\004 \001(\003\022\020\n\010t" +
+      "estType\030\005 \002(\t\"\224\001\n\020NewTestsResponse\0229\n\006he" +
+      "ader\030\001 \002(\0132).org.umit.icm.mobile.proto.R" +
+      "esponseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umit." +
+      "icm.mobile.proto.Test\022\025\n\rtestVersionNo\030\003" +
+      " \002(\005\"F\n\nAssignTask\0228\n\006header\030\001 \002(\0132(.org" +
+      ".umit.icm.mobile.proto.RequestHeader\"\177\n\022",
+      "AssignTaskResponse\0229\n\006header\030\001 \002(\0132).org" +
+      ".umit.icm.mobile.proto.ResponseHeader\022.\n" +
+      "\005tests\030\002 \003(\0132\037.org.umit.icm.mobile.proto" +
+      ".Test\"J\n\016UpgradeToSuper\0228\n\006header\030\001 \002(\0132" +
+      "(.org.umit.icm.mobile.proto.RequestHeade" +
+      "r\"\330\001\n\026UpgradeToSuperResponse\0229\n\006header\030\001" +
+      " \002(\0132).org.umit.icm.mobile.proto.Respons" +
+      "eHeader\022\020\n\010newToken\030\002 \002(\t\0228\n\rnewPrivateK" +
+      "ey\030\003 \002(\0132!.org.umit.icm.mobile.proto.RSA" +
+      "Key\0227\n\014newPublicKey\030\004 \002(\0132!.org.umit.icm",
+      ".mobile.proto.RSAKey\"w\n\021WebsiteSuggestio" +
+      "n\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobile." +
+      "proto.RequestHeader\022\022\n\nwebsiteURL\030\002 \002(\t\022" +
+      "\024\n\014emailAddress\030\003 \001(\t\"\226\001\n\021ServiceSuggest" +
+      "ion\0228\n\006header\030\001 \002(\0132(.org.umit.icm.mobil" +
+      "e.proto.RequestHeader\022\023\n\013serviceName\030\002 \002" +
+      "(\t\022\024\n\014emailAddress\030\003 \001(\t\022\020\n\010hostName\030\004 \002" +
+      "(\t\022\n\n\002ip\030\005 \002(\t\"S\n\026TestSuggestionResponse" +
+      "\0229\n\006header\030\001 \002(\0132).org.umit.icm.mobile.p" +
+      "roto.ResponseHeader\"\207\001\n\020AuthenticatePeer",
+      "\022\021\n\tagentType\030\001 \002(\005\022\017\n\007agentID\030\002 \002(\003\022<\n\021" +
+      "cipheredPublicKey\030\003 \002(\0132!.org.umit.icm.m" +
+      "obile.proto.RSAKey\022\021\n\tagentPort\030\004 \001(\005\"X\n" +
+      "\030AuthenticatePeerResponse\022<\n\021cipheredPub" +
+      "licKey\030\001 \002(\0132!.org.umit.icm.mobile.proto" +
+      ".RSAKey\"$\n\023P2PGetSuperPeerList\022\r\n\005count\030" +
+      "\001 \002(\005\"R\n\033P2PGetSuperPeerListResponse\0223\n\005" +
+      "peers\030\001 \003(\0132$.org.umit.icm.mobile.proto." +
+      "AgentData\"\037\n\016P2PGetPeerList\022\r\n\005count\030\001 \002" +
+      "(\005\"M\n\026P2PGetPeerListResponse\0223\n\005peers\030\001 ",
+      "\003(\0132$.org.umit.icm.mobile.proto.AgentDat" +
+      "a\"F\n\013AgentUpdate\022\017\n\007version\030\001 \002(\t\022\023\n\013dow" +
+      "nloadURL\030\002 \002(\t\022\021\n\tcheckCode\030\003 \001(\005\"6\n\023Age" +
+      "ntUpdateResponse\022\017\n\007version\030\001 \002(\t\022\016\n\006res" +
+      "ult\030\002 \002(\t\"K\n\020TestModuleUpdate\022\017\n\007version" +
+      "\030\001 \002(\t\022\023\n\013downloadURL\030\002 \002(\t\022\021\n\tcheckCode" +
+      "\030\003 \001(\005\";\n\030TestModuleUpdateResponse\022\017\n\007ve" +
+      "rsion\030\001 \002(\t\022\016\n\006result\030\002 \002(\t\"T\n\021Forwardin" +
+      "gMessage\022\023\n\013destination\030\001 \002(\003\022\022\n\nidentif" +
+      "ier\030\002 \002(\t\022\026\n\016encodedMessage\030\003 \002(\t\"G\n\031For",
+      "wardingMessageResponse\022\022\n\nidentifier\030\001 \002" +
+      "(\t\022\026\n\016encodedMessage\030\002 \002(\tB\017B\rMessagePro" +
+      "tos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -21531,8 +22103,16 @@ public final class MessageProtos {
               new java.lang.String[] { "Header", "AgentID", },
               org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse.Builder.class);
-          internal_static_org_umit_icm_mobile_proto_GenerateSecretKey_descriptor =
+          internal_static_org_umit_icm_mobile_proto_RSAKey_descriptor =
             getDescriptor().getMessageTypes().get(11);
+          internal_static_org_umit_icm_mobile_proto_RSAKey_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_RSAKey_descriptor,
+              new java.lang.String[] { "Mod", "Exp", },
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.class,
+              org.umit.icm.mobile.proto.MessageProtos.RSAKey.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_GenerateSecretKey_descriptor =
+            getDescriptor().getMessageTypes().get(12);
           internal_static_org_umit_icm_mobile_proto_GenerateSecretKey_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GenerateSecretKey_descriptor,
@@ -21540,7 +22120,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey.class,
               org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GenerateSecretKeyResponse_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_org_umit_icm_mobile_proto_GenerateSecretKeyResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GenerateSecretKeyResponse_descriptor,
@@ -21548,7 +22128,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeys_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeys_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeys_descriptor,
@@ -21556,7 +22136,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys.class,
               org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeysResponse_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeysResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetTokenAndAsymmetricKeysResponse_descriptor,
@@ -21564,7 +22144,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_CheckAggregator_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_org_umit_icm_mobile_proto_CheckAggregator_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_CheckAggregator_descriptor,
@@ -21572,7 +22152,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregator.class,
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregator.Builder.class);
           internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_CheckAggregatorResponse_descriptor,
@@ -21580,7 +22160,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Login_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_org_umit_icm_mobile_proto_Login_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Login_descriptor,
@@ -21588,7 +22168,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Login.class,
               org.umit.icm.mobile.proto.MessageProtos.Login.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Logout_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_org_umit_icm_mobile_proto_Logout_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Logout_descriptor,
@@ -21596,7 +22176,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Logout.class,
               org.umit.icm.mobile.proto.MessageProtos.Logout.Builder.class);
           internal_static_org_umit_icm_mobile_proto_LoginResponse_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_org_umit_icm_mobile_proto_LoginResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_LoginResponse_descriptor,
@@ -21604,7 +22184,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.LoginResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.LoginResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_org_umit_icm_mobile_proto_GetPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetPeerList_descriptor,
@@ -21612,7 +22192,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.GetPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AgentData_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_org_umit_icm_mobile_proto_AgentData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentData_descriptor,
@@ -21620,7 +22200,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AgentData.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentData.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_org_umit_icm_mobile_proto_GetPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetPeerListResponse_descriptor,
@@ -21628,7 +22208,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetSuperPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_org_umit_icm_mobile_proto_GetSuperPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetSuperPeerList_descriptor,
@@ -21636,7 +22216,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetSuperPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_org_umit_icm_mobile_proto_GetSuperPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetSuperPeerListResponse_descriptor,
@@ -21644,7 +22224,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Location_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Location_descriptor,
@@ -21652,7 +22232,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Location.class,
               org.umit.icm.mobile.proto.MessageProtos.Location.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_org_umit_icm_mobile_proto_GetEvents_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor,
@@ -21660,7 +22240,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetEvents.class,
               org.umit.icm.mobile.proto.MessageProtos.GetEvents.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Event_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_org_umit_icm_mobile_proto_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Event_descriptor,
@@ -21668,7 +22248,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Event.class,
               org.umit.icm.mobile.proto.MessageProtos.Event.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetEventsResponse_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_org_umit_icm_mobile_proto_GetEventsResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetEventsResponse_descriptor,
@@ -21676,7 +22256,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendWebsiteReport_descriptor,
@@ -21684,7 +22264,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport.class,
               org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendServiceReport_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_org_umit_icm_mobile_proto_SendServiceReport_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendServiceReport_descriptor,
@@ -21692,7 +22272,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendServiceReport.class,
               org.umit.icm.mobile.proto.MessageProtos.SendServiceReport.Builder.class);
           internal_static_org_umit_icm_mobile_proto_SendReportResponse_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_org_umit_icm_mobile_proto_SendReportResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_SendReportResponse_descriptor,
@@ -21700,7 +22280,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.SendReportResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.SendReportResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewVersion_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_org_umit_icm_mobile_proto_NewVersion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewVersion_descriptor,
@@ -21708,7 +22288,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewVersion.class,
               org.umit.icm.mobile.proto.MessageProtos.NewVersion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewVersionResponse_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_org_umit_icm_mobile_proto_NewVersionResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewVersionResponse_descriptor,
@@ -21716,7 +22296,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewTests_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_org_umit_icm_mobile_proto_NewTests_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewTests_descriptor,
@@ -21724,7 +22304,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewTests.class,
               org.umit.icm.mobile.proto.MessageProtos.NewTests.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Website_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_org_umit_icm_mobile_proto_Website_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Website_descriptor,
@@ -21732,7 +22312,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Website.class,
               org.umit.icm.mobile.proto.MessageProtos.Website.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Service_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_org_umit_icm_mobile_proto_Service_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Service_descriptor,
@@ -21740,7 +22320,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Service.class,
               org.umit.icm.mobile.proto.MessageProtos.Service.Builder.class);
           internal_static_org_umit_icm_mobile_proto_Test_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_org_umit_icm_mobile_proto_Test_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_Test_descriptor,
@@ -21748,7 +22328,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.Test.class,
               org.umit.icm.mobile.proto.MessageProtos.Test.Builder.class);
           internal_static_org_umit_icm_mobile_proto_NewTestsResponse_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_org_umit_icm_mobile_proto_NewTestsResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_NewTestsResponse_descriptor,
@@ -21756,7 +22336,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AssignTask_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_org_umit_icm_mobile_proto_AssignTask_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AssignTask_descriptor,
@@ -21764,7 +22344,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AssignTask.class,
               org.umit.icm.mobile.proto.MessageProtos.AssignTask.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AssignTaskResponse_descriptor,
@@ -21772,7 +22352,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AssignTaskResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_UpgradeToSuper_descriptor,
@@ -21780,7 +22360,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuper.class,
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuper.Builder.class);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_UpgradeToSuperResponse_descriptor,
@@ -21788,7 +22368,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuperResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.UpgradeToSuperResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_WebsiteSuggestion_descriptor,
@@ -21796,7 +22376,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion.class,
               org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_descriptor =
-            getDescriptor().getMessageTypes().get(44);
+            getDescriptor().getMessageTypes().get(45);
           internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_ServiceSuggestion_descriptor,
@@ -21804,7 +22384,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.class,
               org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_descriptor =
-            getDescriptor().getMessageTypes().get(45);
+            getDescriptor().getMessageTypes().get(46);
           internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestSuggestionResponse_descriptor,
@@ -21812,7 +22392,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor =
-            getDescriptor().getMessageTypes().get(46);
+            getDescriptor().getMessageTypes().get(47);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AuthenticatePeer_descriptor,
@@ -21820,7 +22400,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.class,
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor =
-            getDescriptor().getMessageTypes().get(47);
+            getDescriptor().getMessageTypes().get(48);
           internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AuthenticatePeerResponse_descriptor,
@@ -21828,7 +22408,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(48);
+            getDescriptor().getMessageTypes().get(49);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerList_descriptor,
@@ -21836,7 +22416,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(49);
+            getDescriptor().getMessageTypes().get(50);
           internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetSuperPeerListResponse_descriptor,
@@ -21844,7 +22424,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_descriptor =
-            getDescriptor().getMessageTypes().get(50);
+            getDescriptor().getMessageTypes().get(51);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetPeerList_descriptor,
@@ -21852,7 +22432,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList.Builder.class);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_descriptor =
-            getDescriptor().getMessageTypes().get(51);
+            getDescriptor().getMessageTypes().get(52);
           internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_P2PGetPeerListResponse_descriptor,
@@ -21860,7 +22440,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AgentUpdate_descriptor =
-            getDescriptor().getMessageTypes().get(52);
+            getDescriptor().getMessageTypes().get(53);
           internal_static_org_umit_icm_mobile_proto_AgentUpdate_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentUpdate_descriptor,
@@ -21868,7 +22448,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdate.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdate.Builder.class);
           internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_descriptor =
-            getDescriptor().getMessageTypes().get(53);
+            getDescriptor().getMessageTypes().get(54);
           internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_AgentUpdateResponse_descriptor,
@@ -21876,7 +22456,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AgentUpdateResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_descriptor =
-            getDescriptor().getMessageTypes().get(54);
+            getDescriptor().getMessageTypes().get(55);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestModuleUpdate_descriptor,
@@ -21884,7 +22464,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdate.class,
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdate.Builder.class);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_descriptor =
-            getDescriptor().getMessageTypes().get(55);
+            getDescriptor().getMessageTypes().get(56);
           internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_TestModuleUpdateResponse_descriptor,
@@ -21892,7 +22472,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdateResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.TestModuleUpdateResponse.Builder.class);
           internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor =
-            getDescriptor().getMessageTypes().get(56);
+            getDescriptor().getMessageTypes().get(57);
           internal_static_org_umit_icm_mobile_proto_ForwardingMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_ForwardingMessage_descriptor,
@@ -21900,7 +22480,7 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.class,
               org.umit.icm.mobile.proto.MessageProtos.ForwardingMessage.Builder.class);
           internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor =
-            getDescriptor().getMessageTypes().get(57);
+            getDescriptor().getMessageTypes().get(58);
           internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_ForwardingMessageResponse_descriptor,

@@ -31,6 +31,7 @@ import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.P2PGetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.P2PGetSuperPeerListResponse;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 
 import android.util.Log;
 
@@ -62,7 +63,7 @@ public class P2PTesting {
 				
 				AuthenticatePeerResponse authenticatePeerResponse
 				= AuthenticatePeerResponse.parseFrom(msg);
-				Log.w("###msg ", authenticatePeerResponse.getCipheredPublicKey());
+				Log.w("###msg ", authenticatePeerResponse.getCipheredPublicKey().getExp());
 				
 				} else {
 					Log.w("### ", "Blank response");
@@ -74,12 +75,16 @@ public class P2PTesting {
 		Globals.tcpClient.closeConnection();
 	}
 	
-	private static QueueObject getTestMessage() {		
+	private static QueueObject getTestMessage() {	
+		RSAKey rsaKey = RSAKey.newBuilder()
+		.setExp("exp")
+		.setMod("mod")
+		.build();
 		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
 		.setAgentID(10)
 		.setAgentType(3)
 		.setAgentPort(8000)		
-		.setCipheredPublicKey("cipheredPublicKey")
+		.setCipheredPublicKey(rsaKey)
 		.build();
 		
 		AgentData agentData = AgentData.newBuilder()
@@ -87,7 +92,7 @@ public class P2PTesting {
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")
-		.setPublicKey("Key")
+		.setPublicKey(rsaKey)
 		.setToken("token")
 		.build();
 		
@@ -138,12 +143,17 @@ public class P2PTesting {
 		.setCount(10)
 		.build();
 		
+		RSAKey rsaKey = RSAKey.newBuilder()
+		.setExp("exp")
+		.setMod("mod")
+		.build();
+		
 		AgentData agentData = AgentData.newBuilder()
 		.setAgentID(10)
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")
-		.setPublicKey("Key")
+		.setPublicKey(rsaKey)
 		.setToken("token")
 		.build();
 		
@@ -194,12 +204,17 @@ public class P2PTesting {
 		.setCount(10)
 		.build();
 		
+		RSAKey rsaKey = RSAKey.newBuilder()
+		.setExp("exp")
+		.setMod("mod")
+		.build();
+		
 		AgentData agentData = AgentData.newBuilder()
 		.setAgentID(10)
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")
-		.setPublicKey("Key")
+		.setPublicKey(rsaKey)
 		.setToken("token")
 		.build();
 		

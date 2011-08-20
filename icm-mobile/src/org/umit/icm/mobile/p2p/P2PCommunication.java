@@ -21,7 +21,9 @@
 
 package org.umit.icm.mobile.p2p;
 
+import java.math.BigInteger;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
@@ -139,10 +141,12 @@ public class P2PCommunication {
 		int messageSize = MessageBuilder.byteArrayToInt(messageSizeBytes);
 		byte[] totalBytesEncrypted =  Globals.tcpClient.readBytes(messageSize);
 		
-		if(Constants.P2P_ENCRYPTION == true) {		
+		if(Constants.P2P_ENCRYPTION == true) {	
+			BigInteger mod = new BigInteger(agentInfo.getPublicKey().getMod()); 
+			BigInteger exp = new BigInteger(agentInfo.getPublicKey().getExp());
+			PublicKey peerPublicKey = RSACrypto.generatePublicKey(mod, exp);
 			totalBytes = 
-				RSACrypto.decryptPublic(
-						RSACrypto.stringToPublicKey(agentInfo.getPublicKey()), totalBytesEncrypted);
+				RSACrypto.decryptPublic(peerPublicKey, totalBytesEncrypted);
 		}
 		else {
 			totalBytes = totalBytesEncrypted;
