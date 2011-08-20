@@ -237,8 +237,8 @@ public class Initialization {
 	}
 	
 	public static void loadLists() {
-		ParametersReadWrite.readEventList();
-		ParametersReadWrite.readPeerList();
-		ParametersReadWrite.readSuperPeerList();
+		RuntimeLists.readEventList();
+		RuntimeLists.readPeerList();
+		RuntimeLists.readSuperPeerList();
 	}
 }		
