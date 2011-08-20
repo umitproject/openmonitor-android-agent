@@ -38,38 +38,25 @@ public class KeyManager {
 	private byte[] mySecretKey;
 	private PrivateKey myPrivateKey;
 	private PublicKey myPublicKey;
-	private byte[] myCipheredKey;
+	private String myCipheredKeyMod;
+	private String myCipheredKeyExp;
 	
+	public KeyManager(byte[] mySecretKey, PrivateKey myPrivateKey,
+			PublicKey myPublicKey, String myCipheredKeyMod,
+			String myCipheredKeyExp) {
+		super();
+		this.mySecretKey = mySecretKey;
+		this.myPrivateKey = myPrivateKey;
+		this.myPublicKey = myPublicKey;
+		this.myCipheredKeyMod = myCipheredKeyMod;
+		this.myCipheredKeyExp = myCipheredKeyExp;
+	}
+
 	public KeyManager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	/**
-	 * The value constructor.
-	 *
-	 *
-	 
-	 @param mySecretKey SecretKey of type byte[]
-	 *
-	 
-	 @param myPrivateKey PrivateKey of type {@link PrivateKey}
-	 *
-	 
-	 @param myPublicKey PublicKey of type {@link PublicKey}
-	 *
-	 
-	 @param myCipheredKey CipheredKey of type byte[]
-	 */
-	public KeyManager(byte[] mySecretKey, PrivateKey myPrivateKey,
-			PublicKey myPublicKey, byte[] myCipheredKey) {
-		super();
-		this.mySecretKey = mySecretKey;
-		this.myPrivateKey = myPrivateKey;
-		this.myPublicKey = myPublicKey;
-		this.myCipheredKey = myCipheredKey;
-	}
-
 	public synchronized byte[] getMySecretKey() {
 		return mySecretKey;
 	}
@@ -149,24 +136,14 @@ public class KeyManager {
 		}
 	}
 
-	public synchronized byte[] getMyCipheredKey() {
-		return myCipheredKey;
+	public String getMyCipheredKeyMod() {
+		return myCipheredKeyMod;
 	}
-	
-	/**
-	 * Writes the CipheredKey to disk.
-	 *
-	 *
-	 
-	 @param myCipheredKey CipheredKey of type byte[]
-	 *
-	 
-	 @see CryptoKeyWriter
-	 */
-	public synchronized void setMyCipheredKey(byte[] myCipheredKey) {
-		this.myCipheredKey = myCipheredKey;		
+
+	public void setMyCipheredKeyMod(String myCipheredKeyMod) {
+		this.myCipheredKeyMod = myCipheredKeyMod;
 		try {
-			CryptoKeyWriter.writeMyCipheredKey(this.myCipheredKey);
+			CryptoKeyWriter.writeMyCipheredKeyMod(myCipheredKeyMod);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -174,7 +151,23 @@ public class KeyManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
+
+	public String getMyCipheredKeyExp() {
+		return myCipheredKeyExp;
+	}
+
+	public void setMyCipheredKeyExp(String myCipheredKeyExp) {
+		this.myCipheredKeyExp = myCipheredKeyExp;
+		try {
+			CryptoKeyWriter.writeMyCipheredKeyExp(myCipheredKeyExp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+			
 }
