@@ -241,4 +241,23 @@ public class Initialization {
 		Globals.runtimesList.readPeerList();
 		Globals.runtimesList.readSuperPeerList();
 	}
+	
+	public void registration() {
+	
+	  try {
+		if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
+				  , Constants.PARAMETERS_DIR) == false )
+				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
+				  , Constants.PARAMETERS_DIR) == false )) {
+			  
+		  }
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (RuntimeException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
 }		
