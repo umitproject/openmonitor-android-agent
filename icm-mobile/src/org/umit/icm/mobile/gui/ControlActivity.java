@@ -311,7 +311,8 @@ public class ControlActivity extends Activity {
 					e.printStackTrace();
 				}
         	} else if (Globals.p2pCommunication == true) {
-        		Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+        		Iterator<AgentData> iterator 
+        		= Globals.runtimesList.getSuperPeersList().iterator();
         		while(iterator.hasNext()) {
         			try {
 						MessageForwardingAggregator.forwardWebsiteSuggestion(
@@ -372,7 +373,8 @@ public class ControlActivity extends Activity {
 					e.printStackTrace();
 				}
         	} else if (Globals.p2pCommunication == true) {
-        		Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+        		Iterator<AgentData> iterator 
+        		= Globals.runtimesList.getSuperPeersList().iterator();
         		while(iterator.hasNext()) {
         			try {
 						MessageForwardingAggregator.forwardServiceSuggestion(

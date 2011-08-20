@@ -81,7 +81,8 @@ public class AggregatorAccess {
 					.setAgentPort(Constants.MY_TCP_PORT)		
 					.setCipheredPublicKey(new String(Globals.keyManager.getMyCipheredKey()))
 					.build();
-					Iterator<AgentData> iterator = Globals.superPeersList.iterator(); {
+					Iterator<AgentData> iterator 
+					= Globals.runtimesList.getSuperPeersList().iterator(); {
 						while(iterator.hasNext()) {
 							if(CryptoKeyReader.checkPeerSecretKey(iterator.next().getAgentIP()) == false) {
 								try {

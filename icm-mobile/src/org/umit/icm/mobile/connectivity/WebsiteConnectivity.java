@@ -228,7 +228,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			.addLocations(location)			
 			.build();
 			
-			Globals.eventsList.add(event);
+			Globals.runtimesList.addEvent(event);
 		}
 	}
 		

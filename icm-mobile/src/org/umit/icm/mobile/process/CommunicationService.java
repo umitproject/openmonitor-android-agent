@@ -133,7 +133,8 @@ public class CommunicationService extends Service {
 					.setToken(Globals.runtimeParameters.getToken())
 					.build();
 					
-					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+					Iterator<AgentData> iterator 
+					= Globals.runtimesList.getSuperPeersList().iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
 					.setHeader(requestHeader)
 					.setCount(Constants.MAX_PEERS)
@@ -231,7 +232,8 @@ public class CommunicationService extends Service {
 					.setToken(Globals.runtimeParameters.getToken())
 					.build();
 					
-					Iterator<AgentData> iterator = Globals.superPeersList.iterator();
+					Iterator<AgentData> iterator 
+					= Globals.runtimesList.getSuperPeersList().iterator();
 					Location location = Location.newBuilder()
 					.setLatitude(lat)
 					.setLongitude(lon)

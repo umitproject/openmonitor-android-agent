@@ -215,8 +215,8 @@ public class Initialization {
 		.addLocations(location)
 		.build();
 		
-		Globals.eventsList.add(eventA);
-		Globals.eventsList.add(eventB);
+		Globals.runtimesList.addEvent(eventA);
+		Globals.runtimesList.addEvent(eventB);
 	}	
 	
 	/*Only used for testing
@@ -232,13 +232,13 @@ public class Initialization {
 		.setToken("Token")
 		.build();
 		
-		Globals.superPeersList.add(agentData);
-		Globals.peersList.add(agentData);
+		Globals.runtimesList.addPeer(agentData);
+		Globals.runtimesList.addSuperPeer(agentData);
 	}
 	
 	public static void loadLists() {
-		RuntimeLists.readEventList();
-		RuntimeLists.readPeerList();
-		RuntimeLists.readSuperPeerList();
+		Globals.runtimesList.readEventList();
+		Globals.runtimesList.readPeerList();
+		Globals.runtimesList.readSuperPeerList();
 	}
 }		

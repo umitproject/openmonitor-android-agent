@@ -181,9 +181,7 @@ public class ProcessActions {
 	 @see Event
 	 */
 	public synchronized static boolean updateEventsList(List<Event> events) {
-		for(int i = 0 ; i < events.size(); i++)
-			Globals.eventsList.add(events.get(i));
-		RuntimeLists.writeEventList();
+		Globals.runtimesList.setEventsList(events);
 		return true;
 	}
 	
@@ -201,9 +199,7 @@ public class ProcessActions {
 	 @see AgentData
 	 */
 	public synchronized static boolean updatePeersList(List<AgentData> peers) {
-		for(int i = 0 ; i < peers.size(); i++)
-			Globals.peersList.add(peers.get(i));
-		RuntimeLists.writePeerList();
+		Globals.runtimesList.setPeersList(peers);
 		return true;
 	}
 	
@@ -221,9 +217,7 @@ public class ProcessActions {
 	 @see AgentData
 	 */
 	public synchronized static boolean updateSuperPeersList(List<AgentData> superPeers) {
-		for(int i = 0 ; i < superPeers.size(); i++)
-			Globals.superPeersList.add(superPeers.get(i));
-		RuntimeLists.writeSuperPeerList();
+		Globals.runtimesList.setSuperPeersList(superPeers);
 		return true;
 	}
 	

@@ -34,8 +34,6 @@ import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.p2p.AuthenticatedPeers;
 import org.umit.icm.mobile.p2p.MessageQueue;
-import org.umit.icm.mobile.proto.MessageProtos.AgentData;
-import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.social.TwitterUpdate;
 
 /**
@@ -86,22 +84,7 @@ public class Globals {
 	/**
 	 * Global {@link List} of {@link Service}
 	 */
-	public static List<Service> servicesList = new ArrayList<Service>();
-	
-	/**
-	 * Global {@link List} of {@link Event}
-	 */
-	public static List<Event> eventsList = new ArrayList<Event>();
-	
-	/**
-	 * Global {@link List} of {@link AgentData}
-	 */
-	public static List<AgentData> peersList = new ArrayList<AgentData>();
-	
-	/**
-	 * Global {@link List} of {@link AgentData}
-	 */
-	public static List<AgentData> superPeersList = new ArrayList<AgentData>();
+	public static List<Service> servicesList = new ArrayList<Service>();	
 
 	/**
 	 * Global {@link TCPServer}
@@ -167,4 +150,6 @@ public class Globals {
 	public static android.location.Location currentLocationGPS;
 	
 	public static android.location.Location currentLocationNetwork;
+	
+	public static RuntimeLists runtimesList = new RuntimeLists();
 }
