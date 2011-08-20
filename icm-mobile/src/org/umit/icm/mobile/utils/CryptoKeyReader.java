@@ -93,9 +93,7 @@ public class CryptoKeyReader {
 		return SDCardReadWrite.readString(Constants.MY_CIPHERED_KEY_FILE_EXP, 
 				Constants.KEYS_DIR);
 	}
-	
-	public
-	
+			
 	/**
 	 * Returns secret key byte[] read from disk using 
 	 * {@link AESCrypto#readKey(String)} and filename appended with {@link String}
