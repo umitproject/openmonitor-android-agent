@@ -37,23 +37,31 @@ public class AuthenticatedPeersTests extends AndroidTestCase {
     	AuthenticatedPeers authenticatedPeers
     	= new AuthenticatedPeers();
     	
+    	RSAKey rsaKey1 = RSAKey.newBuilder()
+    	.setExp("exp1")
+    	.setMod("mod1")
+    	.build();
     	AgentData agentData = AgentData.newBuilder()
     	.setAgentID(10)
     	.setAgentIP("IP")
     	.setAgentPort(8000)
     	.setPeerStatus("On")
-    	.setPublicKey("Key")
+    	.setPublicKey(rsaKey1)
     	.setToken("token")
     	.build();
     	    	
     	authenticatedPeers.addAuthenticatedPeer(agentData);
     	
+    	RSAKey rsaKey2 = RSAKey.newBuilder()
+    	.setExp("exp2")
+    	.setMod("mod2")
+    	.build();
     	AgentData agentData2 = AgentData.newBuilder()
     	.setAgentID(20)
     	.setAgentIP("IP")
     	.setAgentPort(8000)
     	.setPeerStatus("On")
-    	.setPublicKey("Key")
+    	.setPublicKey(rsaKey2)
     	.setToken("token")
     	.build();
     	    	

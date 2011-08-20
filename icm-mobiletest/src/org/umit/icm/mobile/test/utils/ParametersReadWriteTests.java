@@ -30,6 +30,7 @@ import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.Service;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.proto.MessageProtos.Website;
@@ -42,21 +43,29 @@ import android.test.AndroidTestCase;
 public class ParametersReadWriteTests extends AndroidTestCase {
 
     public void testPeersList() throws Throwable {
+    	RSAKey rsaKey1 = RSAKey.newBuilder()
+		.setExp("exp1")
+		.setMod("mod1")
+		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
     	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey1")
+    	.setPublicKey(rsaKey1)
     	.setToken("token1")
     	.build();
     	
+    	RSAKey rsaKey2 = RSAKey.newBuilder()
+		.setExp("exp2")
+		.setMod("mod2")
+		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
     	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey2")
+    	.setPublicKey(rsaKey2)
     	.setToken("token2")
     	.build();
     	
@@ -73,21 +82,29 @@ public class ParametersReadWriteTests extends AndroidTestCase {
     }        
     
     public void testSuperPeersList() throws Throwable {
+    	RSAKey rsaKey1 = RSAKey.newBuilder()
+		.setExp("exp1")
+		.setMod("mod1")
+		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
     	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey1")
+    	.setPublicKey(rsaKey1)
     	.setToken("token1")
     	.build();
     	
+    	RSAKey rsaKey2 = RSAKey.newBuilder()
+		.setExp("exp2")
+		.setMod("mod2")
+		.build();    	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
     	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey2")
+    	.setPublicKey(rsaKey2)
     	.setToken("token2")
     	.build();
     	

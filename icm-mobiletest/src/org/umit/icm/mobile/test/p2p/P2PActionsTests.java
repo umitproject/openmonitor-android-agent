@@ -37,21 +37,29 @@ public class P2PActionsTests extends AndroidTestCase {
 
     
     public void testGetPeerList() throws Throwable {
+    	RSAKey rsaKey1 = RSAKey.newBuilder()
+		.setExp("exp1")
+		.setMod("mod1")
+		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
     	.setAgentID(1)
     	.setAgentPort(11)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey1")
+    	.setPublicKey(rsaKey1)
     	.setToken("token1")
     	.build();
     	
+    	RSAKey rsaKey2 = RSAKey.newBuilder()
+		.setExp("exp2")
+		.setMod("mod2")
+		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
     	.setAgentID(2)
     	.setAgentPort(12)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey2")
+    	.setPublicKey(rsaKey2)
     	.setToken("token2")
     	.build();
     	
@@ -72,7 +80,8 @@ public class P2PActionsTests extends AndroidTestCase {
     	if(agent1.getAgentIP().equals(agent2.getAgentIP())
     			&& agent1.getAgentPort() == agent2.getAgentPort()
     			&& agent1.getPeerStatus().equals(agent2.getPeerStatus())
-    			&& agent1.getPublicKey().equals(agent2.getPublicKey())
+    			&& agent1.getPublicKey().getExp().equals(agent2.getPublicKey().getExp())
+    			&& agent1.getPublicKey().getMod().equals(agent2.getPublicKey().getMod())
     			&& agent1.getAgentID() == agent2.getAgentID()
     			&& agent1.getToken().equals(agent2.getToken()))
     		return true;
@@ -80,21 +89,29 @@ public class P2PActionsTests extends AndroidTestCase {
     }
     
     public void testGetSuperPeerList() throws Throwable {
+    	RSAKey rsaKey3 = RSAKey.newBuilder()
+		.setExp("exp3")
+		.setMod("mod3")
+		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP3")
     	.setAgentID(3)
     	.setAgentPort(13)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey3")
+    	.setPublicKey(rsaKey3)
     	.setToken("token3")
     	.build();
     	
+    	RSAKey rsaKey4 = RSAKey.newBuilder()
+		.setExp("exp4")
+		.setMod("mod4")
+		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP4")
     	.setAgentID(4)
     	.setAgentPort(14)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey4")
+    	.setPublicKey(rsaKey4)
     	.setToken("token4")
     	.build();
     	

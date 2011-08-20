@@ -58,22 +58,30 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setCurrentTestVersionNo(21)
     	.setCurrentVersionNo(21)
     	.build();
-
+    	
+    	RSAKey rsaKey1 = RSAKey.newBuilder()
+    	.setExp("exp1")
+    	.setMod("mod1")
+    	.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
     	.setAgentPort(11)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey1")
+    	.setPublicKey(rsaKey1)
     	.setToken("token1")
     	.setAgentID(1)
     	.build();
     	
+    	RSAKey rsaKey2 = RSAKey.newBuilder()
+    	.setExp("exp2")
+    	.setMod("mod2")
+    	.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setAgentID(2)
-    	.setPublicKey("publicKey2")
+    	.setPublicKey(rsaKey2)
     	.setToken("token2")
     	.build();
     	
@@ -107,22 +115,31 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.setCurrentTestVersionNo(22)
     	.setCurrentVersionNo(22)
     	.build();
+    	
+    	RSAKey rsaKey3 = RSAKey.newBuilder()
+    	.setExp("exp3")
+    	.setMod("mod3")
+    	.build();
 
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP3")
     	.setAgentID(3)
     	.setAgentPort(13)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey3")
+    	.setPublicKey(rsaKey3)
     	.setToken("token3")
     	.build();
     	
+    	RSAKey rsaKey4 = RSAKey.newBuilder()
+    	.setExp("exp4")
+    	.setMod("mod4")
+    	.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP4")
     	.setAgentID(4)
     	.setAgentPort(14)
     	.setPeerStatus("On")
-    	.setPublicKey("publicKey4")
+    	.setPublicKey(rsaKey4)
     	.setToken("token4")
     	.build();
     	

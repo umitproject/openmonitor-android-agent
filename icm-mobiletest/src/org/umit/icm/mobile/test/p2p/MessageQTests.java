@@ -26,36 +26,50 @@ import junit.framework.Assert;
 import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.p2p.QueueObject;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 
 import android.test.AndroidTestCase;
 
 public class MessageQTests extends AndroidTestCase {
 	
 	public void testMessageQ() throws Throwable {
+		RSAKey rsaKey1 = RSAKey.newBuilder()
+		.setExp("exp1")
+		.setMod("mod")
+		.build();
+		
 		AgentData agent1 = AgentData.newBuilder()
 		.setAgentIP("IP1")
 		.setAgentID(1)
 		.setAgentPort(11)
 		.setPeerStatus("On")
-		.setPublicKey("publicKey1")
+		.setPublicKey(rsaKey1)
 		.setToken("token1")
 		.build();
 		
+		RSAKey rsaKey2 = RSAKey.newBuilder()
+		.setExp("exp2")
+		.setMod("mosd2")
+		.build();
 		AgentData agent2 = AgentData.newBuilder()
 		.setAgentIP("IP2")
 		.setAgentID(2)
 		.setAgentPort(12)
 		.setPeerStatus("On")
-		.setPublicKey("publicKey2")
+		.setPublicKey(rsaKey2)
 		.setToken("token2")
 		.build();
 		
+		RSAKey rsaKey3 = RSAKey.newBuilder()
+		.setExp("exp3")
+		.setMod("mod3")
+		.build();
 		AgentData agent3 = AgentData.newBuilder()
 		.setAgentIP("IP3")
 		.setAgentID(3)
 		.setAgentPort(13)
 		.setPeerStatus("On")
-		.setPublicKey("publicKey3")
+		.setPublicKey(rsaKey3)
 		.setToken("token3")
 		.build();
 		

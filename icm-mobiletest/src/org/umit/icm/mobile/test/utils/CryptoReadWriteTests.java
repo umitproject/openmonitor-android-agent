@@ -58,11 +58,16 @@ public class CryptoReadWriteTests extends AndroidTestCase {
         Assert.assertTrue(byteArrayEquals(CryptoKeyReader.getMySecretKey(), key));
     }
     
-    public void testCipheredKeyReadWrite() throws Throwable {
-    	byte[] key = AESCrypto.generateKey(
-    			"secretICMMobilePassword".getBytes());
-    	CryptoKeyWriter.writeMyCipheredKey(key);
-        Assert.assertTrue(byteArrayEquals(CryptoKeyReader.getMyCipheredKey(), key));
+    public void testCipheredKeyModReadWrite() throws Throwable {
+    	String mod = "mod";
+    	CryptoKeyWriter.writeMyCipheredKeyMod(mod);
+        Assert.assertTrue(mod.equals(CryptoKeyReader.getMyCipheredKeyMod()));
+    }
+    
+    public void testCipheredKeyExpReadWrite() throws Throwable {
+    	String exp = "exp";
+    	CryptoKeyWriter.writeMyCipheredKeyExp(exp);
+        Assert.assertTrue(exp.equals(CryptoKeyReader.getMyCipheredKeyExp()));
     }
     
     public boolean byteArrayEquals(byte[] array1, byte[] array2) {
