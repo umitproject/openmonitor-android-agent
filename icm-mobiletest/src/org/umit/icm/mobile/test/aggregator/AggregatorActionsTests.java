@@ -21,7 +21,6 @@
 
 package org.umit.icm.mobile.test.aggregator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +28,7 @@ import junit.framework.Assert;
 
 import org.umit.icm.mobile.aggregator.AggregatorActions;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.*;
-import org.umit.icm.mobile.utils.AESCrypto;
 
 import android.test.AndroidTestCase;
 
@@ -89,8 +86,8 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	
     	AggregatorActions.getPeerListAction(getPeerListResponse);
     	                
-        Assert.assertTrue(compareAgentData(Globals.peersList.get(0), agent1));
-        Assert.assertTrue(compareAgentData(Globals.peersList.get(1), agent2));
+        Assert.assertTrue(compareAgentData(Globals.runtimesList.getPeersList().get(0), agent1));
+        Assert.assertTrue(compareAgentData(Globals.runtimesList.getPeersList().get(1), agent2));
                         
     }        
     
@@ -138,8 +135,8 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	
     	AggregatorActions.getSuperPeerListAction(getSuperPeerListResponse);
     	                
-        Assert.assertTrue(compareAgentData(Globals.superPeersList.get(0), agent1));
-        Assert.assertTrue(compareAgentData(Globals.superPeersList.get(1), agent2));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getSuperPeersList().get(0), agent1));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getSuperPeersList().get(1), agent2));
                         
     } 
     
@@ -242,8 +239,8 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	
         Assert.assertEquals(Globals.versionManager.getAgentVersion(), 23);
         Assert.assertEquals(Globals.versionManager.getTestsVersion(), 23);
-        Assert.assertTrue(compareEvent(Globals.eventsList.get(0), event1));
-        Assert.assertTrue(compareEvent(Globals.eventsList.get(1), event2));
+        Assert.assertTrue(compareEvent(Globals.runtimesList.getEventsList().get(0), event1));
+        Assert.assertTrue(compareEvent(Globals.runtimesList.getEventsList().get(1), event2));
                         
     } 
     

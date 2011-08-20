@@ -63,8 +63,8 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	P2PActions.getPeerListAction(getPeerListResponse);
     	    	
-        Assert.assertTrue(compareAgentData(Globals.peersList.get(0), agent1));
-        Assert.assertTrue(compareAgentData(Globals.peersList.get(1), agent2));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getPeersList().get(0), agent1));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getPeersList().get(1), agent2));
                         
     }        
     
@@ -106,8 +106,8 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	P2PActions.getSuperPeerListAction(getSuperPeerListResponse);
         
-        Assert.assertTrue(compareAgentData(Globals.superPeersList.get(0), agent1));
-        Assert.assertTrue(compareAgentData(Globals.superPeersList.get(1), agent2));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getSuperPeersList().get(0), agent1));
+    	Assert.assertTrue(compareAgentData(Globals.runtimesList.getSuperPeersList().get(1), agent2));
                         
     } 
     
@@ -209,8 +209,8 @@ public class P2PActionsTests extends AndroidTestCase {
     	
         Assert.assertEquals(Globals.versionManager.getAgentVersion(), 27);
         Assert.assertEquals(Globals.versionManager.getTestsVersion(), 27);
-        Assert.assertTrue(compareEvent(Globals.eventsList.get(0), event1));
-        Assert.assertTrue(compareEvent(Globals.eventsList.get(1), event2));
+        Assert.assertTrue(compareEvent(Globals.runtimesList.getEventsList().get(0), event1));
+        Assert.assertTrue(compareEvent(Globals.runtimesList.getEventsList().get(1), event2));
                         
     } 
     
