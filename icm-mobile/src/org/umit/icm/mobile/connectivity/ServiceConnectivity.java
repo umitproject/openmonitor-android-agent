@@ -35,7 +35,9 @@ import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.IDGenerator;
+import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
@@ -121,6 +123,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.setHeader(icmReport)		
 		.build();
 		
+		checkStatus(serviceReport);
 		return serviceReport;
 	}
 	
@@ -529,5 +532,35 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					e.printStackTrace();
 				}		
 			}
-		}	
+		}
+	
+	private void checkStatus(ServiceReport serviceReport) {
+		if(serviceReport.getReport().getStatusCode() == 1) {
+			double lat = 0.0;
+			double lon = 0.0;
+			if(Globals.currentLocationGPS != null) {
+				lat = Globals.currentLocationGPS.getLatitude();
+				lon = Globals.currentLocationGPS.getLongitude();
+			} else if(Globals.currentLocationNetwork != null) {
+				lat = Globals.currentLocationNetwork.getLatitude();
+				lon = Globals.currentLocationNetwork.getLongitude();
+			}
+			
+			Location location = Location.newBuilder()
+			.setLatitude(lat)
+			.setLongitude(lon)
+			.build();
+			
+			Event event = Event.newBuilder()
+			.setTestType("WEB")
+			.setEventType("CENSOR")
+			.setTimeUTC(serviceReport.getHeader().getTimeUTC())
+			.setSinceTimeUTC(serviceReport.getHeader().getTimeUTC())
+			.setServiceReport(serviceReport.getReport())
+			.addLocations(location)			
+			.build();
+			
+			Globals.eventsList.add(event);
+		}
+	}
 	}
