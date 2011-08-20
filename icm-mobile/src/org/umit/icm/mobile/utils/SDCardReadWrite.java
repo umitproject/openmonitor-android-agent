@@ -749,9 +749,10 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
+	
 	public static void writePeersList(String dir
 			, List<AgentData> data) throws IOException, RuntimeException{
-		ObjectOutputStream objOutStream = null;		
+		OutputStream outputStream = null;		
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -774,14 +775,13 @@ public class SDCardReadWrite {
     	.build();
     	    	
     	try {
-			objOutStream = new ObjectOutputStream(
-				    new BufferedOutputStream(new FileOutputStream(file)));									
-			 getPeerListResponse.writeTo(objOutStream);				 
+    		outputStream = new FileOutputStream(file);
+    		getPeerListResponse.writeTo(outputStream);				    												 				 
 				
     	} catch (Exception e) {
   		    throw new RuntimeException("write peers list exception", e);
   	  	} finally {
-    		objOutStream.close();
+    		outputStream.close();
     	}
 	}
 	
@@ -812,12 +812,10 @@ public class SDCardReadWrite {
     			+ dir);
     	File file = new File(keyDir
     			, Constants.PEERS_FILE);
-    	InputStream inputStream = new FileInputStream(file.toString());
-  	  	ObjectInputStream objInputStream =
-  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+    	InputStream inputStream = new FileInputStream(file.toString());  	  	 	   
   	  	try {
   	  		GetPeerListResponse getPeerListResponse 
-  	  		= GetPeerListResponse.parseFrom(objInputStream); 	  	
+  	  		= GetPeerListResponse.parseFrom(inputStream); 	  	
 	    	
 	      	return getPeerListResponse.getKnownPeersList();
   	  	} catch (Exception e) {
@@ -848,7 +846,7 @@ public class SDCardReadWrite {
 	 */
 	public static void writeSuperPeersList(String dir
 			, List<AgentData> data) throws IOException, RuntimeException{
-		ObjectOutputStream objOutStream = null;		
+		OutputStream outputStream = null;		
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -871,14 +869,13 @@ public class SDCardReadWrite {
     	.build();
     	    	
     	try {
-			objOutStream = new ObjectOutputStream(
-				    new BufferedOutputStream(new FileOutputStream(file)));									
-			 getSuperPeerListResponse.writeTo(objOutStream);				 
+    		outputStream = new FileOutputStream(file);
+    		getSuperPeerListResponse.writeTo(outputStream);								 
 				
     	} catch (Exception e) {
   		    throw new RuntimeException("write super peers list exception", e);
   	  	} finally {
-    		objOutStream.close();
+    		outputStream.close();
     	}
 	}
 	
@@ -909,12 +906,10 @@ public class SDCardReadWrite {
     			+ dir);
     	File file = new File(keyDir
     			, Constants.SUPER_PEERS_FILE);
-    	InputStream inputStream = new FileInputStream(file.toString());
-  	  	ObjectInputStream objInputStream =
-  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+    	InputStream inputStream = new FileInputStream(file.toString());  	  	
   	  	try {
   	  		GetSuperPeerListResponse getSuperPeerListResponse 
-  	  		= GetSuperPeerListResponse.parseFrom(objInputStream); 	  	
+  	  		= GetSuperPeerListResponse.parseFrom(inputStream); 	  	
 	    	
 	      	return getSuperPeerListResponse.getKnownSuperPeersList();
   	  	} catch (Exception e) {
@@ -945,7 +940,7 @@ public class SDCardReadWrite {
 	 */
 	public static void writeEventsList(String dir
 			, List<Event> data) throws IOException, RuntimeException{
-		ObjectOutputStream objOutStream = null;		
+		OutputStream outputStream = null;		
 		sdCard = Environment.getExternalStorageDirectory();
 		File keyDir = new File (sdCard.getAbsolutePath() 
     			+ dir);
@@ -968,14 +963,14 @@ public class SDCardReadWrite {
     	.build();
     	    	
     	try {
-			objOutStream = new ObjectOutputStream(
-				    new BufferedOutputStream(new FileOutputStream(file)));									
-			 getEventsResponse.writeTo(objOutStream);				 
+		
+			 outputStream = new FileOutputStream(file);
+     		 getEventsResponse.writeTo(outputStream);	
 				
     	} catch (Exception e) {
   		    throw new RuntimeException("write events list exception", e);
   	  	} finally {
-    		objOutStream.close();
+    		outputStream.close();
     	}
 	}
 	
@@ -1006,12 +1001,10 @@ public class SDCardReadWrite {
     			+ dir);
     	File file = new File(keyDir
     			, Constants.EVENTS_FILE);
-    	InputStream inputStream = new FileInputStream(file.toString());
-  	  	ObjectInputStream objInputStream =
-  	    new ObjectInputStream(new BufferedInputStream(inputStream));
+    	InputStream inputStream = new FileInputStream(file.toString());  	  	
   	  	try {
   	  		GetEventsResponse getEventsResponse
-  	  		= GetEventsResponse.parseFrom(objInputStream); 	  	
+  	  		= GetEventsResponse.parseFrom(inputStream); 	  	
 	    	
 	      	return getEventsResponse.getEventsList();
   	  	} catch (Exception e) {
