@@ -403,5 +403,17 @@ public class RSACrypto {
 	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 	    return keyFactory.generatePrivate(spec);
     }
+    
+    public static PrivateKey generatePrivateKey(BigInteger modulus, BigInteger exponential) throws NoSuchAlgorithmException, InvalidKeySpecException {    	
+	    RSAPrivateKeySpec rsaKeySpec = new RSAPrivateKeySpec(modulus, exponential);
+	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	    return keyFactory.generatePrivate(rsaKeySpec);
+    }
+    
+    public static PublicKey generatePublicKey(BigInteger modulus, BigInteger exponential) throws NoSuchAlgorithmException, InvalidKeySpecException {    	
+    	RSAPublicKeySpec rsaKeySpec = new RSAPublicKeySpec(modulus, exponential);
+	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	    return keyFactory.generatePublic(rsaKeySpec);
+    }
 
 }
