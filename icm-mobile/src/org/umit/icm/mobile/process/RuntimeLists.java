@@ -59,30 +59,30 @@ public class RuntimeLists {
 
 	public void setEventsList(List<Event> eventsList) {
 		synchronized(eventLock) {
-			this.eventsList.addAll(eventsList);
-			writeEventList();
+			this.eventsList.addAll(eventsList);			
 		}
+		writeEventList();
 	}
 	
 	public void addEvent(Event event) {
 		synchronized(eventLock) {
-			this.eventsList.add(event);
-			writeEventList();
+			this.eventsList.add(event);			
 		}
+		writeEventList();
 	}
 	
 	public void addPeer(AgentData agentData) {
 		synchronized(peerLock) {
-			this.peersList.add(agentData);
-			writePeerList();
+			this.peersList.add(agentData);			
 		}
+		writePeerList();
 	}
 	
 	public void addSuperPeer(AgentData agentData) {
 		synchronized(superPeerLock) {
-			this.superPeersList.add(agentData);
-			writeSuperPeerList();
+			this.superPeersList.add(agentData);			
 		}
+		writeSuperPeerList();
 	}
 
 	public List<AgentData> getPeersList() {
@@ -93,9 +93,9 @@ public class RuntimeLists {
 
 	public void setPeersList(List<AgentData> peersList) {
 		synchronized(peerLock) {
-			this.peersList.addAll(peersList);
-			writePeerList();
+			this.peersList.addAll(peersList);			
 		}
+		writePeerList();
 	}
 
 	public List<AgentData> getSuperPeersList() {
@@ -106,9 +106,9 @@ public class RuntimeLists {
 
 	public void setSuperPeersList(List<AgentData> superPeersList) {
 		synchronized(superPeerLock) {
-			this.superPeersList.addAll(superPeersList);
-			writeSuperPeerList();
+			this.superPeersList.addAll(superPeersList);			
 		}
+		writeSuperPeerList();
 	}
 
 	/**
