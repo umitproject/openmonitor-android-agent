@@ -84,20 +84,17 @@ public class CryptoKeyReader {
 		return AESCrypto.readKey(Constants.MY_SECRET_KEY_FILE);
 	}
 	
-	/**
-	 * Returns cipheredkey byte[] read from disk using 
-	 * {@link AESCrypto#readKey(String)}.
-	 * 
-	 *
-	
-	@return byte[]
-     *		
-	
-	@see         AESCrypto
-	 */
-	public static byte[] getMyCipheredKey() throws IOException {
-		return AESCrypto.readKey(Constants.MY_CIPHERED_KEY_FILE);
+	public static String getMyCipheredKeyMod() throws IOException {
+		return SDCardReadWrite.readString(Constants.MY_CIPHERED_KEY_FILE_MOD, 
+				Constants.KEYS_DIR);
 	}
+	
+	public static String getMyCipheredKeyExp() throws IOException {
+		return SDCardReadWrite.readString(Constants.MY_CIPHERED_KEY_FILE_EXP, 
+				Constants.KEYS_DIR);
+	}
+	
+	public
 	
 	/**
 	 * Returns secret key byte[] read from disk using 

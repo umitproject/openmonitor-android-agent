@@ -105,19 +105,15 @@ public class CryptoKeyWriter {
 	public static void writeMySecretKey(byte[] secretKey) throws IOException {
 		AESCrypto.saveKey(Constants.MY_SECRET_KEY_FILE, secretKey);
 	}
-	
-	/**
-	 * Writes the passed byte[] to disk. Calls {@link AESCrypto}.
-	 * 
-	 *	 
-	                          
-	@param  myCipheredKey  An object of the type byte[]
-	 *  	                          	
 
-	@see         AESCrypto
-	 */
-	public static void writeMyCipheredKey(byte[] myCipheredKey) throws IOException, RuntimeException {
-		AESCrypto.saveKey(Constants.MY_CIPHERED_KEY_FILE, myCipheredKey);
+	public static void writeMyCipheredKeyMod(String mod) throws IOException, RuntimeException {
+		SDCardReadWrite.writeString(Constants.MY_CIPHERED_KEY_FILE_MOD, 
+				Constants.KEYS_DIR, mod);
+	}
+	
+	public static void writeMyCipheredKeyExp(String exp) throws IOException, RuntimeException {
+		SDCardReadWrite.writeString(Constants.MY_CIPHERED_KEY_FILE_EXP, 
+				Constants.KEYS_DIR, exp);
 	}
 	
 	/**
