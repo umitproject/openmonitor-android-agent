@@ -47,6 +47,7 @@ import javax.crypto.Cipher;
 
 import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 
 import android.os.Environment;
 
@@ -414,6 +415,18 @@ public class RSACrypto {
     	RSAPublicKeySpec rsaKeySpec = new RSAPublicKeySpec(modulus, exponential);
 	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 	    return keyFactory.generatePublic(rsaKeySpec);
+    }
+    
+    public static RSAKey getPublicKeyIntegers(PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		RSAPublicKeySpec publicKeySpec 
+		= keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+		RSAKey rsaKey = RSAKey.newBuilder()
+		.setExp(publicKeySpec.getPublicExponent().toString())
+		.setMod(publicKeySpec.getModulus().toString())
+		.build();
+		
+    	return rsaKey;
     }
 
 }
