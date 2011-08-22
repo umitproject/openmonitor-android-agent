@@ -42,6 +42,9 @@ import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail;
+import org.umit.icm.mobile.proto.MessageProtos.Trace;
+import org.umit.icm.mobile.proto.MessageProtos.TraceRoute;
+import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.util.Log;
@@ -101,6 +104,20 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
 		.setServiceName(service.getName())
 		.setStatusCode(statusCode)
+		.build();
+		
+		Trace trace = Trace.newBuilder()
+		.setHop(1)
+		.setIp(CopyNative.traceRoute(service.getIp() 
+				+ " -p " + Integer.toString(service.getPorts().get(0))))		
+		.addPacketsTiming(1)
+		.build();
+		
+		TraceRoute traceRoute = TraceRoute.newBuilder()
+		.setTarget(service.getIp())
+		.setHops(1)
+		.setPacketSize(1)
+		.addTraces(trace)
 		.build();
 		
 		List<String> listNodes = new ArrayList<String>();
