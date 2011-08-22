@@ -471,7 +471,7 @@ public class AggregatorRetrieve {
 			 	GenerateSecretKeyResponse generateSecretKeyResponse
 			 	= AggregatorResources.generateSecretKey(
 			 			generateSecretKey, clientResource);
-			 	AggregatorActions.getTokenAndAsymmetricKeysAction(getTokenAndAsymmetricKeysResponse);			
+			 	AggregatorActions.generateSecretKeyAction(generateSecretKeyResponse);			
 		 }
 		 	
 }
