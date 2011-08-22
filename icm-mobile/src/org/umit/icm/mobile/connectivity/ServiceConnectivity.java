@@ -132,6 +132,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.setTestID((int)service.getTestID())
 		.setTimeZone(Calendar.ZONE_OFFSET)
 		.setTimeUTC(timeUTC)
+		.setTraceroute(traceRoute)
 		.addAllPassedNode(listNodes)
 		.build();				
 				
