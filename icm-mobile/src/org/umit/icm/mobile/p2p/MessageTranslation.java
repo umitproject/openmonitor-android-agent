@@ -205,8 +205,9 @@ public class MessageTranslation {
 			GenerateSecretKey.parseFrom(message);
 			break;
 			
-		case MessageID.GenerateSecretKeyResponse: 
-			GenerateSecretKeyResponse.parseFrom(message);
+		case MessageID.GenerateSecretKeyResponse:
+			P2PActions.generateSecretKeyAction(GenerateSecretKeyResponse.parseFrom(message)
+					, agentData);			
 			break;
 			
 		case MessageID.GetTokenAndAsymmetricKeys: 
