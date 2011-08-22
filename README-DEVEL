@@ -7,3 +7,29 @@ mvn install:install-file  -Dfile=path-to-your-artifact-jar \
                           -Dpackaging=jar \
                           -DlocalRepositoryPath=path-to-specific-local-repo
 
+The libs which are needed by the ICM Agent but aren't present in the Maven repository are:
+1. Google Maps API 4
+2. OSMDroid 3.0.4
+
+
+==================================================
+RUNNING UNIT TESTS
+==================================================
+In the outer most folder:
+1. mvn clean install
+
+==================================================
+BUILDING AND DEPLOYING THE APP ON THE EMULATOR
+==================================================
+In folder "icm-mobile":
+1. mvn clean install android:deploy
+
+==================================================
+USER GUIDE
+==================================================
+http://dev.umitproject.org/projects/icm-mobile/wiki
+
+==================================================
+APP OVERVIEW
+==================================================
+http://blog.umitproject.org/2011/07/icm-mobile-agent.html
