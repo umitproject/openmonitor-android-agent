@@ -23,6 +23,7 @@ package org.umit.icm.mobile.process;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -30,11 +31,14 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.crypto.SecretKey;
+
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
@@ -43,7 +47,9 @@ import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
+import org.umit.icm.mobile.utils.DiffieHellmanKeyGeneration;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
@@ -304,5 +310,53 @@ public class ProcessActions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Generates SecretKey from the receieved PublicKey.
+	 * 
+	 *
+	 
+	 @param generateSecretKeyResponse	Response message of {@link GenerateSecretKeyResponse}
+	 *
+	 
+	 @param peerIP Parameters of type String
+	 *
+	
+	 
+	 @see CryptoKeyReader
+	 */
+	public static void generateSecretKey(GenerateSecretKeyResponse generateSecretKeyResponse,
+			String peerIP) {
+		try {
+			String mod = generateSecretKeyResponse.getPublicKey().getMod();
+			String exp = generateSecretKeyResponse.getPublicKey().getExp();
+			
+			PublicKey peerPublicKey 
+			= RSACrypto.generatePublicKey(
+					new BigInteger(mod), 
+					new BigInteger(exp));
+			SecretKey secretKey 
+			= DiffieHellmanKeyGeneration.generateSecretKey(
+					CryptoKeyReader.getMyDHPrivateKey(), 
+					peerPublicKey.getEncoded());
+			CryptoKeyWriter.writePeerSecretKey(secretKey.getEncoded(), peerIP);			
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
