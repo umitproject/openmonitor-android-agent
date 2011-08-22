@@ -22,10 +22,13 @@
 
 package org.umit.icm.mobile.utils;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import android.content.Context;
 
@@ -62,12 +65,38 @@ public class CopyNative {
             DataOutputStream osExecPerm = new DataOutputStream(processExecPerm.getOutputStream());
             osExecPerm.writeBytes("chmod 755 " + filePath + "\n");
             osExecPerm.writeBytes("exit\n");
-            osExecPerm.flush();
+            osExecPerm.flush();                     
         }
         
         catch (Exception e) {
         	e.printStackTrace();
           return;
         }
-      }
+    }
+        
+    public static String traceRoute(String url) {
+    	  Process process;
+		try {
+			process = Runtime.getRuntime().exec("/data/local/busybox traceroute "+ url);
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(process.getInputStream()));
+	        int read;
+	        char[] buffer = new char[4096];
+	        StringBuffer output = new StringBuffer();
+	        while ((read = reader.read(buffer)) > 0) {
+	              output.append(buffer, 0, read);
+	        }
+	        reader.close();
+	        process.waitFor();
+	        return output.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}         
+    }
 }
