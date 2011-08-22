@@ -247,17 +247,21 @@ public class ProcessActions {
 		AgentData peer = null;
 		while(iterator.hasNext()) {
 			peer = iterator.next();
-			try {
-				MessageSender.authenticatePeer(peer, authenticatePeer);
-				if(Globals.authenticatedPeers.checkPeer(peer) == true 
-						&& peer != null && generateSecretKey != null){
-					
-					MessageSender.generateSecretKey(peer, generateSecretKey);
+			if(Globals.authenticatedPeers.checkPeer(peer) == false) {
+				try {
+					MessageSender.authenticatePeer(peer, authenticatePeer);
+					if(Globals.authenticatedPeers.checkPeer(peer) == true 
+							&& peer != null && generateSecretKey != null){
+						
+						MessageSender.generateSecretKey(peer, generateSecretKey);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		
 			}
+			
 		}
 		Globals.runtimesList.setPeersList(peers);
 		return true;
@@ -313,17 +317,21 @@ public class ProcessActions {
 		AgentData peer = null;
 		while(iterator.hasNext()) {
 			peer = iterator.next();
-			try {
-				MessageSender.authenticatePeer(peer, authenticatePeer);
-				if(Globals.authenticatedPeers.checkPeer(peer) == true 
-						&& peer != null && generateSecretKey != null){
-					
-					MessageSender.generateSecretKey(peer, generateSecretKey);
+			if(Globals.authenticatedPeers.checkPeer(peer) == false) {
+				try {
+					MessageSender.authenticatePeer(peer, authenticatePeer);
+					if(Globals.authenticatedPeers.checkPeer(peer) == true 
+							&& peer != null && generateSecretKey != null){
+						
+						MessageSender.generateSecretKey(peer, generateSecretKey);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		
 			}
+		
 		}
 		Globals.runtimesList.setSuperPeersList(superPeers);
 		return true;
