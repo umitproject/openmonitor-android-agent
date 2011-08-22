@@ -22,9 +22,12 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
@@ -33,10 +36,15 @@ import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
+import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
+import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
 import org.umit.icm.mobile.utils.CopyNative;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.ProfilerRun;
+import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
@@ -256,13 +264,45 @@ public class Initialization {
 				  , Constants.PARAMETERS_DIR) == false )
 				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 				  , Constants.PARAMETERS_DIR) == false )) {
-			CopyNative.CopyNativeFunction("/data/local", R.raw.busybox, context);
-			  
+			RegisterAgent registerAgent = RegisterAgent.newBuilder()
+			.setAgentType(Constants.AGENT_TYPE)
+			.setIp(Integer.toString(Globals.myIP))
+			.setVersionNo(Globals.versionManager.getTestsVersion())
+			.build();			
+			AggregatorRetrieve.registerAgent(registerAgent);
+			
+			if(Globals.runtimeParameters.getAgentID() != Constants.DEFAULT_AGENT_ID) {										
+				GenerateSecretKey generateSecretKey = GenerateSecretKey.newBuilder()
+				.setAgentID(Globals.runtimeParameters.getAgentID())
+				.setPublicKey(RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey()))
+				.build();
+				AggregatorRetrieve.generateSecretKey(generateSecretKey);
+				
+				if(CryptoKeyReader.checkPeerSecretKey("aggregator") == true) {
+					GetTokenAndAsymmetricKeys getTokenAndAsymmetricKeys
+					= GetTokenAndAsymmetricKeys.newBuilder()
+					.setAgentID(Globals.runtimeParameters.getAgentID())
+					.build();
+					
+					AggregatorRetrieve.getTokenAndAsymmetricKeys(getTokenAndAsymmetricKeys);
+					CopyNative.CopyNativeFunction("/data/local", R.raw.busybox, context);
+				}
+			}
+																		  
 		  }
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (RuntimeException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (NoSuchAlgorithmException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (InvalidKeySpecException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
