@@ -313,10 +313,16 @@ public class ControlActivity extends Activity {
         	} else if (Globals.p2pCommunication == true) {
         		Iterator<AgentData> iterator 
         		= Globals.runtimesList.getSuperPeersList().iterator();
+        		
+        		AgentData peer = null;
         		while(iterator.hasNext()) {
+        			peer = iterator.next();
         			try {
-						MessageForwardingAggregator.forwardWebsiteSuggestion(
-								iterator.next(), websiteSuggestion);
+        				if(Globals.authenticatedPeers.checkPeer(peer)) {
+        					MessageForwardingAggregator.forwardWebsiteSuggestion(
+    								peer, websiteSuggestion);
+        				}
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -375,10 +381,15 @@ public class ControlActivity extends Activity {
         	} else if (Globals.p2pCommunication == true) {
         		Iterator<AgentData> iterator 
         		= Globals.runtimesList.getSuperPeersList().iterator();
+        		AgentData peer = null;
         		while(iterator.hasNext()) {
+        			peer = iterator.next();
         			try {
-						MessageForwardingAggregator.forwardServiceSuggestion(
-								iterator.next(), serviceSuggestion);
+        				if(Globals.authenticatedPeers.checkPeer(peer)) {
+        					MessageForwardingAggregator.forwardServiceSuggestion(
+    								peer, serviceSuggestion);
+        				}
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
