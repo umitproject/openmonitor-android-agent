@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
@@ -312,5 +313,23 @@ public class AggregatorActions {
 	public static void getTokenAndAsymmetricKeysAction(GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse) 
 	throws Exception {
 		ProcessActions.getTokenAndAsymmetricKeys(getTokenAndAsymmetricKeysResponse);	 			
+	}
+	
+	/**
+	 * Calls {@link ProcessActions#generateSecretKey(GenerateSecretKeyResponse, String)}
+	 * 
+	 *	 
+	                          
+	@param  generateSecretKeyResponse  An object of the type GenerateSecretKeyResponse
+	 *  	                          	
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */
+	public static void generateSecretKeyAction(GenerateSecretKeyResponse generateSecretKeyResponse) 
+	throws Exception {
+		ProcessActions.generateSecretKey(generateSecretKeyResponse, "aggregator");	 			
 	}
 }

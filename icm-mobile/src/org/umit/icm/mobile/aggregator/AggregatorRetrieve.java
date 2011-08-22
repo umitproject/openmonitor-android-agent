@@ -26,6 +26,8 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -425,18 +427,15 @@ public class AggregatorRetrieve {
 	 }
 	 
 	/**
-	 * Returns a boolean object from {@link AggregatorActions} method. 
-	 * Calls {@link AggregatorResources#login(org.umit.icm.mobile.proto.MessageProtos.Login, ClientResource)}
+	 * Calls {@link AggregatorActions} method. 
+	 * Calls {@link AggregatorResources#getTokenAndAsymmetricKeys(GetTokenAndAsymmetricKeys, ClientResource)}
 	 * on the passed message 
 	 * 
 	 *	 
 	                          
-	@param  login  An object of the type Login
+	@param  getTokenAndAsymmetricKeys  An object of the type GetTokenAndAsymmetricKeys
 	 *  	                          	
-	                          
-	@return      boolean
-	 * @throws Exception 
-	 *  		                          		
+	                         		                          		
 	 
 	@see         AggregatorResources
 	 */
@@ -451,4 +450,28 @@ public class AggregatorRetrieve {
 		 	AggregatorActions.getTokenAndAsymmetricKeysAction(getTokenAndAsymmetricKeysResponse);			
 	 }
 	 	
+	 /**
+		 * Calls {@link AggregatorActions} method. 
+		 * Calls {@link AggregatorResources#getTokenAndAsymmetricKeys(GetTokenAndAsymmetricKeys, ClientResource)}
+		 * on the passed message 
+		 * 
+		 *	 
+		                          
+		@param  getTokenAndAsymmetricKeys  An object of the type GetTokenAndAsymmetricKeys
+		 *  	                          	
+		                         		                          		
+		 
+		@see         AggregatorResources
+		 */
+		 public synchronized static void generateSecretKey(
+				 GenerateSecretKey generateSecretKey) 
+		 throws Exception {
+			 	ClientResource clientResource 
+			 	= AggregatorResources.getClientResource(Constants.AGGR_GENERATE_SECRET_KEY);
+			 	GenerateSecretKeyResponse generateSecretKeyResponse
+			 	= AggregatorResources.generateSecretKey(
+			 			generateSecretKey, clientResource);
+			 	AggregatorActions.getTokenAndAsymmetricKeysAction(getTokenAndAsymmetricKeysResponse);			
+		 }
+		 	
 }
