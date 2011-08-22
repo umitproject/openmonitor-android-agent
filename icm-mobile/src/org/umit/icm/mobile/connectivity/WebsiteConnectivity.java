@@ -42,8 +42,11 @@ import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
+import org.umit.icm.mobile.proto.MessageProtos.Trace;
+import org.umit.icm.mobile.proto.MessageProtos.TraceRoute;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
+import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 
@@ -165,6 +168,19 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			, Map<String, String> websiteHeader, long responseTime) 
 	throws IOException, RuntimeException, NoSuchAlgorithmException {
 		
+		Trace trace = Trace.newBuilder()
+		.setHop(1)
+		.setIp(CopyNative.traceRoute(website.getUrl().substring(7)))		
+		.addPacketsTiming(1)
+		.build();
+		
+		TraceRoute traceRoute = TraceRoute.newBuilder()
+		.setTarget(website.getUrl())
+		.setHops(1)
+		.setPacketSize(1)
+		.addTraces(trace)
+		.build();
+		
 		int statusCode = WebsiteOpen.getStatusCode(websiteHeader);
 					
 		WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
@@ -188,6 +204,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setTimeZone(Calendar.ZONE_OFFSET)
 		.setTimeUTC(timeUTC)
 		.addAllPassedNode(listNodes)
+		.setTraceroute(traceRoute)
 		.build();
 				
 		WebsiteReport websiteReport = WebsiteReport.newBuilder()		
