@@ -281,8 +281,7 @@ public class P2PActions {
 	@see         AggregatorRetrieve
 	 */
 	public static void generateSecretKeyAction(GenerateSecretKeyResponse generateSecretKeyResponse,
-			AgentData agentData) 
-	throws Exception {
+			AgentData agentData) {
 		ProcessActions.generateSecretKey(generateSecretKeyResponse, 
 				Long.toString(agentData.getAgentID()));	 			
 	}
