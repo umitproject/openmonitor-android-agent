@@ -29,6 +29,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.crypto.SecretKey;
@@ -36,13 +37,17 @@ import javax.crypto.SecretKey;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
 import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
@@ -206,6 +211,54 @@ public class ProcessActions {
 	 @see AgentData
 	 */
 	public synchronized static boolean updatePeersList(List<AgentData> peers) {
+		Iterator<AgentData> iterator = peers.iterator();	
+		RSAKey cipheredKey = RSAKey.newBuilder()
+		.setExp(Globals.keyManager.getMyCipheredKeyExp())
+		.setMod(Globals.keyManager.getMyCipheredKeyMod())
+		.build();
+		
+		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
+		.setAgentType(Constants.AGENT_TYPE_NUMBER)
+		.setAgentPort(Constants.MY_TCP_PORT)
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setCipheredPublicKey(cipheredKey)
+		.build();
+		
+		RSAKey rsaKey;
+		GenerateSecretKey generateSecretKey = null;
+		try {
+			rsaKey = RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey());
+			
+			generateSecretKey = GenerateSecretKey.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setPublicKey(rsaKey)
+			.build();
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvalidKeySpecException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		AgentData peer = null;
+		while(iterator.hasNext()) {
+			peer = iterator.next();
+			try {
+				MessageSender.authenticatePeer(peer, authenticatePeer);
+				if(Globals.authenticatedPeers.checkPeer(peer) == true 
+						&& peer != null && generateSecretKey != null){
+					
+					MessageSender.generateSecretKey(peer, generateSecretKey);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Globals.runtimesList.setPeersList(peers);
 		return true;
 	}
@@ -224,6 +277,54 @@ public class ProcessActions {
 	 @see AgentData
 	 */
 	public synchronized static boolean updateSuperPeersList(List<AgentData> superPeers) {
+		Iterator<AgentData> iterator = superPeers.iterator();	
+		RSAKey cipheredKey = RSAKey.newBuilder()
+		.setExp(Globals.keyManager.getMyCipheredKeyExp())
+		.setMod(Globals.keyManager.getMyCipheredKeyMod())
+		.build();
+		
+		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
+		.setAgentType(Constants.AGENT_TYPE_NUMBER)
+		.setAgentPort(Constants.MY_TCP_PORT)
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setCipheredPublicKey(cipheredKey)
+		.build();
+		
+		RSAKey rsaKey;
+		GenerateSecretKey generateSecretKey = null;
+		try {
+			rsaKey = RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey());
+			
+			generateSecretKey = GenerateSecretKey.newBuilder()
+			.setAgentID(Globals.runtimeParameters.getAgentID())
+			.setPublicKey(rsaKey)
+			.build();
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvalidKeySpecException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		AgentData peer = null;
+		while(iterator.hasNext()) {
+			peer = iterator.next();
+			try {
+				MessageSender.authenticatePeer(peer, authenticatePeer);
+				if(Globals.authenticatedPeers.checkPeer(peer) == true 
+						&& peer != null && generateSecretKey != null){
+					
+					MessageSender.generateSecretKey(peer, generateSecretKey);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Globals.runtimesList.setSuperPeersList(superPeers);
 		return true;
 	}
