@@ -24,6 +24,7 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 import java.util.Calendar;
 
+import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
@@ -34,6 +35,7 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
+import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
@@ -247,13 +249,14 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public void registration() {
+	public void registration(Context context) {
 	
 	  try {
 		if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
 				  , Constants.PARAMETERS_DIR) == false )
 				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 				  , Constants.PARAMETERS_DIR) == false )) {
+			CopyNative.CopyNativeFunction("/data/local", R.raw.busybox, context);
 			  
 		  }
 	} catch (IOException e) {
