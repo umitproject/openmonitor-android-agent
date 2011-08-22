@@ -144,10 +144,16 @@ public class CommunicationService extends Service {
 					.setHeader(requestHeader)
 					.setCount(Constants.MAX_SUPER_PEERS)
 					.build();
+					
+					AgentData peer = null;
 					while(iterator.hasNext()) {
-						try {
-							MessageSender.receivePeerList(iterator.next(), getPeerList);
-							MessageSender.receiveSuperPeerList(iterator.next(), getSuperPeerList);
+						try {							
+							peer = iterator.next();
+							if(Globals.authenticatedPeers.checkPeer(peer) == true) {
+								MessageSender.receivePeerList(peer, getPeerList);
+								MessageSender.receiveSuperPeerList(peer, getSuperPeerList);
+							}
+							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -243,9 +249,14 @@ public class CommunicationService extends Service {
 					.setHeader(requestHeader)
 					.addLocations(location)
 					.build();
-					while(iterator.hasNext()) {							
+					
+					AgentData peer = null;
+					while(iterator.hasNext()) {
+						peer = iterator.next();						
 						try {
-							MessageForwardingAggregator.forwardGetEvents(iterator.next(), getEvents);
+							if(Globals.authenticatedPeers.checkPeer(peer) == true) {
+								MessageForwardingAggregator.forwardGetEvents(peer, getEvents);
+							}							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
