@@ -26,11 +26,13 @@ import java.math.BigInteger;
 import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeerResponse;
 import org.umit.icm.mobile.proto.MessageProtos.ForwardingMessageResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
@@ -263,5 +265,25 @@ public class P2PActions {
 		= Base64.decodeBase64(forwardingMessageResponse.getEncodedMessage().getBytes());
 		MessageTranslation.translateMessage(Integer.parseInt(forwardingMessageResponse.getIdentifier())
 				, decodedMessage, agentData);
+	}
+	
+	/**
+	 * Calls {@link ProcessActions#generateSecretKey(GenerateSecretKeyResponse, String)}
+	 * 
+	 *	 
+	                          
+	@param  generateSecretKeyResponse  An object of the type GenerateSecretKeyResponse
+	 *  	                          	
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */
+	public static void generateSecretKeyAction(GenerateSecretKeyResponse generateSecretKeyResponse,
+			AgentData agentData) 
+	throws Exception {
+		ProcessActions.generateSecretKey(generateSecretKeyResponse, 
+				Long.toString(agentData.getAgentID()));	 			
 	}
 }
