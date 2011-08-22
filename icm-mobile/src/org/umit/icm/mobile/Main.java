@@ -32,6 +32,7 @@ import org.umit.icm.mobile.gui.MapActivityTab;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.process.InitializationThread;
+import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
@@ -89,7 +90,8 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try { /*Register Agent should be called here*/	        	
+	        try { /*Register Agent should be called here*/	 
+	        	CopyNative.CopyNativeFunction("/data/local", R.raw.busybox, Main.this);
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
 				new InitializationThread(Main.this).start();										
