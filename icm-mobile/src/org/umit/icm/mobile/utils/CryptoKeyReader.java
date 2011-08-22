@@ -142,4 +142,40 @@ public class CryptoKeyReader {
 	public static PublicKey getAggregatorPublicKey() throws IOException {
 		return RSACrypto.readPublicKey(Constants.AGGR_PUBLIC_KEY_FILE);
 	}
+	
+	/**
+	 * Returns {@link PublicKey} read from disk using 
+	 * {@link RSACrypto#readPublicKey(String)}.
+	 * 
+	 *
+	
+	@return PublicKey
+     *		
+
+	@see         PublicKey
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static PublicKey getMyDHPublicKey() throws IOException {
+		return RSACrypto.readPublicKey(Constants.MY_DH_PUBLIC_KEY_FILE);
+	}
+	
+	/**
+	 * Returns {@link PrivateKey} read from disk using 
+	 * {@link RSACrypto#readPrivateKey(String)}.
+	 * 
+	 *
+	
+	@return PrivateKey
+     *		
+
+	@see         PrivateKey
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static PrivateKey getMyDHPrivateKey() throws IOException {
+		return RSACrypto.readPrivateKey(Constants.MY_DH_PRIVATE_KEY_FILE);
+	}
 }

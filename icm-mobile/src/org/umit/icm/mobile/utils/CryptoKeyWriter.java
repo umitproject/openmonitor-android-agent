@@ -160,4 +160,58 @@ public class CryptoKeyWriter {
     			, publicKeySpec.getModulus()
     			, publicKeySpec.getPublicExponent());
 	}
+	
+	/**
+	 * Writes the passed {@link PublicKey} to disk. Calls {@link KeyFactory},
+	 * {@link RSAPublicKeySpec} and {@link RSACrypto}.
+	 * 
+	 *	 
+	                          
+	@param  publicKey  An object of the type {@link PublicKey}
+	 *  	                          	
+	                          
+	@see         KeyFactory
+	 *
+
+	@see         RSAPublicKeySpec
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static void writeMyDHPublicKey(PublicKey publicKey) 
+		throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		RSAPublicKeySpec publicKeySpec 
+		= keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+    	RSACrypto.saveKey(Constants.MY_DH_PUBLIC_KEY_FILE
+    			, publicKeySpec.getModulus()
+    			, publicKeySpec.getPublicExponent());
+	}
+	
+	/**
+	 * Writes the passed {@link PrivateKey} to disk. Calls {@link KeyFactory},
+	 * {@link RSAPrivateKeySpec} and {@link RSACrypto}.
+	 * 
+	 *	 
+	                          
+	@param  privateKey  An object of the type {@link PrivateKey}
+	 *  	                          	
+	                          
+	@see         KeyFactory
+	 *
+
+	@see         RSAPrivateKeySpec
+	 *
+	
+	@see         RSACrypto
+	 */
+	public static void writeMyDHPrivateKey(PrivateKey privateKey) 
+	throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+	KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	RSAPrivateKeySpec privateKeySpec 
+	= keyFactory.getKeySpec(privateKey, RSAPrivateKeySpec.class);
+	RSACrypto.saveKey(Constants.MY_DH_PRIVATE_KEY_FILE
+			, privateKeySpec.getModulus()
+			, privateKeySpec.getPrivateExponent());
+	}
 }
