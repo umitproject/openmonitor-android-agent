@@ -21,6 +21,7 @@
 
 package org.umit.icm.mobile.maps;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -188,9 +189,11 @@ public class OSMMaps implements AbstractMap {
 				drawable = context.getResources().getDrawable(R.drawable.reddot);
 			}
 			
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+			
 			OverlayItem overlayItem 
 			= new OverlayItem(event.getTestType(), event.getEventType() + "\n" +
-					event.getTimeUTC() + "\n", gpt);
+					simpleDateFormat.format(event.getTimeUTC()) + "\n", gpt);
 			drawable.setBounds(0,0, 10, 10);
 			overlayItem.setMarker(drawable);
 			overlayList.add(overlayItem);	

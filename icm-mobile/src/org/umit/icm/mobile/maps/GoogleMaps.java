@@ -21,6 +21,7 @@
 
 package org.umit.icm.mobile.maps;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -205,10 +206,12 @@ public class GoogleMaps implements AbstractMap {
 					|| event.getEventType().equals("OFF_LINE")) {
 				drawable = context.getResources().getDrawable(R.drawable.reddot);
 			}
-			
+						
+	        SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+	        
 			OverlayItem overlayItem 
 			= new OverlayItem(gpt, event.getTestType(), event.getEventType() + "\n" +
-					event.getTimeUTC() + "\n");
+					 simpleDateFormat.format(event.getTimeUTC()) + "\n");
 			drawable.setBounds(0,0, 10, 10);
 			overlayItem.setMarker(drawable);
 			overlayList.add(overlayItem);				
