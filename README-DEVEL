@@ -11,6 +11,7 @@ The libs which are needed by the ICM Agent but aren't present in the Maven repos
 1. Google Maps API 4
 2. OSMDroid 3.0.4
 
+These can be downloaded from: http://dev.umitproject.org/projects/icm-mobile/files
 
 ==================================================
 RUNNING UNIT TESTS
@@ -33,3 +34,24 @@ http://dev.umitproject.org/projects/icm-mobile/wiki
 APP OVERVIEW
 ==================================================
 http://blog.umitproject.org/2011/07/icm-mobile-agent.html
+
+==================================================
+GIT REPOSITORY PUBLIC ACCESS
+==================================================
+git clone http://git.umitproject.org/icm-mobile.git
+
+==================================================
+GIT REPOSITORY DEVEL ACCESS
+==================================================
+git clone umitgit@dev.umitproject.org:/icm-mobile.git
+
+==================================================
+Other useful links
+==================================================
+1. Mobile agent screen-shot walkthrough: http://blog.umitproject.org/2011/08/openmonitor-mobile-agent-screenshot.html
+2. Working on a large-scale Android project: http://blog.umitproject.org/2011/08/mobile-woes-working-on-large-scale.html
+3. Common JUnit error: http://blog.umitproject.org/2011/08/junit-javalangverifyerror-failure-in.html
+4. Using Protobuf in Android and Maven: http://blog.umitproject.org/2011/08/using-google-protobufs-in-android-and.html
+5. Using Apache Maven as a build manager for Android projects: http://blog.umitproject.org/2011/05/using-apache-maven-as-build-manager-for.html
+6. i10n and L8n in Android: http://blog.umitproject.org/2011/05/i10n-and-l8n-in-android.html
+7. Unstaged Changes in Git: http://blog.umitproject.org/2011/05/unstaged-changes-in-git.html

@@ -1,0 +1,10 @@
+The Mobile Agent is an integral part of the Umit OpenMonitor. The mobile agent is responsible for running connectivity tests and communicating with the cloud aggregator and other agents -- both desktop and mobile. 
+
+The source code consists of two folders: 1) icm-mobile, 2) icm-mobiletests. The former contains the actual code of the agent while the latter contains the unit tests.
+
+The aggregator code can be found here: http://dev.umitproject.org/projects/icm-aggregator
+The desktop agent code can be found here: http://dev.umitproject.org/projects/desktop-agent
+
+The mobile agent source code is released under the GPL 2.0 License.
+
+Please refer to README-DEVEL for development information.
