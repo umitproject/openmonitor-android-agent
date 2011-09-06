@@ -66,7 +66,8 @@ public class P2PCommunication {
 		byte [] completeMessage;		
 		message = MessageBuilder.generateMessageWithoutLength(messageID, rawMessage);
 		if(Constants.P2P_ENCRYPTION == true) {
-			byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey(
+					Long.toString(agentInfo.getAgentID()));
 			cipherBytes = AESCrypto.encrypt(symmetricKey, message);
 		} else {
 			cipherBytes = message;
