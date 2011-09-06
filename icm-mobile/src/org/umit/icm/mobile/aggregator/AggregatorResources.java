@@ -59,6 +59,7 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AESCrypto;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
@@ -149,7 +150,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getPeerList.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -160,7 +161,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return GetPeerListResponse.parseFrom(plainBytes);
@@ -200,7 +201,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getSuperPeerList.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -211,7 +212,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return GetSuperPeerListResponse.parseFrom(plainBytes);
@@ -250,7 +251,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getEvents.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -261,7 +262,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return GetEventsResponse.parseFrom(plainBytes);
@@ -300,7 +301,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendWebsiteReport.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -312,7 +313,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return SendReportResponse.parseFrom(plainBytes);
@@ -351,7 +352,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendServiceReport.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -362,7 +363,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return SendReportResponse.parseFrom(plainBytes);
@@ -401,7 +402,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newVersion.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -413,7 +414,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return NewVersionResponse.parseFrom(plainBytes);
@@ -452,7 +453,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newTests.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -463,7 +464,7 @@ public class AggregatorResources {
 		 Representation response 
 		 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return NewTestsResponse.parseFrom(plainBytes);
@@ -502,7 +503,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, websiteSuggestion.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -513,7 +514,7 @@ public class AggregatorResources {
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return TestSuggestionResponse.parseFrom(plainBytes);
@@ -552,7 +553,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, serviceSuggestion.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -563,7 +564,7 @@ public class AggregatorResources {
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return TestSuggestionResponse.parseFrom(plainBytes);
@@ -613,7 +614,7 @@ public class AggregatorResources {
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return CheckAggregatorResponse.parseFrom(plainBytes);
@@ -652,7 +653,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
@@ -663,7 +664,7 @@ public class AggregatorResources {
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null));
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
 					 Base64.decodeBase64(response.getText().getBytes()));
 			 return LoginResponse.parseFrom(plainBytes);
@@ -698,7 +699,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, logout.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
