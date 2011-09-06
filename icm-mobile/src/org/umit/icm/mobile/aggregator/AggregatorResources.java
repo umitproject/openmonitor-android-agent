@@ -30,7 +30,6 @@ import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
-import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
@@ -603,7 +602,7 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = Globals.keyManager.getMySecretKey();
+			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, checkAggregator.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
