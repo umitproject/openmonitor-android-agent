@@ -1113,14 +1113,8 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){																								
-				 
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
-				.setToken("token")
-				.build();
-				
 				CheckAggregator checkAggregator = CheckAggregator.newBuilder()
-				.setHeader(requestHeader)
+				.setAgentType(Constants.AGENT_TYPE)
 				.build();
 				
 				try {
