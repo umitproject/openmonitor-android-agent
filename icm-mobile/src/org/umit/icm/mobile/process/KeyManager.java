@@ -34,18 +34,16 @@ import java.security.spec.InvalidKeySpecException;
 
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
 
-public class KeyManager {
-	private byte[] mySecretKey;
+public class KeyManager {	
 	private PrivateKey myPrivateKey;
 	private PublicKey myPublicKey;
 	private String myCipheredKeyMod;
 	private String myCipheredKeyExp;
 	
-	public KeyManager(byte[] mySecretKey, PrivateKey myPrivateKey,
+	public KeyManager(PrivateKey myPrivateKey,
 			PublicKey myPublicKey, String myCipheredKeyMod,
 			String myCipheredKeyExp) {
-		super();
-		this.mySecretKey = mySecretKey;
+		super();		
 		this.myPrivateKey = myPrivateKey;
 		this.myPublicKey = myPublicKey;
 		this.myCipheredKeyMod = myCipheredKeyMod;
@@ -55,25 +53,6 @@ public class KeyManager {
 	public KeyManager() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	
-	public synchronized byte[] getMySecretKey() {
-		return mySecretKey;
-	}
-	
-	/**
-	 * Writes the SecretKey to disk.
-	 *
-	 *
-	 
-	 @param mySecretKey SecretKey of type byte[]
-	 *
-	 
-	 @see CryptoKeyWriter
-	 */
-	public synchronized void setMySecretKey(byte[] mySecretKey) throws IOException {
-		this.mySecretKey = mySecretKey;
-		CryptoKeyWriter.writeMySecretKey(mySecretKey);
 	}
 
 	public synchronized PrivateKey getMyPrivateKey() {
