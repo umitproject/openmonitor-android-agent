@@ -10,7 +10,7 @@ mvn install:install-file  -Dfile=osmdroid-3.0.4.jar \
                           -Dpackaging=jar 
 
 
-mvn install:install-file  -Dfile=osmdroid-3.0.4.jar \
+mvn install:install-file  -Dfile=maps-4_r1.jar \
                           -DgroupId=com.google.android.maps \
                           -DartifactId=maps \
                           -Dversion=4_r1 \
