@@ -41,9 +41,7 @@ import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
-import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
-import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
+
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
@@ -83,11 +81,9 @@ public class ProcessActions {
 			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
 			RequestHeader requestHeader = RequestHeader.newBuilder()
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setToken(Globals.runtimeParameters.getToken())
 			.build();
 			
 			NewVersion newVersion = NewVersion.newBuilder()
-			.setHeader(requestHeader)
 			.setAgentVersionNo(Globals.versionManager.getAgentVersion())
 			.setAgentType(Constants.AGENT_TYPE)
 			.build();
@@ -116,11 +112,9 @@ public class ProcessActions {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
 			RequestHeader requestHeader = RequestHeader.newBuilder()
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setToken(Globals.runtimeParameters.getToken())
 			.build();
 			
 			NewTests newTests = NewTests.newBuilder()
-			.setHeader(requestHeader)
 			.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
 			.build();
 			AggregatorRetrieve.checkTests(newTests);
@@ -225,14 +219,9 @@ public class ProcessActions {
 		.build();
 		
 		RSAKey rsaKey;
-		GenerateSecretKey generateSecretKey = null;
 		try {
 			rsaKey = RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey());
 			
-			generateSecretKey = GenerateSecretKey.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setPublicKey(rsaKey)
-			.build();
 		} catch (NoSuchAlgorithmException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -250,11 +239,7 @@ public class ProcessActions {
 			if(Globals.authenticatedPeers.checkPeer(peer) == false) {
 				try {
 					MessageSender.authenticatePeer(peer, authenticatePeer);
-					if(Globals.authenticatedPeers.checkPeer(peer) == true 
-							&& peer != null && generateSecretKey != null){
-						
-						MessageSender.generateSecretKey(peer, generateSecretKey);
-					}
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -295,14 +280,9 @@ public class ProcessActions {
 		.build();
 		
 		RSAKey rsaKey;
-		GenerateSecretKey generateSecretKey = null;
 		try {
 			rsaKey = RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey());
-			
-			generateSecretKey = GenerateSecretKey.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setPublicKey(rsaKey)
-			.build();
+
 		} catch (NoSuchAlgorithmException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -320,11 +300,7 @@ public class ProcessActions {
 			if(Globals.authenticatedPeers.checkPeer(peer) == false) {
 				try {
 					MessageSender.authenticatePeer(peer, authenticatePeer);
-					if(Globals.authenticatedPeers.checkPeer(peer) == true 
-							&& peer != null && generateSecretKey != null){
-						
-						MessageSender.generateSecretKey(peer, generateSecretKey);
-					}
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -359,113 +335,5 @@ public class ProcessActions {
 		}
 		return true;
 	}
-	
-	/**
-	 * Adds the various parameters: {token, cipheredKey, publicKey
-	 * and privateKey} received from the aggregator after registration.
-	 * 
-	 *
-	 
-	 @param getTokenAndAsymmetricKeysResponse	Response message of {@link GetTokenAndAsymmetricKeysResponse}
-	 *	 
-	 
-	 @see KeyManager
-	 *
-	 
-	 @see RuntimeParameters
-	 */
-	public static void getTokenAndAsymmetricKeys (GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeysResponse) {
-		try {
-			Globals.runtimeParameters.setToken(getTokenAndAsymmetricKeysResponse.getToken());
-			
-			Globals.keyManager.setMyCipheredKeyMod(
-					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getMod());
-			Globals.keyManager.setMyCipheredKeyExp(
-					getTokenAndAsymmetricKeysResponse.getCipheredPublicKey().getExp());
-			
-			BigInteger privateKeyMod 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPrivateKey().getMod());
-			BigInteger privateKeyExp 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPrivateKey().getExp());
-			PrivateKey privateKey 
-			= RSACrypto.generatePrivateKey(privateKeyMod, privateKeyExp);
-			Globals.keyManager.setMyPrivateKey(privateKey);
-			
-			BigInteger publicKeyMod 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPublicKey().getMod());
-			BigInteger publicKeyExp 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getPublicKey().getExp());
-			PublicKey publicKey 
-			= RSACrypto.generatePublicKey(publicKeyMod, publicKeyExp);										
-			Globals.keyManager.setMyPublicKey(publicKey);
-			
-			BigInteger publicKeyModAggr 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey().getMod());
-			BigInteger publicKeyExpAggr 
-			= new BigInteger(getTokenAndAsymmetricKeysResponse.getAggregatorPublicKey().getExp());
-			PublicKey publicKeyAggr 
-			= RSACrypto.generatePublicKey(publicKeyModAggr, publicKeyExpAggr);													
-			CryptoKeyWriter.writeAggregatorPublicKey(publicKeyAggr);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Generates SecretKey from the receieved PublicKey.
-	 * 
-	 *
-	 
-	 @param generateSecretKeyResponse	Response message of {@link GenerateSecretKeyResponse}
-	 *
-	 
-	 @param peerIP Parameters of type String
-	 *
-	
-	 
-	 @see CryptoKeyReader
-	 */
-	public static void generateSecretKey(GenerateSecretKeyResponse generateSecretKeyResponse,
-			String peerIP) {
-		try {
-			String mod = generateSecretKeyResponse.getPublicKey().getMod();
-			String exp = generateSecretKeyResponse.getPublicKey().getExp();
-			
-			PublicKey peerPublicKey 
-			= RSACrypto.generatePublicKey(
-					new BigInteger(mod), 
-					new BigInteger(exp));
-			SecretKey secretKey 
-			= DiffieHellmanKeyGeneration.generateSecretKey(
-					CryptoKeyReader.getMyDHPrivateKey(), 
-					peerPublicKey.getEncoded());
-			CryptoKeyWriter.writePeerSecretKey(secretKey.getEncoded(), peerIP);			
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+
 }

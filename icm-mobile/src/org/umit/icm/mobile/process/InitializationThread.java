@@ -38,11 +38,9 @@ public class InitializationThread extends Thread {
 		
 		RequestHeader requestHeader = RequestHeader.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setToken(Globals.runtimeParameters.getToken())
 		.build();
 		
 		Login login = Login.newBuilder()
-		.setHeader(requestHeader)
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		try {

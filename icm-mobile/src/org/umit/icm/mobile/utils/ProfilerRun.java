@@ -480,7 +480,6 @@ public class ProfilerRun {
 			public void task (){
 				RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 			}
 			
@@ -658,16 +657,13 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				ServiceSuggestion serviceSuggestion =
 					ServiceSuggestion.newBuilder()
-					.setEmailAddress("email")
 					.setHostName("name")
 					.setIp("ip")
 					.setServiceName("name")
-					.setHeader(requestHeader)
 					.build();
 		    	try {
 					boolean bool = 
@@ -699,13 +695,12 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
+
 				.build();
 				
 				WebsiteSuggestion websiteSuggestion 
 				= WebsiteSuggestion.newBuilder()
-				.setEmailAddress("email")
-				.setHeader(requestHeader)
+
 				.setWebsiteURL("website")
 				.build();
 		    	try {
@@ -738,11 +733,9 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				NewTests newTests = NewTests.newBuilder()
-				.setHeader(requestHeader)
 				.setCurrentTestVersionNo(10)
 				.build();
 				
@@ -776,11 +769,9 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				NewVersion newVersion = NewVersion.newBuilder()
-				.setHeader(requestHeader)
 				.setAgentType("MOBILE")
 				.setAgentVersionNo(10)
 				.build();
@@ -815,7 +806,6 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
@@ -854,7 +844,6 @@ public class ProfilerRun {
 				.build(); 
 				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReport)
 				.build();
 				
@@ -888,7 +877,6 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
@@ -928,7 +916,6 @@ public class ProfilerRun {
 				
 				SendWebsiteReport sendWebsiteReport 
 				= SendWebsiteReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(websiteReport)
 				.build();
 				
@@ -962,7 +949,6 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();
 				
 				Location location = Location.newBuilder()
@@ -970,8 +956,7 @@ public class ProfilerRun {
 				.setLongitude(10.1)
 				.build();
 				 
-				GetEvents getEvents = GetEvents.newBuilder()
-				.setHeader(requestHeader)				
+				GetEvents getEvents = GetEvents.newBuilder()			
 				.addLocations(location)
 				.build();
 				
@@ -1006,11 +991,9 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();																
 				 
-				GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-				.setHeader(requestHeader)				
+				GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()				
 				.build();
 				
 				try {
@@ -1043,11 +1026,9 @@ public class ProfilerRun {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(10)
-				.setToken("token")
 				.build();																
 				 
-				GetPeerList getPeerList = GetPeerList.newBuilder()
-				.setHeader(requestHeader)				
+				GetPeerList getPeerList = GetPeerList.newBuilder()			
 				.build();
 				
 				try {

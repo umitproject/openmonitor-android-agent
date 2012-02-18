@@ -24,8 +24,6 @@ package org.umit.icm.mobile.maps;
 import java.util.List;
 
 import com.google.android.maps.OverlayItem;
-
-
 import android.content.Context;
 import android.view.View;
 

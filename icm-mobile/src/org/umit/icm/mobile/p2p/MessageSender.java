@@ -219,24 +219,6 @@ public class MessageSender {
 		P2PCommunication.sendMessage(agentData, forwardingMessage.toByteArray(),
 				MessageID.ForwardingMessage);		
 	}
-	
-	/**
-	 * Sends a {@link GenerateSecretKey} message.
-	 * 
-	 * 
-	 
-	 @param generateSecretKey message of type {@link GenerateSecretKey}
-	 *
-	 
-	 @param agentData message of type {@link AgentData}
-	 *
-	 	 
-	 @see P2PCommunication
-	 */
-	public static void generateSecretKey(AgentData agentData, GenerateSecretKey generateSecretKey) 
-	throws Exception {
-		P2PCommunication.sendMessagePublic(agentData, generateSecretKey.toByteArray(),
-				MessageID.GenerateSecretKey);		
-	}
+
 	
 }

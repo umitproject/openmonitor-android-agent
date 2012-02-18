@@ -120,10 +120,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(websiteReport)
 				.build();				
 				if(Globals.aggregatorCommunication != false) {

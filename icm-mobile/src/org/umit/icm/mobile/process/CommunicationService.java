@@ -109,15 +109,12 @@ public class CommunicationService extends Service {
 					try {		
 						RequestHeader requestHeader = RequestHeader.newBuilder()
 						.setAgentID(Globals.runtimeParameters.getAgentID())
-						.setToken(Globals.runtimeParameters.getToken())
 						.build();
 						
 						GetPeerList getPeerList = GetPeerList.newBuilder()
-						.setHeader(requestHeader)
 						.build();
 						AggregatorRetrieve.getPeerList(getPeerList);
 						GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-						.setHeader(requestHeader)
 						.build();
 						AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
 					} catch (IOException e1) {
@@ -130,18 +127,15 @@ public class CommunicationService extends Service {
 				} else if(Globals.p2pCommunication == true) {
 					RequestHeader requestHeader = RequestHeader.newBuilder()
 					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.setToken(Globals.runtimeParameters.getToken())
 					.build();
 					
 					Iterator<AgentData> iterator 
 					= Globals.runtimesList.getSuperPeersList().iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
-					.setHeader(requestHeader)
 					.setCount(Constants.MAX_PEERS)
 					.build();
 					
 					GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-					.setHeader(requestHeader)
 					.setCount(Constants.MAX_SUPER_PEERS)
 					.build();
 					
@@ -204,7 +198,6 @@ public class CommunicationService extends Service {
 				if(Globals.aggregatorCommunication == true) {	
 					RequestHeader requestHeader = RequestHeader.newBuilder()
 					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.setToken(Globals.runtimeParameters.getToken())
 					.build();
 					
 					Location location = Location.newBuilder()
@@ -213,7 +206,6 @@ public class CommunicationService extends Service {
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
-					.setHeader(requestHeader)
 					.addLocations(location)
 					.build();
 					
@@ -235,7 +227,6 @@ public class CommunicationService extends Service {
 				} else if(Globals.p2pCommunication == true) {
 					RequestHeader requestHeader = RequestHeader.newBuilder()
 					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.setToken(Globals.runtimeParameters.getToken())
 					.build();
 					
 					Iterator<AgentData> iterator 
@@ -246,7 +237,6 @@ public class CommunicationService extends Service {
 					.build();
 					
 					GetEvents getEvents = GetEvents.newBuilder()
-					.setHeader(requestHeader)
 					.addLocations(location)
 					.build();
 					

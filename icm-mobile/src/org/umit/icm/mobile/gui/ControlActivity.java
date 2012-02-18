@@ -283,13 +283,10 @@ public class ControlActivity extends Activity {
 		protected String doInBackground(String... args) {
 			RequestHeader requestHeader = RequestHeader.newBuilder()
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setToken(Globals.runtimeParameters.getToken())
 			.build();
 			
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
-        	.setEmailAddress(args[0])
-        	.setHeader(requestHeader)
         	.setWebsiteURL(args[1])
         	.build();
         	
@@ -349,14 +346,11 @@ public class ControlActivity extends Activity {
 		protected String doInBackground(String... args) {
 			RequestHeader requestHeader = RequestHeader.newBuilder()
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setToken(Globals.runtimeParameters.getToken())
 			.build();
 			
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
-        	.setEmailAddress(args[0])
         	.setServiceName(args[1])
-        	.setHeader(requestHeader)
         	.setHostName(args[2])
         	.setIp(args[3])      
         	.build();

@@ -201,23 +201,7 @@ public class MessageTranslation {
 			WebsiteSuggestion.parseFrom(message);
 			break;
 		
-		case MessageID.GenerateSecretKey: 
-			GenerateSecretKey.parseFrom(message);
-			break;
-			
-		case MessageID.GenerateSecretKeyResponse:
-			P2PActions.generateSecretKeyAction(GenerateSecretKeyResponse.parseFrom(message)
-					, agentData);			
-			break;
-			
-		case MessageID.GetTokenAndAsymmetricKeys: 
-			GetTokenAndAsymmetricKeys.parseFrom(message);
-			break;
-			
-		case MessageID.GetTokenAndAsymmetricKeysResponse: 
-			GetTokenAndAsymmetricKeysResponse.parseFrom(message);
-			break;
-	
+
 		default:
 			throw new RuntimeException("Invalid message");
 		}				

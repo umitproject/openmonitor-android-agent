@@ -181,10 +181,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReport)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -239,10 +237,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportHTTPS)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -297,10 +293,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportFTP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -355,10 +349,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportPOP3)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -413,10 +405,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportIMAP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -471,10 +461,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportGtalk)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
@@ -529,10 +517,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setToken(Globals.runtimeParameters.getToken())
 				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setHeader(requestHeader)
 				.setReport(serviceReportMSN)
 				.build();
 				if(Globals.aggregatorCommunication != false) {

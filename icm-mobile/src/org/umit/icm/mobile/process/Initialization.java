@@ -36,8 +36,7 @@ import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
-import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys;
+
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
@@ -257,8 +256,10 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public void registration(Context context) {
+	public void registration(Context context) 
+	{
 	
+			
 	  try {
 		if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
 				  , Constants.PARAMETERS_DIR) == false )
@@ -270,25 +271,7 @@ public class Initialization {
 			.setVersionNo(Globals.versionManager.getTestsVersion())
 			.build();			
 			AggregatorRetrieve.registerAgent(registerAgent);
-			
-			if(Globals.runtimeParameters.getAgentID() != Constants.DEFAULT_AGENT_ID) {										
-				GenerateSecretKey generateSecretKey = GenerateSecretKey.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.setPublicKey(RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey()))
-				.build();
-				AggregatorRetrieve.generateSecretKey(generateSecretKey);
-				
-				if(CryptoKeyReader.checkPeerSecretKey("aggregator") == true) {
-					GetTokenAndAsymmetricKeys getTokenAndAsymmetricKeys
-					= GetTokenAndAsymmetricKeys.newBuilder()
-					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.build();
-					
-					AggregatorRetrieve.getTokenAndAsymmetricKeys(getTokenAndAsymmetricKeys);
-					CopyNative.CopyNativeFunction("/data/local", R.raw.busybox, context);
-				}
-			}
-																		  
+					  
 		  }
 	} catch (IOException e) {
 		// TODO Auto-generated catch block

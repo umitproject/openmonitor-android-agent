@@ -32,16 +32,14 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
-import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKey;
-import org.umit.icm.mobile.proto.MessageProtos.GenerateSecretKeyResponse;
+
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
-import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeys;
-import org.umit.icm.mobile.proto.MessageProtos.GetTokenAndAsymmetricKeysResponse;
+
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
@@ -709,78 +707,6 @@ public class AggregatorResources {
 			 clientResource.post(form.getWebRepresentation(null)); 				 
 	 }
 	 
-	/**
-	 * Returns a GenerateSecretKeyResponse object. Encodes the passed message to
-	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
-	 * WebRepresentation of the {@link Form} object to the passed 
-	 * {@link ClientResource}. Generates a GenerateSecretKeyResponse object from 
-	 * the POST {@link Representation} response.
-	 * 
-	 *	 
-	                          
-	@param  generateSecretKey  An object of the type GenerateSecretKey
-	 *  	
-	 
-	@param  clientResource  An object of the type ClientResource
-	 *                           	
-	                          
-	@return      GenerateSecretKeyResponse
-	 * @throws Exception 
-	 *  
-	                          
-	@see         Base64
-	 *
-	 
-	@see         ClientResource
-	 */
-	 public static GenerateSecretKeyResponse generateSecretKey(
-			 GenerateSecretKey generateSecretKey, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();			 			 
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(generateSecretKey.toByteArray())));			 
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));			 
-		 return GenerateSecretKeyResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 
-	 }
-	 
-	/**
-	 * Returns a GetTokenAndAsymmetricKeysResponse object. Encodes the passed message to
-	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
-	 * WebRepresentation of the {@link Form} object to the passed 
-	 * {@link ClientResource}. Generates a GetTokenAndAsymmetricKeysResponse object from 
-	 * the POST {@link Representation} response.
-	 * 
-	 *	 
-	                          
-	@param  getTokenAndAsymmetricKeysResponse  An object of the type GetTokenAndAsymmetricKeysResponse
-	 *  	
-	 
-	@param  clientResource  An object of the type ClientResource
-	 *                           	
-	                          
-	@return      GetTokenAndAsymmetricKeysResponse
-	 * @throws Exception 
-	 *  
-	                          
-	@see         Base64
-	 *
-	 
-	@see         ClientResource
-	 */
-	 public static GetTokenAndAsymmetricKeysResponse getTokenAndAsymmetricKeys(
-			 GetTokenAndAsymmetricKeys getTokenAndAsymmetricKeys, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();			 			 
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(getTokenAndAsymmetricKeys.toByteArray())));			 
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));			 
-		 return GetTokenAndAsymmetricKeysResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 
-	 }
+
 
 }
