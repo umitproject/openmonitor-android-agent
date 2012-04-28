@@ -1,8 +1,14 @@
-Requirements:
+==================================================
+REQUIREMENTS
+==================================================
 1. Android SDK
 2. Maven version 3.0.3 or above
+3. Google Protobuf version 4.2.1
 
-As mentioned in http://dev.umitproject.org/issues/450 the central Maven repository does not have the Google Maps API or the OSMDroid API. Therefore, both need to be manually install in the local Maven repository.
+==================================================
+PRE-BUILD STEPS
+==================================================
+1. As mentioned in http://dev.umitproject.org/issues/450 the central Maven repository does not have the Google Maps API or the OSMDroid API. Therefore, both need to be manually install in the local Maven repository.
 This is the general template of the command that needs to be executed for each manual Maven artifact installation:
 mvn install:install-file  -Dfile=path-to-your-artifact-jar \
                           -DgroupId=your.groupId \
@@ -12,12 +18,17 @@ mvn install:install-file  -Dfile=path-to-your-artifact-jar \
                           -DlocalRepositoryPath=path-to-specific-local-repo
 
 The libs which are needed by the ICM Agent but aren't present in the Maven repository are:
-1. Google Maps API 4
-2. OSMDroid 3.0.4
+a. Google Maps API 4
+b. OSMDroid 3.0.4
 
 These can be downloaded from: http://dev.umitproject.org/projects/icm-mobile/files
 
-Alternatively, Linux users can simply use the script deps.sh to install these dependencies in the local Maven repository.
+Alternatively, Linux users can simply use the script 'deps.sh' to install these dependencies in the local Maven repository.
+
+2. The message.proto is present in icm-common, therefore it needs to be added as a submodule to the mobile agent.
+In the outer most folder:
+a. git submodule init
+b. git submodule update --rebase
 
 ==================================================
 RUNNING UNIT TESTS
