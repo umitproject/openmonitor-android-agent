@@ -1,3 +1,7 @@
+Requirements:
+1. Android SDK
+2. Maven version 3.0.3 or above
+
 As mentioned in http://dev.umitproject.org/issues/450 the central Maven repository does not have the Google Maps API or the OSMDroid API. Therefore, both need to be manually install in the local Maven repository.
 This is the general template of the command that needs to be executed for each manual Maven artifact installation:
 mvn install:install-file  -Dfile=path-to-your-artifact-jar \
@@ -12,6 +16,8 @@ The libs which are needed by the ICM Agent but aren't present in the Maven repos
 2. OSMDroid 3.0.4
 
 These can be downloaded from: http://dev.umitproject.org/projects/icm-mobile/files
+
+Alternatively, Linux users can simply use the script deps.sh to install these dependencies in the local Maven repository.
 
 ==================================================
 RUNNING UNIT TESTS
