@@ -83,5 +83,9 @@
     <string name="website_suggestion_sent">Website Suggestion Sent</string>
     <string name="username">Enter Username</string>
     <string name="password">Enter Password</string>
+    <string name="repassword">ReEnter Password</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="report">Report</string>
+    <string name="explain_bug">Explain the Bug</string>
 </resources>
