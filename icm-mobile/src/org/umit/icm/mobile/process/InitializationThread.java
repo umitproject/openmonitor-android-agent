@@ -42,6 +42,8 @@ public class InitializationThread extends Thread {
 		
 		Login login = Login.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setPort(80)
+		.setChallenge("test")
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		try {

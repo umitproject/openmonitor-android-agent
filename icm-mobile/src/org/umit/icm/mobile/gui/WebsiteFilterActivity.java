@@ -99,8 +99,7 @@ public class WebsiteFilterActivity extends Activity{
         selectAllButton = (Button) findViewById(R.id.selectAllButton);        
         selectAllButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	   
-	       		Iterator<WebsiteTextCheckbox> iteratorCheck 
-	       		= listWebsitesCheckbox.iterator();	  	       		
+	       		Iterator<WebsiteTextCheckbox> iteratorCheck  = listWebsitesCheckbox.iterator();	  	       		
 	       		while(iteratorCheck.hasNext()) {
 	       			iteratorCheck.next().setCheck(true);	       			
 	       		}

@@ -32,6 +32,7 @@ import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,8 +41,8 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -51,11 +52,13 @@ public class WebsiteActivity extends Activity{
 	private Button backButton;
 	private String website;
 	private ProgressDialog progressDialog;
+	public static Context context;
 	
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        context=getApplicationContext();
         progressDialog = ProgressDialog.show(this, 
         		getString(R.string.loading)	, getString(R.string.retrieving_website)
         		, true, false);
@@ -72,7 +75,7 @@ public class WebsiteActivity extends Activity{
 	       		WebsiteActivity.this.finish();
 	       	}
 
-	   	}  );
+	   	}  ); 
         
         new UpdateFavicon().execute(website);
     }
