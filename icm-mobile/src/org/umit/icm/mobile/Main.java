@@ -25,6 +25,7 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ServicePackets;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
@@ -94,6 +95,7 @@ public class Main extends TabActivity {
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
+	            
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
 				new InitializationThread(Main.this).start();										

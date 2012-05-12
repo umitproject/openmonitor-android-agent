@@ -26,24 +26,19 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
 
-import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
-import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
-import org.umit.icm.mobile.utils.CopyNative;
-import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.ProfilerRun;
-import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
@@ -256,7 +251,7 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public void registration(Context context) 
+	public static void registration(Context context, LoginCredentials loginCredentials) 
 	{
 	
 			
@@ -267,6 +262,7 @@ public class Initialization {
 				  , Constants.PARAMETERS_DIR) == false )) {
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
+			.setCredentials(loginCredentials)
 			.setIp(Integer.toString(Globals.myIP))
 			.setVersionNo(Globals.versionManager.getTestsVersion())
 			.build();			

@@ -33,7 +33,10 @@ public class InitializationThread extends Thread {
     public InitializationThread(Context context) {
         this.context = context;
     }
-    public void run() {    	
+    public void run() {  
+    	
+    	boolean result;
+    	
 		Initialization.initializeIP(context);
 		
 		RequestHeader requestHeader = RequestHeader.newBuilder()
@@ -46,11 +49,20 @@ public class InitializationThread extends Thread {
 		.setChallenge("test")
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
+		
+		
 		try {
-			AggregatorRetrieve.login(login);
+			result = AggregatorRetrieve.login(login);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			result=false;
 			e.printStackTrace();
+		}
+		if(result){
+			System.out.println("Result is true");
+		}
+		else{
+			System.out.println("Result is false");
 		}
 		Initialization.loadLists();
     	Initialization.initializeEventsList();

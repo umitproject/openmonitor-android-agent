@@ -23,14 +23,16 @@
 	
 	
 	import org.umit.icm.mobile.R;
-	
-	import android.app.Dialog;
-	import android.content.Context;
-	import android.os.Bundle;
-	import android.view.View;
-	import android.widget.Button;
-	import android.widget.EditText;
-	import android.widget.Toast;
+import org.umit.icm.mobile.process.Initialization;
+import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 	
 	
 	public class LoginDialog extends Dialog {
@@ -39,6 +41,7 @@
 	    private EditText etPassword;
 	    private Button buttonSet;
 	    private Button registerButton;
+	    
 	    public static Context context;
 	        
 	    public LoginDialog(Context context) {    	
@@ -80,6 +83,15 @@
 				} else {				
 					String login = etUsername.getText().toString();
 					String password = etPassword.getText().toString();
+					
+					
+					LoginCredentials loginCredentials = LoginCredentials.newBuilder()
+					.setUsername(login)
+					.setPassword(password)
+					.build();
+					
+					Initialization.registration(context,loginCredentials);
+					
 					LoginDialog.this.dismiss();
 				}
 				break;
