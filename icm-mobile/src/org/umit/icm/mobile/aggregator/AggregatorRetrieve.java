@@ -400,6 +400,9 @@ public class AggregatorRetrieve {
 	 throws Exception {
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
+		 	
+		 	 
+		 	
 		 	LoginResponse loginResponse
 		 	= AggregatorResources.login(login, clientResource);
 		 	return AggregatorActions.loginAction(loginResponse);			

@@ -130,6 +130,9 @@ public class Globals {
 	 */
 	public static boolean aggregatorCommunication = true;
 	
+	
+	public static boolean isRegistered =false;
+	
 	/**
 	 * Global P2P message queue
 	 */

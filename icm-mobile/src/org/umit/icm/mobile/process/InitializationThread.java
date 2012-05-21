@@ -21,11 +21,14 @@
 
 package org.umit.icm.mobile.process;
 
+import java.util.Random;
+
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 import android.content.Context;
+import android.widget.Toast;
 
 public class InitializationThread extends Thread {
     
@@ -43,10 +46,14 @@ public class InitializationThread extends Thread {
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.build();
 		
+		Random random = new Random();
+		
+		String challenge= Double.toString(random.nextDouble());
+		
 		Login login = Login.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setPort(80)
-		.setChallenge("test")
+		.setChallenge(challenge)
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		
@@ -59,10 +66,10 @@ public class InitializationThread extends Thread {
 			e.printStackTrace();
 		}
 		if(result){
-			System.out.println("Result is true");
+			Toast.makeText(context, "result is true", Toast.LENGTH_LONG).show();
 		}
 		else{
-			System.out.println("Result is false");
+			Toast.makeText(context, "result is false", Toast.LENGTH_LONG).show();
 		}
 		Initialization.loadLists();
     	Initialization.initializeEventsList();

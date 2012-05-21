@@ -90,7 +90,7 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
-					Initialization.registration(context,loginCredentials);
+					Initialization.registration(context, loginCredentials);
 					
 					LoginDialog.this.dismiss();
 				}
