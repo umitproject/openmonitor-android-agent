@@ -96,7 +96,7 @@ public class Main extends TabActivity {
 	            LoginDialog.show();	
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-				new InitializationThread(Main.this).start();										
+				new InitializationThread(Main.this, Main.this).start();	
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
