@@ -24,27 +24,25 @@ package org.umit.icm.mobile.process;
 import java.util.Random;
 
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
+import android.app.Activity;
 import android.content.Context;
-import android.widget.Toast;
 
 public class InitializationThread extends Thread {
     
 	Context context;
+	Activity activity;
     public InitializationThread(Context context) {
         this.context = context;
+        this.activity=(Activity) context;
     }
     public void run() {  
     	
     	boolean result;
     	
 		Initialization.initializeIP(context);
-		
-		RequestHeader requestHeader = RequestHeader.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.build();
 		
 		Random random = new Random();
 		
@@ -59,21 +57,16 @@ public class InitializationThread extends Thread {
 		
 		
 		try {
-			result = AggregatorRetrieve.login(login);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			result=false;
-			e.printStackTrace();
-		}
-		if(result){
-			Toast.makeText(context, "result is true", Toast.LENGTH_LONG).show();
-		}
-		else{
-			Toast.makeText(context, "result is false", Toast.LENGTH_LONG).show();
-		}
+		result = AggregatorRetrieve.login(login);
 		Initialization.loadLists();
     	Initialization.initializeEventsList();
     	Initialization.initializerPeersList();
     	Initialization.startServices(context);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result= false;
+			e.printStackTrace();
+			Show.Error(activity, "Unable to login mobile agent because : "+e.toString());
+		}
     }
 }
