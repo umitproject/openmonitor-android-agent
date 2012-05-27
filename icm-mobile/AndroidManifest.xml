@@ -35,6 +35,7 @@
         <activity android:name=".gui.WebsiteFilterActivity"></activity>
         <activity android:name=".gui.ServiceFilterActivity"></activity>
         <activity android:name=".gui.ServiceActivity"></activity>
+        <activity android:name=".gui.BugReportActivity"></activity>
         <service android:name=".connectivity.ConnectivityService"></service>
         <service android:name=".process.CommunicationService"></service>
     
