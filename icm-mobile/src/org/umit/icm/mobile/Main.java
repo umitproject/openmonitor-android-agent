@@ -82,7 +82,7 @@ public class Main extends TabActivity {
         tabHost.addTab(tabSpec);
     
         tabHost.setCurrentTab(0);
-       
+        
         if(!SDCardReadWrite.checkSDCard()) {
         	String text = getString(R.string.no_sdcard);
         	int duration = Toast.LENGTH_LONG;
@@ -90,7 +90,9 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try { /*Register Agent should be called here*/	
+	        try { /*Register Agent should be called here*/
+	        	Toast date_time = Toast.makeText(this,getBoostTime(),Toast.LENGTH_LONG);
+	            date_time.show();
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
@@ -111,5 +113,10 @@ public class Main extends TabActivity {
 	            
         }
     }
+    static {
+    	System.loadLibrary("boost-library");
+    }
+    
+    public native String getBoostTime();
    
 }
