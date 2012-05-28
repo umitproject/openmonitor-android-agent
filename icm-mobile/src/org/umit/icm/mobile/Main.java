@@ -91,6 +91,8 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/	
+	        	Toast date_time = Toast.makeText(this,getDateTime(),Toast.LENGTH_LONG);
+	        	date_time.show();
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
@@ -110,6 +112,12 @@ public class Main extends TabActivity {
 			} 
 	            
         }
+    }
+    
+    private native String getDateTime();
+    static
+    {
+    	System.loadLibrary("boost-lib");
     }
    
 }
