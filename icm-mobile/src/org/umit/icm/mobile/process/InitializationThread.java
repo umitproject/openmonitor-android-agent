@@ -26,6 +26,7 @@ import java.util.Random;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
+import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -55,8 +56,11 @@ public class InitializationThread extends Thread {
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		
+				
+		
 		
 		try {
+			
 		result = AggregatorRetrieve.login(login);
 		Initialization.loadLists();
     	Initialization.initializeEventsList();

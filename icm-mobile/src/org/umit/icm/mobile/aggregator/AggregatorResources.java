@@ -113,7 +113,7 @@ public class AggregatorResources {
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
 		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 		 
+		 = clientResource.post(form.getWebRepresentation(null));
 		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
 	 }
 	 

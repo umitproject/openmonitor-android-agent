@@ -9,20 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:hint="Email"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/report"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Email"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:hint="Description"
+        android:hint="@string/email"
         android:textSize="20sp" />
 
     <Button
@@ -32,19 +19,34 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Report"
+        android:text="@string/report"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/summary"
+        android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Email"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Summary"
+        android:hint="@string/subject"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/report"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/summary"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/description"
+        android:singleLine="false"
         android:textSize="20sp" >
 
         <requestFocus />

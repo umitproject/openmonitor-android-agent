@@ -86,6 +86,9 @@
     <string name="repassword">ReEnter Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="subject">Subject</string>
     <string name="report">Report</string>
+    <string name="email">Email</string>
+    <string name="description">Description</string>
     <string name="explain_bug">Explain the Bug</string>
 </resources>
