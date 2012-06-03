@@ -14,10 +14,10 @@ library_names=''
 old_library='libevent.a'
 
 # Linker flags that can not go in dependency_libs.
-inherited_linker_flags=' -pthread'
+inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -lrt'
+dependency_libs=''
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/usr/local/lib'
+libdir='/home/sunshadow/Documents/toolchain-r7/sysroot/usr/lib:/home/sunshadow/Documents/toolchain-r7/lib/gcc/arm-linux-androideabi/4.6.3:/home/sunshadow/Documents/libevent/lib'
