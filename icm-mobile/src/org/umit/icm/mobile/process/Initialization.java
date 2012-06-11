@@ -251,7 +251,7 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public static void registration(Context context, LoginCredentials loginCredentials) 
+	public static void registration(LoginCredentials loginCredentials) 
 	{
 	
 			

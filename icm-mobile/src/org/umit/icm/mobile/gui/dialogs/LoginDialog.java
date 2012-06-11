@@ -22,10 +22,14 @@
 	package org.umit.icm.mobile.gui.dialogs;
 	
 	
-	import org.umit.icm.mobile.R;
+	import org.umit.icm.mobile.Main;
+import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.process.Initialization;
+import org.umit.icm.mobile.process.InitializationThread;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -43,10 +47,12 @@ import android.widget.Toast;
 	    private Button registerButton;
 	    
 	    public static Context context;
+	    public static Activity activity;
 	        
 	    public LoginDialog(Context context) {    	
 	        super(context);            
 	        this.context = context;
+	        this.activity = (Activity)context;
 	        
 	    }
 	    
@@ -90,8 +96,10 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
-					Initialization.registration(context, loginCredentials);
+					Initialization.registration(loginCredentials);
 					
+					Show.Info(activity, "This is running from inside login dialog!!");
+					new InitializationThread(context).start();
 					LoginDialog.this.dismiss();
 				}
 				break;

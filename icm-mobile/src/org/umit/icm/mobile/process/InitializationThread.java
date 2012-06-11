@@ -56,6 +56,7 @@ public class InitializationThread extends Thread {
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		
+		
 				
 		
 		

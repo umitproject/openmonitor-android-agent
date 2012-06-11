@@ -148,18 +148,4 @@ public class BugReportActivity extends Activity{
 
 }
 		
-/*		
-		
-	
-	}
-	
-	
-	  private static void tryGetIssues(RedmineManager mgr) throws Exception {
-	        List<Issue> issues = mgr.getIssues("icm-mobile", null);
-	        for (Issue issue : issues) {
-	            System.out.println(issue.toString());
-	            Show.Info(act, issue.toString());
-	        }
-	    }
 
-}*/

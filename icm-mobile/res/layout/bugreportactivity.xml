@@ -29,7 +29,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Email"
-        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/subject"
         android:textSize="20sp" />
@@ -41,8 +40,7 @@
         android:layout_above="@+id/report"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/summary"
-        android:layout_marginTop="28dp"
+        android:layout_below="@+id/subject"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/description"

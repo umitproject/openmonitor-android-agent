@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ServicePackets;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
@@ -93,14 +94,15 @@ public class Main extends TabActivity {
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/
 	        	
-	        	new InitializationThread(Main.this).start();
-	        	
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
 	            
+	            
+	            
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
+				
 				
 				
 				Globals.scanStatus = getString(R.string.scan_on);								
