@@ -38,7 +38,9 @@ import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
+import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.ProfilerRun;
+import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
@@ -234,7 +236,7 @@ public class Initialization {
 		.build();
 		AgentData agentData = AgentData.newBuilder()
 		.setAgentID(10)
-		.setAgentIP("202.206.64.11")
+		.setAgentIP("127.0.0.1")
 		.setAgentPort(3128)
 		.setPeerStatus("On")
 		.setPublicKey(rsaKey)
@@ -260,10 +262,16 @@ public class Initialization {
 				  , Constants.PARAMETERS_DIR) == false )
 				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 				  , Constants.PARAMETERS_DIR) == false )) {
+			RSAKey rsaKey= RSAKey.newBuilder()
+			.setExp(Globals.keyManager.getMyCipheredKeyExp())
+			.setMod(Globals.keyManager.getMyCipheredKeyMod())
+			.build();
+			
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
 			.setCredentials(loginCredentials)
 			.setIp(Integer.toString(Globals.myIP))
+			.setAgentPublicKey(RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyPublicKey()))
 			.setVersionNo(Globals.versionManager.getTestsVersion())
 			.build();			
 			AggregatorRetrieve.registerAgent(registerAgent);

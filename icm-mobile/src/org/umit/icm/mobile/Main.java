@@ -94,6 +94,8 @@ public class Main extends TabActivity {
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/
 	        	
+	        	Show.Info(this, "Trying to display Login Dialog");
+	        	
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
