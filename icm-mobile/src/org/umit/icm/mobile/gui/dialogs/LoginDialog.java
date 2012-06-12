@@ -22,8 +22,7 @@
 	package org.umit.icm.mobile.gui.dialogs;
 	
 	
-	import org.umit.icm.mobile.Main;
-import org.umit.icm.mobile.R;
+	import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.process.InitializationThread;
@@ -32,11 +31,14 @@ import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 	
 	
 	public class LoginDialog extends Dialog {
@@ -106,8 +108,11 @@ import android.widget.Toast;
 				
 				case R.id.registerButton:
 					LoginDialog.this.dismiss();
-					RegisterDialog RegisterDialog = new RegisterDialog(context);
-					RegisterDialog.show();
+					Intent i = new Intent(Intent.ACTION_VIEW, 
+						       Uri.parse("http://alpha.openmonitor.org/accounts/register/"));
+				
+					LoginDialog.this.context.startActivity(i);
+				
 					break;
 				}               		
 			}			

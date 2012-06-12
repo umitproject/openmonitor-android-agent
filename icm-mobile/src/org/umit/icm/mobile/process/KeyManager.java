@@ -26,13 +26,14 @@ package org.umit.icm.mobile.process;
  */
 
 import java.io.IOException;
+import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 
-
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 public class KeyManager {	
 	private PrivateKey myPrivateKey;
@@ -53,6 +54,22 @@ public class KeyManager {
 	public KeyManager() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setupKeyManager(){
+		try {
+			KeyPair keypair = RSACrypto.generateKey();
+			PublicKey publicKey = keypair.getPublic();
+			PrivateKey privateKey =keypair.getPrivate();
+			setMyPublicKey(publicKey);
+			setMyPrivateKey(privateKey);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	public synchronized PrivateKey getMyPrivateKey() {
