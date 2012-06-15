@@ -98,6 +98,8 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
+					System.out.println("This is from inside loging Dialog");
+					
 					Initialization.registration(loginCredentials);
 					
 					Show.Info(activity, "This is running from inside login dialog!!");

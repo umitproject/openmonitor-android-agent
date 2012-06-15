@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -181,8 +182,8 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
-	    Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
-	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+	    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+	    cipher.init(Cipher.ENCRYPT_MODE, (Key) publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
 	

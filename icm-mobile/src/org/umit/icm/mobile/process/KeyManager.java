@@ -26,12 +26,14 @@ package org.umit.icm.mobile.process;
  */
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
 import org.umit.icm.mobile.utils.RSACrypto;
 
@@ -40,6 +42,7 @@ public class KeyManager {
 	private PublicKey myPublicKey;
 	private String myCipheredKeyMod;
 	private String myCipheredKeyExp;
+	private PublicKey aggrPublicKey;
 	
 	public KeyManager(PrivateKey myPrivateKey,
 			PublicKey myPublicKey, String myCipheredKeyMod,
@@ -49,27 +52,40 @@ public class KeyManager {
 		this.myPublicKey = myPublicKey;
 		this.myCipheredKeyMod = myCipheredKeyMod;
 		this.myCipheredKeyExp = myCipheredKeyExp;
+		
 	}
 
 	public KeyManager() {
 		super();
+		System.out.println("This is from inside KeyMAnager Constructor");
+		this.setupKeyManager();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void setupKeyManager(){
 		try {
+			System.out.println("Setting up KeyManager");
 			KeyPair keypair = RSACrypto.generateKey();
 			PublicKey publicKey = keypair.getPublic();
 			PrivateKey privateKey =keypair.getPrivate();
 			setMyPublicKey(publicKey);
 			setMyPrivateKey(privateKey);
+			RSAKey rsaKey=RSACrypto.getPublicKeyIntegers(publicKey);
+			setMyCipheredKeyMod(rsaKey.getMod());
+			setMyCipheredKeyExp(rsaKey.getExp());
+			
+			
+			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111L");
+			BigInteger exp = new BigInteger("65537L");
+			
+			aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
+			System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+			
+		}	
 	}
 
 	public synchronized PrivateKey getMyPrivateKey() {
@@ -104,6 +120,12 @@ public class KeyManager {
 
 	public synchronized PublicKey getMyPublicKey() {
 		return myPublicKey;
+	}
+	
+	
+	
+	public synchronized PublicKey getAggrPublicKey(){
+		return aggrPublicKey;
 	}
 	
 	/**

@@ -94,6 +94,10 @@ public class Main extends TabActivity {
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/
 	        	
+	        	Initialization.checkProfiler();		
+				Initialization.checkFiles();
+	        	
+	        	
 	        	Show.Info(this, "Trying to display Login Dialog");
 	        	
 	        	LoginDialog LoginDialog = 
@@ -102,8 +106,7 @@ public class Main extends TabActivity {
 	            
 	            
 	            
-	        	Initialization.checkProfiler();		
-				Initialization.checkFiles();
+	        	
 				
 				
 				

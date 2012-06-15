@@ -80,6 +80,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
 	 throws Exception {
+		 
+		 System.out.println("This is from inside AggregatorRetive#registerAgent");
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse

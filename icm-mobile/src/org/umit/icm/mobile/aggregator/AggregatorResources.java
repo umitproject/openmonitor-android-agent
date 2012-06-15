@@ -23,23 +23,26 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.PublicKey;
 
+import javax.crypto.SecretKey;
+import javax.net.ssl.KeyManager;
 
 import org.apache.commons.codec.binary.Base64;
 import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
-
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
-
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
@@ -57,6 +60,7 @@ import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
@@ -108,12 +112,39 @@ public class AggregatorResources {
 	 public static RegisterAgentResponse registerAgent(
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {		 		 
+	 throws Exception{
+		 
+		 System.out.println("IS IT EVEN GETTING HERE?!");
 		 Form form = new Form();
+		 
+		 BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
+		 BigInteger exp = new BigInteger("65537");
+			
+		 PublicKey aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
+		
+		 String key = "THis is my key";
+		 byte[] aggkey = AESCrypto.generateKey(key.getBytes());
+		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,Base64.encodeBase64(aggkey));
+		 byte[] send_key = Base64.encodeBase64(enc_key);
+		 
+		 String send_key_string = new String(send_key);
+		 String enc_key_string = new String(enc_key);
+		 
+		 System.out.println("This is the encoded data ,length ("+ send_key_string.length()+") , encoded_data : "+send_key_string);
+		 System.out.println("This is the decoded data : "+ enc_key_string);
+		 
+		 	
+		 form.add("key", send_key_string);
+		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
 		 form.add(Constants.AGGR_MSG_KEY
 				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
+		 
+		 
+		 Representation response= clientResource.post(form.getWebRepresentation(null));
+		 
+		
+		
+		 
 		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
 	 }
 	 

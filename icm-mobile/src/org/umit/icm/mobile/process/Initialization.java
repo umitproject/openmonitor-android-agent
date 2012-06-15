@@ -258,25 +258,25 @@ public class Initialization {
 	
 			
 	  try {
-		if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
-				  , Constants.PARAMETERS_DIR) == false )
-				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
-				  , Constants.PARAMETERS_DIR) == false )) {
-			RSAKey rsaKey= RSAKey.newBuilder()
-			.setExp(Globals.keyManager.getMyCipheredKeyExp())
+		
+			
+			System.out.println("This is from inside Initialization#registration");
+			RSAKey rsaKey = RSAKey.newBuilder()
 			.setMod(Globals.keyManager.getMyCipheredKeyMod())
+			.setExp(Globals.keyManager.getMyCipheredKeyExp())
 			.build();
+			
 			
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
 			.setCredentials(loginCredentials)
 			.setIp(Integer.toString(Globals.myIP))
-			.setAgentPublicKey(RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyPublicKey()))
+			.setAgentPublicKey(rsaKey)
 			.setVersionNo(Globals.versionManager.getTestsVersion())
 			.build();			
 			AggregatorRetrieve.registerAgent(registerAgent);
 					  
-		  }
+		  
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
