@@ -182,7 +182,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
-	    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+	    Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, (Key) publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
@@ -204,7 +204,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
-	   	Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	   	Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, privateKey);
 	    return cipher.doFinal(cipherBytes);
 	}
@@ -227,7 +227,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
-	    Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	    Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 	    return cipher.doFinal(plainBytes);
 	}
@@ -249,7 +249,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
-	   	Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	   	Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, publicKey);
 	    return cipher.doFinal(cipherBytes);
 	}

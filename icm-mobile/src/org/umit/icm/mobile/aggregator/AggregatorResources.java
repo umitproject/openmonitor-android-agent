@@ -123,15 +123,22 @@ public class AggregatorResources {
 		 PublicKey aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
 		
 		 String key = "THis is my key";
-		 byte[] aggkey = AESCrypto.generateKey(key.getBytes());
-		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,Base64.encodeBase64(aggkey));
+		 byte[] aggkey = AESCrypto.generateKey(key.getBytes("UTF-8"));
+		 
+		 byte[] base64_aggkey = Base64.encodeBase64(aggkey);
+		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,base64_aggkey);
 		 byte[] send_key = Base64.encodeBase64(enc_key);
 		 
-		 String send_key_string = new String(send_key);
-		 String enc_key_string = new String(enc_key);
+		 String send_key_string = new String(send_key,"UTF-8");
+		 String enc_key_string = new String(enc_key,"UTF-8");
+		 String base64_aggkey_string = new String(base64_aggkey,"UTF-8"); 
+		 
+		 String test= new String(Base64.decodeBase64(send_key));
+		 
+		 System.out.println("This should be the *data* : " +base64_aggkey_string  + "   Size of : "+ base64_aggkey_string.length());
 		 
 		 System.out.println("This is the encoded data ,length ("+ send_key_string.length()+") , encoded_data : "+send_key_string);
-		 System.out.println("This is the decoded data : "+ enc_key_string);
+		 System.out.println("This is the decoded data : "+ test + "   Size of : "+ test.length());
 		 
 		 	
 		 form.add("key", send_key_string);
