@@ -183,7 +183,7 @@ public class RSACrypto {
 	 */
 	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
 	    Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
-	    cipher.init(Cipher.ENCRYPT_MODE, (Key) publicKey);
+	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
 	

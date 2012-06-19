@@ -21,20 +21,16 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.PublicKey;
-
-import javax.crypto.SecretKey;
-import javax.net.ssl.KeyManager;
+import java.util.Random;
 
 import org.apache.commons.codec.binary.Base64;
 import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.umit.icm.mobile.process.Constants;
-import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -122,20 +118,27 @@ public class AggregatorResources {
 			
 		 PublicKey aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
 		
-		 String key = "THis is my key";
-		 byte[] aggkey = AESCrypto.generateKey(key.getBytes("UTF-8"));
+		 byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
+		 new Random().nextBytes(bits);
+		 byte[] temp=Base64.encodeBase64(bits);
+		 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
+		 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
+		 byte[] aggkey = AESCrypto.generateKey(key);
+		 String key_string = new String(key,"UTF-8");
 		 
-		 byte[] base64_aggkey = Base64.encodeBase64(aggkey);
-		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,base64_aggkey);
+		 System.out.println("This should be the secret : " + key_string);
+		 
+		 byte[] base64_key = Base64.encodeBase64(key);
+		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,base64_key);
 		 byte[] send_key = Base64.encodeBase64(enc_key);
 		 
 		 String send_key_string = new String(send_key,"UTF-8");
 		 String enc_key_string = new String(enc_key,"UTF-8");
-		 String base64_aggkey_string = new String(base64_aggkey,"UTF-8"); 
+		 String base64_key_string = new String(base64_key,"UTF-8"); 
 		 
 		 String test= new String(Base64.decodeBase64(send_key));
 		 
-		 System.out.println("This should be the *data* : " +base64_aggkey_string  + "   Size of : "+ base64_aggkey_string.length());
+		 System.out.println("This should be the *data* : " +base64_key_string  + "   Size of : "+ base64_key_string.length());
 		 
 		 System.out.println("This is the encoded data ,length ("+ send_key_string.length()+") , encoded_data : "+send_key_string);
 		 System.out.println("This is the decoded data : "+ test + "   Size of : "+ test.length());
@@ -144,11 +147,18 @@ public class AggregatorResources {
 		 form.add("key", send_key_string);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
 		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
+				 , new String(Base64.encodeBase64(AESCrypto.encrypt(key, registerAgent.toByteArray()))));
 		 
-		 
-		 Representation response= clientResource.post(form.getWebRepresentation(null));
-		 
+		 Representation response=null;
+		 try{
+		 response= clientResource.post(form.getWebRepresentation(null));
+		 }catch(ResourceException e){
+			 System.out.println("Got here?!");
+			 System.out.println(e.toString());
+			 System.out.println("Status Below:");
+			 System.out.println(e.getStatus().toString());
+			 e.printStackTrace();
+		 }
 		
 		
 		 

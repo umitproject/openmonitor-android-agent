@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -134,8 +135,27 @@ public class AESCrypto {
 	@see         Cipher
 	 */
 	public static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
+		
+		if(plainBytes.length % Constants.AES_BLOCK_SIZE!=0){
+			byte[] padding = new byte[Constants.AES_BLOCK_SIZE - (plainBytes.length % Constants.AES_BLOCK_SIZE)];
+			
+			System.out.println("Size of plainBytes is : " + plainBytes.length);
+			System.out.println("So we are adding  : " + (Constants.AES_BLOCK_SIZE - (plainBytes.length % Constants.AES_BLOCK_SIZE)));
+			
+			byte[] plainBytesPadded = new byte[padding.length+plainBytes.length];
+			
+			Arrays.fill(padding, Constants.AES_DEFAULT_PADDING);
+			
+			System.arraycopy(plainBytes, 0, plainBytesPadded, 0, plainBytes.length);
+			System.arraycopy(padding, 0, plainBytesPadded, plainBytes.length, padding.length);
+			
+			SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
+			Cipher cipher = Cipher.getInstance("AES");
+		    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
+		    return cipher.doFinal(plainBytesPadded);	
+		}
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(plainBytes);		
 	}
@@ -158,7 +178,7 @@ public class AESCrypto {
 	 */
 	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+		Cipher cipher = Cipher.getInstance("AES");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}
