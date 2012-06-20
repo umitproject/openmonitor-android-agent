@@ -149,13 +149,20 @@ public class AESCrypto {
 			System.arraycopy(plainBytes, 0, plainBytesPadded, 0, plainBytes.length);
 			System.arraycopy(padding, 0, plainBytesPadded, plainBytes.length, padding.length);
 			
+			String plainBytesPadded_string=new String(plainBytesPadded);
+			
+			System.out.println("THIS IS Getting encrypted : " + plainBytesPadded_string + " Its size : " + plainBytesPadded_string.length());
+			
 			SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-			Cipher cipher = Cipher.getInstance("AES");
+			Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
 		    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 		    return cipher.doFinal(plainBytesPadded);	
 		}
+		
+		String plainBytes_string=new String(plainBytes);
+		System.out.println("THIS IS Getting encrypted : " + plainBytes_string + " Its size : " + plainBytes_string.length());
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES");
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(plainBytes);		
 	}
@@ -178,7 +185,7 @@ public class AESCrypto {
 	 */
 	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES");
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}

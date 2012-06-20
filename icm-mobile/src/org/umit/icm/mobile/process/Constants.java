@@ -43,7 +43,7 @@ public class Constants {
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
 	public static int AES_KEY_SIZE = 256;
-	public static int AES_BLOCK_SIZE =32;
+	public static int AES_BLOCK_SIZE =AES_KEY_SIZE/8;
 	public static byte  AES_DEFAULT_PADDING='{';
 	public static String ICM_ROOT_DIR = "/icm-mobile";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";

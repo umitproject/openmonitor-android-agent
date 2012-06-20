@@ -123,31 +123,40 @@ public class AggregatorResources {
 		 byte[] temp=Base64.encodeBase64(bits);
 		 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
 		 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
-		 byte[] aggkey = AESCrypto.generateKey(key);
-		 String key_string = new String(key,"UTF-8");
+//		 byte[] aggkey = AESCrypto.generateKey(bits);
+//		 String key_string = new String(bits,"UTF-8");
 		 
-		 System.out.println("This should be the secret : " + key_string);
+//		 byte[] base64_aggkey= Base64.encodeBase64(aggkey);
 		 
 		 byte[] base64_key = Base64.encodeBase64(key);
 		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,base64_key);
 		 byte[] send_key = Base64.encodeBase64(enc_key);
 		 
+		 byte[] enc_data= AESCrypto.encrypt(key, registerAgent.toByteArray());
+		 byte[] encodedData=Base64.encodeBase64(enc_data);
+		 
+		 
+		 String key_string = new String(key,"UTF-8");
+		 String base64_key_string = new String(base64_key,"UTF-8"); 
 		 String send_key_string = new String(send_key,"UTF-8");
 		 String enc_key_string = new String(enc_key,"UTF-8");
-		 String base64_key_string = new String(base64_key,"UTF-8"); 
+		 String enc_data_string = new String(enc_data,"UTF-8");
+		 String encodedData_string = new String(encodedData,"UTF-8");
 		 
-		 String test= new String(Base64.decodeBase64(send_key));
 		 
+		 System.out.println("This should be the secret : " + key_string + " Length : " +key_string.length());
 		 System.out.println("This should be the *data* : " +base64_key_string  + "   Size of : "+ base64_key_string.length());
-		 
+		 System.out.println("This is the decoded data : "+ enc_key_string + "   Size of : "+ enc_key_string.length());
 		 System.out.println("This is the encoded data ,length ("+ send_key_string.length()+") , encoded_data : "+send_key_string);
-		 System.out.println("This is the decoded data : "+ test + "   Size of : "+ test.length());
 		 
-		 	
+		 System.out.println("This is encrypted Data , its length should be multiple of 16 or whatever : " + enc_data_string + " Length : "+enc_data_string.length());
+		 
+		 System.out.println("This is encodedData : " + encodedData_string + " Length : "+ encodedData_string.length());
+		 
 		 form.add("key", send_key_string);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
 		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(AESCrypto.encrypt(key, registerAgent.toByteArray()))));
+				 , new String(encodedData));
 		 
 		 Representation response=null;
 		 try{
@@ -698,13 +707,17 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
+			 
 			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(cipherBytes)));
+			 
 		 } else {
+			 
 			 form.add(Constants.AGGR_MSG_KEY
 					 , new String(Base64.encodeBase64(login.toByteArray())));
+			 
 		 }
 		 Representation response 
 			 = clientResource.post(form.getWebRepresentation(null));
