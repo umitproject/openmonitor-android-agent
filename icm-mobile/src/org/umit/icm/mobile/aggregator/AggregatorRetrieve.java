@@ -400,10 +400,10 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean login(Login login) 
 	 throws Exception {
+		 
+		 	System.out.println("Inside AggregatorRetrieve#login");
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
-		 	
-		 	 
 		 	
 		 	LoginResponse loginResponse
 		 	= AggregatorResources.login(login, clientResource);

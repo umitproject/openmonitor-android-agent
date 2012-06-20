@@ -131,6 +131,9 @@ public class Globals {
 	public static boolean aggregatorCommunication = true;
 	
 	
+	public static byte [] AESKEY;
+	
+	
 	public static boolean isRegistered =false;
 	
 	/**

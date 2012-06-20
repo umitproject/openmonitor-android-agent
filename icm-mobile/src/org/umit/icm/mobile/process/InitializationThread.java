@@ -43,35 +43,10 @@ public class InitializationThread extends Thread {
     	
     	boolean result;
     	
+    	System.out.println("Inside InitializationThread#run");
+    	
 		Initialization.initializeIP(context);
 		
-		Random random = new Random();
 		
-		String challenge= Double.toString(random.nextDouble());
-		
-		Login login = Login.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setPort(80)
-		.setChallenge(challenge)
-		.setIp(Integer.toString(Globals.myIP))
-		.build();
-		
-		
-				
-		
-		
-		try {
-			
-		result = AggregatorRetrieve.login(login);
-		Initialization.loadLists();
-    	Initialization.initializeEventsList();
-    	Initialization.initializerPeersList();
-    	Initialization.startServices(context);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			result= false;
-			e.printStackTrace();
-			Show.Error(activity, "Unable to login mobile agent because : "+e.toString());
-		}
     }
 }

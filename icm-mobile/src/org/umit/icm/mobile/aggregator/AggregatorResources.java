@@ -31,6 +31,7 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
@@ -122,6 +123,8 @@ public class AggregatorResources {
 		 new Random().nextBytes(bits);
 		 byte[] temp=Base64.encodeBase64(bits);
 		 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
+		 
+		 Globals.AESKEY = key;
 		 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
 //		 byte[] aggkey = AESCrypto.generateKey(bits);
 //		 String key_string = new String(bits,"UTF-8");
@@ -143,6 +146,8 @@ public class AggregatorResources {
 		 String enc_data_string = new String(enc_data,"UTF-8");
 		 String encodedData_string = new String(encodedData,"UTF-8");
 		 
+		 
+		 Constants.send_key_string=send_key_string;
 		 
 		 System.out.println("This should be the secret : " + key_string + " Length : " +key_string.length());
 		 System.out.println("This should be the *data* : " +base64_key_string  + "   Size of : "+ base64_key_string.length());
@@ -706,7 +711,7 @@ public class AggregatorResources {
 			 ClientResource clientResource) 
 	 throws Exception {
 		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
+/*		 if(Constants.AGGR_ENCRYPTION == true) {
 			 
 			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
 			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
@@ -728,7 +733,26 @@ public class AggregatorResources {
 			 return LoginResponse.parseFrom(plainBytes);
 		 } else {
 			 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 }*/
+		 
+		 System.out.println("Inside AggregatorResources#login");
+		 
+		 
+		 byte[] enc_data= AESCrypto.encrypt(Globals.AESKEY, login.toByteArray());
+		 byte[] encodedData=Base64.encodeBase64(enc_data);
+		 
+		 form.add("key", Constants.send_key_string);
+		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
+		 form.add(Constants.AGGR_MSG_KEY
+				 , new String(encodedData));
+		 
+		 Representation response 
+		 = clientResource.post(form.getWebRepresentation(null));
+		 
+		 
+		 
+		 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 
 	 }
 	 
 	/**

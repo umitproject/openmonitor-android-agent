@@ -25,16 +25,19 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
+import java.util.Random;
 
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
@@ -252,6 +255,40 @@ public class Initialization {
 		Globals.runtimesList.readPeerList();
 		Globals.runtimesList.readSuperPeerList();
 	}
+	
+	public static void login()
+	{
+		Random random = new Random();
+		
+		String challenge= Double.toString(random.nextDouble());
+		
+		System.out.println("Setting the login protobuf");
+		
+		Login login = Login.newBuilder()
+		.setAgentID(Constants.DEFAULT_AGENT_ID)
+		.setPort(80)
+		.setChallenge(challenge)
+		.setIp(Integer.toString(Globals.myIP))
+		.build();
+		
+		System.out.println("Login protobuf formed : "  + login.toString());
+				
+		
+		
+		try {
+			
+		AggregatorRetrieve.login(login);
+//		Initialization.loadLists();
+//    	Initialization.initializeEventsList();
+//    	Initialization.initializerPeersList();
+//    	Initialization.startServices(context);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public static void registration(LoginCredentials loginCredentials) 
 	{
