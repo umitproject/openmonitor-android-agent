@@ -327,13 +327,17 @@ public class ProcessActions {
 	 @see RuntimeParameters
 	 */
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
+		System.out.println("Inside ProcessActions@registerAgent");
 		try {
-			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());			
+			System.out.println("SETTING AGENT ID , GOT FROM AGGREGATOR : " + registerAgentResponse.getAgentID());
+			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
+			return true;
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		return true;
+		
 	}
 
 }

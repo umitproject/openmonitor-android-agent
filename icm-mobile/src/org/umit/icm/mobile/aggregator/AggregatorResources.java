@@ -170,13 +170,22 @@ public class AggregatorResources {
 			 System.out.println("Got here?!");
 			 System.out.println(e.toString());
 			 System.out.println("Status Below:");
-			 System.out.println(e.getStatus().toString());
+			 System.out.println(e.getMessage());
 			 e.printStackTrace();
 		 }
 		
+		 
+		
+		byte[] register_byte =Base64.decodeBase64(response.getText().getBytes());
+		byte[] registerAgentResponse_byte = AESCrypto.decrypt(key, register_byte);
+		String registerAgentResponse_string = new String(registerAgentResponse_byte);
+		registerAgentResponse_string=registerAgentResponse_string.replace("{","") + "\n";
+		registerAgentResponse_byte =registerAgentResponse_string.getBytes("UTF-8"); 
+		System.out.println("THIS IS WHAT REGISTERAGENT GOT IN DECODED RESPONSE : \n"+ new String(registerAgentResponse_byte));
+		
 		
 		 
-		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
+		 return RegisterAgentResponse.parseFrom(registerAgentResponse_byte) ;
 	 }
 	 
 	/**
@@ -737,18 +746,32 @@ public class AggregatorResources {
 		 
 		 System.out.println("Inside AggregatorResources#login");
 		 
+		 System.out.println("THIS IS WHAT WE ARE ENCODING : " +new String(login.toByteArray()));
+
+		 byte[] encodedData=Base64.encodeBase64(login.toByteArray());
 		 
-		 byte[] enc_data= AESCrypto.encrypt(Globals.AESKEY, login.toByteArray());
-		 byte[] encodedData=Base64.encodeBase64(enc_data);
 		 
-		 form.add("key", Constants.send_key_string);
-		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(encodedData));
+		 String encodedData_string = new String(encodedData);
 		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
+		 System.out.println("THIS IS WHAT WE ARE SENDING IN FORM : " +encodedData_string);
+
+		 form.add(Constants.AGGR_MSG_KEY, encodedData_string);
 		 
+		 
+		 
+		 Representation response=null;
+		 try{
+		 response= clientResource.post(form.getWebRepresentation(null));
+		 System.out.println("THIS THIS Response: " + clientResource.getResponse().toString());
+		 }catch(ResourceException e){
+			 System.out.println("Got here?!");
+			 System.out.println(e.toString());
+			 System.out.println("Status Below:");
+			 System.out.println(e.getMessage());
+			 
+			 System.out.println("THIS THIS THIS Response: " + clientResource.getResponse().toString());
+			 e.printStackTrace();
+		 }
 		 
 		 
 		 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));

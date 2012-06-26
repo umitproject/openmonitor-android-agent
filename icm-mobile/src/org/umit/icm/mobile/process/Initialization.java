@@ -263,9 +263,9 @@ public class Initialization {
 		String challenge= Double.toString(random.nextDouble());
 		
 		System.out.println("Setting the login protobuf");
-		
+		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
 		Login login = Login.newBuilder()
-		.setAgentID(Constants.DEFAULT_AGENT_ID)
+		.setAgentID(220)
 		.setPort(80)
 		.setChallenge(challenge)
 		.setIp(Integer.toString(Globals.myIP))
