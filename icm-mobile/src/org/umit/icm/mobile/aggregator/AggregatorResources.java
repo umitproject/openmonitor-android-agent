@@ -21,6 +21,7 @@
 
 package org.umit.icm.mobile.aggregator;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 import java.security.PublicKey;
 import java.util.Random;
@@ -174,18 +175,44 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		 }
 		
-		 
+		
+		
 		
 		byte[] register_byte =Base64.decodeBase64(response.getText().getBytes());
 		byte[] registerAgentResponse_byte = AESCrypto.decrypt(key, register_byte);
-		String registerAgentResponse_string = new String(registerAgentResponse_byte);
-		registerAgentResponse_string=registerAgentResponse_string.replace("{","") + "\n";
-		registerAgentResponse_byte =registerAgentResponse_string.getBytes("UTF-8"); 
-		System.out.println("THIS IS WHAT REGISTERAGENT GOT IN DECODED RESPONSE : \n"+ new String(registerAgentResponse_byte));
 		
+		
+		System.out.println("THIS IS BEFPRE CONVERTING TO STRING and removing Padding : ");
+		for(int i=0;i<registerAgentResponse_byte.length;i++)
+		{
+			System.out.print(registerAgentResponse_byte[i]+ " ");
+		}
+		System.out.println();
+		String registerAgentResponse_string = "" ;
+		
+		StringBuffer sb =new StringBuffer();
+		ByteArrayOutputStream baos= new ByteArrayOutputStream();
+//		registerAgentResponse_string=registerAgentResponse_string.replace("{","");
+		for(int i=0;i<registerAgentResponse_byte.length;i++)
+		{
+			if(registerAgentResponse_byte[i]!=123){
+				baos.write(registerAgentResponse_byte[i]);
+			}
+		}
+		registerAgentResponse_string = sb.toString();
+		byte[] fin = baos.toByteArray();
+		System.out.println("This is the concatenated string : " + registerAgentResponse_string);
+		
+		registerAgentResponse_byte =registerAgentResponse_string.getBytes(); 
+		System.out.println("THIS IS WHAT REGISTERAGENT GOT IN DECODED RESPONSE (Binary String) : ");
+		for(int i=0;i<fin.length;i++)
+		{
+			System.out.print(fin[i]+ " ");
+		}
+		System.out.println();
 		
 		 
-		 return RegisterAgentResponse.parseFrom(registerAgentResponse_byte) ;
+		 return RegisterAgentResponse.parseFrom(fin) ;
 	 }
 	 
 	/**
