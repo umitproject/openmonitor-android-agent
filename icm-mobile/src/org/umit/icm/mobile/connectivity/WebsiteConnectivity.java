@@ -189,10 +189,13 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		.setWebsiteURL(website.getUrl())		
 		.build();			
 		
+		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
 		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));
 		long timeUTC = (calendar.getTimeInMillis()/1000);
+		
+		
 		ICMReport icmReport = ICMReport.newBuilder()
 		.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID()
 				, timeUTC

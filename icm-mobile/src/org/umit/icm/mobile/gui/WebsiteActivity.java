@@ -28,6 +28,7 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
+import org.umit.icm.mobile.throttling.Benchmark;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
@@ -124,13 +125,18 @@ public class WebsiteActivity extends Activity{
 							new WebsiteTextBitmap(getString(R.string.status_code) + " " +
 									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
 					websiteTextBitmapAdapter.addItem(
-							new WebsiteTextBitmap(getString(R.string.throughput) + " " +
+							new WebsiteTextBitmap(getString(R.string.bandwidth) + " " +
 									Integer.toString(websiteReport.getReport().getBandwidth())
-									 + " " + getString(R.string.throughput_unit), drawable));
+									 + " " + getString(R.string.bandwidth_unit), drawable));
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.response_time) + " " +
 									Integer.toString(websiteReport.getReport().getResponseTime())
 									+ " " + getString(R.string.response_time_unit), drawable));
+					websiteTextBitmapAdapter.addItem(
+							new WebsiteTextBitmap(getString(R.string.deviation) + " " +
+									Double.toString(Benchmark.DeviationFromAverageThroughput(website))
+									+ " " + getString(R.string.deviation_unit), drawable));
+					
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)

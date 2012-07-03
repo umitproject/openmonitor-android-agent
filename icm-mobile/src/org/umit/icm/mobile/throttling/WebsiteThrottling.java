@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-public class Website {
+public class WebsiteThrottling {
 	
 	public static String Download(String website){
 	
@@ -36,6 +36,20 @@ public class Website {
 		long end_time=System.nanoTime();
 		time_taken=end_time-start_time;
 		return time_taken;
+	}
+	
+	public static double Throughput(String website){
+		
+		double throughput;
+		
+		String content=WebsiteThrottling.Download(website);
+		long size= content.getBytes().length;
+		
+		long time= WebsiteThrottling.TimeTakenToDownload(website);
+		
+		throughput=size/time;
+		
+		return throughput;
 	}
 	
 

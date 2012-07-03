@@ -31,13 +31,14 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
-import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.Signature;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
@@ -157,6 +158,18 @@ public class RSACrypto {
 	 	                          	
 	@see         KeyPairGenerator
 	 */
+	
+	public static byte[] Sign(PrivateKey privateKey, byte[] data) throws Exception{
+		System.out.println("Signing the key inside RSACrypto#Sign");
+		Signature dsa = Signature.getInstance("SHA1withRSA");
+		
+		SecureRandom secureRandom =null;
+		dsa.initSign(privateKey);
+		dsa.update(data);
+		return dsa.sign();
+	}
+	
+	
 	public static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");

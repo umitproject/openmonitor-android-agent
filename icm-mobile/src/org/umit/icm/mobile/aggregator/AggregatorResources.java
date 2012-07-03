@@ -23,6 +23,7 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.security.PublicKey;
 import java.util.Random;
 
@@ -43,6 +44,8 @@ import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
+import org.umit.icm.mobile.proto.MessageProtos.LoginStep1;
+import org.umit.icm.mobile.proto.MessageProtos.LoginStep2;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
@@ -188,22 +191,17 @@ public class AggregatorResources {
 			System.out.print(registerAgentResponse_byte[i]+ " ");
 		}
 		System.out.println();
-		String registerAgentResponse_string = "" ;
 		
 		StringBuffer sb =new StringBuffer();
 		ByteArrayOutputStream baos= new ByteArrayOutputStream();
-//		registerAgentResponse_string=registerAgentResponse_string.replace("{","");
 		for(int i=0;i<registerAgentResponse_byte.length;i++)
 		{
 			if(registerAgentResponse_byte[i]!=123){
 				baos.write(registerAgentResponse_byte[i]);
 			}
 		}
-		registerAgentResponse_string = sb.toString();
 		byte[] fin = baos.toByteArray();
-		System.out.println("This is the concatenated string : " + registerAgentResponse_string);
-		
-		registerAgentResponse_byte =registerAgentResponse_string.getBytes(); 
+		 
 		System.out.println("THIS IS WHAT REGISTERAGENT GOT IN DECODED RESPONSE (Binary String) : ");
 		for(int i=0;i<fin.length;i++)
 		{
@@ -718,6 +716,92 @@ public class AggregatorResources {
 		 }
 	 }
 	 
+	 
+	 
+	 public static LoginResponse login(Login login,ClientResource clientResource,ClientResource clientResource2) throws Exception
+	 {
+		 LoginStep1 loginStep1 = loginStep1(login,clientResource);
+		 
+		 LoginResponse loginResponse = loginStep2(loginStep1,clientResource2);
+		 
+		 return loginResponse;
+	 }
+	 
+	 
+	 
+	 
+	 public static LoginResponse loginStep2(LoginStep1 loginStep1, ClientResource clientResource) throws Exception {
+		 
+		 Form form = new Form();
+		 
+		 System.out.println("This is getting signed : " + loginStep1.getChallenge());
+		 
+		 byte[] encryptedChallenge =  RSACrypto.Sign(Globals.keyManager.getMyPrivateKey(), loginStep1.getChallenge().getBytes());
+		 
+		 
+//		 ByteBuffer bb = ByteBuffer.wrap(encryptedChallenge);
+		 
+		 String encryptedChallenge_string = new String(encryptedChallenge);
+		 
+		 System.out.println("This is Encrypted Signed message: " + encryptedChallenge_string + " Length : " + encryptedChallenge_string.length());
+		 
+		 System.out.println("Signature starts here: ");
+		 int c=0;
+		 for(int i=0;i<encryptedChallenge.length;i++)
+		 {
+			 c=c+1;
+			 System.out.print(encryptedChallenge[i]+" ");
+		 }
+		 System.out.println("Length : "+ c);
+		 
+//		 BigInteger encryptedChallenge_long=new BigInteger(encryptedChallenge);
+		 
+//		 String encryptedChallenge_string_2 = new String(encryptedChallenge_long.toByteArray()); #doesnt work
+		 
+//		 String encryptedChallenge_string_2 = encryptedChallenge_long.toString(); 
+		 
+//		 System.out.println("This is Signed message(after converting to long) : " + encryptedChallenge_string_2);
+		 
+//		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge_long.toByteArray()); #encryptedChallenge_long.toByteArray() Returns same array as encryptedChallenge
+		 
+		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge);
+		 
+		 String encodedEncryptedChallenge_string = new String(encodedEncryptedChallenge);
+		 
+		 System.out.println("This is Encoded Encrypted Signed message: " + encodedEncryptedChallenge_string + " Length : " + encodedEncryptedChallenge_string.length());
+		 
+		 LoginStep2 loginStep2 = LoginStep2.newBuilder()
+				 .setProcessID(loginStep1.getProcessID())
+				 .setCipheredChallenge(encodedEncryptedChallenge_string)
+				 .build();
+		 
+		 
+		 System.out.println("This is loginStep2 protobuf : " + loginStep2.toString());
+		 
+		 byte[] msg = Base64.encodeBase64(loginStep2.toByteArray());
+		 
+		 String msg_string = new String(msg);
+		 
+		 
+		 form.add(Constants.AGGR_MSG_KEY,msg_string);
+		 
+		 
+		 Representation response=null;
+		 try{
+		 response= clientResource.post(form.getWebRepresentation(null));
+		 System.out.println("loginStep2 Response: " + clientResource.getResponse().toString());
+		 }catch(ResourceException e){
+			 e.printStackTrace();
+		 }
+		 
+		 
+		 
+		return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 
+	 }
+	 
+	 
+	 
 	/**
 	 * Returns a LoginResponse object. Encodes the passed message to
 	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
@@ -742,34 +826,11 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static LoginResponse login(
+	 public static LoginStep1 loginStep1(
 			 Login login, 
 			 ClientResource clientResource) 
 	 throws Exception {
 		 Form form = new Form();
-/*		 if(Constants.AGGR_ENCRYPTION == true) {
-			 
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-			 
-		 } else {
-			 
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(login.toByteArray())));
-			 
-		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return LoginResponse.parseFrom(plainBytes);
-		 } else {
-			 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }*/
 		 
 		 System.out.println("Inside AggregatorResources#login");
 		 
@@ -789,19 +850,17 @@ public class AggregatorResources {
 		 Representation response=null;
 		 try{
 		 response= clientResource.post(form.getWebRepresentation(null));
-		 System.out.println("THIS THIS Response: " + clientResource.getResponse().toString());
+		 System.out.println("loginStep1 Response: " + clientResource.getResponse().toString());
 		 }catch(ResourceException e){
-			 System.out.println("Got here?!");
-			 System.out.println(e.toString());
-			 System.out.println("Status Below:");
-			 System.out.println(e.getMessage());
-			 
-			 System.out.println("THIS THIS THIS Response: " + clientResource.getResponse().toString());
 			 e.printStackTrace();
 		 }
 		 
 		 
-		 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		 byte[] response_byte = Base64.decodeBase64(response.getText().getBytes());		 
+		 
+		 
+		 
+		 return LoginStep1.parseFrom(response_byte);
 		 
 	 }
 	 

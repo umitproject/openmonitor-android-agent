@@ -402,11 +402,15 @@ public class AggregatorRetrieve {
 	 throws Exception {
 		 
 		 	System.out.println("Inside AggregatorRetrieve#login");
+		 	
 		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_1);
+		 	
+		 	ClientResource clientResource2
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_2);
 		 	
 		 	LoginResponse loginResponse
-		 	= AggregatorResources.login(login, clientResource);
+		 	= AggregatorResources.login(login, clientResource,clientResource2);
 		 	return AggregatorActions.loginAction(loginResponse);			
 	 }
 	 

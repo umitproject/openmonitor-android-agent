@@ -110,7 +110,8 @@ public class Constants {
 	public static String AGGR_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
 	public static String AGGR_SERVICE_SUGGESTION = "/api/servicesuggestion/";
 	public static String AGGR_TESTS = "/api/tests/";
-	public static String AGGR_LOGIN = "/api/loginagent/";
+	public static String AGGR_LOGIN_1 = "/api/loginagent/";
+	public static String AGGR_LOGIN_2 = "/api/loginagent2/";
 	public static String AGGR_LOGOUT = "/api/logoutagent/";
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";

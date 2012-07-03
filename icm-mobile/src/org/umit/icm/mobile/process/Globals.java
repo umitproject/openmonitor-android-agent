@@ -76,6 +76,9 @@ public class Globals {
 	 */
 	public static String scanStatus = " ";
 	
+	
+	public static String challenge = "";
+	
 	/**
 	 * Global {@link List} of {@link Website}
 	 */

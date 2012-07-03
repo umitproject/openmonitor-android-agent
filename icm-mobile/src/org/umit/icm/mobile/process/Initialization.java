@@ -262,12 +262,14 @@ public class Initialization {
 		
 		String challenge= Double.toString(random.nextDouble());
 		
+		Globals.challenge=challenge;
+		
 		System.out.println("Setting the login protobuf");
 		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
 		Login login = Login.newBuilder()
-		.setAgentID(220)
+		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setPort(80)
-		.setChallenge(challenge)
+		.setChallenge(Globals.challenge)
 		.setIp(Integer.toString(Globals.myIP))
 		.build();
 		
