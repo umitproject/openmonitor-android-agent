@@ -67,7 +67,7 @@ public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
-	enableTwitterButton, aboutButton;	
+	enableTwitterButton, aboutButton,bugReportButton;	
 	private ProgressDialog progressDialog;
 		
     @Override
@@ -81,7 +81,8 @@ public class ControlActivity extends Activity {
         servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
         mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
         enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
-        aboutButton = (Button) this.findViewById(R.id.aboutButton);
+        bugReportButton = (Button) this.findViewById(R.id.bugReportButton);
+        aboutButton = (Button) this.findViewById(R.id.aboutButton);        
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		try {
@@ -178,6 +179,13 @@ public class ControlActivity extends Activity {
 	       	}
 
 	   	}  );
+        bugReportButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		Intent intent = new Intent(ControlActivity.this, BugReportActivity.class);
+	       		startActivity(intent);
+	       	}
+
+	    }  );
         
         aboutButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       			       		       			
