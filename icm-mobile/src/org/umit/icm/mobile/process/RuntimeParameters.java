@@ -36,19 +36,29 @@ public class RuntimeParameters {
 	private String token;
 	private long agentID;
 	private String twitter;
+	private double averageThroughput;
 	
 	public RuntimeParameters(int scanInterval, String scanStatus, String token,
-			long agentID, String twitter) {
+			long agentID, String twitter,double averageThroughput) {
 		super();
 		this.scanInterval = scanInterval;
 		this.scanStatus = scanStatus;
 		this.token = token;
 		this.agentID = agentID;
 		this.twitter = twitter;
+		this.averageThroughput=averageThroughput;
 	}
 	
 	public RuntimeParameters() {
 		super();
+	}
+	
+	public synchronized double getAverageThroughput() {
+		return this.averageThroughput;
+	}
+	
+	public synchronized void setAverageThroughout(double averageThroughput) {
+		this.averageThroughput = averageThroughput;
 	}
 
 	public synchronized String getToken() {

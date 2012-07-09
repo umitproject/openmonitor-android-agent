@@ -27,6 +27,7 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.throttling.Benchmark;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -132,10 +133,13 @@ public class WebsiteActivity extends Activity{
 							new WebsiteTextBitmap(getString(R.string.response_time) + " " +
 									Integer.toString(websiteReport.getReport().getResponseTime())
 									+ " " + getString(R.string.response_time_unit), drawable));
+					
 					websiteTextBitmapAdapter.addItem(
-							new WebsiteTextBitmap(getString(R.string.deviation) + " " +
-									Double.toString(Benchmark.DeviationFromAverageThroughput(website))
+							new WebsiteTextBitmap("Average Thorughput" + " " +
+									Double.toString(Globals.runtimeParameters.getAverageThroughput())
 									+ " " + getString(R.string.deviation_unit), drawable));
+					
+					
 					
 				} else {
 					websiteTextBitmapAdapter.addItem(

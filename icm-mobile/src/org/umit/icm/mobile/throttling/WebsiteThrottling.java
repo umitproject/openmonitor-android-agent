@@ -1,53 +1,41 @@
 package org.umit.icm.mobile.throttling;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.InputStream;
-import java.net.URL;
+import java.net.URLConnection;
+
+import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
 public class WebsiteThrottling {
 	
-	public static String Download(String website){
-	
-		String webpage="";
-		try{
-			URL url=new URL(website);
-			InputStream is=url.openStream();
-			DataInputStream dis = new DataInputStream(new BufferedInputStream(is));
-			String line;
-			webpage = "";
-		    while ((line = dis.readLine()) != null) {
-		        webpage+=line;
-		    }
-		    
-			return webpage;
-		}catch(Exception e){
-			System.err.println(e.toString());
-			e.printStackTrace();
-			return null;
-		}
-
-	}
 	
 	public static long TimeTakenToDownload(String website){
-		long time_taken;
-		long start_time=System.nanoTime();
-		Download(website);
-		long end_time=System.nanoTime();
-		time_taken=end_time-start_time;
+		long time_taken=0;
+		try{
+			URLConnection urlConnection = WebsiteOpen.openURLConnection(website);
+			long start_time=System.currentTimeMillis();
+			WebsiteOpen.getContent(urlConnection);
+			long end_time=System.currentTimeMillis();
+			time_taken=end_time-start_time;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return time_taken;
 	}
 	
 	public static double Throughput(String website){
 		
-		double throughput;
+		double throughput=0;
+		try{
+		URLConnection urlConnection = WebsiteOpen.openURLConnection(website);
 		
-		String content=WebsiteThrottling.Download(website);
+		String content=WebsiteOpen.getContent(urlConnection);
+		
 		long size= content.getBytes().length;
-		
 		long time= WebsiteThrottling.TimeTakenToDownload(website);
 		
 		throughput=size/time;
+		}catch(Exception e){
+			
+		}
 		
 		return throughput;
 	}

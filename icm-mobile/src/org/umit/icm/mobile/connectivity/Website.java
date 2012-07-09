@@ -41,6 +41,8 @@ public class Website implements Serializable {
 	private String check;	
 	private long testID;
 	private long executeAtTimeUTC;
+	private String content;
+	private long timeTakentoDownload;
 	
 	public Website() {
 		super();
@@ -49,6 +51,8 @@ public class Website implements Serializable {
 		check = "";
 		testID = 0;
 		executeAtTimeUTC = 0;
+		content="";
+		timeTakentoDownload=0;
 	}		
 	
 	public Website(String url, String status, String check, long testID, long executeAtTimeUTC) {
@@ -58,6 +62,16 @@ public class Website implements Serializable {
 		this.check = check;
 		this.testID = 0;
 		this.executeAtTimeUTC = 0;
+	}
+	public Website(String url, String status, String check, long testID, long executeAtTimeUTC,String content,long timeTakentoDownload) {
+		super();
+		this.url = url;
+		this.status = status;
+		this.check = check;
+		this.testID = 0;
+		this.executeAtTimeUTC = 0;
+		this.content=content;
+		this.timeTakentoDownload=timeTakentoDownload;
 	}
 	
 	public long getTestID() {

@@ -23,8 +23,13 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
-import java.nio.ByteBuffer;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.Random;
 
 import org.apache.commons.codec.binary.Base64;
@@ -32,6 +37,7 @@ import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
+import org.umit.icm.mobile.debug.MyBase64;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
@@ -161,6 +167,9 @@ public class AggregatorResources {
 		 System.out.println("This is encrypted Data , its length should be multiple of 16 or whatever : " + enc_data_string + " Length : "+enc_data_string.length());
 		 
 		 System.out.println("This is encodedData : " + encodedData_string + " Length : "+ encodedData_string.length());
+		 
+		 
+		 System.out.println("RegisterAgent Protobuf : \n" + registerAgent.toString());
 		 
 		 form.add("key", send_key_string);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
@@ -732,18 +741,30 @@ public class AggregatorResources {
 	 
 	 public static LoginResponse loginStep2(LoginStep1 loginStep1, ClientResource clientResource) throws Exception {
 		 
-		 Form form = new Form();
+		 String message ="This is my message";
 		 
-		 System.out.println("This is getting signed : " + loginStep1.getChallenge());
+		
 		 
-		 byte[] encryptedChallenge =  RSACrypto.Sign(Globals.keyManager.getMyPrivateKey(), loginStep1.getChallenge().getBytes());
+/*		 System.out.println("This is getting signed : " + message);
+		 
+		 System.out.println("This is my privateKey : " + Globals.keyManager.getMyPrivateKey());
+		 
+		 System.out.println("This is my publicKey : " +  Base64.encodeBase64((Globals.keyManager.getMyPublicKey().getEncoded())));
+		 
+//		 String message= loginStep1.getChallenge();
+		 
+		 
+		 byte[] message_byte=message.getBytes();
+		 
+		 byte[] encryptedChallenge =  RSACrypto.Sign(Globals.keyManager.getMyPrivateKey(), message_byte);
+		 
 		 
 		 
 //		 ByteBuffer bb = ByteBuffer.wrap(encryptedChallenge);
 		 
-		 String encryptedChallenge_string = new String(encryptedChallenge);
+//		 String encryptedChallenge_string = new String(encryptedChallenge);
 		 
-		 System.out.println("This is Encrypted Signed message: " + encryptedChallenge_string + " Length : " + encryptedChallenge_string.length());
+//		 System.out.println("This is Encrypted Signed message: " + encryptedChallenge_string + " Length : " + encryptedChallenge_string.length());
 		 
 		 System.out.println("Signature starts here: ");
 		 int c=0;
@@ -766,13 +787,47 @@ public class AggregatorResources {
 		 
 		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge);
 		 
-		 String encodedEncryptedChallenge_string = new String(encodedEncryptedChallenge);
+		 String encodedEncryptedChallenge_string = new String(encodedEncryptedChallenge);*/
+//		 System.out.println("This is Encoded Encrypted Signed message: " + encodedEncryptedChallenge_string + " Length : " + encodedEncryptedChallenge_string.length());
+		 Form form = new Form();
+		 System.out.println("######################################################################################");
+		 String m ="This is my message";
+			System.out.println(m);
+			
+			KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+			keyPairGen.initialize(1024);
+			KeyPair kp = keyPairGen.generateKeyPair();
+			PrivateKey priKey = kp.getPrivate();
+			PublicKey pubKey = kp.getPublic();
+			
+			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(pubKey, RSAPublicKeySpec.class);
+			
+			System.out.println("WITH toString: ");
+			System.out.println("Mod :" + publicKeySpec.getModulus().toString());
+			System.out.println("Exp :" + publicKeySpec.getPublicExponent().toString());
+			System.out.println("PublicKey:" + pubKey.toString());
+			
+			System.out.println("WITHOUT toString: ");
+			System.out.println("Mod :" + publicKeySpec.getModulus());
+			System.out.println("Exp :" + publicKeySpec.getPublicExponent());
+			System.out.println("PublicKey:" + pubKey);
+			
+			
+			System.out.println("PublicKey Base64:" + MyBase64.encode(pubKey.getEncoded()));
+			
+			Signature instance = Signature.getInstance("SHA1withRSA");
+			instance.initSign(priKey);
+			instance.update(m.getBytes());
+			byte[] signature = instance.sign();
+			System.out.println("Signature: " + MyBase64.encode(signature));
 		 
-		 System.out.println("This is Encoded Encrypted Signed message: " + encodedEncryptedChallenge_string + " Length : " + encodedEncryptedChallenge_string.length());
+		 
+		 
 		 
 		 LoginStep2 loginStep2 = LoginStep2.newBuilder()
 				 .setProcessID(loginStep1.getProcessID())
-				 .setCipheredChallenge(encodedEncryptedChallenge_string)
+				 .setCipheredChallenge(MyBase64.encode(signature))
 				 .build();
 		 
 		 

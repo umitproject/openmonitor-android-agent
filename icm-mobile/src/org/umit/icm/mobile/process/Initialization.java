@@ -280,10 +280,7 @@ public class Initialization {
 		try {
 			
 		AggregatorRetrieve.login(login);
-//		Initialization.loadLists();
-//    	Initialization.initializeEventsList();
-//    	Initialization.initializerPeersList();
-//    	Initialization.startServices(context);
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		

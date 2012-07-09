@@ -279,15 +279,14 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
-	public static void writeWebsite(String dir
-			, Website data) throws IOException , RuntimeException{
+	public static void writeWebsite(String dir, Website data) throws IOException , RuntimeException{
+		
 		ObjectOutputStream objOutStream = null;
 		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
+		File keyDir = new File (sdCard.getAbsolutePath() + dir);
 		keyDir.mkdirs();
-    	File file = new File(keyDir, data.getUrl()
-    			+ Constants.WEBSITE_FILE);
+    	File file = new File(keyDir, data.getUrl()+ Constants.WEBSITE_FILE);
+    	
     	if(!file.exists()){
     		file.createNewFile();
     	}

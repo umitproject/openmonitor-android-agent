@@ -92,6 +92,6 @@
     <string name="description">Description</string>
     <string name="explain_bug">Explain the Bug</string>
     <string name="deviation">Deviation from Benchmark: </string>
-    <string name="deviation_unit">bytes/ns</string>
+    <string name="deviation_unit">bytes/ms</string>
     <string name="bug_report_button">Report Bug</string>
 </resources>
