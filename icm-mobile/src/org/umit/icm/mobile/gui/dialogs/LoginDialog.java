@@ -103,6 +103,11 @@ import android.widget.Toast;
 					Initialization.registration(loginCredentials);
 					Initialization.login();
 					
+/*					Initialization.loadLists();
+					Initialization.initializeEventsList();
+			        Initialization.initializerPeersList();
+			        Initialization.startServices(context);*/
+					
 					Show.Info(activity, "This is running from inside login dialog!!");
 					
 					LoginDialog.this.dismiss();

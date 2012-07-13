@@ -36,6 +36,7 @@ import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
@@ -281,12 +282,16 @@ public class Initialization {
 			
 		AggregatorRetrieve.login(login);
 		
+		Initialization.initializeBanlist();
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	
 	public static void registration(LoginCredentials loginCredentials) 
@@ -331,4 +336,19 @@ public class Initialization {
 	}
 		
 	}
+	
+	public static void initializeBanlist(){
+		
+		GetBanlist getBanlist = GetBanlist.newBuilder()
+				.setCount(100)
+				.build();
+		
+		try {
+			AggregatorRetrieve.getBanlist(getBanlist);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }		

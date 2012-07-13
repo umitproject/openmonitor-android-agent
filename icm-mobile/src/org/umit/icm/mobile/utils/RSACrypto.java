@@ -163,7 +163,6 @@ public class RSACrypto {
 		System.out.println("Signing the key inside RSACrypto#Sign");
 		Signature dsa = Signature.getInstance("SHA1withRSA");
 		
-		SecureRandom secureRandom =null;
 		dsa.initSign(privateKey);
 		dsa.update(data);
 		return dsa.sign();

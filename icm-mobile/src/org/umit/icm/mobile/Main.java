@@ -104,10 +104,7 @@ public class Main extends TabActivity {
 	       			new LoginDialog(Main.this);
 	            LoginDialog.show();	
 	            
-	/*          Initialization.loadLists();
-	        	Initialization.initializeEventsList();
-	        	Initialization.initializerPeersList();*/
-	        	Initialization.startServices(getApplicationContext());
+	          
 	            
 	        	
 				

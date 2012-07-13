@@ -26,14 +26,13 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
-
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
-
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
@@ -432,5 +431,12 @@ public class AggregatorRetrieve {
 		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
 		 	AggregatorResources.logout(logout, clientResource);		 				
 	 }
+	 
+	 public synchronized static void getBanlist(GetBanlist getBanlist) throws Exception{
+		 
+		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANLIST);
+		 AggregatorResources.getBanlist(getBanlist, clientResource);
+	 }
+	 
 	 
 }
