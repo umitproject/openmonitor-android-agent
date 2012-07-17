@@ -101,15 +101,9 @@ public class Main extends TabActivity {
 	        	Show.Info(this, "Trying to display Login Dialog");
 	        	
 	        	LoginDialog LoginDialog = 
-	       			new LoginDialog(Main.this);
+	       			new LoginDialog(this);
 	            LoginDialog.show();	
 	            
-	          
-	            
-	        	
-				
-				
-				
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();

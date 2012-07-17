@@ -27,6 +27,7 @@ import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -438,5 +439,10 @@ public class AggregatorRetrieve {
 		 AggregatorResources.getBanlist(getBanlist, clientResource);
 	 }
 	 
-	 
+	 public synchronized static void getBannets(GetBannets getBannets) throws Exception{
+		 
+		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANNETS);
+		 AggregatorResources.getBannets(getBannets, clientResource);
+		 
+	 }
 }

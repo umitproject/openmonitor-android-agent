@@ -37,6 +37,9 @@ import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
+import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
@@ -234,7 +237,7 @@ public class Initialization {
 	 * Should be deprecated eventually.
 	 */
 	public static void initializerPeersList() {
-		RSAKey rsaKey = RSAKey.newBuilder()
+/*		RSAKey rsaKey = RSAKey.newBuilder()
 		.setExp("exp")
 		.setMod("mod")
 		.build();
@@ -248,7 +251,25 @@ public class Initialization {
 		.build();
 		
 		Globals.runtimesList.addPeer(agentData);
-		Globals.runtimesList.addSuperPeer(agentData);
+		Globals.runtimesList.addSuperPeer(agentData);*/
+		
+		GetPeerList getPeerList = GetPeerList.newBuilder()
+				.setCount(10)
+				.build();
+		
+		GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+				.setCount(10)
+				.build();
+		
+		try {
+			AggregatorRetrieve.getPeerList(getPeerList);
+			AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public static void loadLists() {
@@ -283,6 +304,7 @@ public class Initialization {
 		AggregatorRetrieve.login(login);
 		
 		Initialization.initializeBanlist();
+		Initialization.initializeBannets();
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -349,6 +371,19 @@ public class Initialization {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void initializeBannets(){
+		GetBannets getBannets = GetBannets.newBuilder()
+				.setCount(100)
+				.build();
+		
+		try{
+			AggregatorRetrieve.getBannets(getBannets);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 }		

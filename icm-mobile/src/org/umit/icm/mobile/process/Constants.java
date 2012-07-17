@@ -46,7 +46,6 @@ public class Constants {
 	public static int AES_BLOCK_SIZE =AES_KEY_SIZE/8;
 	public static byte  AES_DEFAULT_PADDING='{';
 	public static double averageThroughput=0;
-	public static String send_key_string="";
 	public static String ICM_ROOT_DIR = "/icm-mobile";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
 	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
@@ -115,6 +114,7 @@ public class Constants {
 	public static String AGGR_LOGIN_2 = "/api/loginagent2/";
 	public static String AGGR_LOGOUT = "/api/logoutagent/";
 	public static String AGGR_GET_BANLIST = "/api/get_banlist/";
+	public static String AGGR_GET_BANNETS = "/api/get_bannets/";
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
 	public static int DEFAULT_TESTS_VERSION = 1;

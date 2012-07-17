@@ -23,13 +23,7 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.Signature;
-import java.security.spec.RSAPublicKeySpec;
 import java.util.Random;
 
 import org.apache.commons.codec.binary.Base64;
@@ -37,12 +31,14 @@ import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-import org.umit.icm.mobile.debug.MyBase64;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlistResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannetsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
@@ -122,60 +118,16 @@ public class AggregatorResources {
 			 ClientResource clientResource) 
 	 throws Exception{
 		 
-		 System.out.println("IS IT EVEN GETTING HERE?!");
 		 Form form = new Form();
 		 
-		 BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
-		 BigInteger exp = new BigInteger("65537");
-			
-		 PublicKey aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
-		
-		 byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
-		 new Random().nextBytes(bits);
-		 byte[] temp=Base64.encodeBase64(bits);
-		 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
+		 String msg = AggregatorHelper.aesEncrypt(registerAgent.toByteArray());
 		 
-		 Globals.AESKEY = key;
-		 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
-//		 byte[] aggkey = AESCrypto.generateKey(bits);
-//		 String key_string = new String(bits,"UTF-8");
-		 
-//		 byte[] base64_aggkey= Base64.encodeBase64(aggkey);
-		 
-		 byte[] base64_key = Base64.encodeBase64(key);
-		 byte[] enc_key = RSACrypto.encryptPublic(aggrPublicKey,base64_key);
-		 byte[] send_key = Base64.encodeBase64(enc_key);
-		 
-		 byte[] enc_data= AESCrypto.encrypt(key, registerAgent.toByteArray());
-		 byte[] encodedData=Base64.encodeBase64(enc_data);
+		 String key=AggregatorHelper.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));
 		 
 		 
-		 String key_string = new String(key,"UTF-8");
-		 String base64_key_string = new String(base64_key,"UTF-8"); 
-		 String send_key_string = new String(send_key,"UTF-8");
-		 String enc_key_string = new String(enc_key,"UTF-8");
-		 String enc_data_string = new String(enc_data,"UTF-8");
-		 String encodedData_string = new String(encodedData,"UTF-8");
-		 
-		 
-		 Constants.send_key_string=send_key_string;
-		 
-		 System.out.println("This should be the secret : " + key_string + " Length : " +key_string.length());
-		 System.out.println("This should be the *data* : " +base64_key_string  + "   Size of : "+ base64_key_string.length());
-		 System.out.println("This is the decoded data : "+ enc_key_string + "   Size of : "+ enc_key_string.length());
-		 System.out.println("This is the encoded data ,length ("+ send_key_string.length()+") , encoded_data : "+send_key_string);
-		 
-		 System.out.println("This is encrypted Data , its length should be multiple of 16 or whatever : " + enc_data_string + " Length : "+enc_data_string.length());
-		 
-		 System.out.println("This is encodedData : " + encodedData_string + " Length : "+ encodedData_string.length());
-		 
-		 
-		 System.out.println("RegisterAgent Protobuf : \n" + registerAgent.toString());
-		 
-		 form.add("key", send_key_string);
+		 form.add("key", key);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(encodedData));
+		 form.add(Constants.AGGR_MSG_KEY, msg );
 		 
 		 Representation response=null;
 		 try{
@@ -188,39 +140,9 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		 }
 		
-		
-		
-		
-		byte[] register_byte =Base64.decodeBase64(response.getText().getBytes());
-		byte[] registerAgentResponse_byte = AESCrypto.decrypt(key, register_byte);
-		
-		
-		System.out.println("THIS IS BEFPRE CONVERTING TO STRING and removing Padding : ");
-		for(int i=0;i<registerAgentResponse_byte.length;i++)
-		{
-			System.out.print(registerAgentResponse_byte[i]+ " ");
-		}
-		System.out.println();
-		
-		StringBuffer sb =new StringBuffer();
-		ByteArrayOutputStream baos= new ByteArrayOutputStream();
-		for(int i=0;i<registerAgentResponse_byte.length;i++)
-		{
-			if(registerAgentResponse_byte[i]!=123){
-				baos.write(registerAgentResponse_byte[i]);
-			}
-		}
-		byte[] fin = baos.toByteArray();
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
 		 
-		System.out.println("THIS IS WHAT REGISTERAGENT GOT IN DECODED RESPONSE (Binary String) : ");
-		for(int i=0;i<fin.length;i++)
-		{
-			System.out.print(fin[i]+ " ");
-		}
-		System.out.println();
-		
-		 
-		 return RegisterAgentResponse.parseFrom(fin) ;
+		return RegisterAgentResponse.parseFrom(final_response) ;
 	 }
 	 
 	/**
@@ -247,30 +169,26 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetPeerListResponse getPeerList(
-			 GetPeerList getPeerList, 
-			 ClientResource clientResource) 
-	 throws Exception {
+	 public static GetPeerListResponse getPeerList(GetPeerList getPeerList, ClientResource clientResource) throws Exception {
+		 
 		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getPeerList.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
-		 }		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return GetPeerListResponse.parseFrom(plainBytes);
-		 } else {
-			 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 
+		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
+		 
+		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		 
+		return GetPeerListResponse.parseFrom(final_response);
 		 
 	 }
 	 
@@ -298,30 +216,25 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetSuperPeerListResponse getSuperPeerList(
-			 GetSuperPeerList getSuperPeerList, 
-			 ClientResource clientResource) 
-	 throws Exception {
+	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList, ClientResource clientResource) throws Exception {
 		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getSuperPeerList.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {			 		
-			 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
-		 }
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return GetSuperPeerListResponse.parseFrom(plainBytes);
-		 } else {
-			 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
+		 
+		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		 
+		return GetSuperPeerListResponse.parseFrom(final_response);
+		 
 	 }
 	 
 	/**
@@ -550,30 +463,28 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static NewTestsResponse checkTests(
-			 NewTests newTests, 
-			 ClientResource clientResource) 
-	 throws Exception {
+	 public static NewTestsResponse checkTests(NewTests newTests, ClientResource clientResource) throws Exception {
+
 		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newTests.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(newTests.toByteArray())));
-		 }
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return NewTestsResponse.parseFrom(plainBytes);
-		 } else {
-			 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 
+		 String msg = AggregatorHelper.aesEncrypt(newTests.toByteArray());
+		 
+		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		 
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		
+		 
+		 return NewTestsResponse.parseFrom(final_response);
+		 
 	 }
 	 
 	/**
@@ -746,32 +657,13 @@ public class AggregatorResources {
 		 
 		 Form form = new Form();
 		 
-		 System.out.println("This is getting signed : " + message);
-		 
-		 System.out.println("This is my privateKey : " + Globals.keyManager.getMyPrivateKey());
-		 
-		 System.out.println("This is my publicKey : " +  Base64.encodeBase64((Globals.keyManager.getMyPublicKey().getEncoded())));
-		 
-		 
 		 byte[] message_byte=message.getBytes();
 		 
 		 byte[] encryptedChallenge =  RSACrypto.Sign(Globals.keyManager.getMyPrivateKey(), message_byte);
 		 
-		 
-		 System.out.println("Signature starts here: ");
-		 int c=0;
-		 for(int i=0;i<encryptedChallenge.length;i++)
-		 {
-			 c=c+1;
-			 System.out.print(encryptedChallenge[i]+" ");
-		 }
-		 System.out.println("Length : "+ c);
-		 
-		 
 		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge);
 		 
 		 String encodedEncryptedChallenge_string = new String(encodedEncryptedChallenge);
-		 
 		 
 		 
 		 LoginStep2 loginStep2 = LoginStep2.newBuilder()
@@ -780,7 +672,6 @@ public class AggregatorResources {
 				 .build();
 		 
 		 
-		 System.out.println("This is loginStep2 protobuf : " + loginStep2.toString());
 		 
 		 byte[] msg = Base64.encodeBase64(loginStep2.toByteArray());
 		 
@@ -836,33 +727,18 @@ public class AggregatorResources {
 	 throws Exception {
 		 Form form = new Form();
 		 
-		 System.out.println("Inside AggregatorResources#login");
-		 
-		 System.out.println("THIS IS WHAT WE ARE ENCODING : " +new String(login.toByteArray()));
+		 String msg = AggregatorHelper.encodeData(login.toByteArray());
 
-		 byte[] encodedData=Base64.encodeBase64(login.toByteArray());
-		 
-		 
-		 String encodedData_string = new String(encodedData);
-		 
-		 System.out.println("THIS IS WHAT WE ARE SENDING IN FORM : " +encodedData_string);
-
-		 form.add(Constants.AGGR_MSG_KEY, encodedData_string);
-		 
-		 
+		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response=null;
 		 try{
 		 response= clientResource.post(form.getWebRepresentation(null));
-		 System.out.println("loginStep1 Response: " + clientResource.getResponse().toString());
 		 }catch(ResourceException e){
 			 e.printStackTrace();
 		 }
 		 
-		 
 		 byte[] response_byte = Base64.decodeBase64(response.getText().getBytes());		 
-		 
-		 
 		 
 		 return LoginStep1.parseFrom(response_byte);
 		 
@@ -907,11 +783,11 @@ public class AggregatorResources {
 	 
 	 
 	 
-	 public static void getBanlist(GetBanlist getBanlists,ClientResource clientResource) throws Exception{
+	 public static GetBanlistResponse getBanlist(GetBanlist getBanlists,ClientResource clientResource) throws Exception{
 		 
 		 Form form = new Form();
 		 
-		 String msg= AggregatorHelper.AESEncrypt(getBanlists.toByteArray());
+		 String msg= AggregatorHelper.aesEncrypt(getBanlists.toByteArray());
 		 
 		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
 		 form.add(Constants.AGGR_MSG_KEY, msg);
@@ -922,12 +798,34 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		 }
 		 
-		 byte[] response_byte = Base64.decodeBase64(response.getText().getBytes());
+		 byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
 		 
-		 
+		 return GetBanlistResponse.parseFrom(final_response);
 		 
 	 }
 	 
-
+	 
+	 public static GetBannetsResponse getBannets(GetBannets getBannets, ClientResource clientResource)throws Exception{
+		 
+		 Form form = new Form();
+		 
+		 String msg = AggregatorHelper.aesEncrypt(getBannets.toByteArray());
+		 
+		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		 
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		
+		 
+		 return GetBannetsResponse.parseFrom(final_response);
+	 }
 
 }

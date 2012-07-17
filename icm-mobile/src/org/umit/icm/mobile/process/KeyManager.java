@@ -32,7 +32,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Random;
 
+import org.apache.commons.codec.binary.Base64;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
 import org.umit.icm.mobile.utils.RSACrypto;
@@ -43,6 +45,7 @@ public class KeyManager {
 	private String myCipheredKeyMod;
 	private String myCipheredKeyExp;
 	private PublicKey aggrPublicKey;
+	private byte[] aesKey;
 	
 	public KeyManager(PrivateKey myPrivateKey,
 			PublicKey myPublicKey, String myCipheredKeyMod,
@@ -75,11 +78,20 @@ public class KeyManager {
 			setMyCipheredKeyExp(rsaKey.getExp());
 			
 			
-			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111L");
-			BigInteger exp = new BigInteger("65537L");
+			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
+			BigInteger exp = new BigInteger("65537");
 			
-			aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
+			this.aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
 			System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
+			
+			
+			 byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
+			 new Random().nextBytes(bits);
+			 byte[] temp=Base64.encodeBase64(bits);
+			 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
+			 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
+			 
+			 this.aesKey =key;
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -90,6 +102,14 @@ public class KeyManager {
 
 	public synchronized PrivateKey getMyPrivateKey() {
 		return myPrivateKey;
+	}
+	
+	public synchronized PublicKey getAggregatorPublicKey() {
+		return this.aggrPublicKey;
+	}
+	
+	public synchronized byte[] getAESKey() {
+		return this.aesKey;
 	}
 	
 	/**
@@ -122,11 +142,6 @@ public class KeyManager {
 		return myPublicKey;
 	}
 	
-	
-	
-	public synchronized PublicKey getAggrPublicKey(){
-		return aggrPublicKey;
-	}
 	
 	/**
 	 * Writes the PublicKey to disk.
