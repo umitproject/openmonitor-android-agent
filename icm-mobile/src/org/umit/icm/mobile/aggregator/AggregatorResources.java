@@ -311,31 +311,26 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static SendReportResponse sendWebsiteReport(
-			 SendWebsiteReport sendWebsiteReport, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendWebsiteReport.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
-		 }
+	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, ClientResource clientResource) throws Exception {
+		Form form = new Form();
 		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return SendReportResponse.parseFrom(plainBytes);
-		 } else {
-			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
+			 
+		form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		form.add(Constants.AGGR_MSG_KEY, msg);
+			 
+		Representation response= null;
+			 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+			
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+			 
+		return SendReportResponse.parseFrom(final_response);
+		 
 	 }
 	 
 	/**
@@ -367,25 +362,22 @@ public class AggregatorResources {
 			 ClientResource clientResource) 
 	 throws Exception {
 		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendServiceReport.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(sendServiceReport.toByteArray()))); 
-		 }		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return SendReportResponse.parseFrom(plainBytes);
-		 } else {
-			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 String msg = AggregatorHelper.aesEncrypt(sendServiceReport.toByteArray());
+		 
+		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		 
+		return SendReportResponse.parseFrom(final_response);
 	 }
 	 
 	/**

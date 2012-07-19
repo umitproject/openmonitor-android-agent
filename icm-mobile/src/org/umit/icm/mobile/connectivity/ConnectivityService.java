@@ -30,10 +30,12 @@ import javax.mail.MessagingException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.RuntimeParameters;
+import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 
 import android.app.Service;
 import android.content.Context;
@@ -99,6 +101,8 @@ public class ConnectivityService extends Service {
 	@see         Timer
 	 */	 	 
 	private void startScan() {
+		
+		
 		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
 		 RuntimeParameters runtimeParameters = new RuntimeParameters();
 		 try {
@@ -110,6 +114,20 @@ public class ConnectivityService extends Service {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
+				
+				
+					NewTests newTests = NewTests.newBuilder()
+							.setCurrentTestVersionNo(Constants.DEFAULT_TESTS_VERSION)
+							.build();
+					try {
+						AggregatorRetrieve.checkTests(newTests);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				
+				
 				try {			
 					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 						stopScan();
@@ -134,6 +152,9 @@ public class ConnectivityService extends Service {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();
 				}
+				
+				
+				
 				Context context = getApplicationContext();
 				Calendar calendar = Calendar.getInstance();
 				NotificationHelper.sendNotification(

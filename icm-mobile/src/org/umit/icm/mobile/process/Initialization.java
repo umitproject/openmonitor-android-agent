@@ -142,8 +142,8 @@ public class Initialization {
 	 */
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
-		context.startService(new Intent(context, NotificationService.class));
-		context.startService(new Intent(context, CommunicationService.class));		
+//		context.startService(new Intent(context, NotificationService.class));
+//		context.startService(new Intent(context, CommunicationService.class));		
 	}
 	
 	public static void checkProfiler() {
@@ -237,21 +237,6 @@ public class Initialization {
 	 * Should be deprecated eventually.
 	 */
 	public static void initializerPeersList() {
-/*		RSAKey rsaKey = RSAKey.newBuilder()
-		.setExp("exp")
-		.setMod("mod")
-		.build();
-		AgentData agentData = AgentData.newBuilder()
-		.setAgentID(10)
-		.setAgentIP("127.0.0.1")
-		.setAgentPort(3128)
-		.setPeerStatus("On")
-		.setPublicKey(rsaKey)
-		.setToken("Token")
-		.build();
-		
-		Globals.runtimesList.addPeer(agentData);
-		Globals.runtimesList.addSuperPeer(agentData);*/
 		
 		GetPeerList getPeerList = GetPeerList.newBuilder()
 				.setCount(10)
@@ -278,7 +263,7 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public static void login()
+	public static boolean login()
 	{
 		Random random = new Random();
 		
@@ -297,28 +282,28 @@ public class Initialization {
 		
 		System.out.println("Login protobuf formed : "  + login.toString());
 				
-		
+		boolean success=false;
 		
 		try {
 			
-		AggregatorRetrieve.login(login);
+		success=AggregatorRetrieve.login(login);
 		
 		Initialization.initializeBanlist();
 		Initialization.initializeBannets();
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-		
 			e.printStackTrace();
 		}
+		return success;
 	}
 	
 	
 	
 	
-	public static void registration(LoginCredentials loginCredentials) 
+	public static boolean registration(LoginCredentials loginCredentials) 
 	{
-	
+		boolean success=false;
 			
 	  try {
 		
@@ -336,8 +321,11 @@ public class Initialization {
 			.setIp(Integer.toString(Globals.myIP))
 			.setAgentPublicKey(rsaKey)
 			.setVersionNo(Globals.versionManager.getTestsVersion())
-			.build();			
-			AggregatorRetrieve.registerAgent(registerAgent);
+			.build();
+			
+			
+			
+			success=AggregatorRetrieve.registerAgent(registerAgent);
 					  
 		  
 	} catch (IOException e) {
@@ -356,8 +344,8 @@ public class Initialization {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		
-	}
+	  return success;
+}
 	
 	public static void initializeBanlist(){
 		

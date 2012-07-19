@@ -92,18 +92,10 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try { /*Register Agent should be called here*/
-	        	
+	        try {
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-	        	
-	        	
-	        	Show.Info(this, "Trying to display Login Dialog");
-	        	
-	        	LoginDialog LoginDialog = 
-	       			new LoginDialog(this);
-	            LoginDialog.show();	
-	            
+				Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();

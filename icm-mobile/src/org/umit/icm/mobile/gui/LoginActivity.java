@@ -25,15 +25,16 @@
 	import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Initialization;
-import org.umit.icm.mobile.process.InitializationThread;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,10 +49,8 @@ import android.widget.Toast;
 	    private EditText etPassword;
 	    private Button buttonSet;
 	    private Button registerButton;
-	    
-	    public static Context context;
-	    public static Activity activity;
-	        
+	    ProgressDialog progressDialog;    
+	    private Context context;
 	    
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +62,7 @@ import android.widget.Toast;
 	        registerButton.setOnClickListener(new intervalListener());
 	        etUsername = (EditText) findViewById(R.id.etUsername);                           
 	        etPassword = (EditText) findViewById(R.id.etPassword);
+	        context=this;
 	    }
 	        
 	    private class intervalListener implements android.view.View.OnClickListener {
@@ -72,18 +72,23 @@ import android.widget.Toast;
 				switch (arg0.getId()){
 				case R.id.loginButton:
 				if (etUsername.getText().toString().equals("")) {
-					CharSequence text = context.getString(R.string.username);
+					CharSequence text = getString(R.string.username);
 	        		int duration = Toast.LENGTH_SHORT;
 	
-	        		Toast toast = Toast.makeText(context, text, duration);
+	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 	        		toast.show(); 
 				} else if (etPassword.getText().toString().equals("")) {
-					CharSequence text = context.getString(R.string.password);
+					CharSequence text = getString(R.string.password);
 	        		int duration = Toast.LENGTH_SHORT;
 	
-	        		Toast toast = Toast.makeText(context, text, duration);
+	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 	        		toast.show(); 
-				} else {				
+				} else {
+					progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
+					progressDialog.show();
+					
+					
+					
 					String login = etUsername.getText().toString();
 					String password = etPassword.getText().toString();
 					
@@ -93,26 +98,21 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
-					System.out.println("This is from inside loging Dialog");
+					new Background().execute(loginCredentials);
 					
-					Initialization.registration(loginCredentials);
-					Initialization.login();
 					
 /*					Initialization.loadLists();
 					Initialization.initializeEventsList();
 			        Initialization.initializerPeersList();
 			        Initialization.startServices(context);*/
 					
-					Show.Info(activity, "This is running from inside login dialog!!");
-					Intent intent = new Intent(LoginActivity.this,Main.class);
-					startActivity(intent);
-					finish();
+					
 				}
 				break;
 				
 				case R.id.registerButton:
 					Intent i = new Intent(Intent.ACTION_VIEW, 
-						       Uri.parse("http://alpha.openmonitor.org/accounts/register/"));
+						       Uri.parse(Constants.AGGR_REGISTER_USER));
 				
 					startActivity(i);
 					finish();
@@ -121,5 +121,55 @@ import android.widget.Toast;
 			}			
 	
 	    }   
+	    
+	    
+	    private class Background extends AsyncTask<LoginCredentials,String,String>{
+
+			@Override
+			protected String doInBackground(LoginCredentials... loginCredentials) {
+				// TODO Auto-generated method stub
+				publishProgress("Registering Agent");
+				boolean register=Initialization.registration(loginCredentials[0]);
+				if(register){
+					publishProgress("Registration Done.");
+					publishProgress("Logging Agent");
+					boolean login=Initialization.login();
+					if(login){
+						publishProgress("Done.");
+					}else{
+						publishProgress("Unable to login Agent");
+						this.cancel(true);
+					}
+				}else{
+					publishProgress("Unable to Register Agent");
+					this.cancel(true);
+				}
+				
+				return null;
+			}
+			
+			protected void onProgressUpdate(String... string) {
+				progressDialog.setMessage(string[0]);
+				if(string[0].equalsIgnoreCase("Unable to Register Agent")){
+					Show.Error((Activity)context, string[0]);
+					this.cancel(true);
+				}else if(string[0].equalsIgnoreCase("Unable to login Agent")){
+					Show.Error((Activity)context, string[0]);
+					this.cancel(true);
+				}
+		     }
+	    	
+			protected void onPostExecute(String result) {
+				Intent intent = new Intent(LoginActivity.this,Main.class);
+				startActivity(intent);
+				finish();
+		     }
+			
+			protected void onCancelled() {
+				progressDialog.dismiss();
+		     }
+	    	
+	    }
+	    
 	            
 	}
