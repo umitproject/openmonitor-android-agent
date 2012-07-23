@@ -22,7 +22,9 @@
 	package org.umit.icm.mobile.gui;
 	
 	
-	import org.umit.icm.mobile.Main;
+	import java.io.IOException;
+
+import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.process.Constants;
@@ -84,8 +86,8 @@ import android.widget.Toast;
 	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 	        		toast.show(); 
 				} else {
-					progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
-					progressDialog.show();
+		//			progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
+		//			progressDialog.show();
 					
 					
 					
@@ -98,8 +100,10 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
-					new Background().execute(loginCredentials);
+				//	new Background().execute(loginCredentials);
 					
+					Initialization.registration(loginCredentials);
+		//			Initialization.login();
 					
 /*					Initialization.loadLists();
 					Initialization.initializeEventsList();
@@ -128,6 +132,16 @@ import android.widget.Toast;
 			@Override
 			protected String doInBackground(LoginCredentials... loginCredentials) {
 				// TODO Auto-generated method stub
+				Initialization.checkProfiler();		
+				try {
+					Initialization.checkFiles();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				publishProgress("Registering Agent");
 				boolean register=Initialization.registration(loginCredentials[0]);
 				if(register){
@@ -160,9 +174,13 @@ import android.widget.Toast;
 		     }
 	    	
 			protected void onPostExecute(String result) {
-				Intent intent = new Intent(LoginActivity.this,Main.class);
-				startActivity(intent);
-				finish();
+				progressDialog.dismiss();
+				if(!isCancelled()){
+					Intent intent = new Intent(LoginActivity.this,Main.class);
+					startActivity(intent);
+					finish();	
+				}
+				
 		     }
 			
 			protected void onCancelled() {

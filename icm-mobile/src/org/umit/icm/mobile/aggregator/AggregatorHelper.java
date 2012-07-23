@@ -32,9 +32,14 @@ public class AggregatorHelper {
 		
 	}
 	
-	public static byte[] aesDecrypt(String data){
+	public static byte[] aesDecrypt(byte[] data){
 		byte[] decoded_data=null;
-		decoded_data=Base64.decodeBase64(data.getBytes());
+		System.out.println("-----------_______________---------------- Got this data: " + new String(data));
+		
+		decoded_data=Base64.decodeBase64(data);
+		
+		System.out.println("-----------_______________---------------- Got this decoded_data: " + new String(decoded_data));
+		
 		
 		byte[] decrypted_decoded_data =null;
 		try {
@@ -44,7 +49,11 @@ public class AggregatorHelper {
 			e.printStackTrace();
 		}
 		
+		System.out.println("-----------_______________---------------- Got this decrypted_decoded_data: " + new String(decrypted_decoded_data));
+		
 		byte[] unpadded_decrypted_decoded_data=AggregatorHelper.removePadding(decrypted_decoded_data);
+		
+		System.out.println("-----------_______________---------------- Got this unpadded_decrypted_decoded_data: " + new String(unpadded_decrypted_decoded_data));
 		
 		return unpadded_decrypted_decoded_data;
 		

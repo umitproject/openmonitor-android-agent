@@ -21,12 +21,18 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.ByteArrayOutputStream;
-import java.math.BigInteger;
-import java.security.PublicKey;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -117,32 +123,69 @@ public class AggregatorResources {
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
 	 throws Exception{
-		 
-		 Form form = new Form();
+		 try{
+//		 Form form = new Form();
 		 
 		 String msg = AggregatorHelper.aesEncrypt(registerAgent.toByteArray());
 		 
 		 String key=AggregatorHelper.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));
 		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_REGISTER_AGENT);
 		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("key", key ));
+		 pairs.add(new BasicNameValuePair("agentID", Long.toString(Constants.DEFAULT_AGENT_ID)));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 
+		 System.out.println("Sending key : " + key);
+		 System.out.println("Sending agentID : " + Long.toString(Constants.DEFAULT_AGENT_ID));
+		 System.out.println("Sending msg : " + msg);
+		 
+/*		 
 		 form.add("key", key);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
 		 form.add(Constants.AGGR_MSG_KEY, msg );
 		 
 		 Representation response=null;
 		 try{
-		 response= clientResource.post(form.getWebRepresentation(null));
+			 response= clientResource.post(form.getWebRepresentation(null));
+			 System.out.println("Got response !! , response : " + response.getText());
+			 System.out.println( "Got Context: " + clientResource.getContext() );
+			 System.out.println( "Got Response: " + clientResource.getResponse());
+			 System.out.println( "Got Resonse Attribute : " + clientResource.getResponseAttributes() );
+			 System.out.println( "Got Resonse Entity: " + clientResource.getResponseEntity() );
 		 }catch(ResourceException e){
 			 System.out.println("Got here?!");
 			 System.out.println(e.toString());
 			 System.out.println("Status Below:");
 			 System.out.println(e.getMessage());
 			 e.printStackTrace();
-		 }
-		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		 }*/
 		 
-		return RegisterAgentResponse.parseFrom(final_response) ;
+		String responseBody = EntityUtils.toString(response.getEntity());
+		
+		System.out.println("--------------------------------------------GOT THIS AS RESPONSE : "+ responseBody);
+		 
+		 
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		
+		for(int i=0;i<final_response.length;i++)
+		{
+			System.out.println(final_response[i]);
+		}
+		
+		return RegisterAgentResponse.parseFrom(final_response);
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
+		 
+		return null;
 	 }
 	 
 	/**
@@ -186,7 +229,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		 
 		return GetPeerListResponse.parseFrom(final_response);
 		 
@@ -231,7 +274,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		 
 		return GetSuperPeerListResponse.parseFrom(final_response);
 		 
@@ -327,7 +370,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 			 
 		return SendReportResponse.parseFrom(final_response);
 		 
@@ -375,7 +418,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		 
 		return SendReportResponse.parseFrom(final_response);
 	 }
@@ -472,7 +515,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		
 		 
 		 return NewTestsResponse.parseFrom(final_response);
@@ -790,7 +833,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		 }
 		 
-		 byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		 byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		 
 		 return GetBanlistResponse.parseFrom(final_response);
 		 
@@ -814,7 +857,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText());
+		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		
 		 
 		 return GetBannetsResponse.parseFrom(final_response);

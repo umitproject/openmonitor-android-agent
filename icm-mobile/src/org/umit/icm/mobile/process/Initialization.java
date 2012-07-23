@@ -314,6 +314,7 @@ public class Initialization {
 			.setExp(Globals.keyManager.getMyCipheredKeyExp())
 			.build();
 			
+			Globals.versionManager.setTestsVersion(1);
 			
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
