@@ -87,7 +87,7 @@ public class Initialization {
 					, Constants.PARAMETERS_DIR) == false )
 				|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 						, Constants.PARAMETERS_DIR) == false )) {					
-			Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);
+			Globals.runtimeParameters.setAgentID(Integer.toString(10));
 			/* Aggregator Call
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setIp(Integer.toString(Globals.myIP))

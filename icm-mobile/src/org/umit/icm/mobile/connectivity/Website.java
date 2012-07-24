@@ -39,7 +39,7 @@ public class Website implements Serializable {
 	private String url;
 	private String status;
 	private String check;	
-	private long testID;
+	private String testID;
 	private long executeAtTimeUTC;
 	private String content;
 	private long timeTakentoDownload;
@@ -49,36 +49,36 @@ public class Website implements Serializable {
 		url = "";
 		status = "";
 		check = "";
-		testID = 0;
+		testID = Integer.toString(0);
 		executeAtTimeUTC = 0;
 		content="";
 		timeTakentoDownload=0;
 	}		
 	
-	public Website(String url, String status, String check, long testID, long executeAtTimeUTC) {
+	public Website(String url, String status, String check, String testID, long executeAtTimeUTC) {
 		super();
 		this.url = url;
 		this.status = status;
 		this.check = check;
-		this.testID = 0;
+		this.testID = Integer.toString(0);
 		this.executeAtTimeUTC = 0;
 	}
-	public Website(String url, String status, String check, long testID, long executeAtTimeUTC,String content,long timeTakentoDownload) {
+	public Website(String url, String status, String check, String testID, long executeAtTimeUTC,String content,long timeTakentoDownload) {
 		super();
 		this.url = url;
 		this.status = status;
 		this.check = check;
-		this.testID = 0;
+		this.testID = Integer.toString(0);
 		this.executeAtTimeUTC = 0;
 		this.content=content;
 		this.timeTakentoDownload=timeTakentoDownload;
 	}
 	
-	public long getTestID() {
+	public String getTestID() {
 		return testID;
 	}
 
-	public void setTestID(long testID) {
+	public void setTestID(String testID) {
 		this.testID = testID;
 	}
 

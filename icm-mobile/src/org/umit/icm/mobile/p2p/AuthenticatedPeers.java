@@ -38,13 +38,13 @@ public class AuthenticatedPeers {
 	}
 	
 	public synchronized void addAuthenticatedPeer(AgentData agentData) throws IOException, RuntimeException {
-		authenticated.add(Long.toString(agentData.getAgentID()));
+		authenticated.add(agentData.getAgentID());
 		writeAuthenticatePeers();
 		
 	}
 	
 	public synchronized boolean checkPeer(AgentData agentData) {
-		if(authenticated.contains(Long.toString(agentData.getAgentID())))
+		if(authenticated.contains(agentData.getAgentID()))
 			return true;
 		return false;
 	}

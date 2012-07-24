@@ -72,7 +72,7 @@ public class ServiceMSN {
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(1863);												
-		return new Service("msn", ports, "messenger.hotmail.com" , "open", "true", 0, 0);
+		return new Service("msn", ports, "messenger.hotmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**

@@ -102,8 +102,19 @@ import android.widget.Toast;
 					
 				//	new Background().execute(loginCredentials);
 					
+					Initialization.checkProfiler();		
+					try {
+						Initialization.checkFiles();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RuntimeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					Initialization.registration(loginCredentials);
-		//			Initialization.login();
+					Initialization.login();
 					
 /*					Initialization.loadLists();
 					Initialization.initializeEventsList();

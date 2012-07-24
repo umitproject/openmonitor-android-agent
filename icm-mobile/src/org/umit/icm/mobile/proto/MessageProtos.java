@@ -1369,13 +1369,13 @@ public final class MessageProtos {
     boolean hasReportID();
     String getReportID();
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
     
-    // required int32 testID = 3;
+    // required string testID = 3;
     boolean hasTestID();
-    int getTestID();
+    String getTestID();
     
     // required int32 timeZone = 4;
     boolean hasTimeZone();
@@ -1456,24 +1456,68 @@ public final class MessageProtos {
       }
     }
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     public static final int AGENTID_FIELD_NUMBER = 2;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
-    // required int32 testID = 3;
+    // required string testID = 3;
     public static final int TESTID_FIELD_NUMBER = 3;
-    private int testID_;
+    private java.lang.Object testID_;
     public boolean hasTestID() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getTestID() {
-      return testID_;
+    public String getTestID() {
+      java.lang.Object ref = testID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          testID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getTestIDBytes() {
+      java.lang.Object ref = testID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        testID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required int32 timeZone = 4;
@@ -1525,8 +1569,8 @@ public final class MessageProtos {
     
     private void initFields() {
       reportID_ = "";
-      agentID_ = 0L;
-      testID_ = 0;
+      agentID_ = "";
+      testID_ = "";
       timeZone_ = 0;
       timeUTC_ = 0L;
       passedNode_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -1574,10 +1618,10 @@ public final class MessageProtos {
         output.writeBytes(1, getReportIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, agentID_);
+        output.writeBytes(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, testID_);
+        output.writeBytes(3, getTestIDBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, timeZone_);
@@ -1606,11 +1650,11 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, agentID_);
+          .computeBytesSize(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, testID_);
+          .computeBytesSize(3, getTestIDBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1760,9 +1804,9 @@ public final class MessageProtos {
         super.clear();
         reportID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        testID_ = 0;
+        testID_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         timeZone_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -1954,14 +1998,14 @@ public final class MessageProtos {
               reportID_ = input.readBytes();
               break;
             }
-            case 16: {
+            case 18: {
               bitField0_ |= 0x00000002;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
-            case 24: {
+            case 26: {
               bitField0_ |= 0x00000004;
-              testID_ = input.readInt32();
+              testID_ = input.readBytes();
               break;
             }
             case 32: {
@@ -2030,46 +2074,76 @@ public final class MessageProtos {
         onChanged();
       }
       
-      // required int64 agentID = 2;
-      private long agentID_ ;
+      // required string agentID = 2;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000002;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
       }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        agentID_ = value;
+        onChanged();
+      }
       
-      // required int32 testID = 3;
-      private int testID_ ;
+      // required string testID = 3;
+      private java.lang.Object testID_ = "";
       public boolean hasTestID() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public int getTestID() {
-        return testID_;
+      public String getTestID() {
+        java.lang.Object ref = testID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          testID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setTestID(int value) {
-        bitField0_ |= 0x00000004;
+      public Builder setTestID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
         testID_ = value;
         onChanged();
         return this;
       }
       public Builder clearTestID() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        testID_ = 0;
+        testID_ = getDefaultInstance().getTestID();
         onChanged();
         return this;
+      }
+      void setTestID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        testID_ = value;
+        onChanged();
       }
       
       // required int32 timeZone = 4;
@@ -4909,9 +4983,9 @@ public final class MessageProtos {
   public interface RequestHeaderOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
   }
   public static final class RequestHeader extends
       com.google.protobuf.GeneratedMessage
@@ -4942,18 +5016,40 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     public static final int AGENTID_FIELD_NUMBER = 1;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     private void initFields() {
-      agentID_ = 0L;
+      agentID_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4972,7 +5068,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, agentID_);
+        output.writeBytes(1, getAgentIDBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4985,7 +5081,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, agentID_);
+          .computeBytesSize(1, getAgentIDBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5111,7 +5207,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -5209,9 +5305,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
           }
@@ -5220,25 +5316,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 agentID = 1;
-      private long agentID_ ;
+      // required string agentID = 1;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        agentID_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.RequestHeader)
@@ -6531,9 +6642,9 @@ public final class MessageProtos {
     org.umit.icm.mobile.proto.MessageProtos.ResponseHeader getHeader();
     org.umit.icm.mobile.proto.MessageProtos.ResponseHeaderOrBuilder getHeaderOrBuilder();
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
     
     // required string publicKeyHash = 3;
     boolean hasPublicKeyHash();
@@ -6581,14 +6692,36 @@ public final class MessageProtos {
       return header_;
     }
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     public static final int AGENTID_FIELD_NUMBER = 2;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string publicKeyHash = 3;
@@ -6625,7 +6758,7 @@ public final class MessageProtos {
     
     private void initFields() {
       header_ = org.umit.icm.mobile.proto.MessageProtos.ResponseHeader.getDefaultInstance();
-      agentID_ = 0L;
+      agentID_ = "";
       publicKeyHash_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -6660,7 +6793,7 @@ public final class MessageProtos {
         output.writeMessage(1, header_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, agentID_);
+        output.writeBytes(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getPublicKeyHashBytes());
@@ -6680,7 +6813,7 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, agentID_);
+          .computeBytesSize(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6817,7 +6950,7 @@ public final class MessageProtos {
           headerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         publicKeyHash_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -6956,9 +7089,9 @@ public final class MessageProtos {
               setHeader(subBuilder.buildPartial());
               break;
             }
-            case 16: {
+            case 18: {
               bitField0_ |= 0x00000002;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
             case 26: {
@@ -7062,25 +7195,40 @@ public final class MessageProtos {
         return headerBuilder_;
       }
       
-      // required int64 agentID = 2;
-      private long agentID_ ;
+      // required string agentID = 2;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000002;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        agentID_ = value;
+        onChanged();
       }
       
       // required string publicKeyHash = 3;
@@ -8543,9 +8691,9 @@ public final class MessageProtos {
   public interface LoginOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
     
     // required string challenge = 2;
     boolean hasChallenge();
@@ -8588,14 +8736,36 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     public static final int AGENTID_FIELD_NUMBER = 1;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string challenge = 2;
@@ -8673,7 +8843,7 @@ public final class MessageProtos {
     }
     
     private void initFields() {
-      agentID_ = 0L;
+      agentID_ = "";
       challenge_ = "";
       port_ = 0L;
       ip_ = "";
@@ -8703,7 +8873,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, agentID_);
+        output.writeBytes(1, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getChallengeBytes());
@@ -8725,7 +8895,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, agentID_);
+          .computeBytesSize(1, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -8863,7 +9033,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         challenge_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -8996,9 +9166,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
             case 18: {
@@ -9022,25 +9192,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 agentID = 1;
-      private long agentID_ ;
+      // required string agentID = 1;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        agentID_ = value;
+        onChanged();
       }
       
       // required string challenge = 2;
@@ -9150,9 +9335,9 @@ public final class MessageProtos {
   public interface LoginStep1OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 processID = 1;
+    // required string processID = 1;
     boolean hasProcessID();
-    long getProcessID();
+    String getProcessID();
     
     // required string cipheredChallenge = 2;
     boolean hasCipheredChallenge();
@@ -9191,14 +9376,36 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 processID = 1;
+    // required string processID = 1;
     public static final int PROCESSID_FIELD_NUMBER = 1;
-    private long processID_;
+    private java.lang.Object processID_;
     public boolean hasProcessID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getProcessID() {
-      return processID_;
+    public String getProcessID() {
+      java.lang.Object ref = processID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          processID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getProcessIDBytes() {
+      java.lang.Object ref = processID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        processID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string cipheredChallenge = 2;
@@ -9266,7 +9473,7 @@ public final class MessageProtos {
     }
     
     private void initFields() {
-      processID_ = 0L;
+      processID_ = "";
       cipheredChallenge_ = "";
       challenge_ = "";
     }
@@ -9295,7 +9502,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, processID_);
+        output.writeBytes(1, getProcessIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getCipheredChallengeBytes());
@@ -9314,7 +9521,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, processID_);
+          .computeBytesSize(1, getProcessIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9448,7 +9655,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        processID_ = 0L;
+        processID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         cipheredChallenge_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -9572,9 +9779,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              processID_ = input.readInt64();
+              processID_ = input.readBytes();
               break;
             }
             case 18: {
@@ -9593,25 +9800,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 processID = 1;
-      private long processID_ ;
+      // required string processID = 1;
+      private java.lang.Object processID_ = "";
       public boolean hasProcessID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getProcessID() {
-        return processID_;
+      public String getProcessID() {
+        java.lang.Object ref = processID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          processID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setProcessID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setProcessID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         processID_ = value;
         onChanged();
         return this;
       }
       public Builder clearProcessID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        processID_ = 0L;
+        processID_ = getDefaultInstance().getProcessID();
         onChanged();
         return this;
+      }
+      void setProcessID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        processID_ = value;
+        onChanged();
       }
       
       // required string cipheredChallenge = 2;
@@ -9700,9 +9922,9 @@ public final class MessageProtos {
   public interface LoginStep2OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 processID = 1;
+    // required string processID = 1;
     boolean hasProcessID();
-    long getProcessID();
+    String getProcessID();
     
     // required string cipheredChallenge = 2;
     boolean hasCipheredChallenge();
@@ -9737,14 +9959,36 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 processID = 1;
+    // required string processID = 1;
     public static final int PROCESSID_FIELD_NUMBER = 1;
-    private long processID_;
+    private java.lang.Object processID_;
     public boolean hasProcessID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getProcessID() {
-      return processID_;
+    public String getProcessID() {
+      java.lang.Object ref = processID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          processID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getProcessIDBytes() {
+      java.lang.Object ref = processID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        processID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string cipheredChallenge = 2;
@@ -9780,7 +10024,7 @@ public final class MessageProtos {
     }
     
     private void initFields() {
-      processID_ = 0L;
+      processID_ = "";
       cipheredChallenge_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -9804,7 +10048,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, processID_);
+        output.writeBytes(1, getProcessIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getCipheredChallengeBytes());
@@ -9820,7 +10064,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, processID_);
+          .computeBytesSize(1, getProcessIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9950,7 +10194,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        processID_ = 0L;
+        processID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         cipheredChallenge_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -10061,9 +10305,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              processID_ = input.readInt64();
+              processID_ = input.readBytes();
               break;
             }
             case 18: {
@@ -10077,25 +10321,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 processID = 1;
-      private long processID_ ;
+      // required string processID = 1;
+      private java.lang.Object processID_ = "";
       public boolean hasProcessID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getProcessID() {
-        return processID_;
+      public String getProcessID() {
+        java.lang.Object ref = processID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          processID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setProcessID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setProcessID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         processID_ = value;
         onChanged();
         return this;
       }
       public Builder clearProcessID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        processID_ = 0L;
+        processID_ = getDefaultInstance().getProcessID();
         onChanged();
         return this;
+      }
+      void setProcessID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        processID_ = value;
+        onChanged();
       }
       
       // required string cipheredChallenge = 2;
@@ -10588,9 +10847,9 @@ public final class MessageProtos {
   public interface LogoutOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
   }
   public static final class Logout extends
       com.google.protobuf.GeneratedMessage
@@ -10621,18 +10880,40 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     public static final int AGENTID_FIELD_NUMBER = 1;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     private void initFields() {
-      agentID_ = 0L;
+      agentID_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10651,7 +10932,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, agentID_);
+        output.writeBytes(1, getAgentIDBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -10664,7 +10945,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, agentID_);
+          .computeBytesSize(1, getAgentIDBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10790,7 +11071,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -10888,9 +11169,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
           }
@@ -10899,25 +11180,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 agentID = 1;
-      private long agentID_ ;
+      // required string agentID = 1;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        agentID_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.Logout)
@@ -11655,9 +11951,9 @@ public final class MessageProtos {
   public interface AgentDataOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
     
     // required string agentIP = 2;
     boolean hasAgentIP();
@@ -11709,14 +12005,36 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 agentID = 1;
+    // required string agentID = 1;
     public static final int AGENTID_FIELD_NUMBER = 1;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string agentIP = 2;
@@ -11839,7 +12157,7 @@ public final class MessageProtos {
     }
     
     private void initFields() {
-      agentID_ = 0L;
+      agentID_ = "";
       agentIP_ = "";
       agentPort_ = 0;
       token_ = "";
@@ -11887,7 +12205,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, agentID_);
+        output.writeBytes(1, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getAgentIPBytes());
@@ -11915,7 +12233,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, agentID_);
+          .computeBytesSize(1, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -12062,7 +12380,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         agentIP_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -12237,9 +12555,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
             case 18: {
@@ -12277,25 +12595,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 agentID = 1;
-      private long agentID_ ;
+      // required string agentID = 1;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        agentID_ = value;
+        onChanged();
       }
       
       // required string agentIP = 2;
@@ -21092,9 +21425,9 @@ public final class MessageProtos {
   public interface TestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 testID = 1;
+    // required string testID = 1;
     boolean hasTestID();
-    long getTestID();
+    String getTestID();
     
     // optional .org.umit.icm.mobile.proto.Website website = 2;
     boolean hasWebsite();
@@ -21110,9 +21443,9 @@ public final class MessageProtos {
     boolean hasExecuteAtTimeUTC();
     long getExecuteAtTimeUTC();
     
-    // required string testType = 5;
+    // required int32 testType = 5;
     boolean hasTestType();
-    String getTestType();
+    int getTestType();
   }
   public static final class Test extends
       com.google.protobuf.GeneratedMessage
@@ -21143,14 +21476,36 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 testID = 1;
+    // required string testID = 1;
     public static final int TESTID_FIELD_NUMBER = 1;
-    private long testID_;
+    private java.lang.Object testID_;
     public boolean hasTestID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getTestID() {
-      return testID_;
+    public String getTestID() {
+      java.lang.Object ref = testID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          testID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getTestIDBytes() {
+      java.lang.Object ref = testID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        testID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // optional .org.umit.icm.mobile.proto.Website website = 2;
@@ -21189,44 +21544,22 @@ public final class MessageProtos {
       return executeAtTimeUTC_;
     }
     
-    // required string testType = 5;
+    // required int32 testType = 5;
     public static final int TESTTYPE_FIELD_NUMBER = 5;
-    private java.lang.Object testType_;
+    private int testType_;
     public boolean hasTestType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public String getTestType() {
-      java.lang.Object ref = testType_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          testType_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getTestTypeBytes() {
-      java.lang.Object ref = testType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        testType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getTestType() {
+      return testType_;
     }
     
     private void initFields() {
-      testID_ = 0L;
+      testID_ = "";
       website_ = org.umit.icm.mobile.proto.MessageProtos.Website.getDefaultInstance();
       service_ = org.umit.icm.mobile.proto.MessageProtos.Service.getDefaultInstance();
       executeAtTimeUTC_ = 0L;
-      testType_ = "";
+      testType_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -21261,7 +21594,7 @@ public final class MessageProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, testID_);
+        output.writeBytes(1, getTestIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, website_);
@@ -21273,7 +21606,7 @@ public final class MessageProtos {
         output.writeInt64(4, executeAtTimeUTC_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getTestTypeBytes());
+        output.writeInt32(5, testType_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -21286,7 +21619,7 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, testID_);
+          .computeBytesSize(1, getTestIDBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -21302,7 +21635,7 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getTestTypeBytes());
+          .computeInt32Size(5, testType_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -21430,7 +21763,7 @@ public final class MessageProtos {
       
       public Builder clear() {
         super.clear();
-        testID_ = 0L;
+        testID_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (websiteBuilder_ == null) {
           website_ = org.umit.icm.mobile.proto.MessageProtos.Website.getDefaultInstance();
@@ -21446,7 +21779,7 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         executeAtTimeUTC_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        testType_ = "";
+        testType_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -21596,9 +21929,9 @@ public final class MessageProtos {
               }
               break;
             }
-            case 8: {
+            case 10: {
               bitField0_ |= 0x00000001;
-              testID_ = input.readInt64();
+              testID_ = input.readBytes();
               break;
             }
             case 18: {
@@ -21624,9 +21957,9 @@ public final class MessageProtos {
               executeAtTimeUTC_ = input.readInt64();
               break;
             }
-            case 42: {
+            case 40: {
               bitField0_ |= 0x00000010;
-              testType_ = input.readBytes();
+              testType_ = input.readInt32();
               break;
             }
           }
@@ -21635,25 +21968,40 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 testID = 1;
-      private long testID_ ;
+      // required string testID = 1;
+      private java.lang.Object testID_ = "";
       public boolean hasTestID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getTestID() {
-        return testID_;
+      public String getTestID() {
+        java.lang.Object ref = testID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          testID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setTestID(long value) {
-        bitField0_ |= 0x00000001;
+      public Builder setTestID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         testID_ = value;
         onChanged();
         return this;
       }
       public Builder clearTestID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        testID_ = 0L;
+        testID_ = getDefaultInstance().getTestID();
         onChanged();
         return this;
+      }
+      void setTestID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        testID_ = value;
+        onChanged();
       }
       
       // optional .org.umit.icm.mobile.proto.Website website = 2;
@@ -21857,40 +22205,25 @@ public final class MessageProtos {
         return this;
       }
       
-      // required string testType = 5;
-      private java.lang.Object testType_ = "";
+      // required int32 testType = 5;
+      private int testType_ ;
       public boolean hasTestType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      public String getTestType() {
-        java.lang.Object ref = testType_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          testType_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
+      public int getTestType() {
+        return testType_;
       }
-      public Builder setTestType(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+      public Builder setTestType(int value) {
+        bitField0_ |= 0x00000010;
         testType_ = value;
         onChanged();
         return this;
       }
       public Builder clearTestType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        testType_ = getDefaultInstance().getTestType();
+        testType_ = 0;
         onChanged();
         return this;
-      }
-      void setTestType(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
-        testType_ = value;
-        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.Test)
@@ -26641,9 +26974,9 @@ public final class MessageProtos {
     boolean hasAgentType();
     int getAgentType();
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     boolean hasAgentID();
-    long getAgentID();
+    String getAgentID();
     
     // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 3;
     boolean hasCipheredPublicKey();
@@ -26693,14 +27026,36 @@ public final class MessageProtos {
       return agentType_;
     }
     
-    // required int64 agentID = 2;
+    // required string agentID = 2;
     public static final int AGENTID_FIELD_NUMBER = 2;
-    private long agentID_;
+    private java.lang.Object agentID_;
     public boolean hasAgentID() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public long getAgentID() {
-      return agentID_;
+    public String getAgentID() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          agentID_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAgentIDBytes() {
+      java.lang.Object ref = agentID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        agentID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 3;
@@ -26728,7 +27083,7 @@ public final class MessageProtos {
     
     private void initFields() {
       agentType_ = 0;
-      agentID_ = 0L;
+      agentID_ = "";
       cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
       agentPort_ = 0;
     }
@@ -26764,7 +27119,7 @@ public final class MessageProtos {
         output.writeInt32(1, agentType_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, agentID_);
+        output.writeBytes(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, cipheredPublicKey_);
@@ -26787,7 +27142,7 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, agentID_);
+          .computeBytesSize(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -26924,7 +27279,7 @@ public final class MessageProtos {
         super.clear();
         agentType_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        agentID_ = 0L;
+        agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         if (cipheredPublicKeyBuilder_ == null) {
           cipheredPublicKey_ = org.umit.icm.mobile.proto.MessageProtos.RSAKey.getDefaultInstance();
@@ -27072,9 +27427,9 @@ public final class MessageProtos {
               agentType_ = input.readInt32();
               break;
             }
-            case 16: {
+            case 18: {
               bitField0_ |= 0x00000002;
-              agentID_ = input.readInt64();
+              agentID_ = input.readBytes();
               break;
             }
             case 26: {
@@ -27118,25 +27473,40 @@ public final class MessageProtos {
         return this;
       }
       
-      // required int64 agentID = 2;
-      private long agentID_ ;
+      // required string agentID = 2;
+      private java.lang.Object agentID_ = "";
       public boolean hasAgentID() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public long getAgentID() {
-        return agentID_;
+      public String getAgentID() {
+        java.lang.Object ref = agentID_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          agentID_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
       }
-      public Builder setAgentID(long value) {
-        bitField0_ |= 0x00000002;
+      public Builder setAgentID(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         agentID_ = value;
         onChanged();
         return this;
       }
       public Builder clearAgentID() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        agentID_ = 0L;
+        agentID_ = getDefaultInstance().getAgentID();
         onChanged();
         return this;
+      }
+      void setAgentID(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        agentID_ = value;
+        onChanged();
       }
       
       // required .org.umit.icm.mobile.proto.RSAKey cipheredPublicKey = 3;
@@ -35910,10 +36280,10 @@ public final class MessageProtos {
     boolean hasNodesCount();
     int getNodesCount();
     
-    // repeated int32 agent_ids = 3;
-    java.util.List<java.lang.Integer> getAgentIdsList();
+    // repeated string agent_ids = 3;
+    java.util.List<String> getAgentIdsList();
     int getAgentIdsCount();
-    int getAgentIds(int index);
+    String getAgentIds(int index);
   }
   public static final class GetBanlistResponse extends
       com.google.protobuf.GeneratedMessage
@@ -35967,24 +36337,24 @@ public final class MessageProtos {
       return nodesCount_;
     }
     
-    // repeated int32 agent_ids = 3;
+    // repeated string agent_ids = 3;
     public static final int AGENT_IDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> agentIds_;
-    public java.util.List<java.lang.Integer>
+    private com.google.protobuf.LazyStringList agentIds_;
+    public java.util.List<String>
         getAgentIdsList() {
       return agentIds_;
     }
     public int getAgentIdsCount() {
       return agentIds_.size();
     }
-    public int getAgentIds(int index) {
+    public String getAgentIds(int index) {
       return agentIds_.get(index);
     }
     
     private void initFields() {
       header_ = org.umit.icm.mobile.proto.MessageProtos.ResponseHeader.getDefaultInstance();
       nodesCount_ = 0;
-      agentIds_ = java.util.Collections.emptyList();;
+      agentIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -36017,7 +36387,7 @@ public final class MessageProtos {
         output.writeInt32(2, nodesCount_);
       }
       for (int i = 0; i < agentIds_.size(); i++) {
-        output.writeInt32(3, agentIds_.get(i));
+        output.writeBytes(3, agentIds_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -36040,7 +36410,7 @@ public final class MessageProtos {
         int dataSize = 0;
         for (int i = 0; i < agentIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(agentIds_.get(i));
+            .computeBytesSizeNoTag(agentIds_.getByteString(i));
         }
         size += dataSize;
         size += 1 * getAgentIdsList().size();
@@ -36178,7 +36548,7 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         nodesCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        agentIds_ = java.util.Collections.emptyList();;
+        agentIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -36231,7 +36601,8 @@ public final class MessageProtos {
         }
         result.nodesCount_ = nodesCount_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          agentIds_ = java.util.Collections.unmodifiableList(agentIds_);
+          agentIds_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              agentIds_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.agentIds_ = agentIds_;
@@ -36324,18 +36695,9 @@ public final class MessageProtos {
               nodesCount_ = input.readInt32();
               break;
             }
-            case 24: {
-              ensureAgentIdsIsMutable();
-              agentIds_.add(input.readInt32());
-              break;
-            }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addAgentIds(input.readInt32());
-              }
-              input.popLimit(limit);
+              ensureAgentIdsIsMutable();
+              agentIds_.add(input.readBytes());
               break;
             }
           }
@@ -36455,49 +36817,60 @@ public final class MessageProtos {
         return this;
       }
       
-      // repeated int32 agent_ids = 3;
-      private java.util.List<java.lang.Integer> agentIds_ = java.util.Collections.emptyList();;
+      // repeated string agent_ids = 3;
+      private com.google.protobuf.LazyStringList agentIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureAgentIdsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          agentIds_ = new java.util.ArrayList<java.lang.Integer>(agentIds_);
+          agentIds_ = new com.google.protobuf.LazyStringArrayList(agentIds_);
           bitField0_ |= 0x00000004;
          }
       }
-      public java.util.List<java.lang.Integer>
+      public java.util.List<String>
           getAgentIdsList() {
         return java.util.Collections.unmodifiableList(agentIds_);
       }
       public int getAgentIdsCount() {
         return agentIds_.size();
       }
-      public int getAgentIds(int index) {
+      public String getAgentIds(int index) {
         return agentIds_.get(index);
       }
       public Builder setAgentIds(
-          int index, int value) {
-        ensureAgentIdsIsMutable();
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAgentIdsIsMutable();
         agentIds_.set(index, value);
         onChanged();
         return this;
       }
-      public Builder addAgentIds(int value) {
-        ensureAgentIdsIsMutable();
+      public Builder addAgentIds(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAgentIdsIsMutable();
         agentIds_.add(value);
         onChanged();
         return this;
       }
       public Builder addAllAgentIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<String> values) {
         ensureAgentIdsIsMutable();
         super.addAll(values, agentIds_);
         onChanged();
         return this;
       }
       public Builder clearAgentIds() {
-        agentIds_ = java.util.Collections.emptyList();;
+        agentIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
+      }
+      void addAgentIds(com.google.protobuf.ByteString value) {
+        ensureAgentIdsIsMutable();
+        agentIds_.add(value);
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.GetBanlistResponse)
@@ -37933,7 +38306,7 @@ public final class MessageProtos {
       "t\030\001 \002(\t\022\014\n\004hops\030\002 \002(\005\022\022\n\npacketSize\030\003 \002(" +
       "\005\0220\n\006traces\030\004 \003(\0132 .org.umit.icm.mobile." +
       "proto.Trace\"\260\001\n\tICMReport\022\020\n\010reportID\030\001 " +
-      "\002(\t\022\017\n\007agentID\030\002 \002(\003\022\016\n\006testID\030\003 \002(\005\022\020\n\010" +
+      "\002(\t\022\017\n\007agentID\030\002 \002(\t\022\016\n\006testID\030\003 \002(\t\022\020\n\010" +
       "timeZone\030\004 \002(\005\022\017\n\007timeUTC\030\005 \002(\003\022\022\n\npasse" +
       "dNode\030\006 \003(\t\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
       "it.icm.mobile.proto.TraceRoute\"\245\001\n\023Websi" +
@@ -37951,7 +38324,7 @@ public final class MessageProtos {
       "r\030\001 \002(\0132$.org.umit.icm.mobile.proto.ICMR" +
       "eport\022>\n\006report\030\002 \002(\0132..org.umit.icm.mob" +
       "ile.proto.ServiceReportDetail\" \n\rRequest" +
-      "Header\022\017\n\007agentID\030\001 \002(\003\"H\n\016ResponseHeade" +
+      "Header\022\017\n\007agentID\030\001 \002(\t\"H\n\016ResponseHeade" +
       "r\022\030\n\020currentVersionNo\030\001 \002(\005\022\034\n\024currentTe" +
       "stVersionNo\030\002 \002(\005\"\276\001\n\rRegisterAgent\022\021\n\tv" +
       "ersionNo\030\001 \002(\005\022\021\n\tagentType\030\002 \002(\t\022@\n\013cre" +
@@ -37960,22 +38333,22 @@ public final class MessageProtos {
       "\002(\0132!.org.umit.icm.mobile.proto.RSAKey\022\n" +
       "\n\002ip\030\005 \001(\t\"z\n\025RegisterAgentResponse\0229\n\006h" +
       "eader\030\001 \002(\0132).org.umit.icm.mobile.proto." +
-      "ResponseHeader\022\017\n\007agentID\030\002 \002(\003\022\025\n\rpubli" +
+      "ResponseHeader\022\017\n\007agentID\030\002 \002(\t\022\025\n\rpubli" +
       "cKeyHash\030\003 \002(\t\"\"\n\006RSAKey\022\013\n\003mod\030\001 \002(\t\022\013\n" +
       "\003exp\030\002 \002(\t\"$\n\017CheckAggregator\022\021\n\tagentTy" +
       "pe\030\001 \002(\t\"d\n\027CheckAggregatorResponse\0229\n\006h" +
       "eader\030\001 \002(\0132).org.umit.icm.mobile.proto." +
       "ResponseHeader\022\016\n\006status\030\002 \002(\t\"E\n\005Login\022",
-      "\017\n\007agentID\030\001 \002(\003\022\021\n\tchallenge\030\002 \002(\t\022\014\n\004p" +
+      "\017\n\007agentID\030\001 \002(\t\022\021\n\tchallenge\030\002 \002(\t\022\014\n\004p" +
       "ort\030\003 \002(\003\022\n\n\002ip\030\004 \001(\t\"M\n\nLoginStep1\022\021\n\tp" +
-      "rocessID\030\001 \002(\003\022\031\n\021cipheredChallenge\030\002 \002(" +
+      "rocessID\030\001 \002(\t\022\031\n\021cipheredChallenge\030\002 \002(" +
       "\t\022\021\n\tchallenge\030\003 \002(\t\":\n\nLoginStep2\022\021\n\tpr" +
-      "ocessID\030\001 \002(\003\022\031\n\021cipheredChallenge\030\002 \002(\t" +
+      "ocessID\030\001 \002(\t\022\031\n\021cipheredChallenge\030\002 \002(\t" +
       "\"J\n\rLoginResponse\0229\n\006header\030\001 \002(\0132).org." +
       "umit.icm.mobile.proto.ResponseHeader\"\031\n\006" +
-      "Logout\022\017\n\007agentID\030\001 \002(\003\" \n\016LogoutRespons" +
+      "Logout\022\017\n\007agentID\030\001 \002(\t\" \n\016LogoutRespons" +
       "e\022\016\n\006status\030\001 \002(\t\"\034\n\013GetPeerList\022\r\n\005coun" +
-      "t\030\001 \001(\005\"\231\001\n\tAgentData\022\017\n\007agentID\030\001 \002(\003\022\017",
+      "t\030\001 \001(\005\"\231\001\n\tAgentData\022\017\n\007agentID\030\001 \002(\t\022\017",
       "\n\007agentIP\030\002 \002(\t\022\021\n\tagentPort\030\003 \002(\005\022\r\n\005to" +
       "ken\030\004 \002(\t\0224\n\tpublicKey\030\005 \002(\0132!.org.umit." +
       "icm.mobile.proto.RSAKey\022\022\n\npeerStatus\030\006 " +
@@ -38016,11 +38389,11 @@ public final class MessageProtos {
       "\010NewTests\022\034\n\024currentTestVersionNo\030\001 \002(\005\"" +
       "\026\n\007Website\022\013\n\003url\030\001 \002(\t\"1\n\007Service\022\014\n\004na" +
       "me\030\001 \002(\t\022\014\n\004port\030\002 \002(\005\022\n\n\002ip\030\003 \002(\t\"\254\001\n\004T",
-      "est\022\016\n\006testID\030\001 \002(\003\0223\n\007website\030\002 \001(\0132\".o" +
+      "est\022\016\n\006testID\030\001 \002(\t\0223\n\007website\030\002 \001(\0132\".o" +
       "rg.umit.icm.mobile.proto.Website\0223\n\007serv" +
       "ice\030\003 \001(\0132\".org.umit.icm.mobile.proto.Se" +
       "rvice\022\030\n\020executeAtTimeUTC\030\004 \001(\003\022\020\n\010testT" +
-      "ype\030\005 \002(\t\"\224\001\n\020NewTestsResponse\0229\n\006header" +
+      "ype\030\005 \002(\005\"\224\001\n\020NewTestsResponse\0229\n\006header" +
       "\030\001 \002(\0132).org.umit.icm.mobile.proto.Respo" +
       "nseHeader\022.\n\005tests\030\002 \003(\0132\037.org.umit.icm." +
       "mobile.proto.Test\022\025\n\rtestVersionNo\030\003 \002(\005" +
@@ -38043,7 +38416,7 @@ public final class MessageProtos {
       "nResponse\0229\n\006header\030\001 \002(\0132).org.umit.icm" +
       ".mobile.proto.ResponseHeader\"\207\001\n\020Authent" +
       "icatePeer\022\021\n\tagentType\030\001 \002(\005\022\017\n\007agentID\030" +
-      "\002 \002(\003\022<\n\021cipheredPublicKey\030\003 \002(\0132!.org.u" +
+      "\002 \002(\t\022<\n\021cipheredPublicKey\030\003 \002(\0132!.org.u" +
       "mit.icm.mobile.proto.RSAKey\022\021\n\tagentPort" +
       "\030\004 \001(\005\"g\n\030AuthenticatePeerResponse\022<\n\021ci",
       "pheredPublicKey\030\001 \002(\0132!.org.umit.icm.mob" +
@@ -38079,7 +38452,7 @@ public final class MessageProtos {
       "\030\001 \002(\005\"w\n\022GetBanlistResponse\0229\n\006header\030\001" +
       " \002(\0132).org.umit.icm.mobile.proto.Respons" +
       "eHeader\022\023\n\013nodes_count\030\002 \002(\005\022\021\n\tagent_id" +
-      "s\030\003 \003(\005\"\033\n\nGetBannets\022\r\n\005count\030\001 \002(\005\"\217\001\n" +
+      "s\030\003 \003(\t\"\033\n\nGetBannets\022\r\n\005count\030\001 \002(\005\"\217\001\n" +
       "\022GetBannetsResponse\0229\n\006header\030\001 \002(\0132).or" +
       "g.umit.icm.mobile.proto.ResponseHeader\022>" +
       "\n\010networks\030\002 \003(\0132,.org.umit.icm.mobile.p" +

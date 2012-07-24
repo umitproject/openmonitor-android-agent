@@ -145,15 +145,15 @@ public class WebsiteDetails {
 		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
-		listNodes.add(Long.toString(Globals.runtimeParameters.getAgentID()));
+		listNodes.add(Globals.runtimeParameters.getAgentID());
 		long timeUTC = (calendar.getTimeInMillis()/1000);
 		
 		
 		try {
 			this.icmReport = ICMReport.newBuilder()
-			.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID(), timeUTC, 0))
+			.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID(), timeUTC, "0"))
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setTestID(0)
+			.setTestID(Integer.toString(0))
 			.setTimeZone(Calendar.ZONE_OFFSET)
 			.setTimeUTC(timeUTC)
 			.addAllPassedNode(listNodes)

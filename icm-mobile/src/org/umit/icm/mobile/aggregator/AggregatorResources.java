@@ -147,8 +147,8 @@ public class AggregatorResources {
 		 System.out.println("Sending agentID : " + Long.toString(Constants.DEFAULT_AGENT_ID));
 		 System.out.println("Sending msg : " + msg);
 		 
-/*		 
-		 form.add("key", key);
+		 
+/*		 form.add("key", key);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
 		 form.add(Constants.AGGR_MSG_KEY, msg );
 		 
@@ -218,7 +218,7 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -263,7 +263,7 @@ public class AggregatorResources {
 		 Form form = new Form();
 		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -359,7 +359,7 @@ public class AggregatorResources {
 		 
 		String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
 			 
-		form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		form.add("agentID", Globals.runtimeParameters.getAgentID());
 		form.add(Constants.AGGR_MSG_KEY, msg);
 			 
 		Representation response= null;
@@ -407,7 +407,7 @@ public class AggregatorResources {
 		 Form form = new Form();
 		 String msg = AggregatorHelper.aesEncrypt(sendServiceReport.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -504,7 +504,7 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorHelper.aesEncrypt(newTests.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -824,7 +824,7 @@ public class AggregatorResources {
 		 
 		 String msg= AggregatorHelper.aesEncrypt(getBanlists.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 Representation response =null;
 		 try{
@@ -846,7 +846,7 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getBannets.toByteArray());
 		 
-		 form.add("agentID", Long.toString(Globals.runtimeParameters.getAgentID()));
+		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;

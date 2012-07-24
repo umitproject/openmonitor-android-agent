@@ -34,12 +34,12 @@ public class RuntimeParameters {
 	private int scanInterval;
 	private String scanStatus;
 	private String token;
-	private long agentID;
+	private String agentID;
 	private String twitter;
 	private double averageThroughput;
 	
 	public RuntimeParameters(int scanInterval, String scanStatus, String token,
-			long agentID, String twitter,double averageThroughput) {
+			String agentID, String twitter,double averageThroughput) {
 		super();
 		this.scanInterval = scanInterval;
 		this.scanStatus = scanStatus;
@@ -87,7 +87,7 @@ public class RuntimeParameters {
 		}				
 	}
 
-	public synchronized long getAgentID() {
+	public synchronized String getAgentID() {
 		System.out.println("Inside RuntimeParameter#getAgentID");
 		try {
 			agentID = readAgentID();
@@ -101,7 +101,7 @@ public class RuntimeParameters {
 		return agentID;
 	}
 
-	public synchronized void setAgentID(long agentID) {
+	public synchronized void setAgentID(String agentID) {
 		System.out.println("Inside RuntimeParameter#setAgentID");
 		this.agentID = agentID;
 		try {
@@ -213,14 +213,14 @@ public class RuntimeParameters {
 				, Constants.PARAMETERS_DIR, Integer.toString(scanStatus));
 	}
 	
-	private synchronized long readAgentID() throws IOException, RuntimeException {
-		return Long.parseLong(SDCardReadWrite.readString(Constants.AGENTID_FILE
-				, Constants.PARAMETERS_DIR));
+	private synchronized String readAgentID() throws IOException, RuntimeException {
+		return SDCardReadWrite.readString(Constants.AGENTID_FILE
+				, Constants.PARAMETERS_DIR);
 	}
 
-	private synchronized void writeAgentID(long agentID) throws IOException, RuntimeException {
+	private synchronized void writeAgentID(String agentID) throws IOException, RuntimeException {
 		SDCardReadWrite.writeString(Constants.AGENTID_FILE
-				, Constants.PARAMETERS_DIR, Long.toString(agentID));
+				, Constants.PARAMETERS_DIR, agentID);
 	}
 	
 	private synchronized String readToken() throws IOException, RuntimeException {
