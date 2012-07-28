@@ -111,10 +111,12 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_startLibcage
   (JNIEnv * env, jobject jObj){
   		//std::cout<<"\nLog : Into createCage\n";
-		//boost::thread workerThread(openCage_firstnode,"10001");
+		//createCage_firstnode("20000");
 	    char * message;
 	    message = malloc(100);
-	    sprintf(message,"%s","Connecting to native code");
+	    using namespace boost::posix_time;
+	    ptime now = microsec_clock::local_time();
+	    sprintf(message,"%d",now.time_of_day().hours());
         return env->NewStringUTF(message);
 }
 #ifdef __cplusplus
