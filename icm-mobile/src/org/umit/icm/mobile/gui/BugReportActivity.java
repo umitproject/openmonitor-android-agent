@@ -11,11 +11,13 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class BugReportActivity extends Activity{
 	
@@ -36,18 +38,6 @@ public class BugReportActivity extends Activity{
 	String status;
 	String priority;
 	String target_version ;
-	String start_date;
-	String due_date;
-	String estimated_time;
-	String done;
-	String input;
-	String file_description;
-	String assignedID;
-	String username;
-	String password;
-	String component;
-	String summary;
-	String details;
 	String reporter;
 	
 	
@@ -66,24 +56,9 @@ public class BugReportActivity extends Activity{
 		tracker="Bug";
 		subject="";
 		description="";
-		status="";
 		priority="Normal";
 		target_version = "0.1b";
-		start_date="";
-		due_date="";
-		estimated_time="";
-		done="";
-		input="";
-		file_description= "";
-		assignedID="";
-		username="";
-		password="";
-		component="";
-		summary="";
-		details="";
-		reporter="";
-		
-		
+
 		
 		httpclient = new DefaultHttpClient();
 		httppost = new HttpPost("http://dev.umitproject.org/projects/icm-mobile/issues.xml");
@@ -97,44 +72,42 @@ public class BugReportActivity extends Activity{
 			
 
 			try {
-				
-				reporter = Reporter.getText().toString();
-				subject = "[BugCrashReport]" + Subject.getText().toString();
-				description= "From: " + reporter+ Description.getText().toString();
-				
-				
-				
-				
-				String XML="<issue>"+ 
-						"<tracker>"+ tracker +"</tracker>"+
-						"<subject>"+ subject +"</subject>"+
-						"<status>"+ status +"</status>"+
-						"<priority>"+ priority +"</priority>"+
-						"<target_version>"+ target_version +"</target_version>"+
-						"<start_date>"+ start_date +"</startdate>" +
-						"<due_date>"+ due_date + "</due_date>" +
-						"<input>" + input + "</input>"+
-						"<file_description>"+file_description +"</file_description>" +
-						"<assignedID>"+ assignedID + "</assignedID>"+
-						"<username>" + username + "</username>" +
-						"<password>" + password + "</password>" +
-						"<component>" + component + "</component>" +
-						"<summary>" + summary + "</summary>" +
-						"<details>" + details + "</details>" +
-						"</issue>";
-						
-				
-				
-				
-				StringEntity requestEntity= new StringEntity(XML,HTTP.UTF_8);
-				httppost.setHeader("Content-type", "application/xml");
-				
-				httppost.setEntity(requestEntity);
-				
-				
-				HttpResponse response= httpclient.execute(httppost);
-				String responseBody = EntityUtils.toString(response.getEntity());
-				Show.Info(act, responseBody);
+				if(Subject.getText().toString().equalsIgnoreCase(""))
+				{
+					CharSequence text = "Please enter Subject";
+	        		int duration = Toast.LENGTH_SHORT;
+	
+	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+	        		toast.show(); 
+				}
+				else if(Description.getText().toString().equalsIgnoreCase(""))
+				{
+					CharSequence text = "Please describe the bug";
+	        		int duration = Toast.LENGTH_SHORT;
+	
+	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+	        		toast.show(); 
+				}
+				else{
+					reporter = Reporter.getText().toString();
+					subject = "[BugCrashReport]" + Subject.getText().toString();
+					description= "From: " + reporter+ Description.getText().toString();
+					
+					
+					
+					
+					String XML="<issue>"+ 
+							"<tracker>"+ tracker +"</tracker>"+
+							"<subject>"+ subject +"</subject>"+
+							"<description>"+ description + "</description>" +
+							"<priority>"+ priority +"</priority>"+
+							"<target_version>"+ target_version +"</target_version>"+
+							"</issue>";
+							
+					new Background().execute(XML);
+					
+				}
+			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 			Show.Error(act, e.toString());
@@ -145,6 +118,31 @@ public class BugReportActivity extends Activity{
 		
 	});
 }
+	
+	  private class Background extends AsyncTask<String,String,String>{
+
+		@Override
+		protected String doInBackground(String... XML) {
+			// TODO Auto-generated method stub
+			try{
+			StringEntity requestEntity= new StringEntity(XML[0],HTTP.UTF_8);
+			httppost.setHeader("Content-type", "application/xml");
+			
+			httppost.setEntity(requestEntity);
+			
+			
+			HttpResponse response= httpclient.execute(httppost);
+			String responseBody = EntityUtils.toString(response.getEntity());
+			Show.Info(act, responseBody);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		  
+	  }
 
 }
 		

@@ -86,8 +86,8 @@ import android.widget.Toast;
 	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 	        		toast.show(); 
 				} else {
-		//			progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
-		//			progressDialog.show();
+					progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
+					progressDialog.show();
 					
 					
 					
@@ -100,7 +100,6 @@ import android.widget.Toast;
 					.setPassword(password)
 					.build();
 					
-				//	new Background().execute(loginCredentials);
 					
 					Initialization.checkProfiler();		
 					try {
@@ -113,10 +112,12 @@ import android.widget.Toast;
 						e.printStackTrace();
 					}
 					
-					Initialization.registration(loginCredentials);
+					new Background().execute(loginCredentials);
+					
+/*					Initialization.registration(loginCredentials);
 					Initialization.login();
 					
-/*					Initialization.loadLists();
+					Initialization.loadLists();
 					Initialization.initializeEventsList();
 			        Initialization.initializerPeersList();
 			        Initialization.startServices(context);*/

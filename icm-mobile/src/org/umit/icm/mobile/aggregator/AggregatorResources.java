@@ -136,7 +136,7 @@ public class AggregatorResources {
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		 pairs.add(new BasicNameValuePair("key", key ));
-		 pairs.add(new BasicNameValuePair("agentID", Long.toString(Constants.DEFAULT_AGENT_ID)));
+		 pairs.add(new BasicNameValuePair("agentID",Globals.runtimeParameters.getAgentID()));
 		 pairs.add(new BasicNameValuePair("msg", msg));
 		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
 		 
@@ -144,7 +144,7 @@ public class AggregatorResources {
 		 HttpResponse response = httpclient.execute(httppost);
 		 
 		 System.out.println("Sending key : " + key);
-		 System.out.println("Sending agentID : " + Long.toString(Constants.DEFAULT_AGENT_ID));
+		 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
 		 System.out.println("Sending msg : " + msg);
 		 
 		 
@@ -355,11 +355,11 @@ public class AggregatorResources {
 	@see         ClientResource
 	 */
 	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, ClientResource clientResource) throws Exception {
-		Form form = new Form();
+//		Form form = new Form();
 		 
 		String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
 			 
-		form.add("agentID", Globals.runtimeParameters.getAgentID());
+/*		form.add("agentID", Globals.runtimeParameters.getAgentID());
 		form.add(Constants.AGGR_MSG_KEY, msg);
 			 
 		Representation response= null;
@@ -368,9 +368,22 @@ public class AggregatorResources {
 			 response = clientResource.post(form.getWebRepresentation(null));
 		}catch(Exception e){
 			 e.printStackTrace();
-		}
+		}*/
+		
+		HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_SEND_WEBSITE_REPORT);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 			 
 		return SendReportResponse.parseFrom(final_response);
 		 
@@ -500,11 +513,25 @@ public class AggregatorResources {
 	 */		
 	 public static NewTestsResponse checkTests(NewTests newTests, ClientResource clientResource) throws Exception {
 
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 String msg = AggregatorHelper.aesEncrypt(newTests.toByteArray());
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_CHECK_TESTS);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -513,9 +540,10 @@ public class AggregatorResources {
 			 response = clientResource.post(form.getWebRepresentation(null));
 		}catch(Exception e){
 			 e.printStackTrace();
-		}
+		}*/
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		 
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 		
 		 
 		 return NewTestsResponse.parseFrom(final_response);
@@ -690,7 +718,7 @@ public class AggregatorResources {
 		 
 		 String message =loginStep1.getChallenge();
 		 
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 byte[] message_byte=message.getBytes();
 		 
@@ -712,8 +740,20 @@ public class AggregatorResources {
 		 
 		 String msg_string = new String(msg);
 		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_LOGIN_2);
 		 
-		 form.add(Constants.AGGR_MSG_KEY,msg_string);
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("msg", msg_string));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add(Constants.AGGR_MSG_KEY,msg_string);
 		 
 		 
 		 Representation response=null;
@@ -722,11 +762,11 @@ public class AggregatorResources {
 		 System.out.println("loginStep2 Response: " + clientResource.getResponse().toString());
 		 }catch(ResourceException e){
 			 e.printStackTrace();
-		 }
+		 }*/
 		 
 		 
 		 
-		return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
+		return LoginResponse.parseFrom(Base64.decodeBase64(responseBody.getBytes()));
 		 
 	 }
 	 
@@ -760,22 +800,35 @@ public class AggregatorResources {
 			 Login login, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 String msg = AggregatorHelper.encodeData(login.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_LOGIN_1);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 byte[] response_byte = Base64.decodeBase64(responseBody.getBytes());		 
+		 
+		 return LoginStep1.parseFrom(response_byte);
 
-		 form.add(Constants.AGGR_MSG_KEY, msg);
+/*		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response=null;
 		 try{
 		 response= clientResource.post(form.getWebRepresentation(null));
 		 }catch(ResourceException e){
 			 e.printStackTrace();
-		 }
+		 }*/
 		 
-		 byte[] response_byte = Base64.decodeBase64(response.getText().getBytes());		 
 		 
-		 return LoginStep1.parseFrom(response_byte);
 		 
 	 }
 	 
@@ -820,20 +873,33 @@ public class AggregatorResources {
 	 
 	 public static GetBanlistResponse getBanlist(GetBanlist getBanlists,ClientResource clientResource) throws Exception{
 		 
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 String msg= AggregatorHelper.aesEncrypt(getBanlists.toByteArray());
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_BANLIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 Representation response =null;
 		 try{
 		 response = clientResource.post(form.getWebRepresentation(null));
 		 }catch(Exception e){
 			 e.printStackTrace();
-		 }
+		 }*/
 		 
-		 byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		 byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 		 
 		 return GetBanlistResponse.parseFrom(final_response);
 		 
@@ -842,11 +908,26 @@ public class AggregatorResources {
 	 
 	 public static GetBannetsResponse getBannets(GetBannets getBannets, ClientResource clientResource)throws Exception{
 		 
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getBannets.toByteArray());
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_BANLIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -855,9 +936,9 @@ public class AggregatorResources {
 			 response = clientResource.post(form.getWebRepresentation(null));
 		}catch(Exception e){
 			 e.printStackTrace();
-		}
+		}*/
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 		
 		 
 		 return GetBannetsResponse.parseFrom(final_response);
