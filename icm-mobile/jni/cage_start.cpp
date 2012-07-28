@@ -17,6 +17,9 @@
 #include <vector>
 #include <libcage/src/cage.hpp>
 #include <boost/include/boost/thread.hpp>
+#include <android/log.h>
+
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , "libcage_logs", __VA_ARGS__)
 
 libcage::cage *cage;
 
@@ -28,23 +31,23 @@ void openCage_firstnode(char * portnum){
 		event_init();
 		int port = atoi(portnum);
 		cage = new libcage::cage;
-		std::cout<<"\nAbout to start cage on port "<<port<<"\n";
+		LOGD("About to start cage on port %d",port);
 		try
 		{
 			if(!cage->open(PF_INET,port))
 			{
-				std::cout<<"Could not open port for P2P routing communication\n";
+				LOGD("Could not open port for P2P routing communication");
 				sprintf(portnum,"%d",port+1);
 				openCage_firstnode(portnum);
 				return;
 			}
 		}catch(std::exception &e){
-			std::cout<<"Port cannot be opened due to an exception. Message : "<<e.what()<<"\n";
+			LOGD("Port cannot be opened due to an exception. Message : %s",e.what());
 		}
-		std::cout<<"Cage instance listening on port "<<port;
+		LOGD("Cage instance listening on port %d",port);
 		cage->set_global();
-		std::cout<<"\nLog : Out of createCage\n";
-		event_dispatch();
+		LOGD("Log : Out of createCage");
+		//event_dispatch();
 }
 
 void createCage_firstnode(char * portnum){
@@ -110,8 +113,8 @@ extern "C" {
 #endif
 JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_startLibcage
   (JNIEnv * env, jobject jObj){
-  		//std::cout<<"\nLog : Into createCage\n";
-		//createCage_firstnode("20000");
+  		std::cout<<"\nLog : Into createCage\n";
+		openCage_firstnode("20000");
 	    char * message;
 	    message = malloc(100);
 	    using namespace boost::posix_time;
