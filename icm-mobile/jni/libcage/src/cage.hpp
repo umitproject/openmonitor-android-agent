@@ -47,8 +47,8 @@
 #include "timer.hpp"
 #include "udphandler.hpp"
 
-#include "openssl/evp.h"
-#include "openssl/rand.h"
+#include <openssl/evp.h>
+#include <openssl/rand.h>
 
 namespace libcage {
         class cage {
@@ -95,6 +95,8 @@ namespace libcage {
                 //     automatically divided and then deliverd to the
                 //     destination unlike UDP.
                 //     The destination node should be receive multiple times.
+
+                int 			get_port();
                 void            send_dgram(const void *buf, int len,
                                            uint8_t *dst);
                 void            set_dgram_callback(dgram::callback func);
@@ -112,7 +114,7 @@ namespace libcage {
                 void            set_id(const char *buf, int len);
 
                 void            print_state() const;
-
+                std::vector<std::string> get_Peerlist();
 
         private:
                 class udp_receiver : public udphandler::callback {

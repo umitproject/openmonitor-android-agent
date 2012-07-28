@@ -65,7 +65,7 @@ namespace libcage {
                 bool            is_zero();
                 int             get_size();
                 bool            has_id(uint160_t &id);
-
+                std::vector<std::string> get_Peerlist();
         protected:
                 virtual void    send_ping(cageaddr &dst, uint32_t nonce);
                 void            merge_nodes(const uint160_t &id,

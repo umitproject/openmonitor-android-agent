@@ -132,11 +132,12 @@ boost
             {
             static exception_ptr const e;
             };
-
+        /*
         template <class Exception>
         exception_ptr const
         exception_ptr_static_exception_object<Exception>::
         e = get_static_exception_object<Exception>();
+        */
         }
 
 #if defined(__GNUC__)

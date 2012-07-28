@@ -32,8 +32,10 @@
 #include "rttable.hpp"
 
 #include <set>
-
-#include "../../boost/include/boost/foreach.hpp"
+#include <string>
+#include <sstream>
+#include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
 
 namespace libcage {
         const int       rttable::max_entry = 20;
@@ -412,6 +414,84 @@ namespace libcage {
                                 n++;
                         }
                 }
+        }
+
+        std::vector<std::string> rttable::get_Peerlist(){
+        	std::vector<std::string> peerlist;
+        	std::string str;
+        	std::string peer;
+        	std::map<int, std::list<cageaddr> >::const_iterator i;
+        	std::list<cageaddr>::const_iterator                 j;
+
+        	for (i = m_table.begin(); i != m_table.end(); ++i) {
+        	                        const std::list<cageaddr> &row = i->second;
+        	                        printf("  i = %d\n", i->first);
+
+        	                        int n = 1;
+        	                        for (j = row.begin(); j != row.end(); ++j) {
+        	                                str = j->id->to_string();
+        	                                printf("    %02d: ID = %s,\n", n, str.c_str());
+
+        	                                peer.append(str.c_str());
+        	                                peer.append(",");
+
+
+
+        	                                if (j->domain == domain_inet) {
+        	                                        in_ptr   in;
+        	                                        uint8_t *addr;
+
+        	                                        in = boost::get<in_ptr>(j->saddr);
+
+        	                                        addr = (uint8_t*)&in->sin_addr.s_addr;
+
+        	                                        printf("        IP = %u.%u.%u.%u, ",
+        	                                               addr[0], addr[1],
+        	                                               addr[2], addr[3]);
+        	                                        std::string s1=boost::lexical_cast<std::string>((int)addr[0]);
+        	                                        peer.append(s1);
+        	                                        peer.append(".");
+        	                                        std::string s2=boost::lexical_cast<std::string>((int)addr[1]);
+        	                                        peer.append(s2);
+        	                                        peer.append(".");
+        	                                        std::string s3=boost::lexical_cast<std::string>((int)addr[2]);
+        	                                        peer.append(s3);
+        	                                        peer.append(".");
+        	                                        std::string s4=boost::lexical_cast<std::string>((int)addr[3]);
+        	                                        peer.append(s4);
+        	                                        peer.append(" , ");
+        	                                        printf("Port = %d\n",
+        	                                               ntohs(in->sin_port));
+
+        	                                        std::string portstring = boost::lexical_cast<std::string>(ntohs(in->sin_port));
+        	                                        peer.append(portstring);
+
+        	                                } else if (j->domain == domain_inet6) {
+        	                                        in6_ptr  in6;
+        	                                        uint8_t *addr;
+
+        	                                        in6 = boost::get<in6_ptr>(j->saddr);
+
+        	                                        addr = (uint8_t*)in6->sin6_addr.s6_addr;
+
+        	                                        printf("        IP = %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x, ",
+        	                                               addr[ 0], addr[ 1], addr[ 2],
+        	                                               addr[ 3], addr[ 4], addr[ 5],
+        	                                               addr[ 6], addr[ 7], addr[ 8],
+        	                                               addr[ 9], addr[10], addr[11],
+        	                                               addr[12], addr[13], addr[14],
+        	                                               addr[15]);
+
+        	                                        printf("Port = %d\n",
+        	                                               ntohs(in6->sin6_port));
+        	                                }
+
+        	                                n++;
+        	                        }
+        	                        peerlist.push_back(peer);
+        		}
+        	return(peerlist);
+
         }
 
         void

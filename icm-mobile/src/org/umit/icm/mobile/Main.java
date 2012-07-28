@@ -49,7 +49,11 @@ import android.widget.Toast;
 
 public class Main extends TabActivity {
 	
-
+	static
+    {
+    	System.loadLibrary("cage-lib");
+    }
+	private native String startLibcage();
 	/**
 	 * OnCreate method populates the tabHost with the three tabs: 1) Information,
 	 * 2) Map, 3) Control.
@@ -91,7 +95,7 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try { /*Register Agent should be called here*/	
-	        	Toast date_time = Toast.makeText(this,getDateTime(),Toast.LENGTH_LONG);
+	        	Toast date_time = Toast.makeText(this,this.startLibcage(),Toast.LENGTH_LONG);
 	        	date_time.show();
 	        	LoginDialog LoginDialog = 
 	       			new LoginDialog(Main.this);
@@ -114,10 +118,5 @@ public class Main extends TabActivity {
         }
     }
     
-    private native String getDateTime();
-    static
-    {
-    	System.loadLibrary("boost-lib");
-    }
    
 }

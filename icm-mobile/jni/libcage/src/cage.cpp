@@ -31,7 +31,7 @@
 
 #include "cage.hpp"
 
-#include "../../boost/include/boost/foreach.hpp"
+#include <boost/foreach.hpp>
 
 #include "cagetypes.hpp"
 
@@ -267,6 +267,15 @@ namespace libcage {
 
         }
 
+        int
+        cage::get_port()
+        {
+        	/*int cagePort = m_udp.get_port();
+        	printf("Cage Port : %d", cagePort);
+        	return cagePort;*/
+        	return 20000;
+        }
+
         void
         cage::set_id(const char *buf, int len)
         {
@@ -380,6 +389,10 @@ namespace libcage {
 
                 printf("DHT Table:\n");
                 m_dht.print_table();
+        }
+
+        std::vector<std::string> cage::get_Peerlist(){
+        	return m_dht.get_Peerlist();
         }
 
         bool
