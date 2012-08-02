@@ -214,11 +214,24 @@ public class AggregatorResources {
 	 */
 	 public static GetPeerListResponse getPeerList(GetPeerList getPeerList, ClientResource clientResource) throws Exception {
 		 
-		 Form form = new Form();
+//		 Form form = new Form();
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -227,9 +240,9 @@ public class AggregatorResources {
 			 response = clientResource.post(form.getWebRepresentation(null));
 		}catch(Exception e){
 			 e.printStackTrace();
-		}
+		}*/
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 		 
 		return GetPeerListResponse.parseFrom(final_response);
 		 
@@ -260,10 +273,24 @@ public class AggregatorResources {
 	@see         ClientResource
 	 */
 	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList, ClientResource clientResource) throws Exception {
-		 Form form = new Form();
+//		 Form form = new Form();
 		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
 		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
 		 Representation response= null;
@@ -272,9 +299,9 @@ public class AggregatorResources {
 			 response = clientResource.post(form.getWebRepresentation(null));
 		}catch(Exception e){
 			 e.printStackTrace();
-		}
+		}*/
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
 		 
 		return GetSuperPeerListResponse.parseFrom(final_response);
 		 

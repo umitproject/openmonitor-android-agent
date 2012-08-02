@@ -290,7 +290,7 @@ public class Initialization {
 		
 		Initialization.initializeBanlist();
 		Initialization.initializeBannets();
-		
+		Initialization.initializerPeersList();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
