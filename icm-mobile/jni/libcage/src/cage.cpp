@@ -30,10 +30,12 @@
  */
 
 #include "cage.hpp"
-
+#include <jni.h>
 #include <boost/foreach.hpp>
 
 #include "cagetypes.hpp"
+
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , "libcage_logs", __VA_ARGS__)
 
 namespace libcage {
         extern void no_action(std::vector<cageaddr> &nodes);
@@ -356,38 +358,38 @@ namespace libcage {
                 std::string str;
 
                 str = m_id.to_string();
-                printf("\nMyID = %s\n\n", str.c_str());
+                LOGD("\nMyID = %s\n\n", str.c_str());
 
-                printf("Node State:\n");
+                LOGD("Node State:\n");
 
                 switch (m_nat.get_state()) {
                 case node_undefined:
-                        printf("  undefined\n");
+                        LOGD("  undefined\n");
                         break;
                 case node_global:
-                        printf("  Global\n");
+                        LOGD("  Global\n");
                         break;
                 case node_nat:
-                        printf("  NAT\n");
+                        LOGD("  NAT\n");
                         break;
                 case node_cone:
-                        printf("  Cone NAT\n");
+                        LOGD("  Cone NAT\n");
                         break;
                 case node_symmetric:
-                        printf("  Symmetric NAT\n");
+                        LOGD("  Symmetric NAT\n");
                         break;
                 }
 
-                printf("DTUN Table:\n");
+                LOGD("DTUN Table:\n");
 
                 if (m_is_dtun)
                         m_dtun.print_table();
                 else
-                        printf("  disabled\n");
+                        LOGD("  disabled\n");
 
-                printf("\n");
+                LOGD("\n");
 
-                printf("DHT Table:\n");
+                LOGD("DHT Table:\n");
                 m_dht.print_table();
         }
 

@@ -55,11 +55,20 @@ import org.umit.icm.mobile.utils.CryptoKeyWriter;
 import org.umit.icm.mobile.utils.DiffieHellmanKeyGeneration;
 import org.umit.icm.mobile.utils.RSACrypto;
 
+import android.util.Log;
+
 /**
  * Performs actions based on aggregator and P2P communication responses.
  */
 
 public class ProcessActions {	
+	
+	static
+    {
+    	System.loadLibrary("cage-lib");
+    }
+	
+	private native String startLibcage();
 	/**
 	 * Checks if the response agent version is higher than the current
 	 * agent number. If yes, updates the agent version and makes a webservice
@@ -267,6 +276,13 @@ public class ProcessActions {
 	 */
 	public synchronized static boolean updateSuperPeersList(List<AgentData> superPeers) {
 		Iterator<AgentData> iterator = superPeers.iterator();	
+		
+		Log.i("Debugging", "After getting super peer response from the aggregator");
+		//Callback after we get the super peers - Put bootstrapping logic here
+		if(iterator.hasNext()){
+			Log.i("Debugging","Got some super peers from the aggregator");
+		}
+		
 		RSAKey cipheredKey = RSAKey.newBuilder()
 		.setExp(Globals.keyManager.getMyCipheredKeyExp())
 		.setMod(Globals.keyManager.getMyCipheredKeyMod())

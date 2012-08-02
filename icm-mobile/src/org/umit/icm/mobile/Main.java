@@ -41,6 +41,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.util.Log;
 
 /**
  * The main entry point of the application. Populates the Tabs and initializes
@@ -102,6 +103,7 @@ public class Main extends TabActivity {
 	            LoginDialog.show();	
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
+				Log.i("DEBUGGING","Starting Initialization thread");
 				new InitializationThread(Main.this, Main.this).start();	
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				

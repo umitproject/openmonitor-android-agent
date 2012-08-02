@@ -115,16 +115,30 @@ JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_startLibcage
   (JNIEnv * env, jobject jObj){
   		std::cout<<"\nLog : Into createCage\n";
 		openCage_firstnode("20000");
-	    char * message;
+		boost::this_thread::sleep(boost::posix_time::seconds(2));
+		char * message;
 	    message = malloc(100);
 	    using namespace boost::posix_time;
 	    ptime now = microsec_clock::local_time();
-	    sprintf(message,"%d",now.time_of_day().hours());
+	    //sprintf(message,"%d",now.time_of_day().hours());
+	    sprintf(message,"%d",getPort());
         return env->NewStringUTF(message);
 }
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+JNIEXPORT void JNICALL Java_org_umit_icm_mobile_Main_printRoutingTab
+  (JNIEnv * env, jobject jObj){
+  		printPeers();
+}
+#ifdef __cplusplus
+}
+#endif
+
 /*	char string[30];
 	using namespace boost::posix_time;
 	ptime now = microsec_clock::local_time();

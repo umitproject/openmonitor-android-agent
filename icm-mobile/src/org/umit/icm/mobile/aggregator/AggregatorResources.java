@@ -58,6 +58,8 @@ import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 
+import android.util.Log;
+
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
  * webservice ClientResource. 
@@ -196,6 +198,7 @@ public class AggregatorResources {
 			 GetSuperPeerList getSuperPeerList, 
 			 ClientResource clientResource) 
 	 throws Exception {
+		 Log.i("DEBUGGING","Actual getPeer list being called");
 		 Form form = new Form();
 		 if(Constants.AGGR_ENCRYPTION == true) {
 			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");

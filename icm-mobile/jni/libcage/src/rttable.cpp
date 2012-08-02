@@ -32,11 +32,12 @@
 #include "rttable.hpp"
 
 #include <set>
+#include <jni.h>
 #include <string>
 #include <sstream>
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
-
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , "libcage_logs", __VA_ARGS__)
 namespace libcage {
         const int       rttable::max_entry = 20;
         const int       rttable::ping_timeout = 2;

@@ -50,6 +50,8 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
+import android.util.Log;
+
 /**
  * Generates a ClientResource for each webservice and calls the relevant 
  * AggregatorResources and AggregatorActions methods.
@@ -140,6 +142,7 @@ public class AggregatorRetrieve {
 	 */	 
 	 public synchronized static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
 	 throws Exception {
+		 	Log.i("DEBUGGING", "GEtting Super peer list from the aggregator");
 		 	ClientResource clientResource 
 		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse

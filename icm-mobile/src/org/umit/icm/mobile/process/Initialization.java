@@ -50,6 +50,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 /**
  * Holds initialization methods.
@@ -139,6 +140,7 @@ public class Initialization {
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
 		context.startService(new Intent(context, NotificationService.class));
+		Log.i("DEBUGGING", "Starting CommunicationService thread through Intent");
 		context.startService(new Intent(context, CommunicationService.class));		
 	}
 	
