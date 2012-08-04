@@ -60,8 +60,21 @@ public class WebsiteOpen {
 	@see         URLConnection
 	 */
 	static synchronized public URLConnection openURLConnection(String str) throws IOException, HttpException {
+		
+
 		URL url = new URL(str);
-		return url.openConnection();
+		URLConnection urlConnection = url.openConnection();
+		
+		Map<String, String> websiteHeader = new HashMap <String, String>();
+		websiteHeader = WebsiteOpen.getHeaders(urlConnection);
+		
+		if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
+			return urlConnection;
+		}else{
+			String newURL = websiteHeader.get("location");
+			urlConnection = WebsiteOpen.openURLConnection(newURL);
+			return urlConnection;
+		}
 	}
 
 	/**
@@ -80,10 +93,10 @@ public class WebsiteOpen {
 	@see         InputStream
 	 */
 	static synchronized public String getContent(URLConnection urlConnection) throws IOException, HttpException {
-
-        InputStream inputStream = urlConnection.getInputStream();
-     	return convertStreamToString(inputStream);
-    }
+		
+			InputStream inputStream = urlConnection.getInputStream();
+	     	return convertStreamToString(inputStream);
+	}
 	
 	/**
 	 * Returns a {@link InputStream} object by calling {@link URLConnection#getInputStream()} 

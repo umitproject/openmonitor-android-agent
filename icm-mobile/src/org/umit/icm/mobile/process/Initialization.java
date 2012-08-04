@@ -25,22 +25,26 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
+import java.util.Random;
 
-import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.notifications.NotificationService;
-import org.umit.icm.mobile.process.CommunicationService;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
+import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
+import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
+import org.umit.icm.mobile.proto.MessageProtos.Login;
+import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
-import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.ProfilerRun;
 import org.umit.icm.mobile.utils.RSACrypto;
@@ -84,7 +88,7 @@ public class Initialization {
 					, Constants.PARAMETERS_DIR) == false )
 				|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 						, Constants.PARAMETERS_DIR) == false )) {					
-			Globals.runtimeParameters.setAgentID(Constants.DEFAULT_AGENT_ID);
+			Globals.runtimeParameters.setAgentID(Integer.toString(10));
 			/* Aggregator Call
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setIp(Integer.toString(Globals.myIP))
@@ -139,9 +143,10 @@ public class Initialization {
 	 */
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
-		context.startService(new Intent(context, NotificationService.class));
-		Log.i("DEBUGGING", "Starting CommunicationService thread through Intent");
-		context.startService(new Intent(context, CommunicationService.class));		
+
+//		context.startService(new Intent(context, NotificationService.class));
+//		context.startService(new Intent(context, CommunicationService.class));		
+
 	}
 	
 	public static void checkProfiler() {
@@ -235,21 +240,24 @@ public class Initialization {
 	 * Should be deprecated eventually.
 	 */
 	public static void initializerPeersList() {
-		RSAKey rsaKey = RSAKey.newBuilder()
-		.setExp("exp")
-		.setMod("mod")
-		.build();
-		AgentData agentData = AgentData.newBuilder()
-		.setAgentID(10)
-		.setAgentIP("202.206.64.11")
-		.setAgentPort(3128)
-		.setPeerStatus("On")
-		.setPublicKey(rsaKey)
-		.setToken("Token")
-		.build();
 		
-		Globals.runtimesList.addPeer(agentData);
-		Globals.runtimesList.addSuperPeer(agentData);
+		GetPeerList getPeerList = GetPeerList.newBuilder()
+				.setCount(10)
+				.build();
+		
+		GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+				.setCount(10)
+				.build();
+		
+		try {
+			AggregatorRetrieve.getPeerList(getPeerList);
+			AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public static void loadLists() {
@@ -258,23 +266,72 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public void registration(Context context) 
+	public static boolean login()
 	{
+		Random random = new Random();
+		
+		String challenge= Double.toString(random.nextDouble());
+		
+		Globals.challenge=challenge;
+		
+		System.out.println("Setting the login protobuf");
+		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
+		Login login = Login.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setPort(80)
+		.setChallenge(Globals.challenge)
+		.setIp(Integer.toString(Globals.myIP))
+		.build();
+		
+		System.out.println("Login protobuf formed : "  + login.toString());
+				
+		boolean success=false;
+		
+		try {
+			
+		success=AggregatorRetrieve.login(login);
+		
+		Initialization.initializeBanlist();
+		Initialization.initializeBannets();
+		Initialization.initializerPeersList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success;
+	}
 	
+	
+	
+	
+	public static boolean registration(LoginCredentials loginCredentials) 
+	{
+		boolean success=false;
 			
 	  try {
-		if ((SDCardReadWrite.fileExists(Constants.AGENTID_FILE
-				  , Constants.PARAMETERS_DIR) == false )
-				  || (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
-				  , Constants.PARAMETERS_DIR) == false )) {
+		
+			
+			System.out.println("This is from inside Initialization#registration");
+			RSAKey rsaKey = RSAKey.newBuilder()
+			.setMod(Globals.keyManager.getMyCipheredKeyMod())
+			.setExp(Globals.keyManager.getMyCipheredKeyExp())
+			.build();
+			
+			Globals.versionManager.setTestsVersion(1);
+			
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
+			.setCredentials(loginCredentials)
 			.setIp(Integer.toString(Globals.myIP))
+			.setAgentPublicKey(rsaKey)
 			.setVersionNo(Globals.versionManager.getTestsVersion())
-			.build();			
-			AggregatorRetrieve.registerAgent(registerAgent);
+			.build();
+			
+			
+			
+			success=AggregatorRetrieve.registerAgent(registerAgent);
 					  
-		  }
+		  
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -291,6 +348,34 @@ public class Initialization {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	  return success;
+}
+	
+	public static void initializeBanlist(){
+		
+		GetBanlist getBanlist = GetBanlist.newBuilder()
+				.setCount(100)
+				.build();
+		
+		try {
+			AggregatorRetrieve.getBanlist(getBanlist);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void initializeBannets(){
+		GetBannets getBannets = GetBannets.newBuilder()
+				.setCount(100)
+				.build();
+		
+		try{
+			AggregatorRetrieve.getBannets(getBannets);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
+	
 }		

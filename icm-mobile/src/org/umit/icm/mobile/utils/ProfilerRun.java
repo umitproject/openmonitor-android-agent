@@ -157,9 +157,9 @@ public class ProfilerRun {
 				.build();
 				
 				ICMReport.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID(Integer.toString(10))
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -371,9 +371,9 @@ public class ProfilerRun {
 				.build();
 				
 				ICMReport icmReport = ICMReport.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID(Integer.toString(10))
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -453,9 +453,9 @@ public class ProfilerRun {
 				.build();
 				
 				ICMReport icmReport = ICMReport.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID(Integer.toString(10))
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -479,7 +479,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
 				RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 			}
 			
@@ -533,7 +533,7 @@ public class ProfilerRun {
 				
 				RegisterAgentResponse.newBuilder()	
 				.setHeader(responseHeader)
-				.setAgentID(10)				
+				.setAgentID(Integer.toString(10))				
 				.build();
 			}
 			
@@ -570,7 +570,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				Website website = new Website("url", "status", "check", 0, 0);
+				Website website = new Website("url", "status", "check", "0", 0);
 				try {
 					website.writeWebsite();
 					website.readWebsite("url");
@@ -591,8 +591,8 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				Website website1 = new Website("url1","1","1", 1, 1);
-		    	Website website2 = new Website("url2","2","2", 1, 1);
+				Website website1 = new Website("url1","1","1", "1", 1);
+		    	Website website2 = new Website("url2","2","2", "1", 1);
 		    	List<Website> websiteList = new ArrayList<Website>();
 		    	websiteList.add(website1);
 		    	websiteList.add(website2);
@@ -656,7 +656,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				ServiceSuggestion serviceSuggestion =
@@ -694,7 +694,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 
 				.build();
 				
@@ -732,7 +732,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				NewTests newTests = NewTests.newBuilder()
@@ -768,7 +768,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				NewVersion newVersion = NewVersion.newBuilder()
@@ -805,7 +805,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
@@ -829,9 +829,9 @@ public class ProfilerRun {
 				.build();
 				
 				ICMReport icmReport = ICMReport.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID(Integer.toString(10))
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -876,7 +876,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
@@ -900,9 +900,9 @@ public class ProfilerRun {
 				.build();
 				
 				ICMReport icmReport = ICMReport.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID(Integer.toString(10))
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -948,7 +948,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();
 				
 				Location location = Location.newBuilder()
@@ -990,7 +990,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();																
 				 
 				GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()				
@@ -1025,7 +1025,7 @@ public class ProfilerRun {
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
 				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(10)
+				.setAgentID(Integer.toString(10))
 				.build();																
 				 
 				GetPeerList getPeerList = GetPeerList.newBuilder()			

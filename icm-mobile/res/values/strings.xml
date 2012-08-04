@@ -56,7 +56,7 @@
     <string name="map_selection">Select Map Package</string>
     <string name="google_rb">Google Maps</string>
     <string name="osm_rb">Open Street Maps</string>
-    <string name="google_maps_api_key">0ypQ-LmtOI2bSFZESidxGq7QFVTIbNzqzTGSxOA</string>
+    <string name="google_maps_api_key">0E8T-qQndWDjAGTyy5zopsE_NS8M4P49KqvzjyA</string>
     <string name="no_scan">No Scan Performed Yet</string>
     <string name="normal_status">Status: Normal</string>
     <string name="differentation_status">Status: Differentiation</string>
@@ -73,15 +73,25 @@
     <string name="enable_pin">Enable Pin</string>
     <string name="select_all">Select All</string>
     <string name="unselect_all">Unselect All</string>
-    <string name="throughput">Throughput:</string>
+    <string name="bandwidth">Bandwidth:</string>
     <string name="response_time">Response Time:</string>
     <string name="response_time_unit">ms</string>
-    <string name="throughput_unit">bytes/ms</string>
+    <string name="bandwidth_unit">bytes/ms</string>
     <string name="about_button">About</string>
     <string name="about_text">\u00a9 2011 Umit Project</string>
     <string name="service_suggestion_sent">Service Suggestion Sent</string>     
     <string name="website_suggestion_sent">Website Suggestion Sent</string>
     <string name="username">Enter Username</string>
     <string name="password">Enter Password</string>
+    <string name="repassword">ReEnter Password</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="subject">Subject</string>
+    <string name="report">Report</string>
+    <string name="email">Email(Optional)</string>
+    <string name="description">Description</string>
+    <string name="explain_bug">Explain the Bug</string>
+    <string name="deviation">Deviation from Benchmark: </string>
+    <string name="deviation_unit">bytes/ms</string>
+    <string name="bug_report_button">Report Bug</string>
 </resources>

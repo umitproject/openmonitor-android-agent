@@ -158,14 +158,14 @@ public class ProcessActions {
 	public synchronized static boolean updateTests(List<Test> tests) {
 		List<Integer> ports = new ArrayList<Integer>();
 		for(int i = 0 ; i < tests.size(); i++) {
-			if(tests.get(i).getTestType().equals("WEB")) {
+			if(tests.get(i).equals("WEB")) {
 				Globals.websitesList.add(
 						new Website(tests.get(i).getWebsite().getUrl(), 
 								"false", 
 								"true", 
 								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
-			} else if(tests.get(i).getTestType().equals("SERVICE")) {
+			} else if(tests.get(i).equals("SERVICE")) {
 				ports.clear();
 				ports.add(tests.get(i).getService().getPort());
 				Globals.servicesList.add(
@@ -343,13 +343,16 @@ public class ProcessActions {
 	 @see RuntimeParameters
 	 */
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
+		System.out.println("Inside ProcessActions@registerAgent");
 		try {
-			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());			
+			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
+			return true;
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		return true;
+		
 	}
 
 }

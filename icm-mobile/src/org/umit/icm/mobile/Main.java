@@ -25,7 +25,9 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ServicePackets;
+import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
@@ -95,16 +97,12 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try { /*Register Agent should be called here*/	
+	        try {
 	        	Toast date_time = Toast.makeText(this,this.startLibcage(),Toast.LENGTH_LONG);
 	        	date_time.show();
-	        	LoginDialog LoginDialog = 
-	       			new LoginDialog(Main.this);
-	            LoginDialog.show();	
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-				Log.i("DEBUGGING","Starting Initialization thread");
-				new InitializationThread(Main.this, Main.this).start();	
+		//		Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();

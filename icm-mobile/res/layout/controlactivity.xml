@@ -90,14 +90,22 @@
 					android:layout_centerHorizontal="true"
 					android:layout_below="@id/mapSelectionButton"
 					android:id="@+id/enableTwitterButton"/>
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/bug_report_button" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/enableTwitterButton"
+					android:id="@+id/bugReportButton"/>
 					
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
 					android:text="@string/about_button" 
 					android:layout_centerHorizontal="true"
-					android:layout_below="@id/enableTwitterButton"
+					android:layout_below="@id/bugReportButton"
 					android:id="@+id/aboutButton"/>
+				
 			</RelativeLayout>
 	</ScrollView>
 </LinearLayout>

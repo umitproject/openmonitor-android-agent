@@ -64,6 +64,7 @@ public class AggregatorActions {
 	@see         AggregatorRetrieve
 	 */
 	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws Exception {
+		System.out.println("Inside AggreagatorActions#registerAgentAction");
 		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
 		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
 		return ProcessActions.registerAgent(registerAgentResponse);

@@ -42,7 +42,10 @@ public class Constants {
 	public static String AGGR_PUBLIC_KEY_FILE = "aggrPublicKey.pub";
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
-	public static int AES_KEY_SIZE = 128;
+	public static int AES_KEY_SIZE = 256;
+	public static int AES_BLOCK_SIZE =AES_KEY_SIZE/8;
+	public static byte  AES_DEFAULT_PADDING='{';
+	public static double averageThroughput=0;
 	public static String ICM_ROOT_DIR = "/icm-mobile";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
 	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
@@ -80,17 +83,17 @@ public class Constants {
 		private static final long serialVersionUID = 6933062698660638968L;
 
 	{
-		add(new Website("http://www.google.com", "false", "true", 1001, 0));
-		add(new Website("http://www.facebook.com", "false", "true", 1002, 0));
-		add(new Website("http://www.youtube.com", "false", "true", 1003, 0));
-		add(new Website("http://www.twitter.com", "false", "true", 1004, 0));
-		add(new Website("http://www.yahoo.com", "false", "true", 1005, 0));
-		add(new Website("http://www.cnn.com", "false", "true", 1006, 0));
-		add(new Website("http://www.bbc.com", "false", "true", 1007, 0));
-		add(new Website("http://www.gmail.com", "false", "true", 1008, 0));
-		add(new Website("http://www.umitproject.org", "false", "true", 1009, 0));
-		add(new Website("http://www.flickr.com", "false", "true", 1010, 0));
-		add(new Website("http://www.hotmail.com", "false", "true", 1011, 0));
+		add(new Website("http://www.google.com", "false", "true", Integer.toString(1001), 0));
+		add(new Website("http://www.facebook.com", "false", "true", Integer.toString(1002), 0));
+		add(new Website("http://www.youtube.com", "false", "true", Integer.toString(1003), 0));
+		add(new Website("http://www.twitter.com", "false", "true", Integer.toString(1004), 0));
+		add(new Website("http://www.yahoo.com", "false", "true", Integer.toString(1005), 0));
+		add(new Website("http://www.cnn.com", "false", "true", Integer.toString(1006), 0));
+		add(new Website("http://www.bbc.com", "false", "true", Integer.toString(1007), 0));
+		add(new Website("http://www.gmail.com", "false", "true", "1008", 0));
+		add(new Website("http://www.umitproject.org", "false", "true", "1009", 0));
+		add(new Website("http://www.flickr.com", "false", "true","1010", 0));
+		add(new Website("http://www.hotmail.com", "false", "true", "1011", 0));
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
@@ -107,10 +110,14 @@ public class Constants {
 	public static String AGGR_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
 	public static String AGGR_SERVICE_SUGGESTION = "/api/servicesuggestion/";
 	public static String AGGR_TESTS = "/api/tests/";
-	public static String AGGR_LOGIN = "/api/loginagent/";
+	public static String AGGR_LOGIN_1 = "/api/loginagent/";
+	public static String AGGR_LOGIN_2 = "/api/loginagent2/";
 	public static String AGGR_LOGOUT = "/api/logoutagent/";
+	public static String AGGR_GET_BANLIST = "/api/get_banlist/";
+	public static String AGGR_GET_BANNETS = "/api/get_bannets/";
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
+	public static String AGGR_REGISTER_USER = "http://east1.openmonitor.org/accounts/register/";
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
@@ -125,29 +132,30 @@ public class Constants {
 
 		{
 			ports.add(443);			
-			add(new Service("https", ports, "203.135.62.113" ,"open", "true", 2001, 0));
+			add(new Service("https", ports, "203.135.62.113" ,"open", "true", "2001", 0));
 			ports.clear();
 			ports.add(80);												
-			add(new Service("http", ports, "www.google.com" ,"open", "true", 2001, 0));
+			add(new Service("http", ports, "www.google.com" ,"open", "true", "2001", 0));
 			ports.add(21);						
-			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", 2001, 0));
+			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", "2001", 0));
 			ports.clear();
 			ports.add(995);			
-			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", 2001, 0));
+			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", "2001", 0));
 			ports.clear();
 			ports.add(993);			
-			add(new Service("imap", ports, "imap.gmail.com", "open", "true", 2001, 0));
+			add(new Service("imap", ports, "imap.gmail.com", "open", "true", "2001", 0));
 			ports.clear();
 			ports.add(1863);			
-			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", 2001, 0));
+			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", "2001", 0));
 			ports.clear();		
 			ports.add(5222);			
-			add(new Service("gtalk", ports, "talk.google.com", "open", "true", 2001, 0));
+			add(new Service("gtalk", ports, "talk.google.com", "open", "true", "2001", 0));
 			ports.clear();	
 		
 		}};
 		public static boolean RUN_PROFILER = false;
 		public static long DEFAULT_AGENT_ID = 911;
+		public static long AGENT_ID= 0;
 		public static String DEFAULT_TOKEN = "myToken";
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 

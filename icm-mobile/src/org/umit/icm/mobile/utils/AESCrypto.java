@@ -94,8 +94,7 @@ public class AESCrypto {
 	
 	/**
 	 * Returns an AES secret key using the passed byte[] as seed. 
-	 *	 
-	 *
+	 *	 	 *
 	                          
 	@param  key  An object of the type byte[]
 	 *  	                          	 	                          
@@ -135,8 +134,9 @@ public class AESCrypto {
 	@see         Cipher
 	 */
 	public static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
+		
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES");
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(plainBytes);		
 	}
@@ -159,7 +159,7 @@ public class AESCrypto {
 	 */
 	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES");
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}

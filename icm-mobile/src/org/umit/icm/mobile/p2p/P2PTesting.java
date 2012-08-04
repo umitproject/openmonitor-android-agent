@@ -81,14 +81,14 @@ public class P2PTesting {
 		.setMod("mod")
 		.build();
 		AuthenticatePeer authenticatePeer = AuthenticatePeer.newBuilder()
-		.setAgentID(10)
+		.setAgentID(Integer.toString(10))
 		.setAgentType(3)
 		.setAgentPort(8000)		
 		.setCipheredPublicKey(rsaKey)
 		.build();
 		
 		AgentData agentData = AgentData.newBuilder()
-		.setAgentID(10)
+		.setAgentID(Integer.toString(10))
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")
@@ -149,7 +149,7 @@ public class P2PTesting {
 		.build();
 		
 		AgentData agentData = AgentData.newBuilder()
-		.setAgentID(10)
+		.setAgentID(Integer.toString(10))
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")
@@ -210,7 +210,7 @@ public class P2PTesting {
 		.build();
 		
 		AgentData agentData = AgentData.newBuilder()
-		.setAgentID(10)
+		.setAgentID(Integer.toString(10))
 		.setAgentIP("")
 		.setAgentPort(20)
 		.setPeerStatus("On")

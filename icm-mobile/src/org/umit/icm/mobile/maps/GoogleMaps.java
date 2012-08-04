@@ -29,6 +29,7 @@ import java.util.List;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
+import org.umit.icm.mobile.proto.MessageProtos.Location;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -191,9 +192,8 @@ public class GoogleMaps implements AbstractMap {
 	
 	public List<OverlayItem> getOverlayList(Context context) {
 		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
-		
-		Iterator<Event> iterator 
-		= Globals.runtimesList.getEventsList().iterator();
+				
+		Iterator<Event> iterator = Globals.runtimesList.getEventsList().iterator();
 		while(iterator.hasNext()){
 			Event event = iterator.next();
 			Drawable drawable = context.getResources().getDrawable(R.drawable.greendot);

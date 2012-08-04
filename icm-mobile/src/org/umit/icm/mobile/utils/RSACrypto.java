@@ -37,6 +37,8 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.Signature;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
@@ -156,6 +158,17 @@ public class RSACrypto {
 	 	                          	
 	@see         KeyPairGenerator
 	 */
+	
+	public static byte[] Sign(PrivateKey privateKey, byte[] data) throws Exception{
+		System.out.println("Signing the key inside RSACrypto#Sign");
+		Signature dsa = Signature.getInstance("SHA1withRSA");
+		
+		dsa.initSign(privateKey);
+		dsa.update(data);
+		return dsa.sign();
+	}
+	
+	
 	public static KeyPair generateKey() throws Exception {
 		
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
@@ -181,7 +194,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] encryptPublic(PublicKey publicKey, byte[] plainBytes) throws Exception {
-	    Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	    Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 	    return cipher.doFinal(plainBytes);
 	}
@@ -203,7 +216,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] decryptPrivate(PrivateKey privateKey, byte[] cipherBytes) throws Exception {
-	   	Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	   	Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, privateKey);
 	    return cipher.doFinal(cipherBytes);
 	}
@@ -226,7 +239,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] encryptPrivate(PrivateKey privateKey, byte[] plainBytes) throws Exception {
-	    Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	    Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 	    return cipher.doFinal(plainBytes);
 	}
@@ -248,7 +261,7 @@ public class RSACrypto {
 	@see         Cipher
 	 */
 	public static byte[] decryptPublic(PublicKey publicKey, byte[] cipherBytes) throws Exception {
-	   	Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+	   	Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
 	    cipher.init(Cipher.DECRYPT_MODE, publicKey);
 	    return cipher.doFinal(cipherBytes);
 	}
