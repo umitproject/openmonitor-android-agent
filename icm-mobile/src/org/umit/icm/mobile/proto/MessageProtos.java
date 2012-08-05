@@ -9335,7 +9335,7 @@ public final class MessageProtos {
   public interface LoginStep1OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 processID = 1;
+    // optional int64 processID = 1;
     boolean hasProcessID();
     long getProcessID();
     
@@ -9376,7 +9376,7 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 processID = 1;
+    // optional int64 processID = 1;
     public static final int PROCESSID_FIELD_NUMBER = 1;
     private long processID_;
     public boolean hasProcessID() {
@@ -9460,10 +9460,6 @@ public final class MessageProtos {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasProcessID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasCipheredChallenge()) {
         memoizedIsInitialized = 0;
         return false;
@@ -9719,10 +9715,6 @@ public final class MessageProtos {
       }
       
       public final boolean isInitialized() {
-        if (!hasProcessID()) {
-          
-          return false;
-        }
         if (!hasCipheredChallenge()) {
           
           return false;
@@ -9778,7 +9770,7 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 processID = 1;
+      // optional int64 processID = 1;
       private long processID_ ;
       public boolean hasProcessID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -9885,7 +9877,7 @@ public final class MessageProtos {
   public interface LoginStep2OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required int64 processID = 1;
+    // optional int64 processID = 1;
     boolean hasProcessID();
     long getProcessID();
     
@@ -9922,7 +9914,7 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required int64 processID = 1;
+    // optional int64 processID = 1;
     public static final int PROCESSID_FIELD_NUMBER = 1;
     private long processID_;
     public boolean hasProcessID() {
@@ -9973,10 +9965,6 @@ public final class MessageProtos {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasProcessID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasCipheredChallenge()) {
         memoizedIsInitialized = 0;
         return false;
@@ -10212,10 +10200,6 @@ public final class MessageProtos {
       }
       
       public final boolean isInitialized() {
-        if (!hasProcessID()) {
-          
-          return false;
-        }
         if (!hasCipheredChallenge()) {
           
           return false;
@@ -10262,7 +10246,7 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required int64 processID = 1;
+      // optional int64 processID = 1;
       private long processID_ ;
       public boolean hasProcessID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -38301,9 +38285,9 @@ public final class MessageProtos {
       "ResponseHeader\022\016\n\006status\030\002 \002(\t\"E\n\005Login\022",
       "\017\n\007agentID\030\001 \002(\t\022\021\n\tchallenge\030\002 \002(\t\022\014\n\004p" +
       "ort\030\003 \002(\003\022\n\n\002ip\030\004 \001(\t\"M\n\nLoginStep1\022\021\n\tp" +
-      "rocessID\030\001 \002(\003\022\031\n\021cipheredChallenge\030\002 \002(" +
+      "rocessID\030\001 \001(\003\022\031\n\021cipheredChallenge\030\002 \002(" +
       "\t\022\021\n\tchallenge\030\003 \002(\t\":\n\nLoginStep2\022\021\n\tpr" +
-      "ocessID\030\001 \002(\003\022\031\n\021cipheredChallenge\030\002 \002(\t" +
+      "ocessID\030\001 \001(\003\022\031\n\021cipheredChallenge\030\002 \002(\t" +
       "\"J\n\rLoginResponse\0229\n\006header\030\001 \002(\0132).org." +
       "umit.icm.mobile.proto.ResponseHeader\"\031\n\006" +
       "Logout\022\017\n\007agentID\030\001 \002(\t\" \n\016LogoutRespons" +
