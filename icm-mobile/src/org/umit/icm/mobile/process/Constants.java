@@ -97,7 +97,7 @@ public class Constants {
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
-	public static String AGGREGATOR_URL = "http://localhost:8000";	
+	public static String AGGREGATOR_URL = "http://east1.openmonitor.org";	
 	public static String AGGR_REGISTER_AGENT = "/api/registeragent/";
 	public static String AGGR_GET_PEER_LIST = "/api/getpeerlist/";
 	public static String AGGR_CHECK_AGGREGATOR = "/api/checkaggregator/";	
