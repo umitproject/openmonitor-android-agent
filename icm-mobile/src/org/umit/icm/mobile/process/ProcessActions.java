@@ -280,7 +280,11 @@ public class ProcessActions {
 		Log.i("Debugging", "After getting super peer response from the aggregator");
 		//Callback after we get the super peers - Put bootstrapping logic here
 		if(iterator.hasNext()){
-			Log.i("Debugging","Got some super peers from the aggregator");
+			System.out.println("Debugging - Got some super peers from the aggregator");
+		}
+		else
+		{
+			System.out.println("Debugging - No Peers from Aggregator yet. Start libcage in new network mode");
 		}
 		
 		RSAKey cipheredKey = RSAKey.newBuilder()

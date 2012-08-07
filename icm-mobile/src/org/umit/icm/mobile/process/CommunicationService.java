@@ -114,8 +114,11 @@ public class CommunicationService extends Service {
 						GetPeerList getPeerList = GetPeerList.newBuilder()
 						.build();
 						AggregatorRetrieve.getPeerList(getPeerList);
-						GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
-						.build();
+						/*GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()
+						.build();*/
+						GetSuperPeerList.Builder getSuperPeerListBuilder = GetSuperPeerList.newBuilder();
+						getSuperPeerListBuilder.setLocation("UN");
+						GetSuperPeerList getSuperPeerList = getSuperPeerListBuilder.build();
 						AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

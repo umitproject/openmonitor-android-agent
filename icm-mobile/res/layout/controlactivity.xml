@@ -35,7 +35,8 @@
 				android:orientation="vertical" 
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent">
-		
+				
+				
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
@@ -106,6 +107,13 @@
 					android:layout_below="@id/bugReportButton"
 					android:id="@+id/aboutButton"/>
 				
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/connect_button" 
+					android:layout_centerHorizontal="true"
+					android:layout_below="@id/aboutButton"
+					android:id="@+id/connectButton"/>
 			</RelativeLayout>
 	</ScrollView>
 </LinearLayout>

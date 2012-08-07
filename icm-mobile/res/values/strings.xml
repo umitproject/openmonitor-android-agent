@@ -16,6 +16,7 @@
     <string name="edit_text_interval">Enter Value</string>
     <string name="interval_button">Set Interval</string>
     <string name="scan_button">Start/Stop Scan</string>
+    <string name="connect_button">Connect to P2P network</string>
     <string name="scan_on">On</string>
     <string name="toast_email">Invalid Email Address!</string>
     <string name="toast_selection">No Selection!</string>

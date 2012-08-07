@@ -187,7 +187,8 @@ public class RuntimeLists {
 		try {
 			if(SDCardReadWrite.fileExists(Constants.SUPER_PEERS_FILE, Constants.PARAMETERS_DIR)) {
 				synchronized(superPeerLock) {
-					superPeersList.addAll(SDCardReadWrite.readSuperPeersList(Constants.PARAMETERS_DIR));
+					List<AgentData> list = SDCardReadWrite.readSuperPeersList(Constants.PARAMETERS_DIR);
+					superPeersList.addAll(list);
 				}
 			}
 		} catch (IOException e) {

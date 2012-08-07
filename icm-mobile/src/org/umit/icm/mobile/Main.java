@@ -31,6 +31,7 @@ import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
+
 import org.umit.icm.mobile.gui.dialogs.LoginDialog;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
@@ -56,7 +57,8 @@ public class Main extends TabActivity {
     {
     	System.loadLibrary("cage-lib");
     }
-	private native String startLibcage();
+	public native static String startLibcage();
+	
 	/**
 	 * OnCreate method populates the tabHost with the three tabs: 1) Information,
 	 * 2) Map, 3) Control.
@@ -98,8 +100,7 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try {
-	        	Toast date_time = Toast.makeText(this,this.startLibcage(),Toast.LENGTH_LONG);
-	        	date_time.show();
+	        	
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
 		//		Initialization.startServices(this);

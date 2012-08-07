@@ -27,7 +27,9 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
+
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
@@ -37,9 +39,11 @@ import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
+import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
+
 
 import twitter4j.TwitterException;
 
@@ -64,10 +68,13 @@ import android.widget.Toast;
  */
 
 public class ControlActivity extends Activity {
+
+	
+	
     /** Called when the activity is first created. */
 	private Button sendButton, intervalButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
-	enableTwitterButton, aboutButton,bugReportButton;	
+	enableTwitterButton, aboutButton,bugReportButton, connectButton;	
 	private ProgressDialog progressDialog;
 		
     @Override
@@ -85,6 +92,7 @@ public class ControlActivity extends Activity {
         aboutButton = (Button) this.findViewById(R.id.aboutButton);        
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
+		connectButton = (Button) this.findViewById(R.id.connectButton);
 		try {
 			if(Globals.runtimeParameters.getTwitter().equals("Off")) {
 				enableTwitterButton.setText(getString(R.string.enable_twitter_button));
@@ -204,6 +212,22 @@ public class ControlActivity extends Activity {
 	       	}
 
 	   	}  );
+        
+        connectButton.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v){
+        		Context context = getApplicationContext();
+        		Toast cageTest = Toast.makeText(context,Main.startLibcage(),Toast.LENGTH_LONG);
+	        	cageTest.show();
+	        	try{
+		        	GetSuperPeerList.Builder getSuperPeerListBuilder = GetSuperPeerList.newBuilder();
+					getSuperPeerListBuilder.setLocation("UN");
+					GetSuperPeerList getSuperPeerList = getSuperPeerListBuilder.build();
+					AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+	        	}catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	}
+        });
         
         scanButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {

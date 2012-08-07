@@ -136,7 +136,7 @@ public class AESCrypto {
 	public static byte[] encrypt(byte[] byteKey, byte[] plainBytes) throws Exception {
 		
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+		Cipher cipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding");
 	    cipher.init(Cipher.ENCRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(plainBytes);		
 	}
@@ -159,7 +159,7 @@ public class AESCrypto {
 	 */
 	public static byte[] decrypt(byte[] byteKey, byte[] cipherBytes) throws Exception {
 	    SecretKeySpec secretkeySpec = new SecretKeySpec(byteKey, "AES");
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+		Cipher cipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding");
 	    cipher.init(Cipher.DECRYPT_MODE, secretkeySpec);
 	    return cipher.doFinal(cipherBytes);
 	}
