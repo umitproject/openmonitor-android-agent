@@ -280,7 +280,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://localhost:8000" + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();

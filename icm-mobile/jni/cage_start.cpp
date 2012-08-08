@@ -111,7 +111,7 @@ std::vector<std::string>  getPeers()
 #ifdef __cplusplus
 extern "C" {
 #endif
-JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_startLibcage
+JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_gui_ControlActivity_startLibcage
   (JNIEnv * env, jobject jObj){
   		std::cout<<"\nLog : Into createCage\n";
 		openCage_firstnode("20000");

@@ -62,13 +62,7 @@ import android.util.Log;
  */
 
 public class ProcessActions {	
-	
-	static
-    {
-    	System.loadLibrary("cage-lib");
-    }
-	
-	private native String startLibcage();
+
 	/**
 	 * Checks if the response agent version is higher than the current
 	 * agent number. If yes, updates the agent version and makes a webservice

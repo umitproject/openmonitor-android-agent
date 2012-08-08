@@ -30,6 +30,7 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 
+
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
@@ -69,6 +70,11 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
 
+	static
+    {
+    	System.loadLibrary("cage-lib");
+    }
+	public static native String startLibcage();
 	
 	
     /** Called when the activity is first created. */
@@ -216,7 +222,7 @@ public class ControlActivity extends Activity {
         connectButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v){
         		Context context = getApplicationContext();
-        		Toast cageTest = Toast.makeText(context,Main.startLibcage(),Toast.LENGTH_LONG);
+        		Toast cageTest = Toast.makeText(context,startLibcage(),Toast.LENGTH_LONG);
 	        	cageTest.show();
 	        	try{
 		        	GetSuperPeerList.Builder getSuperPeerListBuilder = GetSuperPeerList.newBuilder();

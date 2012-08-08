@@ -126,7 +126,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		long timeUTC = (calendar.getTimeInMillis()/1000);
 		ICMReport icmReport = ICMReport.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setTestID(service.getTestID())
+		.setTestID(String.valueOf(service.getTestID()))
 		.setTimeZone(Calendar.ZONE_OFFSET)
 		.setTimeUTC(timeUTC)
 		.setTraceroute(traceRoute)

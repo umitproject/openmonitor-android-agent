@@ -153,7 +153,7 @@ public class WebsiteDetails {
 			
 			this.icmReport = ICMReport.newBuilder()
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setTestID(0)
+			.setTestID(String.valueOf(0))
 			.setTimeZone(Calendar.ZONE_OFFSET)
 			.setTimeUTC(timeUTC)
 			.addAllPassedNode(listNodes)

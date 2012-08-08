@@ -15729,417 +15729,6 @@ public final class MessageProtos {
     // @@protoc_insertion_point(class_scope:org.umit.icm.mobile.proto.AddPeerResponse)
   }
   
-  public interface LocationOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // required double longitude = 1;
-    boolean hasLongitude();
-    double getLongitude();
-    
-    // required double latitude = 2;
-    boolean hasLatitude();
-    double getLatitude();
-  }
-  public static final class Location extends
-      com.google.protobuf.GeneratedMessage
-      implements LocationOrBuilder {
-    // Use Location.newBuilder() to construct.
-    private Location(Builder builder) {
-      super(builder);
-    }
-    private Location(boolean noInit) {}
-    
-    private static final Location defaultInstance;
-    public static Location getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public Location getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // required double longitude = 1;
-    public static final int LONGITUDE_FIELD_NUMBER = 1;
-    private double longitude_;
-    public boolean hasLongitude() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public double getLongitude() {
-      return longitude_;
-    }
-    
-    // required double latitude = 2;
-    public static final int LATITUDE_FIELD_NUMBER = 2;
-    private double latitude_;
-    public boolean hasLatitude() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public double getLatitude() {
-      return latitude_;
-    }
-    
-    private void initFields() {
-      longitude_ = 0D;
-      latitude_ = 0D;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      if (!hasLongitude()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasLatitude()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeDouble(1, longitude_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, latitude_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(1, longitude_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, latitude_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.Location prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.umit.icm.mobile.proto.MessageProtos.LocationOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
-      }
-      
-      // Construct using org.umit.icm.mobile.proto.MessageProtos.Location.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        longitude_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        latitude_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.umit.icm.mobile.proto.MessageProtos.Location.getDescriptor();
-      }
-      
-      public org.umit.icm.mobile.proto.MessageProtos.Location getDefaultInstanceForType() {
-        return org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance();
-      }
-      
-      public org.umit.icm.mobile.proto.MessageProtos.Location build() {
-        org.umit.icm.mobile.proto.MessageProtos.Location result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private org.umit.icm.mobile.proto.MessageProtos.Location buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        org.umit.icm.mobile.proto.MessageProtos.Location result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public org.umit.icm.mobile.proto.MessageProtos.Location buildPartial() {
-        org.umit.icm.mobile.proto.MessageProtos.Location result = new org.umit.icm.mobile.proto.MessageProtos.Location(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.longitude_ = longitude_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.latitude_ = latitude_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.Location) {
-          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.Location)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.Location other) {
-        if (other == org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance()) return this;
-        if (other.hasLongitude()) {
-          setLongitude(other.getLongitude());
-        }
-        if (other.hasLatitude()) {
-          setLatitude(other.getLatitude());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        if (!hasLongitude()) {
-          
-          return false;
-        }
-        if (!hasLatitude()) {
-          
-          return false;
-        }
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 9: {
-              bitField0_ |= 0x00000001;
-              longitude_ = input.readDouble();
-              break;
-            }
-            case 17: {
-              bitField0_ |= 0x00000002;
-              latitude_ = input.readDouble();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // required double longitude = 1;
-      private double longitude_ ;
-      public boolean hasLongitude() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public double getLongitude() {
-        return longitude_;
-      }
-      public Builder setLongitude(double value) {
-        bitField0_ |= 0x00000001;
-        longitude_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLongitude() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        longitude_ = 0D;
-        onChanged();
-        return this;
-      }
-      
-      // required double latitude = 2;
-      private double latitude_ ;
-      public boolean hasLatitude() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public double getLatitude() {
-        return latitude_;
-      }
-      public Builder setLatitude(double value) {
-        bitField0_ |= 0x00000002;
-        latitude_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLatitude() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        latitude_ = 0D;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.Location)
-    }
-    
-    static {
-      defaultInstance = new Location(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:org.umit.icm.mobile.proto.Location)
-  }
-  
   public interface GetLocationOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -16904,6 +16493,417 @@ public final class MessageProtos {
     }
     
     // @@protoc_insertion_point(class_scope:org.umit.icm.mobile.proto.GetLocationResponse)
+  }
+  
+  public interface LocationOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required double longitude = 1;
+    boolean hasLongitude();
+    double getLongitude();
+    
+    // required double latitude = 2;
+    boolean hasLatitude();
+    double getLatitude();
+  }
+  public static final class Location extends
+      com.google.protobuf.GeneratedMessage
+      implements LocationOrBuilder {
+    // Use Location.newBuilder() to construct.
+    private Location(Builder builder) {
+      super(builder);
+    }
+    private Location(boolean noInit) {}
+    
+    private static final Location defaultInstance;
+    public static Location getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Location getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // required double longitude = 1;
+    public static final int LONGITUDE_FIELD_NUMBER = 1;
+    private double longitude_;
+    public boolean hasLongitude() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public double getLongitude() {
+      return longitude_;
+    }
+    
+    // required double latitude = 2;
+    public static final int LATITUDE_FIELD_NUMBER = 2;
+    private double latitude_;
+    public boolean hasLatitude() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public double getLatitude() {
+      return latitude_;
+    }
+    
+    private void initFields() {
+      longitude_ = 0D;
+      latitude_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasLongitude()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLatitude()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeDouble(1, longitude_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeDouble(2, latitude_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, longitude_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, latitude_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.umit.icm.mobile.proto.MessageProtos.Location parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.umit.icm.mobile.proto.MessageProtos.Location prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.umit.icm.mobile.proto.MessageProtos.LocationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.umit.icm.mobile.proto.MessageProtos.internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
+      }
+      
+      // Construct using org.umit.icm.mobile.proto.MessageProtos.Location.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        longitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        latitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.Location.getDescriptor();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.Location getDefaultInstanceForType() {
+        return org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance();
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.Location build() {
+        org.umit.icm.mobile.proto.MessageProtos.Location result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.umit.icm.mobile.proto.MessageProtos.Location buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.umit.icm.mobile.proto.MessageProtos.Location result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.umit.icm.mobile.proto.MessageProtos.Location buildPartial() {
+        org.umit.icm.mobile.proto.MessageProtos.Location result = new org.umit.icm.mobile.proto.MessageProtos.Location(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.longitude_ = longitude_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.latitude_ = latitude_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.umit.icm.mobile.proto.MessageProtos.Location) {
+          return mergeFrom((org.umit.icm.mobile.proto.MessageProtos.Location)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.umit.icm.mobile.proto.MessageProtos.Location other) {
+        if (other == org.umit.icm.mobile.proto.MessageProtos.Location.getDefaultInstance()) return this;
+        if (other.hasLongitude()) {
+          setLongitude(other.getLongitude());
+        }
+        if (other.hasLatitude()) {
+          setLatitude(other.getLatitude());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasLongitude()) {
+          
+          return false;
+        }
+        if (!hasLatitude()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 9: {
+              bitField0_ |= 0x00000001;
+              longitude_ = input.readDouble();
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000002;
+              latitude_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required double longitude = 1;
+      private double longitude_ ;
+      public boolean hasLongitude() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public double getLongitude() {
+        return longitude_;
+      }
+      public Builder setLongitude(double value) {
+        bitField0_ |= 0x00000001;
+        longitude_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLongitude() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        longitude_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // required double latitude = 2;
+      private double latitude_ ;
+      public boolean hasLatitude() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public double getLatitude() {
+        return latitude_;
+      }
+      public Builder setLatitude(double value) {
+        bitField0_ |= 0x00000002;
+        latitude_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLatitude() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        latitude_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.umit.icm.mobile.proto.Location)
+    }
+    
+    static {
+      defaultInstance = new Location(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.umit.icm.mobile.proto.Location)
   }
   
   public interface GetEventsOrBuilder
@@ -39937,11 +39937,6 @@ public final class MessageProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_AddPeerResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_umit_icm_mobile_proto_Location_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_umit_icm_mobile_proto_GetLocation_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -39951,6 +39946,11 @@ public final class MessageProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_umit_icm_mobile_proto_GetLocationResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_umit_icm_mobile_proto_Location_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor;
   private static
@@ -40230,10 +40230,10 @@ public final class MessageProtos {
       "entData\"e\n\007AddPeer\0225\n\007newPeer\030\001 \002(\0132$.or" +
       "g.umit.icm.mobile.proto.AgentData\022\021\n\tsup" +
       "erPeer\030\002 \001(\010\022\020\n\010cagePort\030\003 \001(\005\"#\n\017AddPee" +
-      "rResponse\022\020\n\010response\030\001 \002(\t\"/\n\010Location\022" +
-      "\021\n\tlongitude\030\001 \002(\001\022\020\n\010latitude\030\002 \002(\001\"\036\n\013" +
-      "GetLocation\022\017\n\007agentIP\030\001 \002(\t\"\'\n\023GetLocat" +
-      "ionResponse\022\020\n\010location\030\001 \002(\t\"\177\n\tGetEven" +
+      "rResponse\022\020\n\010response\030\001 \002(\t\"\036\n\013GetLocati" +
+      "on\022\017\n\007agentIP\030\001 \002(\t\"\'\n\023GetLocationRespon" +
+      "se\022\020\n\010location\030\001 \002(\t\"/\n\010Location\022\021\n\tlong" +
+      "itude\030\001 \002(\001\022\020\n\010latitude\030\002 \002(\001\"\177\n\tGetEven" +
       "ts\0226\n\tlocations\030\001 \003(\0132#.org.umit.icm.mob",
       "ile.proto.Location\022:\n\ragentLocation\030\002 \001(" +
       "\0132#.org.umit.icm.mobile.proto.Location\"\231" +
@@ -40552,16 +40552,8 @@ public final class MessageProtos {
               new java.lang.String[] { "Response", },
               org.umit.icm.mobile.proto.MessageProtos.AddPeerResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.AddPeerResponse.Builder.class);
-          internal_static_org_umit_icm_mobile_proto_Location_descriptor =
-            getDescriptor().getMessageTypes().get(27);
-          internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_org_umit_icm_mobile_proto_Location_descriptor,
-              new java.lang.String[] { "Longitude", "Latitude", },
-              org.umit.icm.mobile.proto.MessageProtos.Location.class,
-              org.umit.icm.mobile.proto.MessageProtos.Location.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetLocation_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_org_umit_icm_mobile_proto_GetLocation_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetLocation_descriptor,
@@ -40569,13 +40561,21 @@ public final class MessageProtos {
               org.umit.icm.mobile.proto.MessageProtos.GetLocation.class,
               org.umit.icm.mobile.proto.MessageProtos.GetLocation.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetLocationResponse_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_org_umit_icm_mobile_proto_GetLocationResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_umit_icm_mobile_proto_GetLocationResponse_descriptor,
               new java.lang.String[] { "Location", },
               org.umit.icm.mobile.proto.MessageProtos.GetLocationResponse.class,
               org.umit.icm.mobile.proto.MessageProtos.GetLocationResponse.Builder.class);
+          internal_static_org_umit_icm_mobile_proto_Location_descriptor =
+            getDescriptor().getMessageTypes().get(29);
+          internal_static_org_umit_icm_mobile_proto_Location_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_umit_icm_mobile_proto_Location_descriptor,
+              new java.lang.String[] { "Longitude", "Latitude", },
+              org.umit.icm.mobile.proto.MessageProtos.Location.class,
+              org.umit.icm.mobile.proto.MessageProtos.Location.Builder.class);
           internal_static_org_umit_icm_mobile_proto_GetEvents_descriptor =
             getDescriptor().getMessageTypes().get(30);
           internal_static_org_umit_icm_mobile_proto_GetEvents_fieldAccessorTable = new

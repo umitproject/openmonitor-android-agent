@@ -53,12 +53,7 @@ import android.util.Log;
 
 public class Main extends TabActivity {
 	
-	static
-    {
-    	System.loadLibrary("cage-lib");
-    }
-	public native static String startLibcage();
-	
+
 	/**
 	 * OnCreate method populates the tabHost with the three tabs: 1) Information,
 	 * 2) Map, 3) Control.
