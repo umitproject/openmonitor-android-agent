@@ -384,20 +384,9 @@ public class AggregatorResources {
 	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, ClientResource clientResource) throws Exception {
 //		Form form = new Form();
 		 
-		String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
-			 
-/*		form.add("agentID", Globals.runtimeParameters.getAgentID());
-		form.add(Constants.AGGR_MSG_KEY, msg);
-			 
-		Representation response= null;
-			 
-		try{
-			 response = clientResource.post(form.getWebRepresentation(null));
-		}catch(Exception e){
-			 e.printStackTrace();
-		}*/
+		 String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
 		
-		HttpClient httpclient = new DefaultHttpClient();
+		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_SEND_WEBSITE_REPORT);
 		 
 		 

@@ -95,7 +95,7 @@ public class Main extends TabActivity {
 	        try {
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-		//		Initialization.startServices(this);
+				Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();

@@ -76,7 +76,7 @@ public class ServiceFTP {
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(21);												
-		return new Service("ftp", ports, "ftp.secureftp-test.com" , "open", "true", "0", 0);
+		return new Service("ftp", ports, "ftp.secureftp-test.com" , "open", "true", 0, 0);
 	}
 	
 	/**

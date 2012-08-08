@@ -43,7 +43,7 @@ public class Service implements Serializable {
 	private String status;
 	private String check;	
 	private String ip;
-	private String testID;
+	private int testID;
 	private long executeAtTimeUTC;
 		
 	public Service() {
@@ -53,12 +53,12 @@ public class Service implements Serializable {
 		status = "";
 		check = "";
 		ip = "";
-		testID = Integer.toString(0);
+		testID = 0;
 		executeAtTimeUTC = 0;
 	}		
 
 	public Service(String name, List<Integer> ports, String ip, String status, 
-			String check, String testID, long executeAtTimeUTC) {
+			String check, int testID, long executeAtTimeUTC) {
 		super();
 		this.name = name;
 		this.ports = ports;
@@ -109,11 +109,11 @@ public class Service implements Serializable {
 		this.ip = ip;
 	}
 		
-	public String getTestID() {
+	public int getTestID() {
 		return testID;
 	}
 
-	public void setTestID(String testID) {
+	public void setTestID(int testID) {
 		this.testID = testID;
 	}
 

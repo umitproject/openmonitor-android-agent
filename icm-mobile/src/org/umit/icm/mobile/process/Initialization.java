@@ -199,7 +199,7 @@ public class Initialization {
 	public static void initializeIP(Context context) {
 		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        Globals.myIP = wifiInfo.getIpAddress();
+        Globals.myIP = Integer.toString(wifiInfo.getIpAddress());
 	}
 	
 	/*Only used for testing
@@ -277,7 +277,7 @@ public class Initialization {
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setPort(80)
 		.setChallenge(Globals.challenge)
-		.setIp(Integer.toString(Globals.myIP))
+		.setIp(Globals.myIP)
 		.build();
 		
 		System.out.println("Login protobuf formed : "  + login.toString());
@@ -290,7 +290,7 @@ public class Initialization {
 		
 		Initialization.initializeBanlist();
 		Initialization.initializeBannets();
-		Initialization.initializerPeersList();
+//		Initialization.initializerPeersList();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -319,7 +319,7 @@ public class Initialization {
 			RegisterAgent registerAgent = RegisterAgent.newBuilder()
 			.setAgentType(Constants.AGENT_TYPE)
 			.setCredentials(loginCredentials)
-			.setIp(Integer.toString(Globals.myIP))
+			.setIp(Globals.myIP)
 			.setAgentPublicKey(rsaKey)
 			.setVersionNo(Globals.versionManager.getTestsVersion())
 			.build();

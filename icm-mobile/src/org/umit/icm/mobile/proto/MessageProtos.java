@@ -1365,7 +1365,7 @@ public final class MessageProtos {
   public interface ICMReportOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required string reportID = 1;
+    // optional string reportID = 1;
     boolean hasReportID();
     String getReportID();
     
@@ -1373,9 +1373,9 @@ public final class MessageProtos {
     boolean hasAgentID();
     String getAgentID();
     
-    // required string testID = 3;
+    // required int64 testID = 3;
     boolean hasTestID();
-    String getTestID();
+    long getTestID();
     
     // required int32 timeZone = 4;
     boolean hasTimeZone();
@@ -1424,7 +1424,7 @@ public final class MessageProtos {
     }
     
     private int bitField0_;
-    // required string reportID = 1;
+    // optional string reportID = 1;
     public static final int REPORTID_FIELD_NUMBER = 1;
     private java.lang.Object reportID_;
     public boolean hasReportID() {
@@ -1488,36 +1488,14 @@ public final class MessageProtos {
       }
     }
     
-    // required string testID = 3;
+    // required int64 testID = 3;
     public static final int TESTID_FIELD_NUMBER = 3;
-    private java.lang.Object testID_;
+    private long testID_;
     public boolean hasTestID() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public String getTestID() {
-      java.lang.Object ref = testID_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          testID_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getTestIDBytes() {
-      java.lang.Object ref = testID_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        testID_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public long getTestID() {
+      return testID_;
     }
     
     // required int32 timeZone = 4;
@@ -1570,7 +1548,7 @@ public final class MessageProtos {
     private void initFields() {
       reportID_ = "";
       agentID_ = "";
-      testID_ = "";
+      testID_ = 0L;
       timeZone_ = 0;
       timeUTC_ = 0L;
       passedNode_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -1581,10 +1559,6 @@ public final class MessageProtos {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasReportID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasAgentID()) {
         memoizedIsInitialized = 0;
         return false;
@@ -1621,7 +1595,7 @@ public final class MessageProtos {
         output.writeBytes(2, getAgentIDBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getTestIDBytes());
+        output.writeInt64(3, testID_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, timeZone_);
@@ -1654,7 +1628,7 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getTestIDBytes());
+          .computeInt64Size(3, testID_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1806,7 +1780,7 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         agentID_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        testID_ = "";
+        testID_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
         timeZone_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -1941,10 +1915,6 @@ public final class MessageProtos {
       }
       
       public final boolean isInitialized() {
-        if (!hasReportID()) {
-          
-          return false;
-        }
         if (!hasAgentID()) {
           
           return false;
@@ -2003,9 +1973,9 @@ public final class MessageProtos {
               agentID_ = input.readBytes();
               break;
             }
-            case 26: {
+            case 24: {
               bitField0_ |= 0x00000004;
-              testID_ = input.readBytes();
+              testID_ = input.readInt64();
               break;
             }
             case 32: {
@@ -2038,7 +2008,7 @@ public final class MessageProtos {
       
       private int bitField0_;
       
-      // required string reportID = 1;
+      // optional string reportID = 1;
       private java.lang.Object reportID_ = "";
       public boolean hasReportID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -2110,40 +2080,25 @@ public final class MessageProtos {
         onChanged();
       }
       
-      // required string testID = 3;
-      private java.lang.Object testID_ = "";
+      // required int64 testID = 3;
+      private long testID_ ;
       public boolean hasTestID() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public String getTestID() {
-        java.lang.Object ref = testID_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          testID_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
+      public long getTestID() {
+        return testID_;
       }
-      public Builder setTestID(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+      public Builder setTestID(long value) {
+        bitField0_ |= 0x00000004;
         testID_ = value;
         onChanged();
         return this;
       }
       public Builder clearTestID() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        testID_ = getDefaultInstance().getTestID();
+        testID_ = 0L;
         onChanged();
         return this;
-      }
-      void setTestID(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
-        testID_ = value;
-        onChanged();
       }
       
       // required int32 timeZone = 4;
@@ -38306,7 +38261,7 @@ public final class MessageProtos {
       "t\030\001 \002(\t\022\014\n\004hops\030\002 \002(\005\022\022\n\npacketSize\030\003 \002(" +
       "\005\0220\n\006traces\030\004 \003(\0132 .org.umit.icm.mobile." +
       "proto.Trace\"\260\001\n\tICMReport\022\020\n\010reportID\030\001 " +
-      "\002(\t\022\017\n\007agentID\030\002 \002(\t\022\016\n\006testID\030\003 \002(\t\022\020\n\010" +
+      "\001(\t\022\017\n\007agentID\030\002 \002(\t\022\016\n\006testID\030\003 \002(\003\022\020\n\010" +
       "timeZone\030\004 \002(\005\022\017\n\007timeUTC\030\005 \002(\003\022\022\n\npasse" +
       "dNode\030\006 \003(\t\0229\n\ntraceroute\030\007 \001(\0132%.org.um",
       "it.icm.mobile.proto.TraceRoute\"\245\001\n\023Websi" +
