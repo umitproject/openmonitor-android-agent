@@ -125,9 +125,6 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		listNodes.add(Globals.runtimeParameters.getAgentID());
 		long timeUTC = (calendar.getTimeInMillis()/1000);
 		ICMReport icmReport = ICMReport.newBuilder()
-		.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID()
-				, timeUTC
-				, service.getTestID()))
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(service.getTestID())
 		.setTimeZone(Calendar.ZONE_OFFSET)

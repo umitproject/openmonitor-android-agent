@@ -124,7 +124,7 @@ public class WebsiteDetails {
 		
 		this.trace = Trace.newBuilder()
 				.setHop(1)
-				.setIp(CopyNative.traceRoute(this.website.substring(7)))		
+				.setIp("255.255.255.0")		
 				.addPacketsTiming(1)
 				.build();
 		
@@ -150,16 +150,16 @@ public class WebsiteDetails {
 		
 		
 		try {
+			
 			this.icmReport = ICMReport.newBuilder()
-			.setReportID(IDGenerator.generateReportID(Globals.runtimeParameters.getAgentID(), timeUTC, "0"))
 			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setTestID(Integer.toString(0))
+			.setTestID(0)
 			.setTimeZone(Calendar.ZONE_OFFSET)
 			.setTimeUTC(timeUTC)
 			.addAllPassedNode(listNodes)
 			.setTraceroute(this.traceRoute)
 			.build();
-		} catch (NoSuchAlgorithmException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

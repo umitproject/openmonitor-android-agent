@@ -132,24 +132,24 @@ public class Constants {
 
 		{
 			ports.add(443);			
-			add(new Service("https", ports, "203.135.62.113" ,"open", "true", "2001", 0));
+			add(new Service("https", ports, "203.135.62.113" ,"open", "true", 2001, 0));
 			ports.clear();
 			ports.add(80);												
-			add(new Service("http", ports, "www.google.com" ,"open", "true", "2001", 0));
+			add(new Service("http", ports, "www.google.com" ,"open", "true", 2001, 0));
 			ports.add(21);						
-			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", "2001", 0));
+			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", 2001, 0));
 			ports.clear();
 			ports.add(995);			
-			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", "2001", 0));
+			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", 2001, 0));
 			ports.clear();
 			ports.add(993);			
-			add(new Service("imap", ports, "imap.gmail.com", "open", "true", "2001", 0));
+			add(new Service("imap", ports, "imap.gmail.com", "open", "true", 2001, 0));
 			ports.clear();
 			ports.add(1863);			
-			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", "2001", 0));
+			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", 2001, 0));
 			ports.clear();		
 			ports.add(5222);			
-			add(new Service("gtalk", ports, "talk.google.com", "open", "true", "2001", 0));
+			add(new Service("gtalk", ports, "talk.google.com", "open", "true", 2001, 0));
 			ports.clear();	
 		
 		}};

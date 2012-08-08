@@ -634,7 +634,7 @@ public class SDCardReadWrite {
 	    	    service.setIp((String) objInputStream.readObject());
 	    	    service.setPorts((List<Integer>) objInputStream.readObject());
 	    	    service.setStatus((String) objInputStream.readObject());
-	    	    service.setTestID((String)objInputStream.readObject());
+	    	    service.setTestID(Integer.parseInt((String)objInputStream.readObject()));
 	    	    service.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));
 	    	    
 	    	    return service;
