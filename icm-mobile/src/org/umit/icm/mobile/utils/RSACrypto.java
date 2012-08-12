@@ -319,6 +319,9 @@ public class RSACrypto {
     	File keyDir = new File (sdCard.getAbsolutePath() 
     			+ Constants.KEYS_DIR);
     	File file = new File(keyDir, fileName);
+    	if(!file.exists()){
+    		file.createNewFile();
+    	}
     	InputStream inputStream = new FileInputStream(file.toString());
     	  ObjectInputStream objInputStream =
     	    new ObjectInputStream(new BufferedInputStream(inputStream));

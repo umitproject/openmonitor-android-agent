@@ -168,7 +168,7 @@ public class ProcessActions {
 								tests.get(i).getService().getIp(), 
 								"open", 
 								"true", 
-								Integer.parseInt(tests.get(i).getTestID()), 
+								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
 			}
 			

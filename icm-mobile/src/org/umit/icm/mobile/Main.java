@@ -53,6 +53,13 @@ import android.util.Log;
 
 public class Main extends TabActivity {
 	
+	static
+    {
+    	System.loadLibrary("cage-lib");
+    }
+	public static native String startLibcage();
+	public static native String joinLibcage(String a,String b,String c);
+	
 
 	/**
 	 * OnCreate method populates the tabHost with the three tabs: 1) Information,
@@ -98,7 +105,7 @@ public class Main extends TabActivity {
 	        	
 	        	Initialization.checkProfiler();		
 				Initialization.checkFiles();
-				Initialization.startServices(this);
+				//Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();

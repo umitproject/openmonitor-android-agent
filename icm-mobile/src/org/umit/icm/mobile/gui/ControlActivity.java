@@ -70,11 +70,6 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
 
-	static
-    {
-    	System.loadLibrary("cage-lib");
-    }
-	public static native String startLibcage();
 	
 	
     /** Called when the activity is first created. */
@@ -222,13 +217,13 @@ public class ControlActivity extends Activity {
         connectButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v){
         		Context context = getApplicationContext();
-        		Toast cageTest = Toast.makeText(context,startLibcage(),Toast.LENGTH_LONG);
+        		Toast cageTest = Toast.makeText(context,Main.startLibcage(),Toast.LENGTH_LONG);
 	        	cageTest.show();
 	        	try{
 		        	GetSuperPeerList.Builder getSuperPeerListBuilder = GetSuperPeerList.newBuilder();
 					getSuperPeerListBuilder.setLocation("UN");
 					GetSuperPeerList getSuperPeerList = getSuperPeerListBuilder.build();
-					AggregatorRetrieve.getSuperPeerList(getSuperPeerList);
+					AggregatorRetrieve.getBootstrapPeerList(getSuperPeerList);
 	        	}catch(Exception e){
 	        		e.printStackTrace();
 	        	}

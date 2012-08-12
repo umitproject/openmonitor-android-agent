@@ -1,7 +1,7 @@
 #include <org_umit_icm_mobile_Main.h>
 
 /*
- * test_boost.cpp
+ * cage_start.cpp
  *
  *  Created on: May 13, 2012
  *      Author: narendran
@@ -64,7 +64,7 @@ void join_callback(bool result){
 	printPeers();
 }
 
-void openCage_joinnode(char * portnum,char * host, char * destination_port){
+void openCage_joinnode(char* portnum,char* host, char* destination_port){
 		event_init();
 		int port = atoi(portnum);
 		cage = new libcage::cage;
@@ -88,7 +88,7 @@ void openCage_joinnode(char * portnum,char * host, char * destination_port){
 		event_dispatch();
 }
 
-void createCage_joinnode(char * portnum,char * host, char * destination_port){
+void createCage_joinnode(char* portnum,char* host, char* destination_port){
 	std::cout<<"\nLog : Into createCage\n";
 	boost::thread workerThread(openCage_joinnode,portnum,host,destination_port);
 	std::cout<<"\nLog : OUt of createCage\n";
@@ -111,11 +111,11 @@ std::vector<std::string>  getPeers()
 #ifdef __cplusplus
 extern "C" {
 #endif
-JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_gui_ControlActivity_startLibcage
+JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_startLibcage
   (JNIEnv * env, jobject jObj){
   		std::cout<<"\nLog : Into createCage\n";
-		openCage_firstnode("20000");
-		boost::this_thread::sleep(boost::posix_time::seconds(2));
+		createCage_firstnode("20000");
+		//boost::this_thread::sleep(boost::posix_time::seconds(2));
 		char * message;
 	    message = malloc(100);
 	    using namespace boost::posix_time;
@@ -128,6 +128,32 @@ JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_gui_ControlActivity_startLibc
 }
 #endif
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+JNIEXPORT jstring JNICALL Java_org_umit_icm_mobile_Main_joinLibcage
+  (JNIEnv * env, jobject jObj ,jstring portnum, jstring dest_host, jstring dest_port){
+  		std::cout<<"\nLog : Into createCage\n";
+  		char* port = env->GetStringUTFChars(portnum, 0);
+  		char* host = env->GetStringUTFChars(dest_host, 0);
+  		char* desti_port = env->GetStringUTFChars(dest_port, 0);
+		createCage_joinnode(port,host,desti_port);
+		//boost::this_thread::sleep(boost::posix_time::seconds(2));
+		char * message;
+	    message = malloc(100);
+	    sprintf(message,"Port %d - Successfully bootstrapped using super peer",getPort());
+	    env->ReleaseStringUTFChars(portnum,port);
+	    env->ReleaseStringUTFChars(dest_host,host);
+	    env->ReleaseStringUTFChars(dest_port,desti_port);
+        return env->NewStringUTF(message);
+}
+#ifdef __cplusplus
+}
+#endif
+
+
+/*
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -138,6 +164,7 @@ JNIEXPORT void JNICALL Java_org_umit_icm_mobile_Main_printRoutingTab
 #ifdef __cplusplus
 }
 #endif
+*/
 
 /*	char string[30];
 	using namespace boost::posix_time;

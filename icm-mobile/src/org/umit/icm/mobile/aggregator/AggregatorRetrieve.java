@@ -153,6 +153,37 @@ public class AggregatorRetrieve {
 	 }
 	 
 	 /**
+		 * Returns a boolean object from   
+		                          
+		{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}
+		 * and {@link AggregatorResources#getSuperPeerList} on the passed message and 
+		 * {@link AggregatorActions#getSuperPeerListAction} on the response message.
+		 * 
+		 *	 
+		                          
+		@param  getBootstrapPeerList  An object of the type GetSuperPeerList
+		 *  	                          	
+		                          
+		@return      boolean
+		 * @throws Exception 
+		 *  
+		                          
+		@see         AggregatorActions
+		 *
+		 
+		@see         AggregatorResources
+		 */	 
+		 public synchronized static boolean getBootstrapPeerList(GetSuperPeerList getSuperPeerList) 
+		 throws Exception {
+			 	Log.i("DEBUGGING", "Getting Bootstrap peer list from the aggregator");
+			 	ClientResource clientResource 
+			 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
+			 	GetSuperPeerListResponse getSuperPeerListResponse
+			 	= AggregatorResources.getSuperPeerList(getSuperPeerList, clientResource);
+			 	return AggregatorActions.getBootstrapPeerListAction(getSuperPeerListResponse);		 	
+		 }
+	 
+	 /**
 	 * Returns a boolean object from   
 	                          
 	{@link AggregatorActions} method. Calls {@link AggregatorResources#getClientResource}

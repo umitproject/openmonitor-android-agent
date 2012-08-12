@@ -830,6 +830,7 @@ public class AggregatorResources {
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		 pairs.add(new BasicNameValuePair("msg", msg));
+		 pairs.add(new BasicNameValuePair("crypto_v1", "1"));
 		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
 		 
 		 

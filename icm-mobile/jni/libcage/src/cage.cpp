@@ -32,7 +32,7 @@
 #include "cage.hpp"
 #include <jni.h>
 #include <boost/foreach.hpp>
-
+#include <android/log.h>
 #include "cagetypes.hpp"
 
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , "libcage_logs", __VA_ARGS__)

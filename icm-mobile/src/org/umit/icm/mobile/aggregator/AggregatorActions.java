@@ -23,7 +23,9 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 
+import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.process.ProcessActions;
+import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
@@ -34,6 +36,8 @@ import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
 import org.umit.icm.mobile.proto.MessageProtos.SendReportResponse;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
+
+import android.util.Log;
 
 /**
  * Takes actions based on the response messages received from the HTTP POSTs to
@@ -123,6 +127,48 @@ public class AggregatorActions {
 	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
 	 	return ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
 	}
+	
+	/**
+	 * Returns a boolean object from   
+	                          
+	{@link ProcessActions} method. Calls {@link ProcessActions#updateAgentVersion} and 
+	 * {@link ProcessActions#updateTestsVersion} on the ResponseHeader and 
+	 * passes the super peer list to {@link ProcessActions#updateSuperPeersList}.
+	 * 
+	 *	 
+	                          
+	@param  getSuperPeerListResponse  An object of the type GetSuperPeerListResponse
+	 *  	                          	
+	                          
+	@return      boolean
+	 * @throws Exception 
+	 *  
+	                          
+	@see         ProcessActions
+	*
+	*
+	@see         AggregatorRetrieve
+	 */	
+	public static boolean getBootstrapPeerListAction(GetSuperPeerListResponse getSuperPeerListResponse) throws Exception {
+		Log.i("DEBUGGING", "Got Bootstrap peer list from the aggregator");
+		ProcessActions.updateAgentVersion(getSuperPeerListResponse.getHeader());
+	 	ProcessActions.updateTestsVersion(getSuperPeerListResponse.getHeader());
+	 	if(getSuperPeerListResponse.getKnownSuperPeersCount()==0){
+	 		Log.i("DEBUGGING","No Bootstrap peers, so create a new P2P network");
+	 		Main.startLibcage();
+	 	}
+	 	else{
+	 		Log.i("DEBUGGING","Got Bootstrap peers, so using first Super peer to bootstrap");
+	 		AgentData bootstrapper = getSuperPeerListResponse.getKnownSuperPeers(0);
+	 		String ip = bootstrapper.getAgentIP();
+	 		int port = bootstrapper.getAgentPort();
+	 		Log.i("DEBUGGING","Bootstrapping with "+bootstrapper.getAgentIP()+" with Agent ID"+bootstrapper.getAgentID());
+	 		Main.joinLibcage("20000",ip,Integer.toString(port));
+	 		
+	 	}
+	 	return ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
+	}
+	
 	
 	/**
 	 * Returns a boolean object from   

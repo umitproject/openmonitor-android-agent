@@ -83,17 +83,17 @@ public class Constants {
 		private static final long serialVersionUID = 6933062698660638968L;
 
 	{
-		add(new Website("http://www.google.com", "false", "true", Integer.toString(1001), 0));
-		add(new Website("http://www.facebook.com", "false", "true", Integer.toString(1002), 0));
-		add(new Website("http://www.youtube.com", "false", "true", Integer.toString(1003), 0));
-		add(new Website("http://www.twitter.com", "false", "true", Integer.toString(1004), 0));
-		add(new Website("http://www.yahoo.com", "false", "true", Integer.toString(1005), 0));
-		add(new Website("http://www.cnn.com", "false", "true", Integer.toString(1006), 0));
-		add(new Website("http://www.bbc.com", "false", "true", Integer.toString(1007), 0));
-		add(new Website("http://www.gmail.com", "false", "true", "1008", 0));
-		add(new Website("http://www.umitproject.org", "false", "true", "1009", 0));
-		add(new Website("http://www.flickr.com", "false", "true","1010", 0));
-		add(new Website("http://www.hotmail.com", "false", "true", "1011", 0));
+		add(new Website("http://www.google.com", "false", "true", 1001, 0));
+		add(new Website("http://www.facebook.com", "false", "true", 1002, 0));
+		add(new Website("http://www.youtube.com", "false", "true", 1003, 0));
+		add(new Website("http://www.twitter.com", "false", "true", 1004, 0));
+		add(new Website("http://www.yahoo.com", "false", "true", 1005, 0));
+		add(new Website("http://www.cnn.com", "false", "true", 1006, 0));
+		add(new Website("http://www.bbc.com", "false", "true", 1007, 0));
+		add(new Website("http://www.gmail.com", "false", "true", 1008, 0));
+		add(new Website("http://www.umitproject.org", "false", "true", 1009, 0));
+		add(new Website("http://www.flickr.com", "false", "true",1010, 0));
+		add(new Website("http://www.hotmail.com", "false", "true", 1011, 0));
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
