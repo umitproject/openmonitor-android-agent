@@ -734,6 +734,8 @@ public class AggregatorResources {
 		 
 		 String message =loginStep1.getChallenge();
 		 
+		 System.out.println("Challenge Received : " + message);
+		 
 //		 Form form = new Form();
 		 
 		 byte[] message_byte=message.getBytes();
@@ -743,6 +745,8 @@ public class AggregatorResources {
 		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge);
 		 
 		 String encodedEncryptedChallenge_string = new String(encodedEncryptedChallenge);
+		 
+		 System.out.println("Signed Challenge Send : " + encodedEncryptedChallenge_string);
 		 
 		 
 		 LoginStep2 loginStep2 = LoginStep2.newBuilder()

@@ -14,10 +14,10 @@ public class AggregatorHelper {
 	
 	
 	public static String aesEncrypt(byte[] data){
-		byte[] data_padded=AggregatorHelper.addPadding(data);
+//		byte[] data_padded=AggregatorHelper.addPadding(data);
 		byte[] encrypted_data =null;
 		try {
-			encrypted_data = AESCrypto.encrypt(Globals.keyManager.getAESKey(), data_padded);
+			encrypted_data = AESCrypto.encrypt(Globals.keyManager.getAESKey(), data);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,11 +34,11 @@ public class AggregatorHelper {
 	
 	public static byte[] aesDecrypt(byte[] data){
 		byte[] decoded_data=null;
-		System.out.println("-----------_______________---------------- Got this data: " + new String(data));
+		System.out.println("-----------_______________---------------- Got this data: \n" + new String(data));
 		
 		decoded_data=Base64.decodeBase64(data);
 		
-		System.out.println("-----------_______________---------------- Got this decoded_data: " + new String(decoded_data));
+		System.out.println("-----------_______________---------------- Got this decoded_data: \n" + new String(decoded_data));
 		
 		
 		byte[] decrypted_decoded_data =null;
@@ -51,15 +51,15 @@ public class AggregatorHelper {
 		
 		System.out.println("-----------_______________---------------- Got this decrypted_decoded_data: " + new String(decrypted_decoded_data));
 		
-		byte[] unpadded_decrypted_decoded_data=AggregatorHelper.removePadding(decrypted_decoded_data);
+//		byte[] unpadded_decrypted_decoded_data=AggregatorHelper.removePadding(decrypted_decoded_data);
 		
-		System.out.println("-----------_______________---------------- Got this unpadded_decrypted_decoded_data: " + new String(unpadded_decrypted_decoded_data));
+//		System.out.println("-----------_______________---------------- Got this unpadded_decrypted_decoded_data: \n" + new String(unpadded_decrypted_decoded_data));
 		
-		return unpadded_decrypted_decoded_data;
+		return decrypted_decoded_data;
 		
 	}
 	
-	public static byte[] addPadding(byte[] data){
+/*	public static byte[] addPadding(byte[] data){
 		byte[] data_padded =null;
 		if(data.length % Constants.AES_BLOCK_SIZE!=0){
 			byte[] padding = new byte[Constants.AES_BLOCK_SIZE - (data.length % Constants.AES_BLOCK_SIZE)];
@@ -88,7 +88,7 @@ public class AggregatorHelper {
 		byte[] unpaded_data= baos.toByteArray();
 		
 		return unpaded_data;
-	}
+	}*/
 	
 	
 	public static String rsaAggregatorPublicKeyEncypt(byte[] data){

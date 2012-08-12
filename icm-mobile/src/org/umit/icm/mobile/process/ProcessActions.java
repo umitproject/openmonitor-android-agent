@@ -156,6 +156,7 @@ public class ProcessActions {
 								"true", 
 								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
+				
 			} else if(tests.get(i).equals("SERVICE")) {
 				ports.clear();
 				ports.add(tests.get(i).getService().getPort());
@@ -165,7 +166,7 @@ public class ProcessActions {
 								tests.get(i).getService().getIp(), 
 								"open", 
 								"true", 
-								Integer.parseInt(tests.get(i).getTestID()), 
+								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
 			}
 			
