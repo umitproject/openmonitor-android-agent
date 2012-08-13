@@ -343,7 +343,11 @@ public class SDCardReadWrite {
 	    	    website.setUrl((String) objInputStream.readObject());
 	    	    website.setCheck((String) objInputStream.readObject());
 	    	    website.setStatus((String) objInputStream.readObject());
+<<<<<<< HEAD
 	    	    website.setTestID(Long.parseLong((String)objInputStream.readObject()));
+=======
+	    	    website.setTestID(Integer.parseInt((String)objInputStream.readObject()));
+>>>>>>> ebf38a2231283228342375e4ed5e0fa23581f681
 	    	    website.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));
 	    	    
 	    	    return website;

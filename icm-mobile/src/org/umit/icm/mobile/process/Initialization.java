@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
@@ -32,9 +33,7 @@ import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
 import org.umit.icm.mobile.connectivity.Website;
-import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.notifications.NotificationService;
-import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
 import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
@@ -45,9 +44,7 @@ import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
-import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.ProfilerRun;
-import org.umit.icm.mobile.utils.RSACrypto;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.content.Context;
@@ -276,6 +273,8 @@ public class Initialization {
 		
 		System.out.println("Setting the login protobuf");
 		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
+		
+		
 		Login login = Login.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setPort(80)
@@ -312,9 +311,20 @@ public class Initialization {
 		
 			
 			System.out.println("This is from inside Initialization#registration");
+			
+			System.out.println("MY MOD : " + Globals.keyManager.getMyCipheredKeyMod());
+			System.out.println("MY EXP : " + Globals.keyManager.getMyCipheredKeyExp());
+			
+			BigInteger BiMod = new BigInteger(Globals.keyManager.getMyCipheredKeyMod());
+			BigInteger BiExp = new BigInteger(Globals.keyManager.getMyCipheredKeyExp());
+			
+			System.out.println("MY HEX MOD : " + BiMod.toString(16));
+			System.out.println("MY HEX EXP : " + BiExp.toString(10));
+			
+			
 			RSAKey rsaKey = RSAKey.newBuilder()
-			.setMod(Globals.keyManager.getMyCipheredKeyMod())
-			.setExp(Globals.keyManager.getMyCipheredKeyExp())
+			.setMod(BiMod.toString(16))
+			.setExp(BiExp.toString(10))
 			.build();
 			
 			Globals.versionManager.setTestsVersion(1);

@@ -159,6 +159,7 @@ public class ProcessActions {
 								"true", 
 								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
+				
 			} else if(tests.get(i).equals("SERVICE")) {
 				ports.clear();
 				ports.add(tests.get(i).getService().getPort());

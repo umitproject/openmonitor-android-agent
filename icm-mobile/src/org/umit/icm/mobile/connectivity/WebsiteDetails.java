@@ -124,12 +124,12 @@ public class WebsiteDetails {
 		
 		this.trace = Trace.newBuilder()
 				.setHop(1)
-				.setIp("255.255.255.0")		
+				.setIp("193.136.175.1")		
 				.addPacketsTiming(1)
 				.build();
 		
 		this.traceRoute=TraceRoute.newBuilder()
-				.setTarget(this.website)
+				.setTarget("193.136.175.1")
 				.setHops(1)
 				.setPacketSize(1)
 				.addTraces(this.trace)
