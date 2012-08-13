@@ -131,7 +131,7 @@ public class AggregatorResources {
 		 String key=AggregatorHelper.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_REGISTER_AGENT);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_REGISTER_AGENT);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -218,7 +218,7 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -277,7 +277,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -387,7 +387,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
 		
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_SEND_WEBSITE_REPORT);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_WEBSITE_REPORT);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -534,7 +534,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(newTests.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_CHECK_TESTS);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_CHECK_TESTS);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -761,7 +761,7 @@ public class AggregatorResources {
 		 String msg_string = new String(msg);
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_LOGIN_2);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_LOGIN_2);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -825,7 +825,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.encodeData(login.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_LOGIN_1);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGIN_1);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -898,7 +898,7 @@ public class AggregatorResources {
 		 String msg= AggregatorHelper.aesEncrypt(getBanlists.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_BANLIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -933,7 +933,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(getBannets.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost("http://10.0.2.2:8000" + Constants.AGGR_GET_BANLIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
