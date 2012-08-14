@@ -47,7 +47,7 @@ void openCage_firstnode(char * portnum){
 		LOGD("Cage instance listening on port %d",port);
 		cage->set_global();
 		LOGD("Log : Out of createCage");
-		//event_dispatch();
+		event_dispatch();
 }
 
 void createCage_firstnode(char * portnum){
