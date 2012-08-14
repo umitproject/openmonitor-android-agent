@@ -220,7 +220,8 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
+
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -280,7 +281,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_PEER_SUPER_LIST);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -390,7 +391,7 @@ public class AggregatorResources {
 		 String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
 		
 
-		HttpClient httpclient = new DefaultHttpClient();
+		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_WEBSITE_REPORT);
 		 
 		 
@@ -765,7 +766,7 @@ public class AggregatorResources {
 		 String msg_string = new String(msg);
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGIN_2);
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_LOGIN_2);
 		 
 		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
