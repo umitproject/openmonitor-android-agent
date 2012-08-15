@@ -72,7 +72,7 @@ public class ServiceGtalk {
 	public static Service getService() {
 		List<Integer> ports = new ArrayList<Integer>();
 		ports.add(5222);												
-		return new Service("gtalk", ports, "talk.google.com" , "open", "true", 0, 0);
+		return new Service("gtalk", ports, "talk.google.com" , "open", "true", "0", 0);
 	}
 	
 	/**

@@ -81,8 +81,7 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 			
 			
 			website = iterator.next();
-			currentURL = website.getUrl();
-			WebsiteDetails websiteDetails = new WebsiteDetails(currentURL);
+			WebsiteDetails websiteDetails = new WebsiteDetails(website);
 
 			try {
 
@@ -103,8 +102,10 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setReport(websiteReport)
 				.build();				
-				if(Globals.aggregatorCommunication != false) {
+				if(Globals.aggregatorCommunication != false && website.getCheck()=="true") {
+					System.out.println("Sending this report : " + websiteReport );
 					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
+					website.setCheck("false");
 				}				
 			} catch (RuntimeException e) {
 				e.printStackTrace();

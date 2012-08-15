@@ -159,7 +159,7 @@ public class ProfilerRun {
 				ICMReport.newBuilder()
 				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID("10")
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -373,7 +373,7 @@ public class ProfilerRun {
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID("10")
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -455,7 +455,7 @@ public class ProfilerRun {
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID("10")
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -570,7 +570,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				Website website = new Website("url", "status", "check", 0, 0);
+				Website website = new Website("url", "status", "check", "0", 0);
 				try {
 					website.writeWebsite();
 					website.readWebsite("url");
@@ -591,8 +591,8 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){
-				Website website1 = new Website("url1","1","1", 1, 1);
-		    	Website website2 = new Website("url2","2","2", 1, 1);
+				Website website1 = new Website("url1","1","1", "1", 1);
+		    	Website website2 = new Website("url2","2","2", "1", 1);
 		    	List<Website> websiteList = new ArrayList<Website>();
 		    	websiteList.add(website1);
 		    	websiteList.add(website2);
@@ -831,7 +831,7 @@ public class ProfilerRun {
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID("10")
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)
@@ -902,7 +902,7 @@ public class ProfilerRun {
 				ICMReport icmReport = ICMReport.newBuilder()
 				.setAgentID(Integer.toString(10))
 				.setReportID(Integer.toString(10))
-				.setTestID(10)
+				.setTestID("10")
 				.setTimeUTC(10)
 				.setTimeZone(10)
 				.setTraceroute(traceRoute)

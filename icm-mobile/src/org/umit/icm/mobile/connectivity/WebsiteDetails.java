@@ -22,7 +22,8 @@ import org.umit.icm.mobile.utils.CopyNative;
 
 public class WebsiteDetails {
 	
-	String website;
+	Website website;
+	String websiteURL;
 	URLConnection urlConnection;
 	String content;
 	int status;
@@ -39,8 +40,9 @@ public class WebsiteDetails {
 	
 	
 	
-	public WebsiteDetails(String website){
+	public WebsiteDetails(Website website){
 		this.website = website;
+		this.websiteURL=website.getUrl();
 		this.urlConnection=null;
 		this.content="";
 		this.fetchTime=0;
@@ -90,7 +92,7 @@ public class WebsiteDetails {
 	private synchronized void setupURLConnection(){
 		
 		try {
-			this.urlConnection=WebsiteOpen.openURLConnection(this.website);
+			this.urlConnection=WebsiteOpen.openURLConnection(this.websiteURL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,29 +142,23 @@ public class WebsiteDetails {
 				.setResponseTime((int)this.fetchTime)
 				.setStatusCode(this.status)
 				.setHtmlResponse(this.content)
-				.setWebsiteURL(this.website)		
+				.setWebsiteURL(this.websiteURL)		
 				.build();
 		
 		List<String> listNodes = new ArrayList<String>();
 		Calendar calendar = Calendar.getInstance();
 		listNodes.add(Globals.runtimeParameters.getAgentID());
 		long timeUTC = (calendar.getTimeInMillis()/1000);
-		
-		
-		try {
 			
-			this.icmReport = ICMReport.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.setTestID(0)
-			.setTimeZone(Calendar.ZONE_OFFSET)
-			.setTimeUTC(timeUTC)
-			.addAllPassedNode(listNodes)
-			.setTraceroute(this.traceRoute)
-			.build();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.icmReport = ICMReport.newBuilder()
+		.setAgentID(Globals.runtimeParameters.getAgentID())
+		.setTestID(website.getTestID())
+		.setTimeZone(Calendar.ZONE_OFFSET)
+		.setTimeUTC(timeUTC)
+		.addAllPassedNode(listNodes)
+		.setTraceroute(this.traceRoute)
+		.build();
+		
 		
 		
 		this.websiteReport = WebsiteReport.newBuilder()		
