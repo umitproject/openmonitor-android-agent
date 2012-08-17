@@ -103,7 +103,6 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				.setReport(websiteReport)
 				.build();				
 				if(Globals.aggregatorCommunication != false && website.getCheck()=="true") {
-					System.out.println("Sending this report : " + websiteReport );
 					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
 					website.setCheck("false");
 				}				

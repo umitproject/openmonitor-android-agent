@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, Main!</string>
-    <string name="app_name">ICM Mobile</string>
+    <string name="app_name">Open Monitor</string>
     <string name="radio_button_website">Website</string>
     <string name="radio_button_service">Service</string>
     <string name="back_button">Back</string>
@@ -9,7 +9,6 @@
     <string name="check_box_filter">Filter Critical Events</string>
     <string name="text_ip">IP: </string>
     <string name="edit_text_suggestion">Enter Website or Service Name</string>
-    <string name="edit_text_email">Enter Email</string>
     <string name="text_selected">Selected is : </string>
     <string name="send_button">Send</string>
     <string name="text_scanning">Override Default Scanning Interval</string>
@@ -41,9 +40,11 @@
     <string name="no_sdcard">Error! No SD Card detected</string>
     <string name="edit_text_host">Enter Host Name (Service Only)</string>
     <string name="edit_text_ip">Enter IP (Service Only)</string>
+    <string name="edit_text_port">Enter PORT (Service Only)</string>
     <string name="remove_host_ip">Remove Host Name and/or IP for Website</string>
     <string name="invalid_host_ip">Missing Host Name and/or IP</string>
     <string name="toast_ip">Invalid IP!</string>
+    <string name="toast_port">Invalid Port!</string>
     <string name="loading">Loading</string>
     <string name="retrieving_website">Retrieving Website</string>
     <string name="filter_button_websites">Filter Websites</string>
@@ -94,4 +95,7 @@
     <string name="deviation">Deviation from Benchmark: </string>
     <string name="deviation_unit">bytes/ms</string>
     <string name="bug_report_button">Report Bug</string>
+    <string name="link_to_umit">www.umitproject.org</string>
+    <string name="link_to_open_monitor">www.openmonitor.org</string>
+    <string name="icons_by"> Icons by http://dryicons.com</string>
 </resources>

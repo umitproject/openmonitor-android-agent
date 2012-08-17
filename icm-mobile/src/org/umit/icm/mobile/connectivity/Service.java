@@ -39,7 +39,7 @@ public class Service implements Serializable {
 	private static final long serialVersionUID = -1767102046741760141L;
 
 	private String name;
-	private List<Integer> ports;
+	private Integer port;
 	private String status;
 	private String check;	
 	private String ip;
@@ -49,7 +49,7 @@ public class Service implements Serializable {
 	public Service() {
 		super();
 		name = "";
-		ports = new ArrayList<Integer>();
+		port = 0;
 		status = "";
 		check = "";
 		ip = "";
@@ -57,11 +57,11 @@ public class Service implements Serializable {
 		executeAtTimeUTC = 0;
 	}		
 
-	public Service(String name, List<Integer> ports, String ip, String status, 
+	public Service(String name, Integer port,String ip, String status, 
 			String check, String testID, long executeAtTimeUTC) {
 		super();
 		this.name = name;
-		this.ports = ports;
+		this.port = port;
 		this.status = status;
 		this.check = check;
 		this.ip = ip;
@@ -77,12 +77,12 @@ public class Service implements Serializable {
 		this.name = name;
 	}
 
-	public List<Integer> getPorts() {
-		return ports;
+	public Integer getPort() {
+		return port;
 	}
 
-	public void setPorts(List<Integer> ports) {
-		this.ports = ports;
+	public void setPort(Integer port) {
+		this.port = port;
 	}
 
 	public String getStatus() {
@@ -136,7 +136,7 @@ public class Service implements Serializable {
 	 */
 	public void writeService() throws IOException {
 		Service service 
-		= new Service(this.name, this.ports, this.ip, this.status
+		= new Service(this.name,this.port,this.ip, this.status
 				, this.check, this.testID, this.executeAtTimeUTC);
 		SDCardReadWrite.writeService(Constants.SERVICES_DIR, service);
 	}
@@ -164,10 +164,10 @@ public class Service implements Serializable {
 		if(service.getCheck().equals(this.getCheck())
 				&& service.getName().equals(this.getName())
 				&& service.getIp().equals(this.getIp())
-				&& service.getPorts().size() == this.getPorts().size()
+				&& service.getPort()== this.getPort()
 				&& service.getTestID() == this.getTestID()
 				&& service.getExecuteAtTimeUTC() == this.getExecuteAtTimeUTC()
-				&& service.getPorts().size() == this.getPorts().size()
+				&& service.getPort() == this.getPort()
 				&& service.getStatus().equals(this.getStatus()))
 			return true;
 		return false;

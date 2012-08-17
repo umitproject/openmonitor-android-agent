@@ -433,22 +433,23 @@ public class AggregatorResources {
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
 		 String msg = AggregatorHelper.aesEncrypt(sendServiceReport.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_SERVICE_REPORT);
 		 
-		 form.add("agentID", Globals.runtimeParameters.getAgentID());
-		 form.add(Constants.AGGR_MSG_KEY, msg);
 		 
-		 Representation response= null;
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
 		 
-		try{
-			 response = clientResource.post(form.getWebRepresentation(null));
-		}catch(Exception e){
-			 e.printStackTrace();
-		}
-		
-		byte[] final_response= AggregatorHelper.aesDecrypt(response.getText().getBytes());
 		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+			 
 		return SendReportResponse.parseFrom(final_response);
 	 }
 	 
@@ -594,27 +595,27 @@ public class AggregatorResources {
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, websiteSuggestion.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));
+		 
+		 String msg = AggregatorHelper.aesEncrypt(websiteSuggestion.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_WEBSITE_SUGGESTION);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+			 
+		return TestSuggestionResponse.parseFrom(final_response);
+		 
 		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return TestSuggestionResponse.parseFrom(plainBytes);
-		 } else {
-			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
-	 }
 	 
 	/**
 	 * Returns a TestSuggestionResponse object. Encodes the passed message to
@@ -644,26 +645,24 @@ public class AggregatorResources {
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, serviceSuggestion.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));
-		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return TestSuggestionResponse.parseFrom(plainBytes);
-		 } else {
-			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 String msg = AggregatorHelper.aesEncrypt(serviceSuggestion.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SERVICE_SUGGESTION);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+			 
+		return TestSuggestionResponse.parseFrom(final_response);
 	 }
 	 
 	/**itna 

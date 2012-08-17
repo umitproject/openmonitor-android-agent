@@ -582,7 +582,7 @@ public class SDCardReadWrite {
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getName());
 			objOutStream.writeObject(data.getIp());
-			objOutStream.writeObject(data.getPorts());
+			objOutStream.writeObject(data.getPort());
 			objOutStream.writeObject(data.getStatus());
 			objOutStream.writeObject(data.getTestID());
 			objOutStream.writeObject(Long.toString(data.getExecuteAtTimeUTC()));
@@ -632,7 +632,7 @@ public class SDCardReadWrite {
 	    	    service.setCheck((String) objInputStream.readObject());
 	    	    service.setName((String) objInputStream.readObject());
 	    	    service.setIp((String) objInputStream.readObject());
-	    	    service.setPorts((List<Integer>) objInputStream.readObject());
+	    	    service.setPort((Integer) objInputStream.readObject());
 	    	    service.setStatus((String) objInputStream.readObject());
 	    	    service.setTestID((String)objInputStream.readObject());
 	    	    service.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));

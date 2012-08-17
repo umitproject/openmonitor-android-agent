@@ -75,15 +75,16 @@
     	android:layout_below="@id/EditTextHost">
     </EditText>
     
-    <EditText 
-    	android:id="@+id/EditTextEmail" 
+     <EditText 
+    	android:id="@+id/EditTextPORT" 
     	android:layout_height="wrap_content"
     	android:layout_width="fill_parent"  
-    	android:hint="@string/edit_text_email"
+    	android:hint="@string/edit_text_port"
     	android:layout_centerHorizontal="true"
     	android:textSize="20sp"
     	android:layout_below="@id/EditTextIP">
     </EditText>
+    
 
     <Button 
     	android:id="@+id/Button01" 
@@ -92,7 +93,7 @@
         android:text="@string/send_button"
         android:textSize="20sp" 
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/EditTextEmail">
+        android:layout_below="@id/EditTextPORT">
      </Button>
 
 </RelativeLayout>

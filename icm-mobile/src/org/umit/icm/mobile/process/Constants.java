@@ -60,7 +60,7 @@ public class Constants {
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
 	public static String TWITTER_STATUS_FILE = "twitter.param";
-	public static int DEFAULT_SCAN_INTERVAL = 5;
+	public static int DEFAULT_SCAN_INTERVAL = 1;
 	public static String DEFAULT_SCAN_STATUS = "On";
 	public static String DEFAULT_TWITTER_STATUS = "Off";
 	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";
@@ -128,29 +128,16 @@ public class Constants {
 		 * 
 		 */
 		private static final long serialVersionUID = 2L;
-		private List<Integer> ports = new ArrayList<Integer>();
 
 		{
-			ports.add(443);			
-			add(new Service("https", ports, "203.135.62.113" ,"open", "true", "2001", 0));
-			ports.clear();
-			ports.add(80);												
-			add(new Service("http", ports, "www.google.com" ,"open", "true", "2001", 0));
-			ports.add(21);						
-			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", "2001", 0));
-			ports.clear();
-			ports.add(995);			
-			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", "2001", 0));
-			ports.clear();
-			ports.add(993);			
-			add(new Service("imap", ports, "imap.gmail.com", "open", "true", "2001", 0));
-			ports.clear();
-			ports.add(1863);			
-			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", "2001", 0));
-			ports.clear();		
-			ports.add(5222);			
-			add(new Service("gtalk", ports, "talk.google.com", "open", "true", "2001", 0));
-			ports.clear();	
+			add(new Service("https", 443, "203.135.62.113" ,"open", "true", "2001", 0));
+			add(new Service("http", 80, "www.google.com" ,"open", "true", "2001", 0));
+			add(new Service("ftp", 21, "ftp.secureftp-test.com", "open", "true", "2001", 0));
+			add(new Service("pop3", 995, "pop.gmail.com", "open", "true", "2001", 0));
+			add(new Service("imap", 993, "imap.gmail.com", "open", "true", "2001", 0));
+			add(new Service("msn", 1863, "messenger.hotmail.com", "open", "true", "2001", 0));
+			add(new Service("gtalk", 5222, "talk.google.com", "open", "true", "2001", 0));
+			
 		
 		}};
 		public static boolean RUN_PROFILER = false;

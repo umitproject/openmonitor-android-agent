@@ -70,9 +70,9 @@ public class ServiceGtalk {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(5222);												
-		return new Service("gtalk", ports, "talk.google.com" , "open", "true", "0", 0);
+		Integer port = 5222;
+														
+		return new Service("gtalk", port, "talk.google.com" , "open", "true", "0", 0);
 	}
 	
 	/**

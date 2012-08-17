@@ -131,26 +131,29 @@ public class ConnectivityService extends Service {
 				try {			
 					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 						stopScan();
-					Globals.websiteTest.scan();
+					
+					System.out.println("STARTING SERVICE SCAN ------------------------------------");
+					Globals.serviceTest.scan();
+					
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
 				} catch (HttpException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))
 						stopScanNotify();					
+				} catch (MessagingException e) {
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();
 				} 
 				
 				try {
-					Globals.serviceTest.scan();
+					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
 				} catch (HttpException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
-				} catch (MessagingException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-						stopScanNotify();
 				}
 				
 				

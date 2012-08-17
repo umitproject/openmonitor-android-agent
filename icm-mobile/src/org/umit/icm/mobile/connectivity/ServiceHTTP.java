@@ -96,9 +96,8 @@ public class ServiceHTTP {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(80);												
-		return new Service("http", ports, "www.google.com" , "open", "true", "0", 0);
+		Integer port = 80;
+		return new Service("http", port, "www.google.com" , "open", "true", "0", 0);
 	}
 	
 	/**

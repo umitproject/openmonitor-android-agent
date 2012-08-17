@@ -147,7 +147,7 @@ public class ProcessActions {
 	 @see Test
 	 */
 	public synchronized static boolean updateTests(List<Test> tests) {
-		List<Integer> ports = new ArrayList<Integer>();
+		Integer port = 0;
 		for(int i = 0 ; i < tests.size(); i++) {
 			if(tests.get(i).equals("WEB")) {
 				Globals.websitesList.add(
@@ -158,11 +158,10 @@ public class ProcessActions {
 								tests.get(i).getExecuteAtTimeUTC()));
 				
 			} else if(tests.get(i).equals("SERVICE")) {
-				ports.clear();
-				ports.add(tests.get(i).getService().getPort());
+				port = tests.get(i).getService().getPort();
 				Globals.servicesList.add(
 						new Service(tests.get(i).getService().getName(), 
-								ports,
+								port,
 								tests.get(i).getService().getIp(), 
 								"open", 
 								"true", 

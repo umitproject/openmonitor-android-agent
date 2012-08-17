@@ -63,6 +63,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 */
 	@Override()
 	public void scan() throws IOException, HttpException, MessagingException {
+		
+		System.out.println("Scanning SOME SERVICES ---------------------------");
+		
 		HTTPScan();
 		HTTPSScan();
 		FTPScan();
@@ -87,7 +90,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	
 	@param  bytes  An object of the type byte[]
 	 *  	                          		              
-	            
+	            pending list of checkTests to my hardcoded list.
+
 	@return      ServiceReport
 	 * @throws NoSuchAlgorithmException 
 	 */	
@@ -104,17 +108,17 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
 		.setServiceName(service.getName())
 		.setStatusCode(statusCode)
+		.setPort(service.getPort())
 		.build();
 		
 		Trace trace = Trace.newBuilder()
 		.setHop(1)
-		.setIp(CopyNative.traceRoute(service.getIp() 
-				+ " -p " + Integer.toString(service.getPorts().get(0))))		
+		.setIp("193.136.175.1")
 		.addPacketsTiming(1)
 		.build();
 		
 		TraceRoute traceRoute = TraceRoute.newBuilder()
-		.setTarget(service.getIp())
+		.setTarget("193.136.175.1")
 		.setHops(1)
 		.setPacketSize(1)
 		.addTraces(trace)
@@ -157,7 +161,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceHTTP.getService().getIp()
-					, ServiceHTTP.getService().getPorts().get(0));
+					, ServiceHTTP.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
 			serviceResponseBytes
@@ -174,7 +178,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					
 				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
 				Log.w("######name", serviceReport.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -183,6 +187,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReport)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					System.out.println("Sending HTTP SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -214,7 +221,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceHTTPS.getService().getIp()
-					, ServiceHTTPS.getService().getPorts().get(0));
+					, ServiceHTTPS.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			httpsServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
@@ -230,7 +237,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					
 				Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
 				Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -239,6 +246,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportHTTPS)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					System.out.println("Sending HTTPS SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -270,7 +281,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceFTP.getService().getIp()
-					, ServiceFTP.getService().getPorts().get(0));
+					, ServiceFTP.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			ftpServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
@@ -286,7 +297,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						
 				Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportFTP.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceFTP.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceFTP.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -295,6 +306,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportFTP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					
+					System.out.println("Sending FTP SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -326,7 +342,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportPOP3 = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServicePOP3.getService().getIp()
-					, ServicePOP3.getService().getPorts().get(0));
+					, ServicePOP3.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			pop3ServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
@@ -342,7 +358,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						
 				Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
 				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServicePOP3.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServicePOP3.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -351,6 +367,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportPOP3)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					System.out.println("Sending POP3 SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -382,7 +402,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportIMAP = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceIMAP.getService().getIp()
-					, ServiceIMAP.getService().getPorts().get(0));
+					, ServiceIMAP.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			imapServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
@@ -398,7 +418,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						
 				Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportIMAP.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -407,6 +427,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportIMAP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					System.out.println("Sending IMAP SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -438,7 +462,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportGtalk = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceGtalk.getService().getIp()
-					, ServiceGtalk.getService().getPorts().get(0));
+					, ServiceGtalk.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			gtalkServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
@@ -454,7 +478,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						
 				Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
 				Log.w("######name", serviceReportGtalk.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceGtalk.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceGtalk.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -463,6 +487,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportGtalk)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					System.out.println("Sending Gtalk SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
 				} catch (RuntimeException e) {
@@ -494,7 +522,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
 			Globals.tcpClientConnectivity.openConnection(
 					ServiceMSN.getService().getIp()
-					, ServiceMSN.getService().getPorts().get(0));
+					, ServiceMSN.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
 			msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
@@ -510,7 +538,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 					
 				Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
 				Log.w("######name", serviceReportMSN.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceMSN.getService().getPorts().get(0)));
+				Log.w("######port", Integer.toString(ServiceMSN.getService().getPort()));
 				
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -519,6 +547,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				.setReport(serviceReportMSN)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
+					
+					System.out.println("Sending MSN SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}					
 				} catch (RuntimeException e) {

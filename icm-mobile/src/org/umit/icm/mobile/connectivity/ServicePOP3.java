@@ -88,9 +88,8 @@ public class ServicePOP3 {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(995);												
-		return new Service("pop3", ports, "pop.gmail.com" , "open", "true", "0", 0);
+		Integer port = 955;
+		return new Service("pop3", port, "pop.gmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**

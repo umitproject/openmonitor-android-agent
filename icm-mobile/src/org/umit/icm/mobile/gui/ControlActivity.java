@@ -42,7 +42,6 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import twitter4j.TwitterException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -53,6 +52,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -188,10 +189,16 @@ public class ControlActivity extends Activity {
 	    }  );
         
         aboutButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       			       		       			
+	       	public void onClick(View v) {  	       
+	       		
+	       		String msg = getString(R.string.about_text) + "\n" + getString(R.string.link_to_open_monitor) + "\n" + getString(R.string.link_to_umit) + "\n" + getString(R.string.icons_by);
+	       		
+	       		final SpannableString spannableString = new SpannableString(msg);
+	       		Linkify.addLinks(spannableString, Linkify.ALL);
+	       		
 	       		AlertDialog alertDialog = new AlertDialog.Builder(ControlActivity.this).create();
 	       		alertDialog.setTitle(getString(R.string.about_button));
-	       		alertDialog.setMessage(getString(R.string.about_text));
+	       		alertDialog.setMessage(spannableString);
 	       		alertDialog.setIcon(R.drawable.umit_128);
 	       		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int which) {
@@ -247,24 +254,26 @@ public class ControlActivity extends Activity {
             = new StringTokenizer(selection, "&");
             String option = stringTokenizer.nextToken();
             String suggestion = stringTokenizer.nextToken();
-            String email = stringTokenizer.nextToken();
+//            String email = stringTokenizer.nextToken();
             String host = stringTokenizer.nextToken();
-            String ip = stringTokenizer.nextToken();          
+            String ip = stringTokenizer.nextToken();
+            String port = stringTokenizer.nextToken();
             if(option.equals("Website")) {          
             	  Toast.makeText(ControlActivity.this
                   		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " " + email
+                  		+ " " + option + " " + suggestion + " " 
                   		, Toast.LENGTH_LONG).show();
-            	new SendWebsiteTask().execute(email, suggestion);
+            	new SendWebsiteTask().execute(suggestion);
             }
             else {
             	  Toast.makeText(ControlActivity.this
                   		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " " + email 
+                  		+ " " + option + " " + suggestion + " "  
                   		+ " " + host + " " + ip
+                  		+ " " + port
                   		, Toast.LENGTH_LONG).show();
-            	new SendServiceTask().execute(email, suggestion
-            			,host, ip);
+            	new SendServiceTask().execute(suggestion
+            			,host, ip, port);
             }
             
         }
@@ -295,7 +304,7 @@ public class ControlActivity extends Activity {
 			
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
-        	.setWebsiteURL(args[1])
+        	.setWebsiteURL(args[0])
         	.build();
         	
         	if(Globals.aggregatorCommunication == true) {
@@ -358,9 +367,10 @@ public class ControlActivity extends Activity {
 			
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
-        	.setServiceName(args[1])
-        	.setHostName(args[2])
-        	.setIp(args[3])      
+        	.setServiceName(args[0])
+        	.setHostName(args[1])
+        	.setIp(args[2])
+        	.setPort(Integer.parseInt(args[3]))
         	.build();
 
         	if(Globals.aggregatorCommunication == true) {
