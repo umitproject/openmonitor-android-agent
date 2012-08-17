@@ -30,7 +30,6 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
-import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
 import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
@@ -66,7 +65,7 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton
+	private Button sendButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
 	enableTwitterButton, aboutButton,bugReportButton;	
 	private ProgressDialog progressDialog;
@@ -76,7 +75,6 @@ public class ControlActivity extends Activity {
         super.onCreate(savedInstanceState);    
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
-        intervalButton = (Button) this.findViewById(R.id.intervalButton);
         scanButton = (Button) this.findViewById(R.id.scanButton);
         filterButton = (Button) this.findViewById(R.id.filterButton);
         servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
@@ -170,16 +168,6 @@ public class ControlActivity extends Activity {
 
 	   	}  );
         
-        
-        intervalButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       			       		       			
-	       		IntervalDialog intervalDialog = 
-	       			new IntervalDialog(ControlActivity.this, "", new OnReadyIntervalListener());
-	            intervalDialog.show(); 
-	       		
-	       	}
-
-	   	}  );
         bugReportButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
 	       		Intent intent = new Intent(ControlActivity.this, BugReportActivity.class);
@@ -279,12 +267,7 @@ public class ControlActivity extends Activity {
         }
     }
     
-    private class OnReadyIntervalListener implements IntervalDialog.ReadyIntervalListener {
-        @Override
-        public void ready(String interval) {
-            Toast.makeText(ControlActivity.this, interval, Toast.LENGTH_LONG).show();
-        }
-    }
+    
     
     private class SendWebsiteTask extends AsyncTask<String,String,String> {
     	  

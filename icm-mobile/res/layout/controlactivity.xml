@@ -42,21 +42,13 @@
 					android:text="@string/register_suggestion" 		
 					android:layout_centerHorizontal="true"
 					android:id="@+id/selected"/>
-			
-				<Button 
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content" 
-					android:text="@string/interval_button" 
-					android:layout_below="@id/selected"
-					android:layout_centerHorizontal="true"
-					android:id="@+id/intervalButton"/>
 					
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
 					android:text="@string/scan_button" 
 					android:layout_centerHorizontal="true"
-					android:layout_below="@id/intervalButton"
+					android:layout_below="@id/selected"
 					android:id="@+id/scanButton"/>
 					
 				<Button 

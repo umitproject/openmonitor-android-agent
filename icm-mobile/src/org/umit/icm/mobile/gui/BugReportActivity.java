@@ -11,6 +11,7 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,7 @@ public class BugReportActivity extends Activity{
 		Description = (EditText)findViewById(R.id.description);
 		Subject = (EditText)findViewById(R.id.subject);
 		
+		
 		tracker="Bug";
 		subject="";
 		description="";
@@ -91,9 +93,12 @@ public class BugReportActivity extends Activity{
 				else{
 					reporter = Reporter.getText().toString();
 					subject = "[BugCrashReport]" + Subject.getText().toString();
-					description= "From: " + reporter+ Description.getText().toString();
-					
-					
+					if(reporter.equalsIgnoreCase("")){
+						description="Description: " +Description.getText().toString();
+					}
+					else{
+						description= "From: " + reporter+ "\n" +"Description: " +Description.getText().toString();
+					}
 					
 					
 					String XML="<issue>"+ 
@@ -141,6 +146,16 @@ public class BugReportActivity extends Activity{
 			
 			return null;
 		}
+		
+		protected void onPostExecute(String result) {
+			CharSequence text = getString(R.string.bug_report);
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+    		toast.show();
+    		
+    		BugReportActivity.this.finish();
+	     }
 		  
 	  }
 
