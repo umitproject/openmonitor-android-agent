@@ -166,7 +166,8 @@ public class AggregatorActions {
 	 		Main.joinLibcage("20000",ip,Integer.toString(port));
 	 		
 	 	}
-	 	return ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
+	 	return true;
+	 			//ProcessActions.updateSuperPeersList(getSuperPeerListResponse.getKnownSuperPeersList());		
 	}
 	
 	

@@ -217,8 +217,7 @@ public class ControlActivity extends Activity {
         connectButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v){
         		Context context = getApplicationContext();
-        		Toast cageTest = Toast.makeText(context,Main.startLibcage(),Toast.LENGTH_LONG);
-	        	cageTest.show();
+        		
 	        	try{
 		        	GetSuperPeerList.Builder getSuperPeerListBuilder = GetSuperPeerList.newBuilder();
 					getSuperPeerListBuilder.setLocation("UN");

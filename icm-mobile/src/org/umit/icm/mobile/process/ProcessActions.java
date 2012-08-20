@@ -294,7 +294,7 @@ public class ProcessActions {
 		.setCipheredPublicKey(cipheredKey)
 		.build();
 		
-		RSAKey rsaKey;
+		/*RSAKey rsaKey;
 		try {
 			rsaKey = RSACrypto.getPublicKeyIntegers(CryptoKeyReader.getMyDHPublicKey());
 
@@ -307,7 +307,7 @@ public class ProcessActions {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		
 		AgentData peer = null;
 		while(iterator.hasNext()) {
