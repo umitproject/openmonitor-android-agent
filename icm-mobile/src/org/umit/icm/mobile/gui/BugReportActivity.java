@@ -136,9 +136,15 @@ public class BugReportActivity extends Activity{
 			httppost.setEntity(requestEntity);
 			
 			
-			HttpResponse response= httpclient.execute(httppost);
-			String responseBody = EntityUtils.toString(response.getEntity());
-			Show.Info(act, responseBody);
+			httpclient.execute(httppost);
+			
+			CharSequence text = getString(R.string.bug_report);
+    		int duration = Toast.LENGTH_SHORT;
+
+    		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+    		toast.show();
+
+			
 			}catch(Exception e)
 			{
 				e.printStackTrace();
@@ -148,12 +154,6 @@ public class BugReportActivity extends Activity{
 		}
 		
 		protected void onPostExecute(String result) {
-			CharSequence text = getString(R.string.bug_report);
-    		int duration = Toast.LENGTH_SHORT;
-
-    		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-    		toast.show();
-    		
     		BugReportActivity.this.finish();
 	     }
 		  

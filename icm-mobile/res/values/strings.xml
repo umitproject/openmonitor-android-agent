@@ -98,4 +98,5 @@
     <string name="link_to_open_monitor">www.openmonitor.org</string>
     <string name="icons_by"> Icons by http://dryicons.com</string>
     <string name="bug_report">Bug Reported!</string>
+    <string name="average_throughput">Average Throughput:</string>
 </resources>

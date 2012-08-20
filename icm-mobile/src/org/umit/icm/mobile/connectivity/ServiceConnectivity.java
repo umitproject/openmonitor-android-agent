@@ -520,11 +520,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		if(msnResponse != null) {				
 			byte[] msnServiceResponseBytes = null;
 			ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceMSN.getService().getIp()
-					, ServiceMSN.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
+			Globals.tcpClientConnectivity.openConnection(ServiceMSN.getService().getIp(), ServiceMSN.getService().getPort());
+			Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
 			msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
 			if(!msnServiceResponseBytes.equals(null))
 				Log.w("#####bytes", "bytes");

@@ -51,7 +51,7 @@
 					android:layout_below="@id/selected"
 					android:id="@+id/scanButton"/>
 					
-				<Button 
+<!-- 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
 					android:text="@string/filter_button_websites" 
@@ -65,14 +65,14 @@
 					android:text="@string/filter_button_services" 
 					android:layout_centerHorizontal="true"
 					android:layout_below="@id/filterButton"
-					android:id="@+id/serviceFilterButton"/>
+					android:id="@+id/serviceFilterButton"/> -->
 					
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
 					android:text="@string/map_selection" 
 					android:layout_centerHorizontal="true"
-					android:layout_below="@id/serviceFilterButton"
+					android:layout_below="@id/scanButton"
 					android:id="@+id/mapSelectionButton"/>
 									
 				<Button 

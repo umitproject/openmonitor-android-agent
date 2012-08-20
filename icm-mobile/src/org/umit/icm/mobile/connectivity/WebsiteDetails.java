@@ -5,6 +5,7 @@ import java.net.URLConnection;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class WebsiteDetails {
 	TraceRoute traceRoute;
 	ICMReport icmReport;
 	WebsiteReportDetail websiteReportDetail;
-	WebsiteReport websiteReport;
+	public WebsiteReport websiteReport;
 	
 	
 	
@@ -53,6 +54,21 @@ public class WebsiteDetails {
 		this.websiteReport=null;
 		setup();
 	}
+	
+	public WebsiteDetails(String websiteURL){
+		this.website = new Website(websiteURL, "false", "true", "0000", 0);
+		this.websiteURL=websiteURL;
+		this.urlConnection=null;
+		this.content="";
+		this.fetchTime=0;
+		this.trace=null;
+		this.traceRoute=null;
+		this.icmReport=null;
+		this.websiteReportDetail=null;
+		this.websiteReport=null;
+		setup();
+	}
+	
 	
 	public void setup(){
 		setupVariables();
@@ -84,8 +100,6 @@ public class WebsiteDetails {
 		}catch(Exception e){
 			
 		}
-		
-		
 	}
 	
 	
@@ -198,5 +212,6 @@ public class WebsiteDetails {
 			Globals.runtimesList.addEvent(event);
 		}
 	}
+	
 	
 }

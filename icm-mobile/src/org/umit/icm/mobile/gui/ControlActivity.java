@@ -76,8 +76,8 @@ public class ControlActivity extends Activity {
         setContentView(R.layout.controlactivity);
         sendButton = (Button) this.findViewById(R.id.selected);
         scanButton = (Button) this.findViewById(R.id.scanButton);
-        filterButton = (Button) this.findViewById(R.id.filterButton);
-        servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
+//        filterButton = (Button) this.findViewById(R.id.filterButton);
+ //       servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
         mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
         enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
         bugReportButton = (Button) this.findViewById(R.id.bugReportButton);
@@ -152,7 +152,7 @@ public class ControlActivity extends Activity {
 
 	    }  );
         
-        filterButton.setOnClickListener(new OnClickListener() { 
+  /*      filterButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       				            		 
 	       		Intent intent = new Intent(ControlActivity.this, WebsiteFilterActivity.class);	       		
 	            startActivity(intent); 
@@ -166,7 +166,7 @@ public class ControlActivity extends Activity {
 	            startActivity(intent); 
 	       	}
 
-	   	}  );
+	   	}  );*/
         
         bugReportButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
