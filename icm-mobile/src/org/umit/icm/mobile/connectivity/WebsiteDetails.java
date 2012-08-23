@@ -106,6 +106,7 @@ public class WebsiteDetails {
 	private synchronized void setupURLConnection(){
 		
 		try {
+			System.out.println("Opening URL Connection to this website : " + websiteURL);
 			this.urlConnection=WebsiteOpen.openURLConnection(this.websiteURL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

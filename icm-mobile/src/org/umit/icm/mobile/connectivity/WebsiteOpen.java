@@ -65,16 +65,7 @@ public class WebsiteOpen {
 		URL url = new URL(str);
 		URLConnection urlConnection = url.openConnection();
 		
-		Map<String, String> websiteHeader = new HashMap <String, String>();
-		websiteHeader = WebsiteOpen.getHeaders(urlConnection);
-		
-		if(WebsiteOpen.httpOrHttps(websiteHeader).equalsIgnoreCase("http")) {
-			return urlConnection;
-		}else{
-			String newURL = websiteHeader.get("location");
-			urlConnection = WebsiteOpen.openURLConnection(newURL);
-			return urlConnection;
-		}
+		return urlConnection;
 	}
 
 	/**
