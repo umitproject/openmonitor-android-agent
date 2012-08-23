@@ -39,16 +39,25 @@
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
-					android:text="@string/register_suggestion" 		
+					android:text="@string/register_website_suggestion" 		
 					android:layout_centerHorizontal="true"
-					android:id="@+id/selected"/>
+					android:id="@+id/suggestWebsite"/>
+				
+				<Button 
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:text="@string/register_service_suggestion" 		
+					android:layout_centerHorizontal="true"
+					android:id="@+id/suggestService"
+					android:layout_below="@id/suggestWebsite"/>
+				
 					
 				<Button 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
 					android:text="@string/scan_button" 
 					android:layout_centerHorizontal="true"
-					android:layout_below="@id/selected"
+					android:layout_below="@id/suggestService"
 					android:id="@+id/scanButton"/>
 					
 <!-- 				<Button 

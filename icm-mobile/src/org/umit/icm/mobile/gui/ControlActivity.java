@@ -31,8 +31,9 @@ import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
-import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
+import org.umit.icm.mobile.gui.dialogs.ServiceSuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
+import org.umit.icm.mobile.gui.dialogs.WebsiteSuggestionDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
@@ -65,7 +66,7 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, scanButton
+	private Button WebsiteSuggestButton,ServiceSuggestButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
 	enableTwitterButton, aboutButton,bugReportButton;	
 	private ProgressDialog progressDialog;
@@ -74,7 +75,8 @@ public class ControlActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);    
         setContentView(R.layout.controlactivity);
-        sendButton = (Button) this.findViewById(R.id.selected);
+        WebsiteSuggestButton = (Button) this.findViewById(R.id.suggestWebsite);
+        ServiceSuggestButton = (Button) this.findViewById(R.id.suggestService);
         scanButton = (Button) this.findViewById(R.id.scanButton);
 //        filterButton = (Button) this.findViewById(R.id.filterButton);
  //       servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
@@ -109,10 +111,19 @@ public class ControlActivity extends Activity {
 		registerReceiver(receiver
 				, new IntentFilter("org.umit.icm.mobile.CONTROL_ACTIVITY"));
    	   	   	        
-        sendButton.setOnClickListener(new OnClickListener() { 
+        WebsiteSuggestButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
-	       		SuggestionDialog suggestionDialog = 
-	       			new SuggestionDialog(ControlActivity.this, "", new OnReadyListener());
+	       		WebsiteSuggestionDialog websiteSuggestionDialog = 
+	       			new WebsiteSuggestionDialog(ControlActivity.this, "", new OnReadyListener());
+	            websiteSuggestionDialog.show();	        		
+	       	}
+
+	    }  );
+        
+        ServiceSuggestButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		ServiceSuggestionDialog suggestionDialog = 
+	       			new ServiceSuggestionDialog(ControlActivity.this, "", new OnReadyListener());
 	            suggestionDialog.show();	        		
 	       	}
 
@@ -235,7 +246,7 @@ public class ControlActivity extends Activity {
               
     }
     
-    private class OnReadyListener implements SuggestionDialog.ReadyListener {
+    private class OnReadyListener implements WebsiteSuggestionDialog.ReadyListener ,ServiceSuggestionDialog.ReadyListener{
         @Override
         public void ready(String selection) {            
             StringTokenizer stringTokenizer 

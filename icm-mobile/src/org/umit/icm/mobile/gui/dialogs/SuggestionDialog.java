@@ -89,7 +89,7 @@ public class SuggestionDialog extends Dialog {
 			Context context = SuggestionDialog.this.getContext();
 			if((etSuggest.getText().toString().equals(""))){
         		
-        		CharSequence text = context.getString(R.string.edit_text_suggestion);
+        		CharSequence text = context.getString(R.string.suggested_website_name_blank);
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
@@ -110,7 +110,8 @@ public class SuggestionDialog extends Dialog {
 	    	    			readyListener.ready(wRB.getText() 
 	    	    	    			+ "&" + etSuggest.getText().toString()     				    	    			
 	    	    	    			+ "&" + "host" 
-	    	    					+ "&" + "ip");
+	    	    					+ "&" + "ip"
+	    	    	    			+ "&" + "port");
 	    	                SuggestionDialog.this.dismiss(); 
     	    			} else {
     	    				CharSequence text = context.getString(R.string.remove_host_ip);

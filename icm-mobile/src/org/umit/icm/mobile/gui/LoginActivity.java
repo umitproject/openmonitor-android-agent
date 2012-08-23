@@ -128,7 +128,7 @@ import android.widget.Toast;
 				
 				case R.id.registerButton:
 					Intent i = new Intent(Intent.ACTION_VIEW, 
-						       Uri.parse(Constants.AGGR_REGISTER_USER));
+						       Uri.parse(Constants.AGGREGATOR_URL + Constants.AGGR_REGISTER_USER));
 				
 					startActivity(i);
 					finish();

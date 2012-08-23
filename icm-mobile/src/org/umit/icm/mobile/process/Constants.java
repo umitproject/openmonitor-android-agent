@@ -117,7 +117,7 @@ public class Constants {
 	public static String AGGR_GET_BANNETS = "/api/get_bannets/";
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
-	public static String AGGR_REGISTER_USER = "http://east1.openmonitor.org/accounts/register/";
+	public static String AGGR_REGISTER_USER = "/accounts/register/";
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";

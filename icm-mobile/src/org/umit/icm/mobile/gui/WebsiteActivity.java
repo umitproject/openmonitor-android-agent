@@ -140,7 +140,7 @@ public class WebsiteActivity extends Activity{
 					if(Globals.runtimeParameters.getAverageThroughput() == 0){
 						websiteTextBitmapAdapter.addItem(	
 								new WebsiteTextBitmap(getString(R.string.average_throughput) + " " +
-										"Calulating...", drawable));	
+										"Calculating...", drawable));	
 							}
 					else{
 						websiteTextBitmapAdapter.addItem(	

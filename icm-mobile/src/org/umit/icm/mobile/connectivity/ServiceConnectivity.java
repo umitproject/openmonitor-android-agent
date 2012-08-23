@@ -125,9 +125,12 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.build();
 		
 		List<String> listNodes = new ArrayList<String>();
+		
 		Calendar calendar = Calendar.getInstance();
 		listNodes.add(Globals.runtimeParameters.getAgentID());
+		
 		long timeUTC = (calendar.getTimeInMillis()/1000);
+		
 		ICMReport icmReport = ICMReport.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setTestID(service.getTestID())
@@ -158,23 +161,24 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		String HTTPResponse = ServiceHTTP.connect();
 		if(HTTPResponse != null) {			
 			byte[] serviceResponseBytes = null;
-			ServiceReport serviceReport = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceHTTP.getService().getIp()
-					, ServiceHTTP.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-			serviceResponseBytes
-			= Globals.tcpClientConnectivity.readBytes();
+			ServiceReport serviceReport = ServiceReport.getDefaultInstance();
+			
+			Globals.tcpClientConnectivity.openConnection(ServiceHTTP.getService().getIp(), ServiceHTTP.getService().getPort());
+			
+			Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
+			
+			serviceResponseBytes= Globals.tcpClientConnectivity.readBytes();
+			
 			if(!serviceResponseBytes.equals(null))
 				Log.w("#####bytes", "bytes");
+			
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
-				serviceReport = (ServiceReport) clean(ServiceHTTP.getService()
-						, HTTPResponse, serviceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReport);						
+				
+				serviceReport = (ServiceReport) clean(ServiceHTTP.getService(), HTTPResponse, serviceResponseBytes);
+				
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReport);						
 					
 				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
 				Log.w("######name", serviceReport.getReport().getServiceName());
@@ -230,10 +234,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
-				serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService()
-						, HTTPSResponse, httpsServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportHTTPS);						
+				serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService(), HTTPSResponse, httpsServiceResponseBytes);
+				
+				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReportHTTPS);						
 					
 				Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
 				Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
@@ -242,9 +245,11 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				RequestHeader requestHeader = RequestHeader.newBuilder()
 				.setAgentID(Globals.runtimeParameters.getAgentID())
 				.build();
+				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportHTTPS)
 				.build();
+				
 				if(Globals.aggregatorCommunication != false) {
 					
 					System.out.println("Sending HTTPS SERVICE REPORT \n");

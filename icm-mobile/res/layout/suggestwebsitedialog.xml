@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+    
+    
+    
+    <EditText 
+    	android:id="@+id/WebsiteURL" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+    	android:layout_centerHorizontal="true"
+    	android:textSize="20sp" 
+    	android:hint="@string/suggested_website_name" />
+    
+    
+    <Button 
+    	android:id="@+id/SendWebsiteSuggestion" 
+    	android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/send_button"
+        android:textSize="20sp" 
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/WebsiteURL">
+     </Button>
+    
+    
+
+</RelativeLayout>

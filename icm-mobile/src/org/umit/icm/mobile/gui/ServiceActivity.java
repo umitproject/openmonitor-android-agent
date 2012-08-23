@@ -86,21 +86,30 @@ public class ServiceActivity extends Activity{
 			= service + Constants.SERVICE_FILE;
 			try {
 				if(SDCardReadWrite.fileExists(serviceFilename, Constants.SERVICES_DIR)) {
-					ServiceReport serviceReport 
-					= SDCardReadWrite.readServiceReport(Constants.SERVICES_DIR
-							, service);
+					
+					ServiceReport serviceReport = SDCardReadWrite.readServiceReport(Constants.SERVICES_DIR, service);
+					
 					if(serviceReport.getReport().getStatusCode() == 0) {
-						websiteTextBitmapAdapter.addItem(
-								new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
+						
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
+						
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Host: " + serviceReport.getReport().getServiceName(), getResources().getDrawable(R.drawable.greendot)));
+						
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Port: " + serviceReport.getReport().getPort(), getResources().getDrawable(R.drawable.greendot)));
+						
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Status: " + serviceReport.getReport().getStatusCode(), getResources().getDrawable(R.drawable.greendot)));
+						
+						
 					} else {
-						websiteTextBitmapAdapter.addItem(
-								new WebsiteTextBitmap( getString(R.string.differentation_status), getResources().getDrawable(R.drawable.reddot)));
+						
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( getString(R.string.differentation_status), getResources().getDrawable(R.drawable.reddot)));
+						
 					}
 					
 				} else {
-					websiteTextBitmapAdapter.addItem(
-							new WebsiteTextBitmap(getString(R.string.no_scan)
-									, getResources().getDrawable(R.drawable.bluedot)));
+					
+					websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(getString(R.string.no_scan), getResources().getDrawable(R.drawable.bluedot)));
+					
 				}
 				
 			} catch (IOException e) {
