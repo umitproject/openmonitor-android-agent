@@ -38,7 +38,7 @@
   <groupId>org.umit.icm.mobile.test</groupId>
   <artifactId>icm-mobiletest</artifactId>
   <packaging>apk</packaging>
-  <version>1.0.0-test-maven</version>
+  <version>1.0.0-alpha-version</version>
   <name>ICMMobileTest</name>
   
     <repositories>
