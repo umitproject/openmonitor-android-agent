@@ -69,6 +69,7 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AESCrypto;
+import org.umit.icm.mobile.utils.AggregatorCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
 
@@ -126,9 +127,9 @@ public class AggregatorResources {
 		 try{
 //		 Form form = new Form();
 		 
-		 String msg = AggregatorHelper.aesEncrypt(registerAgent.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());
 		 
-		 String key=AggregatorHelper.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));
+		 String key=AggregatorCrypto.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_REGISTER_AGENT);
@@ -173,7 +174,7 @@ public class AggregatorResources {
 		System.out.println("--------------------------------------------GOT THIS AS RESPONSE : "+ responseBody);
 		 
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		
 		for(int i=0;i<final_response.length;i++)
 		{
@@ -216,7 +217,7 @@ public class AggregatorResources {
 		 
 //		 Form form = new Form();
 		 
-		 String msg = AggregatorHelper.aesEncrypt(getPeerList.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(getPeerList.toByteArray());
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
 		 
@@ -242,7 +243,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}*/
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		 
 		return GetPeerListResponse.parseFrom(final_response);
 		 
@@ -274,7 +275,7 @@ public class AggregatorResources {
 	 */
 	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList, ClientResource clientResource) throws Exception {
 //		 Form form = new Form();
-		 String msg = AggregatorHelper.aesEncrypt(getSuperPeerList.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(getSuperPeerList.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
@@ -301,7 +302,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}*/
 		
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		 
 		return GetSuperPeerListResponse.parseFrom(final_response);
 		 
@@ -384,7 +385,7 @@ public class AggregatorResources {
 	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, ClientResource clientResource) throws Exception {
 //		Form form = new Form();
 		 
-		 String msg = AggregatorHelper.aesEncrypt(sendWebsiteReport.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(sendWebsiteReport.toByteArray());
 		
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_WEBSITE_REPORT);
@@ -399,7 +400,7 @@ public class AggregatorResources {
 		 HttpResponse response = httpclient.execute(httppost);
 		 String responseBody = EntityUtils.toString(response.getEntity());
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 			 
 		return SendReportResponse.parseFrom(final_response);
 		 
@@ -433,7 +434,7 @@ public class AggregatorResources {
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 String msg = AggregatorHelper.aesEncrypt(sendServiceReport.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(sendServiceReport.toByteArray());
 			
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_SERVICE_REPORT);
@@ -448,7 +449,7 @@ public class AggregatorResources {
 		 HttpResponse response = httpclient.execute(httppost);
 		 String responseBody = EntityUtils.toString(response.getEntity());
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 			 
 		return SendReportResponse.parseFrom(final_response);
 	 }
@@ -532,7 +533,7 @@ public class AggregatorResources {
 
 //		 Form form = new Form();
 		 
-		 String msg = AggregatorHelper.aesEncrypt(newTests.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(newTests.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_CHECK_TESTS);
@@ -560,7 +561,7 @@ public class AggregatorResources {
 		}*/
 		 
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		
 		 
 		 return NewTestsResponse.parseFrom(final_response);
@@ -596,7 +597,7 @@ public class AggregatorResources {
 			 ClientResource clientResource) 
 	 throws Exception {
 		 
-		 String msg = AggregatorHelper.aesEncrypt(websiteSuggestion.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(websiteSuggestion.toByteArray());
 			
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_WEBSITE_SUGGESTION);
@@ -611,7 +612,7 @@ public class AggregatorResources {
 		 HttpResponse response = httpclient.execute(httppost);
 		 String responseBody = EntityUtils.toString(response.getEntity());
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 			 
 		return TestSuggestionResponse.parseFrom(final_response);
 		 
@@ -645,7 +646,7 @@ public class AggregatorResources {
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 String msg = AggregatorHelper.aesEncrypt(serviceSuggestion.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(serviceSuggestion.toByteArray());
 			
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SERVICE_SUGGESTION);
@@ -660,7 +661,7 @@ public class AggregatorResources {
 		 HttpResponse response = httpclient.execute(httppost);
 		 String responseBody = EntityUtils.toString(response.getEntity());
 			
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 			 
 		return TestSuggestionResponse.parseFrom(final_response);
 	 }
@@ -821,7 +822,7 @@ public class AggregatorResources {
 	 throws Exception {
 //		 Form form = new Form();
 		 
-		 String msg = AggregatorHelper.encodeData(login.toByteArray());
+		 String msg = AggregatorCrypto.encodeData(login.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGIN_1);
@@ -894,7 +895,7 @@ public class AggregatorResources {
 		 
 //		 Form form = new Form();
 		 
-		 String msg= AggregatorHelper.aesEncrypt(getBanlists.toByteArray());
+		 String msg= AggregatorCrypto.aesEncrypt(getBanlists.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
@@ -918,7 +919,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		 }*/
 		 
-		 byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		 byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		 
 		 return GetBanlistResponse.parseFrom(final_response);
 		 
@@ -929,7 +930,7 @@ public class AggregatorResources {
 		 
 //		 Form form = new Form();
 		 
-		 String msg = AggregatorHelper.aesEncrypt(getBannets.toByteArray());
+		 String msg = AggregatorCrypto.aesEncrypt(getBannets.toByteArray());
 		 
 		 HttpClient httpclient = new DefaultHttpClient();
 		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
@@ -957,7 +958,7 @@ public class AggregatorResources {
 			 e.printStackTrace();
 		}*/
 		 
-		byte[] final_response= AggregatorHelper.aesDecrypt(responseBody.getBytes());
+		byte[] final_response= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		
 		 
 		 return GetBannetsResponse.parseFrom(final_response);
