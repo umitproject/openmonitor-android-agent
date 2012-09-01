@@ -41,7 +41,7 @@ public class SuggestionDialog extends Dialog {
 	String selection;
 	Context contextControl;
     private ReadyListener readyListener;
-    EditText etSuggest, etHost, etIP,etPort;
+    private EditText etSuggest, etHost, etIP,etPort;
     private RadioButton sRB, wRB;
     private final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -70,7 +70,7 @@ public class SuggestionDialog extends Dialog {
         Button buttonOK = (Button) findViewById(R.id.Button01);
         buttonOK.setOnClickListener(new sendListener());
         etSuggest = (EditText) findViewById(R.id.EditText01);
- //       etEmail = (EditText) findViewById(R.id.EditTextEmail);
+ //     etEmail = (EditText) findViewById(R.id.EditTextEmail);
         etHost = (EditText) findViewById(R.id.EditTextHost);
         etIP = (EditText) findViewById(R.id.EditTextIP);
         etPort = (EditText) findViewById(R.id.EditTextPORT);
@@ -169,7 +169,7 @@ public class SuggestionDialog extends Dialog {
 
     	}
     
-    private boolean checkEmail(String email) {
+    public boolean checkEmail(String email) {
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
     
