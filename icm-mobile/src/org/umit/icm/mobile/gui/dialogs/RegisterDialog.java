@@ -18,9 +18,7 @@ public class RegisterDialog extends Dialog{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.registerdialog);
-		
-		
+		setContentView(R.layout.registerdialog);	
 	}
 
 }
