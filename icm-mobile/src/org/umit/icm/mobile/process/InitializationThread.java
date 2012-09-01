@@ -29,18 +29,15 @@ public class InitializationThread extends Thread {
     
 	Context context;
 	Activity activity;
+	
     public InitializationThread(Context context) {
         this.context = context;
-        this.activity=(Activity) context;
+        this.activity = (Activity) context;
     }
     public void run() {  
     	
-    	boolean result;
-    	
     	System.out.println("Inside InitializationThread#run");
-    	
 		Initialization.initializeIP(context);
-		
 		
     }
 }
