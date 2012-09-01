@@ -25,16 +25,12 @@ package org.umit.icm.mobile;
 import java.io.IOException;
 
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ServicePackets;
-import org.umit.icm.mobile.debug.Show;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
-import org.umit.icm.mobile.gui.dialogs.LoginDialog;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
-import org.umit.icm.mobile.process.InitializationThread;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;

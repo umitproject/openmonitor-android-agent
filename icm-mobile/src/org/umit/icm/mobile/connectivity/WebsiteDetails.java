@@ -2,16 +2,13 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
@@ -19,7 +16,6 @@ import org.umit.icm.mobile.proto.MessageProtos.Trace;
 import org.umit.icm.mobile.proto.MessageProtos.TraceRoute;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
-import org.umit.icm.mobile.utils.CopyNative;
 
 public class WebsiteDetails {
 	

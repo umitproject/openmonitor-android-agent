@@ -34,7 +34,6 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.process.IDGenerator;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
@@ -44,7 +43,6 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail;
 import org.umit.icm.mobile.proto.MessageProtos.Trace;
 import org.umit.icm.mobile.proto.MessageProtos.TraceRoute;
-import org.umit.icm.mobile.utils.CopyNative;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.util.Log;

@@ -29,7 +29,6 @@ import java.util.List;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
-import org.umit.icm.mobile.proto.MessageProtos.Location;
 
 import android.app.AlertDialog;
 import android.content.Context;

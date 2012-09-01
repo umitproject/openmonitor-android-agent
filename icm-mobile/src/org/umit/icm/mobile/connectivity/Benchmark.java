@@ -1,9 +1,7 @@
 package org.umit.icm.mobile.connectivity;
 
-import java.net.URLConnection;
 import java.util.Iterator;
 
-import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 
 public class Benchmark {

@@ -1,17 +1,14 @@
 package org.umit.icm.mobile.gui;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.debug.Show;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;

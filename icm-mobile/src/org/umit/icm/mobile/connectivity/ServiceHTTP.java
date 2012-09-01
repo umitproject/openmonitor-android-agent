@@ -24,8 +24,6 @@ package org.umit.icm.mobile.connectivity;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

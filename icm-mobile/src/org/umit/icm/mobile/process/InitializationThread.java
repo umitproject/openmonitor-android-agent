@@ -21,12 +21,6 @@
 
 package org.umit.icm.mobile.process;
 
-import java.util.Random;
-
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
-import org.umit.icm.mobile.debug.Show;
-import org.umit.icm.mobile.proto.MessageProtos.Login;
-import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
 
 import android.app.Activity;
 import android.content.Context;

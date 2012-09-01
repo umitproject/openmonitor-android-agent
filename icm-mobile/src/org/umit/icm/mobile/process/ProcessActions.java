@@ -22,17 +22,10 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.crypto.SecretKey;
 
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.Service;
@@ -51,8 +44,6 @@ import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
-import org.umit.icm.mobile.utils.CryptoKeyWriter;
-import org.umit.icm.mobile.utils.DiffieHellmanKeyGeneration;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 /**

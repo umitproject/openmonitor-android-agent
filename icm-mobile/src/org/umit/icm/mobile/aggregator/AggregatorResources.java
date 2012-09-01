@@ -36,7 +36,6 @@ import org.apache.http.util.EntityUtils;
 import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
