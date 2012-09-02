@@ -23,7 +23,7 @@ package org.umit.icm.mobile.gui.dialogs;
 	
 	
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.debug.Show;
+import org.umit.icm.mobile.gui.debug.Show;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 

@@ -1,32 +1,32 @@
-	/**
-	 * Copyright (C) 2011 Adriano Monteiro Marques
-	 *
-	 * Author:  Zubair Nabi <zn.zubairnabi@gmail.com>
-	 *
-	 * This program is free software; you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation; either version 2 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * This program is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with this program; if not, write to the Free Software
-	 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
-	 * USA
-	 */
+/**
+ * Copyright (C) 2011 Adriano Monteiro Marques
+ *
+ * Author:  Zubair Nabi <zn.zubairnabi@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
 	
-	package org.umit.icm.mobile.gui;
+package org.umit.icm.mobile.gui;
 	
 	
-	import java.io.IOException;
+import java.io.IOException;
 
 import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.debug.Show;
+import org.umit.icm.mobile.gui.debug.Show;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
@@ -86,7 +86,7 @@ import android.widget.Toast;
 	        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 	        		toast.show(); 
 				} else {
-					progressDialog= ProgressDialog.show(context, "", "Logging in.. ", true, false);
+					progressDialog = ProgressDialog.show(context, "", "Logging in.. ", true, false);
 					progressDialog.show();
 					
 					
@@ -155,13 +155,13 @@ import android.widget.Toast;
 					e.printStackTrace();
 				}
 				publishProgress("Registering Agent");
-				boolean register=Initialization.registration(loginCredentials[0]);
+				boolean register = Initialization.registration(loginCredentials[0]);
 				if(register){
-					publishProgress("Registration Done.");
-					publishProgress("Logging Agent");
-					boolean login=Initialization.login();
+					publishProgress("Registration Done");
+					publishProgress("Logging in Agent");
+					boolean login = Initialization.login();
 					if(login){
-						publishProgress("Done.");
+						publishProgress("Done");
 					}else{
 						publishProgress("Unable to login Agent");
 						this.cancel(true);

@@ -27,7 +27,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.debug.Show;
+import org.umit.icm.mobile.gui.debug.Show;
 
 import android.app.Activity;
 import android.os.AsyncTask;
