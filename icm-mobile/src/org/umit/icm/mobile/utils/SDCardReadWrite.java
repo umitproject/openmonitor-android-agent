@@ -616,7 +616,7 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
-	@SuppressWarnings("unchecked")
+
 	public static Service readService(String dir
 			, String name) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
