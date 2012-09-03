@@ -44,7 +44,7 @@ public class RuntimeParametersTests extends AndroidTestCase {
     
     public void testAgentIDSetGet() throws Throwable {
     	RuntimeParameters runtimeParameters = new RuntimeParameters();
-    	runtimeParameters.setAgentID(40000);
+    	runtimeParameters.setAgentID("40000");
     	Assert.assertEquals(40000, runtimeParameters.getAgentID());
     }
     

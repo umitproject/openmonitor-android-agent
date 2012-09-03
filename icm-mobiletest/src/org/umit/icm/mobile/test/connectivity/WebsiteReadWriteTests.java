@@ -36,15 +36,15 @@ import android.test.AndroidTestCase;
 public class WebsiteReadWriteTests extends AndroidTestCase {
 
     public void testWebsiteReadWrite() throws Throwable {    	
-    	Website website = new Website("url", "status", "check", 1, 1);
+    	Website website = new Website("url", "status", "check", "id", 1);
     	website.writeWebsite();
     	Website newWebsite = website.readWebsite("url");
         Assert.assertTrue(website.equals(newWebsite));
     }
     
     public void testWebsiteListReadWrite() throws Throwable {
-    	Website website1 = new Website("url1","1","1", 1, 1);
-    	Website website2 = new Website("url2","2","2", 2 ,2);
+    	Website website1 = new Website("url1","1","1", "1", 1);
+    	Website website2 = new Website("url2","2","2", "2" ,2);
     	List<Website> websiteList = new ArrayList<Website>();
     	websiteList.add(website1);
     	websiteList.add(website2);

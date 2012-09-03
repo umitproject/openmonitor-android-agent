@@ -43,7 +43,7 @@ public class P2PActionsTests extends AndroidTestCase {
 		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID(1)
+    	.setAgentID("1")
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey1)
@@ -56,7 +56,7 @@ public class P2PActionsTests extends AndroidTestCase {
 		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID(2)
+    	.setAgentID("2")
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey2)
@@ -95,7 +95,7 @@ public class P2PActionsTests extends AndroidTestCase {
 		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP3")
-    	.setAgentID(3)
+    	.setAgentID("3")
     	.setAgentPort(13)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey3)
@@ -108,7 +108,7 @@ public class P2PActionsTests extends AndroidTestCase {
 		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP4")
-    	.setAgentID(4)
+    	.setAgentID("4")
     	.setAgentPort(14)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey4)
@@ -141,8 +141,8 @@ public class P2PActionsTests extends AndroidTestCase {
     	Test test1 = Test.newBuilder()
     	.setExecuteAtTimeUTC(11)
     	.setWebsite(website)
-    	.setTestID(31)    	
-    	.setTestType("WEB")
+    	.setTestID("31")    	
+    	.setTestType(1)
     	.build();
     	
     	Service service = Service.newBuilder()
@@ -153,9 +153,9 @@ public class P2PActionsTests extends AndroidTestCase {
     	
     	Test test2 = Test.newBuilder()
     	.setExecuteAtTimeUTC(12)    	
-    	.setTestID(32)
+    	.setTestID("32")
     	.setService(service)
-    	.setTestType("SERVICE")
+    	.setTestType(2)
     	.build();
     	
     	NewTestsResponse newTestsResponse = NewTestsResponse.newBuilder()
