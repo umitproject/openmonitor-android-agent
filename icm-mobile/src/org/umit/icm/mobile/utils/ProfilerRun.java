@@ -655,9 +655,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
 				
 				ServiceSuggestion serviceSuggestion =
 					ServiceSuggestion.newBuilder()
@@ -693,10 +690,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-
-				.build();
 				
 				WebsiteSuggestion websiteSuggestion 
 				= WebsiteSuggestion.newBuilder()
@@ -731,10 +724,7 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
-				
+
 				NewTests newTests = NewTests.newBuilder()
 				.setCurrentTestVersionNo(10)
 				.build();
@@ -767,9 +757,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
 				
 				NewVersion newVersion = NewVersion.newBuilder()
 				.setAgentType("MOBILE")
@@ -804,9 +791,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
 				
 				ServiceReportDetail serviceReportDetail = ServiceReportDetail.newBuilder()
 				.setBandwidth(10)
@@ -875,9 +859,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
 				
 				WebsiteReportDetail websiteReportDetail = WebsiteReportDetail.newBuilder()
 				.setBandwidth(10)
@@ -947,9 +928,6 @@ public class ProfilerRun {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
 			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();
 				
 				Location location = Location.newBuilder()
 				.setLatitude(10.1)
@@ -988,10 +966,7 @@ public class ProfilerRun {
 	private static void profileAggrGetSuperPeerList() {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
-			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();																
+			public void task (){																					
 				 
 				GetSuperPeerList getSuperPeerList = GetSuperPeerList.newBuilder()				
 				.build();
@@ -1023,10 +998,7 @@ public class ProfilerRun {
 	private static void profileAggrGetPeerList() {
 		Profiler profiler = new Profiler();
 		profiler.runProfiler(new TaskInterface () {
-			public void task (){					
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Integer.toString(10))
-				.build();																
+			public void task (){																				
 				 
 				GetPeerList getPeerList = GetPeerList.newBuilder()			
 				.build();

@@ -181,10 +181,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
 				Log.w("######name", serviceReport.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPort()));
-				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
+
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReport)
 				.build();
@@ -239,10 +236,6 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
 				Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPort()));
-				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
 				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportHTTPS)
@@ -302,9 +295,6 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######name", serviceReportFTP.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceFTP.getService().getPort()));
 				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportFTP)
 				.build();
@@ -363,9 +353,6 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServicePOP3.getService().getPort()));
 				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportPOP3)
 				.build();
@@ -422,10 +409,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
 				Log.w("######name", serviceReportIMAP.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPort()));
-				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
+
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportIMAP)
 				.build();
@@ -482,10 +466,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
 				Log.w("######name", serviceReportGtalk.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceGtalk.getService().getPort()));
-				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
+
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportGtalk)
 				.build();
@@ -540,9 +521,6 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				Log.w("######name", serviceReportMSN.getReport().getServiceName());
 				Log.w("######port", Integer.toString(ServiceMSN.getService().getPort()));
 				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportMSN)
 				.build();

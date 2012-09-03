@@ -31,7 +31,6 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -96,9 +95,6 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
 				
-				RequestHeader requestHeader = RequestHeader.newBuilder()
-				.setAgentID(Globals.runtimeParameters.getAgentID())
-				.build();
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setReport(websiteReport)
 				.build();				

@@ -37,7 +37,6 @@ import org.umit.icm.mobile.gui.dialogs.WebsiteSuggestionDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
@@ -292,9 +291,6 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
 			
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
@@ -355,10 +351,7 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
-			
+
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
         	.setServiceName(args[0])
