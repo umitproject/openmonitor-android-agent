@@ -32,13 +32,13 @@
    <parent>
    	 <groupId>org.umit.icm.mobile</groupId>
 	 <artifactId>icm-mobile-main</artifactId>
-	 <version>1.0.0-test-maven</version>
+	 <version>1.0.0-alpha-release</version>
    </parent>
   
   <groupId>org.umit.icm.mobile.test</groupId>
   <artifactId>icm-mobiletest</artifactId>
   <packaging>apk</packaging>
-  <version>1.0.0-alpha-version</version>
+  <version>1.0.0-alpha-release</version>
   <name>ICMMobileTest</name>
   
     <repositories>
