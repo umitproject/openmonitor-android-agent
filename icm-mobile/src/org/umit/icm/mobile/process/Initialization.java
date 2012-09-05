@@ -250,8 +250,7 @@ public class Initialization {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+			
 	}
 	
 	public static void loadLists() {
@@ -260,13 +259,12 @@ public class Initialization {
 		Globals.runtimesList.readSuperPeerList();
 	}
 	
-	public static boolean login()
-	{
+	public static boolean login() {
 		Random random = new Random();
 		
-		String challenge= Double.toString(random.nextDouble());
+		String challenge = Double.toString(random.nextDouble());
 		
-		Globals.challenge=challenge;
+		Globals.challenge = challenge;
 		
 		System.out.println("Setting the login protobuf");
 		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
@@ -281,15 +279,15 @@ public class Initialization {
 		
 		System.out.println("Login protobuf formed : "  + login.toString());
 				
-		boolean success=false;
+		boolean success = false;
 		
 		try {
 			
-		success=AggregatorRetrieve.login(login);
-		
-		Initialization.initializeBanlist();
-		Initialization.initializeBannets();
-//		Initialization.initializerPeersList();
+			success = AggregatorRetrieve.login(login);
+			
+			Initialization.initializeBanlist();
+			Initialization.initializeBannets();
+	//		Initialization.initializerPeersList();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -297,16 +295,10 @@ public class Initialization {
 		return success;
 	}
 	
-	
-	
-	
-	public static boolean registration(LoginCredentials loginCredentials) 
-	{
-		boolean success=false;
+	public static boolean registration(LoginCredentials loginCredentials) {
+		boolean success = false;
 			
-	  try {
-		
-			
+		try {	
 			System.out.println("This is from inside Initialization#registration");
 			
 			System.out.println("MY MOD : " + Globals.keyManager.getMyCipheredKeyMod());
@@ -317,8 +309,7 @@ public class Initialization {
 			
 			System.out.println("MY HEX MOD : " + BiMod.toString(16));
 			System.out.println("MY HEX EXP : " + BiExp.toString(10));
-			
-			
+						
 			RSAKey rsaKey = RSAKey.newBuilder()
 			.setMod(BiMod.toString(16))
 			.setExp(BiExp.toString(10))
@@ -332,31 +323,28 @@ public class Initialization {
 			.setIp(Globals.myIP)
 			.setAgentPublicKey(rsaKey)
 			.setVersionNo(Globals.versionManager.getTestsVersion())
-			.build();
+			.build();		
 			
-			
-			
-			success=AggregatorRetrieve.registerAgent(registerAgent);
-					  
+			success = AggregatorRetrieve.registerAgent(registerAgent);				  
 		  
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (RuntimeException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NoSuchAlgorithmException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvalidKeySpecException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success;
 	}
-	  return success;
-}
 	
 	public static void initializeBanlist(){
 		
@@ -377,9 +365,9 @@ public class Initialization {
 				.setCount(100)
 				.build();
 		
-		try{
+		try {
 			AggregatorRetrieve.getBannets(getBannets);
-		}catch(Exception e){
+		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
