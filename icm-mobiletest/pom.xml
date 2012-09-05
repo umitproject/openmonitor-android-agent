@@ -42,7 +42,6 @@
   <name>ICMMobileTest</name>
   
     <repositories>
-
         <repository>
             <id>twitter4j.org</id>
             <name>twitter4j.org Repository</name>
@@ -54,47 +53,45 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
     </repositories>
   
   <dependencies>
     <dependency>
-      <groupId>com.google.android</groupId>
-      <artifactId>android-test</artifactId>
-      <version>2.3.1</version>
-      <scope>provided</scope>
+    	<groupId>com.google.android</groupId>
+      	<artifactId>android-test</artifactId>
+      	<version>2.3.1</version>
+      	<scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.umit.icm.mobile</groupId>
-      <artifactId>icm-mobile</artifactId>
-      <scope>provided</scope>
-      <type>apk</type>
-      <version>1.0.0-test-maven</version>
+      	<groupId>org.umit.icm.mobile</groupId>
+      	<artifactId>icm-mobile</artifactId>
+      	<scope>provided</scope>
+      	<type>apk</type>
+      	<version>1.0.0-test-maven</version>
     </dependency>
     <dependency>
-      <groupId>org.umit.icm.mobile</groupId>
-      <artifactId>icm-mobile</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-      <version>1.0.0-test-maven</version>
+      	<groupId>org.umit.icm.mobile</groupId>
+      	<artifactId>icm-mobile</artifactId>
+      	<scope>provided</scope>
+      	<type>jar</type>
+      	<version>1.0.0-test-maven</version>
     </dependency>
     <dependency>
-		    <groupId>com.google.protobuf</groupId>
-		    <artifactId>protobuf-java</artifactId>
-		    <version>2.4.1</version>
-		    <scope>compile</scope>
+		<groupId>com.google.protobuf</groupId>
+		<artifactId>protobuf-java</artifactId>
+		<version>2.4.1</version>
+		<scope>provided</scope>
 	</dependency>
-
      <dependency>
-            <groupId>org.twitter4j</groupId>
-            <artifactId>twitter4j-core</artifactId>
-            <version>[2.2,)</version>
-            <scope>compile</scope>
+        <groupId>org.twitter4j</groupId>
+        <artifactId>twitter4j-core</artifactId>
+        <version>[2.2,)</version>
+        <scope>provided</scope>
      </dependency>
-            <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.6</version>
-        </dependency>
+        <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.6</version>
+     </dependency>
   </dependencies>
 </project>
