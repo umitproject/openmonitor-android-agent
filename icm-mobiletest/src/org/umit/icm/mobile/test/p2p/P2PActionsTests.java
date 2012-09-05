@@ -174,9 +174,7 @@ public class P2PActionsTests extends AndroidTestCase {
  						"true", 
  						test1.getTestID(), 
  						test1.getExecuteAtTimeUTC())));
-         List<Integer> ports = new ArrayList<Integer>();
-         ports.clear();
- 		ports.add(test2.getService().getPort());
+         int ports = test2.getService().getPort();
          Assert.assertTrue(Globals.servicesList.get(Globals.servicesList.size()-1)
          		.equals(        		
          		new org.umit.icm.mobile.connectivity.Service(test2.getService().getName(), 
