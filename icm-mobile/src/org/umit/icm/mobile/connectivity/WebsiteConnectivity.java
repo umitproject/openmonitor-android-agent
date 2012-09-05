@@ -24,6 +24,7 @@ package org.umit.icm.mobile.connectivity;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpException;
@@ -64,14 +65,15 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	 */
 	@Override()
 	public void scan() throws IOException, HttpException {
-
+		Iterator<Website> iterator = Globals.websitesList.iterator();
+		Website website = new Website();
 		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 		long totalSizeofContent = 0;
 		long totalTime = 0;
 		double averageThroughput = 0;
 		
-		for(Website website: Globals.websitesList) {
-			
+		while(iterator.hasNext()) {
+			website = iterator.next();
 			WebsiteDetails websiteDetails = new WebsiteDetails(website);
 
 			try {
