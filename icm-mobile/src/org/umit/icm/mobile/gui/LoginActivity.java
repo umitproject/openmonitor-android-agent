@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
         		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
         		toast.show(); 
 			} else {
-				progressDialog = ProgressDialog.show(context, "", "Logging in.. ", true, false);
+				progressDialog = ProgressDialog.show(context, "", getString(R.string.logging_in), true, false);
 				progressDialog.show();
 					
 				String login = etUsername.getText().toString();
@@ -138,20 +138,20 @@ public class LoginActivity extends Activity {
 
 		@Override
 		protected String doInBackground(LoginCredentials... loginCredentials) {
-			publishProgress("Registering Agent");
+			publishProgress(getString(R.string.registering));
 			boolean register = Initialization.registration(loginCredentials[0]);
 			if(register){
-				publishProgress("Registration Done");
-				publishProgress("Logging in Agent");
+				publishProgress(getString(R.string.registration_complete));
+				publishProgress(getString(R.string.logging_in));
 				boolean login = Initialization.login();
 				if(login){
-					publishProgress("Done");
+					publishProgress(getString(R.string.login_complete));
 				}else{
-					publishProgress("Unable to login Agent");
+					publishProgress(getString(R.string.login_failed));
 					this.cancel(true);
 				}
 			}else{
-				publishProgress("Unable to Register Agent");
+				publishProgress(getString(R.string.registration_failed));
 				this.cancel(true);
 			}
 			
@@ -160,10 +160,10 @@ public class LoginActivity extends Activity {
 		
 		protected void onProgressUpdate(String... string) {
 			progressDialog.setMessage(string[0]);
-			if(string[0].equalsIgnoreCase("Unable to Register Agent")){
+			if(string[0].equalsIgnoreCase(getString(R.string.registration_failed))){
 				Show.Error((Activity)context, string[0]);
 				this.cancel(true);
-			}else if(string[0].equalsIgnoreCase("Unable to login Agent")){
+			}else if(string[0].equalsIgnoreCase(getString(R.string.login_failed))){
 				Show.Error((Activity)context, string[0]);
 				this.cancel(true);
 			}

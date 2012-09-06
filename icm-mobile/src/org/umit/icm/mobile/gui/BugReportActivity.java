@@ -85,25 +85,27 @@ public class BugReportActivity extends Activity {
 				
 				try {
 					if(Subject.getText().toString().equalsIgnoreCase("")) {
-						CharSequence text = "Please enter Subject";
+						String text = getString(R.string.bug_subject);
 		        		int duration = Toast.LENGTH_SHORT;
 		        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 		        		toast.show(); 
 					}
 					else if(Description.getText().toString().equalsIgnoreCase("")) {
-						CharSequence text = "Please describe the bug";
+						String text = getString(R.string.bug_describe);
 		        		int duration = Toast.LENGTH_SHORT;
 		        		Toast toast = Toast.makeText(getApplicationContext(), text, duration);
 		        		toast.show(); 
 					}
 					else {
 						reporter = Reporter.getText().toString();
-						subject = "[BugCrashReport]" + Subject.getText().toString();
+						subject = getString(R.string.bug_crash) + Subject.getText().toString();
 						if(reporter.equalsIgnoreCase("")) {
-							description = "Description: " + Description.getText().toString();
+							description = getString(R.string.description) + " " 
+							+ Description.getText().toString();
 						}
 						else {
-							description = "From: " + reporter + "\n" + "Description: " 
+							description = getString(R.string.from) + " " + reporter 
+									+ "\n" + getString(R.string.description) + " "
 									+ Description.getText().toString();
 						}
 								
@@ -162,5 +164,3 @@ public class BugReportActivity extends Activity {
 	}
 	  
 }
-		
-

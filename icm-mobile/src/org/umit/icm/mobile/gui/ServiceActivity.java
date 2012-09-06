@@ -91,13 +91,17 @@ public class ServiceActivity extends Activity{
 					
 					if(serviceReport.getReport().getStatusCode() == 0) {
 						
-						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(getString(R.string.normal_status), 
+								getResources().getDrawable(R.drawable.greendot)));
 						
-						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Host: " + serviceReport.getReport().getServiceName(), getResources().getDrawable(R.drawable.greendot)));
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(getString(R.string.host) + " " 
+						+ serviceReport.getReport().getServiceName(), getResources().getDrawable(R.drawable.greendot)));
 						
-						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Port: " + serviceReport.getReport().getPort(), getResources().getDrawable(R.drawable.greendot)));
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(getString(R.string.port) + " "
+						+ serviceReport.getReport().getPort(), getResources().getDrawable(R.drawable.greendot)));
 						
-						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap( "Status: " + serviceReport.getReport().getStatusCode(), getResources().getDrawable(R.drawable.greendot)));
+						websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(getString(R.string.status) + " " 
+						+ serviceReport.getReport().getStatusCode(), getResources().getDrawable(R.drawable.greendot)));
 						
 						
 					} else {

@@ -93,8 +93,8 @@
     <string name="subject">Subject</string>
     <string name="report">Report</string>
     <string name="email">Email(Optional)</string>
-    <string name="description">Description</string>
-    <string name="explain_bug">Explain the Bug</string>
+    <string name="description">Description:</string>
+    <string name="bug_describe">Please describe the bug</string>
     <string name="deviation">Deviation from Benchmark: </string>
     <string name="deviation_unit">bytes/ms</string>
     <string name="bug_report_button">Report Bug</string>
@@ -103,4 +103,17 @@
     <string name="icons_by"> Icons by http://dryicons.com</string>
     <string name="bug_report">Bug Reported!</string>
     <string name="average_throughput">Average Throughput:</string>
+    <string name="bug_subject">Please enter Subject</string>
+    <string name="bug_crash">[BugCrashReport]</string>
+    <string name="from">From</string>
+    <string name="logging_in">Logging in.. </string>
+    <string name="registering">Registering</string>
+    <string name="registration_complete">Registration Complete</string>
+    <string name="login_complete">Login Complete</string>
+    <string name="registration_failed">Registration Failed</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="status">Status:</string>
+    <string name="port">Port:</string>
+    <string name="host">Host:</string>
+    <string name="calculating">Calculating....</string>
 </resources>
