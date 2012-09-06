@@ -65,6 +65,7 @@ public class LoginActivity extends Activity {
         etUsername = (EditText) findViewById(R.id.etUsername);                           
         etPassword = (EditText) findViewById(R.id.etPassword);
         context = this;
+        etUsername.requestFocus();
     }
         
     private class intervalListener implements android.view.View.OnClickListener {
