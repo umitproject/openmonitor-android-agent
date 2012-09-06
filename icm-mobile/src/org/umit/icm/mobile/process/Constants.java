@@ -43,9 +43,8 @@ public class Constants {
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
 	public static int AES_KEY_SIZE = 256;
-	public static int AES_BLOCK_SIZE =AES_KEY_SIZE/16;
-	public static byte  AES_DEFAULT_PADDING='{';
-	public static double averageThroughput=0;
+	public static int AES_BLOCK_SIZE = AES_KEY_SIZE/16;
+	public static byte  AES_DEFAULT_PADDING ='{';
 	public static String ICM_ROOT_DIR = "/icm-mobile";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
 	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
@@ -77,7 +76,7 @@ public class Constants {
 	public static List<Website> WEBSITE_LIST = new ArrayList<Website>()
 	{ 
 
-	/**
+		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 6933062698660638968L;
@@ -142,7 +141,7 @@ public class Constants {
 		}};
 		public static boolean RUN_PROFILER = false;
 		public static long DEFAULT_AGENT_ID = 911;
-		public static long AGENT_ID= 0;
+		public static long AGENT_ID = 0;
 		public static String DEFAULT_TOKEN = "myToken";
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 
