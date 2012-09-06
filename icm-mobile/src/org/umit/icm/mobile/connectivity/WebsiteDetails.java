@@ -35,36 +35,33 @@ public class WebsiteDetails {
 	WebsiteReportDetail websiteReportDetail;
 	public WebsiteReport websiteReport;
 	
-	
-	
 	public WebsiteDetails(Website website){
 		this.website = website;
-		this.websiteURL=website.getUrl();
-		this.urlConnection=null;
-		this.content="";
-		this.fetchTime=0;
-		this.trace=null;
-		this.traceRoute=null;
-		this.icmReport=null;
-		this.websiteReportDetail=null;
-		this.websiteReport=null;
+		this.websiteURL = website.getUrl();
+		this.urlConnection = null;
+		this.content = "";
+		this.fetchTime = 0;
+		this.trace = null;
+		this.traceRoute = null;
+		this.icmReport = null;
+		this.websiteReportDetail = null;
+		this.websiteReport = null;
 		setup();
 	}
 	
 	public WebsiteDetails(String websiteURL){
 		this.website = new Website(websiteURL, "false", "true", "0000", 0);
-		this.websiteURL=websiteURL;
-		this.urlConnection=null;
-		this.content="";
-		this.fetchTime=0;
-		this.trace=null;
-		this.traceRoute=null;
-		this.icmReport=null;
-		this.websiteReportDetail=null;
-		this.websiteReport=null;
+		this.websiteURL = websiteURL;
+		this.urlConnection = null;
+		this.content = "";
+		this.fetchTime = 0;
+		this.trace = null;
+		this.traceRoute = null;
+		this.icmReport = null;
+		this.websiteReportDetail = null;
+		this.websiteReport = null;
 		setup();
 	}
-	
 	
 	public void setup(){
 		setupVariables();
@@ -80,7 +77,6 @@ public class WebsiteDetails {
 			setupHeaders();
 			setupStatus();
 			setupFetchTimeContentThroughput();
-			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -98,12 +94,11 @@ public class WebsiteDetails {
 		}
 	}
 	
-	
 	private synchronized void setupURLConnection(){
 		
 		try {
 			System.out.println("Opening URL Connection to this website : " + websiteURL);
-			this.urlConnection=WebsiteOpen.openURLConnection(this.websiteURL);
+			this.urlConnection = WebsiteOpen.openURLConnection(this.websiteURL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,11 +109,10 @@ public class WebsiteDetails {
 		
 	}
 	
-	
 	private synchronized void setupHeaders() {
 		
 		try {
-			this.header=WebsiteOpen.getHeaders(this.urlConnection);
+			this.header = WebsiteOpen.getHeaders(this.urlConnection);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,7 +124,7 @@ public class WebsiteDetails {
    	}
 	
 	private synchronized void setupStatus(){
-		this.status= WebsiteOpen.getStatusCode(this.header);
+		this.status = WebsiteOpen.getStatusCode(this.header);
 	}
 	
 	private synchronized void setupProtobufs(){
@@ -141,7 +135,7 @@ public class WebsiteDetails {
 				.addPacketsTiming(1)
 				.build();
 		
-		this.traceRoute=TraceRoute.newBuilder()
+		this.traceRoute = TraceRoute.newBuilder()
 				.setTarget("193.136.175.1")
 				.setHops(1)
 				.setPacketSize(1)
@@ -170,13 +164,10 @@ public class WebsiteDetails {
 		.setTraceroute(this.traceRoute)
 		.build();
 		
-		
-		
 		this.websiteReport = WebsiteReport.newBuilder()		
 				.setReport(websiteReportDetail)
 				.setHeader(icmReport)	
 				.build();
-		
 		
 	}
 	
@@ -209,6 +200,4 @@ public class WebsiteDetails {
 			Globals.runtimesList.addEvent(event);
 		}
 	}
-	
-	
 }
