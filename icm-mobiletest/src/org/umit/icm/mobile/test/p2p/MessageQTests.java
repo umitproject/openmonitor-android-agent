@@ -40,7 +40,7 @@ public class MessageQTests extends AndroidTestCase {
 		
 		AgentData agent1 = AgentData.newBuilder()
 		.setAgentIP("IP1")
-		.setAgentID(1)
+		.setAgentID("1")
 		.setAgentPort(11)
 		.setPeerStatus("On")
 		.setPublicKey(rsaKey1)
@@ -53,7 +53,7 @@ public class MessageQTests extends AndroidTestCase {
 		.build();
 		AgentData agent2 = AgentData.newBuilder()
 		.setAgentIP("IP2")
-		.setAgentID(2)
+		.setAgentID("2")
 		.setAgentPort(12)
 		.setPeerStatus("On")
 		.setPublicKey(rsaKey2)
@@ -66,7 +66,7 @@ public class MessageQTests extends AndroidTestCase {
 		.build();
 		AgentData agent3 = AgentData.newBuilder()
 		.setAgentIP("IP3")
-		.setAgentID(3)
+		.setAgentID("3")
 		.setAgentPort(13)
 		.setPeerStatus("On")
 		.setPublicKey(rsaKey3)

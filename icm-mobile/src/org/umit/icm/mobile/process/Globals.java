@@ -76,6 +76,9 @@ public class Globals {
 	 */
 	public static String scanStatus = " ";
 	
+	
+	public static String challenge = "";
+	
 	/**
 	 * Global {@link List} of {@link Website}
 	 */
@@ -123,12 +126,18 @@ public class Globals {
 	/**
 	 * Global IP address of app.
 	 */
-	public static int myIP = 0;
+	public static String myIP = "255.255.255.0";
 	
 	/**
 	 * Global boolean object to check if aggregator is reachable.
 	 */
 	public static boolean aggregatorCommunication = true;
+	
+	
+	public static byte [] AESKEY;
+	
+	
+	public static boolean isRegistered = false;
 	
 	/**
 	 * Global P2P message queue

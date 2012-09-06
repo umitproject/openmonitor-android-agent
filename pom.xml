@@ -5,7 +5,7 @@
     <groupId>org.umit.icm.mobile</groupId>
     <artifactId>icm-mobile-main</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-test-maven</version>
+    <version>1.0.0-alpha-release</version>
     <name>ICMMobileMain</name>
 
     <modules>

@@ -31,6 +31,7 @@ import org.umit.icm.mobile.connectivity.Website;
  * Holds the application wide constants.
  */
 public class Constants {
+	public static boolean DEBUG_MODE = false;
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
 	public static String MY_DH_PUBLIC_KEY_FILE = "myDHPublicKey.pub";
 	public static String ACCESS_TOKEN_FILE = "accessToken.token";
@@ -42,7 +43,9 @@ public class Constants {
 	public static String AGGR_PUBLIC_KEY_FILE = "aggrPublicKey.pub";
 	public static String PEER_SECRET_KEY_FILE = "SecretKey.sec";
 	public static int RSA_KEY_SIZE = 1024;
-	public static int AES_KEY_SIZE = 128;
+	public static int AES_KEY_SIZE = 256;
+	public static int AES_BLOCK_SIZE = AES_KEY_SIZE / 16;
+	public static byte  AES_DEFAULT_PADDING = '{';
 	public static String ICM_ROOT_DIR = "/icm-mobile";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
 	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
@@ -57,7 +60,7 @@ public class Constants {
 	public static String AGENT_VERSION_FILE = "agent.ver";
 	public static String SCAN_FILE = "scan.param";
 	public static String TWITTER_STATUS_FILE = "twitter.param";
-	public static int DEFAULT_SCAN_INTERVAL = 5;
+	public static int DEFAULT_SCAN_INTERVAL = 1;
 	public static String DEFAULT_SCAN_STATUS = "On";
 	public static String DEFAULT_TWITTER_STATUS = "Off";
 	public static String WEBSITES_DIR = ICM_ROOT_DIR + "/websites";
@@ -74,27 +77,27 @@ public class Constants {
 	public static List<Website> WEBSITE_LIST = new ArrayList<Website>()
 	{ 
 
-	/**
+		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 6933062698660638968L;
 
 	{
-		add(new Website("http://www.google.com", "false", "true", 1001, 0));
-		add(new Website("http://www.facebook.com", "false", "true", 1002, 0));
-		add(new Website("http://www.youtube.com", "false", "true", 1003, 0));
-		add(new Website("http://www.twitter.com", "false", "true", 1004, 0));
-		add(new Website("http://www.yahoo.com", "false", "true", 1005, 0));
-		add(new Website("http://www.cnn.com", "false", "true", 1006, 0));
-		add(new Website("http://www.bbc.com", "false", "true", 1007, 0));
-		add(new Website("http://www.gmail.com", "false", "true", 1008, 0));
-		add(new Website("http://www.umitproject.org", "false", "true", 1009, 0));
-		add(new Website("http://www.flickr.com", "false", "true", 1010, 0));
-		add(new Website("http://www.hotmail.com", "false", "true", 1011, 0));
+		add(new Website("http://www.google.com", "false", "true", "1001", 0));
+		add(new Website("http://www.facebook.com", "false", "true", "1002", 0));
+		add(new Website("http://www.youtube.com", "false", "true", "1003", 0));
+		add(new Website("http://www.twitter.com", "false", "true", "1004", 0));
+		add(new Website("http://www.yahoo.com", "false", "true", "1005", 0));
+		add(new Website("http://www.cnn.com", "false", "true", "1006", 0));
+		add(new Website("http://www.bbc.com", "false", "true", "1007", 0));
+		add(new Website("http://www.gmail.com", "false", "true", "1008", 0));
+		add(new Website("http://www.umitproject.org", "false", "true", "1009", 0));
+		add(new Website("http://www.flickr.com", "false", "true","1010", 0));
+		add(new Website("http://www.hotmail.com", "false", "true", "1011", 0));
 	}};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
-	public static String AGGREGATOR_URL = "http://icm-dev.appspot.com";	
+	public static String AGGREGATOR_URL = "http://east1.openmonitor.org";	
 	public static String AGGR_REGISTER_AGENT = "/api/registeragent/";
 	public static String AGGR_GET_PEER_LIST = "/api/getpeerlist/";
 	public static String AGGR_CHECK_AGGREGATOR = "/api/checkaggregator/";	
@@ -107,10 +110,14 @@ public class Constants {
 	public static String AGGR_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
 	public static String AGGR_SERVICE_SUGGESTION = "/api/servicesuggestion/";
 	public static String AGGR_TESTS = "/api/tests/";
-	public static String AGGR_LOGIN = "/api/loginagent/";
+	public static String AGGR_LOGIN_1 = "/api/loginagent/";
+	public static String AGGR_LOGIN_2 = "/api/loginagent2/";
 	public static String AGGR_LOGOUT = "/api/logoutagent/";
+	public static String AGGR_GET_BANLIST = "/api/get_banlist/";
+	public static String AGGR_GET_BANNETS = "/api/get_bannets/";
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
+	public static String AGGR_REGISTER_USER = "/accounts/register/";
 	public static int DEFAULT_TESTS_VERSION = 1;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
@@ -121,33 +128,21 @@ public class Constants {
 		 * 
 		 */
 		private static final long serialVersionUID = 2L;
-		private List<Integer> ports = new ArrayList<Integer>();
 
 		{
-			ports.add(443);			
-			add(new Service("https", ports, "203.135.62.113" ,"open", "true", 2001, 0));
-			ports.clear();
-			ports.add(80);												
-			add(new Service("http", ports, "www.google.com" ,"open", "true", 2001, 0));
-			ports.add(21);						
-			add(new Service("ftp", ports, "ftp.secureftp-test.com", "open", "true", 2001, 0));
-			ports.clear();
-			ports.add(995);			
-			add(new Service("pop3", ports, "pop.gmail.com", "open", "true", 2001, 0));
-			ports.clear();
-			ports.add(993);			
-			add(new Service("imap", ports, "imap.gmail.com", "open", "true", 2001, 0));
-			ports.clear();
-			ports.add(1863);			
-			add(new Service("msn", ports, "messenger.hotmail.com", "open", "true", 2001, 0));
-			ports.clear();		
-			ports.add(5222);			
-			add(new Service("gtalk", ports, "talk.google.com", "open", "true", 2001, 0));
-			ports.clear();	
+			add(new Service("https", 443, "203.135.62.113" ,"open", "true", "2001", 0));
+			add(new Service("http", 80, "www.google.com" ,"open", "true", "2001", 0));
+			add(new Service("ftp", 21, "ftp.secureftp-test.com", "open", "true", "2001", 0));
+			add(new Service("pop3", 995, "pop.gmail.com", "open", "true", "2001", 0));
+			add(new Service("imap", 993, "imap.gmail.com", "open", "true", "2001", 0));
+			add(new Service("msn", 1863, "messenger.hotmail.com", "open", "true", "2001", 0));
+			add(new Service("gtalk", 5222, "talk.google.com", "open", "true", "2001", 0));
+			
 		
 		}};
 		public static boolean RUN_PROFILER = false;
 		public static long DEFAULT_AGENT_ID = 911;
+		public static long AGENT_ID = 0;
 		public static String DEFAULT_TOKEN = "myToken";
 		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
 		public static String TWITTER_CONSUMER_KEY_SECRET 

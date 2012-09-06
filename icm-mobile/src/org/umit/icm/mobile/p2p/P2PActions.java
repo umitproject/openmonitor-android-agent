@@ -26,7 +26,6 @@ import java.math.BigInteger;
 import java.security.PublicKey;
 
 import org.apache.commons.codec.binary.Base64;
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;

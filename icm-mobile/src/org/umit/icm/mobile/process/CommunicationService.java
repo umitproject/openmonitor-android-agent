@@ -37,7 +37,6 @@ import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
 import android.app.Service;
 import android.content.Context;
@@ -107,10 +106,6 @@ public class CommunicationService extends Service {
 			public void run() {
 				if(Globals.aggregatorCommunication == true) {
 					try {		
-						RequestHeader requestHeader = RequestHeader.newBuilder()
-						.setAgentID(Globals.runtimeParameters.getAgentID())
-						.build();
-						
 						GetPeerList getPeerList = GetPeerList.newBuilder()
 						.build();
 						AggregatorRetrieve.getPeerList(getPeerList);
@@ -125,10 +120,6 @@ public class CommunicationService extends Service {
 						e.printStackTrace();
 					}
 				} else if(Globals.p2pCommunication == true) {
-					RequestHeader requestHeader = RequestHeader.newBuilder()
-					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.build();
-					
 					Iterator<AgentData> iterator 
 					= Globals.runtimesList.getSuperPeersList().iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
@@ -196,10 +187,6 @@ public class CommunicationService extends Service {
 					lon = Globals.currentLocationNetwork.getLongitude();
 				}
 				if(Globals.aggregatorCommunication == true) {	
-					RequestHeader requestHeader = RequestHeader.newBuilder()
-					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.build();
-					
 					Location location = Location.newBuilder()
 					.setLatitude(lat)
 					.setLongitude(lon)
@@ -225,10 +212,6 @@ public class CommunicationService extends Service {
 						e.printStackTrace();
 					}							
 				} else if(Globals.p2pCommunication == true) {
-					RequestHeader requestHeader = RequestHeader.newBuilder()
-					.setAgentID(Globals.runtimeParameters.getAgentID())
-					.build();
-					
 					Iterator<AgentData> iterator 
 					= Globals.runtimesList.getSuperPeersList().iterator();
 					Location location = Location.newBuilder()

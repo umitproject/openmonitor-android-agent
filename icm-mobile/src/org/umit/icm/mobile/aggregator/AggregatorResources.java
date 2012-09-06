@@ -21,27 +21,39 @@
 
 package org.umit.icm.mobile.aggregator;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.restlet.data.Form;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
-
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlistResponse;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannetsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
-
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
+import org.umit.icm.mobile.proto.MessageProtos.LoginStep1;
+import org.umit.icm.mobile.proto.MessageProtos.LoginStep2;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
 import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewTestsResponse;
@@ -56,7 +68,9 @@ import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AESCrypto;
+import org.umit.icm.mobile.utils.AggregatorCrypto;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
@@ -108,13 +122,65 @@ public class AggregatorResources {
 	 public static RegisterAgentResponse registerAgent(
 			 RegisterAgent registerAgent,
 			 ClientResource clientResource) 
-	 throws UnsupportedEncodingException, IOException, RuntimeException {		 		 
-		 Form form = new Form();
-		 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(registerAgent.toByteArray())));
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null)); 		 
-		 return RegisterAgentResponse.parseFrom((Base64.decodeBase64(response.getText().getBytes())));
+	 throws Exception{
+		 try{
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());	 
+		 String key = AggregatorCrypto.rsaAggregatorPublicKeyEncypt(Base64.encodeBase64(Globals.keyManager.getAESKey()));	 
+	
+		 HttpClient httpClient = new DefaultHttpClient();
+		 HttpPost httpPost = new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_REGISTER_AGENT);	 	 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("key", key ));
+		 pairs.add(new BasicNameValuePair("agentID",Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httpPost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 HttpResponse response = httpClient.execute(httpPost); 
+		 if(Constants.DEBUG_MODE) {
+			 System.out.println("Sending key : " + key);
+			 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
+			 System.out.println("Sending msg : " + msg);	 
+		 }
+		 
+/*		 form.add("key", key);
+		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
+		 form.add(Constants.AGGR_MSG_KEY, msg );
+		 
+		 Representation response=null;
+		 try{
+			 response= clientResource.post(form.getWebRepresentation(null));
+			 System.out.println("Got response !! , response : " + response.getText());
+			 System.out.println( "Got Context: " + clientResource.getContext() );
+			 System.out.println( "Got Response: " + clientResource.getResponse());
+			 System.out.println( "Got Resonse Attribute : " + clientResource.getResponseAttributes() );
+			 System.out.println( "Got Resonse Entity: " + clientResource.getResponseEntity() );
+		 }catch(ResourceException e){
+			 System.out.println("Got here?!");
+			 System.out.println(e.toString());
+			 System.out.println("Status Below:");
+			 System.out.println(e.getMessage());
+			 e.printStackTrace();
+		 }*/
+		 
+		String responseBody = EntityUtils.toString(response.getEntity());
+		if(Constants.DEBUG_MODE)
+			System.out.println("--------------------------------------------GOT THIS AS RESPONSE : "+ responseBody); 	 
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		
+		if(Constants.DEBUG_MODE) {
+			for(int i = 0; i < finalResponse.length; i++) {
+				System.out.println(finalResponse[i]);
+			}
+		}
+		
+		return RegisterAgentResponse.parseFrom(finalResponse);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		 
+		return null;
 	 }
 	 
 	/**
@@ -141,30 +207,36 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetPeerListResponse getPeerList(
-			 GetPeerList getPeerList, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getPeerList.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(getPeerList.toByteArray())));
-		 }		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return GetPeerListResponse.parseFrom(plainBytes);
-		 } else {
-			 return GetPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+	 public static GetPeerListResponse getPeerList(GetPeerList getPeerList, ClientResource clientResource) throws Exception {
+		 
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(getPeerList.toByteArray());
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());	 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}*/
+		
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 
+		return GetPeerListResponse.parseFrom(finalResponse);
 		 
 	 }
 	 
@@ -192,30 +264,39 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetSuperPeerListResponse getSuperPeerList(
-			 GetSuperPeerList getSuperPeerList, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, getSuperPeerList.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {			 		
-			 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(getSuperPeerList.toByteArray())));
-		 }
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return GetSuperPeerListResponse.parseFrom(plainBytes);
-		 } else {
-			 return GetSuperPeerListResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList, ClientResource clientResource) throws Exception {
+//		 Form form = new Form();
+		 String msg = AggregatorCrypto.aesEncrypt(getSuperPeerList.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_GET_PEER_SUPER_LIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}*/
+		
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 
+		return GetSuperPeerListResponse.parseFrom(finalResponse);
+		 
 	 }
 	 
 	/**
@@ -292,31 +373,26 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static SendReportResponse sendWebsiteReport(
-			 SendWebsiteReport sendWebsiteReport, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendWebsiteReport.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(sendWebsiteReport.toByteArray())));
-		 }
+	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, ClientResource clientResource) throws Exception {
 		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return SendReportResponse.parseFrom(plainBytes);
-		 } else {
-			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(sendWebsiteReport.toByteArray());
+		
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_WEBSITE_REPORT);
+		 	 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));	 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());			 
+		 return SendReportResponse.parseFrom(finalResponse);
+		 
 	 }
 	 
 	/**
@@ -347,26 +423,23 @@ public class AggregatorResources {
 			 SendServiceReport sendServiceReport, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, sendServiceReport.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(sendServiceReport.toByteArray()))); 
-		 }		 
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return SendReportResponse.parseFrom(plainBytes);
-		 } else {
-			 return SendReportResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 String msg = AggregatorCrypto.aesEncrypt(sendServiceReport.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SEND_SERVICE_REPORT);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());		 
+		return SendReportResponse.parseFrom(finalResponse);
 	 }
 	 
 	/**
@@ -444,30 +517,41 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static NewTestsResponse checkTests(
-			 NewTests newTests, 
-			 ClientResource clientResource) 
-	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, newTests.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-				 , new String(Base64.encodeBase64(newTests.toByteArray())));
-		 }
-		 Representation response 
-		 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return NewTestsResponse.parseFrom(plainBytes);
-		 } else {
-			 return NewTestsResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+	 public static NewTestsResponse checkTests(NewTests newTests, ClientResource clientResource) throws Exception {
+
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(newTests.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_CHECK_TESTS);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}*/
+		 
+		 
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());	 
+		return NewTestsResponse.parseFrom(finalResponse);
+		 
 	 }
 	 
 	/**
@@ -498,26 +582,25 @@ public class AggregatorResources {
 			 WebsiteSuggestion websiteSuggestion, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, websiteSuggestion.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(websiteSuggestion.toByteArray())));
-		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return TestSuggestionResponse.parseFrom(plainBytes);
-		 } else {
-			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(websiteSuggestion.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_WEBSITE_SUGGESTION);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());			 
+		 return TestSuggestionResponse.parseFrom(finalResponse);
+		 
 	 }
 	 
 	/**
@@ -548,29 +631,26 @@ public class AggregatorResources {
 			 ServiceSuggestion serviceSuggestion, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, serviceSuggestion.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(serviceSuggestion.toByteArray())));
-		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return TestSuggestionResponse.parseFrom(plainBytes);
-		 } else {
-			 return TestSuggestionResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+		 String msg = AggregatorCrypto.aesEncrypt(serviceSuggestion.toByteArray());
+			
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_SERVICE_SUGGESTION);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+			
+		 byte[] finalResponse= AggregatorCrypto.aesDecrypt(responseBody.getBytes());			 
+		 return TestSuggestionResponse.parseFrom(finalResponse);
 	 }
 	 
-	/**
+	/** 
 	 * Returns a CheckAggregatorResponse object. Encodes the passed message to
 	 * {@link Base64} and generates a {@link Form} object for it. POSTs the 
 	 * WebRepresentation of the {@link Form} object to the passed 
@@ -618,7 +698,72 @@ public class AggregatorResources {
 		 } else {
 			 return CheckAggregatorResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
 		 }
+	 } 
+	 
+	 public static LoginResponse login(Login login,
+			 ClientResource clientResource,
+			 ClientResource clientResource2) 
+	throws Exception {
+		 LoginStep1 loginStep1 = loginStep1(login, clientResource);
+		 LoginResponse loginResponse = loginStep2(loginStep1, clientResource2);	 
+		 return loginResponse;
+	 } 
+	 
+	 public static LoginResponse loginStep2(LoginStep1 loginStep1, 
+			 ClientResource clientResource)
+	throws Exception {
+		 
+		 String message = loginStep1.getChallenge();
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("Challenge Received : " + message);
+		 
+//		 Form form = new Form();
+		 
+		 byte[] messageByte = message.getBytes();
+		 
+		 byte[] encryptedChallenge =  RSACrypto.Sign(Globals.keyManager.getMyPrivateKey(), messageByte);
+		 
+		 byte[] encodedEncryptedChallenge = Base64.encodeBase64(encryptedChallenge);
+		 
+		 String encodedEncryptedChallengeString = new String(encodedEncryptedChallenge);
+		 
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("Signed Challenge Send : " + encodedEncryptedChallengeString); 
+		 
+		 LoginStep2 loginStep2 = LoginStep2.newBuilder()
+				 .setProcessID(loginStep1.getProcessID())
+				 .setCipheredChallenge(encodedEncryptedChallengeString)
+				 .build();
+		 	 
+		 byte[] msg = Base64.encodeBase64(loginStep2.toByteArray());
+		 
+		 String msg_string = new String(msg);
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_LOGIN_2);
+		 	 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("msg", msg_string));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());	 
+		 
+/*		 form.add(Constants.AGGR_MSG_KEY,msg_string);
+		 
+		 Representation response=null;
+		 try{
+		 response= clientResource.post(form.getWebRepresentation(null));
+		 System.out.println("loginStep2 Response: " + clientResource.getResponse().toString());
+		 }catch(ResourceException e){
+			 e.printStackTrace();
+		 }*/ 
+		 
+		return LoginResponse.parseFrom(Base64.decodeBase64(responseBody.getBytes()));
+		 
 	 }
+	 
+	 
 	 
 	/**
 	 * Returns a LoginResponse object. Encodes the passed message to
@@ -644,30 +789,38 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static LoginResponse login(
+	 public static LoginStep1 loginStep1(
 			 Login login, 
 			 ClientResource clientResource) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, login.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(login.toByteArray())));
-		 }
-		 Representation response 
-			 = clientResource.post(form.getWebRepresentation(null));
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] plainBytes = AESCrypto.decrypt(symmetricKey, 
-					 Base64.decodeBase64(response.getText().getBytes()));
-			 return LoginResponse.parseFrom(plainBytes);
-		 } else {
-			 return LoginResponse.parseFrom(Base64.decodeBase64(response.getText().getBytes()));
-		 }
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.encodeData(login.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGIN_1);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 byte[] responseByte = Base64.decodeBase64(responseBody.getBytes());		 
+		 
+		 return LoginStep1.parseFrom(responseByte);
+
+/*		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response=null;
+		 try{
+		 response= clientResource.post(form.getWebRepresentation(null));
+		 }catch(ResourceException e){
+			 e.printStackTrace();
+		 }*/	 
+		 
 	 }
 	 
 	/**
@@ -707,6 +860,74 @@ public class AggregatorResources {
 			 clientResource.post(form.getWebRepresentation(null)); 				 
 	 }
 	 
-
+	 
+	 
+	 public static GetBanlistResponse getBanlist(GetBanlist getBanlists,ClientResource clientResource) throws Exception{
+		 
+//		 Form form = new Form();
+		 
+		 String msg= AggregatorCrypto.aesEncrypt(getBanlists.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 Representation response =null;
+		 try{
+		 response = clientResource.post(form.getWebRepresentation(null));
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }*/
+		 
+		 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 
+		 return GetBanlistResponse.parseFrom(finalResponse);
+		 
+	 }
+	 
+	 
+	 public static GetBannetsResponse getBannets(GetBannets getBannets, ClientResource clientResource)throws Exception{
+		 
+//		 Form form = new Form();
+		 
+		 String msg = AggregatorCrypto.aesEncrypt(getBannets.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost= new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_GET_BANLIST);
+		 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 String responseBody = EntityUtils.toString(response.getEntity());	 
+		 
+/*		 form.add("agentID", Globals.runtimeParameters.getAgentID());
+		 form.add(Constants.AGGR_MSG_KEY, msg);
+		 
+		 Representation response= null;
+		 
+		try{
+			 response = clientResource.post(form.getWebRepresentation(null));
+		}catch(Exception e){
+			 e.printStackTrace();
+		}*/
+		 
+		 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 return GetBannetsResponse.parseFrom(finalResponse);
+	 }
 
 }

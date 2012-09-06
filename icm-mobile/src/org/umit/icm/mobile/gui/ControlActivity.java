@@ -30,19 +30,17 @@ import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
-import org.umit.icm.mobile.gui.dialogs.IntervalDialog;
 import org.umit.icm.mobile.gui.dialogs.MapSelectionDialog;
-import org.umit.icm.mobile.gui.dialogs.SuggestionDialog;
+import org.umit.icm.mobile.gui.dialogs.ServiceSuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
+import org.umit.icm.mobile.gui.dialogs.WebsiteSuggestionDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 
 import twitter4j.TwitterException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -53,6 +51,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -65,23 +65,24 @@ import android.widget.Toast;
 
 public class ControlActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button sendButton, intervalButton, scanButton
+	private Button WebsiteSuggestButton,ServiceSuggestButton, scanButton
 	, filterButton, servicesFilterButton, mapSelectionButton,
-	enableTwitterButton, aboutButton;	
+	enableTwitterButton, aboutButton,bugReportButton;	
 	private ProgressDialog progressDialog;
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);    
         setContentView(R.layout.controlactivity);
-        sendButton = (Button) this.findViewById(R.id.selected);
-        intervalButton = (Button) this.findViewById(R.id.intervalButton);
+        WebsiteSuggestButton = (Button) this.findViewById(R.id.suggestWebsite);
+        ServiceSuggestButton = (Button) this.findViewById(R.id.suggestService);
         scanButton = (Button) this.findViewById(R.id.scanButton);
-        filterButton = (Button) this.findViewById(R.id.filterButton);
-        servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
+//        filterButton = (Button) this.findViewById(R.id.filterButton);
+ //       servicesFilterButton = (Button) this.findViewById(R.id.serviceFilterButton);
         mapSelectionButton = (Button) this.findViewById(R.id.mapSelectionButton);
         enableTwitterButton = (Button) this.findViewById(R.id.enableTwitterButton);
-        aboutButton = (Button) this.findViewById(R.id.aboutButton);
+        bugReportButton = (Button) this.findViewById(R.id.bugReportButton);
+        aboutButton = (Button) this.findViewById(R.id.aboutButton);        
 		scanButton.setText(getString(R.string.scan_text)
        				+" "+ getString(R.string.scan_off));
 		try {
@@ -109,10 +110,19 @@ public class ControlActivity extends Activity {
 		registerReceiver(receiver
 				, new IntentFilter("org.umit.icm.mobile.CONTROL_ACTIVITY"));
    	   	   	        
-        sendButton.setOnClickListener(new OnClickListener() { 
+        WebsiteSuggestButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       		
-	       		SuggestionDialog suggestionDialog = 
-	       			new SuggestionDialog(ControlActivity.this, "", new OnReadyListener());
+	       		WebsiteSuggestionDialog websiteSuggestionDialog = 
+	       			new WebsiteSuggestionDialog(ControlActivity.this, "", new OnReadyListener());
+	            websiteSuggestionDialog.show();	        		
+	       	}
+
+	    }  );
+        
+        ServiceSuggestButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		ServiceSuggestionDialog suggestionDialog = 
+	       			new ServiceSuggestionDialog(ControlActivity.this, "", new OnReadyListener());
 	            suggestionDialog.show();	        		
 	       	}
 
@@ -152,7 +162,7 @@ public class ControlActivity extends Activity {
 
 	    }  );
         
-        filterButton.setOnClickListener(new OnClickListener() { 
+  /*      filterButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	       				            		 
 	       		Intent intent = new Intent(ControlActivity.this, WebsiteFilterActivity.class);	       		
 	            startActivity(intent); 
@@ -166,24 +176,27 @@ public class ControlActivity extends Activity {
 	            startActivity(intent); 
 	       	}
 
-	   	}  );
+	   	}  );*/
         
-        
-        intervalButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       			       		       			
-	       		IntervalDialog intervalDialog = 
-	       			new IntervalDialog(ControlActivity.this, "", new OnReadyIntervalListener());
-	            intervalDialog.show(); 
-	       		
+        bugReportButton.setOnClickListener(new OnClickListener() { 
+	       	public void onClick(View v) {  	       		
+	       		Intent intent = new Intent(ControlActivity.this, BugReportActivity.class);
+	       		startActivity(intent);
 	       	}
 
-	   	}  );
+	    }  );
         
         aboutButton.setOnClickListener(new OnClickListener() { 
-	       	public void onClick(View v) {  	       			       		       			
+	       	public void onClick(View v) {  	       
+	       		
+	       		String msg = getString(R.string.about_text) + "\n" + getString(R.string.link_to_open_monitor) + "\n" + getString(R.string.link_to_umit) + "\n" + getString(R.string.icons_by);
+	       		
+	       		final SpannableString spannableString = new SpannableString(msg);
+	       		Linkify.addLinks(spannableString, Linkify.ALL);
+	       		
 	       		AlertDialog alertDialog = new AlertDialog.Builder(ControlActivity.this).create();
 	       		alertDialog.setTitle(getString(R.string.about_button));
-	       		alertDialog.setMessage(getString(R.string.about_text));
+	       		alertDialog.setMessage(spannableString);
 	       		alertDialog.setIcon(R.drawable.umit_128);
 	       		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int which) {
@@ -232,42 +245,39 @@ public class ControlActivity extends Activity {
               
     }
     
-    private class OnReadyListener implements SuggestionDialog.ReadyListener {
+    private class OnReadyListener implements WebsiteSuggestionDialog.ReadyListener ,ServiceSuggestionDialog.ReadyListener{
         @Override
         public void ready(String selection) {            
             StringTokenizer stringTokenizer 
             = new StringTokenizer(selection, "&");
             String option = stringTokenizer.nextToken();
             String suggestion = stringTokenizer.nextToken();
-            String email = stringTokenizer.nextToken();
+//            String email = stringTokenizer.nextToken();
             String host = stringTokenizer.nextToken();
-            String ip = stringTokenizer.nextToken();          
+            String ip = stringTokenizer.nextToken();
+            String port = stringTokenizer.nextToken();
             if(option.equals("Website")) {          
             	  Toast.makeText(ControlActivity.this
                   		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " " + email
+                  		+ " " + option + " " + suggestion + " " 
                   		, Toast.LENGTH_LONG).show();
-            	new SendWebsiteTask().execute(email, suggestion);
+            	new SendWebsiteTask().execute(suggestion);
             }
             else {
             	  Toast.makeText(ControlActivity.this
                   		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " " + email 
+                  		+ " " + option + " " + suggestion + " "  
                   		+ " " + host + " " + ip
+                  		+ " " + port
                   		, Toast.LENGTH_LONG).show();
-            	new SendServiceTask().execute(email, suggestion
-            			,host, ip);
+            	new SendServiceTask().execute(suggestion
+            			,host, ip, port);
             }
             
         }
     }
     
-    private class OnReadyIntervalListener implements IntervalDialog.ReadyIntervalListener {
-        @Override
-        public void ready(String interval) {
-            Toast.makeText(ControlActivity.this, interval, Toast.LENGTH_LONG).show();
-        }
-    }
+    
     
     private class SendWebsiteTask extends AsyncTask<String,String,String> {
     	  
@@ -281,13 +291,10 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
 			
         	WebsiteSuggestion websiteSuggestion
         	= WebsiteSuggestion.newBuilder()
-        	.setWebsiteURL(args[1])
+        	.setWebsiteURL(args[0])
         	.build();
         	
         	if(Globals.aggregatorCommunication == true) {
@@ -344,15 +351,13 @@ public class ControlActivity extends Activity {
     	}
          
 		protected String doInBackground(String... args) {
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
-			
+
         	ServiceSuggestion serviceSuggestion
         	= ServiceSuggestion.newBuilder()
-        	.setServiceName(args[1])
-        	.setHostName(args[2])
-        	.setIp(args[3])      
+        	.setServiceName(args[0])
+        	.setHostName(args[1])
+        	.setIp(args[2])
+        	.setPort(Integer.parseInt(args[3]))
         	.build();
 
         	if(Globals.aggregatorCommunication == true) {

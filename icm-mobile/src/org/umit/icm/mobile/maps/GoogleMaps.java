@@ -191,9 +191,8 @@ public class GoogleMaps implements AbstractMap {
 	
 	public List<OverlayItem> getOverlayList(Context context) {
 		List<OverlayItem> overlayList = new ArrayList<OverlayItem>();
-		
-		Iterator<Event> iterator 
-		= Globals.runtimesList.getEventsList().iterator();
+				
+		Iterator<Event> iterator = Globals.runtimesList.getEventsList().iterator();
 		while(iterator.hasNext()){
 			Event event = iterator.next();
 			Drawable drawable = context.getResources().getDrawable(R.drawable.greendot);

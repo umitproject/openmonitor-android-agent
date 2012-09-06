@@ -21,37 +21,23 @@
 
 package org.umit.icm.mobile.process;
 
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
-import org.umit.icm.mobile.proto.MessageProtos.Login;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 
+import android.app.Activity;
 import android.content.Context;
 
 public class InitializationThread extends Thread {
     
 	Context context;
+	Activity activity;
+	
     public InitializationThread(Context context) {
         this.context = context;
+        this.activity = (Activity) context;
     }
-    public void run() {    	
+    public void run() {  
+    	if(Constants.DEBUG_MODE)
+    		System.out.println("Inside InitializationThread#run");
 		Initialization.initializeIP(context);
 		
-		RequestHeader requestHeader = RequestHeader.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.build();
-		
-		Login login = Login.newBuilder()
-		.setIp(Integer.toString(Globals.myIP))
-		.build();
-		try {
-			AggregatorRetrieve.login(login);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Initialization.loadLists();
-    	Initialization.initializeEventsList();
-    	Initialization.initializerPeersList();
-    	Initialization.startServices(context);
     }
 }

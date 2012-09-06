@@ -24,8 +24,6 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.umit.icm.mobile.process.Globals;
 
@@ -70,9 +68,8 @@ public class ServiceMSN {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(1863);												
-		return new Service("msn", ports, "messenger.hotmail.com" , "open", "true", 0, 0);
+		Integer port = 1863;
+		return new Service("msn", port, "messenger.hotmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**

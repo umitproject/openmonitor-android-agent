@@ -42,7 +42,7 @@ public class AuthenticatedPeersTests extends AndroidTestCase {
     	.setMod("mod1")
     	.build();
     	AgentData agentData = AgentData.newBuilder()
-    	.setAgentID(10)
+    	.setAgentID("10")
     	.setAgentIP("IP")
     	.setAgentPort(8000)
     	.setPeerStatus("On")
@@ -57,7 +57,7 @@ public class AuthenticatedPeersTests extends AndroidTestCase {
     	.setMod("mod2")
     	.build();
     	AgentData agentData2 = AgentData.newBuilder()
-    	.setAgentID(20)
+    	.setAgentID("20")
     	.setAgentIP("IP")
     	.setAgentPort(8000)
     	.setPeerStatus("On")

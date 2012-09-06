@@ -26,14 +26,14 @@ import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
-
+import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
+import org.umit.icm.mobile.proto.MessageProtos.GetBannets;
 import org.umit.icm.mobile.proto.MessageProtos.GetEvents;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetPeerListResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerListResponse;
-
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginResponse;
 import org.umit.icm.mobile.proto.MessageProtos.Logout;
@@ -80,6 +80,9 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
 	 throws Exception {
+		 
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("This is from inside AggregatorRetive#registerAgent");
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
@@ -398,10 +401,18 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean login(Login login) 
 	 throws Exception {
+		 
+		 if(Constants.DEBUG_MODE)
+		 	System.out.println("Inside AggregatorRetrieve#login");
+		 	
 		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN);
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_1);
+		 	
+		 	ClientResource clientResource2
+		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_2);
+		 	
 		 	LoginResponse loginResponse
-		 	= AggregatorResources.login(login, clientResource);
+		 	= AggregatorResources.login(login, clientResource,clientResource2);
 		 	return AggregatorActions.loginAction(loginResponse);			
 	 }
 	 
@@ -424,4 +435,16 @@ public class AggregatorRetrieve {
 		 	AggregatorResources.logout(logout, clientResource);		 				
 	 }
 	 
+	 public synchronized static void getBanlist(GetBanlist getBanlist) throws Exception{
+		 
+		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANLIST);
+		 AggregatorResources.getBanlist(getBanlist, clientResource);
+	 }
+	 
+	 public synchronized static void getBannets(GetBannets getBannets) throws Exception{
+		 
+		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANNETS);
+		 AggregatorResources.getBannets(getBannets, clientResource);
+		 
+	 }
 }

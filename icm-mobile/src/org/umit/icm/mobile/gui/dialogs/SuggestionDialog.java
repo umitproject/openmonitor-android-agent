@@ -41,7 +41,7 @@ public class SuggestionDialog extends Dialog {
 	String selection;
 	Context contextControl;
     private ReadyListener readyListener;
-    EditText etSuggest, etEmail, etHost, etIP;
+    private EditText etSuggest, etHost, etIP,etPort;
     private RadioButton sRB, wRB;
     private final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -70,9 +70,10 @@ public class SuggestionDialog extends Dialog {
         Button buttonOK = (Button) findViewById(R.id.Button01);
         buttonOK.setOnClickListener(new sendListener());
         etSuggest = (EditText) findViewById(R.id.EditText01);
-        etEmail = (EditText) findViewById(R.id.EditTextEmail);
+ //     etEmail = (EditText) findViewById(R.id.EditTextEmail);
         etHost = (EditText) findViewById(R.id.EditTextHost);
         etIP = (EditText) findViewById(R.id.EditTextIP);
+        etPort = (EditText) findViewById(R.id.EditTextPORT);
         wRB = (RadioButton)findViewById(R.id.websiterb);
         sRB = (RadioButton)findViewById(R.id.servicerb);       
     }
@@ -86,31 +87,31 @@ public class SuggestionDialog extends Dialog {
 		@Override
 		public void onClick(View arg0) {	
 			Context context = SuggestionDialog.this.getContext();
-			if((etSuggest.getText().toString().equals("")) && (etEmail.getText().toString().equals(""))){
+			if((etSuggest.getText().toString().equals(""))){
         		
-        		CharSequence text = context.getString(R.string.edit_text_suggestion);
+        		CharSequence text = context.getString(R.string.suggested_website_name_blank);
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
         		toast.show();        		
         	} 
-        	else if(!checkEmail(etEmail.getText().toString())){
+/*        	else if(!checkEmail(etEmail.getText().toString())){
         		
         		CharSequence text = context.getString(R.string.toast_email);
         		int duration = Toast.LENGTH_SHORT;
 
         		Toast toast = Toast.makeText(context, text, duration);
         		toast.show();
-        	}
+        	} */
         	else{
     	    		if(wRB.isChecked() == true) {
     	    			if((etHost.getText().toString().equals("")) 
     	    					&& (etIP.getText().toString().equals(""))){
 	    	    			readyListener.ready(wRB.getText() 
-	    	    	    			+ "&" + etSuggest.getText().toString() 
-	    	    	    			+ "&" + etEmail.getText().toString()    	    				    	    			
+	    	    	    			+ "&" + etSuggest.getText().toString()     				    	    			
 	    	    	    			+ "&" + "host" 
-	    	    					+ "&" + "ip");
+	    	    					+ "&" + "ip"
+	    	    	    			+ "&" + "port");
 	    	                SuggestionDialog.this.dismiss(); 
     	    			} else {
     	    				CharSequence text = context.getString(R.string.remove_host_ip);
@@ -123,7 +124,7 @@ public class SuggestionDialog extends Dialog {
     	    			    	    		
     	    		else if(sRB.isChecked() == true) {
     	    			if((!etHost.getText().toString().equals("")) 
-    	    					&& (!etIP.getText().toString().equals(""))){
+    	    					&& (!etIP.getText().toString().equals("")) && (!etPort.getText().toString().equals("")) ){
     	    				if(!checkIP(etIP.getText().toString())){
     	    	        		
     	    	        		CharSequence text = context.getString(R.string.toast_ip);
@@ -131,12 +132,19 @@ public class SuggestionDialog extends Dialog {
 
     	    	        		Toast toast = Toast.makeText(context, text, duration);
     	    	        		toast.show();
-    	    	        	} else {
+    	    	        	}else if(!checkPort(etPort.getText().toString())){
+    	    	        		CharSequence text = context.getString(R.string.toast_port);
+    	    	        		int duration = Toast.LENGTH_SHORT;
+
+    	    	        		Toast toast = Toast.makeText(context, text, duration);
+    	    	        		toast.show();
+    	    	        	}
+    	    				else {
 		    	    			readyListener.ready(sRB.getText()
 		    	    	    			+ "&" + etSuggest.getText().toString() 
-		    	    	    			+ "&" + etEmail.getText().toString()
 		    	    	    			+ "&" + etHost.getText().toString() 
-		    	    					+ "&" + etIP.getText().toString());
+		    	    					+ "&" + etIP.getText().toString()
+		    	    					+ "&" + etPort.getText().toString());
 		    	                SuggestionDialog.this.dismiss();
     	    	        	}
     	    			} else {
@@ -161,12 +169,21 @@ public class SuggestionDialog extends Dialog {
 
     	}
     
-    private boolean checkEmail(String email) {
+    public boolean checkEmail(String email) {
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
     
     private boolean checkIP(String ip) {
         return IP_PATTERN.matcher(ip).matches();
+    }
+    
+    private boolean checkPort(String port){
+    	try{
+    		Integer.parseInt(port);
+    	}catch(Exception e){
+    		return false;
+    	}
+    	return true;
     }
     
 }

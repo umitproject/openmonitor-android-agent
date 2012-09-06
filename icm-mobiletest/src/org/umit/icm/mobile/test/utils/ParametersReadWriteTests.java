@@ -49,7 +49,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
 		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID(1)
+    	.setAgentID("1")
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey1)
@@ -62,7 +62,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
 		.build();
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID(2)
+    	.setAgentID("2")
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey2)
@@ -88,7 +88,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
 		.build();
     	AgentData agent1 = AgentData.newBuilder()
     	.setAgentIP("IP1")
-    	.setAgentID(1)
+    	.setAgentID("1")
     	.setAgentPort(11)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey1)
@@ -101,7 +101,7 @@ public class ParametersReadWriteTests extends AndroidTestCase {
 		.build();    	
     	AgentData agent2 = AgentData.newBuilder()
     	.setAgentIP("IP2")
-    	.setAgentID(2)
+    	.setAgentID("2")
     	.setAgentPort(12)
     	.setPeerStatus("On")
     	.setPublicKey(rsaKey2)
@@ -164,8 +164,8 @@ public void testTestsList() throws Throwable {
 	Test test1 = Test.newBuilder()
 	.setExecuteAtTimeUTC(11)
 	.setWebsite(website)
-	.setTestID(31)    	
-	.setTestType("WEB")
+	.setTestID("31")    	
+	.setTestType(1)
 	.build();
 	
 	Service service = Service.newBuilder()
@@ -176,9 +176,9 @@ public void testTestsList() throws Throwable {
 	
 	Test test2 = Test.newBuilder()
 	.setExecuteAtTimeUTC(12)    	
-	.setTestID(32)
+	.setTestID("32")
 	.setService(service)
-	.setTestType("SERVICE")
+	.setTestType(2)
 	.build();
     	
     	List<Test> testList = new ArrayList<Test>();

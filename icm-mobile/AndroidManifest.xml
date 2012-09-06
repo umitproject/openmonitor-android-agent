@@ -5,9 +5,9 @@
       android:versionName="1.0">
 
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/open_monitor" android:label="@string/app_name">
     <uses-library android:name="com.google.android.maps" />  
-        <activity android:name=".Main"
+        <activity android:name=".gui.LoginActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -28,6 +28,7 @@
             	<action android:name="org.umit.icm.mobile.CONTROL_ACTIVITY" />            	
             </intent-filter>
         </activity>
+        <activity android:name=".Main"></activity>
         <activity android:name=".gui.InformationActivity"></activity>
         <activity android:name=".gui.ISPActivity"></activity>
         <activity android:name=".gui.MapActivityTab"></activity>
@@ -35,6 +36,7 @@
         <activity android:name=".gui.WebsiteFilterActivity"></activity>
         <activity android:name=".gui.ServiceFilterActivity"></activity>
         <activity android:name=".gui.ServiceActivity"></activity>
+        <activity android:name=".gui.BugReportActivity"></activity>
         <service android:name=".connectivity.ConnectivityService"></service>
         <service android:name=".process.CommunicationService"></service>
     

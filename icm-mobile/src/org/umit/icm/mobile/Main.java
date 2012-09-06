@@ -29,10 +29,8 @@ import org.umit.icm.mobile.connectivity.ServicePackets;
 import org.umit.icm.mobile.gui.ControlActivity;
 import org.umit.icm.mobile.gui.InformationActivity;
 import org.umit.icm.mobile.gui.MapActivityTab;
-import org.umit.icm.mobile.gui.dialogs.LoginDialog;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
-import org.umit.icm.mobile.process.InitializationThread;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.TabActivity;
@@ -67,18 +65,18 @@ public class Main extends TabActivity {
         Intent intent = new Intent().setClass(this, InformationActivity.class)
         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         TabHost.TabSpec tabSpec = tabHost.newTabSpec(getString(R.string.tab_information)).setIndicator(getString(R.string.tab_information),
-                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+                          resources.getDrawable(R.drawable.tabs_icon_info)).setContent(intent);
         tabHost.addTab(tabSpec);
         
         intent = new Intent().setClass(this, MapActivityTab.class)
         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         tabSpec = tabHost.newTabSpec(getString(R.string.tab_map)).setIndicator(getString(R.string.tab_map),
-                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+                          resources.getDrawable(R.drawable.tabs_icon_map)).setContent(intent);
         tabHost.addTab(tabSpec);
 
         intent = new Intent().setClass(this, ControlActivity.class);
         tabSpec = tabHost.newTabSpec(getString(R.string.tab_control)).setIndicator(getString(R.string.tab_control),
-                          resources.getDrawable(R.drawable.tabs_icons)).setContent(intent);
+                          resources.getDrawable(R.drawable.tabs_icon_ctrl)).setContent(intent);
         tabHost.addTab(tabSpec);
     
         tabHost.setCurrentTab(0);
@@ -90,18 +88,11 @@ public class Main extends TabActivity {
     		toast.show();
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
-	        try { /*Register Agent should be called here*/	
-	        	LoginDialog LoginDialog = 
-	       			new LoginDialog(Main.this);
-	            LoginDialog.show();	
-	        	Initialization.checkProfiler();		
-				Initialization.checkFiles();
-				new InitializationThread(Main.this).start();										
+	        try {
+				Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
-			} catch (IOException e) {
-				e.printStackTrace();
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

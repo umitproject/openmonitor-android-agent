@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>org.umit.icm.mobile</groupId>
 		<artifactId>icm-mobile-main</artifactId>
-		<version>1.0.0-test-maven</version>
+		<version>1.0.0-alpha-release</version>
 	</parent>
 
-	<groupId>org.umit.icm.mobile</groupId>
+	<groupId>org.umit.icm.mobile.agent</groupId>
 	<artifactId>icm-mobile</artifactId>
-	<version>1.0.0-test-maven</version>
+	<version>1.0.0-alpha-release</version>
 	<packaging>apk</packaging>
 	<name>ICMMobile</name>
 

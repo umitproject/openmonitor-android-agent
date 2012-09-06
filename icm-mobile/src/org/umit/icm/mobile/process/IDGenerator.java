@@ -41,7 +41,7 @@ public class IDGenerator {
 	@return        	long
 	 * @throws NoSuchAlgorithmException 
 	 */
-	public static String generateReportID(long agentID, long timeUTC, long testID) throws NoSuchAlgorithmException {
+	public static String generateReportID(String agentID, long timeUTC, String testID) throws NoSuchAlgorithmException {
 		MessageDigest messageDigest = MessageDigest.getInstance("MD5");		
 		messageDigest.update(String.valueOf((agentID)).getBytes());
 		messageDigest.update(String.valueOf((timeUTC)).getBytes());

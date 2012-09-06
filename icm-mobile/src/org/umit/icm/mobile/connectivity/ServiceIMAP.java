@@ -24,8 +24,6 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -88,9 +86,8 @@ public class ServiceIMAP {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(993);												
-		return new Service("imap", ports, "imap.gmail.com" , "open", "true", 0, 0);
+		Integer port = 993;
+		return new Service("imap", port, "imap.gmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**

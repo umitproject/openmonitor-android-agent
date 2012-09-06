@@ -279,15 +279,14 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
-	public static void writeWebsite(String dir
-			, Website data) throws IOException , RuntimeException{
+	public static void writeWebsite(String dir, Website data) throws IOException , RuntimeException{
+		
 		ObjectOutputStream objOutStream = null;
 		sdCard = Environment.getExternalStorageDirectory();
-		File keyDir = new File (sdCard.getAbsolutePath() 
-    			+ dir);
+		File keyDir = new File (sdCard.getAbsolutePath() + dir);
 		keyDir.mkdirs();
-    	File file = new File(keyDir, data.getUrl()
-    			+ Constants.WEBSITE_FILE);
+    	File file = new File(keyDir, data.getUrl()+ Constants.WEBSITE_FILE);
+    	
     	if(!file.exists()){
     		file.createNewFile();
     	}
@@ -297,7 +296,7 @@ public class SDCardReadWrite {
 			objOutStream.writeObject(data.getUrl());
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getStatus());
-			objOutStream.writeObject(Long.toString(data.getTestID()));
+			objOutStream.writeObject(data.getTestID());
 			objOutStream.writeObject(Long.toString(data.getExecuteAtTimeUTC()));
     	} catch (Exception e) {
   		    throw new RuntimeException("writeWebsite exception", e);
@@ -344,7 +343,7 @@ public class SDCardReadWrite {
 	    	    website.setUrl((String) objInputStream.readObject());
 	    	    website.setCheck((String) objInputStream.readObject());
 	    	    website.setStatus((String) objInputStream.readObject());
-	    	    website.setTestID(Long.parseLong((String)objInputStream.readObject()));
+	    	    website.setTestID((String)objInputStream.readObject());
 	    	    website.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));
 	    	    
 	    	    return website;
@@ -583,9 +582,9 @@ public class SDCardReadWrite {
 			objOutStream.writeObject(data.getCheck());
 			objOutStream.writeObject(data.getName());
 			objOutStream.writeObject(data.getIp());
-			objOutStream.writeObject(data.getPorts());
+			objOutStream.writeObject(data.getPort());
 			objOutStream.writeObject(data.getStatus());
-			objOutStream.writeObject(Long.toString(data.getTestID()));
+			objOutStream.writeObject(data.getTestID());
 			objOutStream.writeObject(Long.toString(data.getExecuteAtTimeUTC()));
     	} catch (Exception e) {
   		    throw new RuntimeException("writeService exception", e);
@@ -617,7 +616,7 @@ public class SDCardReadWrite {
 	 
 	@see         Environment
 	 */
-	@SuppressWarnings("unchecked")
+
 	public static Service readService(String dir
 			, String name) throws IOException , RuntimeException{
 		sdCard = Environment.getExternalStorageDirectory();
@@ -633,9 +632,9 @@ public class SDCardReadWrite {
 	    	    service.setCheck((String) objInputStream.readObject());
 	    	    service.setName((String) objInputStream.readObject());
 	    	    service.setIp((String) objInputStream.readObject());
-	    	    service.setPorts((List<Integer>) objInputStream.readObject());
+	    	    service.setPort((Integer) objInputStream.readObject());
 	    	    service.setStatus((String) objInputStream.readObject());
-	    	    service.setTestID(Long.parseLong((String)objInputStream.readObject()));
+	    	    service.setTestID((String)objInputStream.readObject());
 	    	    service.setExecuteAtTimeUTC(Long.parseLong((String)objInputStream.readObject()));
 	    	    
 	    	    return service;

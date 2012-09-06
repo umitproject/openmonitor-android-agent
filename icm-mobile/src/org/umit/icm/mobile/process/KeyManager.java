@@ -26,19 +26,26 @@ package org.umit.icm.mobile.process;
  */
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Random;
 
-
+import org.apache.commons.codec.binary.Base64;
+import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.utils.CryptoKeyWriter;
+import org.umit.icm.mobile.utils.RSACrypto;
 
 public class KeyManager {	
 	private PrivateKey myPrivateKey;
 	private PublicKey myPublicKey;
 	private String myCipheredKeyMod;
 	private String myCipheredKeyExp;
+	private PublicKey aggrPublicKey;
+	private byte[] aesKey;
 	
 	public KeyManager(PrivateKey myPrivateKey,
 			PublicKey myPublicKey, String myCipheredKeyMod,
@@ -48,15 +55,61 @@ public class KeyManager {
 		this.myPublicKey = myPublicKey;
 		this.myCipheredKeyMod = myCipheredKeyMod;
 		this.myCipheredKeyExp = myCipheredKeyExp;
+		
 	}
 
 	public KeyManager() {
 		super();
+		System.out.println("This is from inside KeyMAnager Constructor");
+		this.setupKeyManager();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setupKeyManager(){
+		try {
+			if(Constants.DEBUG_MODE)
+				System.out.println("Setting up KeyManager");
+			KeyPair keypair = RSACrypto.generateKey();
+			PublicKey publicKey = keypair.getPublic();
+			PrivateKey privateKey = keypair.getPrivate();
+			setMyPublicKey(publicKey);
+			setMyPrivateKey(privateKey);
+			RSAKey rsaKey = RSACrypto.getPublicKeyIntegers(publicKey);
+			setMyCipheredKeyMod(rsaKey.getMod());
+			setMyCipheredKeyExp(rsaKey.getExp());
+			
+			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
+			BigInteger exp = new BigInteger("65537");
+			
+			this.aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
+			if(Constants.DEBUG_MODE)
+				System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
+			
+			byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
+			new Random().nextBytes(bits);
+			byte[] temp = Base64.encodeBase64(bits);
+			byte[] key = new byte[Constants.AES_BLOCK_SIZE];
+			System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
+			 
+			this.aesKey = key;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}	
 	}
 
 	public synchronized PrivateKey getMyPrivateKey() {
 		return myPrivateKey;
+	}
+	
+	public synchronized PublicKey getAggregatorPublicKey() {
+		return this.aggrPublicKey;
+	}
+	
+	public synchronized byte[] getAESKey() {
+		return this.aesKey;
 	}
 	
 	/**
@@ -88,6 +141,7 @@ public class KeyManager {
 	public synchronized PublicKey getMyPublicKey() {
 		return myPublicKey;
 	}
+	
 	
 	/**
 	 * Writes the PublicKey to disk.

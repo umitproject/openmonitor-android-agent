@@ -24,8 +24,6 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.umit.icm.mobile.process.Globals;
 
@@ -70,9 +68,9 @@ public class ServiceGtalk {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(5222);												
-		return new Service("gtalk", ports, "talk.google.com" , "open", "true", 0, 0);
+		Integer port = 5222;
+														
+		return new Service("gtalk", port, "talk.google.com" , "open", "true", "0", 0);
 	}
 	
 	/**

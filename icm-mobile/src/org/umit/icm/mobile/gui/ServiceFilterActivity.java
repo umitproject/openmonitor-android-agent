@@ -61,7 +61,8 @@ public class ServiceFilterActivity extends Activity{
         listServicesCheckbox 
         = new ArrayList<WebsiteTextCheckbox>();
         Iterator<Service> iterator = Globals.servicesList.iterator();
-        Log.w("###", Integer.toString(Globals.servicesList.size()));
+        if(Constants.DEBUG_MODE)
+        	Log.w("###", Integer.toString(Globals.servicesList.size()));
                         
         backButton = (Button) findViewById(R.id.backButton);        
         backButton.setOnClickListener(new OnClickListener() { 

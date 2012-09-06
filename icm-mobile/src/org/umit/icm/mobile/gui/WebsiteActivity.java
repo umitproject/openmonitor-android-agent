@@ -25,13 +25,16 @@ import java.io.IOException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
+import org.umit.icm.mobile.connectivity.WebsiteDetails;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,8 +43,8 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -51,11 +54,13 @@ public class WebsiteActivity extends Activity{
 	private Button backButton;
 	private String website;
 	private ProgressDialog progressDialog;
+	public static Context context;
 	
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        context=getApplicationContext();
         progressDialog = ProgressDialog.show(this, 
         		getString(R.string.loading)	, getString(R.string.retrieving_website)
         		, true, false);
@@ -72,7 +77,7 @@ public class WebsiteActivity extends Activity{
 	       		WebsiteActivity.this.finish();
 	       	}
 
-	   	}  );
+	   	}  ); 
         
         new UpdateFavicon().execute(website);
     }
@@ -108,8 +113,12 @@ public class WebsiteActivity extends Activity{
 			= website.substring(11) + Constants.WEBSITE_FILE;
 			try {
 				if(SDCardReadWrite.fileExists(websiteFilename, Constants.WEBSITES_DIR)) {
-					WebsiteReport websiteReport 
-					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);
+/*					WebsiteReport websiteReport 
+					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);*/
+					WebsiteDetails websiteDetails = new WebsiteDetails(website);
+					
+					WebsiteReport websiteReport = websiteDetails.websiteReport;
+					
 					if(websiteReport.getReport().getStatusCode() == 200) {
 						websiteTextBitmapAdapter.addItem(
 								new WebsiteTextBitmap( getString(R.string.normal_status), getResources().getDrawable(R.drawable.greendot)));
@@ -121,13 +130,24 @@ public class WebsiteActivity extends Activity{
 							new WebsiteTextBitmap(getString(R.string.status_code) + " " +
 									Integer.toString(websiteReport.getReport().getStatusCode()), drawable));
 					websiteTextBitmapAdapter.addItem(
-							new WebsiteTextBitmap(getString(R.string.throughput) + " " +
+							new WebsiteTextBitmap(getString(R.string.bandwidth) + " " +
 									Integer.toString(websiteReport.getReport().getBandwidth())
-									 + " " + getString(R.string.throughput_unit), drawable));
+									 + " " + getString(R.string.bandwidth_unit), drawable));
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.response_time) + " " +
 									Integer.toString(websiteReport.getReport().getResponseTime())
 									+ " " + getString(R.string.response_time_unit), drawable));
+					if(Globals.runtimeParameters.getAverageThroughput() == 0){
+						websiteTextBitmapAdapter.addItem(	
+								new WebsiteTextBitmap(getString(R.string.average_throughput) + " " +
+										getString(R.string.calculating), drawable));	
+							}
+					else{
+						websiteTextBitmapAdapter.addItem(	
+								new WebsiteTextBitmap(getString(R.string.average_throughput) + " " +
+										Double.toString(Globals.runtimeParameters.getAverageThroughput())
+										+ " " + getString(R.string.deviation_unit), drawable));
+					}
 				} else {
 					websiteTextBitmapAdapter.addItem(
 							new WebsiteTextBitmap(getString(R.string.no_scan)

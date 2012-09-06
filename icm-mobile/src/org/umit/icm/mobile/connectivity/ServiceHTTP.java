@@ -24,8 +24,6 @@ package org.umit.icm.mobile.connectivity;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -96,9 +94,8 @@ public class ServiceHTTP {
 	@return      Service
 	 */	
 	public static Service getService() {
-		List<Integer> ports = new ArrayList<Integer>();
-		ports.add(80);												
-		return new Service("http", ports, "www.google.com" , "open", "true", 0, 0);
+		Integer port = 80;
+		return new Service("http", port, "www.google.com" , "open", "true", "0", 0);
 	}
 	
 	/**

@@ -22,17 +22,10 @@
 package org.umit.icm.mobile.process;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.crypto.SecretKey;
 
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.Service;
@@ -47,12 +40,9 @@ import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgentResponse;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.ResponseHeader;
 import org.umit.icm.mobile.proto.MessageProtos.Test;
 import org.umit.icm.mobile.utils.CryptoKeyReader;
-import org.umit.icm.mobile.utils.CryptoKeyWriter;
-import org.umit.icm.mobile.utils.DiffieHellmanKeyGeneration;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
@@ -79,9 +69,6 @@ public class ProcessActions {
 		if (header.getCurrentVersionNo() 
 				> Globals.versionManager.getAgentVersion()) {
 			Globals.versionManager.setAgentVersion(header.getCurrentVersionNo());
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
 			
 			NewVersion newVersion = NewVersion.newBuilder()
 			.setAgentVersionNo(Globals.versionManager.getAgentVersion())
@@ -110,9 +97,6 @@ public class ProcessActions {
 		if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
-			RequestHeader requestHeader = RequestHeader.newBuilder()
-			.setAgentID(Globals.runtimeParameters.getAgentID())
-			.build();
 			
 			NewTests newTests = NewTests.newBuilder()
 			.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
@@ -147,21 +131,19 @@ public class ProcessActions {
 	 @see Test
 	 */
 	public synchronized static boolean updateTests(List<Test> tests) {
-		List<Integer> ports = new ArrayList<Integer>();
 		for(int i = 0 ; i < tests.size(); i++) {
-			if(tests.get(i).getTestType().equals("WEB")) {
+			if(tests.get(i).getTestType() == 1) { // website
 				Globals.websitesList.add(
 						new Website(tests.get(i).getWebsite().getUrl(), 
 								"false", 
 								"true", 
 								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
-			} else if(tests.get(i).getTestType().equals("SERVICE")) {
-				ports.clear();
-				ports.add(tests.get(i).getService().getPort());
+				
+			} else if(tests.get(i).getTestType() == 2) { //service
 				Globals.servicesList.add(
 						new Service(tests.get(i).getService().getName(), 
-								ports,
+								tests.get(i).getService().getPort(),
 								tests.get(i).getService().getIp(), 
 								"open", 
 								"true", 
@@ -327,13 +309,16 @@ public class ProcessActions {
 	 @see RuntimeParameters
 	 */
 	public static boolean registerAgent(RegisterAgentResponse registerAgentResponse) {
+		System.out.println("Inside ProcessActions@registerAgent");
 		try {
-			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());			
+			Globals.runtimeParameters.setAgentID(registerAgentResponse.getAgentID());
+			return true;
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		return true;
+		
 	}
 
 }
