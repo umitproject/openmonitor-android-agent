@@ -138,17 +138,6 @@ public class LoginActivity extends Activity {
 
 		@Override
 		protected String doInBackground(LoginCredentials... loginCredentials) {
-			// TODO Auto-generated method stub
-			Initialization.checkProfiler();		
-			try {
-				Initialization.checkFiles();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			publishProgress("Registering Agent");
 			boolean register = Initialization.registration(loginCredentials[0]);
 			if(register){

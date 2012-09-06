@@ -89,14 +89,10 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try {
-	        	Initialization.checkProfiler();		
-				Initialization.checkFiles();
 				Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				
 				//P2PTesting.testRequestResponse();
-			} catch (IOException e) {
-				e.printStackTrace();
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
