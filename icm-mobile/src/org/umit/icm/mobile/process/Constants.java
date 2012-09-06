@@ -31,6 +31,7 @@ import org.umit.icm.mobile.connectivity.Website;
  * Holds the application wide constants.
  */
 public class Constants {
+	public static boolean DEBUG_MODE = false;
 	public static String MY_PUBLIC_KEY_FILE = "myPublicKey.pub";
 	public static String MY_DH_PUBLIC_KEY_FILE = "myDHPublicKey.pub";
 	public static String ACCESS_TOKEN_FILE = "accessToken.token";
