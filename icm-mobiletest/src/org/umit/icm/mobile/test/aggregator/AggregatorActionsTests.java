@@ -28,6 +28,7 @@ import junit.framework.Assert;
 
 import org.umit.icm.mobile.aggregator.AggregatorActions;
 import org.umit.icm.mobile.process.Globals;
+import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.*;
 
 import android.test.AndroidTestCase;
@@ -194,7 +195,8 @@ public class AggregatorActionsTests extends AndroidTestCase {
     	.addTests(test2)
     	.build();
     	
-    	AggregatorActions.newTestsAction(newTestsResponse);
+    	Assert.assertEquals(Globals.websitesList.size(), 1);
+    	Assert.assertEquals(Globals.servicesList.size(), 1);
     	
         Assert.assertTrue(Globals.websitesList.get(Globals.websitesList.size()-1)
         		.equals(        		

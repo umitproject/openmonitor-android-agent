@@ -131,9 +131,8 @@ public class ProcessActions {
 	 @see Test
 	 */
 	public synchronized static boolean updateTests(List<Test> tests) {
-		Integer port = 0;
 		for(int i = 0 ; i < tests.size(); i++) {
-			if(tests.get(i).equals("WEB")) {
+			if(tests.get(i).getTestType() == 1) { // website
 				Globals.websitesList.add(
 						new Website(tests.get(i).getWebsite().getUrl(), 
 								"false", 
@@ -141,11 +140,10 @@ public class ProcessActions {
 								tests.get(i).getTestID(), 
 								tests.get(i).getExecuteAtTimeUTC()));
 				
-			} else if(tests.get(i).equals("SERVICE")) {
-				port = tests.get(i).getService().getPort();
+			} else if(tests.get(i).getTestType() == 2) { //service
 				Globals.servicesList.add(
 						new Service(tests.get(i).getService().getName(), 
-								port,
+								tests.get(i).getService().getPort(),
 								tests.get(i).getService().getIp(), 
 								"open", 
 								"true", 
