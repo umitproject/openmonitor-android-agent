@@ -137,7 +137,7 @@ public class Globals {
 	public static byte [] AESKEY;
 	
 	
-	public static boolean isRegistered =false;
+	public static boolean isRegistered = false;
 	
 	/**
 	 * Global P2P message queue
