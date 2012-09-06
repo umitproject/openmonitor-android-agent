@@ -28,6 +28,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.umit.icm.mobile.process.Constants;
+
 import android.util.Log;
 
 /**
@@ -60,28 +62,33 @@ public class TCPServer {
 		 	thread = new Thread() {
 			 public void run() {		 
 				 while(!stop){
-					  	 try {						 					 
-						Log.w("##Server", "loop");
-			            Socket aSocket = serverSocket.accept();
-			            Log.w("##Server", "accept");
-			            BufferedReader bufferedReader =
-			               new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-			            DataOutputStream dataOutputStream = new DataOutputStream(aSocket.getOutputStream());
-			            Log.w("##Server", "pre-read");
-			            request = bufferedReader.readLine();                        
-			            Log.w("##Server", "read" + request);
-			            dataOutputStream.writeBytes(response + '\n');
-			            Log.w("##Server", "write");
-					 } catch (Exception e) {
-						 throw new RuntimeException("run Server Exception", e);
-					 }
-		         } 
-				try {
-					serverSocket.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					  	 try {	
+					  		if(Constants.DEBUG_MODE)
+					  			Log.w("##Server", "loop");
+					  		Socket aSocket = serverSocket.accept();
+					  		if(Constants.DEBUG_MODE)
+					  			Log.w("##Server", "accept");
+					  		BufferedReader bufferedReader =
+					  				new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
+					  		DataOutputStream dataOutputStream = new DataOutputStream(aSocket.getOutputStream());
+					  		if(Constants.DEBUG_MODE)
+					  			Log.w("##Server", "pre-read");
+					  		request = bufferedReader.readLine();  
+					  		if(Constants.DEBUG_MODE)
+					  			Log.w("##Server", "read" + request);
+					  		dataOutputStream.writeBytes(response + '\n');
+					  		if(Constants.DEBUG_MODE)
+					  			Log.w("##Server", "write");
+						 } catch (Exception e) {
+							 throw new RuntimeException("run Server Exception", e);
+						 }
+				         } 
+						try {
+							serverSocket.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 				
 			 }
 				 
@@ -100,7 +107,8 @@ public class TCPServer {
 	 * Returns the request String.
 	 */
 	public String getRequest() {
-		Log.w("##Server", "get" + request);
+		if(Constants.DEBUG_MODE)
+			Log.w("##Server", "get" + request);
 		return request;
 	}
 	
@@ -115,8 +123,9 @@ public class TCPServer {
 	 * Stops the thread by asserting stop as true.
 	 */
 	public void closeConnection() {
-		stop = true;		
-		Log.w("##Server", "close");
+		stop = true;
+		if(Constants.DEBUG_MODE)
+			Log.w("##Server", "close");
 	}
 	
 }

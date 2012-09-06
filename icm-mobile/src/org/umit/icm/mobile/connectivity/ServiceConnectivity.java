@@ -37,7 +37,6 @@ import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
-import org.umit.icm.mobile.proto.MessageProtos.RequestHeader;
 import org.umit.icm.mobile.proto.MessageProtos.SendServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceReportDetail;
@@ -62,7 +61,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	@Override()
 	public void scan() throws IOException, HttpException, MessagingException {
 		
-		System.out.println("Scanning SOME SERVICES ---------------------------");
+		if(Constants.DEBUG_MODE)
+			System.out.println("Scanning SOME SERVICES ---------------------------");
 		
 		HTTPScan();
 		HTTPSScan();
@@ -177,17 +177,21 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				serviceReport = (ServiceReport) clean(ServiceHTTP.getService(), HTTPResponse, serviceResponseBytes);
 				
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReport);						
-					
-				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
-				Log.w("######name", serviceReport.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceHTTP.getService().getPort()));
+				
+				if(Constants.DEBUG_MODE) {
+					Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
+					Log.w("######name", serviceReport.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceHTTP.getService().getPort()));
+				}
 
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReport)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
-					System.out.println("Sending HTTP SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending HTTP SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -232,19 +236,21 @@ public class ServiceConnectivity extends AbstractConnectivity{
 				serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService(), HTTPSResponse, httpsServiceResponseBytes);
 				
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReportHTTPS);						
-					
-				Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
-				Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPort()));
+				if(Constants.DEBUG_MODE) {	
+					Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
+					Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPort()));
+				}
 				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportHTTPS)
 				.build();
 				
 				if(Globals.aggregatorCommunication != false) {
-					
-					System.out.println("Sending HTTPS SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending HTTPS SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -290,19 +296,21 @@ public class ServiceConnectivity extends AbstractConnectivity{
 							, FTPResponse, ftpServiceResponseBytes);
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 							, serviceReportFTP);						
-						
-				Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
-				Log.w("######name", serviceReportFTP.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceFTP.getService().getPort()));
+				if(Constants.DEBUG_MODE) {		
+					Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
+					Log.w("######name", serviceReportFTP.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceFTP.getService().getPort()));
+				}
 				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportFTP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
 					
-					
-					System.out.println("Sending FTP SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending FTP SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -348,18 +356,19 @@ public class ServiceConnectivity extends AbstractConnectivity{
 							, POP3Response, pop3ServiceResponseBytes);
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 							, serviceReportPOP3);						
-						
-				Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
-				Log.w("######name", serviceReportPOP3.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServicePOP3.getService().getPort()));
-				
+				if(Constants.DEBUG_MODE) {	
+					Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
+					Log.w("######name", serviceReportPOP3.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServicePOP3.getService().getPort()));
+				}
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportPOP3)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
-					
-					System.out.println("Sending POP3 SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending POP3 SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -405,18 +414,20 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						, IMAPResponse, imapServiceResponseBytes);
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 						, serviceReportIMAP);						
-						
-				Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
-				Log.w("######name", serviceReportIMAP.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceIMAP.getService().getPort()));
+				if(Constants.DEBUG_MODE) {		
+					Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
+					Log.w("######name", serviceReportIMAP.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceIMAP.getService().getPort()));
+				}
 
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportIMAP)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
-					
-					System.out.println("Sending IMAP SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending IMAP SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -462,18 +473,20 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						, GtalkResponse, gtalkServiceResponseBytes);
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 						, serviceReportGtalk);						
-						
-				Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
-				Log.w("######name", serviceReportGtalk.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceGtalk.getService().getPort()));
+				if(Constants.DEBUG_MODE) {		
+					Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
+					Log.w("######name", serviceReportGtalk.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceGtalk.getService().getPort()));
+				}
 
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportGtalk)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
-					
-					System.out.println("Sending Gtalk SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending Gtalk SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}
@@ -516,18 +529,20 @@ public class ServiceConnectivity extends AbstractConnectivity{
 						, msnResponse, msnServiceResponseBytes);
 				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
 						, serviceReportMSN);						
-					
-				Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
-				Log.w("######name", serviceReportMSN.getReport().getServiceName());
-				Log.w("######port", Integer.toString(ServiceMSN.getService().getPort()));
+				if(Constants.DEBUG_MODE) {
+					Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
+					Log.w("######name", serviceReportMSN.getReport().getServiceName());
+					Log.w("######port", Integer.toString(ServiceMSN.getService().getPort()));
+				}
 				
 				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
 				.setReport(serviceReportMSN)
 				.build();
 				if(Globals.aggregatorCommunication != false) {
-					
-					System.out.println("Sending MSN SERVICE REPORT \n");
-					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					if(Constants.DEBUG_MODE) {
+						System.out.println("Sending MSN SERVICE REPORT \n");
+						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+					}
 					
 					AggregatorRetrieve.sendServiceReport(sendServiceReport);
 				}					

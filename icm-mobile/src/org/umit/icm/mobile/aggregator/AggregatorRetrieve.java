@@ -81,7 +81,8 @@ public class AggregatorRetrieve {
 	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
 	 throws Exception {
 		 
-		 System.out.println("This is from inside AggregatorRetive#registerAgent");
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("This is from inside AggregatorRetive#registerAgent");
 			ClientResource clientResource 
 			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
@@ -401,6 +402,7 @@ public class AggregatorRetrieve {
 	 public synchronized static boolean login(Login login) 
 	 throws Exception {
 		 
+		 if(Constants.DEBUG_MODE)
 		 	System.out.println("Inside AggregatorRetrieve#login");
 		 	
 		 	ClientResource clientResource 

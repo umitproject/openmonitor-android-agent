@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.ICMReport;
@@ -97,7 +98,8 @@ public class WebsiteDetails {
 	private synchronized void setupURLConnection(){
 		
 		try {
-			System.out.println("Opening URL Connection to this website : " + websiteURL);
+			if(Constants.DEBUG_MODE)
+				System.out.println("Opening URL Connection to this website : " + websiteURL);
 			this.urlConnection = WebsiteOpen.openURLConnection(this.websiteURL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

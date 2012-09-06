@@ -67,31 +67,31 @@ public class KeyManager {
 	
 	public void setupKeyManager(){
 		try {
-			System.out.println("Setting up KeyManager");
+			if(Constants.DEBUG_MODE)
+				System.out.println("Setting up KeyManager");
 			KeyPair keypair = RSACrypto.generateKey();
 			PublicKey publicKey = keypair.getPublic();
-			PrivateKey privateKey =keypair.getPrivate();
+			PrivateKey privateKey = keypair.getPrivate();
 			setMyPublicKey(publicKey);
 			setMyPrivateKey(privateKey);
-			RSAKey rsaKey=RSACrypto.getPublicKeyIntegers(publicKey);
+			RSAKey rsaKey = RSACrypto.getPublicKeyIntegers(publicKey);
 			setMyCipheredKeyMod(rsaKey.getMod());
 			setMyCipheredKeyExp(rsaKey.getExp());
-			
 			
 			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
 			BigInteger exp = new BigInteger("65537");
 			
 			this.aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
-			System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
+			if(Constants.DEBUG_MODE)
+				System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
 			
-			
-			 byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
-			 new Random().nextBytes(bits);
-			 byte[] temp=Base64.encodeBase64(bits);
-			 byte[] key=new byte[Constants.AES_BLOCK_SIZE];
-			 System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
+			byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
+			new Random().nextBytes(bits);
+			byte[] temp = Base64.encodeBase64(bits);
+			byte[] key = new byte[Constants.AES_BLOCK_SIZE];
+			System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
 			 
-			 this.aesKey =key;
+			this.aesKey = key;
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

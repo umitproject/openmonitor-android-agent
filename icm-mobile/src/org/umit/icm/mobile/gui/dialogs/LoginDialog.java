@@ -24,6 +24,7 @@ package org.umit.icm.mobile.gui.dialogs;
 	
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.gui.debug.Show;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 
@@ -94,8 +95,8 @@ public class LoginDialog extends Dialog {
 						.setUsername(login)
 						.setPassword(password)
 						.build();
-						
-						System.out.println("This is from inside loging Dialog");
+						if(Constants.DEBUG_MODE)
+							System.out.println("This is from inside loging Dialog");
 						
 						Initialization.registration(loginCredentials);
 						Initialization.login();
@@ -104,8 +105,8 @@ public class LoginDialog extends Dialog {
 						Initialization.initializeEventsList();
 				        Initialization.initializerPeersList();
 				        Initialization.startServices(context);*/
-						
-						Show.Info(activity, "This is running from inside login dialog!!");
+						if(Constants.DEBUG_MODE)
+							Show.Info(activity, "This is running from inside login dialog!!");
 						
 						LoginDialog.this.dismiss();
 					}

@@ -21,6 +21,8 @@
 
 package org.umit.icm.mobile.p2p;
 
+import org.umit.icm.mobile.process.Constants;
+
 import android.util.Log;
 
 /**
@@ -132,8 +134,10 @@ public class MessageBuilder {
 		 byte[] idByte = intToByteArray(id);
 		 int length = idByte.length + message.length;
 		 byte[] lengthByte = intToByteArray(length);
-		 Log.w("###length", Integer.toString(byteArrayToInt(lengthByte)));
-		 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 if(Constants.DEBUG_MODE) {
+			 Log.w("###length", Integer.toString(byteArrayToInt(lengthByte)));
+			 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 }
 		 return byteArrayAppendThree(lengthByte, idByte, message);
 		 
 	 }
@@ -153,8 +157,10 @@ public class MessageBuilder {
 	 @return byte[] 
 	 */
 	 public static byte[] generateMessageWithoutLength(int id, byte[] message) {
-		 byte[] idByte = intToByteArray(id);		 		 
-		 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 byte[] idByte = intToByteArray(id);	
+		 if(Constants.DEBUG_MODE) {
+			 Log.w("###id", Integer.toString(byteArrayToInt(idByte)));
+		 }
 		 return byteArrayAppend(idByte, message);
 		 
 	 }

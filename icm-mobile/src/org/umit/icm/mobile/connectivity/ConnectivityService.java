@@ -131,8 +131,8 @@ public class ConnectivityService extends Service {
 				try {			
 					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 						stopScan();
-					
-					System.out.println("STARTING SERVICE SCAN ------------------------------------");
+					if(Constants.DEBUG_MODE)
+						System.out.println("STARTING SERVICE SCAN ------------------------------------");
 					Globals.serviceTest.scan();
 					
 				} catch (IOException e) {

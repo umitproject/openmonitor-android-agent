@@ -138,9 +138,11 @@ public class AggregatorResources {
 		 httpPost.setEntity(new UrlEncodedFormEntity(pairs));
 		 
 		 HttpResponse response = httpClient.execute(httpPost); 
-		 System.out.println("Sending key : " + key);
-		 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
-		 System.out.println("Sending msg : " + msg);	 
+		 if(Constants.DEBUG_MODE) {
+			 System.out.println("Sending key : " + key);
+			 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
+			 System.out.println("Sending msg : " + msg);	 
+		 }
 		 
 /*		 form.add("key", key);
 		 form.add("agentID", Long.toString(Constants.DEFAULT_AGENT_ID));
@@ -163,11 +165,14 @@ public class AggregatorResources {
 		 }*/
 		 
 		String responseBody = EntityUtils.toString(response.getEntity());
-		System.out.println("--------------------------------------------GOT THIS AS RESPONSE : "+ responseBody); 	 
-		byte[] finalResponse= AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		if(Constants.DEBUG_MODE)
+			System.out.println("--------------------------------------------GOT THIS AS RESPONSE : "+ responseBody); 	 
+		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		
-		for(int i=0;i<finalResponse.length;i++) {
-			System.out.println(finalResponse[i]);
+		if(Constants.DEBUG_MODE) {
+			for(int i = 0; i < finalResponse.length; i++) {
+				System.out.println(finalResponse[i]);
+			}
 		}
 		
 		return RegisterAgentResponse.parseFrom(finalResponse);
@@ -709,7 +714,8 @@ public class AggregatorResources {
 	throws Exception {
 		 
 		 String message = loginStep1.getChallenge();
-		 System.out.println("Challenge Received : " + message);
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("Challenge Received : " + message);
 		 
 //		 Form form = new Form();
 		 
@@ -721,7 +727,8 @@ public class AggregatorResources {
 		 
 		 String encodedEncryptedChallengeString = new String(encodedEncryptedChallenge);
 		 
-		 System.out.println("Signed Challenge Send : " + encodedEncryptedChallengeString); 
+		 if(Constants.DEBUG_MODE)
+			 System.out.println("Signed Challenge Send : " + encodedEncryptedChallengeString); 
 		 
 		 LoginStep2 loginStep2 = LoginStep2.newBuilder()
 				 .setProcessID(loginStep1.getProcessID())

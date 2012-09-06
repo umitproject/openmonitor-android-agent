@@ -23,6 +23,7 @@ package org.umit.icm.mobile.aggregator;
 
 import java.io.IOException;
 
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.ProcessActions;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
 import org.umit.icm.mobile.proto.MessageProtos.GetEventsResponse;
@@ -64,7 +65,8 @@ public class AggregatorActions {
 	@see         AggregatorRetrieve
 	 */
 	public static boolean registerAgentAction(RegisterAgentResponse registerAgentResponse) throws Exception {
-		System.out.println("Inside AggreagatorActions#registerAgentAction");
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside AggreagatorActions#registerAgentAction");
 		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
 		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
 		return ProcessActions.registerAgent(registerAgentResponse);

@@ -266,8 +266,10 @@ public class Initialization {
 		
 		Globals.challenge = challenge;
 		
-		System.out.println("Setting the login protobuf");
-		System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
+		if(Constants.DEBUG_MODE) {
+			System.out.println("Setting the login protobuf");
+			System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
+		}
 		
 		
 		Login login = Login.newBuilder()
@@ -277,7 +279,8 @@ public class Initialization {
 		.setIp(Globals.myIP)
 		.build();
 		
-		System.out.println("Login protobuf formed : "  + login.toString());
+		if(Constants.DEBUG_MODE) 
+			System.out.println("Login protobuf formed : "  + login.toString());
 				
 		boolean success = false;
 		
@@ -299,16 +302,19 @@ public class Initialization {
 		boolean success = false;
 			
 		try {	
-			System.out.println("This is from inside Initialization#registration");
-			
-			System.out.println("MY MOD : " + Globals.keyManager.getMyCipheredKeyMod());
-			System.out.println("MY EXP : " + Globals.keyManager.getMyCipheredKeyExp());
+			if(Constants.DEBUG_MODE) {
+				System.out.println("This is from inside Initialization#registration");
+				System.out.println("MY MOD : " + Globals.keyManager.getMyCipheredKeyMod());
+				System.out.println("MY EXP : " + Globals.keyManager.getMyCipheredKeyExp());
+			}
 			
 			BigInteger BiMod = new BigInteger(Globals.keyManager.getMyCipheredKeyMod());
 			BigInteger BiExp = new BigInteger(Globals.keyManager.getMyCipheredKeyExp());
 			
-			System.out.println("MY HEX MOD : " + BiMod.toString(16));
-			System.out.println("MY HEX EXP : " + BiExp.toString(10));
+			if(Constants.DEBUG_MODE) {
+				System.out.println("MY HEX MOD : " + BiMod.toString(16));
+				System.out.println("MY HEX EXP : " + BiExp.toString(10));
+			}
 						
 			RSAKey rsaKey = RSAKey.newBuilder()
 			.setMod(BiMod.toString(16))

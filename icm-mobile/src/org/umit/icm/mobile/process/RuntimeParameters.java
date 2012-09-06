@@ -88,7 +88,8 @@ public class RuntimeParameters {
 	}
 
 	public synchronized String getAgentID() {
-		System.out.println("Inside RuntimeParameter#getAgentID");
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside RuntimeParameter#getAgentID");
 		try {
 			agentID = readAgentID();
 		} catch (IOException e) {
@@ -102,7 +103,8 @@ public class RuntimeParameters {
 	}
 
 	public synchronized void setAgentID(String agentID) {
-		System.out.println("Inside RuntimeParameter#setAgentID");
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside RuntimeParameter#setAgentID");
 		this.agentID = agentID;
 		try {
 			writeAgentID(agentID);

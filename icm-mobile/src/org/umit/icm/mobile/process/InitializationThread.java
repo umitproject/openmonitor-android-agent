@@ -35,8 +35,8 @@ public class InitializationThread extends Thread {
         this.activity = (Activity) context;
     }
     public void run() {  
-    	
-    	System.out.println("Inside InitializationThread#run");
+    	if(Constants.DEBUG_MODE)
+    		System.out.println("Inside InitializationThread#run");
 		Initialization.initializeIP(context);
 		
     }

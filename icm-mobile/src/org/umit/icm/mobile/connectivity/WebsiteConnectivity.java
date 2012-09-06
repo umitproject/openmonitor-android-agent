@@ -82,12 +82,13 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				totalTime += websiteDetails.fetchTime;
 				
 				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
-			
-				Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
-				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
-				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
-				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
 				
+				if(Constants.DEBUG_MODE) {
+					Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
+					Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
+					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
+					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+				}
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setReport(websiteReport)
 				.build();				
