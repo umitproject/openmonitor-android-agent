@@ -22,8 +22,6 @@
 package org.umit.icm.mobile;
 
 
-import java.io.IOException;
-
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.ServicePackets;
 import org.umit.icm.mobile.gui.ControlActivity;

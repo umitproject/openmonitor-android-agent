@@ -60,7 +60,8 @@ public class KeyManager {
 
 	public KeyManager() {
 		super();
-		System.out.println("This is from inside KeyMAnager Constructor");
+		if(Constants.DEBUG_MODE)
+			System.out.println("This is from inside KeyMAnager Constructor");
 		this.setupKeyManager();
 		// TODO Auto-generated constructor stub
 	}

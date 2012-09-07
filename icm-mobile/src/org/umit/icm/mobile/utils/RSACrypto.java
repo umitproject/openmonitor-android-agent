@@ -159,7 +159,8 @@ public class RSACrypto {
 	 */
 	
 	public static byte[] Sign(PrivateKey privateKey, byte[] data) throws Exception{
-		System.out.println("Signing the key inside RSACrypto#Sign");
+		if(Constants.DEBUG_MODE)
+			System.out.println("Signing the key inside RSACrypto#Sign");
 		Signature dsa = Signature.getInstance("SHA1withRSA");
 		
 		dsa.initSign(privateKey);

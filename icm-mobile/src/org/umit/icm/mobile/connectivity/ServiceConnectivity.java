@@ -167,8 +167,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			
 			serviceResponseBytes= Globals.tcpClientConnectivity.readBytes();
 			
-			if(!serviceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!serviceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			
 			Globals.tcpClientConnectivity.closeConnection();
 			
@@ -228,8 +230,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			httpsServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(!httpsServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!httpsServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
@@ -287,8 +291,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			ftpServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-			if(!ftpServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!ftpServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
@@ -347,8 +353,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			pop3ServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(!pop3ServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!pop3ServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
@@ -405,8 +413,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			imapServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(!imapServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!imapServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
@@ -464,8 +474,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.writeLine(
 					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
 			gtalkServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(!gtalkServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!gtalkServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
@@ -520,8 +532,10 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.tcpClientConnectivity.openConnection(ServiceMSN.getService().getIp(), ServiceMSN.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
 			msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-			if(!msnServiceResponseBytes.equals(null))
-				Log.w("#####bytes", "bytes");
+			if(Constants.DEBUG_MODE) {
+				if(!msnServiceResponseBytes.equals(null))
+					Log.w("#####bytes", "bytes");
+			}
 			Globals.tcpClientConnectivity.closeConnection();
 			
 			try {
