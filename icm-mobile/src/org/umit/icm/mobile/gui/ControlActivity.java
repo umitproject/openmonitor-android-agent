@@ -35,6 +35,7 @@ import org.umit.icm.mobile.gui.dialogs.ServiceSuggestionDialog;
 import org.umit.icm.mobile.gui.dialogs.TwitterDialog;
 import org.umit.icm.mobile.gui.dialogs.WebsiteSuggestionDialog;
 import org.umit.icm.mobile.p2p.MessageForwardingAggregator;
+import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
@@ -245,40 +246,42 @@ public class ControlActivity extends Activity {
               
     }
     
-    private class OnReadyListener implements WebsiteSuggestionDialog.ReadyListener ,ServiceSuggestionDialog.ReadyListener{
+    private class OnReadyListener implements WebsiteSuggestionDialog.ReadyListener, ServiceSuggestionDialog.ReadyListener{
         @Override
         public void ready(String selection) {            
             StringTokenizer stringTokenizer 
             = new StringTokenizer(selection, "&");
             String option = stringTokenizer.nextToken();
             String suggestion = stringTokenizer.nextToken();
-//            String email = stringTokenizer.nextToken();
+//          String email = stringTokenizer.nextToken();
             String host = stringTokenizer.nextToken();
             String ip = stringTokenizer.nextToken();
             String port = stringTokenizer.nextToken();
-            if(option.equals("Website")) {          
-            	  Toast.makeText(ControlActivity.this
-                  		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " " 
-                  		, Toast.LENGTH_LONG).show();
+            if(option.equals("Website")) {     
+            	if(Constants.DEBUG_MODE) {
+	            	  Toast.makeText(ControlActivity.this
+	                  		, getString(R.string.text_selected) 
+	                  		+ " " + option + " " + suggestion + " " 
+	                  		, Toast.LENGTH_LONG).show();
+            	}
             	new SendWebsiteTask().execute(suggestion);
             }
             else {
-            	  Toast.makeText(ControlActivity.this
-                  		, getString(R.string.text_selected) 
-                  		+ " " + option + " " + suggestion + " "  
-                  		+ " " + host + " " + ip
-                  		+ " " + port
-                  		, Toast.LENGTH_LONG).show();
+            	if(Constants.DEBUG_MODE) {
+	            	  Toast.makeText(ControlActivity.this
+	                  		, getString(R.string.text_selected) 
+	                  		+ " " + option + " " + suggestion + " "  
+	                  		+ " " + host + " " + ip
+	                  		+ " " + port
+	                  		, Toast.LENGTH_LONG).show();
+            	}
             	new SendServiceTask().execute(suggestion
-            			,host, ip, port);
+            			, host, ip, port);
             }
             
         }
     }
-    
-    
-    
+      
     private class SendWebsiteTask extends AsyncTask<String,String,String> {
     	  
     	protected void onPostExecute(String result) {
