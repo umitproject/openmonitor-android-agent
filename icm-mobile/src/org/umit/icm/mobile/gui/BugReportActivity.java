@@ -137,19 +137,10 @@ public class BugReportActivity extends Activity {
 		protected String doInBackground(String... XML) {
 			// TODO Auto-generated method stub
 			try {
-				StringEntity requestEntity= new StringEntity(XML[0],HTTP.UTF_8);
+				StringEntity requestEntity = new StringEntity(XML[0], HTTP.UTF_8);
 				httppost.setHeader("Content-type", "application/xml");
-		
 				httppost.setEntity(requestEntity);
-				
-				httpclient.execute(httppost);
-				
-				CharSequence text = getString(R.string.bug_report);
-				int duration = Toast.LENGTH_SHORT;
-		
-				Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-				toast.show();
-			
+				httpclient.execute(httppost);	
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -158,6 +149,10 @@ public class BugReportActivity extends Activity {
 		}
 		
 		protected void onPostExecute(String result) {
+			CharSequence text = getString(R.string.bug_report);
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+			toast.show();
     		BugReportActivity.this.finish();
 	    }
 		  

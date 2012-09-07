@@ -92,8 +92,8 @@
     <string name="register">Register</string>
     <string name="subject">Subject</string>
     <string name="report">Report</string>
-    <string name="email">Email(Optional)</string>
-    <string name="description">Description:</string>
+    <string name="email">Email (Optional)</string>
+    <string name="description">Description</string>
     <string name="bug_describe">Please describe the bug</string>
     <string name="deviation">Deviation from Benchmark: </string>
     <string name="deviation_unit">bytes/ms</string>
@@ -101,7 +101,7 @@
     <string name="link_to_umit">www.umitproject.org</string>
     <string name="link_to_open_monitor">www.openmonitor.org</string>
     <string name="icons_by"> Icons by http://dryicons.com</string>
-    <string name="bug_report">Bug Reported!</string>
+    <string name="bug_report">Bug Report Sent</string>
     <string name="average_throughput">Average Throughput:</string>
     <string name="bug_subject">Please enter Subject</string>
     <string name="bug_crash">[BugCrashReport]</string>
