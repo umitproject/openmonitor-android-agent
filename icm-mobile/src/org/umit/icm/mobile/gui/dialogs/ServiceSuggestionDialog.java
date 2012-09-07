@@ -81,7 +81,6 @@ public class ServiceSuggestionDialog extends Dialog{
 	        serviceHost = (EditText) findViewById(R.id.ServiceHost);
 	        serviceIP = (EditText) findViewById(R.id.ServiceIP);
 	        servicePort = (EditText) findViewById(R.id.ServicePort);
-	        serviceIP.setInputType(InputType.TYPE_CLASS_NUMBER);
 	        servicePort.setInputType(InputType.TYPE_CLASS_NUMBER);
 	    }
 	 
