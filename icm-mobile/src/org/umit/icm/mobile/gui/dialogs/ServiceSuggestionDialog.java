@@ -29,6 +29,7 @@ import org.umit.icm.mobile.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,10 +40,10 @@ public class ServiceSuggestionDialog extends Dialog{
 	String selection;
 	Context contextControl;
     private ReadyListener readyListener;
-    EditText ServiceName;
-    EditText ServiceHost;
-    EditText ServiceIP;
-    EditText ServicePort;
+    EditText serviceName;
+    EditText serviceHost;
+    EditText serviceIP;
+    EditText servicePort;
     
     
     private final Pattern IP_PATTERN = Pattern.compile(
@@ -76,10 +77,12 @@ public class ServiceSuggestionDialog extends Dialog{
 	        setContentView(R.layout.suggestservicedialog);
 	        Button buttonOK = (Button) findViewById(R.id.SendServiceSuggestion);
 	        buttonOK.setOnClickListener(new sendListener());
-	        ServiceName = (EditText) findViewById(R.id.ServiceName);
-	        ServiceHost = (EditText) findViewById(R.id.ServiceHost);
-	        ServiceIP = (EditText) findViewById(R.id.ServiceIP);
-	        ServicePort = (EditText) findViewById(R.id.ServicePort);
+	        serviceName = (EditText) findViewById(R.id.ServiceName);
+	        serviceHost = (EditText) findViewById(R.id.ServiceHost);
+	        serviceIP = (EditText) findViewById(R.id.ServiceIP);
+	        servicePort = (EditText) findViewById(R.id.ServicePort);
+	        serviceIP.setInputType(InputType.TYPE_CLASS_NUMBER);
+	        servicePort.setInputType(InputType.TYPE_CLASS_NUMBER);
 	    }
 	 
 	 
@@ -92,15 +95,17 @@ public class ServiceSuggestionDialog extends Dialog{
 			@Override
 			public void onClick(View arg0) {	
 				Context context = ServiceSuggestionDialog.this.getContext();
-				if((!ServiceHost.getText().toString().equals("")) && (!ServiceIP.getText().toString().equals("")) && (!ServicePort.getText().toString().equals("")) ){
-    				if(!checkIP(ServiceIP.getText().toString())){
+				if((!serviceHost.getText().toString().equals("")) 
+						&& (!serviceIP.getText().toString().equals("")) 
+						&& (!servicePort.getText().toString().equals("")) ){
+    				if(!checkIP(serviceIP.getText().toString())){
     	        		
     	        		CharSequence text = context.getString(R.string.toast_ip);
     	        		int duration = Toast.LENGTH_SHORT;
 
     	        		Toast toast = Toast.makeText(context, text, duration);
     	        		toast.show();
-    	        	}else if(!checkPort(ServicePort.getText().toString())){
+    	        	}else if(!checkPort(servicePort.getText().toString())){
     	        		CharSequence text = context.getString(R.string.toast_port);
     	        		int duration = Toast.LENGTH_SHORT;
 
@@ -109,10 +114,10 @@ public class ServiceSuggestionDialog extends Dialog{
     	        	}
     				else {
     	    			readyListener.ready("Service"
-    	    	    			+ "&" + ServiceName.getText().toString() 
-    	    	    			+ "&" + ServiceHost.getText().toString() 
-    	    					+ "&" + ServiceIP.getText().toString()
-    	    					+ "&" + ServicePort.getText().toString());
+    	    	    			+ "&" + serviceName.getText().toString() 
+    	    	    			+ "&" + serviceHost.getText().toString() 
+    	    					+ "&" + serviceIP.getText().toString()
+    	    					+ "&" + servicePort.getText().toString());
     	                ServiceSuggestionDialog.this.dismiss();
     	        	}
     			} else {
