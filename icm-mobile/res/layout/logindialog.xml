@@ -30,17 +30,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerInParent="true"
         android:src="@drawable/umit_logo" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/logo"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/logo"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/username"
         android:textSize="20sp" />
@@ -49,35 +49,38 @@
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etUsername"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/etUsername"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textSize="20sp" >
-
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etPassword"
-        android:layout_below="@+id/etPassword"
-        android:layout_marginTop="18dp"
-        android:text="@string/login"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/loginButton"
-        android:layout_alignBottom="@+id/loginButton"
-        android:layout_alignRight="@+id/logo"
-        android:text="@string/register"
-        android:textSize="20sp" />
+    <LinearLayout 
+            android:id="@+id/ButtonGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etPassword"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+	    <Button
+	        android:id="@+id/loginButton"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/login"
+	        android:textSize="20sp" />
+	
+	    <Button
+	        android:id="@+id/registerButton"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/register"
+	        android:textSize="20sp" />
+     </LinearLayout>
 
 </RelativeLayout>
