@@ -21,14 +21,9 @@ import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
 public class WebsiteDetails {
 	
 	Website website;
-	String websiteURL;
 	URLConnection urlConnection;
-	String content;
-	int status;
-	long fetchTime;
 	double throughput;
 	Map<String,String> header;
-	
 	
 	Trace trace;
 	TraceRoute traceRoute;
@@ -38,10 +33,9 @@ public class WebsiteDetails {
 	
 	public WebsiteDetails(Website website){
 		this.website = website;
-		this.websiteURL = website.getUrl();
 		this.urlConnection = null;
-		this.content = "";
-		this.fetchTime = 0;
+		this.website.setContent("");
+		this.website.setTimeTakentoDownload(0);
 		this.trace = null;
 		this.traceRoute = null;
 		this.icmReport = null;
@@ -51,11 +45,8 @@ public class WebsiteDetails {
 	}
 	
 	public WebsiteDetails(String websiteURL){
-		this.website = new Website(websiteURL, "false", "true", "0000", 0);
-		this.websiteURL = websiteURL;
+		this.website = new Website(websiteURL, "false", "true", "0000", 0, "", 0);
 		this.urlConnection = null;
-		this.content = "";
-		this.fetchTime = 0;
 		this.trace = null;
 		this.traceRoute = null;
 		this.icmReport = null;
@@ -87,9 +78,9 @@ public class WebsiteDetails {
 	private synchronized void setupFetchTimeContentThroughput(){
 		try{
 			long startFetchTime = System.currentTimeMillis();
-			this.content = WebsiteOpen.getContent(this.urlConnection);
-			this.fetchTime = System.currentTimeMillis()-startFetchTime;
-			this.throughput = (this.content.getBytes().length /this.fetchTime) ;
+			this.website.setContent(WebsiteOpen.getContent(this.urlConnection));
+			this.website.setTimeTakentoDownload(System.currentTimeMillis() - startFetchTime);
+			this.throughput = (this.website.getContent().getBytes().length / this.website.getTimeTakentoDownload()) ;
 		}catch(Exception e){
 			
 		}
@@ -99,8 +90,8 @@ public class WebsiteDetails {
 		
 		try {
 			if(Constants.DEBUG_MODE)
-				System.out.println("Opening URL Connection to this website : " + websiteURL);
-			this.urlConnection = WebsiteOpen.openURLConnection(this.websiteURL);
+				System.out.println("Opening URL Connection to this website : " + this.website.getUrl());
+			this.urlConnection = WebsiteOpen.openURLConnection(this.website.getUrl());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,7 +117,7 @@ public class WebsiteDetails {
    	}
 	
 	private synchronized void setupStatus(){
-		this.status = WebsiteOpen.getStatusCode(this.header);
+		this.website.setStatus(String.valueOf(WebsiteOpen.getStatusCode(this.header)));
 	}
 	
 	private synchronized void setupProtobufs(){
@@ -146,10 +137,10 @@ public class WebsiteDetails {
 		
 		this.websiteReportDetail = WebsiteReportDetail.newBuilder()
 				.setBandwidth((int)this.throughput)
-				.setResponseTime((int)this.fetchTime)
-				.setStatusCode(this.status)
-				.setHtmlResponse(this.content)
-				.setWebsiteURL(this.websiteURL)		
+				.setResponseTime((int)this.website.getTimeTakentoDownload())
+				.setStatusCode(Integer.parseInt(this.website.getStatus()))
+				.setHtmlResponse(this.website.getContent())
+				.setWebsiteURL(this.website.getUrl())		
 				.build();
 		
 		List<String> listNodes = new ArrayList<String>();
@@ -174,7 +165,7 @@ public class WebsiteDetails {
 	}
 	
 	private void checkStatus() {
-		if(this.status != 200) {
+		if(!this.website.getStatus().equalsIgnoreCase("200")) {
 			double lat = 0.0;
 			double lon = 0.0;
 			if(Globals.currentLocationGPS != null) {

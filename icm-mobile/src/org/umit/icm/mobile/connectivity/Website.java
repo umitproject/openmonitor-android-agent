@@ -63,7 +63,8 @@ public class Website implements Serializable {
 		this.testID = testID;
 		this.executeAtTimeUTC = executeAtTimeUTC;
 	}
-	public Website(String url, String status, String check, String testID, long executeAtTimeUTC,String content,long timeTakentoDownload) {
+	
+	public Website(String url, String status, String check, String testID, long executeAtTimeUTC, String content, long timeTakentoDownload) {
 		super();
 		this.url = url;
 		this.status = status;

@@ -78,8 +78,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 
 			try {
 				websiteReport = websiteDetails.websiteReport;
-				totalSizeofContent += websiteDetails.content.getBytes().length;
-				totalTime += websiteDetails.fetchTime;
+				totalSizeofContent += websiteDetails.website.getContent().getBytes().length;
+				totalTime += websiteDetails.website.getTimeTakentoDownload();
 				
 				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
 				
