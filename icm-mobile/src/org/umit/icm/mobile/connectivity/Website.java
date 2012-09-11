@@ -114,6 +114,22 @@ public class Website implements Serializable {
 		this.check = check;
 	}
 	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public long getTimeTakentoDownload() {
+		return timeTakentoDownload;
+	}
+
+	public void setTimeTakentoDownload(long timeTakentoDownload) {
+		this.timeTakentoDownload = timeTakentoDownload;
+	}
+
 	/**
 	 * Writes the {@link Website} to disk using   
 	                          
@@ -156,6 +172,5 @@ public class Website implements Serializable {
 			return true;
 		return false;
 	}
-	
 	
 }
