@@ -445,6 +445,9 @@ public class AggregatorResources {
 		 		 
 		 HttpResponse response = httpclient.execute(httppost);
 		 String responseBody = EntityUtils.toString(response.getEntity());
+		 if(Constants.DEBUG_MODE) { 
+			 System.out.println("checkTests response code: " + response.getStatusLine());
+		 }
 		 		 
 		 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());	 
 		 return NewTestsResponse.parseFrom(finalResponse);
