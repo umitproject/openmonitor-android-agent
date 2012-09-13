@@ -62,7 +62,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	public void scan() throws IOException, HttpException, MessagingException {
 		
 		if(Constants.DEBUG_MODE)
-			System.out.println("Scanning SOME SERVICES ---------------------------");
+			System.out.println("Inside Services scan() ---------------------------");
 		
 		HTTPScan();
 		HTTPSScan();
@@ -156,6 +156,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * 
 	 */
 	public void HTTPScan() throws UnknownHostException, IOException {
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside HTTPScan() ---------------------------");
 		String HTTPResponse = ServiceHTTP.connect();
 		if(HTTPResponse != null) {			
 			byte[] serviceResponseBytes = null;
@@ -220,6 +222,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * 
 	 */
 	public void HTTPSScan() throws UnknownHostException, IOException {
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside HTTPSScan() ---------------------------");
 		String HTTPSResponse = ServiceHTTPS.connect();
 		if(HTTPSResponse != null) {	
 			byte[] httpsServiceResponseBytes = null;
@@ -281,6 +285,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * 
 	 */
 	public void FTPScan() throws IOException {		
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside FTPScan() ---------------------------");
 		String FTPResponse = ServiceFTP.connect();
 		if(FTPResponse != null) {			
 			byte[] ftpServiceResponseBytes = null;
@@ -342,7 +348,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void POP3Scan() throws IOException, MessagingException {		
+	public void POP3Scan() throws IOException, MessagingException {	
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside POP3Scan() ---------------------------");
 		String POP3Response = ServicePOP3.connect();
 		if(POP3Response != null) {			
 			byte[] pop3ServiceResponseBytes = null;
@@ -403,6 +411,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * 
 	 */
 	public void IMAPScan() throws IOException, MessagingException {		
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside IMAPScan() ---------------------------");
 		String IMAPResponse = ServiceIMAP.connect();
 		if(IMAPResponse != null) {		
 			byte[] imapServiceResponseBytes = null;
@@ -463,7 +473,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void GtalkScan() throws IOException, MessagingException {		
+	public void GtalkScan() throws IOException, MessagingException {	
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside GtalkScan() ---------------------------");
 		String GtalkResponse = ServiceGtalk.connect();
 		if(GtalkResponse != null) {			
 			byte[] gtalkServiceResponseBytes = null;
@@ -524,7 +536,9 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void MSNScan() throws IOException, MessagingException {		
+	public void MSNScan() throws IOException, MessagingException {	
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside MSNScan() ---------------------------");
 		String msnResponse = ServiceMSN.connect();
 		if(msnResponse != null) {				
 			byte[] msnServiceResponseBytes = null;

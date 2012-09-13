@@ -132,7 +132,7 @@ public class ConnectivityService extends Service {
 					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 						stopScan();
 					if(Constants.DEBUG_MODE)
-						System.out.println("STARTING SERVICE SCAN ------------------------------------");
+						System.out.println("STARTING SERVICES SCAN ------------------------------------");
 					Globals.serviceTest.scan();
 					
 				} catch (IOException e) {
@@ -147,6 +147,8 @@ public class ConnectivityService extends Service {
 				} 
 				
 				try {
+					if(Constants.DEBUG_MODE)
+						System.out.println("STARTING WEBSITES SCAN ------------------------------------");
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
