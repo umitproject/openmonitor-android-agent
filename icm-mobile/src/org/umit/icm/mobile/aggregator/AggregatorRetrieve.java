@@ -83,10 +83,8 @@ public class AggregatorRetrieve {
 		 
 		 if(Constants.DEBUG_MODE)
 			 System.out.println("This is from inside AggregatorRetive#registerAgent");
-			ClientResource clientResource 
-			= AggregatorResources.getClientResource( Constants.AGGR_REGISTER_AGENT);
 			RegisterAgentResponse registerAgentResponse
-			= AggregatorResources.registerAgent(registerAgent, clientResource); 
+			= AggregatorResources.registerAgent(registerAgent); 
 			return AggregatorActions.registerAgentAction(registerAgentResponse);			
 	 }
 	
@@ -113,10 +111,8 @@ public class AggregatorRetrieve {
 	 */	
 	 public synchronized static boolean getPeerList(GetPeerList getPeerList) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_LIST);
 		 	GetPeerListResponse getPeerListResponse
-		 	= AggregatorResources.getPeerList(getPeerList, clientResource);
+		 	= AggregatorResources.getPeerList(getPeerList);
 		 	return AggregatorActions.getPeerListAction(getPeerListResponse);		 	
 	 }
 	 
@@ -143,10 +139,8 @@ public class AggregatorRetrieve {
 	 */	 
 	 public synchronized static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_PEER_SUPER_LIST);
 		 	GetSuperPeerListResponse getSuperPeerListResponse
-		 	= AggregatorResources.getSuperPeerList(getSuperPeerList, clientResource);
+		 	= AggregatorResources.getSuperPeerList(getSuperPeerList);
 		 	return AggregatorActions.getSuperPeerListAction(getSuperPeerListResponse);		 	
 	 }
 	 
@@ -173,10 +167,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean getEvents(GetEvents getEvents) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_GET_EVENTS);
 		 	GetEventsResponse getEventsResponse 
-		 	= AggregatorResources.getEvents(getEvents, clientResource);	 	
+		 	= AggregatorResources.getEvents(getEvents);	 	
 		 	return AggregatorActions.getEventsAction(getEventsResponse);
 	 }
 	 
@@ -203,10 +195,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_WEBSITE_REPORT);
 		 	SendReportResponse sendReportResponse
-		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport, clientResource);		 	
+		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport);		 	
 			return AggregatorActions.sendReportAction(sendReportResponse);
 	 }
 	 
@@ -233,10 +223,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean sendServiceReport(SendServiceReport sendServiceReport) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_SEND_SERVICE_REPORT);
 		 	SendReportResponse sendReportResponse 
-		 	= AggregatorResources.sendServiceReport(sendServiceReport, clientResource);
+		 	= AggregatorResources.sendServiceReport(sendServiceReport);
 		 	return AggregatorActions.sendReportAction(sendReportResponse);			
 	 }	
 	 
@@ -263,10 +251,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean checkVersion(NewVersion newVersion) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_VERSION);
 		 	NewVersionResponse newVersionResponse
-		 	= AggregatorResources.checkVersion(newVersion, clientResource);		 	
+		 	= AggregatorResources.checkVersion(newVersion);		 	
 			return AggregatorActions.checkVersionAction(newVersionResponse);
 	 }
 	 
@@ -293,10 +279,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean checkTests(NewTests newTests) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_TESTS);
 		 	NewTestsResponse newTestsResponse 
-		 	= AggregatorResources.checkTests(newTests, clientResource);		 	
+		 	= AggregatorResources.checkTests(newTests);		 	
 			return AggregatorActions.newTestsAction(newTestsResponse);
 	 }
 	 
@@ -321,10 +305,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_WEBSITE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
-		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion, clientResource);		 	
+		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion);		 	
 			return AggregatorActions.sendSuggestionAction(testSuggestionResponse);
 	 }
 
@@ -351,10 +333,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_SERVICE_SUGGESTION);
 		 	TestSuggestionResponse testSuggestionResponse
-		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion, clientResource);
+		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion);
 		 	return AggregatorActions.sendSuggestionAction(testSuggestionResponse);			
 	 }
 	 
@@ -376,10 +356,8 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static boolean checkAggregatorStatus(CheckAggregator checkAggregator) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_CHECK_AGGREGATOR);
 		 	CheckAggregatorResponse checkAggregatorResponse
-		 	= AggregatorResources.checkAggregatorStatus(checkAggregator, clientResource);
+		 	= AggregatorResources.checkAggregatorStatus(checkAggregator);
 		 	return AggregatorActions.checkAggregatorAction(checkAggregatorResponse);			
 	 }
 	 
@@ -405,14 +383,8 @@ public class AggregatorRetrieve {
 		 if(Constants.DEBUG_MODE)
 		 	System.out.println("Inside AggregatorRetrieve#login");
 		 	
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_1);
-		 	
-		 	ClientResource clientResource2
-		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGIN_2);
-		 	
 		 	LoginResponse loginResponse
-		 	= AggregatorResources.login(login, clientResource,clientResource2);
+		 	= AggregatorResources.login(login);
 		 	return AggregatorActions.loginAction(loginResponse);			
 	 }
 	 
@@ -430,21 +402,16 @@ public class AggregatorRetrieve {
 	 */
 	 public synchronized static void logout(Logout logout) 
 	 throws Exception {
-		 	ClientResource clientResource 
-		 	= AggregatorResources.getClientResource(Constants.AGGR_LOGOUT);
-		 	AggregatorResources.logout(logout, clientResource);		 				
+		 	AggregatorResources.logout(logout);		 				
 	 }
 	 
 	 public synchronized static void getBanlist(GetBanlist getBanlist) throws Exception{
-		 
-		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANLIST);
-		 AggregatorResources.getBanlist(getBanlist, clientResource);
+		 AggregatorResources.getBanlist(getBanlist);
 	 }
 	 
 	 public synchronized static void getBannets(GetBannets getBannets) throws Exception{
-		 
-		 ClientResource clientResource = AggregatorResources.getClientResource(Constants.AGGR_GET_BANNETS);
-		 AggregatorResources.getBannets(getBannets, clientResource);
+		 AggregatorResources.getBannets(getBannets);
 		 
 	 }
+	 
 }

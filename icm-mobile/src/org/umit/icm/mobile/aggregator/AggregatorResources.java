@@ -67,9 +67,7 @@ import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.ServiceSuggestion;
 import org.umit.icm.mobile.proto.MessageProtos.TestSuggestionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
-import org.umit.icm.mobile.utils.AESCrypto;
 import org.umit.icm.mobile.utils.AggregatorCrypto;
-import org.umit.icm.mobile.utils.CryptoKeyReader;
 import org.umit.icm.mobile.utils.RSACrypto;
 
 /**
@@ -77,24 +75,6 @@ import org.umit.icm.mobile.utils.RSACrypto;
  * webservice ClientResource. 
  */
 public class AggregatorResources {
-	
-	/**
-	 * Returns a ClientResource object. url is passed to the ClientResource
-	 * constructor.
-	 * 
-	 *	 
-	                          
-	@param  url  An object of the type String
-	 *  	                          	
-	                          
-	@return      ClientResource
-	 *  
-
-	@see         ClientResource
-	 */
-	 public synchronized static ClientResource getClientResource(String url) {	
-		 return new ClientResource(Constants.AGGREGATOR_URL + url);
-	 }
 	 
 	/**
 	 * Returns a RegisterAgentResponse object. Encodes the passed message to
@@ -120,8 +100,7 @@ public class AggregatorResources {
 	@see         ClientResource
 	 */
 	 public static RegisterAgentResponse registerAgent(
-			 RegisterAgent registerAgent,
-			 ClientResource clientResource) 
+			 RegisterAgent registerAgent) 
 	 throws Exception{
 		 try{
 
@@ -187,8 +166,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetPeerListResponse getPeerList(GetPeerList getPeerList, 
-			 ClientResource clientResource) 
+	 public static GetPeerListResponse getPeerList(GetPeerList getPeerList) 
 	 throws Exception {
 
 		 String msg = AggregatorCrypto.aesEncrypt(getPeerList.toByteArray());
@@ -232,8 +210,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList, 
-			 ClientResource clientResource) 
+	 public static GetSuperPeerListResponse getSuperPeerList(GetSuperPeerList getSuperPeerList) 
 	 throws Exception {
 
 		 String msg = AggregatorCrypto.aesEncrypt(getSuperPeerList.toByteArray());
@@ -278,9 +255,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static GetEventsResponse getEvents(
-			 GetEvents getEvents, 
-			 ClientResource clientResource) 
+	 public static GetEventsResponse getEvents(GetEvents getEvents) 
 	 throws Exception {
 		 
 		 String msg = AggregatorCrypto.aesEncrypt(getEvents.toByteArray());
@@ -324,8 +299,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport, 
-			 ClientResource clientResource) 
+	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
 	 throws Exception {
 
 		 String msg = AggregatorCrypto.aesEncrypt(sendWebsiteReport.toByteArray());
@@ -370,9 +344,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static SendReportResponse sendServiceReport(
-			 SendServiceReport sendServiceReport, 
-			 ClientResource clientResource) 
+	 public static SendReportResponse sendServiceReport(SendServiceReport sendServiceReport) 
 	 throws Exception {
 		 String msg = AggregatorCrypto.aesEncrypt(sendServiceReport.toByteArray());
 			
@@ -415,9 +387,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static NewVersionResponse checkVersion(
-			 NewVersion newVersion, 
-			 ClientResource clientResource) 
+	 public static NewVersionResponse checkVersion(NewVersion newVersion) 
 	 throws Exception {
 		 String msg = AggregatorCrypto.aesEncrypt(newVersion.toByteArray());
 		 HttpClient httpclient = new DefaultHttpClient();
@@ -460,8 +430,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static NewTestsResponse checkTests(NewTests newTests, 
-			 ClientResource clientResource) 
+	 public static NewTestsResponse checkTests(NewTests newTests) 
 	 throws Exception {
 
 		 String msg = AggregatorCrypto.aesEncrypt(newTests.toByteArray());
@@ -506,9 +475,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */		
-	 public static TestSuggestionResponse sendWebsiteSuggestion(
-			 WebsiteSuggestion websiteSuggestion, 
-			 ClientResource clientResource) 
+	 public static TestSuggestionResponse sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
 	 throws Exception {
 		 
 		 String msg = AggregatorCrypto.aesEncrypt(websiteSuggestion.toByteArray());
@@ -553,9 +520,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */	
-	 public static TestSuggestionResponse sendServiceSuggestion(
-			 ServiceSuggestion serviceSuggestion, 
-			 ClientResource clientResource) 
+	 public static TestSuggestionResponse sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
 	 throws Exception {
 		 String msg = AggregatorCrypto.aesEncrypt(serviceSuggestion.toByteArray());
 			
@@ -598,9 +563,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */					 
-	 public static CheckAggregatorResponse checkAggregatorStatus(
-			 CheckAggregator checkAggregator, 
-			 ClientResource clientResource) 
+	 public static CheckAggregatorResponse checkAggregatorStatus(CheckAggregator checkAggregator) 
 	 throws Exception {
 		 String msg = AggregatorCrypto.aesEncrypt(checkAggregator.toByteArray());
 		 HttpClient httpclient = new DefaultHttpClient();
@@ -618,17 +581,14 @@ public class AggregatorResources {
 		 return CheckAggregatorResponse.parseFrom(finalResponse);
 	 } 
 	 
-	 public static LoginResponse login(Login login,
-			 ClientResource clientResource,
-			 ClientResource clientResource2) 
+	 public static LoginResponse login(Login login) 
 	 throws Exception {
-		 LoginStep1 loginStep1 = loginStep1(login, clientResource);
-		 LoginResponse loginResponse = loginStep2(loginStep1, clientResource2);	 
+		 LoginStep1 loginStep1 = loginStep1(login);
+		 LoginResponse loginResponse = loginStep2(loginStep1);	 
 		 return loginResponse;
 	 } 
 	 
-	 public static LoginResponse loginStep2(LoginStep1 loginStep1, 
-			 ClientResource clientResource)
+	 public static LoginResponse loginStep2(LoginStep1 loginStep1)
 	 throws Exception {
 		 
 		 String message = loginStep1.getChallenge();
@@ -695,9 +655,7 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static LoginStep1 loginStep1(
-			 Login login, 
-			 ClientResource clientResource) 
+	 public static LoginStep1 loginStep1(Login login) 
 	 throws Exception {
 		 
 		 String msg = AggregatorCrypto.encodeData(login.toByteArray());
@@ -737,26 +695,23 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static void logout(
-			 Logout logout, 
-			 ClientResource clientResource) 
+	 public static void logout(Logout logout) 
 	 throws Exception {
-		 Form form = new Form();
-		 if(Constants.AGGR_ENCRYPTION == true) {
-			 byte [] symmetricKey = CryptoKeyReader.getPeerSecretKey("aggregator");
-			 byte[] cipherBytes = AESCrypto.encrypt(symmetricKey, logout.toByteArray());
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(cipherBytes)));
-		 } else {
-			 form.add(Constants.AGGR_MSG_KEY
-					 , new String(Base64.encodeBase64(logout.toByteArray())));
-		 }
-			 clientResource.post(form.getWebRepresentation(null)); 				 
+		 String msg = AggregatorCrypto.aesEncrypt(logout.toByteArray());
+		 
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost = new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGOUT); 
+		 
+		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		 pairs.add(new BasicNameValuePair("msg", msg));
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		
+		 httpclient.execute(httppost);			 
 	 }
 	  
 	 
-	 public static GetBanlistResponse getBanlist(GetBanlist getBanlists,
-			 ClientResource clientResource) 
+	 public static GetBanlistResponse getBanlist(GetBanlist getBanlists) 
 	 throws Exception{
 		 
 		 String msg = AggregatorCrypto.aesEncrypt(getBanlists.toByteArray());
@@ -778,8 +733,7 @@ public class AggregatorResources {
 	 }
 	 
 	 
-	 public static GetBannetsResponse getBannets(GetBannets getBannets, 
-			 ClientResource clientResource) 
+	 public static GetBannetsResponse getBannets(GetBannets getBannets) 
 	 throws Exception{
 		 
 		 String msg = AggregatorCrypto.aesEncrypt(getBannets.toByteArray());
