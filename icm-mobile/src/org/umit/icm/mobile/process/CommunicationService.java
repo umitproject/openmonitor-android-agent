@@ -70,7 +70,7 @@ public class CommunicationService extends Service {
 	public void onCreate() {
 
 		super.onCreate();				
-		startPeers();		
+		//startPeers();		
 		startEvents();
 		startAccess();
 		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -85,7 +85,7 @@ public class CommunicationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();		
-		stopPeers();
+		//stopPeers();
 		stopEvents();
 		stopAccess();
 	}		

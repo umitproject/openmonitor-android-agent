@@ -140,7 +140,7 @@ public class Initialization {
 	public static void startServices(Context context) {
 		context.startService(new Intent(context, ConnectivityService.class));
 //		context.startService(new Intent(context, NotificationService.class));
-//		context.startService(new Intent(context, CommunicationService.class));		
+		context.startService(new Intent(context, CommunicationService.class));		
 	}
 	
 	public static void checkProfiler() {
