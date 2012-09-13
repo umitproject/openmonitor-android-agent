@@ -22,6 +22,7 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
 	 * 
 	 */
-	public void HTTPScan() throws UnknownHostException, IOException {
+	public void HTTPScan() {
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside HTTPScan() ---------------------------");
 		String HTTPResponse = ServiceHTTP.connect();
@@ -163,18 +164,23 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			byte[] serviceResponseBytes = null;
 			ServiceReport serviceReport = ServiceReport.getDefaultInstance();
 			
-			Globals.tcpClientConnectivity.openConnection(ServiceHTTP.getService().getIp(), ServiceHTTP.getService().getPort());
-			
-			Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-			
-			serviceResponseBytes= Globals.tcpClientConnectivity.readBytes();
-			
-			if(Constants.DEBUG_MODE) {
-				if(!serviceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(ServiceHTTP.getService().getIp(), ServiceHTTP.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
+				serviceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!serviceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			
-			Globals.tcpClientConnectivity.closeConnection();
+					
 			
 			try {
 				
@@ -221,24 +227,33 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
 	 * 
 	 */
-	public void HTTPSScan() throws UnknownHostException, IOException {
+	public void HTTPSScan() {
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside HTTPSScan() ---------------------------");
 		String HTTPSResponse = ServiceHTTPS.connect();
 		if(HTTPSResponse != null) {	
 			byte[] httpsServiceResponseBytes = null;
 			ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceHTTPS.getService().getIp()
-					, ServiceHTTPS.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			httpsServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!httpsServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceHTTPS.getService().getIp()
+						, ServiceHTTPS.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				httpsServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!httpsServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
+			
 			
 			try {
 				serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService(), HTTPSResponse, httpsServiceResponseBytes);
@@ -284,25 +299,42 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
 	 * 
 	 */
-	public void FTPScan() throws IOException {		
+	public void FTPScan() {		
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside FTPScan() ---------------------------");
-		String FTPResponse = ServiceFTP.connect();
+		String FTPResponse = null;
+		try {
+			FTPResponse = ServiceFTP.connect();
+		} catch (SocketException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(FTPResponse != null) {			
 			byte[] ftpServiceResponseBytes = null;
 			ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceFTP.getService().getIp()
-					, ServiceFTP.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			ftpServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!ftpServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceFTP.getService().getIp()
+						, ServiceFTP.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				ftpServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!ftpServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
-			
+					
 			try {
 				serviceReportFTP = (ServiceReport) clean(ServiceFTP.getService()
 							, FTPResponse, ftpServiceResponseBytes);
@@ -348,24 +380,49 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void POP3Scan() throws IOException, MessagingException {	
+	public void POP3Scan() {	
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside POP3Scan() ---------------------------");
-		String POP3Response = ServicePOP3.connect();
-		if(POP3Response != null) {			
+		String POP3Response = null;
+		try {
+			POP3Response = ServicePOP3.connect();
+		} catch (SocketException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (MessagingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside POP3Scan(),POP3Response: " + POP3Response + " -----------------------");
+		if(POP3Response != null) {	
+			if(Constants.DEBUG_MODE)
+				System.out.println("POP3Response!=null ---------------------------");
 			byte[] pop3ServiceResponseBytes = null;
 			ServiceReport serviceReportPOP3 = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServicePOP3.getService().getIp()
-					, ServicePOP3.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			pop3ServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!pop3ServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(
+						ServicePOP3.getService().getIp()
+						, ServicePOP3.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				pop3ServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!pop3ServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
+			
 			
 			try {
 				serviceReportPOP3 = (ServiceReport) clean(ServicePOP3.getService()
@@ -410,25 +467,45 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void IMAPScan() throws IOException, MessagingException {		
+	public void IMAPScan() {		
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside IMAPScan() ---------------------------");
-		String IMAPResponse = ServiceIMAP.connect();
+		String IMAPResponse = null;
+		try {
+			IMAPResponse = ServiceIMAP.connect();
+		} catch (SocketException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (MessagingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(IMAPResponse != null) {		
 			byte[] imapServiceResponseBytes = null;
 			ServiceReport serviceReportIMAP = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceIMAP.getService().getIp()
-					, ServiceIMAP.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			imapServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!imapServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceIMAP.getService().getIp()
+						, ServiceIMAP.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				imapServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!imapServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
-			
+					
 			try {
 				serviceReportIMAP = (ServiceReport) clean(ServiceIMAP.getService()
 						, IMAPResponse, imapServiceResponseBytes);
@@ -473,24 +550,42 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void GtalkScan() throws IOException, MessagingException {	
+	public void GtalkScan() {	
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside GtalkScan() ---------------------------");
-		String GtalkResponse = ServiceGtalk.connect();
+		String GtalkResponse = null;
+		try {
+			GtalkResponse = ServiceGtalk.connect();
+		} catch (SocketException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(GtalkResponse != null) {			
 			byte[] gtalkServiceResponseBytes = null;
 			ServiceReport serviceReportGtalk = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(
-					ServiceGtalk.getService().getIp()
-					, ServiceGtalk.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(
-					ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-			gtalkServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!gtalkServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(
+						ServiceGtalk.getService().getIp()
+						, ServiceGtalk.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(
+						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
+				gtalkServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!gtalkServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
+			
 			
 			try {
 				serviceReportGtalk = (ServiceReport) clean(ServiceGtalk.getService()
@@ -536,21 +631,41 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
 	 * 
 	 */
-	public void MSNScan() throws IOException, MessagingException {	
+	public void MSNScan() {	
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside MSNScan() ---------------------------");
-		String msnResponse = ServiceMSN.connect();
+		String msnResponse = null;
+		try {
+			msnResponse = ServiceMSN.connect();
+		} catch (SocketException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(msnResponse != null) {				
 			byte[] msnServiceResponseBytes = null;
 			ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
-			Globals.tcpClientConnectivity.openConnection(ServiceMSN.getService().getIp(), ServiceMSN.getService().getPort());
-			Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(ServicePackets.MSN_VER));
-			msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-			if(Constants.DEBUG_MODE) {
-				if(!msnServiceResponseBytes.equals(null))
-					Log.w("#####bytes", "bytes");
+			try {
+				Globals.tcpClientConnectivity.openConnection(ServiceMSN.getService().getIp(), 
+						ServiceMSN.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(
+						ServicePackets.MSN_VER));
+				msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!msnServiceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			Globals.tcpClientConnectivity.closeConnection();
+			
 			
 			try {
 				serviceReportMSN = (ServiceReport) clean(ServiceMSN.getService()
@@ -617,4 +732,5 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			Globals.runtimesList.addEvent(event);
 		}
 	}
-	}
+	
+}

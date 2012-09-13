@@ -31,6 +31,8 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
 
+import org.umit.icm.mobile.process.Constants;
+
 import com.sun.mail.pop3.POP3SSLStore;
 
 /**
@@ -54,6 +56,8 @@ public class ServicePOP3 {
 	@see Store
 	 */
 	public static String connect() throws SocketException, IOException, MessagingException {
+		if(Constants.DEBUG_MODE)
+			System.out.println("Inside ServicePOP3.connect() ---------------------------");
 					       
         Properties properties = new Properties();        
         properties.setProperty("mail.pop3.socketFactory.class",
