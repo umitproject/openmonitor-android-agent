@@ -79,11 +79,15 @@ import org.umit.icm.mobile.utils.RSACrypto;
 public class AggregatorResources {
 	
 	public static List<NameValuePair> getPairs(byte[] bytes) {
-		 String msg = AggregatorCrypto.aesEncrypt(bytes);	 
-		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		 pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
-		 pairs.add(new BasicNameValuePair("msg", msg));
-		 return pairs;
+		String msg;
+		if(Constants.AGGR_ENCRYPTION)
+			msg = AggregatorCrypto.aesEncrypt(bytes);	 
+		else
+			msg = new String(bytes);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("agentID", Globals.runtimeParameters.getAgentID()));
+		pairs.add(new BasicNameValuePair("msg", msg));
+		return pairs;
 	}
 	
 	public static byte[] getResponse(String call, byte[] msgBytes) 
@@ -96,8 +100,11 @@ public class AggregatorResources {
 		 if(Constants.DEBUG_MODE) { 
 			 System.out.println(call + " response code: " + response.getStatusLine());
 		 }
-		 String responseBody = EntityUtils.toString(response.getEntity());	 
-		 return AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 String responseBody = EntityUtils.toString(response.getEntity());	
+		 if(Constants.AGGR_ENCRYPTION)
+			 return AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+		 else
+			 return responseBody.getBytes();
 	}
 	
 	public static String getResponse(String call, List<NameValuePair> pairs) 
@@ -140,8 +147,11 @@ public class AggregatorResources {
 			 RegisterAgent registerAgent) 
 	 throws Exception{
 		 try{
-			 
-			 String msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());	 
+			 String msg;
+			 if(Constants.AGGR_ENCRYPTION)
+				 msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());	
+			 else
+				 msg = new String(registerAgent.toByteArray());
 			 String key = AggregatorCrypto.rsaAggregatorPublicKeyEncypt(
 				 Base64.encodeBase64(Globals.keyManager.getAESKey()));	 
 	 	 
@@ -159,8 +169,13 @@ public class AggregatorResources {
 			 String responseBody = getResponse(Constants.AGGR_REGISTER_AGENT, pairs); 
 
 			 if(Constants.DEBUG_MODE)
-				 System.out.println("------------------------------GOT THIS AS RESPONSE : " + responseBody); 	 
-			 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+				 System.out.println("------------------------------GOT THIS AS RESPONSE : " + responseBody);
+			 
+			 byte[] finalResponse;
+			 if(Constants.AGGR_ENCRYPTION)
+				 finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+			 else
+				 finalResponse = responseBody.getBytes();
 		
 			 if(Constants.DEBUG_MODE) {
 				 for(int i = 0; i < finalResponse.length; i++) {

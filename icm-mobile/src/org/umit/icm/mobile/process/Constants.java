@@ -170,5 +170,5 @@ public class Constants {
 		public static int MAX_PEERS = 10;
 		public static int MAX_SUPER_PEERS = 2;	
 		public static boolean P2P_ENCRYPTION = false;
-		public static boolean AGGR_ENCRYPTION = false;
+		public static boolean AGGR_ENCRYPTION = true;
 }
