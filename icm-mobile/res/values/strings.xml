@@ -106,11 +106,11 @@
     <string name="bug_subject">Please enter Subject</string>
     <string name="bug_crash">[BugCrashReport]</string>
     <string name="from">From</string>
-    <string name="logging_in">Logging in.. </string>
-    <string name="registering">Registering</string>
-    <string name="registration_complete">Registration Complete</string>
+    <string name="logging_in">Logging in..</string>
+    <string name="registering">Exchanging Credentials..</string>
+    <string name="registration_complete">Credentials Exchanged</string>
     <string name="login_complete">Login Complete</string>
-    <string name="registration_failed">Registration Failed</string>
+    <string name="registration_failed">Credentials Exchange Failed</string>
     <string name="login_failed">Login Failed</string>
     <string name="status">Status:</string>
     <string name="port">Port:</string>
