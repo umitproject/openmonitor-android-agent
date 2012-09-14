@@ -99,6 +99,19 @@ public class AggregatorResources {
 		 String responseBody = EntityUtils.toString(response.getEntity());	 
 		 return AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 	}
+	
+	public static String getResponse(String call, List<NameValuePair> pairs) 
+			throws ClientProtocolException, IOException {
+		 HttpClient httpclient = new DefaultHttpClient();
+		 HttpPost httppost = new HttpPost(Constants.AGGREGATOR_URL + call);
+		 httppost.setEntity(new UrlEncodedFormEntity(pairs));
+		 
+		 HttpResponse response = httpclient.execute(httppost);
+		 if(Constants.DEBUG_MODE) { 
+			 System.out.println(call + " response code: " + response.getStatusLine());
+		 }
+		 return EntityUtils.toString(response.getEntity());	 
+	}
 	 
 	/**
 	 * Returns a RegisterAgentResponse object. Encodes the passed message to
@@ -127,38 +140,35 @@ public class AggregatorResources {
 			 RegisterAgent registerAgent) 
 	 throws Exception{
 		 try{
-
-		 String msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());	 
-		 String key = AggregatorCrypto.rsaAggregatorPublicKeyEncypt(
+			 
+			 String msg = AggregatorCrypto.aesEncrypt(registerAgent.toByteArray());	 
+			 String key = AggregatorCrypto.rsaAggregatorPublicKeyEncypt(
 				 Base64.encodeBase64(Globals.keyManager.getAESKey()));	 
-	
-		 HttpClient httpClient = new DefaultHttpClient();
-		 HttpPost httpPost = new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_REGISTER_AGENT);	 	 
-		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		 pairs.add(new BasicNameValuePair("key", key ));
-		 pairs.add(new BasicNameValuePair("agentID",Globals.runtimeParameters.getAgentID()));
-		 pairs.add(new BasicNameValuePair("msg", msg));
-		 httpPost.setEntity(new UrlEncodedFormEntity(pairs));
+	 	 
+			 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+			 pairs.add(new BasicNameValuePair("key", key ));
+			 pairs.add(new BasicNameValuePair("agentID",Globals.runtimeParameters.getAgentID()));
+			 pairs.add(new BasicNameValuePair("msg", msg));
 		 
-		 HttpResponse response = httpClient.execute(httpPost); 
-		 if(Constants.DEBUG_MODE) {
-			 System.out.println("Sending key : " + key);
-			 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
-			 System.out.println("Sending msg : " + msg);	 
-		 }
+			 if(Constants.DEBUG_MODE) {
+				 System.out.println("Sending key : " + key);
+				 System.out.println("Sending agentID : " + Globals.runtimeParameters.getAgentID());
+				 System.out.println("Sending msg : " + msg);	 
+			 }
 		 
-		String responseBody = EntityUtils.toString(response.getEntity());
-		if(Constants.DEBUG_MODE)
-			System.out.println("---------------------------------GOT THIS AS RESPONSE : " + responseBody); 	 
-		byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
+			 String responseBody = getResponse(Constants.AGGR_REGISTER_AGENT, pairs); 
+
+			 if(Constants.DEBUG_MODE)
+				 System.out.println("------------------------------GOT THIS AS RESPONSE : " + responseBody); 	 
+			 byte[] finalResponse = AggregatorCrypto.aesDecrypt(responseBody.getBytes());
 		
-		if(Constants.DEBUG_MODE) {
-			for(int i = 0; i < finalResponse.length; i++) {
-				System.out.println(finalResponse[i]);
-			}
-		}
+			 if(Constants.DEBUG_MODE) {
+				 for(int i = 0; i < finalResponse.length; i++) {
+					 System.out.println(finalResponse[i]);
+				 }
+			 }
 		
-		return RegisterAgentResponse.parseFrom(finalResponse);
+			 return RegisterAgentResponse.parseFrom(finalResponse);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -494,18 +504,12 @@ public class AggregatorResources {
 				 .build();
 		 	 
 		 byte[] msg = Base64.encodeBase64(loginStep2.toByteArray());
-		 String msg_string = new String(msg);
-		 
-		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost = new HttpPost(Constants.AGGREGATOR_URL+ Constants.AGGR_LOGIN_2);
+		 String msg_string = new String(msg);	 
 		 	 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		 pairs.add(new BasicNameValuePair("msg", msg_string));
-		 httppost.setEntity(new UrlEncodedFormEntity(pairs));		 
-		 
-		 HttpResponse response = httpclient.execute(httppost);
-		 String responseBody = EntityUtils.toString(response.getEntity());	 
-		 
+
+		 String responseBody = getResponse(Constants.AGGR_LOGIN_2, pairs);		 
 		 return LoginResponse.parseFrom(Base64.decodeBase64(responseBody.getBytes()));
 		 
 	 }
@@ -541,15 +545,10 @@ public class AggregatorResources {
 		 
 		 String msg = AggregatorCrypto.encodeData(login.toByteArray());
 		 
-		 HttpClient httpclient = new DefaultHttpClient();
-		 HttpPost httppost = new HttpPost(Constants.AGGREGATOR_URL + Constants.AGGR_LOGIN_1);
-		 
 		 List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		 pairs.add(new BasicNameValuePair("msg", msg));
-		 httppost.setEntity(new UrlEncodedFormEntity(pairs)); 
-		 
-		 HttpResponse response = httpclient.execute(httppost);
-		 String responseBody = EntityUtils.toString(response.getEntity());
+
+		 String responseBody = getResponse(Constants.AGGR_LOGIN_1, pairs);
 		 byte[] responseByte = Base64.decodeBase64(responseBody.getBytes());		 
 		 
 		 return LoginStep1.parseFrom(responseByte);
