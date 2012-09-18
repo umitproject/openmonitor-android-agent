@@ -113,11 +113,8 @@ public class WebsiteActivity extends Activity{
 			= website.substring(11) + Constants.WEBSITE_FILE;
 			try {
 				if(SDCardReadWrite.fileExists(websiteFilename, Constants.WEBSITES_DIR)) {
-/*					WebsiteReport websiteReport 
-					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);*/
-					WebsiteDetails websiteDetails = new WebsiteDetails(website);
-					
-					WebsiteReport websiteReport = websiteDetails.websiteReport;
+					WebsiteReport websiteReport 
+					= SDCardReadWrite.readWebsiteReport(Constants.WEBSITES_DIR, website);
 					
 					if(websiteReport.getReport().getStatusCode() == 200) {
 						websiteTextBitmapAdapter.addItem(
