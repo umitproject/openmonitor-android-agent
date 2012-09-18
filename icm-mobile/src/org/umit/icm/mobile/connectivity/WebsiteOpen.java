@@ -33,6 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpException;
+import org.umit.icm.mobile.process.Constants;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -155,6 +156,8 @@ public class WebsiteOpen {
 		Map<String, String> headerMap = new HashMap <String, String>();
 		String key = new String();
 		String value = new String();
+		if(Constants.DEBUG_MODE)
+			System.out.println("Header for " + urlConnection.getURL());
 		
 		for (int i=0 ;	; i++) {
 			key = urlConnection.getHeaderFieldKey(i);
@@ -164,6 +167,8 @@ public class WebsiteOpen {
 			if (key == null) 
 				key = "status";
 			headerMap.put(key, value);
+			if(Constants.DEBUG_MODE)
+				System.out.println(key + ": " + value);
 			key = "";
 			value = "";
 		}
