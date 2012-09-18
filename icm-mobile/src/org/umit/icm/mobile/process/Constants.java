@@ -46,7 +46,7 @@ public class Constants {
 	public static int AES_KEY_SIZE = 256;
 	public static int AES_BLOCK_SIZE = AES_KEY_SIZE / 16;
 	public static byte  AES_DEFAULT_PADDING = '{';
-	public static String ICM_ROOT_DIR = "/icm-mobile";
+	public static String ICM_ROOT_DIR = "/openmonitor";
 	public static String KEYS_DIR = ICM_ROOT_DIR + "/keys";
 	public static String PARAMETERS_DIR = ICM_ROOT_DIR + "/params";
 	public static String VERSIONS_DIR = ICM_ROOT_DIR + "/versions";
