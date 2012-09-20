@@ -88,6 +88,17 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 					Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+					Log.w("######IP", websiteDetails.ip);
+					for (int i = 0; i < websiteDetails.nsDNSRecord.length; i++) {
+						Log.w("######NS Record", websiteDetails.nsDNSRecord[i]);
+					}
+					for (int i = 0; i < websiteDetails.aDNSRecord.length; i++) {
+						Log.w("######A Record", websiteDetails.aDNSRecord[i]);
+					}
+					for (int i = 0; i < websiteDetails.soaDNSRecord.length; i++) {
+						Log.w("######SOA Record", websiteDetails.soaDNSRecord[i]);
+					}
+					
 				}
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setReport(websiteReport)

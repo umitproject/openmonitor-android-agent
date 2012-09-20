@@ -2,6 +2,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.umit.icm.mobile.proto.MessageProtos.Trace;
 import org.umit.icm.mobile.proto.MessageProtos.TraceRoute;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReportDetail;
+import org.xbill.DNS.TextParseException;
 
 public class WebsiteDetails {
 	
@@ -30,6 +32,10 @@ public class WebsiteDetails {
 	ICMReport icmReport;
 	WebsiteReportDetail websiteReportDetail;
 	public WebsiteReport websiteReport;
+	String ip;
+	String aDNSRecord[];
+	String nsDNSRecord[];
+	String soaDNSRecord[];
 	
 	public WebsiteDetails(Website website){
 		this.website = website;
@@ -41,6 +47,10 @@ public class WebsiteDetails {
 		this.icmReport = null;
 		this.websiteReportDetail = null;
 		this.websiteReport = null;
+		ip = "";
+		aDNSRecord = null;
+		nsDNSRecord = null;
+		soaDNSRecord = null;
 		setup();
 	}
 	
@@ -52,6 +62,10 @@ public class WebsiteDetails {
 		this.icmReport = null;
 		this.websiteReportDetail = null;
 		this.websiteReport = null;
+		ip = "";
+		aDNSRecord = null;
+		nsDNSRecord = null;
+		soaDNSRecord = null;
 		setup();
 	}
 	
@@ -64,11 +78,11 @@ public class WebsiteDetails {
 	private synchronized void setupVariables(){
 		try{
 			//URLConnection urlConnection = WebsiteOpen.openURLConnection(this.website);
-			
 			setupURLConnection();
 			setupHeaders();
 			setupStatus();
 			setupFetchTimeContentThroughput();
+			setupDNSRecords();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -118,6 +132,22 @@ public class WebsiteDetails {
 	
 	private synchronized void setupStatus(){
 		this.website.setStatus(String.valueOf(WebsiteOpen.getStatusCode(this.header)));
+	}
+	
+	private synchronized void setupDNSRecords(){
+		String url = this.website.getUrl().split("/+")[1];
+		try {
+			this.ip = DNSLookup.getIPString(url);
+			this.nsDNSRecord = DNSLookup.getDNSRecordNSString(url.substring(4));
+			this.aDNSRecord = DNSLookup.getDNSRecordAString(url.substring(4));
+			this.soaDNSRecord = DNSLookup.getDNSRecordSOAString(url.substring(4));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TextParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private synchronized void setupProtobufs(){

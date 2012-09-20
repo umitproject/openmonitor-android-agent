@@ -87,9 +87,11 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.6</version>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>dnsjava</groupId>
+			<artifactId>dnsjava</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 		<dependency>
 			<groupId>javamail-android</groupId>
 			<artifactId>mail</artifactId>
