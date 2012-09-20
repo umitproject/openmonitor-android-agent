@@ -115,26 +115,35 @@ public class ConnectivityService extends Service {
 			@Override
 			public void run() {
 				
+				if(Globals.scanStatus.equals(getString(R.string.scan_off)))
+					stopScan();
 				
-					NewTests newTests = NewTests.newBuilder()
-							.setCurrentTestVersionNo(Constants.DEFAULT_TESTS_VERSION)
-							.build();
-					try {
-						AggregatorRetrieve.checkTests(newTests);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				NewTests newTests = NewTests.newBuilder()
+						.setCurrentTestVersionNo(Constants.DEFAULT_TESTS_VERSION)
+						.build();
+				try {
+					AggregatorRetrieve.checkTests(newTests);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
+				try {
+					if(Constants.DEBUG_MODE)
+						System.out.println("STARTING WEBSITES SCAN ------------------------------------");
+					Globals.websiteTest.scan();
+				} catch (IOException e) {
+						if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+							stopScanNotify();					
+				} catch (HttpException e) {
+						if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+							stopScanNotify();					
+				}
 				
-				
-				try {			
-					if(Globals.scanStatus.equals(getString(R.string.scan_off)))
-						stopScan();
+				try {				
 					if(Constants.DEBUG_MODE)
 						System.out.println("STARTING SERVICES SCAN ------------------------------------");
-					Globals.serviceTest.scan();
-					
+					Globals.serviceTest.scan();	
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
@@ -145,20 +154,6 @@ public class ConnectivityService extends Service {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();
 				} 
-				
-				try {
-					if(Constants.DEBUG_MODE)
-						System.out.println("STARTING WEBSITES SCAN ------------------------------------");
-					Globals.websiteTest.scan();
-				} catch (IOException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-						stopScanNotify();					
-				} catch (HttpException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-						stopScanNotify();					
-				}
-				
-				
 				
 				Context context = getApplicationContext();
 				Calendar calendar = Calendar.getInstance();
