@@ -74,9 +74,8 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 		
 		while(iterator.hasNext()) {
 			website = iterator.next();
-			WebsiteDetails websiteDetails = new WebsiteDetails(website);
-
 			try {
+				WebsiteDetails websiteDetails = new WebsiteDetails(website);
 				websiteReport = websiteDetails.websiteReport;
 				totalSizeofContent += websiteDetails.website.getContent().getBytes().length;
 				totalTime += websiteDetails.website.getTimeTakentoDownload();

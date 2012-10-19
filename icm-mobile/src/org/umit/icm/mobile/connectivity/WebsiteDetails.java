@@ -37,7 +37,7 @@ public class WebsiteDetails {
 	String nsDNSRecord[];
 	String soaDNSRecord[];
 	
-	public WebsiteDetails(Website website){
+	public WebsiteDetails(Website website) throws Exception{
 		this.website = website;
 		this.urlConnection = null;
 		this.website.setContent("");
@@ -54,7 +54,7 @@ public class WebsiteDetails {
 		setup();
 	}
 	
-	public WebsiteDetails(String websiteURL){
+	public WebsiteDetails(String websiteURL) throws Exception{
 		this.website = new Website(websiteURL, "false", "true", "0000", 0, "", 0);
 		this.urlConnection = null;
 		this.trace = null;
@@ -69,69 +69,43 @@ public class WebsiteDetails {
 		setup();
 	}
 	
-	public void setup(){
-		setupVariables();
-		setupProtobufs();
-		checkStatus();
-	}
-	
-	private synchronized void setupVariables(){
-		try{
-			//URLConnection urlConnection = WebsiteOpen.openURLConnection(this.website);
-			setupURLConnection();
-			setupHeaders();
-			setupStatus();
-			setupFetchTimeContentThroughput();
-			setupDNSRecords();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
-	
-	private synchronized void setupFetchTimeContentThroughput(){
-		try{
-			long startFetchTime = System.currentTimeMillis();
-			this.website.setContent(WebsiteOpen.getContent(this.urlConnection));
-			this.website.setTimeTakentoDownload(System.currentTimeMillis() - startFetchTime);
-			this.throughput = (this.website.getContent().getBytes().length / this.website.getTimeTakentoDownload()) ;
-		}catch(Exception e){
-			
-		}
-	}
-	
-	private synchronized void setupURLConnection(){
-		
+	public void setup() throws Exception{
 		try {
-			if(Constants.DEBUG_MODE)
-				System.out.println("Opening URL Connection to this website : " + this.website.getUrl());
-			this.urlConnection = WebsiteOpen.openURLConnection(this.website.getUrl());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			setupVariables();
+			setupProtobufs();
+			checkStatus();
+		} catch (Exception e) {
+			throw new Exception("Exception while setting up variables");
 		}
-		
 	}
 	
-	private synchronized void setupHeaders() {
-		
-		try {
-			this.header = WebsiteOpen.getHeaders(this.urlConnection);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	private synchronized void setupVariables() throws IOException, HttpException{
+		setupURLConnection();
+		setupHeaders();
+		setupStatus();
+		setupFetchTimeContentThroughput();
+		setupDNSRecords();
+	}
+	
+	private synchronized void setupURLConnection() throws IOException, HttpException{
+		if(Constants.DEBUG_MODE)
+			System.out.println("Opening URL Connection to this website : " + this.website.getUrl());
+		this.urlConnection = WebsiteOpen.openURLConnection(this.website.getUrl());		
+	}
+	
+	private synchronized void setupHeaders() throws IOException, HttpException {
+		this.header = WebsiteOpen.getHeaders(this.urlConnection);
    	}
 	
 	private synchronized void setupStatus(){
 		this.website.setStatus(String.valueOf(WebsiteOpen.getStatusCode(this.header)));
+	}
+	
+	private synchronized void setupFetchTimeContentThroughput() throws IOException, HttpException{
+		long startFetchTime = System.currentTimeMillis();
+		this.website.setContent(WebsiteOpen.getContent(this.urlConnection));
+		this.website.setTimeTakentoDownload(System.currentTimeMillis() - startFetchTime);
+		this.throughput = (this.website.getContent().getBytes().length / this.website.getTimeTakentoDownload()) ;
 	}
 	
 	private synchronized void setupDNSRecords(){
@@ -174,18 +148,18 @@ public class WebsiteDetails {
 				.build();
 		
 		List<String> listNodes = new ArrayList<String>();
-		Calendar calendar = Calendar.getInstance();
 		listNodes.add(Globals.runtimeParameters.getAgentID());
+		Calendar calendar = Calendar.getInstance();
 		long timeUTC = (calendar.getTimeInMillis()/1000);
 			
 		this.icmReport = ICMReport.newBuilder()
-		.setAgentID(Globals.runtimeParameters.getAgentID())
-		.setTestID(website.getTestID())
-		.setTimeZone(Calendar.ZONE_OFFSET)
-		.setTimeUTC(timeUTC)
-		.addAllPassedNode(listNodes)
-		.setTraceroute(this.traceRoute)
-		.build();
+				.setAgentID(Globals.runtimeParameters.getAgentID())
+				.setTestID(website.getTestID())
+				.setTimeZone(Calendar.ZONE_OFFSET)
+				.setTimeUTC(timeUTC)
+				.addAllPassedNode(listNodes)
+				.setTraceroute(this.traceRoute)
+				.build();
 		
 		this.websiteReport = WebsiteReport.newBuilder()		
 				.setReport(websiteReportDetail)
@@ -207,18 +181,18 @@ public class WebsiteDetails {
 			}
 			
 			Location location = Location.newBuilder()
-			.setLatitude(lat)
-			.setLongitude(lon)
-			.build();
+				.setLatitude(lat)
+				.setLongitude(lon)
+				.build();
 			
 			Event event = Event.newBuilder()
-			.setTestType("WEB")
-			.setEventType("CENSOR")
-			.setTimeUTC(this.icmReport.getTimeUTC())
-			.setSinceTimeUTC(this.icmReport.getTimeUTC())
-			.setWebsiteReport(this.websiteReportDetail)
-			.addLocations(location)			
-			.build();
+				.setTestType("WEB")
+				.setEventType("CENSOR")
+				.setTimeUTC(this.icmReport.getTimeUTC())
+				.setSinceTimeUTC(this.icmReport.getTimeUTC())
+				.setWebsiteReport(this.websiteReportDetail)
+				.addLocations(location)			
+				.build();
 			
 			Globals.runtimesList.addEvent(event);
 		}
