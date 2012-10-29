@@ -118,10 +118,16 @@ public class ConnectivityService extends Service {
 				if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 					stopScan();
 				
-				NewTests newTests = NewTests.newBuilder()
-						.setCurrentTestVersionNo(Constants.DEFAULT_TESTS_VERSION)
-						.build();
+				
 				try {
+					int testsVersion = Globals.versionManager.getTestsVersion();
+					if(testsVersion == 0)
+						testsVersion = Constants.DEFAULT_TESTS_VERSION;
+					if(Constants.DEBUG_MODE)
+						System.out.println("Tests Version: " + String.valueOf(testsVersion));
+					NewTests newTests = NewTests.newBuilder()
+							.setCurrentTestVersionNo(testsVersion)
+							.build();
 					AggregatorRetrieve.checkTests(newTests);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
