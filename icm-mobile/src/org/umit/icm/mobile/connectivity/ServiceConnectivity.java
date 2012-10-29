@@ -110,14 +110,15 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		.setPort(service.getPort())
 		.build();
 		
+		String ip = "255.255.255.0";
 		Trace trace = Trace.newBuilder()
 		.setHop(1)
-		.setIp("193.136.175.1")
+		.setIp(ip) //TODO: fix
 		.addPacketsTiming(1)
 		.build();
 		
 		TraceRoute traceRoute = TraceRoute.newBuilder()
-		.setTarget("193.136.175.1")
+		.setTarget(ip) //TODO: fix
 		.setHops(1)
 		.setPacketSize(1)
 		.addTraces(trace)

@@ -1,6 +1,9 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -128,12 +131,24 @@ public class WebsiteDetails {
 		
 		this.trace = Trace.newBuilder()
 				.setHop(1)
-				.setIp("193.136.175.1")		
+				.setIp("255.255.255.0")		//TODO: fix
 				.addPacketsTiming(1)
 				.build();
 		
+		String ip = "255.255.255.0";
+		InetAddress address;
+		try {
+			address = InetAddress.getByName(new URL(this.website.getUrl()).getHost());
+			ip = address.getHostAddress();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.traceRoute = TraceRoute.newBuilder()
-				.setTarget("193.136.175.1")
+				.setTarget(ip)
 				.setHops(1)
 				.setPacketSize(1)
 				.addTraces(this.trace)
