@@ -23,7 +23,7 @@ package org.umit.icm.mobile.connectivity;
 
 
 import java.io.IOException;
-import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import org.umit.icm.mobile.process.Globals;
 
@@ -32,7 +32,7 @@ import org.umit.icm.mobile.process.Globals;
  * {@link ServiceGtalk#getService()} and {@link ServiceGtalk#getService()} methods.
  */
 
-public class ServiceGtalk {
+public class ServiceGtalk implements AbstractServiceTest {
 	
 
 	/**
@@ -45,16 +45,25 @@ public class ServiceGtalk {
 	 
 	@see TCPClient
 	 */
-	public static String connect() throws SocketException, IOException {
-		
-		Globals.tcpClientConnectivity.openConnection("talk.google.com"
-				, 5222);
-		Globals.tcpClientConnectivity.writeLine("hello");
-		String reply = Globals.tcpClientConnectivity.readLines();
-		Globals.tcpClientConnectivity.closeConnection();
-		if(reply != null)
-			return "normal";
-		return "blocked";
+	@Override
+	public String connect() {
+		try {
+			Globals.tcpClientConnectivity.openConnection("talk.google.com"
+					, 5222);
+			Globals.tcpClientConnectivity.writeLine("hello");
+			String reply = Globals.tcpClientConnectivity.readLines();
+			Globals.tcpClientConnectivity.closeConnection();
+			if(reply != null)
+				return "normal";
+			return "blocked";
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -67,7 +76,8 @@ public class ServiceGtalk {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
+	@Override
+	public Service getService() {
 		Integer port = 5222;
 														
 		return new Service("gtalk", port, "talk.google.com" , "open", "true", "0", 0);
@@ -80,7 +90,13 @@ public class ServiceGtalk {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "talk.google.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }

@@ -22,8 +22,6 @@
 package org.umit.icm.mobile.connectivity;
 
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -38,7 +36,7 @@ import com.sun.mail.imap.IMAPSSLStore;
  * {@link ServiceIMAP#getService()} and {@link ServiceIMAP#getService()} methods.
  */
 
-public class ServiceIMAP {	
+public class ServiceIMAP implements AbstractServiceTest {	
 
 	/**
 	 * Returns an IMAP Response String.
@@ -53,8 +51,9 @@ public class ServiceIMAP {
 	
 	@see Store
 	 */
-	public static String connect() throws SocketException, IOException, MessagingException {
-					       
+	@Override
+	public String connect() {
+		String ret = null;       
         Properties properties = new Properties();        
         properties.setProperty("mail.imap.socketFactory.class",
         		"javax.net.ssl.SSLSocketFactory");
@@ -67,12 +66,19 @@ public class ServiceIMAP {
         
         Session session = Session.getInstance(properties, null);
         Store store = new IMAPSSLStore(session, urlName);
-        store.connect();
-        if(store.isConnected()) {
-        	store.close();
-        	return "normal";
-        }
-        return "blocked";
+        try {
+			store.connect();
+			 if(store.isConnected()) {
+		        	store.close();
+		        	ret = "normal";
+		     }
+		     ret = "blocked";
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+        return ret;
 	}
 	
 	/**
@@ -84,8 +90,9 @@ public class ServiceIMAP {
 	 *  	                          		              
 	            
 	@return      Service
-	 */	
-	public static Service getService() {
+	 */
+	@Override
+	public Service getService() {
 		Integer port = 993;
 		return new Service("imap", port, "imap.gmail.com" , "open", "true", "0", 0);
 	}
@@ -97,7 +104,13 @@ public class ServiceIMAP {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "imap.gmail.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }

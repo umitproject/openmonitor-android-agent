@@ -40,7 +40,7 @@ import android.util.Log;
  * {@link ServiceHTTP#getService()} and {@link ServiceHTTP#getService()} methods.
  */
 
-public class ServiceHTTP {
+public class ServiceHTTP implements AbstractServiceTest {
 	
 	/**
 	 * Returns a an HTTP Response String.
@@ -52,7 +52,8 @@ public class ServiceHTTP {
 	 
 	@see HttpClient
 	 */	
-	public static String connect() {
+	@Override
+	public String connect() {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(getServiceURL());		
@@ -93,7 +94,8 @@ public class ServiceHTTP {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
+	@Override
+	public Service getService() {
 		Integer port = 80;
 		return new Service("http", port, "www.google.com" , "open", "true", "0", 0);
 	}
@@ -105,7 +107,13 @@ public class ServiceHTTP {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "http://www.google.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }

@@ -22,8 +22,9 @@
 package org.umit.icm.mobile.connectivity;
 
 
+
 import java.io.IOException;
-import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import org.umit.icm.mobile.process.Globals;
 
@@ -32,7 +33,7 @@ import org.umit.icm.mobile.process.Globals;
  * {@link ServiceMSN#getService()} and {@link ServiceMSN#getService()} methods.
  */
 
-public class ServiceMSN {
+public class ServiceMSN implements AbstractServiceTest {
 	
 
 	/**
@@ -45,16 +46,26 @@ public class ServiceMSN {
 	 
 	@see TCPClient
 	 */
-	public static String connect() throws SocketException, IOException {
-		
-		Globals.tcpClientConnectivity.openConnection("messenger.hotmail.com"
-				, 1863);
-		Globals.tcpClientConnectivity.writeLine(Globals.servicePacketsMap.get("msn"));
-		String reply = Globals.tcpClientConnectivity.readLines();
-		Globals.tcpClientConnectivity.closeConnection();
-		if(reply != null)			
-			return "normal";
-		return "blocked";
+	@Override
+	public String connect() {
+		String ret = null;
+		try {
+			Globals.tcpClientConnectivity.openConnection("messenger.hotmail.com"
+					, 1863);
+			Globals.tcpClientConnectivity.writeLine(Globals.servicePacketsMap.get("msn"));
+			String reply = Globals.tcpClientConnectivity.readLines();
+			Globals.tcpClientConnectivity.closeConnection();
+			if(reply != null)			
+				ret = "normal";
+			ret = "blocked";
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
 	}
 	
 	/**
@@ -67,7 +78,8 @@ public class ServiceMSN {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
+	@Override
+	public Service getService() {
 		Integer port = 1863;
 		return new Service("msn", port, "messenger.hotmail.com" , "open", "true", "0", 0);
 	}
@@ -79,7 +91,14 @@ public class ServiceMSN {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "messenger.hotmail.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		// TODO Auto-generated method stub
+		return ServicePackets.MSN_VER;
 	}
 }

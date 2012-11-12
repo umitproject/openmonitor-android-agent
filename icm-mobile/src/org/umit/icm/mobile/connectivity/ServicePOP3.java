@@ -22,8 +22,6 @@
 package org.umit.icm.mobile.connectivity;
 
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -40,7 +38,7 @@ import com.sun.mail.pop3.POP3SSLStore;
  * {@link ServicePOP3#getService()} and {@link ServicePOP3#getService()} methods.
  */
 
-public class ServicePOP3 {	
+public class ServicePOP3 implements AbstractServiceTest {	
 
 	/**
 	 * Returns an POP3 Response String.
@@ -55,7 +53,9 @@ public class ServicePOP3 {
 	
 	@see Store
 	 */
-	public static String connect() throws SocketException, IOException, MessagingException {
+	@Override
+	public String connect() {
+		String ret = null;
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside ServicePOP3.connect() ---------------------------");
 					       
@@ -71,12 +71,18 @@ public class ServicePOP3 {
         
         Session session = Session.getInstance(properties, null);
         Store store = new POP3SSLStore(session, urlName);
-        store.connect();
-        if(store.isConnected()) {
-        	store.close();
-        	return "normal";
-        }
-        return "blocked";
+        try {
+			store.connect();
+			if(store.isConnected()) {
+	        	store.close();
+	        	ret = "normal";
+	        }
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        ret = "blocked";
+        return ret;
 	}
 	
 	/**
@@ -89,7 +95,8 @@ public class ServicePOP3 {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
+	@Override
+	public Service getService() {
 		Integer port = 955;
 		return new Service("pop3", port, "pop.gmail.com" , "open", "true", "0", 0);
 	}
@@ -101,7 +108,13 @@ public class ServicePOP3 {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "pop.gmail.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }

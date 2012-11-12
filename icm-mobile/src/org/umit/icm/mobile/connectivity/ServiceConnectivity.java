@@ -22,11 +22,10 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -65,13 +64,21 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside Services scan() ---------------------------");
 		
-		HTTPScan();
-		HTTPSScan();
-		FTPScan();
-		POP3Scan();
-		IMAPScan();
-		GtalkScan();
-		MSNScan();
+		List<Class<? extends AbstractServiceTest>> servicesList 
+		= new ArrayList<Class<? extends AbstractServiceTest>>();
+		
+		servicesList.add(ServiceHTTP.class);
+		servicesList.add(ServiceHTTPS.class);
+		servicesList.add(ServiceFTP.class);
+		servicesList.add(ServicePOP3.class);
+		servicesList.add(ServiceIMAP.class);
+		servicesList.add(ServiceGtalk.class);
+		servicesList.add(ServiceMSN.class);
+		
+		Iterator<Class<? extends AbstractServiceTest>> iterator = servicesList.iterator();
+		while(iterator.hasNext()) {
+			connect(iterator.next());	
+		}
 	};
 		 
 	/**
@@ -149,560 +156,66 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		return serviceReport;
 	}
 	
-	/**
-	 * For HTTP service calls
-	 * {@link ServiceHTTP#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
-	 * 
-	 */
-	public void HTTPScan() {
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside HTTPScan() ---------------------------");
-		String HTTPResponse = ServiceHTTP.connect();
-		if(HTTPResponse != null) {			
-			byte[] serviceResponseBytes = null;
-			ServiceReport serviceReport = ServiceReport.getDefaultInstance();
-			
-			try {
-				Globals.tcpClientConnectivity.openConnection(ServiceHTTP.getService().getIp(), ServiceHTTP.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(Globals.servicePacketsMap.get("http")));
-				serviceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!serviceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-					
-			
-			try {
-				
-				serviceReport = (ServiceReport) clean(ServiceHTTP.getService(), HTTPResponse, serviceResponseBytes);
-				
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReport);						
-				
-				if(Constants.DEBUG_MODE) {
-					Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
-					Log.w("######name", serviceReport.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceHTTP.getService().getPort()));
-				}
-
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReport)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending HTTP SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}					
-		}
-	
-	/**
-	 * For HTTPS service calls
-	 * {@link ServiceHTTPS#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
-	 * 
-	 */
-	public void HTTPSScan() {
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside HTTPSScan() ---------------------------");
-		String HTTPSResponse = ServiceHTTPS.connect();
-		if(HTTPSResponse != null) {	
-			byte[] httpsServiceResponseBytes = null;
-			ServiceReport serviceReportHTTPS = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(
-						ServiceHTTPS.getService().getIp()
-						, ServiceHTTPS.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-				httpsServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!httpsServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			try {
-				serviceReportHTTPS = (ServiceReport) clean(ServiceHTTPS.getService(), HTTPSResponse, httpsServiceResponseBytes);
-				
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReportHTTPS);						
-				if(Constants.DEBUG_MODE) {	
-					Log.w("######Code", Integer.toString(serviceReportHTTPS.getReport().getStatusCode()));
-					Log.w("######name", serviceReportHTTPS.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceHTTPS.getService().getPort()));
-				}
-				
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportHTTPS)
-				.build();
-				
-				if(Globals.aggregatorCommunication != false) {
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending HTTPS SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}		
-		}
-	
-	/**
-	 * For FTP service calls
-	 * {@link ServiceFTP#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}
-	 * 
-	 */
-	public void FTPScan() {		
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside FTPScan() ---------------------------");
-		String FTPResponse = null;
+	void sendReport(Service service, String response, byte[] responseBytes) {
+		
 		try {
-			FTPResponse = ServiceFTP.connect();
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(FTPResponse != null) {			
-			byte[] ftpServiceResponseBytes = null;
-			ServiceReport serviceReportFTP = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(
-						ServiceFTP.getService().getIp()
-						, ServiceFTP.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-				ftpServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!ftpServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			ServiceReport serviceReport 
+			= (ServiceReport) clean(service, response, responseBytes);
+			
+			SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR, serviceReport);						
+			
+			if(Constants.DEBUG_MODE) {
+				Log.w("######Code", Integer.toString(serviceReport.getReport().getStatusCode()));
+				Log.w("######name", serviceReport.getReport().getServiceName());
+				Log.w("######port", Integer.toString(service.getPort()));
 			}
-					
-			try {
-				serviceReportFTP = (ServiceReport) clean(ServiceFTP.getService()
-							, FTPResponse, ftpServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-							, serviceReportFTP);						
-				if(Constants.DEBUG_MODE) {		
-					Log.w("######Code", Integer.toString(serviceReportFTP.getReport().getStatusCode()));
-					Log.w("######name", serviceReportFTP.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceFTP.getService().getPort()));
+
+			SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
+			.setReport(serviceReport)
+			.build();
+			if(Globals.aggregatorCommunication != false) {
+				if(Constants.DEBUG_MODE) {
+					System.out.println("Sending " + service.getName() + " SERVICE REPORT \n");
+					System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
 				}
 				
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportFTP)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
-					
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending FTP SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-				// TODO Auto-generated catch block
+				AggregatorRetrieve.sendServiceReport(sendServiceReport);
+			}
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}					
-	}
-
-	/**
-	 * For POP3 service calls
-	 * {@link ServicePOP3#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
-	 * 
-	 */
-	public void POP3Scan() {	
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside POP3Scan() ---------------------------");
-		String POP3Response = null;
-		try {
-			POP3Response = ServicePOP3.connect();
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (MessagingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside POP3Scan(),POP3Response: " + POP3Response + " -----------------------");
-		if(POP3Response != null) {	
-			if(Constants.DEBUG_MODE)
-				System.out.println("POP3Response!=null ---------------------------");
-			byte[] pop3ServiceResponseBytes = null;
-			ServiceReport serviceReportPOP3 = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(
-						ServicePOP3.getService().getIp()
-						, ServicePOP3.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-				pop3ServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!pop3ServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			try {
-				serviceReportPOP3 = (ServiceReport) clean(ServicePOP3.getService()
-							, POP3Response, pop3ServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-							, serviceReportPOP3);						
-				if(Constants.DEBUG_MODE) {	
-					Log.w("######Code", Integer.toString(serviceReportPOP3.getReport().getStatusCode()));
-					Log.w("######name", serviceReportPOP3.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServicePOP3.getService().getPort()));
-				}
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportPOP3)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending POP3 SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}					
 	}
 	
-	/**
-	 * For IMAP service calls
-	 * {@link ServiceIMAP#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
-	 * 
-	 */
-	public void IMAPScan() {		
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside IMAPScan() ---------------------------");
-		String IMAPResponse = null;
+	void connect(Class<? extends AbstractServiceTest> classObj) {
+		AbstractServiceTest service;
 		try {
-			IMAPResponse = ServiceIMAP.connect();
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (MessagingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(IMAPResponse != null) {		
-			byte[] imapServiceResponseBytes = null;
-			ServiceReport serviceReportIMAP = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(
-						ServiceIMAP.getService().getIp()
-						, ServiceIMAP.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-				imapServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!imapServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-					
-			try {
-				serviceReportIMAP = (ServiceReport) clean(ServiceIMAP.getService()
-						, IMAPResponse, imapServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportIMAP);						
-				if(Constants.DEBUG_MODE) {		
-					Log.w("######Code", Integer.toString(serviceReportIMAP.getReport().getStatusCode()));
-					Log.w("######name", serviceReportIMAP.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceIMAP.getService().getPort()));
-				}
-
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportIMAP)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending IMAP SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-		}
-	}
-	
-	/**
-	 * For Gtalk service calls
-	 * {@link ServiceGtalk#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
-	 * 
-	 */
-	public void GtalkScan() {	
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside GtalkScan() ---------------------------");
-		String GtalkResponse = null;
-		try {
-			GtalkResponse = ServiceGtalk.connect();
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(GtalkResponse != null) {			
-			byte[] gtalkServiceResponseBytes = null;
-			ServiceReport serviceReportGtalk = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(
-						ServiceGtalk.getService().getIp()
-						, ServiceGtalk.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(
-						ServicePackets.generatedRandomBytes(ServicePackets.HTTP_GET));
-				gtalkServiceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!gtalkServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			try {
-				serviceReportGtalk = (ServiceReport) clean(ServiceGtalk.getService()
-						, GtalkResponse, gtalkServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportGtalk);						
-				if(Constants.DEBUG_MODE) {		
-					Log.w("######Code", Integer.toString(serviceReportGtalk.getReport().getStatusCode()));
-					Log.w("######name", serviceReportGtalk.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceGtalk.getService().getPort()));
-				}
-
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportGtalk)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
-					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending Gtalk SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
-					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}
-				} catch (RuntimeException e) {
-					e.printStackTrace();
-				}	catch (IOException e) {
-					e.printStackTrace();
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-			}
-		}		
-	
-	/**
-	 * For MSN service calls
-	 * {@link ServiceMSN#connect()}	 	
-	 * {@link TCPClient#writeLine(byte[])}, and
-	 * {@link TCPClient#readBytes()}. Passes the services content
-	 * to {@link ServiceConnectivity#clean(Service, String, byte[])}	 
-	 * 
-	 */
-	public void MSNScan() {	
-		if(Constants.DEBUG_MODE)
-			System.out.println("Inside MSNScan() ---------------------------");
-		String msnResponse = null;
-		try {
-			msnResponse = ServiceMSN.connect();
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(msnResponse != null) {				
-			byte[] msnServiceResponseBytes = null;
-			ServiceReport serviceReportMSN = ServiceReport.getDefaultInstance();						         
-			try {
-				Globals.tcpClientConnectivity.openConnection(ServiceMSN.getService().getIp(), 
-						ServiceMSN.getService().getPort());
-				Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(
-						ServicePackets.MSN_VER));
-				msnServiceResponseBytes	= Globals.tcpClientConnectivity.readBytes();
-				if(Constants.DEBUG_MODE) {
-					if(!msnServiceResponseBytes.equals(null))
-						Log.w("#####bytes", "bytes");
-				}
-				Globals.tcpClientConnectivity.closeConnection();
-			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			try {
-				serviceReportMSN = (ServiceReport) clean(ServiceMSN.getService()
-						, msnResponse, msnServiceResponseBytes);
-				SDCardReadWrite.writeServiceReport(Constants.SERVICES_DIR
-						, serviceReportMSN);						
-				if(Constants.DEBUG_MODE) {
-					Log.w("######Code", Integer.toString(serviceReportMSN.getReport().getStatusCode()));
-					Log.w("######name", serviceReportMSN.getReport().getServiceName());
-					Log.w("######port", Integer.toString(ServiceMSN.getService().getPort()));
-				}
+			service = classObj.newInstance();
+			String response = service.connect();
+			if(response != null) {			
+				byte[] serviceResponseBytes = null;
 				
-				SendServiceReport sendServiceReport = SendServiceReport.newBuilder()
-				.setReport(serviceReportMSN)
-				.build();
-				if(Globals.aggregatorCommunication != false) {
+				try {
+					Globals.tcpClientConnectivity.openConnection(service.getService().getIp(), service.getService().getPort());
+					Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(service.getServicePacket()));
+					serviceResponseBytes = Globals.tcpClientConnectivity.readBytes();
 					if(Constants.DEBUG_MODE) {
-						System.out.println("Sending MSN SERVICE REPORT \n");
-						System.out.println("Sending Service Report : \n" + sendServiceReport.toString());
+						if(!serviceResponseBytes.equals(null))
+							Log.w("#####bytes", "bytes");
 					}
-					
-					AggregatorRetrieve.sendServiceReport(sendServiceReport);
-				}					
-				} catch (RuntimeException e) {
-				e.printStackTrace();
-				}	catch (IOException e) {
-				e.printStackTrace();
-				} catch (NoSuchAlgorithmException e) {
+					Globals.tcpClientConnectivity.closeConnection();
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
+					e1.printStackTrace();
+				} 
+						
+				sendReport(service.getService(), response, serviceResponseBytes);
 			}
-		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
 	
 	private void checkStatus(ServiceReport serviceReport) {
 		if(serviceReport.getReport().getStatusCode() == 1) {

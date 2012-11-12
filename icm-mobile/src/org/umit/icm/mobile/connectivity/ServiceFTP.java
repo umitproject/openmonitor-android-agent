@@ -33,7 +33,7 @@ import org.apache.commons.net.ftp.FTPClient;
  * {@link ServiceFTP#getService()} and {@link ServiceFTP#getService()} methods.
  */
 
-public class ServiceFTP {
+public class ServiceFTP implements AbstractServiceTest {
 	
 
 	/**
@@ -46,19 +46,29 @@ public class ServiceFTP {
 	 
 	@see FTPClient
 	 */
-	public static String connect() throws SocketException, IOException {
+	@Override
+	public String connect() {
 		
 		FTPClient ftpClient = new FTPClient();
-		ftpClient.connect(getServiceURL());
-		ftpClient.login("test", "test");		
-		ftpClient.setFileType(FTP.BINARY_FILE_TYPE);	                				
-		ftpClient.enterLocalPassiveMode();		
-		String reply =  ftpClient.getReplyString();
-		ftpClient.logout();
-		ftpClient.disconnect();
-		if(reply != null)			
-			return "normal";
-		return "blocked";
+		try {
+			ftpClient.connect(getServiceURL());
+			ftpClient.login("test", "test");		
+			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);	                				
+			ftpClient.enterLocalPassiveMode();		
+			String reply =  ftpClient.getReplyString();
+			ftpClient.logout();
+			ftpClient.disconnect();
+			if(reply != null)			
+				return "normal";
+			return "blocked";
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -71,8 +81,9 @@ public class ServiceFTP {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
-		Integer port =21;
+	@Override
+	public Service getService() {
+		Integer port = 21;
 		return new Service("ftp", port, "ftp.secureftp-test.com" , "open", "true", "0", 0);
 	}
 	
@@ -83,7 +94,13 @@ public class ServiceFTP {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "ftp.secureftp-test.com";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }

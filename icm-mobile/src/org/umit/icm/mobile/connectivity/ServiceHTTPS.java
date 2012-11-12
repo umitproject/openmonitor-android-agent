@@ -39,7 +39,7 @@ import android.util.Log;
  * {@link ServiceHTTPS#getService()} and {@link ServiceHTTPS#getService()} methods.
  */
 
-public class ServiceHTTPS {
+public class ServiceHTTPS implements AbstractServiceTest {
 	
 	/**
 	 * Returns an HTTPS Response String.
@@ -51,7 +51,8 @@ public class ServiceHTTPS {
 	 
 	@see HttpClient
 	 */
-	public static String connect() {
+	@Override
+	public String connect() {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(getServiceURL());		
@@ -92,7 +93,8 @@ public class ServiceHTTPS {
 	            
 	@return      Service
 	 */	
-	public static Service getService() {
+	@Override
+	public Service getService() {
 		Integer port = 443;
 		return new Service("https", port, "campusmail.lums.edu.pk" , "open", "true", "0", 0);
 	}
@@ -104,7 +106,13 @@ public class ServiceHTTPS {
 	            
 	@return      String
 	 */	
-	public static String getServiceURL() {
+	@Override
+	public String getServiceURL() {
 		return "https://campusmail.lums.edu.pk";
+	}
+
+	@Override
+	public String getServicePacket() {
+		return ServicePackets.HTTP_GET;
 	}
 }
