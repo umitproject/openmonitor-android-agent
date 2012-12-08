@@ -59,7 +59,6 @@ public class WebsiteFilterActivity extends Activity{
         setContentView(R.layout.websitefilteractivity);        
         listWebsitesCheckbox 
         = new ArrayList<WebsiteTextCheckbox>();
-        Iterator<Website> iterator = Globals.websitesList.iterator();
                         
         backButton = (Button) findViewById(R.id.backButton);        
         backButton.setOnClickListener(new OnClickListener() { 
@@ -76,16 +75,16 @@ public class WebsiteFilterActivity extends Activity{
 	    				check = "true";	    				
 	    			}    				
 	    			else
-	    				check = "false";
-	    			website = Globals.websitesList.get(i);
+    				check = "false";
+	    			website = Globals.runtimeList.websitesList.get(i);
 	    			website.setCheck(check);
-	    			Globals.websitesList.set(i, 
-	    					website);						       				    			
+	    			Globals.runtimeList.websitesList.set(i, 
+	    					website);	
 	    			i++;
 	            } 
 	    		try {
 					SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR,
-							Globals.websitesList);
+							Globals.runtimeList.websitesList);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (RuntimeException e) {
@@ -125,7 +124,7 @@ public class WebsiteFilterActivity extends Activity{
         listView = (ListView)findViewById(R.id.ListView01);
         websiteTextCheckboxAdapter 
         = new WebsiteTextCheckboxAdapter(WebsiteFilterActivity.this);
-                
+        Iterator<Website> iterator = Globals.runtimeList.websitesList.iterator();
         while(iterator.hasNext()){               
 			currentWebsite = iterator.next();
 			currentURL = currentWebsite.getUrl();
@@ -133,8 +132,8 @@ public class WebsiteFilterActivity extends Activity{
 				currentCheck = true;
 			else 
 				currentCheck = false;			
-			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, currentCheck));						       			
-        }  
+			listWebsitesCheckbox.add(new WebsiteTextCheckbox(currentURL, currentCheck));						       			  
+        }
         
         websiteTextCheckboxAdapter.setListItems(listWebsitesCheckbox);        	
         listView.setAdapter(websiteTextCheckboxAdapter);
@@ -156,16 +155,16 @@ public class WebsiteFilterActivity extends Activity{
     				check = "true";	    				
     			}    				
     			else
-    				check = "false";
-    			website = Globals.websitesList.get(i);
+				check = "false";
+    			website = Globals.runtimeList.websitesList.get(i);
     			website.setCheck(check);
-    			Globals.websitesList.set(i, 
-    					website);						       				    			
+    			Globals.runtimeList.websitesList.set(i, 
+    					website);	
     			i++;
             } 
     		try {
 				SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR,
-						Globals.websitesList);
+						Globals.runtimeList.websitesList);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {

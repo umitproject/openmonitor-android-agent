@@ -22,7 +22,6 @@
 package org.umit.icm.mobile.gui;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,10 +29,7 @@ import java.util.List;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.Website;
-import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
-import org.umit.icm.mobile.process.Initialization;
-import org.umit.icm.mobile.utils.SDCardReadWrite;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -110,54 +106,27 @@ public class InformationActivity extends Activity{
         	  startActivity(intent); 
           }
         });
-        
-        try {
-			if ((SDCardReadWrite.fileExists(Constants.WEBSITES_LIST_FILE
-					, Constants.WEBSITES_DIR) == true)){					
-				Globals.websitesList 
-				= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);									
-
-			} else {
-				Initialization.intializeWebsitesList();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			if ((SDCardReadWrite.fileExists(Constants.SERVICES_LIST_FILE
-					, Constants.SERVICES_DIR) == true)){					
-				Globals.servicesList 
-				= SDCardReadWrite.readServicesList(Constants.SERVICES_DIR);									
-			} else {
-				Initialization.intializeServicesList();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 			
-		new UpdateList().execute("");
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        new UpdateList().execute("");
 		new UpdateListServices().execute("");
     }
+    
     private class UpdateList extends AsyncTask<String,String,List<Website>> {
   	  
     	protected void onPostExecute(List<Website> result) {
     		List<String> list = new ArrayList<String>();
     		Iterator<Website> iterator = result.iterator();
     		Website website = new Website();
-    		 while(iterator.hasNext()){  
+    		while(iterator.hasNext()){  
     			 website = iterator.next();
     			 if(website.getCheck().equals("true"))
     				 list.add(website.getUrl());
-    		 }
+    		}
    		 	arrayAdapter = new ArrayAdapter<String>(InformationActivity.this
    				 ,android.R.layout.simple_list_item_1 
    				 , list);   		 	
@@ -165,7 +134,7 @@ public class InformationActivity extends Activity{
     	}
          
 		protected List<Website> doInBackground(String... urls) {		
-			return Globals.websitesList;			 						
+			return Globals.runtimeList.websitesList;			 						
 		}
 			
     }    
@@ -176,7 +145,7 @@ public class InformationActivity extends Activity{
     		List<String> list = new ArrayList<String>();
     		Iterator<Service> iterator = result.iterator();
     		Service service = new Service();
-    		 while(iterator.hasNext()){  
+    		 while(iterator.hasNext()) {  
     			 service = iterator.next();
     			 if(service.getCheck().equals("true"))
     				 list.add(service.getName());
@@ -188,7 +157,7 @@ public class InformationActivity extends Activity{
     	}
          
 		protected List<Service> doInBackground(String... urls) {		
-			return Globals.servicesList;
+			return Globals.runtimeList.servicesList;
 			 						
 		}
 			

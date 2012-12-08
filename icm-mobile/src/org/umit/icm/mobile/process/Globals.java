@@ -21,16 +21,12 @@
 
 package org.umit.icm.mobile.process;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.ServiceConnectivity;
 import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
-import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.p2p.AuthenticatedPeers;
 import org.umit.icm.mobile.p2p.MessageQueue;
@@ -78,16 +74,7 @@ public class Globals {
 	
 	
 	public static String challenge = "";
-	
-	/**
-	 * Global {@link List} of {@link Website}
-	 */
-	public static List<Website> websitesList = new ArrayList<Website>();
-	
-	/**
-	 * Global {@link List} of {@link Service}
-	 */
-	public static List<Service> servicesList = new ArrayList<Service>();	
+
 
 	/**
 	 * Global {@link TCPServer}
@@ -160,5 +147,5 @@ public class Globals {
 	
 	public static android.location.Location currentLocationNetwork;
 	
-	public static RuntimeLists runtimesList = new RuntimeLists();
+	public static RuntimeLists runtimeList = new RuntimeLists();
 }

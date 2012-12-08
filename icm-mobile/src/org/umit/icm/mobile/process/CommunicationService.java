@@ -121,7 +121,7 @@ public class CommunicationService extends Service {
 					}
 				} else if(Globals.p2pCommunication == true) {
 					Iterator<AgentData> iterator 
-					= Globals.runtimesList.getSuperPeersList().iterator();
+					= Globals.runtimeList.getSuperPeersList().iterator();
 					GetPeerList getPeerList = GetPeerList.newBuilder()
 					.setCount(Constants.MAX_PEERS)
 					.build();
@@ -213,7 +213,7 @@ public class CommunicationService extends Service {
 					}							
 				} else if(Globals.p2pCommunication == true) {
 					Iterator<AgentData> iterator 
-					= Globals.runtimesList.getSuperPeersList().iterator();
+					= Globals.runtimeList.getSuperPeersList().iterator();
 					Location location = Location.newBuilder()
 					.setLatitude(lat)
 					.setLongitude(lon)

@@ -35,7 +35,6 @@ import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.AuthenticatePeer;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 
-import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersion;
 import org.umit.icm.mobile.proto.MessageProtos.NewVersionResponse;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
@@ -94,15 +93,19 @@ public class ProcessActions {
 	public static void updateTestsVersion(ResponseHeader header)
 		throws Exception {
 		
-		if (header.getCurrentTestVersionNo() 
+		// TODO: uncomment
+		/*if (header.getCurrentTestVersionNo() 
 				> Globals.versionManager.getTestsVersion()) {
 			Globals.versionManager.setTestsVersion(header.getCurrentTestVersionNo());
+			if(Constants.DEBUG_MODE)
+				System.out.println("Inside ProcessActions#updateTestsVersion: " 
+			+ Integer.valueOf(header.getCurrentTestVersionNo()));
 			
 			NewTests newTests = NewTests.newBuilder()
 			.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
 			.build();
 			AggregatorRetrieve.checkTests(newTests);
-		}
+		}*/
 	}
 			
 	/**
@@ -133,15 +136,29 @@ public class ProcessActions {
 	public synchronized static boolean updateTests(List<Test> tests) {
 		for(int i = 0 ; i < tests.size(); i++) {
 			if(tests.get(i).getTestType() == 1) { // website
-				Globals.websitesList.add(
-						new Website(tests.get(i).getWebsite().getUrl(), 
-								"false", 
-								"true", 
-								tests.get(i).getTestID(), 
-								tests.get(i).getExecuteAtTimeUTC()));
+				String url = tests.get(i).getWebsite().getUrl();
+				// clean up URL
+				if(!url.startsWith("http://www.")) {
+					if(url.startsWith("http://")) {
+						String suffix = url.substring(7);
+						url = "http://www." + suffix;
+					} else if (url.startsWith("www")) {
+						url = "http://" + url;
+					} else {
+						url = "http://www." + url;
+					}
+				}
+				Website website = new Website(url, 
+						"false", 
+						"true", 
+						tests.get(i).getTestID(), 
+						tests.get(i).getExecuteAtTimeUTC());
+				if(!Globals.runtimeList.websitesList.contains(website)) {
+					Globals.runtimeList.websitesList.add(website);
+				}
 				
 			} else if(tests.get(i).getTestType() == 2) { //service
-				Globals.servicesList.add(
+				Globals.runtimeList.servicesList.add(
 						new Service(tests.get(i).getService().getName(), 
 								tests.get(i).getService().getPort(),
 								tests.get(i).getService().getIp(), 
@@ -169,7 +186,7 @@ public class ProcessActions {
 	 @see Event
 	 */
 	public synchronized static boolean updateEventsList(List<Event> events) {
-		Globals.runtimesList.setEventsList(events);
+		Globals.runtimeList.setEventsList(events);
 		return true;
 	}
 	
@@ -230,7 +247,7 @@ public class ProcessActions {
 			}
 			
 		}
-		Globals.runtimesList.setPeersList(peers);
+		Globals.runtimeList.setPeersList(peers);
 		return true;
 	}
 	
@@ -291,7 +308,7 @@ public class ProcessActions {
 			}
 		
 		}
-		Globals.runtimesList.setSuperPeersList(superPeers);
+		Globals.runtimeList.setSuperPeersList(superPeers);
 		return true;
 	}
 	

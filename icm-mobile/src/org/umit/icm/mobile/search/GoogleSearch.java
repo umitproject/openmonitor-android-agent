@@ -24,10 +24,10 @@ package org.umit.icm.mobile.search;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 
-import twitter4j.internal.org.json.JSONException;
-import twitter4j.internal.org.json.JSONObject;
 
 
 /**

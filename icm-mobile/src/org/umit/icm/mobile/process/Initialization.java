@@ -30,9 +30,7 @@ import java.util.Random;
 
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.connectivity.ConnectivityService;
-import org.umit.icm.mobile.connectivity.Service;
 import org.umit.icm.mobile.connectivity.TCPServer;
-import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.notifications.NotificationService;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.proto.MessageProtos.GetBanlist;
@@ -42,6 +40,7 @@ import org.umit.icm.mobile.proto.MessageProtos.GetSuperPeerList;
 import org.umit.icm.mobile.proto.MessageProtos.Location;
 import org.umit.icm.mobile.proto.MessageProtos.Login;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
+import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 import org.umit.icm.mobile.proto.MessageProtos.RSAKey;
 import org.umit.icm.mobile.proto.MessageProtos.RegisterAgent;
 import org.umit.icm.mobile.utils.ProfilerRun;
@@ -85,12 +84,6 @@ public class Initialization {
 				|| (SDCardReadWrite.fileNotEmpty(Constants.AGENTID_FILE
 						, Constants.PARAMETERS_DIR) == false )) {					
 			Globals.runtimeParameters.setAgentID(Integer.toString(10));
-			/* Aggregator Call
-			RegisterAgent registerAgent = RegisterAgent.newBuilder()
-			.setIp(Integer.toString(Globals.myIP))
-			.setVersionNo(Globals.versionManager.getAgentVersion())
-			.build();
-			*/
 		}
 		if ((SDCardReadWrite.fileExists(Constants.TOKEN_FILE
 				, Constants.PARAMETERS_DIR) == false )
@@ -147,36 +140,83 @@ public class Initialization {
 		if(Constants.RUN_PROFILER == true)
 			ProfilerRun.run();
 	}
-	
-	/**
-	 * Initializes the {@link Globals#websitesList} with 
-	 * {@link Constants#WEBSITE_LIST}
-	 * 
-	 *	 
-	                    
-	@see         Website
-	 *
-	
-	@see         Constants
-	 */
-	public static void intializeWebsitesList() {
-		Globals.websitesList = Constants.WEBSITE_LIST;				
+
+	private static void initializeTests() {
+		try {
+			if ((SDCardReadWrite.fileExists(Constants.WEBSITES_LIST_FILE, 
+					Constants.WEBSITES_DIR) == true) &&
+					(SDCardReadWrite.fileExists(Constants.SERVICES_LIST_FILE, 
+							Constants.SERVICES_DIR) == true)){	
+				Globals.runtimeList.websitesList 
+				= SDCardReadWrite.readWebsitesList(Constants.WEBSITES_DIR);	
+
+				Globals.runtimeList.servicesList 
+				= SDCardReadWrite.readServicesList(Constants.SERVICES_DIR);	
+				
+			// No tests on SD Card
+			} else {
+				Globals.runtimeList.websitesList = Constants.WEBSITE_LIST;	
+				Globals.runtimeList.servicesList = Constants.SERVICE_LIST;	
+				NewTests newTests = NewTests.newBuilder()
+						.setCurrentTestVersionNo(Globals.versionManager.getTestsVersion())
+						.build();
+
+				try {
+					AggregatorRetrieve.checkTests(newTests);
+					SDCardReadWrite.writeServicesList(Constants.SERVICES_DIR,
+								Globals.runtimeList.servicesList);
+					SDCardReadWrite.writeWebsitesList(Constants.WEBSITES_DIR,
+								Globals.runtimeList.websitesList);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	/**
-	 * Initializes the {@link Globals#servicesList} with 
-	 * {@link Constants#SERVICE_LIST}
-	 * 
-	 *	 
-	                    
-	@see         Service
-	 *
-	
-	@see         Constants
-	 */
-	public static void intializeServicesList() {		
-		Globals.servicesList = Constants.SERVICE_LIST;				
+	private static void initializeBanlist(){
+		GetBanlist getBanlist = GetBanlist.newBuilder()
+				.setCount(100)
+				.build();
+		try {
+			AggregatorRetrieve.getBanlist(getBanlist);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
+	
+	private static void initializeBannets(){
+		GetBannets getBannets = GetBannets.newBuilder()
+				.setCount(100)
+				.build();
+		try {
+			AggregatorRetrieve.getBannets(getBannets);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void intializeLists() {
+		initializeTests();
+		initializeBanlist();
+		initializeBannets();
+		Globals.runtimeList.readEventList();
+		Globals.runtimeList.readPeerList();
+		Globals.runtimeList.readSuperPeerList();
+		//initializerPeersList();
+		initializeEventsList();
+	}
+	
 	
 	/**
 	 * Initializes the {@link Globals#tcpServer} with 
@@ -202,7 +242,7 @@ public class Initialization {
 	/*Only used for testing
 	 * Should be deprecated eventually.
 	 */
-	public static void initializeEventsList() {
+	private static void initializeEventsList() {
 		Calendar calendar = Calendar.getInstance();
 		
 		Location location = Location.newBuilder()
@@ -226,14 +266,14 @@ public class Initialization {
 		.addLocations(location)
 		.build();
 		
-		Globals.runtimesList.addEvent(eventA);
-		Globals.runtimesList.addEvent(eventB);
+		Globals.runtimeList.addEvent(eventA);
+		Globals.runtimeList.addEvent(eventB);
 	}	
 	
 	/*Only used for testing
 	 * Should be deprecated eventually.
 	 */
-	public static void initializerPeersList() {
+	private static void initializerPeersList() {
 		
 		GetPeerList getPeerList = GetPeerList.newBuilder()
 				.setCount(10)
@@ -251,12 +291,6 @@ public class Initialization {
 			e.printStackTrace();
 		}
 			
-	}
-	
-	public static void loadLists() {
-		Globals.runtimesList.readEventList();
-		Globals.runtimesList.readPeerList();
-		Globals.runtimesList.readSuperPeerList();
 	}
 	
 	public static boolean login() {
@@ -287,11 +321,7 @@ public class Initialization {
 		try {
 			
 			success = AggregatorRetrieve.login(login);
-			
-			Initialization.initializeBanlist();
-			Initialization.initializeBannets();
-	//		Initialization.initializerPeersList();
-		} catch (Exception e) {
+			} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -350,33 +380,6 @@ public class Initialization {
 			e.printStackTrace();
 		}
 		return success;
-	}
-	
-	public static void initializeBanlist(){
-		
-		GetBanlist getBanlist = GetBanlist.newBuilder()
-				.setCount(100)
-				.build();
-		
-		try {
-			AggregatorRetrieve.getBanlist(getBanlist);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void initializeBannets(){
-		GetBannets getBannets = GetBannets.newBuilder()
-				.setCount(100)
-				.build();
-		
-		try {
-			AggregatorRetrieve.getBannets(getBannets);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		
 	}
 	
 }		

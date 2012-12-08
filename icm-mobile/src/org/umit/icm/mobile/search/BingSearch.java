@@ -24,12 +24,12 @@ package org.umit.icm.mobile.search;
 import java.io.IOException;
 
 import org.apache.http.HttpException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 
-import twitter4j.internal.org.json.JSONArray;
-import twitter4j.internal.org.json.JSONException;
-import twitter4j.internal.org.json.JSONObject;
 
 /**
  * BingSearch class that implements the interface {@link AbstractSearch}.

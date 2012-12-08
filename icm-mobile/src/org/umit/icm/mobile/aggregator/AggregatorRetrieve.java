@@ -78,7 +78,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean registerAgent(RegisterAgent registerAgent) 
+	 public static boolean registerAgent(RegisterAgent registerAgent) 
 	 throws Exception {
 		 
 		 if(Constants.DEBUG_MODE)
@@ -109,7 +109,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */	
-	 public synchronized static boolean getPeerList(GetPeerList getPeerList) 
+	 public static boolean getPeerList(GetPeerList getPeerList) 
 	 throws Exception {
 		 	GetPeerListResponse getPeerListResponse
 		 	= AggregatorResources.getPeerList(getPeerList);
@@ -137,7 +137,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */	 
-	 public synchronized static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
+	 public static boolean getSuperPeerList(GetSuperPeerList getSuperPeerList) 
 	 throws Exception {
 		 	GetSuperPeerListResponse getSuperPeerListResponse
 		 	= AggregatorResources.getSuperPeerList(getSuperPeerList);
@@ -165,7 +165,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean getEvents(GetEvents getEvents) 
+	 public static boolean getEvents(GetEvents getEvents) 
 	 throws Exception {
 		 	GetEventsResponse getEventsResponse 
 		 	= AggregatorResources.getEvents(getEvents);	 	
@@ -193,7 +193,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
+	 public static boolean sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
 	 throws Exception {
 		 	SendReportResponse sendReportResponse
 		 	= AggregatorResources.sendWebsiteReport(sendWebsiteReport);		 	
@@ -221,7 +221,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean sendServiceReport(SendServiceReport sendServiceReport) 
+	 public static boolean sendServiceReport(SendServiceReport sendServiceReport) 
 	 throws Exception {
 		 	SendReportResponse sendReportResponse 
 		 	= AggregatorResources.sendServiceReport(sendServiceReport);
@@ -249,7 +249,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean checkVersion(NewVersion newVersion) 
+	 public static boolean checkVersion(NewVersion newVersion) 
 	 throws Exception {
 		 	NewVersionResponse newVersionResponse
 		 	= AggregatorResources.checkVersion(newVersion);		 	
@@ -277,7 +277,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean checkTests(NewTests newTests) 
+	 public static boolean checkTests(NewTests newTests) 
 	 throws Exception {
 		 	NewTestsResponse newTestsResponse 
 		 	= AggregatorResources.checkTests(newTests);		 	
@@ -303,7 +303,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
+	 public static boolean sendWebsiteSuggestion(WebsiteSuggestion websiteSuggestion) 
 	 throws Exception {
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendWebsiteSuggestion(websiteSuggestion);		 	
@@ -331,7 +331,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
+	 public static boolean sendServiceSuggestion(ServiceSuggestion serviceSuggestion) 
 	 throws Exception {
 		 	TestSuggestionResponse testSuggestionResponse
 		 	= AggregatorResources.sendServiceSuggestion(serviceSuggestion);
@@ -354,7 +354,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean checkAggregatorStatus(CheckAggregator checkAggregator) 
+	 public static boolean checkAggregatorStatus(CheckAggregator checkAggregator) 
 	 throws Exception {
 		 	CheckAggregatorResponse checkAggregatorResponse
 		 	= AggregatorResources.checkAggregatorStatus(checkAggregator);
@@ -377,7 +377,7 @@ public class AggregatorRetrieve {
 	 
 	@see         AggregatorResources
 	 */
-	 public synchronized static boolean login(Login login) 
+	 public static boolean login(Login login) 
 	 throws Exception {
 		 
 		 if(Constants.DEBUG_MODE)
@@ -400,16 +400,16 @@ public class AggregatorRetrieve {
 
 	@see         AggregatorResources
 	 */
-	 public synchronized static void logout(Logout logout) 
+	 public static void logout(Logout logout) 
 	 throws Exception {
 		 	AggregatorResources.logout(logout);		 				
 	 }
 	 
-	 public synchronized static void getBanlist(GetBanlist getBanlist) throws Exception{
+	 public static void getBanlist(GetBanlist getBanlist) throws Exception{
 		 AggregatorResources.getBanlist(getBanlist);
 	 }
 	 
-	 public synchronized static void getBannets(GetBannets getBannets) throws Exception{
+	 public static void getBannets(GetBannets getBannets) throws Exception{
 		 AggregatorResources.getBannets(getBannets);
 		 
 	 }

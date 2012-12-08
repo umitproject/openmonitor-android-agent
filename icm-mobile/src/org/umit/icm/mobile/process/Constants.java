@@ -118,7 +118,7 @@ public class Constants {
 	public static String AGGR_GENERATE_SECRET_KEY = "/api/generatesecretkey/";
 	public static String AGGR_GET_TOKEN_ASYMMETRIC_KEYS = "/api/gettokenandasymmetrickeys/";
 	public static String AGGR_REGISTER_USER = "/accounts/register/";
-	public static int DEFAULT_TESTS_VERSION = 1;
+	public static int DEFAULT_TESTS_VERSION = 0;
 	public static int DEFAULT_AGENT_VERSION = 1;
 	public static String AGGR_MSG_KEY = "msg";
 	public static int MY_TCP_PORT = 5555;		

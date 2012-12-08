@@ -1,0 +1,7 @@
+This is the initialization order:
+1) LoginActivity -> Initialization.checkProfiler() -> Initialization.checkFiles() ->
+BackgroundLogin() (AsyncTask) -> Initialization.registration() -> Initialization.login()
+Case: successful login
+2) Main (TabActivity) -> SDCardReadWrite.checkSDCard() ->
+Case: SDCard found
+Initialization.intializeLists() -> Initialization.startServices()

@@ -43,8 +43,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-	
-	
+
 public class LoginActivity extends Activity {
 	
     private EditText etUsername;
@@ -109,15 +108,7 @@ public class LoginActivity extends Activity {
 					e.printStackTrace();
 				}
 				
-				new Background().execute(loginCredentials);
-				
-/*					Initialization.registration(loginCredentials);
-					Initialization.login();
-					
-					Initialization.loadLists();
-					Initialization.initializeEventsList();
-			        Initialization.initializerPeersList();
-			        Initialization.startServices(context);*/
+				new BackgroundLogin().execute(loginCredentials);
 							
 			}
 			break;
@@ -135,23 +126,23 @@ public class LoginActivity extends Activity {
     }   
     
     
-    private class Background extends AsyncTask<LoginCredentials,String,String>{
+    private class BackgroundLogin extends AsyncTask<LoginCredentials,String,String> {
 
 		@Override
 		protected String doInBackground(LoginCredentials... loginCredentials) {
 			publishProgress(getString(R.string.registering));
 			boolean register = Initialization.registration(loginCredentials[0]);
-			if(register){
+			if(register) {
 				publishProgress(getString(R.string.registration_complete));
 				publishProgress(getString(R.string.logging_in));
 				boolean login = Initialization.login();
-				if(login){
+				if(login) {
 					publishProgress(getString(R.string.login_complete));
-				}else{
+				} else {
 					publishProgress(getString(R.string.login_failed));
 					this.cancel(true);
 				}
-			}else{
+			} else{
 				publishProgress(getString(R.string.registration_failed));
 				this.cancel(true);
 			}

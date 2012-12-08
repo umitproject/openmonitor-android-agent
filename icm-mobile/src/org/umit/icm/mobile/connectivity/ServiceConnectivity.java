@@ -243,7 +243,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			.addLocations(location)			
 			.build();
 			
-			Globals.runtimesList.addEvent(event);
+			Globals.runtimeList.addEvent(event);
 		}
 	}
 	

@@ -47,10 +47,10 @@ public class AggregatorCrypto {
 	public static byte[] aesDecrypt(byte[] data){
 		byte[] decodedData = null;
 		if(Constants.DEBUG_MODE)
-			System.out.println("-----------_______________---------------- Got this data: \n" + new String(data));	
+			System.out.println("--------------------------- Got this data: \n" + new String(data));	
 		decodedData = Base64.decodeBase64(data);	
 		if(Constants.DEBUG_MODE)
-			System.out.println("-----------_______________---------------- Got this decoded_data: \n" + new String(decodedData));		
+			System.out.println("--------------------------- Got this decoded_data: \n" + new String(decodedData));		
 		byte[] decryptedDecodedData = null;
 		try {
 			decryptedDecodedData = AESCrypto.decrypt(Globals.keyManager.getAESKey(), decodedData);
@@ -59,7 +59,7 @@ public class AggregatorCrypto {
 			e.printStackTrace();
 		}	
 		if(Constants.DEBUG_MODE)
-			System.out.println("-----------_______________---------------- Got this decrypted_decoded_data: " + new String(decryptedDecodedData));
+			System.out.println("--------------------------  Got this decrypted_decoded_data: " + new String(decryptedDecodedData));
 		return decryptedDecodedData;
 	}
 	

@@ -27,8 +27,6 @@ import org.umit.icm.mobile.process.Globals;
 
 public class Benchmark {
 	
-	static Iterator<Website> websiteList = Globals.websitesList.iterator();
-	
 	public static double DeviationFromAverageThroughput(String website) {
 		
 		double throughput = WebsiteThrottling.Throughput(website);	

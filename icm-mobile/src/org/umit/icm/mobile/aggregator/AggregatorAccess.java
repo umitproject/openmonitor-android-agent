@@ -88,7 +88,7 @@ public class AggregatorAccess {
 					.setCipheredPublicKey(rsaKey)					
 					.build();
 					Iterator<AgentData> iterator 
-					= Globals.runtimesList.getSuperPeersList().iterator(); {
+					= Globals.runtimeList.getSuperPeersList().iterator(); {
 						while(iterator.hasNext()) {
 							if(CryptoKeyReader.checkPeerSecretKey(iterator.next().getAgentIP()) == false) {
 								try {

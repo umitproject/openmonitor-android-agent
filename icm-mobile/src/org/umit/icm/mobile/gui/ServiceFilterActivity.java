@@ -60,9 +60,6 @@ public class ServiceFilterActivity extends Activity{
         setContentView(R.layout.servicefilteractivity);        
         listServicesCheckbox 
         = new ArrayList<WebsiteTextCheckbox>();
-        Iterator<Service> iterator = Globals.servicesList.iterator();
-        if(Constants.DEBUG_MODE)
-        	Log.w("###", Integer.toString(Globals.servicesList.size()));
                         
         backButton = (Button) findViewById(R.id.backButton);        
         backButton.setOnClickListener(new OnClickListener() { 
@@ -79,16 +76,16 @@ public class ServiceFilterActivity extends Activity{
 	    				check = "true";	    				
 	    			}    				
 	    			else
-	    				check = "false";
-	    			service = Globals.servicesList.get(i);
+    				check = "false";
+	    			service = Globals.runtimeList.servicesList.get(i);
 	    			service.setCheck(check);
-	    			Globals.servicesList.set(i, 
-	    					service);						       				    			
+	    			Globals.runtimeList.servicesList.set(i, 
+	    					service);	
 	    			i++;
 	            } 
 	    		try {
-					SDCardReadWrite.writeServicesList(Constants.SERVICES_DIR,
-							Globals.servicesList);
+    				SDCardReadWrite.writeServicesList(Constants.SERVICES_DIR,
+    						Globals.runtimeList.servicesList);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (RuntimeException e) {
@@ -102,8 +99,8 @@ public class ServiceFilterActivity extends Activity{
         listView = (ListView)findViewById(R.id.ListView01);
         serviceTextCheckboxAdapter 
         = new WebsiteTextCheckboxAdapter(ServiceFilterActivity.this);
-                
-        while(iterator.hasNext()){               
+		Iterator<Service> iterator = Globals.runtimeList.servicesList.iterator();
+		while(iterator.hasNext()){               
 			currentService = iterator.next();
 			currentName = currentService.getName();
 			if (currentService.getCheck().equals("true"))
@@ -112,7 +109,7 @@ public class ServiceFilterActivity extends Activity{
 				currentCheck = false;			
 			listServicesCheckbox.add(new WebsiteTextCheckbox(currentName, currentCheck));						       			
         } 
-        
+     
         selectAllButton = (Button) findViewById(R.id.selectAllButton);        
         selectAllButton.setOnClickListener(new OnClickListener() { 
 	       	public void onClick(View v) {  	   
@@ -159,16 +156,16 @@ public class ServiceFilterActivity extends Activity{
     				check = "true";	    				
     			}    				
     			else
-    				check = "false";
-    			service = Globals.servicesList.get(i);
+				check = "false";
+    			service = Globals.runtimeList.servicesList.get(i);
     			service.setCheck(check);
-    			Globals.servicesList.set(i, 
-    					service);						       				    			
+    			Globals.runtimeList.servicesList.set(i, 
+    					service);
     			i++;
             } 
     		try {
 				SDCardReadWrite.writeServicesList(Constants.SERVICES_DIR,
-						Globals.servicesList);
+						Globals.runtimeList.servicesList);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (RuntimeException e) {

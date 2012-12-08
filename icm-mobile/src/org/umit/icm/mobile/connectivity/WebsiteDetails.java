@@ -209,7 +209,7 @@ public class WebsiteDetails {
 				.addLocations(location)			
 				.build();
 			
-			Globals.runtimesList.addEvent(event);
+			Globals.runtimeList.addEvent(event);
 		}
 	}
 }

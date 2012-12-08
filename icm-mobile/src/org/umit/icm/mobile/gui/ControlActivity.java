@@ -319,7 +319,7 @@ public class ControlActivity extends Activity {
 				}
         	} else if (Globals.p2pCommunication == true) {
         		Iterator<AgentData> iterator 
-        		= Globals.runtimesList.getSuperPeersList().iterator();
+        		= Globals.runtimeList.getSuperPeersList().iterator();
         		
         		AgentData peer = null;
         		while(iterator.hasNext()) {
@@ -382,7 +382,7 @@ public class ControlActivity extends Activity {
 				}
         	} else if (Globals.p2pCommunication == true) {
         		Iterator<AgentData> iterator 
-        		= Globals.runtimesList.getSuperPeersList().iterator();
+        		= Globals.runtimeList.getSuperPeersList().iterator();
         		AgentData peer = null;
         		while(iterator.hasNext()) {
         			peer = iterator.next();

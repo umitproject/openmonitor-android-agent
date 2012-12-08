@@ -68,7 +68,7 @@ public class AggregatorActions {
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside AggreagatorActions#registerAgentAction");
 		ProcessActions.updateAgentVersion(registerAgentResponse.getHeader());
-		ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
+		//ProcessActions.updateTestsVersion(registerAgentResponse.getHeader());				
 		return ProcessActions.registerAgent(registerAgentResponse);
 	}
 	

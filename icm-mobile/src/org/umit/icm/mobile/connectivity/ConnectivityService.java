@@ -30,12 +30,10 @@ import javax.mail.MessagingException;
 
 import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.RuntimeParameters;
-import org.umit.icm.mobile.proto.MessageProtos.NewTests;
 
 import android.app.Service;
 import android.content.Context;
@@ -117,22 +115,6 @@ public class ConnectivityService extends Service {
 				
 				if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 					stopScan();
-				
-				
-				try {
-					int testsVersion = Globals.versionManager.getTestsVersion();
-					if(testsVersion == 0)
-						testsVersion = Constants.DEFAULT_TESTS_VERSION;
-					if(Constants.DEBUG_MODE)
-						System.out.println("Tests Version: " + String.valueOf(testsVersion));
-					NewTests newTests = NewTests.newBuilder()
-							.setCurrentTestVersionNo(testsVersion)
-							.build();
-					AggregatorRetrieve.checkTests(newTests);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				
 				try {
 					if(Constants.DEBUG_MODE)

@@ -23,7 +23,6 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
-import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -41,7 +40,7 @@ import android.util.Log;
  * This is the WebsiteConnectivity class which extends {@link AbstractConnectivity}.
  */
 
-public class WebsiteConnectivity extends AbstractConnectivity{		
+public class WebsiteConnectivity extends AbstractConnectivity {		
 
 	/**
 	 * This is the default constructor. Populates the Websites list with the
@@ -65,13 +64,12 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 	 */
 	@Override()
 	public void scan() throws IOException, HttpException {
-		Iterator<Website> iterator = Globals.websitesList.iterator();
 		Website website = new Website();
 		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 		long totalSizeofContent = 0;
 		long totalTime = 0;
 		double averageThroughput = 0;
-		
+		Iterator<Website> iterator = Globals.runtimeList.websitesList.iterator();
 		while(iterator.hasNext()) {
 			website = iterator.next();
 			try {
@@ -79,7 +77,6 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 				websiteReport = websiteDetails.websiteReport;
 				totalSizeofContent += websiteDetails.website.getContent().getBytes().length;
 				totalTime += websiteDetails.website.getTimeTakentoDownload();
-				
 				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
 				
 				if(Constants.DEBUG_MODE) {
@@ -97,7 +94,6 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 					for (int i = 0; i < websiteDetails.soaDNSRecord.length; i++) {
 						Log.w("######SOA Record", websiteDetails.soaDNSRecord[i]);
 					}
-					
 				}
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
 				.setReport(websiteReport)
@@ -106,23 +102,12 @@ public class WebsiteConnectivity extends AbstractConnectivity{
 					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
 					website.setCheck("false");
 				}				
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-			}	catch (IOException e) {
-				e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}			
-																	
+			}																	
 		}
-		
 		averageThroughput = totalSizeofContent / totalTime;
-		Globals.runtimeParameters.setAverageThroughout(averageThroughput);
-																		
-	};
-		
+		Globals.runtimeParameters.setAverageThroughout(averageThroughput);		
+
+	};		
 }

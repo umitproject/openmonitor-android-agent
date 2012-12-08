@@ -87,6 +87,7 @@ public class Main extends TabActivity {
     		moveTaskToBack(true);        	
         } else {        	            	      			                         
 	        try {
+	        	Initialization.intializeLists();
 				Initialization.startServices(this);
 				Globals.scanStatus = getString(R.string.scan_on);								
 				ServicePackets.populateServicesMap();				

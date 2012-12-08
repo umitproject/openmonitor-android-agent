@@ -24,7 +24,10 @@ package org.umit.icm.mobile.process;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.umit.icm.mobile.connectivity.Service;
+import org.umit.icm.mobile.connectivity.Website;
 import org.umit.icm.mobile.proto.MessageProtos.AgentData;
 import org.umit.icm.mobile.proto.MessageProtos.Event;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
@@ -41,6 +44,8 @@ public class RuntimeLists {
 	private Object eventLock;
 	private Object peerLock;
 	private Object superPeerLock;
+	public List<Website> websitesList;
+	public List<Service> servicesList;
 	
 	public RuntimeLists() {
 		eventsList = new ArrayList<Event>();
@@ -49,6 +54,8 @@ public class RuntimeLists {
 		eventLock = new Object();
 		peerLock = new Object();
 		superPeerLock = new Object();
+		websitesList = new CopyOnWriteArrayList<Website>();
+		servicesList = new CopyOnWriteArrayList<Service>();	
 	}		
 	
 	public List<Event> getEventsList() {
