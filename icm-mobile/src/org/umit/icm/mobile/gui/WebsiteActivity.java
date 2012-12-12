@@ -23,9 +23,7 @@ package org.umit.icm.mobile.gui;
 
 import java.io.IOException;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
-import org.umit.icm.mobile.connectivity.WebsiteDetails;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
@@ -101,12 +99,7 @@ public class WebsiteActivity extends Activity{
 				= BitmapFactory.decodeResource(resources,
 						R.drawable.tabs_icons);
 				e.printStackTrace();
-			} catch (HttpException e) {
-				favicon 
-				= BitmapFactory.decodeResource(resources,
-						R.drawable.tabs_icons);
-				e.printStackTrace();
-			}
+			} 
 			Drawable drawable = new BitmapDrawable(favicon);
 			websiteTextBitmapAdapter.addItem(new WebsiteTextBitmap(website, drawable));
 			String websiteFilename 

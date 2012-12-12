@@ -72,6 +72,7 @@ import org.umit.icm.mobile.proto.MessageProtos.WebsiteSuggestion;
 import org.umit.icm.mobile.utils.AggregatorCrypto;
 import org.umit.icm.mobile.utils.RSACrypto;
 
+
 /**
  * Encodes the passed message using {@link Base64} and POSTs it to corresponding
  * webservice ClientResource. 
@@ -297,7 +298,7 @@ public class AggregatorResources {
 	 *                           	
 	                          
 	@return      SendReportResponse
-	 * @throws Exception 
+	 * @throws IOException 
 	 *  
 	                          
 	@see         Base64
@@ -305,8 +306,8 @@ public class AggregatorResources {
 	 
 	@see         ClientResource
 	 */
-	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport) 
-	 throws Exception {					 
+	 public static SendReportResponse sendWebsiteReport(SendWebsiteReport sendWebsiteReport) throws IOException 
+	 {					 
 		 return SendReportResponse.parseFrom(getResponse(Constants.AGGR_SEND_WEBSITE_REPORT,
 				 sendWebsiteReport.toByteArray()));		 
 	 }

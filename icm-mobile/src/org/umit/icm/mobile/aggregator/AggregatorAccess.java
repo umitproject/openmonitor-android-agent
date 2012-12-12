@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.connectivity.WebsiteOpen;
 import org.umit.icm.mobile.p2p.MessageSender;
 import org.umit.icm.mobile.process.Constants;
@@ -106,10 +105,7 @@ public class AggregatorAccess {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 		}
 	}
 }

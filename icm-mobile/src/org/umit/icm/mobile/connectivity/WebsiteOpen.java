@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.process.Constants;
 
 import android.graphics.Bitmap;
@@ -56,16 +55,14 @@ public class WebsiteOpen {
 	 *  	                          	
 	                          
 	@return      URLConnection
+	 * @throws IOException 
 	 *  
 	
 	@see         URLConnection
 	 */
-	static synchronized public URLConnection openURLConnection(String str) throws IOException, HttpException {
-		
-
+	static public URLConnection openURLConnection(String str) throws IOException {
 		URL url = new URL(str);
 		URLConnection urlConnection = url.openConnection();
-		
 		return urlConnection;
 	}
 
@@ -80,14 +77,14 @@ public class WebsiteOpen {
 	 *  	                          	
 	                          
 	@return      String
+	 * @throws IOException 
 	 *  
 	
 	@see         InputStream
 	 */
-	static synchronized public String getContent(URLConnection urlConnection) throws IOException, HttpException {
-		
-			InputStream inputStream = urlConnection.getInputStream();
-	     	return convertStreamToString(inputStream);
+	static public String getContent(URLConnection urlConnection) throws IOException {
+		InputStream inputStream = urlConnection.getInputStream();
+	    return convertStreamToString(inputStream);
 	}
 	
 	/**
@@ -100,12 +97,12 @@ public class WebsiteOpen {
 	 *  	                          	
 	                          
 	@return      InputStream
+	 * @throws IOException 
 	 *  
 	
 	@see         InputStream
 	 */
-	static synchronized public InputStream getContentStream(URLConnection urlConnection) throws IOException, HttpException {
-
+	static public InputStream getContentStream(URLConnection urlConnection) throws IOException {
         return urlConnection.getInputStream();
     }
 	
@@ -121,6 +118,7 @@ public class WebsiteOpen {
 	 *  	                          	
 	                          
 	@return      Bitmap
+	 * @throws IOException 
 	 *  
 	
 	@see         InputStream
@@ -128,7 +126,7 @@ public class WebsiteOpen {
 	
 	@see         BitmapFactory
 	 */
-	static synchronized public Bitmap getFavicon(String str) throws IOException, HttpException {
+	static public Bitmap getFavicon(String str) throws IOException {
 		InputStream inputStream = getContentStream(openURLConnection(str + "/favicon.ico"));
 		return BitmapFactory.decodeStream(inputStream);
 	}
@@ -151,8 +149,7 @@ public class WebsiteOpen {
 	
 	@see         URLConnection
 	 */
-	static synchronized public Map<String, String> getHeaders(URLConnection urlConnection) throws IOException, HttpException {
-
+	static public Map<String, String> getHeaders(URLConnection urlConnection) {
 		Map<String, String> headerMap = new HashMap <String, String>();
 		String key = new String();
 		String value = new String();
@@ -186,6 +183,7 @@ public class WebsiteOpen {
 	 *  	                          	
 	                          
 	@return      String
+	 * @throws IOException 
 	 *  
 	                          
 	@see         BufferedReader
@@ -193,16 +191,14 @@ public class WebsiteOpen {
 	 
 	@see         StringBuilder
 	 */
-	private synchronized static String convertStreamToString(InputStream inputStream) throws IOException {
-	   
+	private static String convertStreamToString(InputStream inputStream) throws IOException {
 	    BufferedReader bufferedReader 
 	    = new BufferedReader(new InputStreamReader(inputStream));
 	    StringBuilder stringBuilder = new StringBuilder();
 	    String line = null;
-	    
-	        while ((line = bufferedReader.readLine()) != null) {
-	            stringBuilder.append(line + "\n");
-	        }	   
+	    while ((line = bufferedReader.readLine()) != null) {
+	    	stringBuilder.append(line + "\n");
+	    }	   
 	    inputStream.close();	    	    
 	    return stringBuilder.toString();
 	}
@@ -224,7 +220,7 @@ public class WebsiteOpen {
 	 
 	@see         Matcher
 	 */
-	public synchronized static int getStatusCode(Map <String, String> websiteHeader) {
+	public static int getStatusCode(Map <String, String> websiteHeader) {
 		int statusCode = websiteHeader.size();
 		if(websiteHeader.size()!=0) {
 			Pattern httpCodePattern = 
@@ -251,7 +247,7 @@ public class WebsiteOpen {
 	                          
 	@return      String
 	 */
-	public synchronized static String httpOrHttps(Map <String, String> websiteHeader) {
+	public static String httpOrHttps(Map <String, String> websiteHeader) {
 		String connectionType = "http";
 		int statusCode = getStatusCode(websiteHeader);
 		if (statusCode >= 300 && statusCode <= 307 && statusCode != 306)
@@ -273,7 +269,7 @@ public class WebsiteOpen {
 	                          
 	@see        	ConnectivityManager
 	 */
-	public synchronized static boolean checkInternetAccess(
+	public static boolean checkInternetAccess(
 			ConnectivityManager connectivityManager) {	    
 	    if (connectivityManager.getActiveNetworkInfo() != null
 	            && connectivityManager.getActiveNetworkInfo().isAvailable()

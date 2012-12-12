@@ -21,7 +21,6 @@
 
 package org.umit.icm.mobile.connectivity;
 
-import java.util.Iterator;
 
 import org.umit.icm.mobile.process.Globals;
 

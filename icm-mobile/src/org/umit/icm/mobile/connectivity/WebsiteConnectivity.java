@@ -23,6 +23,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -57,13 +58,14 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 	 * {@link WebsiteOpen#getHeaders(URLConnection)} and
 	 * {@link WebsiteOpen#getContent(URLConnection)}. Passes the website content
 	 * to {@link WebsiteConnectivity#clean(String, String, Map, long)} 
+	 * @throws HttpException 
 	 * 
 	 * 
 	 *
 	 @see         WebsiteOpen
 	 */
 	@Override()
-	public void scan() throws IOException, HttpException {
+	public void scan() throws IOException {
 		Website website = new Website();
 		WebsiteReport websiteReport = WebsiteReport.getDefaultInstance();
 		long totalSizeofContent = 0;
@@ -72,11 +74,13 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 		Iterator<Website> iterator = Globals.runtimeList.websitesList.iterator();
 		while(iterator.hasNext()) {
 			website = iterator.next();
+			WebsiteDetails websiteDetails = new WebsiteDetails(website);
 			try {
-				WebsiteDetails websiteDetails = new WebsiteDetails(website);
-				websiteReport = websiteDetails.websiteReport;
-				totalSizeofContent += websiteDetails.website.getContent().getBytes().length;
-				totalTime += websiteDetails.website.getTimeTakentoDownload();
+				websiteDetails.setup();
+				websiteReport = websiteDetails.getWebsiteReport();
+				totalSizeofContent += websiteDetails.getWebsite().getContent().getBytes().length;
+				totalTime += websiteDetails.getWebsite().getTimeTakentoDownload();
+
 				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
 				
 				if(Constants.DEBUG_MODE) {
@@ -84,15 +88,15 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 					Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
 					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
 					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
-					Log.w("######IP", websiteDetails.ip);
-					for (int i = 0; i < websiteDetails.nsDNSRecord.length; i++) {
-						Log.w("######NS Record", websiteDetails.nsDNSRecord[i]);
+					Log.w("######IP", websiteDetails.getIp());
+					for (int i = 0; i < websiteDetails.getNsDNSRecord().length; i++) {
+						Log.w("######NS Record", websiteDetails.getNsDNSRecord()[i]);
 					}
-					for (int i = 0; i < websiteDetails.aDNSRecord.length; i++) {
-						Log.w("######A Record", websiteDetails.aDNSRecord[i]);
+					for (int i = 0; i < websiteDetails.getaDNSRecord().length; i++) {
+						Log.w("######A Record", websiteDetails.getaDNSRecord()[i]);
 					}
-					for (int i = 0; i < websiteDetails.soaDNSRecord.length; i++) {
-						Log.w("######SOA Record", websiteDetails.soaDNSRecord[i]);
+					for (int i = 0; i < websiteDetails.getSoaDNSRecord().length; i++) {
+						Log.w("######SOA Record", websiteDetails.getSoaDNSRecord()[i]);
 					}
 				}
 				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
@@ -101,10 +105,20 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 				if(Globals.aggregatorCommunication != false && website.getCheck()=="true") {
 					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
 					website.setCheck("false");
-				}				
-			} catch (Exception e) {
+				}
+				
+			} catch(UnknownHostException e) {
 				e.printStackTrace();
-			}																	
+				throw new IOException("No Internet");
+			} catch(HttpException e) {
+				e.printStackTrace();
+				throw new IOException("No Internet");
+			} catch(IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		averageThroughput = totalSizeofContent / totalTime;
 		Globals.runtimeParameters.setAverageThroughout(averageThroughput);		

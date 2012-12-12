@@ -26,9 +26,7 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.mail.MessagingException;
 
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.notifications.NotificationHelper;
 import org.umit.icm.mobile.process.Constants;
@@ -121,12 +119,9 @@ public class ConnectivityService extends Service {
 						System.out.println("STARTING WEBSITES SCAN ------------------------------------");
 					Globals.websiteTest.scan();
 				} catch (IOException e) {
-						if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-							stopScanNotify();					
-				} catch (HttpException e) {
-						if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-							stopScanNotify();					
-				}
+					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
+						stopScanNotify();					
+				} 
 				
 				try {				
 					if(Constants.DEBUG_MODE)
@@ -135,12 +130,6 @@ public class ConnectivityService extends Service {
 				} catch (IOException e) {
 					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
 						stopScanNotify();					
-				} catch (HttpException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))
-						stopScanNotify();					
-				} catch (MessagingException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-						stopScanNotify();
 				} 
 				
 				Context context = getApplicationContext();

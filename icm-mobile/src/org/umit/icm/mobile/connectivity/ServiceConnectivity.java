@@ -28,9 +28,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.mail.MessagingException;
-
-import org.apache.http.HttpException;
 import org.umit.icm.mobile.aggregator.AggregatorRetrieve;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.process.Globals;
@@ -55,11 +52,12 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	/**
 	 * scan method which overrides the {@link AbstractConnectivity#scan}. 
 	 * Calls the scan method of each service. 	
+	 * @throws IOException 
 	 * 	  
 	 *
 	 */
 	@Override()
-	public void scan() throws IOException, HttpException, MessagingException {
+	public void scan() throws IOException {
 		
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside Services scan() ---------------------------");
@@ -101,9 +99,8 @@ public class ServiceConnectivity extends AbstractConnectivity{
 	@return      ServiceReport
 	 * @throws NoSuchAlgorithmException 
 	 */	
-	public ServiceReport clean(Service service, String serviceContent
-			, byte[] bytes) 
-	throws IOException, RuntimeException, NoSuchAlgorithmException {
+	private ServiceReport clean(Service service, String serviceContent
+			, byte[] bytes) {
 		int statusCode = 0;
 		if(serviceContent.equals("blocked"))
 			statusCode = 1;
@@ -156,8 +153,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		return serviceReport;
 	}
 	
-	void sendReport(Service service, String response, byte[] responseBytes) {
-		
+	private void sendReport(Service service, String response, byte[] responseBytes) {
 		try {
 			ServiceReport serviceReport 
 			= (ServiceReport) clean(service, response, responseBytes);
@@ -186,36 +182,32 @@ public class ServiceConnectivity extends AbstractConnectivity{
 			}
 	}
 	
-	void connect(Class<? extends AbstractServiceTest> classObj) {
-		AbstractServiceTest service;
+	private void connect(Class<? extends AbstractServiceTest> classObj) throws IOException {
+		AbstractServiceTest service;	
 		try {
 			service = classObj.newInstance();
 			String response = service.connect();
 			if(response != null) {			
 				byte[] serviceResponseBytes = null;
-				
-				try {
-					Globals.tcpClientConnectivity.openConnection(service.getService().getIp(), service.getService().getPort());
-					Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(service.getServicePacket()));
-					serviceResponseBytes = Globals.tcpClientConnectivity.readBytes();
-					if(Constants.DEBUG_MODE) {
-						if(!serviceResponseBytes.equals(null))
-							Log.w("#####bytes", "bytes");
-					}
-					Globals.tcpClientConnectivity.closeConnection();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-						
+				Globals.tcpClientConnectivity.openConnection(service.getService().getIp(), service.getService().getPort());
+				Globals.tcpClientConnectivity.writeLine(ServicePackets.generatedRandomBytes(service.getServicePacket()));
+				serviceResponseBytes = Globals.tcpClientConnectivity.readBytes();
+				if(Constants.DEBUG_MODE) {
+					if(!serviceResponseBytes.equals(null))
+						Log.w("#####bytes", "bytes");
+				}
+				Globals.tcpClientConnectivity.closeConnection();	
 				sendReport(service.getService(), response, serviceResponseBytes);
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
+		} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
 	}
+
 	
 	private void checkStatus(ServiceReport serviceReport) {
 		if(serviceReport.getReport().getStatusCode() == 1) {
