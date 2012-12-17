@@ -26,7 +26,6 @@ package org.umit.icm.mobile.process;
  */
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -60,57 +59,50 @@ public class KeyManager {
 
 	public KeyManager() {
 		super();
-		if(Constants.DEBUG_MODE)
-			System.out.println("This is from inside KeyMAnager Constructor");
-		this.setupKeyManager();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public void setupKeyManager(){
+		//generate all keys
 		try {
 			if(Constants.DEBUG_MODE)
 				System.out.println("Setting up KeyManager");
+			//generate RSA key pair
 			KeyPair keypair = RSACrypto.generateKey();
-			PublicKey publicKey = keypair.getPublic();
-			PrivateKey privateKey = keypair.getPrivate();
-			setMyPublicKey(publicKey);
-			setMyPrivateKey(privateKey);
-			RSAKey rsaKey = RSACrypto.getPublicKeyIntegers(publicKey);
-			setMyCipheredKeyMod(rsaKey.getMod());
-			setMyCipheredKeyExp(rsaKey.getExp());
-			
-			BigInteger mod =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
-			BigInteger exp = new BigInteger("65537");
-			
-			this.aggrPublicKey= RSACrypto.generatePublicKey(mod,exp);
+			this.setMyPublicKey(keypair.getPublic());
+			this.setMyPrivateKey(keypair.getPrivate());
+			//now separate public key into its mod and exp
+			RSAKey rsaKey = RSACrypto.getPublicKeyIntegers(keypair.getPublic());
+			this.setMyCipheredKeyMod(rsaKey.getMod());
+			this.setMyCipheredKeyExp(rsaKey.getExp());
+			//generate aggregator's public key
+			this.setAggregatorPublicKey(RSACrypto.generatePublicKey(Constants.AGGR_PUB_KEY_MOD,
+					Constants.AGGR_PUB_KEY_EXP));
 			if(Constants.DEBUG_MODE)
 				System.out.println("AGGRPUBLICKEY inside KeyManager : "+ aggrPublicKey);
-			
+			//generate AES symmetric key
 			byte[] bits = new byte[Constants.AES_BLOCK_SIZE];
 			new Random().nextBytes(bits);
-			byte[] temp = Base64.encodeBase64(bits);
-			byte[] key = new byte[Constants.AES_BLOCK_SIZE];
-			System.arraycopy(temp, 0, key,0, Constants.AES_BLOCK_SIZE);
-			 
-			this.aesKey = key;
-			
+			this.setAESKey(Base64.encodeBase64(bits));	
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		}	
-	}
-
-	public synchronized PrivateKey getMyPrivateKey() {
-		return myPrivateKey;
 	}
 	
 	public synchronized PublicKey getAggregatorPublicKey() {
 		return this.aggrPublicKey;
 	}
 	
+	public synchronized void setAggregatorPublicKey(PublicKey publicKey) {
+		this.aggrPublicKey = publicKey;
+	}
+	
 	public synchronized byte[] getAESKey() {
 		return this.aesKey;
+	}
+	
+	public synchronized void setAESKey(byte[] aesKey) {
+		this.aesKey = aesKey;
+	}
+	
+	public synchronized PrivateKey getMyPrivateKey() {
+		return myPrivateKey;
 	}
 	
 	/**

@@ -27,7 +27,6 @@ import java.util.Map;
 import org.umit.icm.mobile.connectivity.ServiceConnectivity;
 import org.umit.icm.mobile.connectivity.TCPClient;
 import org.umit.icm.mobile.connectivity.TCPServer;
-import org.umit.icm.mobile.connectivity.WebsiteConnectivity;
 import org.umit.icm.mobile.p2p.AuthenticatedPeers;
 import org.umit.icm.mobile.p2p.MessageQueue;
 import org.umit.icm.mobile.social.TwitterUpdate;
@@ -60,12 +59,6 @@ public class Globals {
 	 */
 	public static KeyManager keyManager
 	= new KeyManager();
-	
-	/**
-	 * Global {@link WebsiteConnectivity}
-	 */
-	public static WebsiteConnectivity websiteTest 
-	= new WebsiteConnectivity();
 
 	/**
 	 * Global {@link String} to hold scan status
@@ -120,10 +113,7 @@ public class Globals {
 	 */
 	public static boolean aggregatorCommunication = true;
 	
-	
-	public static byte [] AESKEY;
-	
-	
+
 	public static boolean isRegistered = false;
 	
 	/**

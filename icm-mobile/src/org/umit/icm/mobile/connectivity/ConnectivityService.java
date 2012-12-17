@@ -74,7 +74,6 @@ public class ConnectivityService extends Service {
 		} else if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 			getCurrentLocationNetwork();
 		}
-		
 		startScan();							
 	}
 	
@@ -97,8 +96,6 @@ public class ConnectivityService extends Service {
 	@see         Timer
 	 */	 	 
 	private void startScan() {
-		
-		
 		 int interval = Constants.DEFAULT_SCAN_INTERVAL;
 		 RuntimeParameters runtimeParameters = new RuntimeParameters();
 		 try {
@@ -110,17 +107,16 @@ public class ConnectivityService extends Service {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				
+				WebsiteConnectivity websiteTest = new WebsiteConnectivity(getApplicationContext());
 				if(Globals.scanStatus.equals(getString(R.string.scan_off)))
 					stopScan();
 				
 				try {
 					if(Constants.DEBUG_MODE)
 						System.out.println("STARTING WEBSITES SCAN ------------------------------------");
-					Globals.websiteTest.scan();
-				} catch (IOException e) {
-					if(!WebsiteOpen.checkInternetAccess(connectivityManager))						
-						stopScanNotify();					
+					websiteTest.scan();
+				} catch (IOException e) {					
+					stopScanNotify();					
 				} 
 				
 				try {				

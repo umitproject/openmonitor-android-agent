@@ -35,6 +35,8 @@ import org.umit.icm.mobile.proto.MessageProtos.SendWebsiteReport;
 import org.umit.icm.mobile.proto.MessageProtos.WebsiteReport;
 import org.umit.icm.mobile.utils.SDCardReadWrite;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 /**
@@ -47,8 +49,11 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 	 * This is the default constructor. Populates the Websites list with the
 	 * list from {@link Constants}.
 	 */
-	public WebsiteConnectivity() {
+	private ConnectivityManager connectivityManager;
+	public WebsiteConnectivity(Context context) {
 		super();		
+		connectivityManager
+	    = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 	}
 	
 	/**
@@ -109,9 +114,11 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 				
 			} catch(UnknownHostException e) {
 				e.printStackTrace();
-				throw new IOException("No Internet");
+				if(!WebsiteOpen.checkInternetAccess(connectivityManager))	
+					throw new IOException("No Internet");
 			} catch(HttpException e) {
-				e.printStackTrace();
+				if(!WebsiteOpen.checkInternetAccess(connectivityManager))
+					e.printStackTrace();
 				throw new IOException("No Internet");
 			} catch(IOException e) {
 				e.printStackTrace();
