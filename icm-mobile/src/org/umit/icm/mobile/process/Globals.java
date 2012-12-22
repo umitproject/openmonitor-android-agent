@@ -116,6 +116,8 @@ public class Globals {
 
 	public static boolean isRegistered = false;
 	
+	public static boolean isLoggedIn = false;
+	
 	/**
 	 * Global P2P message queue
 	 */

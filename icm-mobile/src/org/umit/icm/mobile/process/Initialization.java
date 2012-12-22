@@ -295,16 +295,13 @@ public class Initialization {
 	
 	public static boolean login() {
 		Random random = new Random();
-		
 		String challenge = Double.toString(random.nextDouble());
-		
 		Globals.challenge = challenge;
 		
 		if(Constants.DEBUG_MODE) {
 			System.out.println("Setting the login protobuf");
 			System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
 		}
-		
 		
 		Login login = Login.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
@@ -317,14 +314,13 @@ public class Initialization {
 			System.out.println("Login protobuf formed : "  + login.toString());
 				
 		boolean success = false;
-		
 		try {
-			
 			success = AggregatorRetrieve.login(login);
 			} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Globals.isLoggedIn = success;
 		return success;
 	}
 	
@@ -379,6 +375,7 @@ public class Initialization {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Globals.isRegistered = success;
 		return success;
 	}
 	
