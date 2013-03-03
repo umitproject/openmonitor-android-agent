@@ -22,7 +22,6 @@
 package org.umit.icm.mobile.aggregator;
 
 
-import org.restlet.resource.ClientResource;
 import org.umit.icm.mobile.process.Constants;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregator;
 import org.umit.icm.mobile.proto.MessageProtos.CheckAggregatorResponse;
