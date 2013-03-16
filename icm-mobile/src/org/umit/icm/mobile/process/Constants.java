@@ -83,19 +83,20 @@ public class Constants {
 		 */
 		private static final long serialVersionUID = 6933062698660638968L;
 
-	{
-		add(new Website("http://www.google.com", "false", "true", "1001", 0));
-		add(new Website("http://www.facebook.com", "false", "true", "1002", 0));
-		add(new Website("http://www.youtube.com", "false", "true", "1003", 0));
-		add(new Website("http://www.twitter.com", "false", "true", "1004", 0));
-		add(new Website("http://www.yahoo.com", "false", "true", "1005", 0));
-		add(new Website("http://www.cnn.com", "false", "true", "1006", 0));
-		add(new Website("http://www.bbc.com", "false", "true", "1007", 0));
-		add(new Website("http://www.gmail.com", "false", "true", "1008", 0));
-		add(new Website("http://www.umitproject.org", "false", "true", "1009", 0));
-		add(new Website("http://www.flickr.com", "false", "true","1010", 0));
-		add(new Website("http://www.hotmail.com", "false", "true", "1011", 0));
-	}};
+		{
+			add(new Website("http://www.google.com", "false", "true", "1001", 0));
+			add(new Website("http://www.facebook.com", "false", "true", "1002", 0));
+			add(new Website("http://www.youtube.com", "false", "true", "1003", 0));
+			add(new Website("http://www.twitter.com", "false", "true", "1004", 0));
+			add(new Website("http://www.yahoo.com", "false", "true", "1005", 0));
+			add(new Website("http://www.cnn.com", "false", "true", "1006", 0));
+			add(new Website("http://www.bbc.com", "false", "true", "1007", 0));
+			add(new Website("http://www.gmail.com", "false", "true", "1008", 0));
+			add(new Website("http://www.umitproject.org", "false", "true", "1009", 0));
+			add(new Website("http://www.flickr.com", "false", "true","1010", 0));
+			add(new Website("http://www.hotmail.com", "false", "true", "1011", 0));
+		}
+	};
 	
 	public static int P2P_MESSAGE_QUEUE_SIZE = 10;
 	public static String AGGREGATOR_URL = "http://east1.openmonitor.org";	
@@ -138,40 +139,40 @@ public class Constants {
 			add(new Service("imap", 993, "imap.gmail.com", "open", "true", "2001", 0));
 			add(new Service("msn", 1863, "messenger.hotmail.com", "open", "true", "2001", 0));
 			add(new Service("gtalk", 5222, "talk.google.com", "open", "true", "2001", 0));
-			
-		
-		}};
-		public static boolean RUN_PROFILER = false;
-		public static long DEFAULT_AGENT_ID = 911;
-		public static long AGENT_ID = 0;
-		public static String DEFAULT_TOKEN = "myToken";
-		public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
-		public static String TWITTER_CONSUMER_KEY_SECRET 
-		= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
-		public static int DEFAULT_GET_EVENTS_INTERVAL = 5;
-		public static int DEFAULT_GET_UPDATES_INTERVAL = 10;
-		public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 1;		
-		public static final String BING_SEARCH_API = "930F43D8FAD299B1368D22FB4B32467E11EC1BE8";
-		public static final String TWITTER_HASHTAG = "#ICMMobileAgent";
-		public static String SUPER_GET_PEER_LIST = "/api/getpeerlist/";		
-		public static String SUPER_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
-		public static String SUPER_GET_EVENTS = "/api/getevents/";
-		public static String SUPER_SEND_WEBSITE_REPORT = "/api/sendwebsitereport/";
-		public static String SUPER_SEND_SERVICE_REPORT = "/api/sendservicereport/";
-		public static String SUPER_CHECK_VERSION = "/api/checkversion/";
-		public static String SUPER_CHECK_TESTS = "/api/checktests/";
-		public static String SUPER_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
-		public static String SUPER_SERVICE_SUGGESTION = "/api/servicesuggestion/";
-		public static String SUPER_TESTS = "/api/tests/";
-		public static String SUPER_AUTHENTICATE_PEER = "/api/authenticatepeer/";
-		public static String SUPER_LOGIN = "/api/login/";
-		public static String SUPER_MSG_KEY = "msg";
-		public static String AGENT_TYPE = "MOBILE";
-		public static int AGENT_TYPE_NUMBER = 3;
-		public static int MAX_PEERS = 10;
-		public static int MAX_SUPER_PEERS = 2;	
-		public static boolean P2P_ENCRYPTION = false;
-		public static boolean AGGR_ENCRYPTION = true;
-		public static BigInteger AGGR_PUB_KEY_MOD =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
-		public static BigInteger AGGR_PUB_KEY_EXP = new BigInteger("65537");
+			add(new Service("smtp", 587, "smtp.gmail.com", "open", "true", "2001", 0));
+		}
+	};
+	public static boolean RUN_PROFILER = false;
+	public static long DEFAULT_AGENT_ID = 911;
+	public static long AGENT_ID = 0;
+	public static String DEFAULT_TOKEN = "myToken";
+	public static String TWITTER_CONSUMER_KEY = "EE5Tdr3bbOUkeuHhsIZBow";
+	public static String TWITTER_CONSUMER_KEY_SECRET 
+	= "ZVQzO8f07K9HOyKIPoYsXxunLpASL7CwNWbyYIkzI9Y";
+	public static int DEFAULT_GET_EVENTS_INTERVAL = 5;
+	public static int DEFAULT_GET_UPDATES_INTERVAL = 10;
+	public static int DEFAULT_AGGREGATOR_ACCESS_INTERVAL = 1;		
+	public static final String BING_SEARCH_API = "930F43D8FAD299B1368D22FB4B32467E11EC1BE8";
+	public static final String TWITTER_HASHTAG = "#ICMMobileAgent";
+	public static String SUPER_GET_PEER_LIST = "/api/getpeerlist/";		
+	public static String SUPER_GET_PEER_SUPER_LIST = "/api/getsuperpeerlist/";
+	public static String SUPER_GET_EVENTS = "/api/getevents/";
+	public static String SUPER_SEND_WEBSITE_REPORT = "/api/sendwebsitereport/";
+	public static String SUPER_SEND_SERVICE_REPORT = "/api/sendservicereport/";
+	public static String SUPER_CHECK_VERSION = "/api/checkversion/";
+	public static String SUPER_CHECK_TESTS = "/api/checktests/";
+	public static String SUPER_WEBSITE_SUGGESTION = "/api/websitesuggestion/";
+	public static String SUPER_SERVICE_SUGGESTION = "/api/servicesuggestion/";
+	public static String SUPER_TESTS = "/api/tests/";
+	public static String SUPER_AUTHENTICATE_PEER = "/api/authenticatepeer/";
+	public static String SUPER_LOGIN = "/api/login/";
+	public static String SUPER_MSG_KEY = "msg";
+	public static String AGENT_TYPE = "MOBILE";
+	public static int AGENT_TYPE_NUMBER = 3;
+	public static int MAX_PEERS = 10;
+	public static int MAX_SUPER_PEERS = 2;	
+	public static boolean P2P_ENCRYPTION = false;
+	public static boolean AGGR_ENCRYPTION = true;
+	public static BigInteger AGGR_PUB_KEY_MOD =  new BigInteger("93740173714873692520486809225128030132198461438147249362129501889664779512410440220785650833428588898698591424963196756217514115251721698086685512592960422731696162410024157767288910468830028582731342024445624992243984053669314926468760439060317134193339836267660799899385710848833751883032635625332235630111");
+	public static BigInteger AGGR_PUB_KEY_EXP = new BigInteger("65537");
 }

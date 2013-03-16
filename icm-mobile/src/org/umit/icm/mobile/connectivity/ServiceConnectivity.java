@@ -72,6 +72,7 @@ public class ServiceConnectivity extends AbstractConnectivity{
 		servicesList.add(ServiceIMAP.class);
 		servicesList.add(ServiceGtalk.class);
 		servicesList.add(ServiceMSN.class);
+		servicesList.add(ServiceSMTP.class);
 		
 		Iterator<Class<? extends AbstractServiceTest>> iterator = servicesList.iterator();
 		while(iterator.hasNext()) {
