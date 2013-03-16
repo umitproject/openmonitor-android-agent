@@ -59,8 +59,8 @@ public class WebsiteDetails {
 		try {
 			conductTests();
 		} catch (UnknownHostException e) {
+			// This means that DNS lookup failed
 			this.getWebsite().setStatus(Integer.toString(404));
-			e.printStackTrace();
 		} 
 		try {
 			setupProtobufs();
