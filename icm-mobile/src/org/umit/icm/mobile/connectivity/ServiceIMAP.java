@@ -24,6 +24,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.util.Properties;
 
+import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
@@ -52,8 +53,7 @@ public class ServiceIMAP implements AbstractServiceTest {
 	@see Store
 	 */
 	@Override
-	public String connect() {
-		String ret = null;       
+	public String connect() {      
         Properties properties = new Properties();        
         properties.setProperty("mail.imap.socketFactory.class",
         		"javax.net.ssl.SSLSocketFactory");
@@ -61,7 +61,7 @@ public class ServiceIMAP implements AbstractServiceTest {
         properties.setProperty("mail.imap.port",  "993");
         properties.setProperty("mail.imap.socketFactory.port", "993");
         
-        URLName urlName = new URLName("imap", "imap.gmail.com", 995, "",
+        URLName urlName = new URLName("imap", "imap.gmail.com", 993, "",
                 "umiticmmobile", "umiticmmobile2011");
         
         Session session = Session.getInstance(properties, null);
@@ -70,15 +70,19 @@ public class ServiceIMAP implements AbstractServiceTest {
 			store.connect();
 			 if(store.isConnected()) {
 		        	store.close();
-		        	ret = "normal";
+		        	return "normal";
 		     }
-		     ret = "blocked";
+		} catch (AuthenticationFailedException e) {
+			// Considering that we're using a fake username and password, it
+			// should result in an Authentication Failure but that means that
+			// at least the service is connecting
+			return "normal";
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
        
-        return ret;
+        return "blocked";
 	}
 	
 	/**
@@ -93,8 +97,7 @@ public class ServiceIMAP implements AbstractServiceTest {
 	 */
 	@Override
 	public Service getService() {
-		Integer port = 993;
-		return new Service("imap", port, "imap.gmail.com" , "open", "true", "0", 0);
+		return new Service("imap", 993, "imap.gmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**
