@@ -236,7 +236,13 @@ public class Initialization {
 	public static void initializeIP(Context context) {
 		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        Globals.myIP = Integer.toString(wifiInfo.getIpAddress());
+        int ip = wifiInfo.getIpAddress();
+        Globals.myIP = String.format( 
+        	    "%d.%d.%d.%d", 
+        	    (ip & 0xff), 
+        	    (ip >> 8 & 0xff),
+        	    (ip >> 16 & 0xff),
+        	    (ip >> 24 & 0xff));
 	}
 	
 	/*Only used for testing
@@ -302,7 +308,6 @@ public class Initialization {
 			System.out.println("Setting the login protobuf");
 			System.out.println("THIS IS THE AGENT ID BEING SEND : " +Globals.runtimeParameters.getAgentID());
 		}
-		
 		Login login = Login.newBuilder()
 		.setAgentID(Globals.runtimeParameters.getAgentID())
 		.setPort(80)

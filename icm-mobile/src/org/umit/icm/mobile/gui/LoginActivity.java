@@ -28,6 +28,7 @@ import org.umit.icm.mobile.Main;
 import org.umit.icm.mobile.R;
 import org.umit.icm.mobile.gui.debug.Show;
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 import org.umit.icm.mobile.process.Initialization;
 import org.umit.icm.mobile.proto.MessageProtos.LoginCredentials;
 
@@ -56,6 +57,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Initialization.initializeIP(this);
         setContentView(R.layout.logindialog);
         buttonSet = (Button) findViewById(R.id.loginButton);
         buttonSet.setOnClickListener(new intervalListener());
