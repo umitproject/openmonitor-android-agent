@@ -24,6 +24,7 @@ package org.umit.icm.mobile.connectivity;
 
 import java.util.Properties;
 
+import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
@@ -55,7 +56,6 @@ public class ServicePOP3 implements AbstractServiceTest {
 	 */
 	@Override
 	public String connect() {
-		String ret = null;
 		if(Constants.DEBUG_MODE)
 			System.out.println("Inside ServicePOP3.connect() ---------------------------");
 					       
@@ -75,14 +75,18 @@ public class ServicePOP3 implements AbstractServiceTest {
 			store.connect();
 			if(store.isConnected()) {
 	        	store.close();
-	        	ret = "normal";
+	        	return "normal";
 	        }
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (AuthenticationFailedException e) {
+			// Considering that we're using a fake username and password, it
+			// should result in an Authentication Failure but that means that
+			// at least the service is connecting
+			return "normal";
 		}
-        ret = "blocked";
-        return ret;
+        catch (MessagingException e) {
+			e.printStackTrace();
+		} 
+        return "blocked";
 	}
 	
 	/**
@@ -97,8 +101,7 @@ public class ServicePOP3 implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 955;
-		return new Service("pop3", port, "pop.gmail.com" , "open", "true", "0", 0);
+		return new Service("pop3", 995, "pop.gmail.com" , "open", "true", "0", 0);
 	}
 	
 	/**
