@@ -1,8 +1,6 @@
 package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -57,38 +55,49 @@ public class WebsiteDetails {
 		this.setSoaDNSRecord(null);
 	}
 	
-	public void setup() throws IOException {
-		setupDetails();
-		setupDNSRecords();
-		setupProtobufs();
+	public void setup() {
+		try {
+			conductTests();
+		} catch (UnknownHostException e) {
+			this.getWebsite().setStatus(Integer.toString(404));
+			e.printStackTrace();
+		} 
+		try {
+			setupProtobufs();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		checkStatus();
 	}
 	
-	private synchronized void setupDetails() throws IOException {
+	private synchronized void conductTests() throws UnknownHostException {
 		if(Constants.DEBUG_MODE)
-			System.out.println("Opening URL Connection to this website : " + this.getWebsite().getUrl());
-		URLConnection urlConnection = WebsiteOpen.openURLConnection(this.getWebsite().getUrl());	
-		Map<String,String> header = WebsiteOpen.getHeaders(urlConnection);
-		this.getWebsite().setStatus(String.valueOf(WebsiteOpen.getStatusCode(header)));
-		long startFetchTime = System.currentTimeMillis();
-		this.getWebsite().setContent(WebsiteOpen.getContent(urlConnection));
-		this.getWebsite().setTimeTakentoDownload(System.currentTimeMillis() - startFetchTime);
-   	}
-	
-	private synchronized void setupDNSRecords() {
+			System.out.println("Conducting tests for: " + this.getWebsite().getUrl());
+		//DNS lookup
 		String url = this.getWebsite().getUrl().split("/+")[1];
+		this.setIp(DNSLookup.getIPString(url));
 		try {
-			this.setIp(DNSLookup.getIPString(url));
 			this.setNsDNSRecord(DNSLookup.getDNSRecordNSString(url.substring(4)));
 			this.setaDNSRecord(DNSLookup.getDNSRecordAString(url.substring(4)));
 			this.setSoaDNSRecord(DNSLookup.getDNSRecordSOAString(url.substring(4)));
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (TextParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//HTTP
+		URLConnection urlConnection;
+		try {
+			urlConnection = WebsiteOpen.openURLConnection(this.getWebsite().getUrl());
+			Map<String,String> header = WebsiteOpen.getHeaders(urlConnection);
+			this.getWebsite().setStatus(String.valueOf(WebsiteOpen.getStatusCode(header)));
+			long startFetchTime = System.currentTimeMillis();
+			this.getWebsite().setContent(WebsiteOpen.getContent(urlConnection));
+			this.getWebsite().setTimeTakentoDownload(System.currentTimeMillis() - startFetchTime);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	private synchronized void setupProtobufs() throws IOException {
@@ -97,19 +106,18 @@ public class WebsiteDetails {
 				.setIp("255.255.255.0")		//TODO: fix
 				.addPacketsTiming(1)
 				.build();
-		
-		String ip = "255.255.255.0";
-		InetAddress address = InetAddress.getByName(new URL(this.getWebsite().getUrl()).getHost());
-		ip = address.getHostAddress();
 
 		TraceRoute traceRoute = TraceRoute.newBuilder()
-				.setTarget(ip)
+				.setTarget(this.ip)
 				.setHops(1)
 				.setPacketSize(1)
 				.addTraces(trace)
 				.build();
 		
-		double throughput = (this.getWebsite().getContent().getBytes().length / this.getWebsite().getTimeTakentoDownload());
+		double throughput = 0;
+		if(this.getWebsite().getTimeTakentoDownload() != 0)
+			throughput = this.getWebsite().getContent().getBytes().length / 
+			this.getWebsite().getTimeTakentoDownload();
 		this.websiteReportDetail = WebsiteReportDetail.newBuilder()
 				.setBandwidth((int)throughput)
 				.setResponseTime((int)this.getWebsite().getTimeTakentoDownload())

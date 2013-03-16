@@ -23,7 +23,6 @@ package org.umit.icm.mobile.connectivity;
 
 import java.io.IOException;
 import java.net.URLConnection;
-import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -78,54 +77,52 @@ public class WebsiteConnectivity extends AbstractConnectivity {
 		double averageThroughput = 0;
 		Iterator<Website> iterator = Globals.runtimeList.websitesList.iterator();
 		while(iterator.hasNext()) {
+			if(!WebsiteOpen.checkInternetAccess(connectivityManager))	
+				throw new IOException("No Internet");
 			website = iterator.next();
 			WebsiteDetails websiteDetails = new WebsiteDetails(website);
-			try {
-				websiteDetails.setup();
-				websiteReport = websiteDetails.getWebsiteReport();
-				totalSizeofContent += websiteDetails.getWebsite().getContent().getBytes().length;
-				totalTime += websiteDetails.getWebsite().getTimeTakentoDownload();
+			websiteDetails.setup();
+			websiteReport = websiteDetails.getWebsiteReport();
+			totalSizeofContent += websiteDetails.getWebsite().getContent().getBytes().length;
+			totalTime += websiteDetails.getWebsite().getTimeTakentoDownload();
 
-				SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
-				
-				if(Constants.DEBUG_MODE) {
-					Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
-					Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
-					Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
-					Log.w("######URL", websiteReport.getReport().getWebsiteURL());
-					Log.w("######IP", websiteDetails.getIp());
+			SDCardReadWrite.writeWebsiteReport(Constants.WEBSITES_DIR, websiteReport);									
+			
+			if(Constants.DEBUG_MODE) {
+				Log.w("######BW", Integer.toString(websiteReport.getReport().getBandwidth()));
+				Log.w("######ResponseTime", Integer.toString(websiteReport.getReport().getResponseTime()));
+				Log.w("######Code", Integer.toString(websiteReport.getReport().getStatusCode()));
+				Log.w("######URL", websiteReport.getReport().getWebsiteURL());
+				Log.w("######IP", websiteDetails.getIp());
+				if (websiteDetails.getNsDNSRecord() != null) {
 					for (int i = 0; i < websiteDetails.getNsDNSRecord().length; i++) {
 						Log.w("######NS Record", websiteDetails.getNsDNSRecord()[i]);
 					}
+				}
+				if (websiteDetails.getaDNSRecord() != null) {
 					for (int i = 0; i < websiteDetails.getaDNSRecord().length; i++) {
 						Log.w("######A Record", websiteDetails.getaDNSRecord()[i]);
 					}
+				}
+				if (websiteDetails.getSoaDNSRecord() != null) {
 					for (int i = 0; i < websiteDetails.getSoaDNSRecord().length; i++) {
 						Log.w("######SOA Record", websiteDetails.getSoaDNSRecord()[i]);
 					}
 				}
-				SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
-				.setReport(websiteReport)
-				.build();				
-				if(Globals.aggregatorCommunication != false && website.getCheck()=="true") {
-					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
-					website.setCheck("false");
-				}
-				
-			} catch(UnknownHostException e) {
-				e.printStackTrace();
-				if(!WebsiteOpen.checkInternetAccess(connectivityManager))	
-					throw new IOException("No Internet");
-			} catch(HttpException e) {
-				if(!WebsiteOpen.checkInternetAccess(connectivityManager))
-					e.printStackTrace();
-				throw new IOException("No Internet");
-			} catch(IOException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			SendWebsiteReport sendWebsiteReport = SendWebsiteReport.newBuilder()
+			.setReport(websiteReport)
+			.build();				
+			if(Globals.aggregatorCommunication != false && website.getCheck() == "true") {
+				try {
+					AggregatorRetrieve.sendWebsiteReport(sendWebsiteReport);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				website.setCheck("false");
+			}
+
 		}
 		averageThroughput = totalSizeofContent / totalTime;
 		Globals.runtimeParameters.setAverageThroughout(averageThroughput);		
