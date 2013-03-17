@@ -30,6 +30,8 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
 
+import org.umit.icm.mobile.process.Globals;
+
 import com.sun.mail.imap.IMAPSSLStore;
 
 /**
@@ -61,8 +63,8 @@ public class ServiceIMAP implements AbstractServiceTest {
         properties.setProperty("mail.imap.port",  "993");
         properties.setProperty("mail.imap.socketFactory.port", "993");
         
-        URLName urlName = new URLName("imap", "imap.gmail.com", 993, "",
-                "umiticmmobile", "umiticmmobile2011");
+        URLName urlName = new URLName("imap", this.getService().getIp(), this.getService().getPort(), 
+        		"", "umiticmmobile", "umiticmmobile2011");
         
         Session session = Session.getInstance(properties, null);
         Store store = new IMAPSSLStore(session, urlName);
@@ -97,7 +99,7 @@ public class ServiceIMAP implements AbstractServiceTest {
 	 */
 	@Override
 	public Service getService() {
-		return new Service("imap", 993, "imap.gmail.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(4);
 	}
 	
 	/**
@@ -109,7 +111,7 @@ public class ServiceIMAP implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "imap.gmail.com";
+		return this.getService().getIp();
 	}
 
 	@Override

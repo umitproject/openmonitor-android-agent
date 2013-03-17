@@ -31,6 +31,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.umit.icm.mobile.process.Globals;
 
 
 import android.util.Log;
@@ -96,8 +97,7 @@ public class ServiceHTTP implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 80;
-		return new Service("http", port, "www.google.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(1);
 	}
 	
 	/**

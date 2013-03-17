@@ -31,6 +31,7 @@ import javax.mail.Store;
 import javax.mail.URLName;
 
 import org.umit.icm.mobile.process.Constants;
+import org.umit.icm.mobile.process.Globals;
 
 import com.sun.mail.pop3.POP3SSLStore;
 
@@ -66,8 +67,8 @@ public class ServicePOP3 implements AbstractServiceTest {
         properties.setProperty("mail.pop3.port",  "995");
         properties.setProperty("mail.pop3.socketFactory.port", "995");
         
-        URLName urlName = new URLName("pop3", "pop.gmail.com", 995, "",
-                "umiticmmobile", "umiticmmobile2011");
+        URLName urlName = new URLName("pop3", this.getService().getIp(), this.getService().getPort(), 
+        		"", "umiticmmobile", "umiticmmobile2011");
         
         Session session = Session.getInstance(properties, null);
         Store store = new POP3SSLStore(session, urlName);
@@ -101,7 +102,7 @@ public class ServicePOP3 implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		return new Service("pop3", 995, "pop.gmail.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(3);
 	}
 	
 	/**
@@ -113,7 +114,7 @@ public class ServicePOP3 implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "pop.gmail.com";
+		return this.getService().getIp();
 	}
 
 	@Override

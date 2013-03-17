@@ -30,6 +30,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.umit.icm.mobile.process.Globals;
@@ -71,13 +72,17 @@ public class ServiceSMTP implements AbstractServiceTest {
       		  });
         Message message = new MimeMessage(session);
         try {
+        	message.setFrom(new InternetAddress("umiticmmobile@gmail.com"));
+    		message.setRecipients(Message.RecipientType.TO,
+    			InternetAddress.parse("umiticmmobile@gmail.com"));
+    		message.setSubject("SMTP test");
+    		message.setText("SMTP test");
 			Transport.send(message);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "normal";
 		}
        
-        return "normal";
+        return "blocked";
 	}
 	
 	/**
@@ -104,7 +109,7 @@ public class ServiceSMTP implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "smtp.gmail.com";
+		return this.getService().getIp();
 	}
 
 	@Override

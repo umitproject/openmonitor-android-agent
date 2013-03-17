@@ -31,6 +31,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.umit.icm.mobile.process.Globals;
 
 import android.util.Log;
 
@@ -95,8 +96,7 @@ public class ServiceHTTPS implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 443;
-		return new Service("https", port, "campusmail.lums.edu.pk" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(0);
 	}
 	
 	/**

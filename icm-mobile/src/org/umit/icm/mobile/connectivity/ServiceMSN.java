@@ -50,8 +50,8 @@ public class ServiceMSN implements AbstractServiceTest {
 	public String connect() {
 		String ret = null;
 		try {
-			Globals.tcpClientConnectivity.openConnection("messenger.hotmail.com"
-					, 1863);
+			Globals.tcpClientConnectivity.openConnection(this.getService().getIp(),
+					this.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine(Globals.servicePacketsMap.get("msn"));
 			String reply = Globals.tcpClientConnectivity.readLines();
 			Globals.tcpClientConnectivity.closeConnection();
@@ -80,8 +80,7 @@ public class ServiceMSN implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 1863;
-		return new Service("msn", port, "messenger.hotmail.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(5);
 	}
 	
 	/**
@@ -93,7 +92,7 @@ public class ServiceMSN implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "messenger.hotmail.com";
+		return this.getService().getIp();
 	}
 
 	@Override

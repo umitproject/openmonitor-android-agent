@@ -27,6 +27,7 @@ import java.net.SocketException;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.umit.icm.mobile.process.Globals;
 
 /**
  * This is the FTP Service class. Holds {@link ServiceFTP#connect()},
@@ -83,8 +84,7 @@ public class ServiceFTP implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 21;
-		return new Service("ftp", port, "ftp.secureftp-test.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(2);
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class ServiceFTP implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "ftp.secureftp-test.com";
+		return this.getService().getIp();
 	}
 
 	@Override

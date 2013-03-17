@@ -48,8 +48,8 @@ public class ServiceGtalk implements AbstractServiceTest {
 	@Override
 	public String connect() {
 		try {
-			Globals.tcpClientConnectivity.openConnection("talk.google.com"
-					, 5222);
+			Globals.tcpClientConnectivity.openConnection(this.getService().getIp(),
+					this.getService().getPort());
 			Globals.tcpClientConnectivity.writeLine("hello");
 			String reply = Globals.tcpClientConnectivity.readLines();
 			Globals.tcpClientConnectivity.closeConnection();
@@ -78,9 +78,7 @@ public class ServiceGtalk implements AbstractServiceTest {
 	 */	
 	@Override
 	public Service getService() {
-		Integer port = 5222;
-														
-		return new Service("gtalk", port, "talk.google.com" , "open", "true", "0", 0);
+		return Globals.runtimeList.servicesList.get(6);
 	}
 	
 	/**
@@ -92,7 +90,7 @@ public class ServiceGtalk implements AbstractServiceTest {
 	 */	
 	@Override
 	public String getServiceURL() {
-		return "talk.google.com";
+		return this.getService().getIp();
 	}
 
 	@Override
