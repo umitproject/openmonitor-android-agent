@@ -60,7 +60,8 @@
     <string name="map_selection">Select Map Package</string>
     <string name="google_rb">Google Maps</string>
     <string name="osm_rb">Open Street Maps</string>
-    <string name="google_maps_api_key">0E8T-qQndWDjAGTyy5zopsE_NS8M4P49KqvzjyA</string>
+    <string name="google_maps_api_key">0ypQ-LmtOI2b8fxrT3C-qLA6Q1xkMrv2Krb3jrQ</string>
+    <string name="google_maps_api_key_debug">0E8T-qQndWDjAGTyy5zopsE_NS8M4P49KqvzjyA</string>
     <string name="no_scan">No Scan Performed Yet</string>
     <string name="normal_status">Status: Normal</string>
     <string name="differentation_status">Status: Differentiation</string>
