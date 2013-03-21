@@ -129,7 +129,8 @@ public class OSMMaps implements AbstractMap {
 		osmMapView.setBuiltInZoomControls(true);
 		osmMapView.setMultiTouchControls(true);
 		mapController.setZoom(14);
-		mapController.setCenter(this.geoPoint);  		
+		//to ensure that the map is always centered on the current position
+		//mapController.setCenter(this.geoPoint);  		
         osmMapView.invalidate();
         
         List<Overlay> overlayList = osmMapView.getOverlays();

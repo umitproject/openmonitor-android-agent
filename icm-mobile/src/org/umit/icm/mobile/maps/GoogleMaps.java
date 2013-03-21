@@ -177,7 +177,8 @@ public class GoogleMaps implements AbstractMap {
 		mapController = googleMapView.getController();
 		googleMapView.setBuiltInZoomControls(true);
         
-        mapController.setCenter(geoPoint);     
+		//to ensure that the map is always centered on the current position
+        //mapController.setCenter(geoPoint);     
         mapController.setZoom(15);
         googleMapView.invalidate();
         

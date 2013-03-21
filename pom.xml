@@ -35,11 +35,9 @@
                         <path>${env.ANDROID_HOME}</path>
                         <platform>1.6</platform>
                     </sdk>
-                    <!--
                     <sign>
   						<debug>false</debug>
 					</sign>
-					-->
                     <deleteConflictingFiles>true</deleteConflictingFiles>
                     <dex>
 	                    <jvmArguments>
